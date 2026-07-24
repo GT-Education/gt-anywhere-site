@@ -1,0 +1,46 @@
+<svg width="1440" height="577" viewBox="0 0 1440 577" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2780_2235)">
+<line x1="47.5" y1="577" x2="47.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="111.5" y1="577" x2="111.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="175.5" y1="577" x2="175.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="239.5" y1="577" x2="239.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="303.5" y1="577" x2="303.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="367.5" y1="577" x2="367.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="431.5" y1="577" x2="431.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="495.5" y1="577" x2="495.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="559.5" y1="577" x2="559.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="623.5" y1="577" x2="623.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="687.5" y1="577" x2="687.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="751.5" y1="577" x2="751.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="815.5" y1="577" x2="815.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="879.5" y1="577" x2="879.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="943.5" y1="577" x2="943.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1007.5" y1="577" x2="1007.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1071.5" y1="577" x2="1071.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1135.5" y1="577" x2="1135.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1199.5" y1="577" x2="1199.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1263.5" y1="577" x2="1263.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1327.5" y1="577" x2="1327.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line x1="1391.5" y1="577" x2="1391.5" y2="1" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="0.5" x2="1440" y2="0.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="64.5" x2="1440" y2="64.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="128.5" x2="1440" y2="128.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="192.5" x2="1440" y2="192.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="256.5" x2="1440" y2="256.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="320.5" x2="1440" y2="320.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="384.5" x2="1440" y2="384.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="448.5" x2="1440" y2="448.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="512.5" x2="1440" y2="512.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<line y1="576.5" x2="1440" y2="576.5" stroke="#C4B78A" stroke-opacity="0.2"/>
+<rect width="1440" height="822" fill="url(#paint0_radial_2780_2235)"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_2780_2235" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(720 411) rotate(90) scale(411 720)">
+<stop offset="0.7" stop-color="#FCF4EF" stop-opacity="0"/>
+<stop offset="1" stop-color="#FCF4EF"/>
+</radialGradient>
+<clipPath id="clip0_2780_2235">
+<rect width="1440" height="577" fill="white"/>
+</clipPath>
+</defs>
+</svg>

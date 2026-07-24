@@ -1,0 +1,32 @@
+{
+  "start": "https://anywhere.gt.school/",
+  "pages": 8,
+  "assets": 236,
+  "pageList": [
+    "index.html",
+    "advisors/index.html",
+    "academics/index.html",
+    "intensives/index.html",
+    "academic-calendar/index.html",
+    "privacy-policy/index.html",
+    "terms-of-use/index.html",
+    "refund-policy/index.html"
+  ],
+  "leftRemote": [
+    "ajax.googleapis.com",
+    "app.vidzflow.com",
+    "apply.gt.school",
+    "cdn.jsdelivr.net",
+    "cdn.prod.website-files.com",
+    "external.vidzflow.com",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com",
+    "js.hs-scripts.com",
+    "meetings.hubspot.com",
+    "www.cognia.org",
+    "www.disruptivesocial.co.uk",
+    "www.facebook.com",
+    "www.googletagmanager.com"
+  ],
+  "errors": []
+}
