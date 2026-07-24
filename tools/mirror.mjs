@@ -178,7 +178,20 @@ async function downloadAssets() {
   }
 }
 
+// Capture the site's custom 404 page (Webflow serves it for any unknown path).
+// Saved as 404.html so static hosts (Vercel) serve it for unmatched routes.
+async function capture404() {
+  try {
+    const res = await fetch(START + 'this-path-does-not-exist-404-probe-xyz', { headers: { 'user-agent': UA } });
+    const html = await res.text();
+    if (!/<html/i.test(html)) return;
+    await save('404.html', rewriteHtml(html, START));
+    process.stdout.write('page  404.html\n');
+  } catch (e) { log.errors.push('404: ' + String(e)); }
+}
+
 await crawl();
+await capture404();
 await downloadAssets();
 await save('MIRROR-LOG.json', JSON.stringify({
   start: START, pages: log.pages.length, assets: log.assetCount,
