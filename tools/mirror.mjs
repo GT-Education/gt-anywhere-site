@@ -37,8 +37,14 @@ function enqueuePage(abs) {
   pageQueue.push(u.href);
 }
 
-function assetLocal(u) {
+// On-disk path: decoded (real filename, e.g. "menu icon.json").
+function assetDisk(u) {
   return `assets/${u.hostname}${decodeURIComponent(u.pathname)}`.replace(/\/+$/, '');
+}
+// In-markup reference: keep percent-encoding (e.g. %20) so srcset/url() parse
+// correctly. The static host decodes the request back to the on-disk filename.
+function assetRef(u) {
+  return `assets/${u.hostname}${u.pathname}`.replace(/\/+$/, '');
 }
 
 // Catch-all: localize any absolute Webflow-host asset URL anywhere in the text
@@ -58,9 +64,8 @@ function catchAllAssets(str) {
 }
 function enqueueAsset(abs) {
   const u = new URL(abs);
-  const local = assetLocal(u);
-  if (!assets.has(abs)) assets.set(abs, local);
-  return '/' + local;
+  if (!assets.has(abs)) assets.set(abs, assetDisk(u));
+  return '/' + assetRef(u);
 }
 
 function pagePath(u) {
