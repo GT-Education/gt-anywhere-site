@@ -70,7 +70,7 @@ Every slot names its source. A slot whose source is a Q id ships with a visible 
 
 | Breakpoint | Layout | Rules |
 |---|---|---|
-| 390px (design first) | Umbrella sentence; doors stacked, Georgetown then Anywhere; helper below the doors; compare anchor; comparison as a two-column table with sticky school headers; all sections single column | The first screen fits the doors' CTAs above the fold on a 390 by 844 viewport; tap targets at least 44px; no horizontal scroll; no sticky apply bar (DD-14) |
+| 390px (design first) | Umbrella sentence; doors stacked, Georgetown then Anywhere; helper below the doors; compare anchor; comparison rendered as stacked blocks per row with the school name labelling each cell (amended 2026-09-10 after the build: the two-column table clipped or squeezed at 390px in every mock; the real `table` markup and headers stay for screen readers and for 768px and up); all sections single column | The first screen fits the doors' CTAs above the fold on a 390 by 844 viewport; tap targets at least 44px; no horizontal scroll; no sticky apply bar (DD-14) |
 | 768px | Doors side by side; comparison full table | Check only, no separate design |
 | 1440px | Doors side by side with the helper beside or beneath; one mock attempts the comparison inside the first viewport (DD-03) | Maximum content width from tokens; typography scale from tokens |
 

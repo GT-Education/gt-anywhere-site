@@ -7,7 +7,7 @@ ALLOWED_HOSTS = {'www.gt.school','gt.school','anywhere.gt.school','apply.gt.scho
 ALLOWED_NUMS = {'90','10,400','9','8','512','270','9481','2026','09','10','844','390','1440'}
 EVENTS = {'door_click':4,'compare_view':1,'cta_apply_click':2,'cta_secondary_click':4,'families_click':1,'tefa_module_view':1,'outbound_school_site':2}
 RATIONALE_SECTIONS = ['Direction','h1','Decisions applied','Motion spec','Assets','Departures','Flagged slots','Parent questions','Self-check']
-MOTION_OK = {'color','background-color','border-color','text-decoration-color','outline-color','opacity','transform','fill','stroke','box-shadow','background'}
+MOTION_OK = {'opacity','transform'}
 
 def visible_text(doc):
     d = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)
@@ -67,7 +67,8 @@ def check(folder):
             if 'var(--duration-' not in part and prop != 'none': badt.append(f'{prop}:no-token-duration')
     r('R10 transitions within budget', not badt, ', '.join(sorted(set(badt)))[:160])
     r('R10 no keyframe animation', not re.search(r'@keyframes|\banimation\s*:', style))
-    r('R10 reduced-motion block', 'prefers-reduced-motion' in style)
+    rm = style[style.find('prefers-reduced-motion'):] if 'prefers-reduced-motion' in style else ''
+    r('R10 reduced-motion block covers pseudo-elements', 'prefers-reduced-motion' in style and ('::after' in rm or '::before' in rm))
     hexes = sorted(set(re.findall(r'#[0-9a-fA-F]{3,8}\b', style)))
     r('R11 raw colors declared', not hexes or (os.path.exists(rat) and 'Departures' in open(rat).read()), f"{len(hexes)} raw hex in styles.css: {' '.join(hexes[:8])}")
     counts = {e: len(re.findall(rf'data-event="{e}"', doc)) for e in EVENTS}
@@ -79,6 +80,9 @@ def check(folder):
     r('R13 at most two eager photos (the first screen); svg logos exempt', len(eager) <= 2, f'{len(eager)} eager')
     for s in set(x for x in srcs if x.startswith('../shared/')):
         if not os.path.exists(os.path.normpath(os.path.join(folder, s))): r('R13 asset exists', False, s)
+    r('R17 no unscoped application link', not re.search(r'href="https://apply\.gt\.school/?"', doc), 'apply.gt.school link without school=')
+    r('R18 provenance line once', text.count('The gifted school in the Alpha School network') == 1, f"{text.count('The gifted school in the Alpha School network')} occurrences")
+    r('R19 compare anchor before the table', 'href="#compare"' in doc and doc.find('href="#compare"') < doc.find('<table'))
     r('R16 real logos in header and footer', 'gt-school-logo-h.svg' in doc and 'gt-anywhere-logo-h.svg' in doc, 'GT School and GT Anywhere logo SVGs required')
     size = os.path.getsize(idx) + (os.path.getsize(css) if os.path.exists(css) else 0)
     r('R14 size under 1 MB', size < 1_000_000, f'{size//1024} KB')
