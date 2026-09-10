@@ -29,7 +29,7 @@
 | Door 2 name | GT Anywhere |
 | Door 2 line | Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown. |
 | Door 2 CTA | Explore GT Anywhere → https://anywhere.gt.school/ `data-event="door_click" data-school="anywhere" data-placement="first_screen"` |
-| Cue set (DD-04) | Label plus icon plus photo for each door; photos from `img/` (Georgetown: campus or classroom; Anywhere: `anywhere-student-home.webp`) |
+| Cue set (DD-04) | Label plus icon plus photo for each door; photos from `img/` per `ASSETS.md`. Georgetown: `georgetown-science.webp` or another classroom photo. Anywhere: `anywhere-austin-intensives.webp` or `anywhere-slider-1.webp`. Do not use `anywhere-student-home.webp` or `georgetown-kid-writing.webp` (studio-isolated, read as stock, ASSETS.md findings) |
 
 ## Section 2. Compare anchor
 
