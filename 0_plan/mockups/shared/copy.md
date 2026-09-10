@@ -4,7 +4,7 @@
 |---|---|
 | Purpose | The one copy source every mock uses. Fixed slots are identical across M1 to M5; flagged slots carry their Q id and ship in the mock with the default below, never with placeholder text |
 | Decisions applied | G0.5 (`16-g05-decision-record.md`): umbrella sentence as drafted; no speed figure; no accreditation claim or Cognia mark; Georgetown "Tuition on request"; Guides, not Advisors; one provenance line |
-| Numbers | Every figure below has a claims-register row: 90th percentile CR-011; $10,400 CR-021; four weekends CR-032; 9 to noon CR-033; three hours CR-034; weekly check-ins CR-035. No other number may appear on the page |
+| Numbers | Every figure below has a claims-register row: 90th percentile CR-011; $10,400 CR-021; four weekends CR-032; 9 to noon and about two hours CR-033; two to three hours CR-034; weekly check-ins CR-035. No other number may appear on the page |
 | Links | Doors and CTAs go only to gt.school, anywhere.gt.school, apply.gt.school and community.gt.school (REQ-070). No forms. Every link carries the `data-event` attribute from `1_spec/03` section 7 |
 
 ## Section 0. Header
@@ -42,7 +42,7 @@ Table with `caption` "Georgetown Campus and GT Anywhere, side by side", column h
 | Row | Georgetown Campus | GT Anywhere | Source, flag |
 |---|---|---|---|
 | Same school, same academics | One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so. | Same | Both sites |
-| The day | Mornings from 9 to noon: focused academics in the TimeBack learning platform. Afternoons: workshops, projects and competitions. | About three hours of mastery academics a day with live sessions from Guides. The rest of the day is yours. | CR-033, CR-034 |
+| The day | Mornings from 9 to noon: about two hours of focused academics in TimeBack blocks, with structured breaks. Afternoons: workshops, projects and competitions. | Two to three hours of focused mastery academics a day, with live sessions from Guides. The rest of the day is yours. | CR-033, CR-034 |
 | Where and how | On campus in Georgetown, Texas, north of Austin. | From home, anywhere in the United States. | gt.school footer "Anywhere in the States" |
 | Peers and community | A small cohort of gifted peers, together every school day. | A cohort of gifted peers online every day, together in person each quarter. | No cohort number (CR-025, CR-026 conflict) |
 | In-person time | Every school day. | Four intensive weekends a year in Georgetown. | CR-032; Q-017 for logistics |
