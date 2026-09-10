@@ -78,12 +78,14 @@ a:focus-visible {
   flex-wrap: wrap;
 }
 .lockup {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding-block: var(--space-3);
+}
+.lockup img {
+  display: block;
+  height: var(--space-6);
+  width: auto;
 }
 .site-header nav ul {
   display: flex;
@@ -485,6 +487,23 @@ tbody tr:last-child td {
   font-size: var(--text-sm);
   max-width: 42ch;
   margin-block-end: var(--space-4);
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-block-end: var(--space-4);
+}
+.footer-logos a {
+  display: inline-flex;
+  align-items: center;
+  padding-block: var(--space-4);
+}
+.footer-logos img {
+  display: block;
+  height: var(--space-5);
+  width: auto;
 }
 .site-footer .contact {
   font-family: var(--font-mono);
