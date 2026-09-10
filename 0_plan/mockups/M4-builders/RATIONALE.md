@@ -24,24 +24,51 @@ so it carries the h1 role in this mock the same way it does in M1 and M3, rather
 
 | Id | How it is applied in this mock |
 |---|---|
+| DD-01 | Literata for the h1, provenance and door names; Inter Tight for nav, labels and CTAs; Inconsolata for the step-list markers and the proof-strip footnote — the sites' three-typeface pairing, no fourth face added |
+| DD-02 | Palette pulled only from `tokens.css`'s merged swatches (warm bg/surface/tints, one accent); this mock's own per-mock hero tone is the full-bleed photo itself, not a flat color field |
 | DD-04 | Each door: uppercase text label ("In person" / "Online"), a small decorative CSS icon (dot / square, `aria-hidden`), and a real photo. Color (the tint backgrounds) is secondary, never the only cue |
 | DD-05 | "Explore the Georgetown campus →" / "Explore GT Anywhere →" on the first screen and again after the comparison; "Begin application: <school>" as the separate, later apply step |
+| DD-06 | The comparison table's nine rows follow the fixed order (shared rows first, then differences), cell text straight from `copy.md`, with the TEFA module directly beneath it |
+| DD-07 | No figure in the proof strip — Q-019 is unresolved, so the strip carries four register-backed facts and a footnote instead of a number |
 | DD-08 / T-045 | No stock. Every photo is an existing, published GT photo from `shared/img/`; none of the two studio-isolated photos (`anywhere-student-home.webp`, `georgetown-kid-writing.webp`) are used |
-| DD-10 / MD-25 | No wealth cues; the 90th-percentile bar and TEFA coverage both appear in the comparison table and proof strip, stated plainly, not dramatized |
+| DD-09 | Warm, candid classroom photography carries the "serious school" case instead of abstract statistics — the direct answer to the cold/adult risk DD-09 flags for a young child's parent |
+| DD-10 / MD-06 / MD-25 | No wealth cues, no manufactured urgency; the 90th-percentile bar and TEFA coverage both appear in the comparison table and proof strip, stated plainly, not dramatized |
+| DD-11 | Header lockup is `gt-school-logo-h.svg` as the placeholder umbrella mark pending Holly's element (Q-001); it links to `#top`, matching the other four mocks |
+| DD-12 | Header nav is routing-only — "Current families" and "Contact admissions," no marketing menu — consistent with a landing whose job is to route, not to browse |
 | DD-13 | No phone number in the header; only "Current families" and "Contact admissions" |
 | DD-14 | Doors stack Georgetown-then-Anywhere at mobile, no sticky CTA bar, mobile designed first |
+| DD-15 | Superseded by Part C — motion decisions are cited in the MN table below, not duplicated here |
+| DD-17 | No accreditation mark or wording anywhere on the page — Q-033 is unresolved, so the page stays silent rather than guessing |
+| DD-18 | Superseded by AN-04 (REQ-029 excludes real tracking from mocks); every CTA still carries its `data-event`/`data-school`/`data-placement`/`data-type` attributes so wiring is mechanical later |
 | DD-19 | Type families and the merged palette are fixed; layout (full-bleed photo, photo strip) is this mock's free expression. See Departures below |
 | DD-20 / DD-33 | Umbrella sentence precedes the doors, spells out "gifted and talented," and sits above the fold with the photo |
 | DD-21 | The doors are a real `<ul class="door-list">` of two `<li>`, laid out with flexbox so a third or fourth entry would wrap/flow, not break the split |
+| DD-22 | FAQ routes to the Anywhere academics page, tour/admissions route to gt.school/contact — content stays on the school sites it already lives on; the landing only points to it |
 | DD-23 | "Not sure which is right for your family? Compare the two." anchors to `#compare`; the same door list repeats immediately after the comparison table with `data-placement="after_comparison"` |
+| DD-24 | The one-question decision helper is correctly absent — deferred to Phase 2 per DD-24's own revision, not a gap in this mock |
 | DD-25 | Both apply links carry `?school=georgetown` / `?school=anywhere` |
 | DD-26 | Both doors get identical card treatment, padding, and CTA styling — equal visual weight, stable order |
 | DD-27 | "Georgetown Campus" and "GT Anywhere" in full everywhere; Guides, never Advisors, in visible text |
+| DD-28 | The proof-strip footnote is dated ("checked 2026-09-10") rather than presented as timeless, so a stale fact is falsifiable later |
+| DD-29 | Every screen carries a real fact (the doors' own lines, four proof-strip facts, nine comparison rows) — no decorative whitespace-only screen |
+| DD-30 | Plain language first: "mastery academics," "check in every week," "TimeBack learning platform" — all from `copy.md`, no unexplained jargon |
 | DD-31 | Declared in Assets below: which photos, why, and the typographic fallback if any is rejected |
+| DD-32 | "Current families" gets its own header link and its own late-page section with a support-hub link — framed as a support route, not folded into general contact |
+| DD-34 | The comparison table's "The day" row is the literal schedule device: Georgetown's 9-to-noon academics versus Anywhere's about-three-hours, verbatim from `copy.md` |
+| DD-35 | TimeBack is named once, plainly, in "The day" row — the only product name on the page, no screenshot (that's Phase 2) |
 | DD-36 | Body copy in Literata; motion is hover-only and fully removed under `prefers-reduced-motion` |
+| MD-01 | Zero lead forms; the page's only conversions are routing to the two school sites and to apply.gt.school |
+| MD-02 | "More ways to connect" is the secondary-CTA section by name: FAQ, admissions, tour, info session, for the visitor who isn't ready to apply |
 | MD-04 | Order is umbrella promise → two doors → what-students-do strip → proof, never proof first |
+| MD-05 | No testimonial and no figure anywhere — neither is Approved yet (Q-034, Q-019), so the proof strip stays fact-only |
+| MD-10 | Full names, redundant format cues, and a `school=` parameter on both apply links are the wrong-school-prevention mechanism this landing exists to provide |
 | MD-13 / REQ-026 | Tuition and access row: Georgetown "Tuition on request. Ask admissions."; Anywhere the exact $10,400/TEFA sentence from `copy.md` |
+| MD-14 | The TEFA module is shown to every visitor (D-015 option c), not geo-gated — geographic personalization stays a later experiment |
+| MD-15 | No eligibility gate or quiz; both doors are always visible and clickable regardless of any answer |
+| MD-16 | The proof-strip footnote cites the checked-on date; nothing on the page states a number or claim without a `copy.md`/register source |
 | MD-17 | The provenance line appears exactly once, in the hero panel, in a smaller weight than the h1 |
+| MD-18 | No competitor or alternative-school name appears anywhere on the page |
+| MD-26 | The TEFA module's heading, body and link are `copy.md`'s exact wording, shown unconditionally per D-015 option c |
 | REQ-011 / rule 8 | Above the two door CTAs at 390×844: header, hero photo + h1 + provenance (this mock's compact added element), nothing else |
 | REQ-012 | Redundant format+location cues (label, icon, photo, tint) so the choice does not depend on reading the photo |
 | REQ-017 | "Current families" in the header nav; general phone number only in the footer, never above the fold |
@@ -57,6 +84,27 @@ so it carries the h1 role in this mock the same way it does in M1 and M3, rather
 
 No scroll reveals, no lifts, no signature animation. Transform and opacity are the only properties ever
 transitioned; both duration and easing come from `tokens.css`.
+
+### MN decisions applied
+
+| MN id | What the page does |
+|---|---|
+| MN-01 | Motion supports orientation and choice only; there is no signature moment anywhere on the page |
+| MN-02 | The hero photo has no entrance animation at all — it renders on first paint, stricter than MN-02's "opacity only, under 300ms" allowance |
+| MN-03 | Door cards have static, fixed dimensions; hover/focus only recolors the CTA pill and reveals its underline — no lift, no expand |
+| MN-04 | No scroll-triggered reveal exists; every section is visible in normal document flow as soon as it loads |
+| MN-05 | No stateful component exists in this v1 mock (the decision helper is deferred, DD-24); where hover/focus does change something, it is instant with no layout shift |
+| MN-07 | The live sites' duplicate button-text/button-text-ab hover-swap node is not replicated; instead each CTA keeps one accessible name at all times and just recolors/underlines on hover or focus, which satisfies MN-07's one-accessible-name intent by a simpler route |
+| MN-10 | The only transition anywhere (`.link-underline::after`) animates `transform: scaleX()` for `--duration-fast` (100ms) with `--ease-standard`; every image carries `width`/`height` so nothing shifts layout |
+| MN-11 | `@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }` removes the one transition; nothing on the page autoplays, so no pause control is needed |
+| MN-12 | The same hover styling also fires on `:focus-visible` (the touch/keyboard equivalent); no scroll-hijacking exists anywhere; the motion budget (one 100ms underline) is already far under half of any evidenced duration |
+| MN-13 | Only `--duration-fast` and `--ease-standard` are used — no other duration or easing value appears anywhere in `styles.css` |
+
+Also satisfied structurally: MN-06 (no video anywhere), MN-08 (this mock differs from the other four through
+imagery, layout and copy only, never a signature animation), MN-09 (CSS only — no JavaScript, not even
+IntersectionObserver, since nothing here needs a scroll trigger), MN-14 (header/footer/tokens are the same
+shared components a school-site shell would inherit), and MN-15 (one restrained motion treatment applies
+everywhere; nothing branches for in-app browsers).
 
 ## Assets
 
@@ -183,12 +231,14 @@ provenance line, and the "Two programs of one school" kicker — exactly header 
 line + this mock's own compact element, as rule 8 allows. This is a size estimate from the CSS, not a rendered
 measurement; the browser-based check is a separate verification step (T-048) outside this pass.
 
-**Rule 9 (link whitelist).** Every `href` is one of: `#compare`, `#main` (in-page anchors); `../shared/fonts.css`,
-`../shared/tokens.css`, `styles.css` (stylesheets); `/` (the lockup, per `copy.md`'s own "`/` of the mock"
-instruction); or a `gt.school` / `www.gt.school` / `anywhere.gt.school` / `apply.gt.school` / `community.gt.school`
-destination, each matching `copy.md` exactly and carrying its `data-event` attribute. `data-event` counts:
-`door_click`×4, `cta_apply_click`×2, `cta_secondary_click`×4, `families_click`×2, `outbound_school_site`×2,
-`tefa_module_view`×1, `compare_view`×1 — matching every event `copy.md` specifies.
+**Rule 9 (link whitelist).** Every `href` is one of: `#compare`, `#main`, `#top` (in-page anchors); `../shared/fonts.css`,
+`../shared/tokens.css`, `styles.css` (stylesheets); or a `gt.school` / `www.gt.school` / `anywhere.gt.school` /
+`apply.gt.school` / `community.gt.school` destination, each matching `copy.md` exactly and carrying its
+`data-event` attribute. `data-event` counts: `door_click`×4, `cta_apply_click`×2, `cta_secondary_click`×4,
+`families_click`×2, `outbound_school_site`×2, `tefa_module_view`×1, `compare_view`×1 — matching every event
+`copy.md` specifies. (The header lockup originally linked to `/`, per `copy.md`'s literal "`/` of the mock"
+instruction; the coordinator changed it to `#top` — `<body id="top">` — for consistency with the other four
+mocks, which this document now reflects.)
 
 **Rule 10 (motion).** `grep -n "transition" styles.css` shows exactly two rules: the `.link-underline::after`
 transform reveal (`--duration-fast`, `--ease-standard`) and the `prefers-reduced-motion: reduce` block that
