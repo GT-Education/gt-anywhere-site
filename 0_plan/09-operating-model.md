@@ -42,6 +42,7 @@ flowchart TB
 | Data type | System of record | Derived views | Owner | Rule |
 |---|---|---|---|---|
 | Requirements, decisions, architecture, plans | `0_plan/` in GitHub | The "dev requirements" Google Sheet, regenerated; Linear project description | Johnny writes, Nari approves | D-013. Never edit the sheet by hand |
+| Released deliverables for presentation | `2_deliverables/` in GitHub, one folder per DEL id, frozen versioned files | The working copies in `0_plan/` and `1_spec/` | Johnny releases; Nari, David receive | New version per change, never edited in place; index in `2_deliverables/README.md` |
 | Work items and their status | Linear, team GT School (GTT), project gt-anywhere | The gate and ensemble columns in `05` section 8, which carry the Linear id | Johnny | D-018. One status home |
 | Code and mocks | GitHub `GT-Education/gt-anywhere-site` (this repo); `apply-gt-school` for the application | Vercel previews | Johnny | D-019 |
 | Live site content | Webflow for gt.school and anywhere.gt.school today; Vercel for the landing and Anywhere v2 after cutover | The mirror in this repo is a snapshot, re-taken by `tools/mirror.mjs` | Nari owns Webflow; Johnny owns Vercel | D-020, D-021 |

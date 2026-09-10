@@ -57,3 +57,9 @@ tests/package.json
 .cursor/skills/verify-anywhere/SKILL.md
 .cursor/skills/verify-anywhere/
 0_plan/16-g05-decision-record.md
+2_deliverables/README.md
+2_deliverables/DEL-017-positioning-brief/
+2_deliverables/DEL-017-positioning-brief/positioning-brief-v1.0-2026-09-10.md
+2_deliverables/DEL-017-positioning-brief/g05-decision-record-v1.0-2026-09-10.md
+2_deliverables/DEL-017-positioning-brief/g05-decision-record.html
+2_deliverables/DEL-nnn-<slug>/

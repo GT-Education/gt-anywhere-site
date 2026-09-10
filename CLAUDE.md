@@ -11,6 +11,8 @@ Two things share this repository:
    package.json, linter, or test runner. The deliverable is the checked-in HTML + `assets/`.
 2. On the `v2` branch, the planning home for the **GT School web redo**: one umbrella landing
    page that routes parents to the right school, then aligned school sites with owned content.
+   `0_plan/` is planning, `1_spec/` the build spec, `2_deliverables/` the frozen, versioned
+   releases handed to Nari and David (never edited in place; release a new version).
 
 Read in this order before any design or build work: `0_plan/00-context.md` (what GT School
 is, the estate, five facts every session must carry), `0_plan/README.md` (index, id
@@ -112,6 +114,7 @@ creating ad accounts or tags, adding a dependency or a build step to the reposit
 |---|---|---|
 | Which sources count as truth | `0_plan/SOURCES.md` (the mapping) and `0_plan/TRUTH.md` (human designations and attestations) | Cite a listed source for every fact; model memory and planning summaries are not sources |
 | Requirements, decisions, plans | `0_plan/` in this repo | `09` section 1 |
+| Released deliverables | `2_deliverables/`, one folder per DEL id, versioned snapshots | Working copies stay in `0_plan/` and `1_spec/`; `2_deliverables/README.md` is the index |
 | Work status | Linear | D-018 |
 | Live site content | Webflow (gt.school, anywhere.gt.school) until cutover; Vercel after | D-020, D-021 |
 | Leads and applications | Supabase behind apply.gt.school; HubSpot CRM | Read-only from here |

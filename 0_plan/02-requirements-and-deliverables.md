@@ -144,7 +144,7 @@ All `Proposed` unless noted. Priority is within the phase.
 | DEL-014 | Georgetown site aligned to the shared shell | 2 | Johnny, Nari | D-005, DEL-010 | Both sites pass the IA checklist | Not started |
 | DEL-015 | Chatbot evaluation | 3 | Johnny | DEL-012 plus 60 days of FAQ data | Go or no-go logged as a decision | Gated |
 | DEL-016 | Reconcile the mirror with the live site (re-mirror, merge the Phase 0 branches) | Before 2 | Johnny | | Diff of mirror versus live is empty except intended changes | Not started |
-| DEL-017 | Positioning brief, one page: umbrella promise, per-school promise, proof, tone, affiliation stance, price and access stance | 1 | Johnny with Nari | R2, R4 | Nari approves (gate G0.5) | Draft v0.1 written 2026-09-10 (`15-positioning-brief.md`); awaiting Nari |
+| DEL-017 | Positioning brief, one page: umbrella promise, per-school promise, proof, tone, affiliation stance, price and access stance | 1 | Johnny with Nari | R2, R4 | Nari approves (gate G0.5) | v1.0 released 2026-09-10 to `2_deliverables/DEL-017-positioning-brief/`: all six decisions made by Johnny, item 5 Guides; Nari's written confirmation pending |
 | DEL-018 | Claims register: every quantitative claim on both sites with source, approved wording, date and surfaces | 1 | Johnny; Nari approves wording | R4 | Zero unregistered claims on any surface | In progress: 31 rows Unverified from R4 (`12-claims-register.md`); Nari approves wording |
 | DEL-019 | Risk register | 1 | Johnny | | Reviewed with Nari | Not started |
 | DEL-020 | Launch checklist: DNS, redirects, consent, claims, accessibility, analytics, rollback | 1 | Johnny; Nari and David sign off | DEL-009 | Executed and signed at go-live | Not started |
