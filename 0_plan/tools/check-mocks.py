@@ -75,8 +75,8 @@ def check(folder):
     r('R12 data-event coverage', not missing, ', '.join(missing))
     dims = [i for i in imgs if not (re.search(r'\bwidth=', i) and re.search(r'\bheight=', i))]
     r('R13 image dimensions', not dims, f'{len(dims)} without width/height')
-    eager = [i for i in imgs if 'loading="lazy"' not in i]
-    r('R13 at most two eager images (the first screen)', len(eager) <= 2, f'{len(eager)} eager')
+    eager = [i for i in imgs if 'loading="lazy"' not in i and '.svg' not in i]
+    r('R13 at most two eager photos (the first screen); svg logos exempt', len(eager) <= 2, f'{len(eager)} eager')
     for s in set(x for x in srcs if x.startswith('../shared/')):
         if not os.path.exists(os.path.normpath(os.path.join(folder, s))): r('R13 asset exists', False, s)
     r('R16 real logos in header and footer', 'gt-school-logo-h.svg' in doc and 'gt-anywhere-logo-h.svg' in doc, 'GT School and GT Anywhere logo SVGs required')
