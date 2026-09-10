@@ -1,0 +1,3 @@
+| ID | Result | Finding |
+|---|---|---|
+| D-027 | Pass | Checked: agent shell carries CLAUDE_CODE_* variables (env); the last three commits are authored by Johnny Chung with Claude Co-Authored-By trailers (git log); user.signingkey, commit.gpgsign and gpg.format are unset (git config); truth.py lines 67 to 68 gate the signature check on local config and accept statuses G or U with no signer allowlist; CODEOWNERS lists only @gt-johnnychung and notes an author cannot approve their own PR; Q-028 exists in ID-INDEX.md. "Branch protection unverified" describes Astra's own read-only scope, not a repo fact. Recommendation (a) and the reasoning agree. |

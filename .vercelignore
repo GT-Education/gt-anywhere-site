@@ -1,0 +1,12 @@
+# Deploy the site only. Planning, spec, tooling and internal files never ship.
+0_plan
+1_spec
+tools
+.github
+.cursor
+.claude
+V2.md
+CLAUDE.md
+README.md
+out
+*.log

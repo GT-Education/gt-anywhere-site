@@ -1,0 +1,5 @@
+# Only humans change the source-of-truth manifest. GitHub enforces this once branch protection requires
+# code-owner review on main and v2 (D-027). Add the second human reviewer's handle when known (Q-028), because
+# an author cannot approve their own pull request.
+/0_plan/TRUTH.md @gt-johnnychung
+/.github/CODEOWNERS @gt-johnnychung

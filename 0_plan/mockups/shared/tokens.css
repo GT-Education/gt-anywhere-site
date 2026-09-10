@@ -1,0 +1,68 @@
+/* Draft tokens extracted by R1 (0_plan/research/R1-design-tokens.md) on 2026-09-10 from both live sites' CSS.
+   Values are evidenced, not invented; roles merge by value (DD-19). Owned by design-system/ after T-063/T-064. */
+:root {
+  /* Type — families confirmed identical on both live sites (§2, DD-01) */
+  --font-serif: Literata, Georgia, "Palatino Linotype", sans-serif; /* fallback stack merges both sites' */
+  --font-sans: "Inter Tight", Arial, sans-serif; /* string picked from Georgetown's @font-face; Anywhere's own files must be repointed from "Intertight" */
+  --font-mono: Inconsolata, Arial, sans-serif;
+
+  /* Type scale — h1–h6 identical on both sites (§4); tiny..xlarge take Anywhere's ladder (§7 C2) */
+  --text-xs: .75rem;    /* Anywhere "tiny" */
+  --text-sm: .875rem;   /* Anywhere "small" = h6 = Georgetown "tiny" */
+  --text-base: 1rem;    /* body, both sites */
+  --text-md: 1.125rem;  /* Anywhere "medium" */
+  --text-lg: 1.25rem;   /* Anywhere "large" = h5, both sites */
+  --text-xl: 1.5rem;    /* Anywhere "xlarge" = h4, both sites */
+  --text-2xl: 2rem;     /* = h3, both sites */
+  --text-3xl: 3.25rem;  /* = h1, both sites (h2 = 3rem sits between 2xl and 3xl; both sites agree on this too) */
+
+  --leading-tight: 1.15;  /* h1–h3 on both sites, confirmed identical computed value despite different alias names (§4) */
+  --leading-body: 1.25;   /* Anywhere's live value; Georgetown computes 1.3 here — conflict C1, Anywhere kept per continuity */
+
+  /* Color — raw swatches ~identical across sites (§3); role assignment merged per §7 C7–C11, C9 escalated */
+  --color-bg: #fcf4ef;          /* Anywhere background--primary; C7 */
+  --color-surface: #f8e8de;     /* Anywhere background--secondary; C8 */
+  --color-surface-alt: #002a3a; /* Anywhere background--tertiary (dark) — UNRESOLVED, see C9: Georgetown's tertiary is light (#f8e8de). Escalate before using. */
+  --color-text: #001117;        /* identical on both sites */
+  --color-text-muted: #5b5b5b;  /* Georgetown's grey-dark — Anywhere has no true muted-grey text color (gap noted §3a) */
+  --color-accent: #e48b53;      /* identical on both sites (Anywhere "gold" = Georgetown "orange") */
+  --color-accent-contrast: #fbfbfb; /* both sites' CTA text color on navy/orange fills; AA ratio not verified — see appendix */
+  --color-border: #cac6c4;      /* Anywhere border-color--primary; C10 */
+  --color-focus: #004f71;       /* Anywhere's explicit brand--blue; Georgetown has no focus token at all (falls back to an unbranded Webflow default) — C11 */
+  --color-georgetown-tint: /* NOT DETERMINABLE — no per-school color distinction exists on either live site today; see appendix */ ;
+  --color-anywhere-tint: /* NOT DETERMINABLE — same reason */ ;
+
+  /* Space — 4px-based, 12 non-zero steps; Anywhere's ladder used end to end (§5b, §7 C3) */
+  --space-1: .125rem;  /* 2px */
+  --space-2: .25rem;   /* 4px */
+  --space-3: .5rem;    /* 8px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.5rem;   /* 24px */
+  --space-6: 2rem;     /* 32px */
+  --space-7: 3rem;     /* 48px */
+  --space-8: 4rem;     /* 64px */
+  --space-9: 5rem;     /* 80px */
+  --space-10: 6rem;    /* 96px */
+  --space-11: 8rem;    /* 128px */
+  --space-12: 12rem;   /* 192px */
+
+  /* Shape — matched by value, not by name, across both sites (§5c) */
+  --radius-sm: .25rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;   /* Anywhere alone also has a 4th step, 1rem, if a bigger radius is ever needed (C4) */
+
+  /* Elevation — only one shadow recipe is confirmed shared verbatim on both sites (§5f) */
+  --shadow-1: 1px 2px 14px #00000008; /* Anywhere .menu_wrap == Georgetown .mobile-menu_wrap, byte-identical */
+  --shadow-2: 0 -2px 16px #0000000d;  /* Anywhere .section.home-intro; not confirmed on the 3 Georgetown pages fetched — verify before relying on it as "shared" */
+
+  /* Layout */
+  --container-max: 90rem;     /* 1440px — Georgetown's value, chosen because it matches this project's own 1440px verification width (C5), not Anywhere's 92rem/1472px */
+  --container-narrow: 48rem;  /* 768px — identical on both sites, no conflict (C6) */
+
+  /* Motion — real, extracted durations; NOTE these differ from the 150/250/400ms already fixed in 07-design-decisions.md MN-13 (§8) */
+  --duration-fast: 100ms;   /* both sites: modal-close-icon, social-button, slider-dot */
+  --duration-base: 200ms;   /* both sites: form controls, nav dropdowns, secondary buttons */
+  --duration-slow: 300ms;   /* both sites: primary CTA / menu button / lightbox control */
+  --ease-standard: ease;    /* the only easing observed anywhere on either site — no cubic-bezier or GSAP ease found */
+  --ease-emphasized: ease;  /* NOT DETERMINABLE as a distinct curve — no second easing exists in either site's CSS or scripts; set equal to --ease-standard pending a deliberate new choice (see appendix) */
+}
