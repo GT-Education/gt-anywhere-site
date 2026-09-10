@@ -69,14 +69,14 @@
 
 ### 8a. The six questions
 
-| # | Topic | Options | Reasoning | Nari's response |
-|---|---|---|---|---|
-| 1 | Umbrella sentence | (a) "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." (b) Your edit | Parents often do not know two ways to attend exist, and most do not know what GT stands for. One sentence fixes both before they choose a school | |
-| 2 | Speed figure | (a) 3X. (b) 4x. (c) 3-7x. (d) No figure | All three are live today, so at least two are wrong. 3X is the only one gt.school uses and the only one the refund policy guarantees. None has published data behind it yet | |
-| 3 | Accreditation | (a) "Fully accredited by Cognia". (b) "Candidate for Accreditation with Cognia". (c) Say nothing | All three versions are live today. Only one can be true, and "Candidate" means not yet accredited. Until confirmed, saying nothing is the only safe choice | |
-| 4 | Georgetown tuition | (a) Publish the yearly figure. (b) Publish a range. (c) "Tuition on request" | Anywhere states $10,400 a year. Georgetown states no price anywhere, only a $10,000 scholarship banner, so parents cannot compare the two schools | |
-| 5 | Title for the adults | (a) Advisors. (b) Guides | gt.school says Guides, Anywhere says Advisors, and some are the same people with the same bios. One word everywhere, or parents assume two different roles | |
-| 6 | Alpha School relationship | (a) One small line: "The gifted school in the Alpha School network". (b) Other wording. (c) In the headline. (d) Not mentioned | The affiliation is already public on both sites, so hiding it looks evasive. Keeping it to one line keeps GT's own results separate from press questions about the network | |
+| # | Topic | What it is now | What we recommend | Why | Nari's response |
+|---|---|---|---|---|---|
+| 1 | Umbrella sentence | Neither site tells a parent there are two ways to attend, or what GT stands for | "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." | It answers the two questions every first-time parent has before they can choose a school | |
+| 2 | Speed figure | Three different figures are live at once: 3x, 4x and 3-7x | No figure on the landing. If one is used later, 3X | At least two of the three are wrong. 3X is the only one gt.school uses and the only one the refund policy guarantees, but none has published data behind it yet | |
+| 3 | Accreditation | Three versions are live: "fully accredited by Cognia", "Candidate for Accreditation", and plain "Accredited" in gt.school's footer | Say nothing and show no Cognia mark until you and counsel confirm the true status. Fix the live sites now | Only one version can be true, and "Candidate" means not yet accredited. A wrong claim here is a legal problem, not a copy problem | |
+| 4 | Georgetown tuition | No price on any Georgetown page, only "a limited number of $10,000 scholarships" with nothing to subtract from. Anywhere states $10,400 a year | "Tuition on request" until you give us the number, then publish it the same way Anywhere does | Parents cannot compare two schools when one has a price and the other does not. We cannot invent the number | |
+| 5 | Title for the adults | gt.school says Guides, Anywhere says Advisors, and some are the same people with identical bios | Advisors, everywhere | One staff body needs one name, or parents assume two roles. Advisors is already GT's word; Guides is the Alpha network's | |
+| 6 | Alpha School relationship | Anywhere calls itself "The Gifted Academy of Alpha School"; gt.school does not mention Alpha | One small line, once: "The gifted school in the Alpha School network" | The link is already public on both sides, so hiding it looks evasive. One line keeps GT's own results separate from press questions about the network | |
 
 ### 8b. Evidence behind each question
 
