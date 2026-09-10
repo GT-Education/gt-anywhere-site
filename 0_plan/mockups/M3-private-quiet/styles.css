@@ -1,0 +1,551 @@
+/* M3 Private Quiet — prestige as restraint.
+   Tokens only: every color, font, size, space, radius and duration below is a
+   var(--...) from ../shared/tokens.css. The one flagged departure is the navy
+   footer surface (RATIONALE.md, Departures) — the token itself (--color-navy)
+   already exists in tokens.css, the departure is using it as a footer surface. */
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+h1, h2, h3, p, ul, ol, li, table, th, td, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol { list-style: none; }
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link: off-screen at rest, brought in with transform only (rule 10) */
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  background: var(--color-text);
+  color: var(--color-accent-contrast);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-sm);
+  z-index: 1;
+  transform: translateY(-150%);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Focus ring, everywhere */
+a:focus-visible,
+.skip-link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Layout ---------- */
+.wrap {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+}
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.lockup:hover { color: var(--color-focus); }
+
+.utility-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.utility-nav a {
+  font-size: var(--text-xs);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-block: var(--space-2);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.utility-nav a:hover { color: var(--color-focus); }
+
+/* ---------- First screen ---------- */
+.first-screen {
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.provenance {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+/* Doors: a list so a third or fourth campus costs nothing (DD-21) */
+.doors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.door {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+.door:hover, .door:focus-within {
+  border-color: var(--color-focus);
+}
+.door[data-school="georgetown"] { background: var(--color-georgetown-tint); }
+.door[data-school="anywhere"] { background: var(--color-anywhere-tint); }
+
+/* Compact head row: a small photo beside the label and name, so the cue set
+   (label + icon + photo, DD-04) fits the 390x844 fold with both doors (rule 8) */
+.door-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.door-photo {
+  width: var(--space-8);
+  height: var(--space-8);
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex: none;
+}
+.door[data-school="georgetown"] .door-photo { object-position: center 35%; }
+.door[data-school="anywhere"] .door-photo { object-position: center 30%; }
+
+.door-head-text { min-width: 0; }
+
+.door-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+.door-label svg { width: var(--space-4); height: var(--space-4); flex: none; }
+
+.door-name {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-lg);
+}
+
+.door-line {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.door-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-focus);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.door-cta:hover { color: var(--color-text); }
+.door-cta span { margin-left: var(--space-2); }
+
+/* ---------- Compare anchor ---------- */
+.compare-anchor {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.compare-anchor a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: var(--text-sm);
+  color: var(--color-focus);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.compare-anchor a:hover { color: var(--color-text); }
+
+/* ---------- Eyebrow / kicker (mono, used twice only) ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* ---------- Comparison ---------- */
+.comparison { padding-block: var(--space-8); }
+.comparison h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-2xl); margin-bottom: var(--space-6); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+caption {
+  text-align: left;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+th[scope="col"] {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-md);
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+}
+th[scope="row"] {
+  font-weight: 500;
+  width: 30%;
+}
+td { width: 35%; }
+
+.doors--repeat {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+.door-repeat { flex: 1 1 var(--space-12); }
+.door-name-small {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+}
+.door-cta--quiet { font-size: var(--text-sm); }
+
+.tefa-module {
+  margin-top: var(--space-7);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.tefa-module h3 {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+}
+.tefa-module p { font-size: var(--text-sm); margin-bottom: var(--space-3); }
+.tefa-module a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-focus);
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.tefa-module a:hover { color: var(--color-text); }
+
+/* ---------- Proof strip ---------- */
+.proof-strip {
+  padding-block: var(--space-8);
+  background: var(--color-surface);
+}
+.proof-strip h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-5);
+}
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.facts li {
+  font-size: var(--text-base);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border);
+}
+.footnote {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Application steps ---------- */
+.steps { padding-block: var(--space-8); }
+.steps h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-2xl); }
+.steps-intro { font-size: var(--text-base); margin-top: var(--space-3); margin-bottom: var(--space-5); }
+.steps-list {
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.steps-list li {
+  counter-increment: step;
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-base);
+}
+.steps-list li::before {
+  content: counter(step);
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  flex: none;
+  width: var(--space-5);
+}
+.apply-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.apply-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-focus);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.apply-links a:hover { color: var(--color-text); }
+
+/* ---------- Secondary CTAs ---------- */
+.secondary-ctas { padding-block: var(--space-8); }
+.secondary-ctas h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-2xl); margin-bottom: var(--space-5); }
+.secondary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.secondary-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.secondary-list a:hover { color: var(--color-focus); }
+
+/* ---------- Current families ---------- */
+.current-families {
+  padding-block: var(--space-8);
+  background: var(--color-surface);
+}
+.current-families h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-xl); margin-bottom: var(--space-3); }
+.current-families p { font-size: var(--text-base); margin-bottom: var(--space-4); }
+.quiet-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--color-focus);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.quiet-link:hover { color: var(--color-text); }
+
+/* ---------- Footer: the one flagged dark-surface departure (DD-19) ---------- */
+.site-footer {
+  background: var(--color-navy);
+  color: var(--color-accent-contrast);
+  padding-block: var(--space-8);
+}
+.footer-facts {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+.footer-contact {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-6);
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: var(--text-xs);
+  color: var(--color-accent-contrast);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.footer-links a:hover { color: var(--color-accent); }
+
+/* ---------- Comparison table at 767px and narrower: stacked blocks instead of three
+   squeezed columns (fix pass). The table stays a real <table> in the DOM — only its
+   CSS display changes here. thead is visually hidden with the same clip pattern as
+   .visually-hidden (not display:none) so screen readers still get the column headers;
+   each td keeps a data-label attribute naming its school, rendered by ::before. Rows
+   whose value is identical for both schools use a single td[colspan="2"] instead and
+   need no label. ---------- */
+@media (max-width: 767px) {
+  .comparison table,
+  .comparison tbody,
+  .comparison tr,
+  .comparison th,
+  .comparison td {
+    display: block;
+    width: auto;
+  }
+  caption { display: block; width: auto; text-align: left; }
+
+  .comparison thead {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .comparison th[scope="col"] { position: static; }
+
+  .comparison tbody tr {
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-4);
+  }
+  .comparison tbody tr:first-child { padding-top: 0; }
+  .comparison tbody tr:last-child { border-bottom: 0; padding-bottom: 0; }
+
+  .comparison th[scope="row"],
+  .comparison td {
+    border-bottom: 0;
+    padding: var(--space-2) 0;
+  }
+  .comparison th[scope="row"] { padding-top: 0; }
+
+  .comparison td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+}
+
+/* ---------- 768px: doors side by side, table breathes (spec section 4) ---------- */
+@media (min-width: 768px) {
+  .doors { flex-direction: row; }
+  .door { flex: 1 1 50%; }
+
+  h1 { font-size: var(--text-2xl); }
+
+  .door-photo { width: var(--space-9); height: var(--space-9); }
+}
+
+/* ---------- 1440px: the large Literata display the direction asks for ---------- */
+@media (min-width: 1440px) {
+  .wrap { padding-inline: var(--space-8); }
+
+  .first-screen { padding-block: var(--space-10) var(--space-9); }
+
+  h1 { font-size: var(--text-3xl); }
+
+  .door-photo { width: var(--space-10); height: var(--space-10); }
+
+  .comparison h2,
+  .proof-strip h2,
+  .steps h2,
+  .secondary-ctas h2 {
+    font-size: var(--text-3xl);
+  }
+
+  .comparison, .proof-strip, .steps, .secondary-ctas, .current-families, .site-footer {
+    padding-block: var(--space-10);
+  }
+}
+
+/* ---------- Reduced motion: every transition above is removed ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}

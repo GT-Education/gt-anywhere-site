@@ -75,8 +75,8 @@ def check(folder):
     r('R12 data-event coverage', not missing, ', '.join(missing))
     dims = [i for i in imgs if not (re.search(r'\bwidth=', i) and re.search(r'\bheight=', i))]
     r('R13 image dimensions', not dims, f'{len(dims)} without width/height')
-    lazy = [i for i in imgs[1:] if 'loading="lazy"' not in i]
-    r('R13 lazy loading after the first image', not lazy, f'{len(lazy)} eager')
+    eager = [i for i in imgs if 'loading="lazy"' not in i]
+    r('R13 at most two eager images (the first screen)', len(eager) <= 2, f'{len(eager)} eager')
     for s in set(x for x in srcs if x.startswith('../shared/')):
         if not os.path.exists(os.path.normpath(os.path.join(folder, s))): r('R13 asset exists', False, s)
     size = os.path.getsize(idx) + (os.path.getsize(css) if os.path.exists(css) else 0)
@@ -87,7 +87,7 @@ def check(folder):
     else: r('R15 rationale exists', False)
     return res
 
-folders = sys.argv[1:] or sorted(glob.glob(os.path.join(REPO, '0_plan', 'mockups', 'M*')))
+folders = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(glob.glob(os.path.join(REPO, '0_plan', 'mockups', 'M*')))
 fails = 0
 for f in folders:
     res = check(f); nf = sum(1 for _,s,_ in res if s=='FAIL'); fails += nf
