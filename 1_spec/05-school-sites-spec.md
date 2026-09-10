@@ -104,3 +104,16 @@ An "Ask GT" section on the Admissions and FAQ pages is reserved for the chatbot 
 | T-097 | Content inventory with owners and cadence (DEL-011) | S7 | Fable with Nari | REQ-050 | Every row owned | `1_spec/02` section 6 | 60 min |
 | T-098 | Editing model implementation per D-004 once decided | S9 | Builder, Sonnet 5 | REQ-051, D-004 | An edit reaches production within the agreed SLA | RUN-LOG evidence | 60 min |
 | T-099 | Cutover PR checklist per V2.md: mirror reconciled (T-012), harness green, redirects none, shell proven, Nari accepts | S7 | Fable | REQ-001, D-009, CON-06 | PR merged | PR link | 1 |
+
+## Guides rename (REQ-076)
+
+Decided at G0.5 on 2026-09-10 (`0_plan/16-g05-decision-record.md`, item 5): the adults are Guides on every GT surface.
+
+| Change | Where | Verification |
+|---|---|---|
+| Copy: "Academic Advisor(s)", "Advisor(s)" become "Guide(s)" | Every Anywhere page, including the FAQ answers and their FAQPage structured data | A text sweep of every live page finds no "Advisor" outside historical documents (V-row to be added with the Anywhere content tasks) |
+| Page: `/advisors` title "Our Academic Advisors" becomes a Guides page; if the URL changes, `/advisors` redirects with 301 to the new path | Anywhere sitemap, redirect map (REQ-071) | Old URL returns 301 to the new page; new page indexable; sitemap updated |
+| Legal: Terms of Use "Academic Advisors are responsible for weekly 1:1 check-ins" becomes Guides, on both sites (gt.school reuses the same document) | `/terms-of-use` on both sites | Both documents match word for word after the change |
+| Landing: the comparison block and any staff mention say Guides from the first mock | `1_spec/03-landing-page-spec.md` | Mock review checklist |
+
+Owner: Nari for the live Webflow changes (stop-and-ask rule), Johnny for the landing and the redirect map.

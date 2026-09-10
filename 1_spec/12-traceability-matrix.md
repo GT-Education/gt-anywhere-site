@@ -1,11 +1,11 @@
 # 12 Traceability matrix
 
-Generated 2026-09-10 17:33 by `1_spec/tools/build-traceability.py`. Do not hand-edit. A REQ with an empty Tasks or Verifications cell is not buildable yet; a REQ whose tasks lack both `Verify-Fable` and `Verify-Astra` Pass rows is not Done.
+Generated 2026-09-10 17:34 by `1_spec/tools/build-traceability.py`. Do not hand-edit. A REQ with an empty Tasks or Verifications cell is not buildable yet; a REQ whose tasks lack both `Verify-Fable` and `Verify-Astra` Pass rows is not Done.
 
 
 | Requirements | With a spec section | With tasks | With verifications | With test cases |
 |---|---|---|---|---|
-| 53 | 52 | 48 | 48 | 26 |
+| 53 | 53 | 48 | 48 | 26 |
 
 | REQ | Title | Spec docs citing it | Tasks | Verifications | Test cases | Latest task status | Fable verified | Astra verified |
 |---|---|---|---|---|---|---|---|---|
@@ -61,4 +61,4 @@ Generated 2026-09-10 17:33 by `1_spec/tools/build-traceability.py`. Do not hand-
 | REQ-073 | Core Web Vitals no worse than today; the README roadmap items fold into v2 | `00-scope-and-traceability.md`, `03-landing-page-spec.md`, `04-design-system-spec.md`, `06-analytics-tracking-spec.md`, `11-verification-spec.md`, `13-testing-suite-spec.md` | T-009, T-059, T-065, T-167 | V-043 | TC-002, TC-043 |  | Pending | Pending |
 | REQ-074 | New pages meet WCAG 2.1 AA; inherited console and SVG errors are fixed, not mirrored | `03-landing-page-spec.md`, `04-design-system-spec.md`, `11-verification-spec.md`, `13-testing-suite-spec.md` | T-058, T-072, T-166 | V-044 |  |  | Pending | Pending |
 | REQ-075 | Every node of every workflow in `13-journey-map.md` has at least one test case in `1_spec/ | `13-testing-suite-spec.md` |  |  |  |  |  |  |
-| REQ-076 | Guides is the one title for the adults on the landing and both school sites: rename Anywhe |  |  |  |  |  |  |  |
+| REQ-076 | Guides is the one title for the adults on the landing and both school sites: rename Anywhe | `05-school-sites-spec.md` |  |  |  |  |  |  |
