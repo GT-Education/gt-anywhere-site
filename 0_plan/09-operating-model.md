@@ -72,7 +72,7 @@ Agents never type a `[SoT]` tag. They run `truth.py propose` with a verbatim sta
 | GitHub | Code, planning documents, pull requests, review history, the id index | Task status, chat | Remote `git@github.com:GT-Education/gt-anywhere-site.git`; push over HTTPS as `gt-johnnychung` (memory: the SSH key lacks access) |
 | Linear | Every work item, bug and its status; cycles; weekly project updates | Requirement text (link the REQ), decisions (link the D) | Team GTT, project gt-anywhere; `gta-NNN` maps to GTT ids (confirm, Q-026) |
 | Webflow | Production for the two live sites; Georgetown restyle in Phase 2 (D-005) | The landing or Anywhere v2; any edit without a Linear issue and Nari's go | Nari owner; Johnny editor through the MCP from the v1 checkout only; the v2 worktree has none by design |
-| Vercel | Previews per PR, staging for `v2`, production for the landing and Anywhere v2 | Personal-scope projects | A mirror project exists in personal scope, mislinked, no git connection (prior session; verify). Fix first (D-020) |
+| Vercel | Previews per PR, staging for `v2`, production for the landing and Anywhere v2 | Team project `gt-website-v2` (team GT School, `prj_c3T2gp0dGQ04OoqwAE2H4CMnqaZ1`), connected to this repo on 2026-09-10; Vercel Authentication on every deployment except custom domains (team default) | Production branch is still `main`; Johnny switches it to `v2` in project settings. The earlier personal-scope mirror project stays unlinked; retire it (D-020) |
 | Supabase | The application and lead backend, owned by the application project | Anything from this repo except the link and the school parameter (MD-09) | Read-only MCP; never write; never test-submit the form |
 | HubSpot | CRM, meetings, email, answer-engine metrics | Requirements or design | MCP connected |
 | GA4 | Behavior, funnel, attribution; the baseline | Conversions of record (AN-07) | `~/.gt-analytics-token.json`, readonly and edit scopes; `tools/ga4-snapshot.py` |
@@ -99,11 +99,11 @@ flowchart LR
 |---|---|---|---|---|
 | Local | `python3 -m http.server`, or the verify harness on 8213 | Working tree | Anyone | Development stream (AN-15) |
 | Preview | Vercel deployment per pull request | Any PR | Automatic | Development stream |
-| Staging | Vercel project on branch `v2` | Merge to `v2` | Automatic | Development stream |
+| Staging | `gt-website-v2`, branch `v2`, URL `gt-website-v2-git-v2-gt-school-cc7ed351.vercel.app` (Vercel login required) | Push or merge to `v2` | Automatic | Development stream |
 | Production, Webflow | gt.school and anywhere.gt.school as they run today | Webflow publish | Nari, or Johnny with Nari's go (D-021) | Production stream; gt.school untagged until REQ-027 |
 | Production, Vercel | The landing at the root (D-001) and Anywhere v2 after cutover | Merge to `main` after DEL-020 | Johnny, after Nari and David sign | Production stream |
 
-Fix before the first PR: the Vercel project moves to a team scope, connects to this GitHub repo, sets `main` as production and enables previews (D-020).
+Done 2026-09-10: `gt-website-v2` was created in the GT School team and connected to this repo; every push deploys (D-020). Still open: the production branch is `main` and Johnny switches it to `v2` in the project settings, because the Vercel CLI on this machine is signed into a personal account, not the team, so agents cannot change project settings. `.vercelignore` keeps `0_plan/`, `1_spec/`, `tools/` and the repo notes out of every deployment, and `vercel.json` sends `X-Robots-Tag: noindex, nofollow` on every response until a production domain exists (SE-13).
 
 ## 4. Branches and pull requests (D-019)
 
@@ -225,7 +225,7 @@ flowchart LR
 |---|---|---|---|---|
 | GA4 property | In the gtschool account since 2026-08-28; Johnny administrator, Sana Malas marketer | Add Nari and Crystal as viewers; confirm Sana's role on the project (Q-024) | Johnny | AN-02 |
 | gt.school analytics | Untagged; a second GA property (548367324) holds two dark streams | Tag with the shared stream through the container before the baseline | Johnny, Nari | REQ-027, AN-01 |
-| Vercel project | Personal scope, mislinked, no git connection (prior session) | Recreate under a team scope with git connection | Johnny | D-020 |
+| Vercel project | `gt-website-v2` in team GT School, git-connected, Vercel Authentication on all deployments except custom domains | Switch the production branch to `v2`; retire the personal-scope mirror project; sign the local CLI into the team (`vercel login`) if agents should manage settings | Johnny | D-020 |
 | Webflow | Nari owner; Johnny editor through the MCP; none from the v2 worktree | Keep | | D-021 |
 | DNS for gt.school | Provider unknown | Find out before DEL-009 | Nari | Q-022 |
 | Linear | Team GTT, project gt-anywhere (prior session) | Confirm; create issues for `05` section 8 | Johnny | Q-026 |

@@ -386,7 +386,7 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | SE-10 | AI crawler policy and llms.txt | `0_plan/07-design-decisions.md:184` | `03-decisions-and-open-questions.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
 | SE-11 | AEO measurement | `0_plan/07-design-decisions.md:185` | `11-seo-aeo-plan.md`, `1_spec/07-seo-aeo-spec.md` |
 | SE-12 | Local search for Georgetown | `0_plan/07-design-decisions.md:186` | `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-13 | Preview and staging indexation | `0_plan/07-design-decisions.md:187` | `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md`, `CLAUDE.md` |
+| SE-13 | Preview and staging indexation | `0_plan/07-design-decisions.md:187` | `09-operating-model.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md`, `CLAUDE.md` |
 | SE-14 | Governance | `0_plan/07-design-decisions.md:188` | `05-landing-mockups-plan.md`, `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/07-seo-aeo-spec.md` |
 
 ## SRC: Sources of truth (SOURCES.md; designated in TRUTH.md)

@@ -9,7 +9,7 @@ proposed and depends on decisions D-001 to D-005.
 |---|---|---|---|---|
 | Georgetown campus site | gt.school | Webflow | gt.school Webflow project (Nari) | Carries the "GT School" brand; effectively the umbrella today (P-02) |
 | GT Anywhere, live | anywhere.gt.school | Webflow | Webflow project, edited live | Last published by Webflow on 2026-07-09 per page markup |
-| GT Anywhere mirror, v1 | Staging only | Static HTML, no build | This repo, `main`; a Vercel staging project | Faithful capture of 2026-07-24; behind live (D-009) |
+| GT Anywhere mirror, v1 | Staging only | Static HTML, no build | This repo, `main` (v1) and `v2`; Vercel project `gt-website-v2` deploys `v2` | Faithful capture of 2026-07-24; behind live (D-009) |
 | GT Anywhere v2 | None yet | Static HTML | This repo, `v2` worktree | Redesign; no deploy link by design (V2.md) |
 | Application flow | apply.gt.school | Separate single-page app | Not in this repo | Receives "Begin Application" hand-offs from both sites; also hosts `#/dashboard` and `#/community-map` |
 | Lead capture | Supabase edge function `partner-lead-webhook` | Serverless | Not in this repo | Called by the Begin Application modal on every Anywhere page; live even from localhost |
