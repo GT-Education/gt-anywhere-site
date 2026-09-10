@@ -39,7 +39,7 @@
 |---|---|
 | Institutional and warm; short sentences; plain words first, GT terms second ("teachers, whom we call advisors") | DD-16, DD-30; R2: Lakeside, Nueva and Harker lead with short, warm, plain headlines despite extreme selectivity; MIT's admissions voice is informal |
 | Calm confidence, no exclamation, no urgency devices | DD-10, MD-06; R2 |
-| One name system: "GT School" as the parent, "Georgetown Campus" and "GT Anywhere" as the two forms | DD-27; the same staff must not be Guides on one site and Advisors on the other (Q-020) |
+| One name system: "GT School" as the parent, "Georgetown Campus" and "GT Anywhere" as the two forms | DD-27; the same staff must not be Guides on one site and Advisors on the other (Q-035) |
 
 ## 5. Affiliation stance
 
@@ -73,5 +73,5 @@
 | 2 | Which speed figure, if any (Q-019) | None on the landing |
 | 3 | The accreditation wording (Q-033) | None on the landing |
 | 4 | How Georgetown tuition is stated (Q-011) | "Tuition on request" |
-| 5 | Guides or Advisors (Q-020) | Advisors, as Anywhere uses today |
+| 5 | Guides or Advisors (Q-035) | Advisors, as Anywhere uses today |
 | 6 | The provenance line wording | As drafted |

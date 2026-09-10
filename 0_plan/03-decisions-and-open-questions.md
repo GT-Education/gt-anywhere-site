@@ -75,6 +75,7 @@ Every decision lists its options, Fable's and Astra's recommendation and reasoni
 | Q-032 | If the decision helper is prototyped, what question elicits the family's preference rather than commute feasibility, and who approves the wording? A commutable, TEFA-eligible Texas family may still prefer Anywhere (R3, DD-24) | Nari | DD-24, TC-073 | The current wording has the gap Astra flagged |
 | Q-033 | Which accreditation statement is true today: "fully accredited by Cognia", "Candidate for Accreditation", or "Accredited"? All three appear on the Anywhere homepage and gt.school's footer broadcasts the unqualified version (R4 §3i; CR-001 to CR-003) | Nari, counsel | REQ-004, DD-17, SE-05 | No Cognia mark on any new surface until answered |
 | Q-034 | Are the five homepage testimonials on gt.school (attributed "2 Hour Learning Student") GT School students with consent on file, or network testimonials? | Nari | MD-05, AD-11 | No quote is reused until confirmed |
+| Q-035 | Guides or Advisors: which title do the adults carry across both sites and the landing? gt.school says "guide(s)" 47 times and titles staff "Guide for Middle School", "Lead Guide"; Anywhere says "Advisors" (its `/advisors` page), and R4 confirms at least two staff bios are word-for-word identical on both sites under different titles | Nari, Holly | DD-27, REQ-018 | Brief section 4 defaults to Advisors, Anywhere's word today; the landing uses one title only |
 
 ## Push-back on the call
 
