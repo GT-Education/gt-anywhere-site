@@ -92,13 +92,14 @@ a:focus-visible,
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: var(--text-lg);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
+  transition: opacity var(--duration-fast) var(--ease-standard);
 }
-.lockup:hover { color: var(--color-focus); }
+.lockup:hover { opacity: 0.8; }
+.lockup img {
+  display: block;
+  height: var(--space-6);
+  width: auto;
+}
 
 .utility-nav ul {
   display: flex;
@@ -454,6 +455,23 @@ td { width: 35%; }
   transition: color var(--duration-fast) var(--ease-standard);
 }
 .footer-links a:hover { color: var(--color-accent); }
+
+/* Real logos, not text: gt-school-logo-h.svg has a navy-fill portion that would
+   vanish on the navy footer, so both logo links sit on a small light panel instead
+   of being recolored (coordinator note). Opacity replaces the color transition since
+   there is no text to recolor. */
+.footer-links a.footer-logo-link {
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding-inline: var(--space-3);
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.footer-links a.footer-logo-link:hover { opacity: 0.8; }
+.footer-logo-link img {
+  display: block;
+  height: var(--space-5);
+  width: auto;
+}
 
 /* ---------- Comparison table at 767px and narrower: stacked blocks instead of three
    squeezed columns (fix pass). The table stays a real <table> in the DOM — only its

@@ -118,8 +118,10 @@ last clause directly.
 |---|---|---|---|---|
 | `georgetown-science.webp` (1440×1208) | Georgetown door cue photo | "Students in lab coats run a science experiment on the Georgetown campus." | Published by GT on its own site, consent to be confirmed by Nari (AD-11) | Remove the `<img>`; the label + icon + school name still carry the cue (DD-31) |
 | `anywhere-austin-intensives.webp` (1080×1163) | GT Anywhere door cue photo | "A GT Anywhere student records in a podcast studio during an in-person intensive." | Published by GT on its own site, consent to be confirmed by Nari (AD-11) | Same: remove the `<img>`, the card still reads correctly without it |
+| `gt-school-logo-h.svg` (139×32 viewBox) | Header lockup (linking to `#top`) and the "Georgetown Campus" footer link | "GT School" | The real logo file from the mirror, no recoloring | If rejected, the `.lockup`/footer link falls back to a plain text label with no other markup change |
+| `gt-anywhere-logo-h.svg` (252×48 viewBox) | "GT Anywhere" footer link | "GT Anywhere" | The real logo file from the mirror, no recoloring | Same fallback: plain text label |
 
-Both are the two "strongest large images" the coordinator's asset note named, and
+Both photos are the two "strongest large images" the coordinator's asset note named, and
 neither belongs to a "same session, don't pair" cluster in `ASSETS.md`, so using them
 together is clean. Neither is on the avoid list (`anywhere-student-home.webp`,
 `georgetown-kid-writing.webp`), and `georgetown-crowd.webp` (baked-in banner/QR) is not
@@ -134,7 +136,18 @@ correct box before the file arrives (CLS 0).
 
 No other photograph is used anywhere on the page. The direction's asset dependency
 (1_spec/03 §10 said "None" for M3, before `copy.md`'s cue-set correction) is now these
-two files only — see Departures.
+two door photos plus the two real logo files (brand-continuity note) — see Departures.
+
+Both logo SVGs are used exactly as shipped, with no recoloring or filters. Checked
+directly against their source: `gt-school-logo-h.svg` fills part of its mark
+`#002A3A` — the same value as `--color-navy` — so on the navy footer that portion
+would be invisible (0:1 contrast, navy on navy). Rather than recolor the logo, both
+footer logo links sit on a small `var(--color-bg)` panel (`.footer-logo-link`), so
+every color in both marks reads exactly as designed; `gt-anywhere-logo-h.svg` (white
+and `--color-accent` orange) would have read fine directly on navy, but got the same
+panel treatment for visual consistency between the two. The header logo needs no such
+panel — its only colors (orange, navy) both read clearly on the light `--color-bg`
+first screen.
 
 ## Departures
 
@@ -156,7 +169,7 @@ raw literal outside these named exceptions — every other declaration is a
 
 | Slot | Q id | Default shipped in this mock |
 |---|---|---|
-| Lockup | Q-001 | "GT School" set as a Literata wordmark (plain text, not the SVG file), consistent with the restraint direction; Holly's element is still pending |
+| Lockup | Q-001 | The real `gt-school-logo-h.svg` mark (one of `copy.md`'s own two sanctioned options for this slot, the other being a Literata wordmark), per Johnny's brand-continuity note; Holly's own, purpose-built element is still pending |
 | Current families link (header and its own section) | Q-002 | Linked to `https://community.gt.school` as `copy.md` gives it |
 | Application steps | Q-007 | The four generic steps from `copy.md`, unchanged |
 | Comparison row content | Q-008 | Rows exactly as `copy.md` gives them |
