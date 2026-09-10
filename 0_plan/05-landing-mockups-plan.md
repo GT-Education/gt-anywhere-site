@@ -198,8 +198,8 @@ Status values: `Not started`, `In progress`, `Done`, `Blocked`, `n/a`. Check col
 | 5 | R4 content and proof | `research/R4-content-and-proof.md` | Done 2026-09-10 (report filed) | n/a | n/a | Pending (E3) | |
 | 6 | R5 synthesis | `07-design-decisions.md` v0.2: 32 rows revised from R1 to R4 evidence, 12 of them toward Astra's position; claims register CR-001 to CR-031; Q-007 to Q-021 evidenced; tokens draft; gt.school inventory | Done 2026-09-10 | Audit of revised cells running | Pending | Pending (E1) | |
 | 7 | E1 Astra decision review | `ensemble/E1-decisions.md`; Astra column and verdicts merged | n/a | Not started | Pending | n/a | |
-| 8 | Build wave 1 | M1 to M4 (4 builders plus Fable as watchdog) | In progress 2026-09-10: shared foundation committed (tokens, fonts, copy deck, 28 assets, builder brief); four Sonnet 5 builders launched | n/a | n/a | Pending (E2) | |
-| 9 | Build wave 2 | M5 plus the gallery `mockups/index.html` | Not started | n/a | n/a | Pending (E2) | |
+| 8 | Build wave 1 | M1 to M4 (4 builders plus Fable as watchdog) | Done 2026-09-10: four mocks built by Sonnet 5 builders, each 32 of 32 on `check-mocks.py`, browser-checked at 390 and 1440 by Fable, fix passes applied (mobile comparison stacking, desktop door height, real logos) | n/a | n/a | Pending (E2) | |
+| 9 | Build wave 2 | M5 plus the gallery `mockups/index.html` | In progress 2026-09-10: M5 built and in its fix pass (hidden-table overflow, stacked mobile table, schedule visual, desktop fold, Anywhere door photo); gallery and `06-mockup-rationale.md` being assembled | n/a | n/a | Pending (E2) | |
 | 10 | Rationale | `06-mockup-rationale.md`: one row per mock, every decision traced | Not started | n/a | n/a | Pending (E2, E3) | |
 | 11 | Self-QA | 390px and 1440px screenshots per mock, zero console errors, links resolve, a11y quick pass | Gate written: `tools/check-mocks.py` enforces the brief's 15 rules; browser pass follows the builds | n/a | n/a | Pending (E2) | |
 | 12 | E2 Astra mock review | `ensemble/E2-mocks.md` | n/a | Not started | Pending | n/a | |
