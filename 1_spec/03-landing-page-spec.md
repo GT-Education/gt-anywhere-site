@@ -41,18 +41,18 @@ Every slot names its source. A slot whose source is a Q id ships with a visible 
 
 | Slot | Section | Copy rule | Source | Status |
 |---|---|---|---|---|
-| Umbrella sentence | 1 | One sentence, under 25 words, decodes "gifted and talented", names both ways to attend, plain words (DD-30), institutional and warm (DD-16). Working draft: "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." | DEL-017 positioning brief fixes the final wording | Draft |
+| Umbrella sentence | 1 | One sentence, under 25 words, decodes "gifted and talented", names both ways to attend, plain words (DD-30), institutional and warm (DD-16). Working draft: "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." | DEL-017 positioning brief fixes the final wording | Fixed (G0.5 item 1); `0_plan/mockups/shared/copy.md` |
 | Provenance line | 1 | "The gifted school in the Alpha School network." Once, small | MD-17; homepage already states the affiliation | Ready |
-| Door: Georgetown | 1 | Name "Georgetown Campus"; line "In person, Georgetown, Texas"; CTA "Explore the Georgetown campus" | DD-27 (Nari to confirm the label) | Draft |
-| Door: Anywhere | 1 | Name "GT Anywhere"; line "Online, from anywhere, with quarterly in-person intensives"; CTA "Explore GT Anywhere" | DD-27; site copy | Draft |
+| Door: Georgetown | 1 | Name "Georgetown Campus"; line "In person, Georgetown, Texas"; CTA "Explore the Georgetown campus" | DD-27 (Nari to confirm the label) | Fixed in `copy.md` v1 (T-041) |
+| Door: Anywhere | 1 | Name "GT Anywhere"; line "Online, from anywhere, with quarterly in-person intensives"; CTA "Explore GT Anywhere" | DD-27; site copy | Fixed in `copy.md` v1 (T-041) |
 | Helper | Phase 2 | Deferred: DD-24 revised after R3 to omit the helper from v1; the spec in `01` section 6 stays as the Phase 2 experiment gated on TC-073 | DD-24, Q-032 | Deferred |
 | Comparison rows | 3 | One short cell per school per row; facts only | Q-007, Q-008, Q-011, Q-013, Q-017; site copy for the 90th percentile bar and TEFA | Blocked on questions |
-| Tuition and access | 3 | Anywhere: the Approved TEFA wording (CR-021, CR-022 conflict to resolve). Georgetown: "Tuition on request" until Q-011, because the campus site discloses no figure, only a $10,000 founding-family scholarship (CR-024) | Claims register rows; MD-13, REQ-026 | Blocked on Q-011 |
-| TEFA module | 3 | "Texas families: the TEFA voucher covers GT Anywhere tuition in full. <window>" with an owner and an expiry date in the content file | MD-26; Q-021 for window and disclaimers | Blocked on Q-021 |
-| Proof figure | 4 | One figure, footnoted; the evidence favors 3X (R4: the only figure gt.school uses, matching the refund-policy growth-factor guarantee, CR-004, CR-007, CR-008) once Nari approves the row (Q-019) | DEL-018 | Blocked on Q-019 |
-| Steps | 5 | Four steps per school, one line each | Q-007; the Anywhere flow is Interest, Apply, Enroll, Tuition per prior sessions | Blocked on Q-007 |
-| Secondary CTAs | 6 | "Read the FAQ", "Talk to an advisor", "Book a campus tour", "Join a virtual info session" | MD-02; HubSpot meeting links from Nari | Links TBD |
-| Facts block | 8 | Identical wording on every surface | SE-08; claims register | Draft after T-004 |
+| Tuition and access | 3 | Anywhere: the Approved TEFA wording (CR-021, CR-022 conflict to resolve). Georgetown: "Tuition on request" until Q-011, because the campus site discloses no figure, only a $10,000 founding-family scholarship (CR-024) | Claims register rows; MD-13, REQ-026 | Georgetown "Tuition on request" decided (G0.5 item 4); Anywhere wording in `copy.md`, CR-021/CR-022 conflict flagged |
+| TEFA module | 3 | "Texas families: the TEFA voucher covers GT Anywhere tuition in full. <window>" with an owner and an expiry date in the content file | MD-26; Q-021 for window and disclaimers | Default copy in `copy.md`; window, owner and expiry blocked on Q-021 |
+| Proof figure | 4 | One figure, footnoted; the evidence favors 3X (R4: the only figure gt.school uses, matching the refund-policy growth-factor guarantee, CR-004, CR-007, CR-008) once Nari approves the row (Q-019) | DEL-018 | Withheld by decision (G0.5 item 2); the strip carries four register-backed facts instead (`copy.md` section 4) |
+| Steps | 5 | Four steps per school, one line each | Q-007; the Anywhere flow is Interest, Apply, Enroll, Tuition per prior sessions | Four generic steps in `copy.md`, flagged Q-007 |
+| Secondary CTAs | 6 | "Read the FAQ", "Talk to an advisor", "Book a campus tour", "Join a virtual info session" | MD-02; HubSpot meeting links from Nari | Destinations set in `copy.md` (contact page until meeting links exist); "Talk to admissions" replaces "Talk to an advisor" after G0.5 item 5 |
+| Facts block | 8 | Identical wording on every surface | SE-08; claims register | Fixed in `copy.md` section 8 |
 
 ## 3. States
 
