@@ -26,6 +26,7 @@
 | 13 | Images from `../shared/img/` only, with `width` and `height` attributes, `loading="lazy"` and `decoding="async"` on everything except the first-screen image. Page under 1 MB excluding shared images | `du` |
 | 14 | Tokens: every color, font, size, space, radius, shadow and duration is a `var(--...)` from `tokens.css`. A value outside the token set is a departure: allowed only if named in `RATIONALE.md` with the reason (DD-19) | grep `#` in styles.css |
 | 15 | Design for N campuses: the doors are a list (`<ul>`) that could hold three to five entries (DD-21), even where the visual is a two-panel split | Markup |
+| 16 | Brand continuity (Johnny, 2026-09-10): the header lockup is the real GT School logo SVG from `../shared/img/`, the footer shows both real logos as gt.school's footer does, colors come only from `tokens.css` (the sites' own swatches) and type only from the three site faces. No text wordmark in place of the logo, no recolored or redrawn mark, no new color outside the one flagged tint | grep `gt-school-logo-h.svg` and `gt-anywhere-logo-h.svg` |
 
 ## The direction of each mock, from `1_spec/03` section 10 and `0_plan/05` section 4
 

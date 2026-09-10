@@ -79,6 +79,7 @@ def check(folder):
     r('R13 at most two eager images (the first screen)', len(eager) <= 2, f'{len(eager)} eager')
     for s in set(x for x in srcs if x.startswith('../shared/')):
         if not os.path.exists(os.path.normpath(os.path.join(folder, s))): r('R13 asset exists', False, s)
+    r('R16 real logos in header and footer', 'gt-school-logo-h.svg' in doc and 'gt-anywhere-logo-h.svg' in doc, 'GT School and GT Anywhere logo SVGs required')
     size = os.path.getsize(idx) + (os.path.getsize(css) if os.path.exists(css) else 0)
     r('R14 size under 1 MB', size < 1_000_000, f'{size//1024} KB')
     if os.path.exists(rat):

@@ -11,7 +11,7 @@
 
 | Slot | Copy | Destination | Note |
 |---|---|---|---|
-| Lockup | "GT School" (use `img/gt-school-logo-h.svg` or a Literata wordmark) | `/` of the mock | Placeholder until Holly's element (Q-001); flag in rationale |
+| Lockup | The real GT School logo: `<img src="../shared/img/gt-school-logo-h.svg" alt="GT School" width="..." height="...">`, never a text wordmark (Johnny, 2026-09-10: maintain colors, fonts and logos) | `#top` of the mock | Holly's unifying element (Q-001) may later be added beside it; flag in rationale |
 | Current families | "Current families" | https://community.gt.school | Q-002 confirm; `data-event="families_click"` |
 | Admissions contact | "Contact admissions" | https://www.gt.school/contact | No phone number in the header (DD-13) |
 
@@ -101,6 +101,7 @@ All carry `data-event="cta_secondary_click"`.
 | Facts block (SE-08, identical everywhere) | GT School, Inc. is a selective school for gifted and talented children, kindergarten to 8th grade. Georgetown Campus: in person in Georgetown, Texas. GT Anywhere: online, with four in-person weekends a year in Georgetown. The gifted school in the Alpha School network. |
 | Contact | (512) 270-9481, the number both sites publish. No email until Nari supplies one |
 | Links | Georgetown Campus https://www.gt.school/ · GT Anywhere https://anywhere.gt.school/ · Apply https://apply.gt.school/ · Current families https://community.gt.school · Privacy https://www.gt.school/privacy-policy · Terms https://www.gt.school/terms-of-use |
+| Logos | Both real logos as gt.school's own footer shows them: `gt-school-logo-h.svg` linking to https://www.gt.school/ and `gt-anywhere-logo-h.svg` linking to https://anywhere.gt.school/, each with alt text naming the school. No redrawn or recolored marks |
 | Accreditation | None (decision 3) |
 | Outbound links | `data-event="outbound_school_site" data-school="georgetown|anywhere"` on the school-site links |
 
