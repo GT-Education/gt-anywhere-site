@@ -22,10 +22,10 @@
 |---|---|---|---|---|---|---|---|---|
 | CR-001 | "Yes. We are fully accredited by Cognia and TEFA-eligible." | `index.html`, `academics/index.html` (Anywhere) | Fully accredited | CR-002, CR-003 | Unverified | Nari |  | 2026-09-10 |
 | CR-002 | "GT School - Virtual is a Candidate for Accreditation with Cognia..." | `index.html`, `academics/index.html`, `intensives/index.html`, `advisors/index.html` (Anywhere) | Candidate, not yet accredited | CR-001, CR-003 | Unverified | Nari |  | 2026-09-10 |
-| CR-003 | "Accredited K-8 virtual academy for exceptional students delivering 4x faster learning..." (JSON-LD) and "Our Accredited K-8 Virtual School..." (gt.school footer) | `index.html` (Anywhere, structured data); all 11 gt.school pages | Accredited, unqualified | CR-001, CR-002 | Unverified | Nari |  | 2026-09-10 |
+| CR-003 | "Accredited K-8 virtual academy for exceptional students delivering 4x faster learning..." (JSON-LD) and "Our Accredited K-8 Virtual School..." (gt.school footer) | `index.html` (Anywhere, structured data); all 11 gt.school pages; live check 2026-09-10: the Anywhere structured data now reads "delivering 3x faster learning", the "Accredited" wording is unchanged | Accredited, unqualified | CR-001, CR-002 | Unverified | Nari |  | 2026-09-10 |
 | CR-004 | "Delivering 3x faster learning" | `index.html` (Anywhere) | 3x | CR-005, CR-006, CR-007 | Unverified | Nari |  | 2026-09-10 |
-| CR-005 | "delivering 4x faster learning" (structured data) / "Adaptive platform proven to deliver 4X learning velocity" | `index.html` (Anywhere) | 4x | CR-004, CR-006, CR-007 | Unverified | Nari |  | 2026-09-10 |
-| CR-006 | "3-7x faster learning" | `index.html` (Anywhere), stat tile | 3-7x | CR-004, CR-005, CR-007 | Unverified | Nari |  | 2026-09-10 |
+| CR-005 | "delivering 4x faster learning" (structured data) / "Adaptive platform proven to deliver 4X learning velocity" | `index.html` (Anywhere) | 4x | CR-004, CR-006, CR-007 | Removed from live (checked 2026-09-10; present in the 2026-07-24 mirror) | Nari |  | 2026-09-10 |
+| CR-006 | "3-7x faster learning" | `index.html` (Anywhere), stat tile | 3-7x | CR-004, CR-005, CR-007 | Removed from live (checked 2026-09-10; present in the 2026-07-24 mirror) | Nari |  | 2026-09-10 |
 | CR-007 | "Growth Factor target (3X for grades 3+, 2X for grades K-2)" | `refund-policy/index.html` (Anywhere) | 3X / 2X, contractual | CR-004, CR-005, CR-006 | Unverified | Nari |  | 2026-09-10 |
 | CR-008 | "3X learning velocity" | `https://www.gt.school/` (and 8 other pages) | 3X | None internally; conflicts with CR-005/CR-006 across sites | Unverified | Nari |  | 2026-09-10 |
 | CR-009 | "1400+ SATs by 8th grade" | `index.html` (Anywhere); `https://www.gt.school/`, `/academics` | 1400+ | CR-010 | Unverified | Nari |  | 2026-09-10 |
@@ -51,3 +51,24 @@
 | CR-029 | "The program launches in 2026 with $1 billion in funding." (TEFA, statewide) | `index.html` (Anywhere) | $1B statewide, 2026 | None | Unverified | Nari |  | 2026-09-10 |
 | CR-030 | "50% Monthly Tuition Credit... if [MAP] Growth Factor... is less than [target]... and... completed at least 80% of assigned Essential Skills" | `refund-policy/index.html` (Anywhere) | 50% credit; 80% completion threshold | None; relates to CR-004–CR-007 | Unverified | Nari |  | 2026-09-10 |
 | CR-031 | "TimeBack · 140 XP / Day" | `https://www.gt.school/calendar`, hero badge | 140 XP/day | None found elsewhere to compare | Unverified | Nari |  | 2026-09-10 |
+
+## Live check, 2026-09-10
+
+Text fetch of every live page (no scripts run), compared with the 2026-07-24 mirror the register was built from.
+
+| Statement | Live today | Page and visible text | Register row |
+|---|---|---|---|
+| 3x faster learning | Yes | anywhere.gt.school home: "Delivering 3x faster learning, 1400+ SATs by 8th grade"; also its structured data | CR-004 |
+| 3X learning velocity | Yes | www.gt.school, every page: "1400+ SAT. AP 5s. 3X learning velocity. That's the standard." | CR-008 |
+| 3X / 2X growth-factor guarantee | Yes | anywhere.gt.school/refund-policy: "Growth Factor target (3X for grades 3+, 2X for grades K-2)" | CR-007 |
+| 4x faster learning | No | Gone from the live homepage and its structured data | CR-005 |
+| 3-7x | No | Gone from the live homepage | CR-006 |
+| Fully accredited by Cognia | Yes | anywhere.gt.school home and /academics, FAQ "Is GT Anywhere a full-time school?": "Yes. We are fully accredited by Cognia and TEFA-eligible." | CR-001 |
+| Candidate for Accreditation | Yes | anywhere.gt.school home, /advisors, /intensives, /academic-calendar, footer: "GT School - Virtual is a Candidate for Accreditation with Cognia and its accreditation divisions" | CR-002 |
+| Accredited, unqualified | Yes | anywhere.gt.school home structured data: "Accredited K-8 virtual academy"; www.gt.school footer on 10 of 11 pages: "Our Accredited K-8 Virtual School brings 3X learning velocity to your home." | CR-003 |
+| 1400+ SAT | Yes | Both sites | CR-009 |
+| 1350+ SAT | Yes | www.gt.school/resources/gt-school-a-new-option-for-gifted-kids-in-texas: "score 1350+ on their SAT tests by eighth grade" | CR-010 |
+| Top 1-2% nationally | Yes | anywhere.gt.school home meta description: "Top 1-2% nationally" | CR-012 |
+| 90th+ percentile | Yes | anywhere.gt.school/academics FAQ: "designed for students in the 90th+ percentile" | CR-011 |
+| $10,400 tuition, $10,474 TEFA | Yes | anywhere.gt.school/academics FAQ: "The $10,474 TEFA voucher fully covers the $10,400 GT Anywhere tuition." | CR-021, CR-022 |
+| /book-a-tour | Still 404 | www.gt.school/book-a-tour | REQ-002 |

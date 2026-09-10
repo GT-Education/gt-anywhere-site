@@ -41,7 +41,7 @@ GT School is the selective school for gifted students inside the Alpha School ne
 |---|---|---|---|
 | 1 | The Alpha affiliation is already public on the Anywhere homepage | Decide prominence, never disclosure | MD-17 |
 | 2 | Anywhere is TEFA-covered for Texas families | Exclusivity is selectivity (90th percentile), never price | MD-25, DD-10 |
-| 3 | The homepage carries three speed claims (3x, 4x, 3-7x), reads a 1400+ SAT target as a result, and states accreditation three ways (fully accredited, Candidate for Accreditation, and unqualified Accredited in structured data and in gt.school's footer) | No number or status claim on any new surface without an Approved claims-register row; no Cognia mark until the status is settled | MD-16, REQ-022, DEL-018, Q-033 |
+| 3 | The Anywhere homepage carried three speed claims in the July mirror (3x, 4x, 3-7x); live today it is 3x only (checked 2026-09-10), and it reads a 1400+ SAT target as a result | No number or status claim on any new surface without an Approved claims-register row; no Cognia mark until the status is settled | MD-16, REQ-022, DEL-018, Q-033 |
 | 4 | The site says "expanding nationwide" | Every choice component works with several campuses plus one virtual school | DD-21 |
 | 5 | Traffic today is organic Instagram, search, direct, HubSpot email and alpha.school referrals; paid social is 32 sessions in 28 days; devices are mostly mobile | Design for the phone and for organic continuity first; paid message match is a later lever | DD-14, MD-23, AD-01 |
 

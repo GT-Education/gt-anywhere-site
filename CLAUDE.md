@@ -56,7 +56,7 @@ Remote: `git@github.com:GT-Education/gt-anywhere-site.git`. The v1 checkout's wo
 |---|---|---|
 | 1 | The Anywhere homepage already says "The Gifted Academy of Alpha School" | Affiliation is a prominence decision (MD-17), never a disclosure decision |
 | 2 | Anywhere tuition is $10,400 a year and TEFA-covered for Texas families; admission is 90th percentile and above | Exclusivity is selectivity, never price (MD-25) |
-| 3 | The homepage carries three speed claims (3x, 4x, 3-7x) and reads a 1400+ SAT target as a result | No number on any new surface without a claims-register row (REQ-022, DEL-018) |
+| 3 | The Anywhere homepage carried three speed claims in the July mirror (3x, 4x, 3-7x); live today it is 3x only (checked 2026-09-10), still without published data, and it reads a 1400+ SAT target as a result | No number on any new surface without a claims-register row (REQ-022, DEL-018) |
 | 4 | The site says "expanding nationwide" | Every choice component works for several campuses plus one virtual school (DD-21) |
 | 5 | Traffic is organic Instagram, search, direct, HubSpot email and alpha.school referrals; paid social is 32 sessions in 28 days; two thirds of sessions are mobile; gt.school itself is untagged | Design for the phone and organic continuity first (DD-14, MD-23); tag Georgetown before any baseline (REQ-027) |
 
