@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GT School landing mock gallery</title>
+<meta name="description" content="Five mock directions for the gt.school umbrella landing page, side by side, ahead of Nari's G1 pick.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./shared/tokens.css">
+<link rel="stylesheet" href="./shared/fonts.css">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+  }
+  .skip-link {
+    position: absolute; left: -999px; top: auto;
+    background: var(--color-navy); color: var(--color-accent-contrast);
+    padding: var(--space-3) var(--space-4);
+    z-index: 1;
+  }
+  .skip-link:focus {
+    left: var(--space-4); top: var(--space-4);
+  }
+  a { color: var(--color-focus); }
+  a:hover, a:focus-visible { color: var(--color-accent); }
+  .wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-5); }
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+  .header-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    gap: var(--space-4);
+  }
+  .header-bar img { display: block; height: 2rem; width: auto; }
+  .header-note {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  main { padding: var(--space-7) var(--space-5) var(--space-9); }
+  .intro { max-width: 60ch; margin: 0 auto var(--space-8); text-align: center; }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    margin: 0 0 var(--space-4);
+  }
+  .intro p {
+    font-size: var(--text-md);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .intro .gate {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-6);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .card {
+    display: flex; flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+  .card h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: var(--text-xl);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
+  .card .mock-id {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+  .card .lens-order {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .card .hypothesis {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    margin: 0;
+  }
+  .thumbs {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+  }
+  .thumbs img {
+    display: block;
+    height: 11rem;
+    width: auto;
+    max-width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+  }
+  .thumbs figure { margin: 0; text-align: center; }
+  .thumbs figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .card-links {
+    display: flex; flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-2);
+  }
+  .card-links a {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .common-section {
+    max-width: var(--container-max);
+    margin: var(--space-9) auto 0;
+  }
+  .common-section h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: var(--text-2xl);
+    margin: 0 0 var(--space-4);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  caption { text-align: left; color: var(--color-text-muted); margin-bottom: var(--space-3); font-size: var(--text-xs); }
+  th, td {
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+  th { font-family: var(--font-sans); font-weight: 700; background: var(--color-surface); }
+  td:last-child, th:last-child { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-muted); white-space: nowrap; }
+  .rationale-link {
+    margin-top: var(--space-5);
+    font-size: var(--text-md);
+  }
+  footer.site-footer {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-5);
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 480px) {
+    .thumbs { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrap header-bar">
+    <img src="./shared/img/gt-school-logo-h.svg" alt="GT School" width="139" height="32">
+    <span class="header-note">Mock gallery — review tool, not a live page</span>
+  </div>
+</header>
+
+<main id="main">
+  <div class="intro">
+    <h1>GT School landing: five mock directions</h1>
+    <p>Five complete, distinct mocks for the gt.school umbrella landing page, built to the same requirements and the same token set, each ranking objective, existing design system, mission and exclusivity differently.</p>
+    <span class="gate">Gate G1: Nari picks a direction in writing</span>
+  </div>
+
+  <div class="wrap">
+  <div class="grid">
+
+    <article class="card">
+      <div>
+        <span class="mock-id">M1 — Two Doors</span>
+        <h2>Two Doors</h2>
+      </div>
+      <p class="lens-order">L1 objective &gt; L2 existing system &gt; L4 elite &gt; L3 mission</p>
+      <p class="hypothesis">The fastest correct choice wins: a parent who already knows &ldquo;in person&rdquo; or &ldquo;online&rdquo; should click the right door before reading anything else.</p>
+      <div class="thumbs">
+        <figure>
+          <img src="./shared/screenshots/M1-390.png" alt="M1 at 390 pixels wide" width="390" height="844" loading="lazy">
+          <figcaption>390px</figcaption>
+        </figure>
+        <figure>
+          <img src="./shared/screenshots/M1-1440.png" alt="M1 at 1440 pixels wide" width="1440" height="900" loading="lazy">
+          <figcaption>1440px</figcaption>
+        </figure>
+      </div>
+      <div class="card-links">
+        <a href="./M1-two-doors/">Open the mock</a>
+        <a href="./M1-two-doors/RATIONALE.md">Read the rationale</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div>
+        <span class="mock-id">M2 — The Institute</span>
+        <h2>The Institute</h2>
+      </div>
+      <p class="lens-order">L3 mission &gt; L4 elite &gt; L1 objective &gt; L2 existing system</p>
+      <p class="hypothesis">Proof of rigor is the brand: an academic grid, hairline-ruled and mono-labelled, convinces a parent this is the most serious K-8 option they have seen.</p>
+      <div class="thumbs">
+        <figure>
+          <img src="./shared/screenshots/M2-390.png" alt="M2 at 390 pixels wide" width="390" height="844" loading="lazy">
+          <figcaption>390px</figcaption>
+        </figure>
+        <figure>
+          <img src="./shared/screenshots/M2-1440.png" alt="M2 at 1440 pixels wide" width="1440" height="900" loading="lazy">
+          <figcaption>1440px</figcaption>
+        </figure>
+      </div>
+      <div class="card-links">
+        <a href="./M2-the-institute/">Open the mock</a>
+        <a href="./M2-the-institute/RATIONALE.md">Read the rationale</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div>
+        <span class="mock-id">M3 — Private Quiet</span>
+        <h2>Private Quiet</h2>
+      </div>
+      <p class="lens-order">L4 elite &gt; L2 existing system &gt; L1 objective &gt; L3 mission</p>
+      <p class="hypothesis">Prestige is read through restraint, not through ornament.</p>
+      <div class="thumbs">
+        <figure>
+          <img src="./shared/screenshots/M3-390.png" alt="M3 at 390 pixels wide" width="390" height="844" loading="lazy">
+          <figcaption>390px</figcaption>
+        </figure>
+        <figure>
+          <img src="./shared/screenshots/M3-1440.png" alt="M3 at 1440 pixels wide" width="1440" height="900" loading="lazy">
+          <figcaption>1440px</figcaption>
+        </figure>
+      </div>
+      <div class="card-links">
+        <a href="./M3-private-quiet/">Open the mock</a>
+        <a href="./M3-private-quiet/RATIONALE.md">Read the rationale</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div>
+        <span class="mock-id">M4 — Builders</span>
+        <h2>Builders</h2>
+      </div>
+      <p class="lens-order">L3 mission &gt; L1 objective &gt; L2 existing system &gt; L4 elite</p>
+      <p class="hypothesis">Mission through student work beats mission through statistics: a parent believes GT School is serious because they see what children do.</p>
+      <div class="thumbs">
+        <figure>
+          <img src="./shared/screenshots/M4-390.png" alt="M4 at 390 pixels wide" width="390" height="844" loading="lazy">
+          <figcaption>390px</figcaption>
+        </figure>
+        <figure>
+          <img src="./shared/screenshots/M4-1440.png" alt="M4 at 1440 pixels wide" width="1440" height="900" loading="lazy">
+          <figcaption>1440px</figcaption>
+        </figure>
+      </div>
+      <div class="card-links">
+        <a href="./M4-builders/">Open the mock</a>
+        <a href="./M4-builders/RATIONALE.md">Read the rationale</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div>
+        <span class="mock-id">M5 — One School, Two Campuses</span>
+        <h2>One School, Two Campuses</h2>
+      </div>
+      <p class="lens-order">L2 existing system &gt; L1 objective &gt; L3 mission &gt; L4 elite</p>
+      <p class="hypothesis">Coherence itself is the message: does this already look like the front door of the two sites it leads to.</p>
+      <div class="thumbs">
+        <figure>
+          <img src="./shared/screenshots/M5-390.png" alt="M5 at 390 pixels wide" width="390" height="844" loading="lazy">
+          <figcaption>390px</figcaption>
+        </figure>
+        <figure>
+          <img src="./shared/screenshots/M5-1440.png" alt="M5 at 1440 pixels wide" width="1440" height="900" loading="lazy">
+          <figcaption>1440px</figcaption>
+        </figure>
+      </div>
+      <div class="card-links">
+        <a href="./M5-one-school-two-campuses/">Open the mock</a>
+        <a href="./M5-one-school-two-campuses/RATIONALE.md">Read the rationale</a>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="common-section">
+    <h2>What is identical in all five</h2>
+    <table>
+      <caption>Non-negotiable across every mock (`0_plan/05-landing-mockups-plan.md` section 4)</caption>
+      <thead>
+        <tr><th scope="col">Item</th><th scope="col">Rule</th><th scope="col">Requirement</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>First screen</td><td>Both schools named in full, one-line description each, one CTA each</td><td>REQ-011, REQ-018</td></tr>
+        <tr><td>Distinction</td><td>In person versus virtual is unmistakable before any CTA</td><td>REQ-012</td></tr>
+        <tr><td>Comparison</td><td>A &ldquo;shared&rdquo; then &ldquo;different&rdquo; block as high as the layout allows</td><td>REQ-013</td></tr>
+        <tr><td>Mobile</td><td>Designed at 390px alongside 1440px; nothing hidden on mobile</td><td>REQ-015</td></tr>
+        <tr><td>Current families</td><td>A visible route, general phone number absent from the first screen</td><td>REQ-017</td></tr>
+        <tr><td>Links</td><td>CTAs link to the real school sites and to apply.gt.school; nothing else external</td><td>REQ-070</td></tr>
+        <tr><td>Forms</td><td>None. No lead form in any mock, so nothing can reach the live webhook</td><td>Hard rule</td></tr>
+        <tr><td>Copy</td><td>Real copy, no placeholder text; every factual claim tagged verified or unverified in the rationale</td><td>REQ-016, DD-07</td></tr>
+        <tr><td>Tokens</td><td>All five consume `tokens.css` from R1; M5 uses the merged set fully</td><td>REQ-032</td></tr>
+      </tbody>
+    </table>
+    <p class="rationale-link"><a href="../06-mockup-rationale.md">Read the full mockup rationale (06-mockup-rationale.md)</a></p>
+  </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  GT School v2 planning &middot; internal review only &middot; noindex
+</footer>
+</body>
+</html>
