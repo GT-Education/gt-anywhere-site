@@ -51,6 +51,10 @@
 | CR-029 | "The program launches in 2026 with $1 billion in funding." (TEFA, statewide) | `index.html` (Anywhere) | $1B statewide, 2026 | None | Unverified | Nari |  | 2026-09-10 |
 | CR-030 | "50% Monthly Tuition Credit... if [MAP] Growth Factor... is less than [target]... and... completed at least 80% of assigned Essential Skills" | `refund-policy/index.html` (Anywhere) | 50% credit; 80% completion threshold | None; relates to CR-004–CR-007 | Unverified | Nari |  | 2026-09-10 |
 | CR-031 | "TimeBack · 140 XP / Day" | `https://www.gt.school/calendar`, hero badge | 140 XP/day | None found elsewhere to compare | Unverified | Nari |  | 2026-09-10 |
+| CR-032 | Four in-person intensive weekends a year in Georgetown (four named 2026 to 2027 weekends) | `intensives/index.html` (Anywhere) | 4 weekends | CR-025, CR-026 (cohort size) | Unverified, public | Nari | | 2026-09-10 |
+| CR-033 | Georgetown academics run 9 to noon each school day in the TimeBack platform, afternoons for workshops and building | `https://www.gt.school/academics` | 9 to 12 daily | None | Unverified, public | Nari | | 2026-09-10 |
+| CR-034 | GT Anywhere academics take about three hours a day | `index.html`, `academics/index.html` (Anywhere) | 3 hours | None | Unverified, public | Nari | | 2026-09-10 |
+| CR-035 | Guides hold weekly one-to-one check-ins with each student ("Academic Advisors are responsible for weekly 1:1 check-ins", Terms of Use, both sites) | `terms-of-use/index.html`; `https://www.gt.school/terms-of-use` | Weekly | Title conflict, Q-035 (decided: Guides) | Unverified, public | Nari | | 2026-09-10 |
 
 ## Live check, 2026-09-10
 

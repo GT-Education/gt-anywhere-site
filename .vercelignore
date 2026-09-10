@@ -1,5 +1,6 @@
 # Deploy the site only. Planning, spec, tooling and internal files never ship.
-0_plan
+0_plan/*
+!0_plan/mockups
 1_spec
 2_deliverables
 tools

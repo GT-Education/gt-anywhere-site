@@ -148,6 +148,27 @@ Research amendments (they change the swarm brief, so they stay here):
 
 The parent-questions test used in E2, derived from Nari's "as a new parent, I get exactly what I need" (00:13:51) and replaced by the REQ-039 session when it happens: what is GT School; who is it for; in person or online, and where; what is the same and what differs between the two; what it costs, or where to find out; how to apply and the steps; accreditation and outcomes; how to reach a human.
 
+### 6c. Parent questions the landing must answer (E2 amendment)
+
+Every mock answers these on the page or its rationale says which it defers to the school sites and why (C-13). Astra scores each mock against this table at E2.
+
+| # | Question a parent arrives with | Answered by | Journey |
+|---|---|---|---|
+| PQ-01 | What is GT School? | Section 1, umbrella sentence | J1 |
+| PQ-02 | Is it for my child? | Sections 1, 4, 5: gifted and talented, the 90th percentile bar | J1 |
+| PQ-03 | In person or online: what are my options? | Section 1, the two doors | J1 |
+| PQ-04 | Where is the campus? | Sections 1 and 3: Georgetown, Texas | J1 |
+| PQ-05 | What does a day look like? | Section 3, "The day" | J1, J2 |
+| PQ-06 | What does it cost, and can TEFA help? | Section 3, "Tuition and access" and the TEFA module | J2, J3 |
+| PQ-07 | How do I apply? | Section 5 | J3 |
+| PQ-08 | Who teaches my child? | Section 3 "Guides", section 4 | J1, J2 |
+| PQ-09 | How much in-person time does GT Anywhere have? | Section 3, "In-person time" | J1 |
+| PQ-10 | What results does the school get, and is it accredited? | Deferred by decision (G0.5 items 2 and 3): the page is silent; the rationale says so and points to admissions | J2 |
+| PQ-11 | What happens after 8th grade? | Section 3 row, deferred to admissions (Q-013) | J2 |
+| PQ-12 | I am a current family, where do I go? | Sections 0 and 7 | J4 |
+| PQ-13 | I am not ready to apply, what can I do? | Section 6 | J2 |
+| PQ-14 | Is GT School part of Alpha School? | Section 1, provenance line | J1 |
+
 ## 7. Ensemble protocol (Codex Astra)
 
 | Item | Rule |

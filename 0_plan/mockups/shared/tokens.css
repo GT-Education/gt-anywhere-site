@@ -1,4 +1,4 @@
-/* Draft tokens extracted by R1 (0_plan/research/R1-design-tokens.md) on 2026-09-10 from both live sites' CSS.
+/* Tokens extracted by R1 and fixed for S3 on 2026-09-10 (T-064). Draft tokens extracted by R1 (0_plan/research/R1-design-tokens.md) on 2026-09-10 from both live sites' CSS.
    Values are evidenced, not invented; roles merge by value (DD-19). Owned by design-system/ after T-063/T-064. */
 :root {
   /* Type — families confirmed identical on both live sites (§2, DD-01) */
@@ -29,8 +29,9 @@
   --color-accent-contrast: #fbfbfb; /* both sites' CTA text color on navy/orange fills; AA ratio not verified — see appendix */
   --color-border: #cac6c4;      /* Anywhere border-color--primary; C10 */
   --color-focus: #004f71;       /* Anywhere's explicit brand--blue; Georgetown has no focus token at all (falls back to an unbranded Webflow default) — C11 */
-  --color-georgetown-tint: /* NOT DETERMINABLE — no per-school color distinction exists on either live site today; see appendix */ ;
-  --color-anywhere-tint: /* NOT DETERMINABLE — same reason */ ;
+  --color-georgetown-tint: #f8e8de; /* S3 decision: Anywhere's secondary background, the warm swatch both sites share; a secondary cue only (DD-04) */
+  --color-anywhere-tint: #e4eef2;   /* S3 decision: a light tint of the shared brand blue #004f71; DEPARTURE flagged for G1 because neither site has it today (DD-19) */
+  --color-navy: #002a3a;            /* S3 decision: Anywhere's tertiary background and the dark surface Georgetown's hero uses; dark sections and M3's dark variant; flagged as a brand extension (DD-19, C9) */
 
   /* Space — 4px-based, 12 non-zero steps; Anywhere's ladder used end to end (§5b, §7 C3) */
   --space-1: .125rem;  /* 2px */
