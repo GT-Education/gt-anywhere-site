@@ -1,0 +1,250 @@
+<title>GT School Positioning Decisions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&family=Inter+Tight:wght@400;500;600&family=Inconsolata:wght@500&display=swap">
+<style>
+  :root {
+    --ground: #F4F5F3;
+    --panel: #FFFFFF;
+    --ink: #1B2330;
+    --muted: #5C6670;
+    --line: #D7DBD6;
+    --accent: #0F6E56;
+    --accent-soft: #E3F0EB;
+    --gold: #A9822B;
+    --gold-soft: #F5EDD9;
+    --shadow: 0 1px 2px rgba(27, 35, 48, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #12171C;
+      --panel: #1A2128;
+      --ink: #E7EAE6;
+      --muted: #98A2AB;
+      --line: #2A333B;
+      --accent: #4FB596;
+      --accent-soft: #16302A;
+      --gold: #D1AB5A;
+      --gold-soft: #2E2716;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12171C;
+    --panel: #1A2128;
+    --ink: #E7EAE6;
+    --muted: #98A2AB;
+    --line: #2A333B;
+    --accent: #4FB596;
+    --accent-soft: #16302A;
+    --gold: #D1AB5A;
+    --gold-soft: #2E2716;
+    --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 1080px; margin: 0 auto; padding: 48px 24px 72px; }
+  header.masthead { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .eyebrow { font-family: "Inconsolata", ui-monospace, monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: "Literata", Georgia, serif; font-weight: 500; font-size: clamp(30px, 4.2vw, 44px); line-height: 1.12; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  .lede { max-width: 66ch; margin: 0; color: var(--muted); font-size: 17px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 14px; color: var(--muted); }
+  .meta strong { color: var(--ink); font-weight: 600; }
+  h2 { font-family: "Literata", Georgia, serif; font-weight: 500; font-size: 24px; margin: 48px 0 16px; text-wrap: balance; }
+  h2 .count { font-family: "Inconsolata", ui-monospace, monospace; font-size: 14px; color: var(--muted); margin-left: 10px; letter-spacing: 0.04em; }
+
+  .decisions { display: grid; gap: 14px; }
+  .decision {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .decision .side { padding: 22px 22px; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 8px; }
+  .decision .num { font-family: "Inconsolata", ui-monospace, monospace; font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+  .decision .topic { font-family: "Literata", Georgia, serif; font-size: 20px; font-weight: 500; line-height: 1.25; text-wrap: balance; }
+  .ids { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .id { font-family: "Inconsolata", ui-monospace, monospace; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+  .decision .body { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .cell { padding: 22px 22px; border-left: 1px solid var(--line); display: grid; align-content: start; gap: 8px; }
+  .cell:first-child { border-left: 0; }
+  .label { font-family: "Inconsolata", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .cell p { margin: 0; font-size: 15px; }
+  .cell.decided { background: var(--accent-soft); }
+  .cell.decided .label { color: var(--accent); }
+  .cell.decided p { font-weight: 500; }
+  .quote { font-family: "Literata", Georgia, serif; font-style: italic; }
+  .override { display: inline-block; margin-top: 6px; font-size: 12.5px; padding: 3px 8px; border-radius: 3px; background: var(--gold-soft); color: var(--gold); font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  th { font-family: "Inconsolata", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tr:last-child td { border-bottom: 0; }
+  td.owner { white-space: nowrap; color: var(--muted); }
+  .num-col { font-family: "Inconsolata", ui-monospace, monospace; color: var(--muted); white-space: nowrap; }
+
+  .gate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+  .gate .step { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 6px; }
+  .gate .step .label { color: var(--muted); }
+  .gate .step.now { border-color: var(--accent); }
+  .gate .step.now .label { color: var(--accent); }
+  .gate .step p { margin: 0; font-size: 14.5px; }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; max-width: 70ch; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 860px) {
+    .decision { grid-template-columns: 1fr; }
+    .decision .side { border-right: 0; border-bottom: 1px solid var(--line); }
+    .decision .body { grid-template-columns: 1fr; }
+    .cell { border-left: 0; border-top: 1px solid var(--line); }
+    .cell:first-child { border-top: 0; }
+    .gate { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <div class="eyebrow">GT School web redo · Gate G0.5</div>
+    <h1>Six positioning decisions for the new gt.school landing</h1>
+    <p class="lede">The umbrella page that routes a parent to the Georgetown campus or to GT Anywhere. These six decisions govern every mock, headline and ad that follows.</p>
+    <div class="meta">
+      <span><strong>Decided</strong> 2026-09-10 by Johnny Chung</span>
+      <span><strong>Remaining formality</strong> Nari's written confirmation</span>
+      <span><strong>Evidence</strong> Live pages checked 2026-09-10</span>
+      <span><strong>Record</strong> 0_plan/16-g05-decision-record.md</span>
+    </div>
+  </header>
+
+  <h2>The decisions <span class="count">6 of 6 decided</span></h2>
+  <div class="decisions">
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">01</div>
+        <div class="topic">Umbrella sentence</div>
+        <div class="ids"><span class="id">DD-33</span><span class="id">DD-20</span><span class="id">REQ-021</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>Neither site tells a parent there are two ways to attend, or what GT stands for.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p class="quote">"GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere."</p></div>
+        <div class="cell"><div class="label">Why</div><p>It answers the two questions every first-time parent has before they can choose a school.</p></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">02</div>
+        <div class="topic">Speed figure</div>
+        <div class="ids"><span class="id">Q-019</span><span class="id">CR-004 to 008</span><span class="id">REQ-022</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>In July the Anywhere homepage carried 3x, 4x and 3-7x at once. Today only 3x remains, on both sites and in the refund policy.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p>No speed figure on the landing. 3X is the only candidate, and only after the data behind it is published.</p></div>
+        <div class="cell"><div class="label">Why</div><p>The sites now agree on 3X and the refund policy guarantees it, but no data has been published, and the press is asking the network exactly that question.</p></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">03</div>
+        <div class="topic">Accreditation</div>
+        <div class="ids"><span class="id">Q-033</span><span class="id">CR-001 to 003</span><span class="id">REQ-004</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>Three versions are live today: "fully accredited by Cognia", "Candidate for Accreditation", and plain "Accredited" in gt.school's footer and Anywhere's structured data.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p>No accreditation claim and no Cognia mark on any new surface until the true status is confirmed with counsel. The live sites are corrected to one true wording.</p></div>
+        <div class="cell"><div class="label">Why</div><p>Only one version can be true, and "Candidate" means not yet accredited. A wrong claim here is a legal problem, not a copy problem.</p></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">04</div>
+        <div class="topic">Georgetown tuition</div>
+        <div class="ids"><span class="id">Q-011</span><span class="id">CR-024</span><span class="id">MD-25</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>No price on any Georgetown page, only a $10,000 scholarship banner with nothing to subtract from. Anywhere states $10,400 a year.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p>"Tuition on request" on the landing until the figure is supplied, then published the way Anywhere publishes its own.</p></div>
+        <div class="cell"><div class="label">Why</div><p>Parents cannot compare two schools when one has a price and the other does not. The figure cannot be invented.</p></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">05</div>
+        <div class="topic">Title for the adults</div>
+        <div class="ids"><span class="id">Q-035</span><span class="id">DD-27</span><span class="id">REQ-076</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>gt.school says Guides, Anywhere says Advisors, and some are the same people with identical bios.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p>Guides, everywhere. Anywhere renames its Advisors copy, page, structured data and Terms of Use.</p><span class="override">Recommendation was Advisors. Johnny chose Guides.</span></div>
+        <div class="cell"><div class="label">Why</div><p>One staff body needs one name, or parents assume two roles. Guides is the word gt.school already uses 47 times and matches the network.</p></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="side">
+        <div class="num">06</div>
+        <div class="topic">Alpha School relationship</div>
+        <div class="ids"><span class="id">MD-17</span><span class="id">MD-16</span><span class="id">REQ-021</span></div>
+      </div>
+      <div class="body">
+        <div class="cell"><div class="label">What it was</div><p>Anywhere calls itself "The Gifted Academy of Alpha School". gt.school does not mention Alpha.</p></div>
+        <div class="cell decided"><div class="label">Decision</div><p class="quote">One small line, once: "The gifted school in the Alpha School network."</p></div>
+        <div class="cell"><div class="label">Why</div><p>The link is already public on both sides, so hiding it looks evasive. One line keeps GT's own results separate from press questions about the network.</p></div>
+      </div>
+    </article>
+  </div>
+
+  <h2>What changes because of them</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Decision</th><th>Change</th><th>Where</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="num-col">1, 6</td><td>The umbrella sentence and the provenance line become fixed copy in the landing spec.</td><td>Landing page spec</td><td class="owner">Johnny</td></tr>
+        <tr><td class="num-col">2</td><td>No multiplier anywhere on the landing, in its titles, structured data or ads.</td><td>Landing, SEO and advertising specs</td><td class="owner">Johnny</td></tr>
+        <tr><td class="num-col">3</td><td>No Cognia mark or accreditation copy on new surfaces. The three live statements are corrected to one true wording.</td><td>Live Webflow sites (REQ-004)</td><td class="owner">Nari, counsel</td></tr>
+        <tr><td class="num-col">4</td><td>"Tuition on request" in the Georgetown comparison cell until a figure arrives.</td><td>Landing comparison block</td><td class="owner">Johnny; Nari supplies the figure</td></tr>
+        <tr><td class="num-col">5</td><td>Guides on the landing. Anywhere renames Advisors in copy, page title, structured data and Terms of Use, with a redirect if the page moves.</td><td>Live Webflow site (REQ-076)</td><td class="owner">Nari</td></tr>
+        <tr><td class="num-col">All</td><td>Register rows DD-20, DD-27, DD-33, MD-17 and MD-25 move from Proposed to Decided. Q-011, Q-019, Q-033 and Q-035 carry the decision.</td><td>Planning registers</td><td class="owner">Johnny</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Still open after G0.5</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Item</th><th>Waiting on</th><th>Effect while open</th></tr></thead>
+      <tbody>
+        <tr><td>Nari's written confirmation of the six decisions</td><td class="owner">Nari</td><td>Formality for the gate record. The decisions stand.</td></tr>
+        <tr><td>The true accreditation status and its approved wording</td><td class="owner">Nari, counsel</td><td>The landing stays silent on accreditation. The live sites keep contradicting each other.</td></tr>
+        <tr><td>Georgetown tuition figure, and whether TEFA applies to Georgetown</td><td class="owner">Nari</td><td>The landing shows "Tuition on request".</td></tr>
+        <tr><td>Published data behind 3X</td><td class="owner">Nari, David</td><td>No speed figure anywhere.</td></tr>
+        <tr><td>Renaming Advisors to Guides on Anywhere</td><td class="owner">Nari</td><td>The landing says Guides while Anywhere says Advisors, the inconsistency the decision was meant to end.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Where this sits</h2>
+  <div class="gate">
+    <div class="step"><div class="label">Before</div><p><strong>S1 Research.</strong> Four reports, 116 sources, 32 register rows revised, live pages re-checked.</p></div>
+    <div class="step now"><div class="label">This gate · G0.5</div><p><strong>S2 Positioning brief.</strong> Six decisions recorded 2026-09-10. Nari's confirmation is the remaining formality.</p></div>
+    <div class="step"><div class="label">Unlocked</div><p><strong>S3 Design system, then S4 five mocks.</strong> Nari picks a direction at G1.</p></div>
+  </div>
+
+  <footer>Source of record: 0_plan/15-positioning-brief.md and 0_plan/16-g05-decision-record.md on branch v2 of GT-Education/gt-anywhere-site. Every figure quoted here has a row in the claims register; none is approved for use on the landing.</footer>
+</div>
