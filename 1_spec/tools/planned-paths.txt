@@ -63,3 +63,9 @@ tests/package.json
 2_deliverables/DEL-017-positioning-brief/g05-decision-record-v1.0-2026-09-10.md
 2_deliverables/DEL-017-positioning-brief/g05-decision-record.html
 2_deliverables/DEL-nnn-<slug>/
+0_plan/mockups/shared/screenshots/QA-2026-09-10.md
+0_plan/mockups/shared/BUILDER-BRIEF.md
+0_plan/mockups/shared/ASSETS.md
+0_plan/mockups/shared/copy.md
+0_plan/mockups/shared/fonts.css
+0_plan/tools/check-mocks.py
