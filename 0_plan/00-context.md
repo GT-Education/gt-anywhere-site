@@ -31,7 +31,7 @@ GT School is the selective school for gifted students inside the Alpha School ne
 | Site | gt.school (Webflow) | anywhere.gt.school (Webflow; mirrored here) |
 | Tuition | Unknown here (Q-011) | $10,400 a year; the $10,474 TEFA voucher covers it for eligible Texas families |
 | Admission | Selective; criteria per Q-012 | Students at the 90th percentile and above |
-| Adults | Advisors (Alpha says guides) | Advisors |
+| Adults | Guides (decided 2026-09-10, Q-035); Anywhere's pages still say Advisors until REQ-076 | Guides |
 | Platform | TimeBack, MAP-aligned, about two hours of academics a day | Same |
 | Afternoons | Projects and workshops | Projects; an Accelerated Foundations track for the youngest |
 
@@ -54,7 +54,7 @@ GT School is the selective school for gifted students inside the Alpha School ne
 | GT Anywhere | The virtual school |
 | Alpha School | The parent network: the "2 Hour Learning" model, guides, workshops |
 | TimeBack | The adaptive learning platform the academics run on |
-| Advisors | GT's word for the adults (Alpha says guides) |
+| Guides | The one title for the adults on every GT surface (decided 2026-09-10, Q-035); Anywhere's site still says Advisors until REQ-076 renames it |
 | Intensives | Anywhere's quarterly in-person weekends |
 | MAP | The standardized growth assessment the outcome claims cite |
 | TEFA | Texas Education Freedom Accounts, the state voucher that covers Anywhere tuition |

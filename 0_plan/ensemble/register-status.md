@@ -1,6 +1,6 @@
 # Register status
 
-Generated 2026-09-10 17:31 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
+Generated 2026-09-10 17:33 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
 
 | Rows | Complete or superseded | Drafted | Reviewed | Rework | Escalated | Malformed |
 |---|---|---|---|---|---|---|

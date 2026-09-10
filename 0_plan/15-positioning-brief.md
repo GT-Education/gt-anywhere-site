@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Purpose | One page that every mock, every headline and every ad answers to. Nothing here is a new claim: every fact traces to the claims register or a designated source; anything not yet approved is marked |
-| Status | Draft v0.1, 2026-09-10, after research R1 to R4. Nari approves or edits; approval is gate G0.5 (nothing is built before it) |
+| Status | v1.0. Decisions recorded 2026-09-10 by Johnny: all six recommendations accepted, item 5 decided as Guides. The gate definition in `1_spec/00` S2 names Nari's written approval; her confirmation is the remaining formality, and the record for presentation is `16-g05-decision-record.md` |
 | Sources | `00-context.md`, `research/R2-brand-semiotics.md`, `research/R4-content-and-proof.md`, `12-claims-register.md`, the transcript |
 
 ## 1. Umbrella promise
@@ -37,7 +37,7 @@
 
 | Rule | Basis |
 |---|---|
-| Institutional and warm; short sentences; plain words first, GT terms second ("teachers, whom we call advisors") | DD-16, DD-30; R2: Lakeside, Nueva and Harker lead with short, warm, plain headlines despite extreme selectivity; MIT's admissions voice is informal |
+| Institutional and warm; short sentences; plain words first, GT terms second ("teachers, whom we call guides") | DD-16, DD-30; R2: Lakeside, Nueva and Harker lead with short, warm, plain headlines despite extreme selectivity; MIT's admissions voice is informal |
 | Calm confidence, no exclamation, no urgency devices | DD-10, MD-06; R2 |
 | One name system: "GT School" as the parent, "Georgetown Campus" and "GT Anywhere" as the two forms | DD-27; the same staff must not be Guides on one site and Advisors on the other (Q-035) |
 
@@ -65,18 +65,18 @@
 | Competitor names | MD-18 |
 | Countdowns, limited seats, scarcity | MD-06; gt.school's undated scholarship banner is the pattern to retire (MD-26) |
 
-## 8. For Nari to decide at G0.5
+## 8. Decisions at G0.5
 
 ### 8a. The six questions
 
-| # | Topic | What it is now | What we recommend | Why | Nari's response |
+| # | Topic | What it is now | What we recommend | Why | Decision (2026-09-10, Johnny) |
 |---|---|---|---|---|---|
-| 1 | Umbrella sentence | Neither site tells a parent there are two ways to attend, or what GT stands for | "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." | It answers the two questions every first-time parent has before they can choose a school | |
-| 2 | Speed figure | In July the Anywhere homepage carried three figures at once: 3x, 4x and 3-7x. Today only 3x remains, on both sites and in the refund policy | No figure on the landing until the 3X figure has published data behind it | The sites now agree on 3X and the refund policy guarantees it, but no data has been published to support it, and the press is asking the network exactly that question | |
-| 3 | Accreditation | Three versions are live today (links in 8c): "fully accredited by Cognia", "Candidate for Accreditation", and plain "Accredited" in gt.school's footer | Say nothing and show no Cognia mark until you and counsel confirm the true status. Fix the live sites now | Only one version can be true, and "Candidate" means not yet accredited. A wrong claim here is a legal problem, not a copy problem | |
-| 4 | Georgetown tuition | No price on any Georgetown page, only "a limited number of $10,000 scholarships" with nothing to subtract from. Anywhere states $10,400 a year | "Tuition on request" until you give us the number, then publish it the same way Anywhere does | Parents cannot compare two schools when one has a price and the other does not. We cannot invent the number | |
-| 5 | Title for the adults | gt.school says Guides, Anywhere says Advisors, and some are the same people with identical bios | Advisors, everywhere | One staff body needs one name, or parents assume two roles. Advisors is already GT's word; Guides is the Alpha network's | |
-| 6 | Alpha School relationship | Anywhere calls itself "The Gifted Academy of Alpha School"; gt.school does not mention Alpha | One small line, once: "The gifted school in the Alpha School network" | The link is already public on both sides, so hiding it looks evasive. One line keeps GT's own results separate from press questions about the network | |
+| 1 | Umbrella sentence | Neither site tells a parent there are two ways to attend, or what GT stands for | "GT School is a selective school for gifted and talented children, in person at our Georgetown, Texas campus or online from anywhere." | It answers the two questions every first-time parent has before they can choose a school | Accepted as drafted |
+| 2 | Speed figure | In July the Anywhere homepage carried three figures at once: 3x, 4x and 3-7x. Today only 3x remains, on both sites and in the refund policy | No figure on the landing until the 3X figure has published data behind it | The sites now agree on 3X and the refund policy guarantees it, but no data has been published to support it, and the press is asking the network exactly that question | Accepted: no figure on the landing; 3X is the only candidate, after data is published |
+| 3 | Accreditation | Three versions are live today (links in 8c): "fully accredited by Cognia", "Candidate for Accreditation", and plain "Accredited" in gt.school's footer | Say nothing and show no Cognia mark until you and counsel confirm the true status. Fix the live sites now | Only one version can be true, and "Candidate" means not yet accredited. A wrong claim here is a legal problem, not a copy problem | Accepted: no claim, no mark; live-site correction stays with Nari (REQ-004) |
+| 4 | Georgetown tuition | No price on any Georgetown page, only "a limited number of $10,000 scholarships" with nothing to subtract from. Anywhere states $10,400 a year | "Tuition on request" until you give us the number, then publish it the same way Anywhere does | Parents cannot compare two schools when one has a price and the other does not. We cannot invent the number | Accepted: "Tuition on request" until a number is given |
+| 5 | Title for the adults | gt.school says Guides, Anywhere says Advisors, and some are the same people with identical bios | Advisors, everywhere | One staff body needs one name, or parents assume two roles. Advisors is already GT's word; Guides is the Alpha network's | Guides, not Advisors. Overrides the recommendation; Anywhere renames under REQ-076 |
+| 6 | Alpha School relationship | Anywhere calls itself "The Gifted Academy of Alpha School"; gt.school does not mention Alpha | One small line, once: "The gifted school in the Alpha School network" | The link is already public on both sides, so hiding it looks evasive. One line keeps GT's own results separate from press questions about the network | Accepted as drafted |
 
 ### 8b. Evidence behind each question
 

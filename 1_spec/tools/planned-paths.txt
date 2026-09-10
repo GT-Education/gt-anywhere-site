@@ -56,3 +56,4 @@ tests/package.json
 1_spec/tests/
 .cursor/skills/verify-anywhere/SKILL.md
 .cursor/skills/verify-anywhere/
+0_plan/16-g05-decision-record.md
