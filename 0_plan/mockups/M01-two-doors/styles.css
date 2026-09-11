@@ -309,6 +309,10 @@ tbody tr:last-child .col-georgetown, tbody tr:last-child .col-anywhere { border-
    carries two thirds of sessions. */
 .footer-logo img { height: 32px; width: auto; }
 .footer-logo--anywhere { padding-inline: 0; }
+/* The GT Anywhere wordmark is part near-white, so on a forced white ground it renders as "GT" with
+   "anywhere" gone. Its navy plate and its own colours are kept through forced colours, which is how
+   M09 passed the same test. The runner now fails a run that leaves it unprotected. */
+@media (forced-colors: active) { .footer-logo--anywhere { background: var(--color-navy); padding-inline: var(--space-3); forced-color-adjust: none; } }
 
 /* ---------- Reduced motion (MN-16, R8): every duration --duration-none, elements and pseudo-elements ---------- */
 @media (prefers-reduced-motion: reduce) {

@@ -120,13 +120,45 @@ const PROBE = `(() => {
   }
   const box = (sel) => { const e = document.querySelector(sel); if (!e) return null; const r = e.getBoundingClientRect(); return { top: px(r.top + scrollY), bottom: px(r.bottom + scrollY), h: px(r.height) }; };
   const ctaH = [...document.querySelectorAll('.cta')].map(a => px(a.getBoundingClientRect().height));
+  const ctaW = [...document.querySelectorAll('.cta')].map(a => px(a.getBoundingClientRect().width));
   const ctaLines = [...document.querySelectorAll('.cta span:first-child')].map(s => s.getClientRects().length);
+  // Characters a line, measured on the rendered line boxes rather than computed from a track width: for every text
+  // node in the node's body, count its client rects (lines) and its characters, then divide. The map's prose is the
+  // thing the track ratio is FOR, so it is measured at every row like the fold.
+  const measureOf = (sel) => {
+    const el = document.querySelector(sel); if (!el) return null;
+    let chars = 0, lines = 0;
+    const w = (n) => {
+      if (n.nodeType === 3) { const t = n.textContent.trim(); if (t) { const rg = document.createRange(); rg.selectNodeContents(n); chars += t.length; lines += rg.getClientRects().length; } return; }
+      if (n.nodeType === 1) for (const c of n.childNodes) w(c);
+    };
+    w(el);
+    return lines ? px(chars / lines) : null;
+  };
+  // The two door BLOCKS (card plus its tail). The split's arms are solved from grid edges now, but an unequal pair
+  // is a DD-14 failure in its own right, so both are reported rather than only the first.
+  const blockOf = (card, tail) => { const c = document.querySelector(card), t = document.querySelector(tail); if (!c) return null; const cb = c.getBoundingClientRect(); const tb = t ? t.getBoundingClientRect() : null; return px(cb.height + (tb && (Math.abs(tb.top - cb.bottom) < 2 && Math.abs(tb.left - cb.left) < 2) ? tb.height : 0)); };
+  // Where each arm actually lands inside its own door card, measured from the card's top edge.
+  const attachOf = (segName, card) => {
+    const c = document.querySelector(card); if (!c) return null;
+    const s = segs.find(x => x.name.indexOf(segName) >= 0); if (!s) return null;
+    return px((s.t + s.b) / 2 - c.getBoundingClientRect().top);
+  };
+  const ratio2 = (a, b) => { const l1 = lum(a), l2 = lum(b); return Math.round(((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)) * 100) / 100; };
+  function lum(c) { const n = (c.match(/[\\d.]+/g) || []).slice(0, 3).map(Number).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * n[0] + 0.7152 * n[1] + 0.0722 * n[2]; }
+  const rs = getComputedStyle(document.documentElement);
+  const val = (n) => { const d = document.createElement('span'); d.style.color = rs.getPropertyValue(n).trim(); document.body.appendChild(d); const c = getComputedStyle(d).color; d.remove(); return c; };
+  const ink = val('--m23-ink'), line = val('--m23-line'), bg = val('--color-bg'), surf = val('--color-surface'), tint = val('--color-anywhere-tint');
   return {
     h1: { size: px(parseFloat(cs.fontSize)), lh: px(lh), lines, box: box('h1') },
     header: box('.site-header'), prov: box('.provenance'), map: box('.map'), banner: box('.banner'),
     cardG: box('.node--georgetown'), cardA: box('.node--anywhere'), lineG: box('.place-line--georgetown'), lineA: box('.place-line--anywhere'),
     admissions: box('.node--admissions'), program: box('.node--program'),
-    ctaH, ctaLines, segs: orth, worst, overlaps, svgText,
+    blockG: blockOf('.node--georgetown', '.place-line--georgetown'), blockA: blockOf('.node--anywhere', '.place-line--anywhere'),
+    attachG: attachOf('w-up', '.node--georgetown'), attachA: attachOf('w-down', '.node--anywhere'),
+    measureAdm: measureOf('.node--admissions .node-body'), measureProg: measureOf('.node--program .node-body'),
+    contrast: { inkBg: ratio2(ink, bg), inkSurface: ratio2(ink, surf), inkTint: ratio2(ink, tint), lineBg: ratio2(line, bg), lineSurface: ratio2(line, surf), lineTint: ratio2(line, tint) },
+    ctaH, ctaW, ctaLines, segs: orth, worst, overlaps, svgText,
     docH: document.documentElement.scrollHeight, scrollW: document.documentElement.scrollWidth,
   };
 })()`;
@@ -145,8 +177,12 @@ const PROBE = `(() => {
   const page = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
   const out = ['# M23 measurements', '', `Run ${new Date().toISOString()}; Chromium ${browser.version()}.`, '',
     '| Row | h1 px | h1 lines | h1 bottom | prov bottom | map top | map bottom | card G h | tail G h | card A h | banner top | banner bottom | CTA heights | CTA label lines |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|'];
+  const doors = ['', '## The two door blocks, the arms that land on them, and the map\'s measure', '',
+    'A block is a door card plus its own tail where the tail is joined to it. The arms are measured from each card\'s own top edge, not computed from the CSS: the split is anchored to grid edges, and this is the check that it is. A negative arm figure, or one larger than the card, means the arm is a vertical entering the card\'s top or bottom edge rather than a horizontal entering its side: what matters is that the two doors report the same number.', '',
+    '| Row | block G | block A | difference | arm into G | arm into A | CTA widths | ADMISSIONS characters a line | THE PROGRAM characters a line |', '|---|---|---|---|---|---|---|---|---|'];
   const clear = ['', '## Connector geometry and clearance', '', '| Row | segments | all orthogonal | overlapping segment/label pairs | smallest clearance to rendered text | segment | nearest text |', '|---|---|---|---|---|---|---|'];
   const svg = [];
+  let contrast = null;
   for (const [row, w, h] of ROWS) {
     await page.setViewportSize({ width: w, height: h });
     await page.goto(`http://127.0.0.1:${port}${REL}/index.html`, { waitUntil: 'load' });
@@ -156,9 +192,17 @@ const PROBE = `(() => {
     out.push(`| ${row} | ${m.h1.size} | ${m.h1.lines} | ${m.h1.box.bottom} | ${m.prov.bottom} | ${m.map.top} | ${m.map.bottom} | ${m.cardG?.h ?? ''} | ${m.lineG?.h ?? ''} | ${m.cardA?.h ?? ''} | ${m.banner?.top ?? ''} | ${m.banner?.bottom ?? ''} | ${m.ctaH.join(', ')} | ${m.ctaLines.join(', ')} |`);
     const nonOrth = m.segs.filter(s => s.w > 0.5 && s.h > 0.5 && Math.min(s.w, s.h) > 6);
     clear.push(`| ${row} | ${m.segs.length} | ${nonOrth.length === 0 ? 'yes' : 'NO: ' + nonOrth.map(s => s.name).join(', ')} | ${m.overlaps} | ${m.worst ? m.worst.g + 'px' : 'n/a'} | ${m.worst ? m.worst.seg : ''} | ${m.worst ? '"' + m.worst.text + '"' : ''} |`);
+    const diff = (m.blockG != null && m.blockA != null) ? Math.round(Math.abs(m.blockG - m.blockA) * 100) / 100 : '';
+    doors.push(`| ${row} | ${m.blockG ?? ''} | ${m.blockA ?? ''} | ${diff} | ${m.attachG ?? ''} | ${m.attachA ?? ''} | ${m.ctaW.join(', ')} | ${m.measureAdm ?? ''} | ${m.measureProg ?? ''} |`);
+    contrast = m.contrast;
     if (m.svgText.length) svg.push(`${row}: ` + m.svgText.map(t => `"${t.text}" declared ${t.declared}px rendered ${t.rendered}px`).join('; '));
   }
-  out.push(...clear, '', '## SVG text', '', svg.length ? svg.join('\n') : 'None: the diagram carries no `<svg>` element and no SVG text. Every card, label and connector is an HTML box, so no type sits inside a scaled viewBox (the M10 defect).');
+  out.push(...doors, ...clear, '', '## Contrast of the drawing (computed from the rendered token values)', '',
+    '| Object | Token | On the page ground | On the surface | On the GT Anywhere tint |', '|---|---|---|---|---|',
+    `| Every card edge, strip rule, tail edge, banner edge, mark chip | \`--color-border-strong\` | ${contrast.inkBg} | ${contrast.inkSurface} | ${contrast.inkTint} |`,
+    `| Every connector segment and junction dot | \`--color-accent-text\` | ${contrast.lineBg} | ${contrast.lineSurface} | ${contrast.lineTint} |`,
+    '', 'WCAG 1.4.11 asks 3:1 of a graphical object required to understand the content. In this direction the drawing IS the content, so every line in it is measured against what sits behind it.',
+    '', '## SVG text', '', svg.length ? svg.join('\n') : 'None: the diagram carries no `<svg>` element and no SVG text. Every card, label and connector is an HTML box, so no type sits inside a scaled viewBox (the M10 defect).');
   writeFileSync(join(REPO, REL.slice(1), 'qa', 'measurements.md'), out.join('\n') + '\n');
   console.log(out.join('\n'));
   await browser.close(); srv.close();

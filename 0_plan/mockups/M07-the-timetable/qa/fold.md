@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:43:39.484Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T18:56:10.215Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -56,7 +56,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V8 | yes | content reaches 723 of 739 and more follows below |
 | V9 | yes | content reaches 832 of 844 and more follows below |
 | V10 | yes | text cut by the edge, 315 to 347 |
-| V11 | yes | text cut by the edge, 990 to 1032 |
+| V11 | yes | content reaches 1011 of 1024 and more follows below |
 | V12 | yes | content reaches 1188 of 1194 and more follows below |
 | V13 | yes | content reaches 758 of 768 and more follows below |
 | V14 | yes | content reaches 712 of 720 and more follows below |
@@ -65,6 +65,15 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | text cut by the edge, 946 to 967 |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+
+## The GT Anywhere mark under forced colours
+
+Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.
+
+| Scheme | File | Result |
+|---|---|---|
+| light | `gt-anywhere-logo-h.svg` | kept by the image itself |
+| dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px
 

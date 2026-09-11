@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:43:25.082Z; page `/0_plan/mockups/M02-the-journal/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T18:55:37.047Z; page `/0_plan/mockups/M02-the-journal/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -56,8 +56,8 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V8 | yes | text cut by the edge, 727 to 747 |
 | V9 | yes | text cut by the edge, 818 to 845 |
 | V10 | yes | content reaches 334 of 342 and more follows below |
-| V11 | yes | text cut by the edge, 986 to 1028 |
-| V12 | yes | text cut by the edge, 1164 to 1206 |
+| V11 | yes | content reaches 1013 of 1024 and more follows below |
+| V12 | yes | content reaches 1172 of 1194 and more follows below |
 | V13 | yes | text cut by the edge, 760 to 775 |
 | V14 | yes | text cut by the edge, 708 to 723 |
 | V15 | yes | content reaches 646 of 648 and more follows below |
@@ -65,6 +65,15 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | text cut by the edge, 942 to 963 |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 567 to 588 |
+
+## The GT Anywhere mark under forced colours
+
+Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.
+
+| Scheme | File | Result |
+|---|---|---|
+| light | `gt-anywhere-logo-h.svg` | kept by the image itself |
+| dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px
 

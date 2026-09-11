@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:41:26.160Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T18:55:45.231Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -56,19 +56,28 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V8 | yes | text cut by the edge, 731 to 751 |
 | V9 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V10 | yes | text cut by the edge, 334 to 354 |
-| V11 | yes | text cut by the edge, 1002 to 1044 |
-| V12 | yes | text cut by the edge, 1168 to 1201 |
+| V11 | yes | content reaches 1023 of 1024 and more follows below |
+| V12 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V13 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V14 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V15 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V16 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V17 | yes | text cut by the edge, 937 to 987 |
+| V17 | yes | content reaches 958 of 960 and more follows below |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | content reaches 552 of 576 and more follows below |
 
+## The GT Anywhere mark under forced colours
+
+Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.
+
+| Scheme | File | Result |
+|---|---|---|
+| light | `gt-anywhere-logo-h.svg` | kept by the image itself |
+| dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
+
 ## Interactive targets under 44px
 
-BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA. Everything under 44 is listed. A row fails only under 24px, or a door CTA under 44.
+BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.
 
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|

@@ -239,3 +239,11 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
   .door-cta, .btn { border: 1px solid ButtonText; }
   .footer-logo.plate { border: 1px solid CanvasText; }
 }
+
+/* The GT Anywhere wordmark is part near-white, so on a forced white ground it renders as "GT" with
+   "anywhere" gone. Its navy plate and its own colours are kept through forced colours, which is how
+   M09, M21, M23 and M25 already passed the same test. The runner now fails a run that leaves it
+   unprotected, and eleven of the seventeen built mocks shipped the defect before it was measured. */
+@media (forced-colors: active) {
+  .footer-logo--anywhere { background: var(--color-navy); forced-color-adjust: none; }
+}

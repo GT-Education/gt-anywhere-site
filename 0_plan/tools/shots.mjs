@@ -104,6 +104,15 @@ const FOLD_JS = `(() => {
       const cs = getComputedStyle(node);
       if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) return;
       const box = node.getBoundingClientRect();
+      // A visually hidden element still has text rects, and counting them named a clipped heading as the
+      // ink cutting three rows (found by the M25 engineer in its own fold report). The standard pattern is
+      // a 1px box with an inset clip, so reject anything clipped away or collapsed to a pixel.
+      // Only the visually hidden pattern: clipped away, or absolutely positioned and collapsed to a pixel.
+      // A bare zero-size test is wrong, because an element using display:contents reports an empty rect
+      // while its children are perfectly visible, and rejecting it took their text with it.
+      const clipped = cs.clipPath.indexOf('inset(50%') === 0 || cs.clip === 'rect(0px, 0px, 0px, 0px)';
+      const pinhole = cs.position === 'absolute' && box.width <= 1.5 && box.height <= 1.5;
+      if (clipped || pinhole) return;
       const tag = node.tagName.toUpperCase();
       if (REPLACED.includes(tag) || node.tagName.toLowerCase() === 'svg') add(box, tag.toLowerCase());
       else if (paints(node) && box.height <= 8) add(box, 'rule');
@@ -181,6 +190,27 @@ const TARGETS_JS = `(() => {
       h: Math.round(r.height * 10) / 10, w: Math.round(r.width),
       door: !!el.closest('[data-fold^="cta-"]') || el.matches('[data-fold^="cta-"]'),
       sentence: words >= 5 });
+  }
+  return out;
+})()`;
+// The GT Anywhere mark's wordmark is part near-white, so on a forced white ground it renders as "GT"
+// with "anywhere" gone unless the mark sits on a plate that keeps its own colours. Four mocks shipped
+// this, three of them already gated, and no capture showed it because the failure is a word going
+// missing rather than a colour changing. Checked under forced colours in both schemes.
+const FC_MARKS_JS = `(() => {
+  const out = [];
+  for (const img of document.querySelectorAll('img')) {
+    const src = img.getAttribute('src') || '';
+    if (!/anywhere/i.test(src)) continue;
+    const r = img.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    let el = img, protectedBy = null;
+    while (el) {
+      const cs = getComputedStyle(el);
+      if (cs.forcedColorAdjust === 'none') { protectedBy = el === img ? 'the image itself' : (el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '')); break; }
+      el = el.parentElement;
+    }
+    out.push({ file: src.split('/').pop(), protectedBy });
   }
   return out;
 })()`;
@@ -265,6 +295,25 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
       await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
     }
   }
+  // The GT Anywhere mark under forced colours, in both schemes
+  const fcRows = []; let fcFailures = 0;
+  for (const scheme of ['light', 'dark']) {
+    const fcx = await browser.newContext({ viewport: { width: 1280, height: 720 }, forcedColors: 'active', colorScheme: scheme });
+    const fcp = await fcx.newPage();
+    try {
+      await fcp.goto(url, { waitUntil: 'load' });
+      await fcp.evaluate(() => document.fonts ? document.fonts.ready : null); await fcp.waitForTimeout(150);
+      const marks = await fcp.evaluate(FC_MARKS_JS);
+      if (!marks.length) fcRows.push(`| ${scheme} | no GT Anywhere mark on the page | |`);
+      for (const m of marks) {
+        if (!m.protectedBy) fcFailures++;
+        fcRows.push(`| ${scheme} | \`${m.file}\` | ${m.protectedBy ? 'kept by ' + m.protectedBy : 'FAIL: nothing keeps its colours, so the wordmark loses "anywhere"'} |`);
+      }
+    } catch (e) { fcRows.push(`| ${scheme} | probe failed | ${String(e).slice(0, 60)} |`); }
+    await fcx.close();
+  }
+  failures += fcFailures;
+
   // Interactive target heights at the narrowest and a laptop row
   const targetRows = []; let targetFailures = 0;
   for (const [label, w, h] of [['320 by 256', 320, 256], ['375 by 629', 375, 629], ['1440 by 900', 1440, 900]]) {
@@ -334,6 +383,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (consoleErrors.size) failures++;
   lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',
     '| Row | Cut | Element and the ink that crosses the bottom edge |', '|---|---|---|', ...bandEvidence);
+  lines.push('', '## The GT Anywhere mark under forced colours', '', 'Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.', '',
+    '| Scheme | File | Result |', '|---|---|---|', ...fcRows);
   lines.push('', '## Interactive targets under 44px', '', "BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.", '',
     '| Viewport | Target | Height | Width | Kind | Result |', '|---|---|---|---|---|---|', ...(targetRows.length ? targetRows : ['| all three rows | every interactive target is at least 44px tall | | | | ok |']));
   lines.push('', '## Mark geometry (K12 V2)', '', 'Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.', '',
