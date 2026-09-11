@@ -35,6 +35,8 @@ CASES = {
  'a disguised closing tag does not shorten the inline script byte count': ('data-d039="script"', LD, '<script>const marker = "</scripture>"; /*' + 'x' * 2048 + '*/</script>', 'R2', 'FAIL'),
  'a commented-out input is not an input': ('', LD, '<!-- <input type="text" name="search"> -->', 'R1', 'PASS'),
  'a commented-out script is not a script': ('', LD, '<!-- <script src="../shared/reveal.js"></script> -->', 'R2', 'PASS'),
+ 'an input mentioned in a script comment is not an input': ('data-d039="script inputs" data-d039-component="router"', LD, '<input type="radio"><script>// Keep the <input> radios usable without JavaScript.\nlet a=1</script>', 'R1', 'PASS'),
+ 'a script tag mentioned in a script comment is not a script': ('data-d039="script"', LD, '<script>// This <script> enhances the static page with optional reveals.\nlet a=1</script>', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

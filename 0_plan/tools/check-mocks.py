@@ -69,8 +69,21 @@ def check(folder):
     rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
     return check_doc(doc, style, rat_text, folder)
 
+def without_script_bodies(doc):
+    """the document with every script body removed and the script tags kept, so text inside a script (a comment
+    mentioning <input>, a string containing <script>) is never scanned as markup"""
+    out = []; i = 0
+    for tag, end in tags(doc, 'script'):
+        start = doc.lower().rfind('<script', 0, end)
+        if start < i: continue
+        m = re.compile(r'</script(?=[\s/>])', re.I).search(doc, end)
+        out.append(doc[i:end]); i = m.start() if m else len(doc)
+    out.append(doc[i:]); return ''.join(out)
+
 def check_doc(doc, style, rat_text, folder='(memory)'):
     doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # commented-out markup is not markup: the tag scans and the text rules see the document without comments
+    blocks = script_blocks(doc)  # script bodies are read here for the byte count, then removed before any other tag scan
+    doc = without_script_bodies(doc)
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
@@ -86,7 +99,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
         r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not submit and not re.search(r'<(form|select|textarea)\b', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
     else:
         r('R1 no forms', not any(tags(doc, n) for n in ('form', 'input', 'select', 'textarea')) and not any((attr(t, 'type') or '').lower() == 'submit' for t, _ in tags(doc, 'button')))
-    blocks = script_blocks(doc); scripts = [t for t, _ in blocks]
+    scripts = [t for t, _ in blocks]
     if 'script' in d039:
         external = [t for t in scripts if attr(t, 'src') is not None]
         ldjson = [t for t in scripts if 'ld+json' in (attr(t, 'type') or '')]
