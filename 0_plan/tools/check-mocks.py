@@ -34,6 +34,34 @@ def attr(tag, name):
     """value of one attribute, '' for a bare boolean attribute, None if absent"""
     return attrs(tag).get(name.lower())
 
+def tags(doc, name):
+    """every start tag <name ...> in document order, each returned whole; the scan honours quotes, so a > inside a
+    quoted attribute value does not end the tag. Returns (tag_text, end_index) pairs."""
+    out = []; i = 0; low = doc.lower(); pat = '<' + name.lower()
+    while True:
+        i = low.find(pat, i)
+        if i < 0: break
+        j = i + len(pat)
+        if j < len(doc) and (doc[j].isalnum() or doc[j] in '-_'): i = j; continue
+        q = None
+        while j < len(doc):
+            ch = doc[j]
+            if q: 
+                if ch == q: q = None
+            elif ch in '"\'': q = ch
+            elif ch == '>': break
+            j += 1
+        out.append((doc[i:j+1], j+1)); i = j + 1
+    return out
+
+def script_blocks(doc):
+    """(start_tag, body) for every <script> element, quote-aware"""
+    res = []
+    for tag, end in tags(doc, 'script'):
+        close = doc.lower().find('</script', end)
+        res.append((tag, doc[end:close] if close >= 0 else doc[end:]))
+    return res
+
 def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
     if not os.path.exists(idx): return [('files','FAIL','index.html missing')]
@@ -47,21 +75,21 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
     rat = os.path.join(folder, 'RATIONALE.md')
     text = visible_text(doc)
-    _html = re.search(r'<html\b[^>]*>', doc, re.I); _decl = attr(_html.group(0), 'data-d039') if _html else None
+    _html_tags = tags(doc, 'html'); _decl = attr(_html_tags[0][0], 'data-d039') if _html_tags else None
     d039m = _decl is not None; d039 = set(_decl.split()) if d039m else set(); d039_empty = d039m and not d039
     if 'inputs' in d039:
-        html_tag = re.search(r'<html\b[^>]*>', doc, re.I); comp = html_tag and (attr(html_tag.group(0), 'data-d039-component') or '').lower() == 'router'
-        inputs = re.findall(r'<input\b[^>]*>', doc, re.I)
+        comp = bool(_html_tags) and (attr(_html_tags[0][0], 'data-d039-component') or '').lower() == 'router'
+        inputs = [t for t, _ in tags(doc, 'input')]
         nonradio = [t for t in inputs if (attr(t, 'type') or 'text').lower() != 'radio']
-        submit = any((attr(t, 'type') or '').lower() == 'submit' for t in re.findall(r'<(?:input|button)\b[^>]*>', doc, re.I))
+        submit = any((attr(t, 'type') or '').lower() == 'submit' for t in inputs + [t for t, _ in tags(doc, 'button')])
         r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not submit and not re.search(r'<(form|select|textarea)\b', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
     else:
-        r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b', doc, re.I) and not any((attr(t, 'type') or '').lower() == 'submit' for t in re.findall(r'<button\b[^>]*>', doc, re.I)))
-    scripts = re.findall(r'<script\b[^>]*>', doc, re.I)
+        r('R1 no forms', not any(tags(doc, n) for n in ('form', 'input', 'select', 'textarea')) and not any((attr(t, 'type') or '').lower() == 'submit' for t, _ in tags(doc, 'button')))
+    blocks = script_blocks(doc); scripts = [t for t, _ in blocks]
     if 'script' in d039:
         external = [t for t in scripts if attr(t, 'src') is not None]
         ldjson = [t for t in scripts if 'ld+json' in (attr(t, 'type') or '')]
-        inline = [m.group(2) for m in re.finditer(r'(<script\b[^>]*>)(.*?)</script>', doc, re.I|re.S) if attr(m.group(1), 'src') is None and 'ld+json' not in (attr(m.group(1), 'type') or '')]
+        inline = [body for t, body in blocks if attr(t, 'src') is None and 'ld+json' not in (attr(t, 'type') or '')]
         r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and not external and len(ldjson)==1 and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, external {len(external)}, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
     else:
         r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in (attr(scripts[0], 'type') or '') and attr(scripts[0], 'src') is None, f'{len(scripts)} script tags')

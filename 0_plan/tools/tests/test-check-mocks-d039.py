@@ -27,6 +27,10 @@ CASES = {
  'JSON-LD tag with a bare src is rejected without a declaration': ('', '<script type="application/ld+json" src>{}</script>', '', 'R2', 'FAIL'),
  'JSON-LD tag with a bare src is rejected beside a declared inline script': ('data-d039="script"', '<script type="application/ld+json" src>{}</script>', '<script>1</script>', 'R2', 'FAIL'),
  'bare data-d039 attribute fails R20': ('data-d039', LD, '', 'R20', 'FAIL'),
+ 'submit button hiding behind a quoted > is rejected': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><button value=">" type="submit">go</button>', 'R1', 'FAIL'),
+ 'JSON-LD tag with a quoted > and a bare src is rejected': ('', '<script type="application/ld+json" data-note=">" src>{}</script>', '', 'R2', 'FAIL'),
+ 'bare data-d039 after a quoted > in the html tag fails R20': ('title=">" data-d039', LD, '', 'R20', 'FAIL'),
+ 'quoted > inside a legitimate inline script tag still counts one inline script': ('data-d039="script"', LD, '<script data-note=">">1</script>', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():
