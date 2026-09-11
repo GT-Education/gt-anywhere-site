@@ -112,7 +112,10 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
 
 /* Buttons: the estate's face, case, navy fill and .5rem radius (K12 F41, G15, G17) at the runbook's 44px floor.
    DD-46: the fill is surface-dependent, navy with a near-white label on light surfaces (14.58). */
-.btn { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); width: 100%; min-height: 44px; padding: var(--space-2) var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; overflow-wrap: anywhere; }
+/* 4px between the label and the arrow, not 8: at 360 the label, arrow and gap wanted 263.0px inside a 262px
+   content box, so the Georgetown label wrapped and the pair stood 52.5 against 44 on the row whose whole
+   thesis is that the two doors are equal. 4px returns 44/44 and gives 17px back to the fold (studio critic). */
+.btn { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); width: 100%; min-height: 44px; padding: var(--space-2) var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; overflow-wrap: anywhere; }
 .btn:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 
 /* The door lines when the compact rule is in force: hidden here, shown after the second CTA (below). */
@@ -177,7 +180,7 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
   .door { padding: var(--space-4); }
   .door-cta { margin-top: var(--space-4); }
   .compare-lead { margin-top: var(--space-4); }
-  .first-inner > .accent-rule { margin-top: var(--space-4); margin-bottom: var(--space-6); }
+  .first-inner > .accent-rule { margin-top: var(--space-5); margin-bottom: var(--space-6); } /* 24px, not 16: at 5.7px of clearance the rule read as a second underline on the anchor (studio critic, fix 2) */
 }
 @media (min-width: 1024px) and (min-height: 600px) and (max-height: 689px) {
   .first-screen { padding-block: var(--space-4) 0; }
@@ -185,7 +188,7 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
   .door { padding: var(--space-3); }
   .door-cta { margin-top: var(--space-3); }
   .compare-lead { margin-top: var(--space-3); }
-  .first-inner > .accent-rule { margin-top: var(--space-3); margin-bottom: var(--space-6); }
+  .first-inner > .accent-rule { margin-top: var(--space-5); margin-bottom: var(--space-6); } /* the same floor on the shortest laptop band */
 }
 
 /* ---------- Bands: the page's rhythm, --space-9 on phones to --space-11 from 1280 ----------

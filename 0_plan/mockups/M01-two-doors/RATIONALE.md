@@ -440,7 +440,7 @@ across every mock in `0_plan/mockups/`.)
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 88 | 313 | 342 | 481 | 612 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 88 | 313 | 342 | 472 | 595 | yes | PASS |
 | V2 | 375 by 629 | fold | 605 | 56 | 283 | 312 | 442 | 565 | yes | PASS |
 | V3 | 390 by 664 | fold | 640 | 56 | 286 | 315 | 445 | 568 | yes | PASS |
 | V4 | 393 by 659 | fold | 635 | 56 | 286 | 315 | 445 | 568 | yes | PASS |
@@ -535,3 +535,5 @@ rule (a 64px dash reading as a second underline under the compare link), the tab
 button wrapping and the other not), the application pair (the same wrap inside a tinted matte), the
 two text links' arrows (parked at the right edge of a wrapped label), and the door card's border
 colour (`--color-border` at 1.4:1 left the cards edgeless).
+
+**Director's changes after the scoring.** Two, both from the studio critic's measurements and both made by the design director rather than the engineer: the button's internal gap went from 8px to 4px, because at 360 the label, arrow and gap wanted 263.0px inside a 262px content box, so the Georgetown label wrapped and the two first-screen controls stood 52.5 against 44 on the row whose whole thesis is that the doors are equal; and the accent rule under the compare anchor took a 24px floor on the two short-laptop bands, where it had been clearing the anchor by 5.7px and reading as a second underline. Every other figure in this file is unchanged, and both CTAs still sit above the fold on every row.
