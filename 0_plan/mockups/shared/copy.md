@@ -1,4 +1,4 @@
-# Landing copy deck, v1 (T-041), 2026-09-10
+# Landing copy deck, v1.1 (T-041), 2026-09-10, revised 2026-09-11
 
 | Field | Value |
 |---|---|
@@ -29,7 +29,7 @@
 | Door 2 name | GT Anywhere |
 | Door 2 line | Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown. |
 | Door 2 CTA | Explore GT Anywhere → https://anywhere.gt.school/ `data-event="door_click" data-school="anywhere" data-placement="first_screen"` |
-| Cue set (DD-04) | Label plus icon plus photo for each door; photos from `img/` per `ASSETS.md`. Georgetown: `georgetown-science.webp` or another classroom photo. Anywhere: `anywhere-austin-intensives.webp` or `anywhere-slider-1.webp`. Do not use `anywhere-student-home.webp` or `georgetown-kid-writing.webp` (studio-isolated, read as stock, ASSETS.md findings) |
+| Cue set (DD-04) | Label plus icon for each door (`gt-icon.svg` or the school mark). Photographs appear only in the photographed state of DD-42, after Nari's written permissions (RF-25), with files and crops from `0_plan/kb/briefs/CONTRACT.md` section 5; v1 named door photographs by default, which the ASSETS.md re-check of 2026-09-11 withdrew |
 
 ## Section 2. Compare anchor
 
@@ -37,7 +37,7 @@
 
 ## Section 3. Comparison (id `compare`)
 
-Table with `caption` "Georgetown Campus and GT Anywhere, side by side", column headers as the full school names. Shared rows come first (Same school, Admissions, After 8th grade), then the rows that differ (DD-06, REQ-013). On widths up to 767px the table renders as stacked blocks with the school name labelling each cell (approved alternative to a two-column table, `1_spec/03` section 4).
+Table with `caption` "Georgetown Campus and GT Anywhere, side by side", column headers as the full school names. Shared rows come first (Same school, Admissions, After 8th grade), then the rows that differ (DD-06, REQ-013). Below the measured breakpoint (R6; 767px was the value the five earlier mocks tested) the table renders as stacked blocks with the school name labelling each cell (approved alternative to a two-column table, `1_spec/03` section 4).
 
 | Row | Georgetown Campus | GT Anywhere | Source, flag |
 |---|---|---|---|
@@ -114,7 +114,7 @@ All carry `data-event="cta_secondary_click"`.
 | robots | `noindex, nofollow` on every mock (SE-13) |
 | canonical | https://gt.school/ |
 | JSON-LD | `EducationalOrganization` "GT School" with two `subOrganization` entries (Georgetown Campus, GT Anywhere), `sameAs` both sites. No "Accredited", no multiplier, no SAT figure |
-| Open Graph | Title and description above; image `../shared/img/georgetown-campus.webp` |
+| Open Graph | Title and description above; no photograph while the default state holds (DD-42, RF-25); a share image, if one is required, is the GT School mark on `--color-bg` rendered as a static PNG under the mock's folder |
 
 ## Section headings allowed beyond the slots (E2 finding 20)
 
@@ -126,7 +126,7 @@ All carry `data-event="cta_secondary_click"`.
 | 5 | "How to apply" |
 | 6 | "More ways to connect", "Other ways to connect", "Questions before you apply" |
 | 7 | "Current families", "Already a GT family?" |
-| M4 | "What students do", with captions that describe only what is visible |
+| M4, M18 | "What students do", with captions that describe only what is visible (M18 uses it over its two activity lists) |
 | Eyebrow labels (any mock) | One-word section labels in Inconsolata above an h2: "Compare", "Proof", "Admissions", "Connect", "Families", "Builders" (M4 strip) |
 | M2 first-screen preview | "A closer look" (kicker) and "The full comparison continues below." (the preview's closing line) |
 
@@ -145,18 +145,21 @@ Words the twenty briefs need beyond the fixed slots. Each names the brief that n
 | "Monday" to "Friday" | M07 | Column labels of the week grid | Calendar words, no fact |
 | "Morning", "Afternoon", "Across the year" | M14 | Step labels on the two timelines; each step's sentence is a door-line phrase | No fact beyond the door lines |
 | "Which school fits your family?" | M16 | Router card heading | Held until D-039 |
+| Radio labels "Yes" and "No"; the caveat "GT Anywhere's four in-person weekends are in Georgetown."; the third result "Neither door fits every school day yet. Talk to admissions about your options." (shown when the family can reach neither the campus daily nor the four weekends) | M16 | Answer labels, caveat and the third result; the result sentences name a door or admissions, never a price | Held until D-039 and Nari; four weekends is CR-032
 | Router questions (proposed, held until D-039 and Nari): "Could your child travel to our Georgetown, Texas campus every school day?"; "Does your child do their best work in a room with other children?"; "Could your family travel to Georgetown for four weekends a year?" Results: "Georgetown Campus fits: in person, every school day." and "GT Anywhere fits: online, with four in-person weekends a year in Georgetown." Button: "Show the door that fits" | M16 | The three radio groups, the two result sentences and the button | Held until D-039; four weekends is CR-032; no price or wealth cue (MD-25) |
-| Photo captions, default state: `georgetown-dscf1931.webp` "A student works through a math problem."; `georgetown-guide.webp` "A Guide teaches at the whiteboard."; `anywhere-slider-2.webp` "Students play a strategy game in class." | M02, M04, M11, M13 and any brief using the default photographs | One sentence under the photograph, what is visible only; place is not named because the files do not establish it | K9 section 10; no adjective |
+| Photo captions, photographed state only (no photograph is shown by default): `georgetown-dscf1931.webp` "A student works through a math problem."; `georgetown-guide.webp` "A Guide teaches at the whiteboard."; `anywhere-slider-2.webp` "Students play a strategy game in class."; `georgetown-science.webp` "Students run a science experiment."; `georgetown-presenting.webp` "Students gather for a class presentation."; any GT Anywhere photograph Nari supplies gets its caption here before use | Every brief with a photographed state | One sentence under the photograph, what is visible only; place is not named because the files do not establish it | K9 section 10; no adjective; permission-gated (RF-25) |
 | Schematic labels "In person" and "Online" on diagrams | M07, M10, M17 | Reuse the door labels | Fixed slots reused |
+| Locations list status strings "Now enrolling" and "Coming soon", and the city names, as gt.school's footer publishes them (K12 F64) | M05, M10 | Footer or map list; the coming-soon cities appear only with Nari's confirmation recorded in the rationale | A statement about future campuses: Nari confirms before use |
+| The list heading for M19 reuses the allowed section 6 heading "Questions before you apply" | M19 | Heading over the question list | Allowed heading reused |
 | "Across the day" | M14 | Step label for the GT Anywhere day (with "Morning", "Afternoon", "Across the year" above) | No fact beyond the deck cell |
 | "Schematic: the weekends are not placed on a calendar." | M17 | Caption under the rhythm band | States the absence of dates |
 | Row labels "Peers", "Afternoons", "In person", "Guides" | M18 | Labels over the deck's own sentences in the two activity lists | Wayfinding only |
 | The thirteen parent questions of `05` section 6c (PQ-01 to PQ-09, PQ-11 to PQ-14) in their PQ wording, and the PQ-03 answer "In person at the Georgetown Campus or online with GT Anywhere." | M19 | Question eyebrows and one joined answer; every other answer is a deck cell unchanged | Proposed for Nari; PQ-10 is not shown (G0.5 items 2 and 3) |
-| Quotes for M20, verbatim from https://www.gt.school/about-us (text fetch, checked 2026-09-11): (1) "Everything at GT School runs on one formula: high standards and high support and never one without the other. Raising the bar without coaching a child over it is pressure; support without a bar worth clearing is babysitting." attributed "GT School, About us"; (2) "Schools aren't cruel to these kids. They're calibrated to the middle, and calibration is destiny." attributed "Arvind and David, founders, Why we built GT School"; (3) "Motivation, not content, is the real bottleneck in learning, and a child who loves school will outwork any curriculum." attributed "GT School, About us" | M20 | The three quote slots; no figure, no accreditation, no parent voice; the page's own attribution wording | Q-034 stays open for parent quotes; the Alpha sentence on the same page is not quoted (G0.5 item 6) |
+| Quotes for M20, verbatim from https://www.gt.school/about-us (text fetch, checked 2026-09-11): (1) "Everything at GT School runs on one formula: high standards and high support and never one without the other. Raising the bar without coaching a child over it is pressure; support without a bar worth clearing is babysitting." attributed "GT School, About us page (gt.school/about-us)"; (2) "Schools aren't cruel to these kids. They're calibrated to the middle, and calibration is destiny." attributed "Arvind and David, in 'Why we built GT School' (gt.school/about-us)"; (3) "Every gifted child eventually reaches a point where they ask: 'Is this all there is?' Most schools answer with more worksheets. GT School was built to present real challenges." attributed "GT School, About us page (gt.school/about-us)" | M20 | The three quote slots; no figure, no accreditation, no outcome claim, no parent voice; attributions are the studio's wording of the page's own headings, stated as such in the rationale | Q-034 stays open for parent quotes; the Alpha sentence on the same page is not quoted (G0.5 item 6); the earlier quote about a child who loves school outworking any curriculum was dropped as an outcome claim without a register row |
 
 ## Version
 
 | Version | Date | Change |
 |---|---|---|
 | v1 | 2026-09-10 | Deck for the five mocks; E2 findings 4, 15, 18, 20 applied |
-| v1.1 | 2026-09-11 | Three "Same" cells repeat their value (DD-43, proposed); tour label per R14 (MD-02); Section 9 wayfinding vocabulary v2 added for the twenty briefs (M05, M07, M13, M14, M16 held, M17, M18, M19, M20 quotes); captions for three photographs, permission-gated like every file after the ASSETS.md correction. The umbrella sentence, provenance line, doors, proof facts and sources line are unchanged (G0.5) |
+| v1.1 | 2026-09-11 | Three "Same" cells repeat their value (DD-43, proposed); tour label per R14 (MD-02); Section 9 wayfinding vocabulary v2 added for the twenty briefs; captions for five photographs, permission-gated like every file after the ASSETS.md correction; door cue set, comparison breakpoint and Open Graph image aligned to the no-photograph default and the measured breakpoint; M20's third quote replaced. The umbrella sentence, provenance line, doors, proof facts and sources line are unchanged (G0.5) |

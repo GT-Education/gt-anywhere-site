@@ -58,18 +58,19 @@
 
   /* Colour roles: DD-39 option (a), RF-07 (K3 section 5e, K12 G8 to G10). Three values are new tints and are
      DD-19 departures: --color-accent-text, --color-text-muted-on-dark, --color-border-strong. */
-  --color-accent-text: #a5501a;        /* accent as small text on light surfaces (7.0 on --color-bg per K3) */
+  --color-accent-text: #a5501a;        /* accent as small text on light surfaces (5.14 on --color-bg, computed 2026-09-11; AA for text) */
   --color-on-navy: #fbfbfb;            /* alias of --color-accent-contrast: text on navy (14.58) */
   --color-on-accent: #001117;          /* text on the accent or gold fill (7.43), never #fbfbfb (2.50) */
   --color-focus-on-dark: #fbfbfb;      /* focus ring on navy; --color-focus is 1.69 on navy and fails */
   --color-text-muted-on-dark: #a3bfcb; /* muted text on navy (7.81 per E5a) */
   --color-border-strong: #857f7b;      /* borders that must reach 3:1 on light surfaces */
 
-  /* Motion: MN-16 option (a), RF-53 (K4 F5, F22). ease is a vendor default; three named curves replace it.
-     Durations unchanged (100, 200, 300). Under prefers-reduced-motion: reduce every duration is --duration-none. */
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  /* Motion: MN-16 option (a), RF-53 (K4 F5, F22, F25). ease is a vendor default; named curves replace it. --ease-standard takes
+     K4 section 8.1's value; --ease-out and --ease-in are RF-53's proposed enter and exit curves (K4 F25 gives the direction, not
+     the values). Durations unchanged (100, 200, 300). Under prefers-reduced-motion: reduce every duration is --duration-none. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* K4 section 8.1 */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* K4 section 8.1 */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* K4 section 8.1 */
   --duration-none: 0ms;
 }
 @media (prefers-reduced-motion: reduce) {

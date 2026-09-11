@@ -79,7 +79,7 @@
 | C35 | The visually dominant headline is not the markup h1 | SFMOMA, Vanguard (D) | Craft | One real, dominant h1 (DD-44 runner test) | Avoid | None |
 | C36 | Zero or near-zero first-screen CTAs, trading on recognition | COLLINS, RISD (D); Harvard (C, on its captured date). Yale Architecture is not in this row: its hero carries Apply and Courses | Objective | K6 section 5a: two primary CTAs | Avoid | None; M03 and M08 keep the doors on the first screen |
 | C37 | A founding year as the sole quantitative claim | RISD, UAL (D) | Mission and exclusivity | Needs a claims-register row like any figure (REQ-022) | Use only with a CR row | M15, M20 if a row exists |
-| C38 | A dark or saturated band reserved for the proof or mission moment, at most twice a page | COLLINS, Vanguard (D); Exeter (A) | Color and surface | K3 section 5a; dark surfaces purposeful (`17` section 6) | Use | M03, M09, M12, M20 |
+| C38 | A dark or saturated band reserved for the proof or mission moment, at most twice a page | COLLINS, Vanguard (D); Exeter (A) | Color and surface | K3 section 5g (CS5, CS6 as an Option); dark surfaces purposeful (`17` section 6) | Use | M03, M09, M12, M20 |
 | C39 | A sourced figure set in headline-scale numerals | ASU, Vanguard (D) | Mission and exclusivity | Only register-approved figures (CR-011, CR-021, CR-022, CR-032 to CR-035) | Use | M15, M12 |
 | C40 | Arrow-glyph text links as the only CTA affordance | RISD, UAL (D) | Objective | Door CTAs need button affordance (K6 section 5b, K12 G17) | Avoid | None |
 | C42 | A minimal header whose depth appears one interaction later | Yale Architecture, Harvard (C) | Composition | DD-12 minimal landing shell; DD-41 | Use | M05 and every header |
