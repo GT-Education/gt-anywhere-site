@@ -15,41 +15,6 @@ def visible_text(doc):
     d = re.sub(r'<[^>]+>', ' ', d)
     return H.unescape(d)
 
-ATTR_RE = re.compile(r'\s+([^\s"\'=<>`/]+)(?:\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'=<>`]+)))?')
-
-def attrs(tag):
-    """all attributes of one tag as {lowercase name: value}; the tag is tokenized left to right so a quoted value is
-    consumed whole and never rescanned (a value containing type=radio cannot impersonate a type attribute); a boolean
-    attribute (bare name) maps to ''"""
-    m = re.match(r'<\s*[^\s/>]+', tag)
-    body = tag[m.end():] if m else tag
-    out = {}
-    for a in ATTR_RE.finditer(body):
-        name = a.group(1).lower()
-        val = a.group(2) if a.group(2) is not None else (a.group(3) if a.group(3) is not None else a.group(4))
-        out.setdefault(name, '' if val is None else H.unescape(val))  # character references decoded, so sub&#109;it is submit
-    return out
-
-def tags(doc, name):
-    """every start tag <name ...> in document order, each returned whole; the scan honours quotes, so a > inside a
-    quoted attribute value does not end the tag. Returns (tag_text, end_index) pairs."""
-    out = []; i = 0; low = doc.lower(); pat = '<' + name.lower()
-    while True:
-        i = low.find(pat, i)
-        if i < 0: break
-        j = i + len(pat)
-        if j < len(doc) and (doc[j].isalnum() or doc[j] in '-_'): i = j; continue
-        q = None
-        while j < len(doc):
-            ch = doc[j]
-            if q: 
-                if ch == q: q = None
-            elif ch in '"\'': q = ch
-            elif ch == '>': break
-            j += 1
-        out.append((doc[i:j+1], j+1)); i = j + 1
-    return out
-
 RAW_TEXT = ('script', 'style', 'title')  # elements whose content is text, never markup (HTML raw-text and RCDATA elements a mock may contain)
 
 def walk(doc):
