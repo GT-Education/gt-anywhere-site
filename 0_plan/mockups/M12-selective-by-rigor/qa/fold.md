@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T12:20:50.595Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:45.425Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -22,7 +22,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V16 | 1440 by 900 | fold | 876 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 555 | 682 | no | PASS no horizontal scroll |
-| V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | yes | report: scrollWidth 1024 |
+| V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | no | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
 
@@ -46,24 +46,24 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | ul.door-lines ink 614 to 787 |
-| V2 | yes | ul.door-lines ink 608 to 781 |
-| V3 | yes | ul.door-lines ink 611 to 784 |
-| V4 | yes | ul.door-lines ink 611 to 785 |
-| V5 | yes | ul.door-lines ink 590 to 740 |
-| V6 | yes | ul.door-lines ink 743 to 892 |
-| V7 | yes | ul.door-lines ink 581 to 754 |
-| V8 | yes | ul.door-lines ink 592 to 742 |
-| V9 | yes | ul.door-lines ink 771 to 945 |
-| V10 | yes | ul.door-lines ink 324 to 420 |
-| V11 | yes | section.band ink 858 to 2382 |
-| V12 | yes | section.band ink 798 to 2253 |
-| V13 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
+| V1 | yes | content reaches 739 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 609 to 629 |
+| V3 | yes | text cut by the edge, 660 to 680 |
+| V4 | yes | content reaches 656 of 659 and more follows below |
+| V5 | yes | text cut by the edge, 696 to 716 |
+| V6 | yes | text cut by the edge, 824 to 844 |
+| V7 | yes | content reaches 674 of 681 and more follows below |
+| V8 | yes | text cut by the edge, 722 to 742 |
+| V9 | yes | content reaches 840 of 844 and more follows below |
+| V10 | yes | text cut by the edge, 325 to 345 |
+| V11 | yes | content reaches 1015 of 1024 and more follows below |
+| V12 | yes | text cut by the edge, 1189 to 1209 |
+| V13 | yes | content reaches 766 of 768 and more follows below |
 | V14 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V15 | yes | div.statement ink 567 to 695 |
-| V16 | yes | section.band ink 890 to 2165 |
-| V17 | yes | section.band ink 890 to 2165 |
-| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
-| V19 | yes | div.statement ink 561 to 681 |
+| V15 | yes | text cut by the edge, 643 to 667 |
+| V16 | yes | text cut by the edge, 890 to 906 |
+| V17 | yes | content reaches 958 of 960 and more follows below |
+| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V19 | no | FALSE FLOOR: the last visible content ends at 534, 42px clear of the 576px edge, so the screen reads as finished |
 
 ## Result: all required rows pass

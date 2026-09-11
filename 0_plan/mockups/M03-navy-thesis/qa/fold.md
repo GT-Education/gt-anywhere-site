@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T12:20:44.187Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:26.518Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -46,24 +46,24 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | div.wrap ink 648 to 828 |
-| V2 | yes | div.wrap ink 618 to 798 |
-| V3 | yes | div.wrap ink 621 to 801 |
-| V4 | yes | div.wrap ink 621 to 802 |
-| V5 | yes | div.wrap ink 592 to 749 |
-| V6 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V7 | yes | div.wrap ink 623 to 803 |
-| V8 | yes | div.wrap ink 595 to 751 |
+| V1 | yes | content reaches 740 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 618 to 638 |
+| V3 | yes | text cut by the edge, 645 to 665 |
+| V4 | yes | text cut by the edge, 645 to 665 |
+| V5 | yes | text cut by the edge, 705 to 725 |
+| V6 | yes | text cut by the edge, 835 to 865 |
+| V7 | yes | text cut by the edge, 671 to 691 |
+| V8 | yes | text cut by the edge, 731 to 751 |
 | V9 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V10 | yes | div.wrap ink 309 to 420 |
-| V11 | yes | section.section ink 1002 to 3416 |
-| V12 | yes | section.section ink 1027 to 3399 |
+| V10 | yes | text cut by the edge, 334 to 354 |
+| V11 | yes | text cut by the edge, 1002 to 1044 |
+| V12 | yes | text cut by the edge, 1168 to 1201 |
 | V13 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V14 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V15 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
 | V16 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V17 | yes | section.section ink 937 to 2426 |
-| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
-| V19 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V17 | yes | text cut by the edge, 937 to 987 |
+| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V19 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 576px edge, so the screen reads as finished |
 
 ## Result: all required rows pass

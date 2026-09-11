@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T12:32:36.529Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:58.157Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -46,24 +46,24 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | ul.days ink 610 to 1008 |
-| V2 | yes | ul.days ink 597 to 953 |
-| V3 | yes | ul.days ink 583 to 940 |
-| V4 | yes | ul.days ink 583 to 919 |
-| V5 | yes | ul.days ink 554 to 890 |
-| V6 | yes | ul.days ink 715 to 1051 |
-| V7 | yes | ul.days ink 585 to 921 |
-| V8 | yes | ul.days ink 557 to 893 |
-| V9 | yes | ul.days ink 744 to 1100 |
-| V10 | yes | ul.days ink 310 to 519 |
-| V11 | yes | section.section ink 990 to 3397 |
-| V12 | yes | section.section ink 966 to 3329 |
-| V13 | yes | div.door-lines ink 712 to 818 |
-| V14 | yes | div.door-lines ink 691 to 800 |
-| V15 | yes | p.strip ink 618 to 681 |
-| V16 | yes | div.door-lines ink 870 to 980 |
-| V17 | yes | div.door-lines ink 884 to 994 |
-| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
-| V19 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V1 | yes | content reaches 739 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 602 to 632 |
+| V3 | yes | text cut by the edge, 654 to 671 |
+| V4 | yes | text cut by the edge, 655 to 672 |
+| V5 | yes | text cut by the edge, 704 to 721 |
+| V6 | yes | text cut by the edge, 827 to 844 |
+| V7 | yes | content reaches 673 of 681 and more follows below |
+| V8 | yes | content reaches 723 of 739 and more follows below |
+| V9 | yes | content reaches 832 of 844 and more follows below |
+| V10 | yes | text cut by the edge, 315 to 347 |
+| V11 | yes | text cut by the edge, 990 to 1032 |
+| V12 | yes | content reaches 1188 of 1194 and more follows below |
+| V13 | yes | content reaches 758 of 768 and more follows below |
+| V14 | yes | content reaches 712 of 720 and more follows below |
+| V15 | yes | text cut by the edge, 637 to 655 |
+| V16 | yes | content reaches 891 of 900 and more follows below |
+| V17 | yes | text cut by the edge, 946 to 967 |
+| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V19 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 576px edge, so the screen reads as finished |
 
 ## Result: all required rows pass

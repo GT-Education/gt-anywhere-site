@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:57:41.374Z; page `/0_plan/mockups/M09-two-places/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:21:04.604Z; page `/0_plan/mockups/M09-two-places/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -46,24 +46,24 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | ul.place-lines ink 692 to 865 |
-| V2 | yes | ul.place-lines ink 598 to 771 |
-| V3 | yes | ul.place-lines ink 601 to 774 |
-| V4 | yes | ul.place-lines ink 601 to 775 |
-| V5 | yes | ul.place-lines ink 636 to 786 |
-| V6 | yes | section.band ink 780 to 927 |
-| V7 | yes | ul.place-lines ink 602 to 776 |
-| V8 | yes | ul.place-lines ink 638 to 788 |
-| V9 | yes | section.band ink 808 to 955 |
-| V10 | yes | p.place-line ink 300 to 370 |
-| V11 | yes | section.band ink 782 to 2517 |
-| V12 | yes | section.band ink 754 to 2412 |
-| V13 | yes | section.band ink 705 to 830 |
-| V14 | yes | section.band ink 703 to 829 |
-| V15 | yes | section.band ink 631 to 758 |
-| V16 | yes | section.band ink 836 to 963 |
-| V17 | yes | section.band ink 896 to 1023 |
-| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
-| V19 | yes | ul.place-lines ink 548 to 656 |
+| V1 | yes | content reaches 737 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 623 to 643 |
+| V3 | yes | text cut by the edge, 650 to 670 |
+| V4 | yes | text cut by the edge, 650 to 670 |
+| V5 | yes | content reaches 705 of 715 and more follows below |
+| V6 | yes | text cut by the edge, 810 to 840 |
+| V7 | yes | text cut by the edge, 676 to 696 |
+| V8 | yes | text cut by the edge, 720 to 740 |
+| V9 | yes | text cut by the edge, 838 to 868 |
+| V10 | yes | text cut by the edge, 325 to 345 |
+| V11 | yes | text cut by the edge, 1012 to 1032 |
+| V12 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
+| V13 | yes | content reaches 768 of 768 and more follows below |
+| V14 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
+| V15 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
+| V16 | yes | text cut by the edge, 866 to 901 |
+| V17 | yes | text cut by the edge, 926 to 961 |
+| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V19 | yes | content reaches 570 of 576 and more follows below |
 
 ## Result: all required rows pass

@@ -85,28 +85,51 @@ const FOLD_JS = `(() => {
     if (cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0) return true;
     return false;
   };
-  const ink = (root) => {
-    let top = Infinity, bottom = -Infinity;
-    const add = (r) => { if (r && r.height > 0 && r.width > 0) { if (r.top < top) top = r.top; if (r.bottom > bottom) bottom = r.bottom; } };
+  // Every individual piece of CONTENT ink in a subtree: a line of text, an image, a thin drawn rule.
+  // A container's own background fill is deliberately excluded. Unioning it with the text was the bug
+  // Astra found on M15 at 834 by 1194: the proof band's footnotes end at 1137 and its tint runs to 1360,
+  // so the union straddled the edge while a reader saw a finished section above 57px of padding.
+  // A surface that genuinely begins near the fold and runs off it is caught by the sampling rule below.
+  const REPLACED = ['IMG', 'SVG', 'CANVAS', 'VIDEO', 'INPUT', 'BUTTON', 'SELECT', 'TEXTAREA'];
+  const contentInk = (root) => {
+    const rects = [];
+    const add = (r, what) => { if (r && r.height > 0 && r.width > 0) rects.push({ top: r.top, bottom: r.bottom, what }); };
     const walk = (node) => {
-      if (node.nodeType === 3) { if (node.textContent.trim()) { const rg = document.createRange(); rg.selectNodeContents(node); for (const r of rg.getClientRects()) add(r); } return; }
+      if (node.nodeType === 3) { if (node.textContent.trim()) { const rg = document.createRange(); rg.selectNodeContents(node); for (const r of rg.getClientRects()) add(r, 'text'); } return; }
       if (node.nodeType !== 1) return;
       const cs = getComputedStyle(node);
-      if (cs.display === 'none' || cs.visibility === 'hidden') return;
-      for (const pseudo of ['::before', '::after']) { const ps = getComputedStyle(node, pseudo); if (ps.content && ps.content !== 'none' && ps.content !== 'normal') add(node.getBoundingClientRect()); }
-      if (paints(node)) add(node.getBoundingClientRect());
+      if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) return;
+      const box = node.getBoundingClientRect();
+      const tag = node.tagName.toUpperCase();
+      if (REPLACED.includes(tag) || node.tagName.toLowerCase() === 'svg') add(box, tag.toLowerCase());
+      else if (paints(node) && box.height <= 8) add(box, 'rule');
+      for (const pseudo of ['::before', '::after']) { const ps = getComputedStyle(node, pseudo); if (ps.content && ps.content !== 'none' && ps.content !== 'normal' && box.height <= 8) add(box, 'mark'); }
       for (const c of node.childNodes) walk(c);
     };
     walk(root);
-    return { top, bottom };
+    return rects;
   };
   const lastCta = Math.max(out['cta-georgetown'] || 0, out['cta-anywhere'] || 0) - window.scrollY;
   let cutBy = null;
-  for (const el of document.body.querySelectorAll('section, div, table, tbody, tr, td, th, dl, dd, li, article, figure, footer, p, h2, h3, ul, ol')) {
-    const r = el.getBoundingClientRect();
-    if (!(r.height > 8 && r.top >= lastCta && r.top < vh - 4 && r.bottom > vh)) continue;
-    const i = ink(el);
-    if (i.top >= lastCta && i.top < vh - 8 && i.bottom > vh + 2) { cut = true; cutBy = (el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '')) + ' ink ' + Math.round(i.top) + ' to ' + Math.round(i.bottom); break; }
+  // The contract reserves the bottom 24px of every fold row. So the test is the contract's own: below the
+  // last door CTA, visible content must reach into that reserved band, and more content must lie beyond the
+  // edge. A section whose text finishes well above the edge and leaves only padding showing is the false
+  // floor this catches, however tall its tinted box happens to be.
+  const RESERVED = 24;
+  let lastVisible = -Infinity, below = null, deepest = null;
+  for (const k of contentInk(document.body)) {
+    if (k.bottom <= lastCta) continue;
+    // At least 4px of the piece must actually show. A line whose top sits a fraction of a pixel above the
+    // edge is not visible content, which is how M15's 834 by 1194 row passed while reading as finished.
+    if (k.top < vh) { const v = Math.min(k.bottom, vh); if (v - k.top >= 4 && v > lastVisible) { lastVisible = v; deepest = k; } }
+    if (k.bottom > vh + 2 && !below) below = k;
+  }
+  if (below && lastVisible >= vh - RESERVED - 1) {
+    cut = true;
+    cutBy = (deepest && deepest.bottom > vh ? deepest.what + ' cut by the edge, ' + Math.round(deepest.top) + ' to ' + Math.round(deepest.bottom)
+      : 'content reaches ' + Math.round(lastVisible) + ' of ' + vh + ' and more follows below');
+  } else if (below) {
+    cutBy = 'FALSE FLOOR: the last visible content ends at ' + Math.round(lastVisible) + ', ' + Math.round(vh - lastVisible) + 'px clear of the ' + vh + 'px edge, so the screen reads as finished';
   }
   // A band edge also reads as continuation when the first screen's own surface ENDS inside the viewport and a
   // different surface runs off the bottom: M03 and M12 close a navy hero onto cream with nothing literally cut,

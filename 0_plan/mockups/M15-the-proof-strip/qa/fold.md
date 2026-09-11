@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T12:35:14.140Z; page `/0_plan/mockups/M15-the-proof-strip/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:51.790Z; page `/0_plan/mockups/M15-the-proof-strip/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -15,14 +15,14 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V9 | 390 by 844 | emptiness |  | 56 | 294 | 323 | 548 | 774 | yes | report: page height 6688 |
 | V10 | 750 by 342 | fold | 318 | 56 | 147 | 177 | 286 | 286 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 229 | 259 | 490 | 490 | yes | PASS |
-| V12 | 834 by 1194 | fold | 1170 | 56 | 235 | 264 | 497 | 497 | yes | PASS |
+| V12 | 834 by 1194 | fold | 1170 | 56 | 235 | 264 | 497 | 497 | no | FAIL false floor: nothing visible continues past the bottom edge |
 | V13 | 1024 by 768 | fold | 744 | 56 | 258 | 288 | 532 | 532 | yes | PASS |
 | V14 | 1280 by 720 | fold | 696 | 56 | 279 | 309 | 530 | 530 | yes | PASS |
 | V15 | 1366 by 648 | fold | 624 | 56 | 278 | 308 | 498 | 498 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 316 | 354 | 594 | 594 | yes | PASS |
-| V17 | 1920 by 960 | fold | 936 | 56 | 316 | 354 | 594 | 594 | yes | PASS |
+| V17 | 1920 by 960 | fold | 936 | 56 | 316 | 354 | 594 | 594 | no | FAIL false floor: nothing visible continues past the bottom edge |
 | V18 | 320 by 256 | reflow |  | 88 | 352 | 402 | 540 | 653 | no | PASS no horizontal scroll |
-| V19 | 1024 by 576 | zoom |  | 56 | 258 | 288 | 532 | 532 | yes | report: scrollWidth 1024 |
+| V19 | 1024 by 576 | zoom |  | 56 | 258 | 288 | 532 | 532 | no | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
 
@@ -46,24 +46,24 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | ul.door-lines ink 635 to 824 |
-| V2 | yes | ul.door-lines ink 605 to 794 |
-| V3 | yes | ul.door-lines ink 608 to 797 |
-| V4 | yes | ul.door-lines ink 608 to 798 |
-| V5 | yes | ul.door-lines ink 579 to 745 |
-| V6 | yes | div.compare-lead ink 795 to 858 |
-| V7 | yes | ul.door-lines ink 610 to 799 |
-| V8 | yes | ul.door-lines ink 582 to 747 |
-| V9 | yes | div.compare-lead ink 823 to 886 |
-| V10 | yes | ul.door-lines ink 328 to 448 |
-| V11 | yes | section.band ink 609 to 1379 |
-| V12 | yes | section.band ink 616 to 1360 |
-| V13 | yes | section.band ink 620 to 1340 |
-| V14 | yes | section.band ink 619 to 1177 |
-| V15 | yes | section.band ink 564 to 1116 |
-| V16 | yes | section.band ink 756 to 1365 |
-| V17 | yes | section.band ink 756 to 1365 |
-| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
-| V19 | yes | div.compare-lead ink 565 to 606 |
+| V1 | yes | content reaches 728 of 740 and more follows below |
+| V2 | yes | content reaches 626 of 629 and more follows below |
+| V3 | yes | text cut by the edge, 657 to 677 |
+| V4 | yes | content reaches 653 of 659 and more follows below |
+| V5 | yes | text cut by the edge, 701 to 721 |
+| V6 | yes | text cut by the edge, 828 to 858 |
+| V7 | yes | content reaches 679 of 681 and more follows below |
+| V8 | yes | text cut by the edge, 727 to 747 |
+| V9 | yes | text cut by the edge, 831 to 861 |
+| V10 | yes | text cut by the edge, 329 to 349 |
+| V11 | yes | content reaches 1016 of 1024 and more follows below |
+| V12 | no | FALSE FLOOR: the last visible content ends at 1137, 57px clear of the 1194px edge, so the screen reads as finished |
+| V13 | yes | text cut by the edge, 738 to 782 |
+| V14 | yes | text cut by the edge, 690 to 738 |
+| V15 | yes | text cut by the edge, 626 to 675 |
+| V16 | yes | text cut by the edge, 874 to 924 |
+| V17 | no | FALSE FLOOR: the last visible content ends at 924, 36px clear of the 960px edge, so the screen reads as finished |
+| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V19 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 576px edge, so the screen reads as finished |
 
-## Result: all required rows pass
+## Result: 2 failure(s)
