@@ -80,3 +80,5 @@ tests/package.json
 0_plan/kb/*.md
 0_plan/mockups/M01..M20/
 tests/mocks/
+0_plan/kb/BRIEF-TEMPLATE.md
+0_plan/kb/exemplars/<slug>-1440.png
