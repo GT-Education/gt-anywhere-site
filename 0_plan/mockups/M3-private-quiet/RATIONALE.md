@@ -25,7 +25,8 @@ The two door cards themselves are the quietest version of DD-04's cue set the ru
 allow: a small identifying photograph, a plain label with a one-color line icon, the
 school name in the same serif as the h1, one calm sentence, and a CTA that is a
 text link with a permanent underline rather than a filled button. Nothing on the page
-moves except a color shift on hover and focus (motion spec below). The known risk named
+moves except an instant color or border-color change on hover and focus (motion spec
+below). The known risk named
 in the brief — "big type over thin content reads empty" — is answered by DD-29: every
 section below the fold is a real, sourced fact (the comparison table, the four proof
 facts, the four application steps, the footer facts block), not decorative type.
@@ -49,7 +50,7 @@ comparison section's h2.
 
 | Id | How it is applied in this mock |
 |---|---|
-| DD-01 | Literata (serif) for every heading and door name; Inter Tight (sans) for everything functional — nav, body, table cells, CTAs, footer; Inconsolata used twice only, for the two "Compare" / "Admissions" kickers and the footnote/step numerals (its spec role: "data labels, footnote markers") |
+| DD-01 | Literata (serif) is the reading-text default (`body`'s own `font-family`) — body copy, door lines, table cells (headers and data), facts, steps, footer facts; Inter Tight (sans) is scoped explicitly to labels, navigation and CTAs — utility nav, the door format label, every CTA/link (door, compare anchor, TEFA, apply, secondary, quiet-link, footer nav, skip link); Inconsolata used twice only, for the two "Compare" / "Admissions" kickers and the footnote/step numerals (its spec role: "data labels, footnote markers") |
 | DD-02 | Light hero (cream `--color-bg`) for legibility on phones outdoors; the footer is the one dark-surface use, flagged under DD-19 below |
 | DD-03 | One umbrella sentence, then two doors, exactly as specified |
 | DD-04 | Label + icon (inline SVG, `aria-hidden`) + photo per door; the photo is a small square identifier rather than a banner — see Departures |
@@ -75,7 +76,7 @@ comparison section's h2.
 | DD-28 | No dated content on the page except the proof-strip's own "checked" citation date and the TEFA module, which `copy.md` already scopes as the one owned, expiring exception |
 | DD-29 | Every section carries at least one sourced fact — see Direction above |
 | DD-30 | Plain words first throughout; no unexplained jargon |
-| DD-36 | Literata for all body reading text; strict heading structure; motion limited to color/underline |
+| DD-36 | Literata for all body reading text (the `body` default, not an inherited Inter Tight — see DD-01 and rule 11); strict heading structure; motion limited to opacity/transform, color and border-color state changes instant |
 | MD-02 | Four secondary CTAs (FAQ, admissions, tour, info session) for the not-yet-ready visitor |
 | MD-04 | Order is umbrella promise, then two ways to attend, then proof — never proof first |
 | MD-06 | No countdowns, no manufactured scarcity; the only "exclusivity" signal is the stated 90th-percentile bar |
@@ -90,10 +91,10 @@ comparison section's h2.
 | MD-26 | TEFA module shown to everyone (v1 default, D-015 option c), scoped to "Texas families" in its own heading |
 | MN-01, MN-08 | No signature animation; the mock differs from the others through layout, density and typography only |
 | MN-02, MN-04 | No hero entrance, no scroll reveals; everything is visible on load |
-| MN-03 | Door cards keep static dimensions; only `border-color` shifts on hover/focus-within |
-| MN-07 | No hover text-swap; CTA text is stable, only its color changes |
+| MN-03 | Door cards keep static dimensions; only `border-color` changes on hover/focus-within, instantly — no transition (rule 6) |
+| MN-07 | No hover text-swap; CTA text is stable, only its color changes, instantly — no transition (rule 6) |
 | MN-09 | CSS only; no JavaScript, no IntersectionObserver |
-| MN-10, MN-13 | Only `--duration-fast` and `--ease-standard` used; only `color`/`border-color`/`transform` transition, never anything that would shift layout |
+| MN-10, MN-13 | Only `--duration-fast` and `--ease-standard` used, and only on `transform`/`opacity` (skip-link reveal, lockup and footer-logo-link hover); color and border-color state changes are instant, never anything that would shift layout |
 | MN-11 | `prefers-reduced-motion: reduce` removes every transition in one rule |
 | DD-24 | No decision helper (v1 default); doors carry the full routing job alone |
 | SE-13 | `noindex, nofollow` in the head, as on every mock |
@@ -102,15 +103,18 @@ comparison section's h2.
 
 | What animates | Trigger | Duration token | Easing token | Reduced-motion behavior |
 |---|---|---|---|---|
-| Door card border color | Hover, keyboard focus-within | `--duration-fast` | `--ease-standard` | Instant (no interpolation); border still changes state |
-| Every CTA / link text color (doors, compare anchor, TEFA link, apply links, secondary CTAs, current-families link, footer links, header links, lockup) | Hover, `:focus-visible` | `--duration-fast` | `--ease-standard` | Instant |
+| Lockup opacity | Hover | `--duration-fast` | `--ease-standard` | Instant (no interpolation) |
+| Footer logo link opacity | Hover | `--duration-fast` | `--ease-standard` | Instant |
 | Skip-link reveal | Keyboard focus | `--duration-fast` | `--ease-standard` | Instant; implemented with `transform: translateY()` only, never `top`, so it stays inside the transform/opacity rule |
 
-Nothing else animates. There is no scroll reveal, no hero entrance, no lift or scale on
-the doors (MN-03), and no signature moment (MN-08). `:focus-visible` outlines appear
-without a transition (instant is the safer, standard practice for focus indication).
-The largest image (the door photos) and the h1 never animate, satisfying rule 10's
-last clause directly.
+Every other state change on the page — the door card's border color; every CTA/link
+text color (doors, compare anchor, TEFA link, apply links, secondary CTAs,
+current-families link, footer links, header links); and the footer's focus-outline
+color — carries no `transition` property at all (rule 6 tightened the budget to
+`transform` and `opacity` only), so these changes are instant, not interpolated.
+Nothing else animates: no scroll reveal, no hero entrance, no lift or scale on the
+doors (MN-03), no signature moment (MN-08). The largest image (the door photos) and
+the h1 never animate, satisfying rule 10's last clause directly.
 
 ## Assets
 
@@ -141,13 +145,38 @@ two door photos plus the two real logo files (brand-continuity note) — see Dep
 Both logo SVGs are used exactly as shipped, with no recoloring or filters. Checked
 directly against their source: `gt-school-logo-h.svg` fills part of its mark
 `#002A3A` — the same value as `--color-navy` — so on the navy footer that portion
-would be invisible (0:1 contrast, navy on navy). Rather than recolor the logo, both
-footer logo links sit on a small `var(--color-bg)` panel (`.footer-logo-link`), so
-every color in both marks reads exactly as designed; `gt-anywhere-logo-h.svg` (white
-and `--color-accent` orange) would have read fine directly on navy, but got the same
-panel treatment for visual consistency between the two. The header logo needs no such
-panel — its only colors (orange, navy) both read clearly on the light `--color-bg`
-first screen.
+would be invisible (0:1 contrast, navy on navy). Rather than recolor the logo, the
+Georgetown footer logo link sits on a small `var(--color-bg)` panel
+(`.footer-logo-link[data-school="georgetown"]`), so every color in the mark reads
+exactly as designed. `gt-anywhere-logo-h.svg` (white and `--color-accent` orange)
+reads fine directly on navy — the earlier build also gave it a light panel "for
+visual consistency," which E2 finding 18 flagged as making the white lettering hard
+to distinguish, so its link now gets an explicit `var(--color-navy)` panel instead
+(`.footer-logo-link[data-school="anywhere"]`), the same surface as the footer itself,
+kept as its own rule for consistency with the Georgetown treatment rather than for a
+visible edge. The header logo needs no such panel — its only colors (orange, navy)
+both read clearly on the light `--color-bg` first screen.
+
+## Claims register tags
+
+Every figure on the page, tagged with its `0_plan/12-claims-register.md` id and
+status. All six carry status "Unverified, public" (`copy.md` section 4: cleared to
+show in a mock, not yet approved for production — Nari's approval is T-053).
+`1_spec/tools/check-claims.py index.html` confirms this mechanically; the counts
+below are its own output.
+
+| Figure as shown on the page | Where | CR id | Count | Status |
+|---|---|---|---|---|
+| "90th percentile" | Comparison "Admissions" row; proof strip fact 1; steps intro line | CR-011 | 3 | Unverified, public |
+| "$10,400 a year" | Comparison "Tuition and access" row, GT Anywhere cell | CR-021 | 1 | Unverified, public |
+| "four in-person weekends" / "Four intensive weekends" | Door 2 line; comparison "In-person time" row, GT Anywhere cell | CR-032 | 3 | Unverified, public |
+| "9 to noon" / "about two hours" | Comparison "The day" row, Georgetown cell | CR-033 | 2 | Unverified, public |
+| "Two to three hours" | Comparison "The day" row, GT Anywhere cell | CR-034 | 1 | Unverified, public |
+| "check-in every week" | Comparison "Guides" row, GT Anywhere cell; proof strip fact 3 | CR-035 | 2 | Unverified, public |
+
+No other figure appears on the page (Self-check rule 5). Every register row above is
+still Unverified — a mock may show them (G0.5), but none may reach production until
+Nari signs off (T-053, REQ-022).
 
 ## Departures
 
@@ -179,25 +208,31 @@ raw literal outside these named exceptions — every other declaration is a
 | Proof / outcome figure | Q-019 | Withheld entirely; the proof strip carries four register-backed facts instead, no multiplier |
 | TEFA window, owner, expiry | Q-021 | Module shown with `copy.md`'s default wording; no specific window or expiry date is stated because none was supplied |
 | "Talk to admissions" destination | MD-02 | Points to `/contact`; a HubSpot meeting link is still TBD |
-| "Book a campus tour" destination | REQ-002 | Points to `/contact`, since gt.school's own `/book-a-tour` 404s |
-| "Join a virtual info session" destination | — | Points to `anywhere.gt.school/` home; a session-specific link is still TBD |
+| "Ask about a campus tour" destination | REQ-002 | Points to `/contact`, since gt.school's own `/book-a-tour` 404s; label reworded to match the destination (E2 finding 15) |
+| "Ask about a virtual info session" destination | E2 finding 15 | Points to `/contact` (no session-specific registration link exists); label reworded to match the destination rather than promising a booking flow |
 | `school=` parameter on apply links | DD-25 | Convention only; the live `apply.gt.school` parameter name is confirmed in S5 |
 | Accreditation | Q-033 | Not shown anywhere on the page |
 | Parent quote | Q-034 | Not used at all (no quote appears on the page, so no unverified-subject risk) |
 | Adults' title | Q-035 (decided) | "Guides" used everywhere; "advisor" appears once, only as the `data-type="advisor"` attribute value the spec allows (rule 6) |
 
-## Parent questions (`1_spec/01-users-and-journeys.md` section 5)
+## Parent questions (`0_plan/05-landing-mockups-plan.md` section 6c)
 
-| # | Question | Does M3 answer it on the page? | Where / one click to |
+| # | Question a parent arrives with | Answered by M3 | Where / one click to |
 |---|---|---|---|
-| 1 | What is GT School? | Yes | The h1 (umbrella sentence) |
-| 2 | Who is it for? | Yes | "gifted and talented children" in the h1; "90th percentile and above" in the proof strip and the steps intro |
-| 3 | In person or online, and where? | Yes | The two doors: label ("In person" / "Online"), photo, name, one line each |
-| 4 | What is the same and what differs? | Yes | The comparison table, shared rows first, then differences |
-| 5 | What does it cost, or where do I find out? | Partly | Comparison row "Tuition and access": Anywhere's figure is stated; Georgetown reads "Tuition on request. Ask admissions" (Q-011), one click to the school site's own Admissions contact |
-| 6 | How do I apply and what are the steps? | Yes | "How to apply" section: four steps, then a "Begin application" link per school |
-| 7 | Is it accredited and what are the outcomes? | Deferred by decision, not by omission | Nothing on this page states an outcome figure or an accreditation status (Q-019, Q-033 both open); a parent must go to the school sites for anything more, and today those sites disagree with each other, which is exactly why this page stays silent rather than guess |
-| 8 | How do I reach a human? | Yes | Header "Contact admissions"; "Other ways to connect" section (FAQ, talk to admissions, tour, info session) |
+| PQ-01 | What is GT School? | Page | The h1 (umbrella sentence) |
+| PQ-02 | Is it for my child? | Page | "gifted and talented children" in the h1; "90th percentile and above" in the proof strip and the steps intro |
+| PQ-03 | In person or online: what are my options? | Page | The two doors: label ("In person" / "Online"), photo, name, one line each |
+| PQ-04 | Where is the campus? | Page | Door 1 line and the comparison "Where and how" row: Georgetown, Texas |
+| PQ-05 | What does a day look like? | Page | Comparison "The day" row |
+| PQ-06 | What does it cost, and can TEFA help? | Page | Comparison "Tuition and access" row and the TEFA module |
+| PQ-07 | How do I apply? | Page | "How to apply" section: four steps, then a "Begin application" link per school |
+| PQ-08 | Who teaches my child? | Page | Comparison "Guides" row; proof strip fact 3 |
+| PQ-09 | How much in-person time does GT Anywhere have? | Page | Comparison "In-person time" row |
+| PQ-10 | What results does the school get, and is it accredited? | Silent by G0.5 decisions 2 and 3; admissions answers it | Nothing on the page states an outcome figure or an accreditation status (Q-019, Q-033 both open); "Talk to admissions" and the header "Contact admissions" are the one-click path to the human who answers this |
+| PQ-11 | What happens after 8th grade? | Deferred to admissions | Comparison "After 8th grade" row: "Families plan the path after 8th grade with admissions" (Q-013) |
+| PQ-12 | I am a current family, where do I go? | Page | Header "Current families" link; "Already a GT family?" section |
+| PQ-13 | I am not ready to apply, what can I do? | Page | "Other ways to connect" section (FAQ, talk to admissions, tour, info session) |
+| PQ-14 | Is GT School part of Alpha School? | Page | The provenance line under the h1 |
 
 ## Self-check
 
@@ -233,7 +268,7 @@ content numbers, each traced to its line:
 | `10`, `400` | 1 each | "$10,400" — comparison Tuition and access row, Anywhere cell (CR-021) |
 | `9` | 1 | "9 to noon" — comparison "The day" row, Georgetown cell (CR-033) |
 | `8` | 4 | "8th grade" — proof strip fact 4, footer facts block, and the comparison "After 8th grade" row header + cell. Verbatim `copy.md` text (Section 4, Section 8, Section 3), not a marketing claim; not in rule 5's summary phrase but not an invented figure either |
-| `2026`, `09`, `10` | 1 each | The proof-strip footnote's citation date, "checked 2026-09-10," verbatim from `copy.md` Section 4 |
+| `2026`, `09`, `10` | 2 each | The sources line's citation date, "Checked 2026-09-10," verbatim from `copy.md` Section 4 — it now appears twice (under the proof facts and again under the comparison table, shared fix 5) |
 | `512`, `270`, `9481` | 1 each | The footer contact number "(512) 270-9481," verbatim from `copy.md` Section 8 |
 
 No speed figure, no SAT figure, no cohort size, and no accreditation mark appear
@@ -246,8 +281,9 @@ admissions" link — the one attribute value the rule itself allows. The visible
 always "Guide"/"Guides."
 
 **Rule 7 (full school names).**
-"Georgetown Campus" appears 8 times, "GT Anywhere" 15 times; neither school name is
-ever abbreviated.
+"Georgetown Campus" appears 7 times, "GT Anywhere" 13 times (re-measured after the
+footer's two scoped "Apply: <school>" links replaced the single unscoped "Apply"
+link, shared fix 2); neither school name is ever abbreviated.
 
 **Rule 8 (both CTAs above the fold at 390×844, only header + h1 + provenance above
 them).** Nothing but the header, h1, and provenance line sits above the doors — no
@@ -260,9 +296,9 @@ Playwright):
 | Header (padding `--space-3`×2 + a 44px tap-target row + 1px border) | ≈ 61px |
 | First-screen top padding (`--space-6`) | 32px |
 | h1 (`--text-xl`/24px, `--leading-tight`, ~132 characters, ~25 characters per line at the 342px content width) | ≈ 166–193px (6–7 lines) |
-| Provenance (margin-top `--space-3` + one `--text-sm` line + margin-bottom `--space-6`) | ≈ 58px |
+| Provenance (margin-top `--space-3` + one `--text-sm` line + margin-bottom `--space-5`, trimmed from `--space-6` by rule 12) | ≈ 50px |
 | Two door cards (`--space-4` padding; a `--space-8` 64px photo beside a two-line label/name stack; a 3-line `--text-sm` body line; a 44px CTA; `--space-4` gap between cards) | ≈ 437px |
-| **Total** | **≈ 754–781px, leaving ≈ 63–90px of slack under 844px** |
+| **Total** | **≈ 746–773px, leaving ≈ 71–98px of slack under 844px** |
 
 This is a calculated, conservative estimate (character-width assumed at roughly
 0.5–0.55em for both faces), not a browser measurement. It is the reason the door photo
@@ -272,6 +308,21 @@ rule outright. Confirming the true rendered height is the separate browser-verif
 pass this task's constraints (no Playwright) do not permit; that pass should screenshot
 this mock at 390×844 before it goes to Nari.
 
+**Compare anchor inside 844px (rule 12, E2 finding 6).** A live measurement — not this
+document's own hand estimate above — put the compare anchor's bottom edge at
+approximately 850px on the 844px viewport, 6px over, with part of the link's 44px
+target clipped. Three spacing values between the doors and the compare anchor were
+trimmed to recover room, none of them inside the doors themselves: `.provenance`
+margin-bottom (`--space-6`→`--space-5`, −8px, in the budget above), `.first-screen`
+bottom padding (`--space-7`→`--space-6`, −16px), and `.compare-anchor` padding-block
+(`--space-5`→`--space-4`, −16px) — a combined −40px. Applied to the measured 850px
+baseline this projects to about 810px, comfortably inside 844px with the link's full
+44px target included. Neither door card nor either door CTA is touched by these three
+trims — they sit entirely in the spacing before and after the doors — so both stay
+exactly as visible as the budget above shows. A live re-measurement (this task's
+constraints still withhold Playwright) should confirm the new bottom edge before this
+mock goes to Nari.
+
 **Rule 9 (links only to the five allowed destinations, each with its `data-event`).**
 Every `<a href>` in the page resolves to `gt.school`/`www.gt.school`,
 `anywhere.gt.school`, `apply.gt.school`, `community.gt.school`, or an in-page anchor
@@ -280,20 +331,32 @@ there is no live umbrella root to link to). Every `data-event`, `data-school`,
 `data-placement`, and `data-type` attribute matches `copy.md`'s Section 7 event table
 and per-slot notes exactly.
 
-**Rule 10 (motion).** See Motion spec above. `grep -n "transition" styles.css` shows
-only `color`, `border-color`, and one `transform` (the skip-link's off-screen reveal,
-deliberately built with `transform: translateY()` rather than `top` so it stays inside
-"transform and opacity only"). Every duration is `var(--duration-fast)`; the only
-easing used is `var(--ease-standard)`. `@media (prefers-reduced-motion: reduce)`
-removes every transition in one rule. Neither the h1 nor the door photos (the page's
-largest images) ever animate.
+**Rule 10 (motion).** See Motion spec above. `grep -n "transition" styles.css` now
+shows only `opacity` (lockup hover, footer-logo-link hover) and one `transform` (the
+skip-link's off-screen reveal, built with `transform: translateY()` rather than
+`top`) — the tightened budget of transform and opacity only. Color and border-color
+state changes (door border, every CTA/link, footer links, the footer's focus-outline
+color) carry no `transition` property at all, so they are instant rather than merely
+fast. Every remaining duration is `var(--duration-fast)`; the only easing used is
+`var(--ease-standard)`. `@media (prefers-reduced-motion: reduce)` removes every
+remaining transition, on `*, *::before, *::after`, in one rule. Neither the h1 nor the
+door photos (the page's largest images) ever animate.
 
 **Rule 11 (accessibility).** `<html lang="en">`; a skip link to `#main`; landmarks
 `header`, two `nav`s, `main`, `footer`; exactly one `h1`, seven `h2`s, one `h3`
-(verified: tag counts balance, and heading levels never skip); `:focus-visible` outline
-using `var(--color-focus)`; alt text on both images describing the cue, not the file;
-tap targets at `min-height: 2.75rem` (44px) throughout; the comparison is a real
-`<table>` with a `<caption>` and `scope="col"`/`scope="row"` on every header cell.
+(verified: tag counts balance, and heading levels never skip); `:focus-visible`
+outline using `var(--color-focus)` everywhere except the footer, where every
+focusable element (`.site-footer a:focus-visible`, all seven footer links) uses
+`var(--color-accent-contrast)` instead — `--color-focus` on `--color-navy` measures
+1.69:1, under the 3:1 non-text contrast minimum, while `--color-accent-contrast` on
+`--color-navy` is the same ~15:1 already used elsewhere on this surface (finding 2,
+rule 10); alt text on both door photos describing the cue, not the file; tap targets
+at `min-height: 2.75rem` (44px) **and** `padding-inline` on the anchor itself
+throughout — every link on the page, not only the ones with short labels, per the
+coordinator's clarification on rule 7 — so a link's clickable width clears 44px too
+(the footer's "Apply," "Privacy" and "Terms" text were the one measured shortfall,
+~29–37px before the padding was added); the comparison is a real `<table>` with a
+`<caption>` and `scope="col"`/`scope="row"` on every header cell.
 Contrast pairings actually used, computed against WCAG's relative-luminance formula:
 `--color-focus` (the CTA/link color) on `--color-bg` is 8.2:1; `--color-text-muted` on
 `--color-bg` is 6.2:1; `--color-accent-contrast` on `--color-navy` (the footer) is
@@ -311,7 +374,8 @@ history).
 **Rule 13 (images).** Two `<img>` elements total, both from `../shared/img/`, both with
 real intrinsic `width`/`height`, both treated as first-screen images (no
 `loading`/`decoding` attributes — see Assets). `index.html` + `styles.css` together are
-32 KB, far under the 1 MB budget excluding shared images (`du -sh` confirmed).
+29 KB, far under the 1 MB budget excluding shared images (confirmed by direct
+`os.path.getsize` after this fix pass).
 
 **Rule 14 (tokens).** `grep -n "#" styles.css` → no matches; a script cross-check
 confirmed every `var(--...)` reference in `styles.css` resolves to a token actually
@@ -331,9 +395,18 @@ layout rebuild.
 
 ## What I could not do
 
-Visual confirmation of the 390×844 fold (rule 8) and the 1440px desktop layout is a
-browser-verification step this task's constraints explicitly withhold (no Playwright,
-no starting a server). The budget above is a worked calculation from the actual CSS
-values, built with slack on purpose, but only a real viewport screenshot closes the
-question. Contrast ratios above were computed by hand from the token hex values, not
-read from a running contrast checker.
+Visual confirmation of the 390×844 fold (rule 8), the compare-anchor trim (rule 12),
+and the 1440px desktop layout is a browser-verification step this task's constraints
+explicitly withhold (no Playwright, no starting a server, per this fix pass's own
+instructions too). The budgets above are worked calculations from the actual CSS
+values — for the compare anchor, applied to E2's own measured 850px baseline rather
+than a fresh browser read — not a live re-measurement. Every anchor's clickable width
+(rule 7, tightened per the coordinator's clarification to cover every link, not only
+the categories first named) now carries `padding-inline` on top of the existing
+`min-height`, sized by the same character-count reasoning as the rest of this
+document, not a measured box — the footer's short labels ("Apply," "Terms") were the
+one figure with an actual measured shortfall (E2 finding 1, ~29–37px) to fix against.
+Contrast ratios, including the new footer focus-outline color, were computed by hand
+from the token values, not read from a running contrast checker. A live pass should
+confirm all of the above — the 844px fits, the footer focus ring, and every tap
+target's true rendered width — before this mock goes to Nari.

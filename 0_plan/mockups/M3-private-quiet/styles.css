@@ -13,7 +13,7 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: var(--text-base);
   line-height: var(--leading-body);
 }
@@ -51,6 +51,7 @@ a { color: inherit; }
   min-height: 2.75rem;
   background: var(--color-text);
   color: var(--color-accent-contrast);
+  font-family: var(--font-sans);
   padding-inline: var(--space-4);
   border-radius: var(--radius-sm);
   z-index: 1;
@@ -92,6 +93,7 @@ a:focus-visible,
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  padding-inline: var(--space-3);
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 .lockup:hover { opacity: 0.8; }
@@ -107,6 +109,7 @@ a:focus-visible,
   gap: var(--space-4);
 }
 .utility-nav a {
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -114,20 +117,20 @@ a:focus-visible,
   align-items: center;
   min-height: 2.75rem;
   padding-block: var(--space-2);
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .utility-nav a:hover { color: var(--color-focus); }
 
 /* ---------- First screen ---------- */
 .first-screen {
-  padding-block: var(--space-6) var(--space-7);
+  padding-block: var(--space-6);
 }
 
 .provenance {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin-top: var(--space-3);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 h1 {
@@ -148,7 +151,6 @@ h1 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
-  transition: border-color var(--duration-fast) var(--ease-standard);
 }
 .door:hover, .door:focus-within {
   border-color: var(--color-focus);
@@ -180,6 +182,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: var(--color-text-muted);
   margin-bottom: var(--space-1);
@@ -203,18 +206,19 @@ h1 {
   align-items: center;
   min-height: 2.75rem;
   color: var(--color-focus);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .door-cta:hover { color: var(--color-text); }
 .door-cta span { margin-left: var(--space-2); }
 
 /* ---------- Compare anchor ---------- */
 .compare-anchor {
-  padding-block: var(--space-5);
+  padding-block: var(--space-4);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -222,11 +226,12 @@ h1 {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   color: var(--color-focus);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .compare-anchor a:hover { color: var(--color-text); }
 
@@ -308,10 +313,11 @@ td { width: 35%; }
   align-items: center;
   min-height: 2.75rem;
   color: var(--color-focus);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .tefa-module a:hover { color: var(--color-text); }
 
@@ -341,6 +347,9 @@ td { width: 35%; }
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-text-muted);
+}
+.footnote--comparison {
+  margin-top: var(--space-4);
 }
 
 /* ---------- Application steps ---------- */
@@ -377,11 +386,12 @@ td { width: 35%; }
   align-items: center;
   min-height: 2.75rem;
   color: var(--color-focus);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .apply-links a:hover { color: var(--color-text); }
 
@@ -397,10 +407,11 @@ td { width: 35%; }
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .secondary-list a:hover { color: var(--color-focus); }
 
@@ -416,11 +427,12 @@ td { width: 35%; }
   align-items: center;
   min-height: 2.75rem;
   color: var(--color-focus);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .quiet-link:hover { color: var(--color-text); }
 
@@ -448,23 +460,40 @@ td { width: 35%; }
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: var(--color-accent-contrast);
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  transition: color var(--duration-fast) var(--ease-standard);
+  padding-inline: var(--space-3);
 }
 .footer-links a:hover { color: var(--color-accent); }
 
+/* Footer keyboard focus (rule 10): --color-focus on --color-navy measures 1.69:1,
+   under the 3:1 non-text contrast minimum (see RATIONALE.md Self-check rule 11 for
+   the token values). Every focusable element in the footer uses
+   --color-accent-contrast instead, ~15:1 on this surface. */
+.site-footer a:focus-visible {
+  outline-color: var(--color-accent-contrast);
+}
+
 /* Real logos, not text: gt-school-logo-h.svg has a navy-fill portion that would
-   vanish on the navy footer, so both logo links sit on a small light panel instead
-   of being recolored (coordinator note). Opacity replaces the color transition since
-   there is no text to recolor. */
+   vanish on the navy footer, so the Georgetown logo link sits on a small light
+   panel instead of being recolored (coordinator note). gt-anywhere-logo-h.svg's
+   white lettering reads directly on navy — E2 finding 18 flagged the earlier light
+   panel here as hard to distinguish — so its link gets an explicit navy panel
+   instead, the same surface as the footer, kept as its own rule for consistency
+   with the Georgetown treatment. Opacity replaces the color transition since there
+   is no text to recolor. */
 .footer-links a.footer-logo-link {
-  background: var(--color-bg);
   border-radius: var(--radius-sm);
-  padding-inline: var(--space-3);
   transition: opacity var(--duration-fast) var(--ease-standard);
+}
+.footer-links a.footer-logo-link[data-school="georgetown"] {
+  background: var(--color-bg);
+}
+.footer-links a.footer-logo-link[data-school="anywhere"] {
+  background: var(--color-navy);
 }
 .footer-links a.footer-logo-link:hover { opacity: 0.8; }
 .footer-logo-link img {
