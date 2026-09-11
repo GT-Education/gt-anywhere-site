@@ -22,7 +22,7 @@ def critics(mid):
         if not os.path.exists(p): out.append(f'{who.capitalize()}: pending'); continue
         t = open(p, encoding='utf-8').read()
         scores = [int(x) for x in re.findall(r'^\| (?:Objective|Composition|Typography|Imagery|Color and surface|Motion|Mission and exclusivity|Craft|Continuity) \| (\d) \|', t, re.M)]
-        verdict = 'Pass' if re.search(r'\bVerdict:?\**\s*Pass\b', t) or (scores and min(scores) >= 4 and 'Iterate' not in t) else ('Iterate' if 'Iterate' in t else '')
+        verdict = ('Pass' if min(scores) >= 4 else 'Iterate') if len(scores) == 9 else ''  # from the nine scores only
         out.append(f'{who.capitalize()}: {"/".join(map(str, scores)) if scores else "scored"}{(" " + verdict) if verdict else ""}')
     return '; '.join(out)
 def card(mid, name, thesis, folder, state, run, crit):
