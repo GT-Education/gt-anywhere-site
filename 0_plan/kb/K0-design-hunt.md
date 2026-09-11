@@ -53,7 +53,7 @@ Searching the visible text of all 73 fetched pages for a comparison control retu
 | Site | Control | Where it sits |
 |---|---|---|
 | Getty | `Compare Museums` -> `https://www.getty.edu/visit/` | **Judgment, since corrected by rendered evidence.** The original text-fetch read this as sitting beside the two door links in the Visit menu. `0_plan/kb/CONCEPTS-B.md`'s Getty section rendered all four captures (1440 and 390, fold and full page) and found `Compare Museums` hover-gated inside the `Visit` nav dropdown, absent from every capture, while the shared sentence and the two door links sit in an "Our Locations" card one scroll below the first screen with no compare link beside them there. Getty's compare control exists, but one interaction deeper and one scroll away from the doors, not next to them |
-| Vanguard | `Compare services` | Beside the audience doors in the first screen. Not re-rendered for this rework, but independently corroborated: `0_plan/kb/CONCEPTS.md` C45 cites this same link as GT's nearest usable precedent, so the finding stands |
+| Vanguard | `Compare services` | Beside the audience doors in the fetched text. The placement was not rendered for this rework, and `0_plan/kb/CONCEPTS.md` C45 cites this finding rather than corroborating it, so the placement stays a text proxy until a capture confirms it (corrected after E4b) |
 
 This matters more than any other single finding in K0. A parent choosing between a Georgetown campus and an online school is doing a comparison, and a text search of all 73 pages found a named comparison control on only two of them.
 
