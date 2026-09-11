@@ -30,9 +30,6 @@ def attrs(tag):
         out.setdefault(name, '' if val is None else H.unescape(val))  # character references decoded, so sub&#109;it is submit
     return out
 
-def attr(tag, name):
-    """value of one attribute, '' for a bare boolean attribute, None if absent"""
-    return attrs(tag).get(name.lower())
 
 def tags(doc, name):
     """every start tag <name ...> in document order, each returned whole; the scan honours quotes, so a > inside a
