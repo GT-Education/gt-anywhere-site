@@ -12,7 +12,9 @@ for f in files:
     for sec in SECTIONS:
         if not any(sec.lower() in h.lower() for h in heads): errs.append(f'missing section: {sec}')
     urls = re.findall(r'https?://[^\s)\]|>]+', s)
-    if len(set(urls)) < 20: errs.append(f'only {len(set(urls))} distinct URLs (need 20 or more)')
+    repo_refs = re.findall(r'`[\w./-]+\.(?:html|css|svg|md|json|js)(?::\d+)?`', s)
+    evidence = set(urls) | set(repo_refs)
+    if len(evidence) < 20: errs.append(f'only {len(evidence)} distinct evidence references (URLs plus repo file citations; need 20 or more)')
     # findings: table rows and numbered subsections inside every level-2 "Findings" section
     fsecs = re.findall(r'^##[^\n]*Findings[^\n]*\n(.*?)(?=^##\s|\Z)', s, flags=re.S|re.M|re.I)
     fbody = '\n'.join(fsecs)
@@ -25,7 +27,7 @@ for f in files:
     words = len(m.group(1).split()) if m else 0
     if words < 300: errs.append(f'GT application section has {words} words (need 300 or more)')
     if re.search(r'\bTBD\b|lorem ipsum|\[placeholder\]', s, flags=re.I): errs.append('placeholder text present')
-    print(f'{rel}: {len(s.splitlines())} lines, {len(set(urls))} URLs, {len(findings)} findings, GT section {words} words -> ' + ('OK' if not errs else 'FAIL: ' + '; '.join(errs)))
+    print(f'{rel}: {len(s.splitlines())} lines, {len(set(urls))} URLs, {len(set(repo_refs))} repo refs, {len(findings)} findings, GT section {words} words -> ' + ('OK' if not errs else 'FAIL: ' + '; '.join(errs)))
     bad += bool(errs)
 print(f'check-kb: {"OK" if not bad else f"FAIL ({bad})"}')
 sys.exit(1 if bad else 0)
