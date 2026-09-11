@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T19:09:28.131Z; page `/0_plan/mockups/M08-the-letter/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T20:25:45.852Z; page `/0_plan/mockups/M08-the-letter/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -66,15 +66,21 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 563 to 588 |
 
-## The GT Anywhere mark under forced colours
+## The GT marks under forced colours
 
-Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.
+Both GT marks are two-colour artwork, so each needs a ground that keeps its own colours: the Anywhere mark loses its second word on a forced white ground, and the GT School mark loses its navy lettering on a forced black one.
 
 | Scheme | File | Result |
 |---|---|---|
+| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
 | light | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| light | `gt-school-logo-h.svg` | kept by the image itself |
+| light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
+| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
 | dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| dark | `gt-school-logo-h.svg` | kept by the image itself |
+| dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px

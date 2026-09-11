@@ -201,7 +201,11 @@ const FC_MARKS_JS = `(() => {
   const out = [];
   for (const img of document.querySelectorAll('img')) {
     const src = img.getAttribute('src') || '';
-    if (!/anywhere/i.test(src)) continue;
+    // Both horizontal wordmarks, not only the Anywhere one. The first version filtered on 'anywhere' and
+    // could not see the GT School mark's navy lettering on black in the dark forced palette, measured at
+    // 1.39 to 1, which one mock cleared the gate with (M22 critic). The square icon is excluded on purpose:
+    // it is single-colour artwork, so a forced palette recolours it whole and it loses nothing.
+    if (!/logo-h\.svg$/i.test(src)) continue;
     const r = img.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) continue;
     let el = img, protectedBy = null;
@@ -331,10 +335,10 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
         fcRows.push(`| ${scheme} | focus ring on \`${r.text}\` | ${bad ? 'FAIL at ' + r.ratio + ':1 against its own retained ground' : r.ratio + ':1 against its own retained ground'} |`);
       }
       const marks = await fcp.evaluate(FC_MARKS_JS);
-      if (!marks.length) fcRows.push(`| ${scheme} | no GT Anywhere mark on the page | |`);
+      if (!marks.length) fcRows.push(`| ${scheme} | no GT mark on the page | |`);
       for (const m of marks) {
         if (!m.protectedBy) fcFailures++;
-        fcRows.push(`| ${scheme} | \`${m.file}\` | ${m.protectedBy ? 'kept by ' + m.protectedBy : 'FAIL: nothing keeps its colours, so the wordmark loses "anywhere"'} |`);
+        fcRows.push(`| ${scheme} | \`${m.file}\` | ${m.protectedBy ? 'kept by ' + m.protectedBy : 'FAIL: nothing keeps its colours, so half the wordmark disappears'} |`);
       }
     } catch (e) { fcRows.push(`| ${scheme} | probe failed | ${String(e).slice(0, 60)} |`); }
     await fcx.close();
@@ -410,7 +414,7 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (consoleErrors.size) failures++;
   lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',
     '| Row | Cut | Element and the ink that crosses the bottom edge |', '|---|---|---|', ...bandEvidence);
-  lines.push('', '## The GT Anywhere mark under forced colours', '', 'Its wordmark is part near-white, so on a forced white ground it renders as "GT" with "anywhere" missing unless something in its ancestry keeps its own colours.', '',
+  lines.push('', '## The GT marks under forced colours', '', "Both GT marks are two-colour artwork, so each needs a ground that keeps its own colours: the Anywhere mark loses its second word on a forced white ground, and the GT School mark loses its navy lettering on a forced black one.", '',
     '| Scheme | File | Result |', '|---|---|---|', ...fcRows);
   lines.push('', '## Interactive targets under 44px', '', "BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.", '',
     '| Viewport | Target | Height | Width | Kind | Result |', '|---|---|---|---|---|---|', ...(targetRows.length ? targetRows : ['| all three rows | every interactive target is at least 44px tall | | | | ok |']));

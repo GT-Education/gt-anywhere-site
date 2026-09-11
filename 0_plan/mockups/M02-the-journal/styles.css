@@ -390,3 +390,21 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 @media (forced-colors: active) {
   .footer__anywhere:focus-visible { outline-color: var(--color-on-navy); }
 }
+
+/* The header lockup keeps its own ground through forced colours too. The GT School mark is navy
+   lettering, which disappears on a forced black ground at 1.39 to 1, and a check that looked only at
+   the Anywhere mark could not see it (M22 critic). The ring matches the light ground it keeps. */
+@media (forced-colors: active) {
+  .lockup { background: var(--color-bg); forced-color-adjust: none; }
+  .lockup:focus-visible { outline-color: var(--color-navy); }
+}
+
+/* Both wordmarks keep their own colours and their own ground through forced colours, keyed on the mark
+   file rather than on a wrapper, because every mock wraps them differently and a per-wrapper rule left
+   a different instance unprotected in fifteen of them. The GT School mark is navy lettering and needs a
+   light ground; the GT Anywhere mark is part near-white and needs the navy one. The square icon is left
+   alone on purpose: it is single-colour artwork, so a forced palette recolours it whole. */
+@media (forced-colors: active) {
+  img[src$="gt-school-logo-h.svg"] { forced-color-adjust: none; background: var(--color-bg); }
+  img[src$="gt-anywhere-logo-h.svg"] { forced-color-adjust: none; background: var(--color-navy); }
+}
