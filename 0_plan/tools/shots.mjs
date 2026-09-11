@@ -3,7 +3,7 @@
 // npx cache that the Playwright MCP server already uses and drives the Chromium in ~/Library/Caches/ms-playwright, so the
 // repository gains no dependency (D-028 pending). Usage: node 0_plan/tools/shots.mjs 0_plan/mockups/Mnn-slug
 // Measures all 19 rows; writes qa/fold.md (fold bottoms, continuation, reduced motion, root-font doubling, console errors),
-// viewport screenshots for the key rows (all rows with --all), qa/V2-full.jpg and qa/V14-full.jpg. Exit 1 when a required row fails.
+// viewport screenshots for every row (--key for the seven key rows only), qa/V2-full.jpg and qa/V14-full.jpg. Exit 1 when a required row fails.
 import { createRequire } from 'node:module';
 import { readdirSync, existsSync, mkdirSync, writeFileSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve, extname } from 'node:path';
@@ -27,8 +27,12 @@ function findPlaywright() {
   if (!hits.length) throw new Error('no playwright package in the npx cache');
   return hits;
 }
-const ALL = process.argv.includes('--all');
-const KEY = new Set(['V2', 'V5', 'V9', 'V13', 'V14', 'V16', 'V18']); // screenshots kept for these rows unless --all; every row is measured
+// Every row is captured. A key-row-only default left stale screenshots whenever a fix touched another
+// row, and a critic then scored the stale image: that cost a full review pass on M15's 834 by 1194 row,
+// where the capture predated the fix by an hour. --key restores the old subset for a quick local look;
+// --all is kept as a no-op so existing commands and documentation still work.
+const KEY = new Set(['V2', 'V5', 'V9', 'V13', 'V14', 'V16', 'V18']);
+const ALL = !process.argv.includes('--key');
 const ROWS = [
   ['V1', 360, 740, 'fold'], ['V2', 375, 629, 'fold'], ['V3', 390, 664, 'fold'], ['V4', 393, 659, 'fold'], ['V5', 414, 715, 'fold'],
   ['V6', 412, 839, 'fold'], ['V7', 402, 681, 'fold'], ['V8', 430, 739, 'fold'], ['V9', 390, 844, 'emptiness'], ['V10', 750, 342, 'fold'],
