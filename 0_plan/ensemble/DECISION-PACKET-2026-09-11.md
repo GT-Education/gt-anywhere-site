@@ -1,6 +1,6 @@
 # Decision packet for Johnny, 2026-09-11: the twenty-mock program at its first ceilings
 
-Both models' findings are attached by path. Nothing here is decided; every row names who decides.
+Both models' findings are attached by path. Nothing here is decided; every row names who decides. Published as a private page for sharing: https://claude.ai/code/artifact/6e72032d-6b80-48a9-bf56-dd01262ec564 (this file is the source of record).
 
 ## 1. Where things stand
 
