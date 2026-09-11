@@ -54,13 +54,41 @@ def tags(doc, name):
         out.append((doc[i:j+1], j+1)); i = j + 1
     return out
 
+SCRIPT_END = re.compile(r'</script(?=[\s/>])', re.I)
+
+def script_walk(doc):
+    """one sequential walk over the document: for each script element yield (start_tag, body, tag_start, tag_end, body_end).
+    After a start tag the walk jumps to the real end tag, so a <script or <input inside a script body is never seen as a tag."""
+    i = 0; low = doc.lower()
+    while True:
+        i = low.find('<script', i)
+        if i < 0: return
+        j = i + 7
+        if j < len(doc) and (doc[j].isalnum() or doc[j] in '-_'): i = j; continue
+        q = None
+        while j < len(doc):
+            ch = doc[j]
+            if q:
+                if ch == q: q = None
+            elif ch in '"\'': q = ch
+            elif ch == '>': break
+            j += 1
+        tag_end = j + 1
+        m = SCRIPT_END.search(doc, tag_end)
+        body_end = m.start() if m else len(doc)
+        yield doc[i:tag_end], doc[tag_end:body_end], i, tag_end, body_end
+        i = body_end
+
 def script_blocks(doc):
-    """(start_tag, body) for every <script> element, quote-aware"""
-    res = []
-    for tag, end in tags(doc, 'script'):
-        m = re.compile(r'</script(?=[\s/>])', re.I).search(doc, end)  # the real end tag; </scripture> is not one
-        res.append((tag, doc[end:m.start()] if m else doc[end:]))
-    return res
+    """(start_tag, body) for every script element"""
+    return [(t, b) for t, b, _, _, _ in script_walk(doc)]
+
+def without_script_bodies(doc):
+    """the document with every script body removed and the tags kept, so text inside a script is never scanned as markup"""
+    out = []; i = 0
+    for t, b, ts, te, be in script_walk(doc):
+        out.append(doc[i:te]); i = be
+    out.append(doc[i:]); return ''.join(out)
 
 def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
@@ -68,17 +96,6 @@ def check(folder):
     doc = open(idx, encoding='utf-8').read(); style = open(css, encoding='utf-8').read() if os.path.exists(css) else ''
     rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
     return check_doc(doc, style, rat_text, folder)
-
-def without_script_bodies(doc):
-    """the document with every script body removed and the script tags kept, so text inside a script (a comment
-    mentioning <input>, a string containing <script>) is never scanned as markup"""
-    out = []; i = 0
-    for tag, end in tags(doc, 'script'):
-        start = doc.lower().rfind('<script', 0, end)
-        if start < i: continue
-        m = re.compile(r'</script(?=[\s/>])', re.I).search(doc, end)
-        out.append(doc[i:end]); i = m.start() if m else len(doc)
-    out.append(doc[i:]); return ''.join(out)
 
 def check_doc(doc, style, rat_text, folder='(memory)'):
     doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # commented-out markup is not markup: the tag scans and the text rules see the document without comments
