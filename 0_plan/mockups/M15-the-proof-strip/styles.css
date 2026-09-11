@@ -15,6 +15,7 @@ p, h1, h2, h3 { margin: 0; }
 h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
 a { color: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.nowrap { white-space: nowrap; } /* holds a compound whole ("in-person") without changing a character */
 .wrap { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
 @media (min-width: 768px) { .wrap { padding-inline: var(--space-6); } }
 .arrow { flex: none; }
@@ -78,7 +79,9 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
 .door-cta { margin-top: var(--space-4); }
 @media (min-width: 768px) { .door-cta { margin-top: auto; padding-top: 0; } .door-line { margin-bottom: var(--space-4); } } /* CTAs bottom-aligned across the pair (DD-26) */
 
-/* Buttons: the estate's face and case (Inconsolata 600 uppercase, K12 G15, G17), navy fill on the light page, 44px floor */
+/* Buttons: the estate's face, case, navy fill and .5rem radius (K12 F41, G15, G17) with the runbook's 44px floor
+   (G17 corrects the estate's shipped 40px). The weight is CONTRACT.md section 3's button role, Inconsolata 600;
+   K12 G15 and G17 measure the live sites at 500, so 600 is the contract's step, not the estate's. */
 .btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 44px; max-width: 100%; padding: var(--space-2) var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; overflow-wrap: anywhere; }
 .btn:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 
@@ -103,7 +106,14 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
   .door .door-line { display: none; }
   .door-cta { margin-top: var(--space-3); }
   .door-lines { display: block; }
-  .compare-lead { margin-top: 0; padding-top: var(--space-3); } /* the anchor block starts flush under the lines; its rule shows at the V8 edge (739) while the lines cross the V5 edge (715) */
+  .compare-lead { margin-top: 0; padding-top: var(--space-3); } /* the anchor block starts flush under the lines */
+}
+/* Compact phone rows only (V10's landscape recipe keeps its own spacing below). The run-in lines sit --space-6 under
+   the second CTA and --space-5 apart, so the paragraph itself is sliced by the edge at every phone height in the
+   matrix: without it V5 (715) closed on a finished paragraph two pixels above the edge, a false floor. */
+@media (max-width: 767px) and (max-height: 779px) {
+  .door-lines { margin-top: var(--space-6); }
+  .door-lines li + li { margin-top: var(--space-5); }
 }
 
 /* Phone landscape (V10, 750 by 342): the contract's landscape recipe. Section padding --space-3; the h1 across the full
@@ -114,14 +124,30 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
   .provenance { margin-top: var(--space-3); }
   .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); margin-top: var(--space-3); }
   .door { padding-top: var(--space-2); }
+  .door + .door { border-top: 1px solid var(--color-border); } /* the doors are side by side here: both rows keep their rule (the stacked-phone rule above drops it) */
   .door-name { font-size: var(--text-lg); }
 }
 
-/* Short laptops (V15, 1366 by 648; V19): trimmed first-screen paddings and anchor gap so the strip's surface shows before the fold */
-@media (min-width: 1024px) and (max-height: 699px) {
+/* Short laptops (V13 1024 by 768, V14 1280 by 720, V15 1366 by 648, V19): give back first-screen padding, then the
+   strip's own top padding, until the strip's heading — not a band of tint — is what the bottom edge cuts. Each step
+   is a height band, because a viewport 72px shorter has 72px less to spend. */
+@media (min-width: 1024px) and (max-height: 789px) {
   .first-screen { padding-block: var(--space-5) var(--space-4); }
   .door { padding-bottom: var(--space-4); }
   .compare-lead { margin-top: var(--space-4); }
+}
+@media (min-width: 1024px) and (max-height: 749px) {
+  .band.proof { padding-top: var(--space-6); } /* .band.proof beats the .band rule declared further down */
+}
+/* Band B is the short-laptop band proper (600 to 669 tall). Below 600px at a desktop width the page is being zoomed
+   (V19), and there the first screen rightly ends with the compare anchor sliced by the edge, as it does on phones. */
+@media (min-width: 1024px) and (min-height: 600px) and (max-height: 669px) {
+  .first-screen { padding-block: var(--space-4) var(--space-3); }
+  .doors { margin-top: var(--space-4); }
+  .door { padding-block: var(--space-3); }
+  .door-line { margin-bottom: var(--space-3); }
+  .compare-lead { margin-top: var(--space-3); }
+  .band.proof { padding-top: var(--space-5); }
 }
 
 /* ---------- Bands: proof strip, comparison, steps, connect, families ---------- */
@@ -130,20 +156,39 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
 .eyebrow { margin-bottom: var(--space-3); }
 .proof .accent-rule { margin-bottom: var(--space-4); }
 .connect { padding-top: 0; } /* Steps and Connect share one section gap on the same surface */
+/* Compare to Admissions is the conversion hinge, not a change of subject: one 80px gap, not two 80px paddings */
+.comparison { padding-bottom: var(--space-6); }
+.steps { padding-top: var(--space-7); }
 
-/* The proof strip: on --color-surface, four ruled cells (Exeter's shape: the fact, then its linked source), then the sources line */
-.proof { background: var(--color-surface); }
+/* Label column: from 1024 a band whose content is prose-measured puts its eyebrow, heading and lead in four columns
+   at the left and runs the content across the remaining eight, so the rules reach the band edge instead of stopping
+   at 65ch with an empty right half. Bands whose content is a full-width structure (the strip, the table) stack. */
+@media (min-width: 1024px) {
+  .band-split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); align-items: start; }
+  .band-label { grid-column: 1 / span 4; }
+  .band-body { grid-column: 5 / -1; }
+  .band-body > :first-child { margin-top: 0; }
+  .band-body .steps-list, .band-body .connect-list { max-width: none; }
+}
+
+/* The proof strip: on --color-surface between two --color-border hairlines (the 1.10:1 tint is not load-bearing and
+   disappears in forced colours), ruled cells (COLLINS's hairline row), each the fact then its linked source. */
+.proof { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
 .facts { margin-top: var(--space-6); border-bottom: 1px solid var(--color-border); }
-@media (min-width: 768px) { .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); margin-top: var(--space-7); border-bottom: 0; } }
-@media (min-width: 1024px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.fact-cell { padding-block: var(--space-5); border-top: 1px solid var(--color-border); }
-@media (min-width: 768px) { .fact-cell { padding-block: var(--space-5); } }
+/* From 768 the cells are grid tracks with NO column gap and the gutter carried as cell padding, so the cells' top
+   rules butt into one continuous hairline across the band instead of four gutter-broken segments. */
+@media (min-width: 768px) { .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 0; margin-top: var(--space-5); border-bottom: 0; } }
+@media (min-width: 1280px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } } /* two by two to 1279: four across at 1024 sets 22 characters a line */
+/* grid-template-rows: 1fr auto bottom-aligns every cell's source on one line across the strip; the cells are equal height */
+.fact-cell { display: grid; grid-template-rows: 1fr auto; padding-block: var(--space-5); border-top: 1px solid var(--color-border); }
+@media (min-width: 768px) { .fact-cell { padding-block: var(--space-5) var(--space-4); padding-inline-end: var(--space-6); } }
 .fact { font-size: var(--text-md); line-height: var(--leading-prose); max-width: 40ch; }
 .fact-lead { font-weight: 500; }
-.fact-sources { display: flex; flex-wrap: wrap; gap: 0 var(--space-4); margin-top: var(--space-3); font-size: var(--text-xs); line-height: var(--leading-prose); color: var(--color-text-muted); }
+/* One behaviour in every cell: one address a line, whether the cell carries one source or two */
+.fact-sources { display: flex; flex-direction: column; align-items: flex-start; margin-top: var(--space-3); font-size: var(--text-xs); line-height: var(--leading-prose); color: var(--color-text-muted); }
 .fact-sources a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; overflow-wrap: anywhere; }
 .fact-sources a:hover, .fact-sources a:focus-visible { color: var(--color-text); }
-.sources { margin-top: var(--space-6); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.sources { margin-top: var(--space-5); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
 
 /* Comparison table: a real table at 768 and above with equal school columns; stacked blocks below, each cell labelled with its school */
 .compare-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: var(--space-6); }
@@ -206,7 +251,8 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 .footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
 .footer-logo.plate { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
-.footer-logo img { height: 27px; width: auto; }
+.footer-logo img { height: 27px; width: auto; } /* K12 V2's phone floor */
+@media (min-width: 768px) { .footer-logo img { height: 32px; } } /* K12 V2: 32px at 1440, the same step the header takes */
 .footer-logo--anywhere { padding-inline: 0; }
 .footer-logo--anywhere img { height: 32px; }
 
