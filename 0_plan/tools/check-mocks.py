@@ -56,39 +56,51 @@ def tags(doc, name):
 
 SCRIPT_END = re.compile(r'</script(?=[\s/>])', re.I)
 
-def script_walk(doc):
-    """one sequential walk over the document: for each script element yield (start_tag, body, tag_start, tag_end, body_end).
-    After a start tag the walk jumps to the real end tag, so a <script or <input inside a script body is never seen as a tag."""
-    i = 0; low = doc.lower()
-    while True:
-        i = low.find('<script', i)
-        if i < 0: return
-        j = i + 7
-        if j < len(doc) and (doc[j].isalnum() or doc[j] in '-_'): i = j; continue
-        q = None
-        while j < len(doc):
-            ch = doc[j]
-            if q:
-                if ch == q: q = None
-            elif ch in '"\'': q = ch
-            elif ch == '>': break
-            j += 1
-        tag_end = j + 1
-        m = SCRIPT_END.search(doc, tag_end)
-        body_end = m.start() if m else len(doc)
-        yield doc[i:tag_end], doc[tag_end:body_end], i, tag_end, body_end
-        i = body_end
+def walk(doc):
+    """One sequential pass over the document in source order. Yields ('comment', text) for each HTML comment,
+    ('script', start_tag, body) for each script element, and ('other', text) for everything between. Because the
+    pass is sequential, a comment marker inside a script body is script text, and a script inside a comment is comment
+    text: neither can be mistaken for the other."""
+    i = 0; n = len(doc); low = doc.lower()
+    while i < n:
+        c = doc.find('<!--', i); sidx = low.find('<script', i)
+        while sidx >= 0 and sidx + 7 < n and (doc[sidx + 7].isalnum() or doc[sidx + 7] in '-_'):
+            sidx = low.find('<script', sidx + 7)
+        nxt = [x for x in (c, sidx) if x >= 0]
+        if not nxt:
+            yield ('other', doc[i:]); return
+        j = min(nxt)
+        if j > i: yield ('other', doc[i:j])
+        if j == c:
+            e = doc.find('-->', j + 4); e = n if e < 0 else e + 3
+            yield ('comment', doc[j:e]); i = e
+        else:
+            k = j + 7; q = None
+            while k < n:
+                ch = doc[k]
+                if q:
+                    if ch == q: q = None
+                elif ch in '"\'': q = ch
+                elif ch == '>': break
+                k += 1
+            tag_end = k + 1
+            m = SCRIPT_END.search(doc, tag_end)
+            body_end = m.start() if m else n
+            close_end = m.end() + (doc.find('>', m.end()) - m.end() + 1 if m and doc.find('>', m.end()) >= 0 else 0) if m else n
+            yield ('script', doc[j:tag_end], doc[tag_end:body_end]); i = close_end
 
 def script_blocks(doc):
-    """(start_tag, body) for every script element"""
-    return [(t, b) for t, b, _, _, _ in script_walk(doc)]
+    """(start_tag, body) for every script element that is not inside an HTML comment"""
+    return [(t, b) for kind, *rest in walk(doc) if kind == 'script' for t, b in [rest]]
 
-def without_script_bodies(doc):
-    """the document with every script body removed and the tags kept, so text inside a script is never scanned as markup"""
-    out = []; i = 0
-    for t, b, ts, te, be in script_walk(doc):
-        out.append(doc[i:te]); i = be
-    out.append(doc[i:]); return ''.join(out)
+def cleaned(doc):
+    """the document with HTML comments removed and script bodies removed (script start tags kept), for element scans"""
+    out = []
+    for item in walk(doc):
+        if item[0] == 'other': out.append(item[1])
+        elif item[0] == 'script': out.append(item[1] + '</script>')
+        else: out.append(' ')
+    return ''.join(out)
 
 def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
@@ -98,9 +110,8 @@ def check(folder):
     return check_doc(doc, style, rat_text, folder)
 
 def check_doc(doc, style, rat_text, folder='(memory)'):
-    blocks = script_blocks(doc)  # script bodies are read first, on the untouched document, for the byte count and the JSON-LD
-    doc = without_script_bodies(doc)  # then removed, so text inside a script is never scanned as markup
-    doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # then commented-out markup is removed: it is not markup either
+    blocks = script_blocks(doc)  # scripts outside HTML comments, bodies intact, for the byte count and the JSON-LD
+    doc = cleaned(doc)  # one sequential walk: comments removed, script bodies removed, so neither hides or fakes an element
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
