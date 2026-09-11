@@ -86,3 +86,8 @@ tests/mocks/
 0_plan/kb/CONCEPTS-BRIEF.md
 0_plan/kb/briefs/
 0_plan/kb/briefs/M01..M20.md
+0_plan/kb/CONCEPTS-A.md
+0_plan/kb/CONCEPTS-B.md
+0_plan/kb/CONCEPTS-C.md
+0_plan/kb/CONCEPTS-D.md
+0_plan/kb/exemplars/index.html
