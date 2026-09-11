@@ -1,0 +1,157 @@
+/* M08 The Letter. Design engineer build 2026-09-11 (Fable fork, brief 0_plan/kb/briefs/M08.md, CONTRACT v2.1).
+   Direction: L3 mission > L4 exclusivity > L1 objective > L2 continuity. A school speaks plainly to a family: the fixed
+   sentences set as a short letter in Literata, the doors at its close as bordered text buttons. One centred column of
+   --measure-prose (65ch in the base size, RF-55) from 768; 24px margins below. No card, no photograph, no motion.
+   Every colour, face, size, space, radius and duration is a var(--...) from ../shared/tokens-v2.css. Values outside
+   the token set, declared in RATIONALE.md (Departures): breakpoints in px, 1px hairlines, the 2px focus ring, the 44px
+   target minimum, letter-spacing and inline margins in em, the 0.5em run-in gap, `fit-content`. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } } /* V10 native anchor scroll, CONTRACT 6 */
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-serif); font-size: var(--text-base); line-height: var(--leading-prose); overflow-wrap: break-word; } /* long tokens (URLs, "Georgetown,") break instead of scrolling at large text sizes */
+img { display: block; max-width: 100%; }
+ul, ol { margin: 0; padding: 0; } ul { list-style: none; } p, h1, h2, h3, hr { margin: 0; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; text-decoration-color: var(--color-border-strong); }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; } /* K3 section 5d, light surfaces */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---------- The column: the letter's measure ---------- */
+/* 65ch resolves in the column's own (base) size; the door lines at --text-md then run about 66 characters, K1 F30's ideal. */
+.col { width: min(100% - 2 * var(--space-5), var(--measure-prose)); margin-inline: auto; }
+
+/* ---------- Skip link, header (56px) ---------- */
+.skip-link { position: absolute; top: -999px; left: var(--space-4); z-index: 10; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); border: 2px solid var(--color-focus); font-family: var(--font-sans); }
+.skip-link:focus { top: var(--space-2); }
+.site-header { background: var(--color-bg); box-shadow: 0 1px 0 var(--color-border); } /* hairline without layout height */
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); min-height: 3.5rem; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-4); }
+@media (min-width: 768px) { .bar { padding-inline: var(--space-7); } }
+.lockup { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.lockup img { height: 24px; width: auto; }
+.utility { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); font-family: var(--font-sans); font-size: var(--text-xs); }
+.utility a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-2); }
+@media (min-width: 768px) { .utility { gap: var(--space-4); font-size: var(--text-sm); } .utility a { padding-inline: var(--space-3); } }
+
+/* ---------- The letter: h1, provenance, one accent rule, two doors, postscript ---------- */
+.letter { padding-block: var(--space-4) var(--space-7); }
+h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; text-wrap: balance; }
+/* At 360 to 413px wide the sentence sets in seven lines, past Chromium's six-line balance limit (K2 F-22); a no-break space
+   before the last word in the markup holds "from anywhere." together there (measured: `text-wrap: pretty` left the orphan). */
+.provenance { margin-top: var(--space-4); font-family: var(--font-sans); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
+.rule { width: var(--space-7); height: 2px; margin: var(--space-4) 0 var(--space-3); border: 0; background: var(--color-accent); } /* the screen's one accent use */
+
+.doors { display: block; }
+.door { display: block; }
+.door + .door { margin-top: var(--space-4); }
+/* Label and name as a run-in opener on the paragraph's first line (Inter Tight 500, xs, uppercase, 0.08em, muted). */
+.door-opener, .door-line-name { font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.door-opener { margin-right: 0.5em; }
+.sep { margin-inline: 0.4em; }
+.door-line { display: inline; font-size: var(--text-md); line-height: var(--leading-prose); } /* reading prose in the serif, K2 section 5b */
+.door-line-name { display: none; }
+.door-cta { display: flex; width: fit-content; align-items: center; min-height: 44px; margin-top: var(--space-3); padding-inline: var(--space-4); border: 1px solid var(--color-navy); border-radius: var(--radius-md); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); color: var(--color-navy); text-decoration: none; }
+.door-cta:hover { background: var(--color-navy); color: var(--color-on-navy); } /* V1 door state: instant */
+.postscript { margin-top: var(--space-6); font-style: italic; font-size: var(--text-base); line-height: var(--leading-prose); }
+.postscript a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Room to breathe where the viewport allows it (from 768 wide and 800 tall: V11, V12, V16, V17). */
+@media (min-width: 768px) { .letter { padding-top: var(--space-5); } }
+@media (min-width: 768px) and (min-height: 800px) {
+  .letter { padding-top: var(--space-7); }
+  .rule { margin-bottom: var(--space-4); }
+  .door + .door { margin-top: var(--space-5); }
+  .door-cta { margin-top: var(--space-4); }
+}
+
+/* Compact door rule (CONTRACT section 2): under 700px tall, and also under 375px wide where the seven-line h1 and five-line
+   door lines overflow V1 (360 by 740) by 26px. The doors become compact blocks (opener, CTA) and both door lines follow the
+   second CTA as run-in paragraphs opened by the door name. Reordering is CSS only: the list items become `display: contents`
+   and their children take grid order; the DOM and focus order are unchanged (opener, line, CTA per door). */
+@media (max-height: 699px), (max-width: 374px) {
+  .doors { display: grid; row-gap: var(--space-3); }
+  .door { display: contents; }
+  .door:nth-child(1) > * { order: 1; }
+  .door:nth-child(2) > * { order: 2; }
+  .door:nth-child(3) > * { order: 3; }
+  .door:nth-child(4) > * { order: 4; }
+  .door:nth-child(5) > * { order: 5; }
+  .door > .door-line { order: 10; margin-top: var(--space-3); }
+  .door-opener { display: block; margin-right: 0; }
+  .door-line { display: block; }
+  .door-line-name { display: inline; margin-right: 0.5em; }
+  .door-cta { margin-top: 0; margin-bottom: var(--space-4); }
+}
+
+/* ---------- Sections below the letter: hairline, tracked eyebrow (Barnes, C27), quiet h2 ---------- */
+.section { padding-bottom: var(--space-9); }
+.section > .col { border-top: 1px solid var(--color-border); padding-top: var(--space-6); }
+.eyebrow, .tefa h3, .cell-school, .compare-table th[scope="row"] { font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.section h2 { margin-top: var(--space-3); font-size: var(--text-xl); text-wrap: balance; }
+.lead { margin-top: var(--space-5); font-size: var(--text-md); line-height: var(--leading-prose); text-wrap: pretty; }
+.sources { max-width: 56ch; margin-top: var(--space-5); font-family: var(--font-sans); font-size: var(--text-xs); line-height: var(--leading-prose); color: var(--color-text-muted); } /* about 71 characters a line in its own size */
+.text-link { display: inline-flex; align-items: center; gap: 0.4em; min-height: 44px; margin-top: var(--space-2); font-family: var(--font-sans); font-weight: 500; font-size: var(--text-base); }
+
+/* Comparison: a real table, read as stacked definition rows at every width (the letter's column never reaches the
+   45-character cell floor two columns would need, K2 section 5b); from 768 the attribute sits in the margin. */
+.compare-table { display: block; width: 100%; margin-top: var(--space-6); border-collapse: collapse; }
+.compare-table caption { display: block; text-align: left; margin-bottom: var(--space-4); font-family: var(--font-sans); font-style: italic; font-size: var(--text-sm); color: var(--color-text-muted); }
+.compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; text-align: left; }
+.compare-table tr { padding-block: var(--space-5); border-top: 1px solid var(--color-border); }
+.compare-table td { margin-top: var(--space-3); font-size: var(--text-base); line-height: var(--leading-prose); text-wrap: pretty; }
+.cell-school { display: block; margin-bottom: var(--space-1); letter-spacing: 0.06em; }
+@media (min-width: 768px) {
+  .compare-table tr { display: grid; grid-template-columns: 10rem minmax(0, 1fr); column-gap: var(--space-5); row-gap: var(--space-4); }
+  .compare-table th[scope="row"] { grid-column: 1; grid-row: 1 / span 2; padding-top: 0.2em; }
+  .compare-table td { grid-column: 2; margin-top: 0; }
+}
+.doors-again { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); margin-top: var(--space-6); }
+.doors-again .door-cta { margin: 0; }
+.tefa { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
+.tefa p { margin-top: var(--space-3); font-size: var(--text-md); line-height: var(--leading-prose); text-wrap: pretty; }
+
+/* Proof: four facts, one per line */
+.facts { margin-top: var(--space-6); }
+.facts li { padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); text-wrap: pretty; }
+.facts li:last-child { border-bottom: 1px solid var(--color-border); }
+
+/* Steps */
+.steps-list { margin-top: var(--space-5); list-style: none; counter-reset: step; }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-7) minmax(0, 1fr); column-gap: var(--space-3); padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+.apply { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); margin-top: var(--space-6); }
+.btn-fill { display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-4); border: 1px solid var(--color-navy); border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-decoration: none; }
+.btn-fill:hover { background: var(--color-bg); color: var(--color-navy); }
+
+/* Connect */
+.links { margin-top: var(--space-5); }
+.links a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-family: var(--font-sans); font-weight: 500; font-size: var(--text-base); text-decoration: none; }
+.links li:last-child a { border-bottom: 1px solid var(--color-border); }
+.links a::after { content: "\2192"; }
+.links a:hover { text-decoration: underline; }
+
+/* ---------- Footer: navy, both marks on their panels, the facts block ---------- */
+.site-footer { background: var(--color-navy); color: var(--color-on-navy); padding-block: var(--space-8) var(--space-7); }
+.footer-grid { display: grid; gap: var(--space-7); max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 768px) { .footer-grid { padding-inline: var(--space-7); } }
+@media (min-width: 900px) { .footer-grid { grid-template-columns: 1.4fr 1fr auto; gap: var(--space-8); } }
+.footer-facts p { max-width: 48ch; font-family: var(--font-sans); font-size: var(--text-sm); line-height: var(--leading-prose); text-wrap: pretty; }
+.footer-phone { margin-top: var(--space-4); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+.footer-nav ul { display: flex; flex-direction: column; align-items: flex-start; font-family: var(--font-sans); font-size: var(--text-sm); }
+.footer-nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration-color: var(--color-text-muted-on-dark); }
+.footer-nav a:hover { text-decoration-color: currentColor; }
+.footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); text-decoration: none; }
+.logo-plate { background: var(--color-bg); } /* the GT School mark only on a light panel */
+.logo-plate img, .logo-navy img { height: 24px; width: auto; }
+/* K3's two-colour ring on and across navy: inner on-navy band, outer navy band; one band clears 3:1 on any ground */
+.site-footer :focus-visible { outline: 2px solid var(--color-on-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-navy); }
+@media (forced-colors: active) { :focus-visible { outline: 3px solid CanvasText; box-shadow: none; } }
+
+/* ---------- Motion: none. Reduced motion keeps every duration at zero, pseudo-elements included (R8). ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
