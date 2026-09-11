@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:29:28.179Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:44:28.537Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -63,7 +63,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V15 | yes | text cut by the edge, 643 to 667 |
 | V16 | yes | text cut by the edge, 890 to 906 |
 | V17 | yes | content reaches 958 of 960 and more follows below |
-| V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
+| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | content reaches 562 of 576 and more follows below |
 
 ## Result: all required rows pass

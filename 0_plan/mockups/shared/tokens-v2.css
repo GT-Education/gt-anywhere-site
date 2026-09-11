@@ -21,7 +21,7 @@
   --color-accent-contrast: #fbfbfb;
   --color-border: #cac6c4;
   --color-focus: #004f71;
-  --color-georgetown-tint: #f8e8de;
+  --color-georgetown-tint: var(--color-surface); /* the same value by intent: one tint, two names, so a mock can say which meaning it is using. Change it here if Georgetown ever gets a tint of its own */
   --color-anywhere-tint: #e4eef2;
   --color-navy: #002a3a;
 

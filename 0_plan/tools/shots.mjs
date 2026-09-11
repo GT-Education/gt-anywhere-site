@@ -145,7 +145,9 @@ const FOLD_JS = `(() => {
     cutBy = (deepest && deepest.bottom > vh ? deepest.what + ' cut by the edge, ' + Math.round(deepest.top) + ' to ' + Math.round(deepest.bottom)
       : 'content reaches ' + Math.round(lastVisible) + ' of ' + vh + ' and more follows below');
   } else if (below) {
-    cutBy = 'FALSE FLOOR: the last visible content ends at ' + Math.round(lastVisible) + ', ' + Math.round(vh - lastVisible) + 'px clear of the ' + vh + 'px edge, so the screen reads as finished';
+    cutBy = lastVisible === -Infinity
+      ? 'no content is visible below the last CTA at all, so nothing signals that the page continues'
+      : 'FALSE FLOOR: the last visible content ends at ' + Math.round(lastVisible) + ', ' + Math.round(vh - lastVisible) + 'px clear of the ' + vh + 'px edge, so the screen reads as finished';
   }
   // A band edge also reads as continuation when the first screen's own surface ENDS inside the viewport and a
   // different surface runs off the bottom: M03 and M12 close a navy hero onto cream with nothing literally cut,
