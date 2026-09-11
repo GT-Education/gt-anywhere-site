@@ -4,9 +4,9 @@
 |---|---|
 | Cluster | K11 of `18-knowledge-base-plan.md` section 1 |
 | Written | 2026-09-10 |
-| Method | 46 web sources fetched by the agent (text fetch only, no browser, no GT or Alpha page loaded in a browser); plus 6 direct byte measurements of live third-party tag scripts over the network and 7 measurements of this repository's own assets, taken with `curl` and the standard library plus the system Pillow 12.1.1 |
+| Method | 46 web sources fetched by the agent (text fetch only, no browser, no GT or Alpha page loaded in a browser); plus 4 direct byte measurements of live third-party tag scripts over the network (GA4, Meta, TikTok's loader stub, HubSpot's banner — the HubSpot URL is a wildcard match, `js.hs-banner.com/*.js`, not one fixed resource) and 7 measurements of this repository's own assets, taken with `curl` and the standard library plus the system Pillow 12.1.1 |
 | Feeds | `1_spec/03` section 9 (performance budget), REQ-073, T-059, T-065, the QA runner in `1_spec/13`, rubric row **Craft** in `17` section 6 |
-| Status | Draft, Astra E4 pending |
+| Status | Drafted by Fable; reworked by Fable after Astra's E4 (`ensemble/E4-knowledge-base.md`, `ensemble/prompts/REWORK-PACK.md`) |
 
 Two kinds of evidence appear below and are never mixed. **F-numbers** are findings from a fetched
 source and carry a URL, an author and a date. **M-numbers** are values the agent measured directly,
@@ -143,7 +143,7 @@ the Web Almanac's field numbers.
 | A3 | `loading="lazy"` on the hero | ≈100 ms of LCP measured in the demo (F-17); 16–17% of the field does it anyway (F-42) | Not yet present; the mocks must be checked, because the Webflow export lazy-loads almost everything |
 | A4 | The LCP image behind a CSS `background-image` | The preload scanner "only scans markup, not CSS"; recovering it costs a preload and ≈250 ms if you forget (F-17, F-19) | Any mock that puts the door photo in `background-image` for cropping convenience |
 | A5 | Tags in `<head>` because the vendor asked | Meta and Google both ask for `<head>` placement (F-29, F-31). Honouring both puts **296.5 KB** of compressed JavaScript in contention with the first screen (M-06) | The mirrored `index.html`, which carries gtag, Meta and TikTok inline in `<head>` |
-| A6 | Relying on Vercel's defaults for caching | The default is `public, max-age=0, must-revalidate` — no browser caching at all (F-35). Repeat visits re-download every font and image | Any deploy of this repo without a `vercel.json` `headers` block |
+| A6 | Relying on Vercel's defaults for caching | The default is `public, max-age=0, must-revalidate` (F-35) — that marks the response stale immediately, not unstorable: the browser still holds it and must revalidate before reuse, and F-36 confirms Vercel's CDN already caches the same static file at the edge for the deployment's lifetime regardless of this header. What survives as a real cost is a revalidation round trip per asset on every repeat visit, not a full re-download of every font and image | Any deploy of this repo without a `vercel.json` `headers` block that sets `immutable` on hashed assets |
 | A7 | Expecting Vercel to optimise `<img>` | It explicitly does not: a plain `img` "will be instructed to bypass optimization" (F-37). Waiting for the platform to fix image weight means never fixing it | The assumption behind "we're on Vercel, images are handled" |
 | A8 | Quoting a single Lighthouse run | Simulated throttling is "inherently inaccurate for edge cases" (F-11) and the score is a weighted composite dominated by TBT and LCP (F-12). One run is an anecdote | Any RUN-LOG row that carries one number |
 | A9 | `font-display: block` for brand fidelity | Blocks up to 3 s in Chromium/Firefox and indefinitely in Safari (K2 F-39), delaying a text LCP past the whole 2.0 s budget. 25% of the field does this (F-45) | A tempting "fix" if the fallback looks wrong at G1 |
@@ -164,6 +164,11 @@ A cold TLS 1.3 connection to a Vercel PoP costs roughly two round trips before t
 budget. That leaves ~800 ms of transfer, which at 200 KB/s is **160 KB** — and that is the number the
 first screen must fit inside, not the 400 KB now in `1_spec/03` §9.
 
+The tables below work that ceiling through one example composition (two preloaded fonts, two door
+images). The ceiling itself and the LCP outcome are what a runner enforces, not this specific request
+count or resource mix — a typographic or fewer-image direction is not penalized for landing on a
+different mix under the same bytes (R13; RF-30).
+
 **First screen (above the door CTAs at 390×844), over the wire:**
 
 | Resource | Requests | Budget | Evidence |
@@ -173,7 +178,7 @@ first screen must fit inside, not the 400 KB now in `1_spec/03` §9.
 | Door images, 2 at 390w AVIF | 2 | **32 KB** | M-03: 6.6 KB and 10.2 KB measured for the two named candidates; 16 KB each is a generous ceiling |
 | JavaScript on the critical path | 0 | **0 KB** | REQ-070, MN-09 |
 | Third-party anything | 0 | **0 KB** | P7 |
-| **First screen total** | **5** | **118 KB, hard ceiling 150 KB** | 118 KB ≈ 590 ms of transfer; with a 500 ms TTFB that is ~1.1 s, a 45% margin under 2.0 s |
+| **First screen total** | **5** | **118 KB (proposal), hard ceiling 150 KB** | 118 KB ≈ 590 ms of transfer; with a 500 ms TTFB that is ~1.1 s, a 45% margin under 2.0 s. 5 requests describes this composition, not a ceiling of its own |
 
 **Whole page, first-party, over the wire:**
 
@@ -183,7 +188,7 @@ first screen must fit inside, not the 400 KB now in `1_spec/03` §9.
 | Below-fold photographs, 3 at 780w AVIF, lazy | 3 | 60 KB |
 | Third woff2 face (Inconsolata, button labels) | 1 | 20 KB |
 | First-party script: consent gate, tag loader, `data-event` delegation | 1 (or inlined) | 3 KB |
-| **Whole page, first-party** | **≤ 10** | **201 KB, hard ceiling 250 KB** |
+| **Whole page, first-party** | **≤ 10** | **201 KB (proposal), hard ceiling 250 KB** |
 
 **Deferred third-party, after consent and after `load` — measured, not estimated (M-06):**
 gtag.js **189.0 KB**, fbevents.js **107.5 KB**, TikTok loader **1.8 KB**, plus whatever the TikTok
@@ -197,19 +202,26 @@ fonts and before any tag (M-04). Against that page, the proposed landing's **who
 is one twelfth the weight (201 KB against 2,479 KB) and its first screen one twenty-first
 (118 KB)**; against the field median it is **one seventh of the requests** (≤ 10 against 72).
 
-**Recommended amendment to `1_spec/03` §9:** replace "Under 400 KB / under 1 MB" with the table
-above (118 KB first screen, 201 KB first-party page, 500 KB including deferred tags), and add a
-request ceiling, which the current spec has none of.
+**Recommended amendment to `1_spec/03` §9:** replace "Under 400 KB / under 1 MB" with a byte ceiling
+(150 KB first screen, 250 KB first-party page) scored together with REQ-073's LCP target — bytes and
+LCP are the outcome that gates a build, not a fixed request count or resource mix (R13). This is
+recorded as **AN-19** (`0_plan/07-design-decisions.md`, status Proposed) and **RF-30**
+(`0_plan/kb/REGISTER-FOLLOWUPS.md`); the 118 KB and 201 KB figures above are K11's derived proposal
+feeding that row, not measurements in their own right — M-06 supplies the only measured figures in
+this section, for the deferred third-party libraries.
 
 ### 5b. The image pipeline for the 25 assets
 
-**Widths.** The landing paints photographs in exactly three slots: the two doors (358 CSS px at
-390; ~640 CSS px each at 1440 inside `--container-max`), a below-fold proof or builders image
-(full container width), and nothing else. The ladder is therefore **400 / 800 / 1200** — 400 covers
-1× phones, 800 covers 2× phones and the 768 checkpoint, 1200 covers a 2× desktop door. Nothing above
-1200 is produced, because no slot is wider than 640 CSS px at the 1440 verification width.
+**Widths, worked for one composition.** Where a brief uses the two-doors slot shape (358 CSS px doors
+at 390; ~640 CSS px each at 1440 inside `--container-max`, plus a below-fold proof or builders image
+at full container width), R13's rule — CSS width times DPR against source resolution, no universal
+ladder — resolves to **400 / 800 / 1200**: 400 covers 1× phones, 800 covers 2× phones and the 768
+checkpoint, 1200 covers a 2× desktop door, and nothing above 1200 is produced because no slot in
+*this* composition is wider than 640 CSS px at 1440. **This is one worked example, not a fixed ladder
+for every direction** (R13; D-037): a typographic mock, a different crop, or no doors at all gets its
+own per-slot arithmetic and is not penalized for shipping a different set of widths.
 
-**Tiers.** Of the 28 files in `shared/img/`:
+**Tiers, for that same composition.** Of the 28 files in `shared/img/`:
 
 | Tier | Files | What ships | Why |
 |---|---|---|---|
@@ -220,7 +232,9 @@ request ceiling, which the current spec has none of.
 | E — masters | the remaining 12 photos | nothing | Kept as source; never referenced by a built page |
 | F — logos | 3 SVG | the header lockup **inlined** into the HTML; the other two only where used | Removes a request; 8,559 B raw is 3,616 B gzipped inside the document (M-05) |
 
-Worst case that is 18 + 10 + 1 = **29 derivative files, of which any one page load fetches 5**.
+Worst case for this composition is 18 + 10 + 1 = **29 derivative files, of which any one page load
+fetches 5**; a direction with a different slot shape sizes its own files the same way (R13) and is
+not held to this count.
 
 **Markup shape** (F-24, F-25, F-26, F-19, F-20):
 
@@ -264,7 +278,8 @@ than assumed:
 | Homebrew `avifenc` / `libavif` | A developer-machine install only, but it changes the reproducible output; if Pillow's AVIF support is missing on another machine this is the fallback, with F-27's settings |
 
 **Caching, which is the other half of image weight.** Vercel's default is
-`public, max-age=0, must-revalidate` — no browser cache at all (F-35). Add to `vercel.json`:
+`public, max-age=0, must-revalidate` (F-35) — stale immediately, not uncached; see A6's correction
+above. Add to `vercel.json`:
 
 ```json
 { "headers": [
@@ -278,6 +293,9 @@ than assumed:
 carry the width and a short content hash. Note also F-34: Vercel does **not** compress AVIF or WebP
 — correctly, they are already compressed — but it **does** compress `svg+xml`, which is why the
 inlined lockup and any inline SVG are counted at their gzipped size in 5a.
+
+This authoring-time production plan plus `vercel.json` caching is recorded as **D-037**
+(`0_plan/03-decisions-and-open-questions.md`, status Proposed).
 
 ### 5c. The font plan, reconciled with K2
 
@@ -313,11 +331,18 @@ K11 adds four reconciliations that only appear once you look at the fonts throug
    (K2 OQ-2: no WOFF2 converter was available). If the measured pair exceeds 80 KB, the fix order is:
    subset harder → drop Inter Tight 500 to 400 → drop the third face from the first screen entirely.
 
+This font plan (five faces, subset woff2, two preloads, metric-matched fallbacks) is recorded as
+**D-038** (`0_plan/03-decisions-and-open-questions.md`, status Proposed); the K2/K11 preload-count
+difference in point 3 above is tracked separately as **RF-33**.
+
 ### 5d. The tag deferral pattern
 
-The whole trick is that **`dataLayer` is a plain array and `gtag()` is a shim that pushes to it**
-(F-29). The queue can exist from the first line of the page while the 189 KB library arrives
-minutes later or never. So: inline ~300 bytes in `<head>`, and load nothing.
+The mechanism is that **`dataLayer` is a plain array and `gtag()` is a shim that pushes to it**
+(F-29). Consent defaults can exist from the first line of the page — inline roughly 300 bytes in
+`<head>`, nothing else loaded — while the heavier remote code arrives later in the same page view, or
+never. **Production loads the one GTM container AN-03 and MD-08 decide, not `gtag.js` directly** —
+GA4, Meta, TikTok and HubSpot are configured as tags inside that container; no container exists yet
+(AN-03), so the id below is a stand-in.
 
 ```html
 <script>
@@ -326,37 +351,42 @@ minutes later or never. So: inline ~300 bytes in `<head>`, and load nothing.
   gtag('consent','default',{ ad_storage:'denied', analytics_storage:'denied',
     ad_user_data:'denied', ad_personalization:'denied', wait_for_update:500 });
   gtag('js', new Date());
-  gtag('config','G-494D3VN0SF',{ send_page_view:false });
 </script>
 ```
 
-Every `door_click`, `compare_view` and `cta_apply_click` from `1_spec/03` §7 fires into that queue
-immediately. Then, and only then:
+Every `door_click`, `compare_view` and `cta_apply_click` from `1_spec/03` §7 pushes into `dataLayer`
+immediately, whether or not the container has loaded. Then, and only then:
 
 ```js
 addEventListener('load', () => {
   onConsentGranted(() => {                       // first-party banner, no vendor script
     gtag('consent','update', { analytics_storage:'granted', /* … per the AN rows */ });
     const s = document.createElement('script'); s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-494D3VN0SF';
-    document.head.appendChild(s);                // Meta and TikTok only if their rows are Approved
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=<container id, AN-03>';
+    // GA4, Meta, TikTok and HubSpot fire as tags from inside it, only for channels marked Approved (AD-04)
+    document.head.appendChild(s);
   });
 });
 ```
 
-When the library arrives it replays the queue in order, so **nothing that happened before consent is
-lost** — it is simply not sent until it is lawful to send it. What this buys, measured: **298.3 KB of
-compressed third-party JavaScript kept off the critical path** (M-06), which is 2.5× the entire
-first-party first-screen budget.
+**Correction (E4):** `dataLayer` is in-memory and does not survive a navigation — a new page starts a
+new, empty array, so nothing pushed on a page the visitor leaves carries to the next one. Within one
+page view the queue only bridges the gap between first paint and the container loading; it is not a
+durable event log, and per R12, AN-10 and Q-016, replaying whatever sat in it before consent is not
+an approved pattern in any case — if consent is denied, those pushed events are never reported to any
+vendor, queued or not. What the pattern actually buys, measured: **298.3 KB of compressed
+third-party JavaScript** (M-06) kept off the critical path for as long as consent takes to decide,
+which is 2.5× the entire first-party first-screen budget — and, under the container, GA4's tag still
+fetches the same 189.0 KB `gtag.js` measured in M-06; AN-03 decides *when* it loads, not whether.
 
 Two things must be said plainly rather than hidden in the implementation:
 
-- **The consent-mode trade-off is real and belongs in an AN row.** "Advanced" consent mode loads
+- **The consent-mode trade-off is real, and now has a register row.** "Advanced" consent mode loads
   gtag.js with denied defaults so Google still receives cookieless pings and can model conversions
   (F-30) — at a cost of the full 189 KB on every load whether or not anyone consents. "Basic" loads
   nothing until consent — zero bytes, no modelling. Given that two thirds of sessions are mobile,
-  K11 recommends **basic plus the inline queue**, and says so as a recommendation with its cost
-  named, not as a fact.
+  K11's recommendation is **basic plus the inline consent-default queue**, now recorded as **AN-19**
+  (`0_plan/07-design-decisions.md`, status Proposed) rather than asserted here as settled.
 - **Do not take HubSpot's banner to get a banner.** Its consent script alone measured **14.5 KB
   compressed** (M-06) before HubSpot's own tracking code, which loads more and is asked to sit
   before `</body>` (F-32). A first-party banner is a few hundred bytes and does not need approval
@@ -400,6 +430,18 @@ after consent.
 matrix too, not only a layout one: those webviews start cold, often on a worse connection, and a
 budget met in Chrome is not automatically met there. T-060 should capture the same five numbers.
 
+**Tests G-D must run before any number above is trusted as fact, not a budget:**
+
+- **DPR.** Confirm each shipped image's rendered CSS size times the device's actual pixel ratio
+  against the file produced for it (R13) — measured on the built mock, not assumed from the
+  400/800/1200 ladder in 5b.
+- **Fonts.** Measure the real subsetted woff2 byte sizes once `pyftsubset` runs (OQ-3); the 70 KB
+  line in 5a is K2's expectation, not yet a measurement, and the two-preload allocation in 5c depends
+  on it.
+- **LCP element.** Read the actual `largest-contentful-paint` element from the Lighthouse JSON per
+  mock (OQ-6) before assuming a door photograph, rather than the umbrella sentence, owns the preload
+  allocation in 5c.
+
 ### 5f. A calibrated 5 for the rubric row **Craft**, as it concerns performance
 
 | Score | What it looks like |
@@ -408,7 +450,7 @@ budget met in Chrome is not automatically met there. T-060 should capture the sa
 | **2** | Somebody compressed the images once, by hand, to one size. `width`/`height` missing on half the `<img>`. Lighthouse run once on a laptop on office wifi and the score quoted in a PR |
 | **3** | The page meets the 2.5 s "good" threshold in the lab. WebP everywhere, `loading="lazy"` applied uniformly — including, invisibly, to the hero. Caching left at Vercel's default. One Lighthouse run, mobile only |
 | **4** | LCP under 2.0 s at the median of five mobile runs; CLS 0; AVIF with a WebP fallback at three widths; two font preloads with metric-matched fallbacks; zero third-party bytes before consent; `vercel.json` sets immutable caching; the budget is asserted by the runner |
-| **5** | Everything in 4, **and** the page is *provably* small rather than merely fast: the first screen is **five requests and under 130 KB**, and you can say which byte is in which. The LCP sub-parts have been read individually — TTFB is under 40% of the total, load delay under 10% — rather than inferred from the headline number. The filmstrip on **packet-level** throttling, not just the simulated run, shows the first screen complete and stationary before 2.0 s. With web fonts blocked entirely, nothing on the page moves a pixel. The repeat view is a near-empty waterfall, because the cache headers are real. The budget lives in a file the runner reads, so exceeding it fails the build instead of being discovered at go-live. The measured numbers — not the score — are in the PR body. And the same page is still inside budget in the Instagram webview on a real Android handset, because that is where two thirds of the traffic actually is |
+| **5** | Everything in 4, **and** the page is *provably* small rather than merely fast: the first screen is **under 130 KB, in however many requests that composition takes**, and you can say which byte is in which. The LCP sub-parts have been read individually — TTFB is under 40% of the total, load delay under 10% — rather than inferred from the headline number. The filmstrip on **packet-level** throttling, not just the simulated run, shows the first screen complete and stationary before 2.0 s. With web fonts blocked entirely, nothing on the page moves a pixel. The repeat view is a near-empty waterfall, because the cache headers are real. The budget lives in a file the runner reads, so exceeding it fails the build instead of being discovered at go-live. The measured numbers — not the score — are in the PR body. And the same page is still inside budget in a real in-app browser (Instagram, Facebook or TikTok) on a real Android handset — two thirds of sessions are mobile and Instagram is one of the organic channels this traffic already arrives from, but the GA snapshot supports the mobile share, not a webview-by-OS segmentation (the five facts) |
 
 Calibration exemplar to keep beside the rubric: the **live Anywhere home page as the anti-exemplar**
 (M-04 — 1,264 KB of `alt=""` decoration), and the Web Almanac's top-1,000 cohort as the honest bar:
@@ -485,3 +527,34 @@ of OQ-1.
 **already-installed** system Pillow 12.1.1; the scripts live in this session's scratchpad
 (`enc.py` plus inline heredocs) and add nothing to the repository. Re-run them against the built
 page before quoting any number in 5a as a result rather than a budget.
+
+---
+
+## 8. Rework log (E4)
+
+| E4 item | What changed | Where |
+|---|---|---|
+| A6: "no browser caching at all… repeat visits re-download every font and image" | Reworded: `must-revalidate` marks the response stale, not unstorable; the browser still stores and conditionally revalidates it, and F-36's edge caching already applies regardless of this header. Restated the real cost as a revalidation round trip, not a re-download. The same overstated claim, repeated in 5b, got the matching fix | Section 4, row A6; Section 5b, "Caching" paragraph |
+| §5d "nothing that happened before consent is lost" | Corrected: an in-memory `dataLayer` does not survive a navigation and bridges only one page view; pre-consent replay is not an approved pattern (R12, AN-10, Q-016) regardless of the technical mechanism, so queued events are never sent later on the strength of having been queued | Section 5d |
+| Rubric row 5 put two thirds of traffic in "the Instagram webview on a real Android handset" | Reworded to what the GA snapshot supports: two thirds of sessions are mobile; Instagram is one organic channel; no webview-by-OS segmentation exists | Section 5f, score **5** row |
+| Direct `gtag.js` loading bypasses AN-03/MD-08's container architecture | Rewrote the deferred-load code sample to load the GTM container (`gtm.js?id=…`) rather than `gtag.js` directly, dropped the direct GA4 `config` call, and noted GA4, Meta, TikTok and HubSpot fire as tags inside the one container | Section 5d, both code blocks and surrounding prose |
+| Exact request-count and format prescriptions penalize typographic variants | Labelled the 5-request/10-request compositions as one worked example, not a mandate, with the byte ceiling plus REQ-073's LCP target as the actual gate; reworded "Recommended amendment" to drop the request-ceiling ask; reworded the width ladder and tier table as one composition's arithmetic, not a universal ladder (R13); dropped the same "five requests" anchor from the rubric's score-5 row for consistency | Section 5a (intro paragraph, both tables, "Recommended amendment"); Section 5b ("Widths", "Tiers", worst-case line); Section 5f (score **5** row) |
+| M-06 itemizes four script payloads versus six claimed; HubSpot URL is a wildcard | Header "Method" field corrected from 6 to 4, named the four (GA4, Meta, TikTok stub, HubSpot banner), and labelled the HubSpot URL as a wildcard match rather than one fixed resource | Header field table, Method row |
+| Keep the measured byte evidence; list the DPR, font and LCP-element tests G-D must run | Added a short list naming the three unproven numbers G-D must measure before treating them as fact: per-slot DPR against produced widths (R13), actual subsetted woff2 sizes (OQ-3), and the actual Lighthouse-reported LCP element per mock (OQ-6) | Section 5e, new paragraph before 5f |
+
+Also cited rather than re-proposed, per this pack's note: **AN-19** (consent-first tag loading, byte
+ceilings, absolute vitals targets, `0_plan/07-design-decisions.md`), **D-037** (image delivery and
+caching) and **D-038** (font delivery, both `0_plan/03-decisions-and-open-questions.md`) — the
+register rows this cluster fed, now cited in 5a, 5b, 5c and 5d instead of proposed again. The M-06
+byte figures (189.0 KB gtag.js, 107.5 KB fbevents.js compressed) already matched AN-19's citation of
+this file; no number needed changing there.
+
+### Register row follow-ups
+
+None. AN-19, D-037 and D-038 already carry K11's byte-budget, image-delivery and font-delivery
+proposals; this rework cites them in place rather than proposing duplicates.
+
+### Disagreements with Astra's E4 items
+
+None. All seven K11 items verified against the file as Astra described them; each is corrected above
+rather than kept.
