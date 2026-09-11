@@ -1,23 +1,23 @@
 # SVG text and h1 measurements (qa/measure.mjs)
 
-2026-09-11T10:29:39.179Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
+2026-09-11T12:26:39.315Z; page `/0_plan/mockups/M07-the-timetable/index.html`.
 
 ## Grid form, 960 to 1440 (and 1920): every SVG text box against every other, against its week area, against the door column
 
 | Viewport | Form | Week area | Door column | Texts | Overlapping pairs | Clipped past the week area | Smallest slack to the week edge (label) | Row heights (head, Georgetown, GT Anywhere) |
 |---|---|---|---|---|---|---|---|---|
-| 1024 by 768 | grid, compact doors | 616px | 344px | 10 | 0 | none | 42px (Friday) | 32, 132, 132 |
-| 1024 by 900 | grid, doors with lines | 616px | 344px | 10 | 0 | none | 42px (Friday) | 32, 226, 226 |
-| 1100 by 720 | grid, compact doors | 691px | 345px | 10 | 0 | none | 49px (Friday) | 32, 132, 132 |
-| 1152 by 864 | grid, doors with lines | 726px | 362px | 10 | 0 | none | 53px (Friday) | 32, 228, 228 |
-| 1200 by 720 | grid, compact doors | 758px | 378px | 10 | 0 | none | 56px (Friday) | 32, 132, 132 |
-| 1280 by 720 | grid, compact doors | 790px | 394px | 10 | 0 | none | 59px (Friday) | 32, 132, 132 |
-| 1280 by 800 | grid, doors with lines | 790px | 394px | 10 | 0 | none | 59px (Friday) | 32, 204, 204 |
-| 1366 by 648 | grid, compact doors | 847px | 423px | 10 | 0 | none | 64px (Friday) | 32, 132, 132 |
-| 1366 by 900 | grid, doors with lines | 847px | 423px | 10 | 0 | none | 64px (Friday) | 32, 205, 205 |
-| 1440 by 900 | grid, doors with lines | 875px | 437px | 10 | 0 | none | 67px (Friday) | 32, 206, 206 |
-| 1440 by 720 | grid, compact doors | 875px | 437px | 10 | 0 | none | 67px (Friday) | 32, 132, 132 |
-| 1920 by 960 | grid, doors with lines | 875px | 437px | 10 | 0 | none | 67px (Friday) | 32, 206, 206 |
+| 1024 by 768 | grid, compact doors | 616px | 344px | 12 | 0 | none | 42px (Friday) | 33, 143, 115 |
+| 1024 by 900 | grid, compact doors | 616px | 344px | 12 | 0 | none | 42px (Friday) | 33, 174, 145 |
+| 1100 by 720 | grid, compact doors | 691px | 345px | 12 | 0 | none | 49px (Friday) | 33, 143, 115 |
+| 1152 by 864 | grid, compact doors | 726px | 362px | 12 | 0 | none | 53px (Friday) | 33, 143, 115 |
+| 1200 by 720 | grid, compact doors | 758px | 378px | 12 | 0 | none | 56px (Friday) | 33, 144, 116 |
+| 1280 by 720 | grid, compact doors | 790px | 394px | 12 | 0 | none | 59px (Friday) | 33, 144, 116 |
+| 1280 by 800 | grid, compact doors | 790px | 394px | 12 | 0 | none | 59px (Friday) | 33, 144, 116 |
+| 1366 by 648 | grid, compact doors | 847px | 423px | 12 | 0 | none | 65px (Friday) | 33, 144, 116 |
+| 1366 by 900 | grid, compact doors | 847px | 423px | 12 | 0 | none | 65px (Friday) | 33, 175, 147 |
+| 1440 by 900 | grid, compact doors | 875px | 437px | 12 | 0 | none | 67px (Friday) | 33, 175, 148 |
+| 1440 by 720 | grid, compact doors | 875px | 437px | 12 | 0 | none | 67px (Friday) | 33, 145, 117 |
+| 1920 by 960 | grid, compact doors | 875px | 437px | 12 | 0 | none | 67px (Friday) | 33, 179, 151 |
 
 ## h1 lines at the fold rows (rendered box height over the line box)
 

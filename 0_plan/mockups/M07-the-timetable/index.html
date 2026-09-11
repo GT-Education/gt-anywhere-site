@@ -30,9 +30,9 @@
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="site-header" data-fold="header">
+<header class="site-header" data-fold="header" data-component="Header (landing)">
   <div class="wrap header-inner">
-    <a class="lockup" href="#top"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" decoding="async"></a>
+    <a class="lockup" href="#top" data-component="Umbrella lockup"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" decoding="async"></a>
     <nav class="utility-nav" aria-label="Utility">
       <a class="link" href="https://community.gt.school" data-event="families_click">Current families</a>
       <a class="link" href="https://www.gt.school/contact">Contact admissions</a>
@@ -47,17 +47,17 @@
       <h1 id="thesis" data-fold="h1">GT School is a selective school for gifted and talented children, in&nbsp;person at our Georgetown, Texas campus or online <span class="nowrap">from anywhere.</span></h1>
       <p class="provenance" data-fold="provenance" data-slot="provenance">The gifted school in the Alpha School network.</p>
 
-      <div class="diagram" data-motion="v8">
+      <div class="diagram" data-motion="v8" data-component="Schedule visual">
         <h2 class="visually-hidden">Two ways to attend</h2>
 
-        <ul class="doors">
-          <li class="door" data-door="georgetown">
+        <ul class="doors" data-component="Door list">
+          <li class="door" data-door="georgetown" data-component="Door card">
             <p class="label door-label">In person</p>
             <h3 class="door-name">Georgetown Campus</h3>
             <p class="door-line">Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
             <a class="btn btn-navy cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="first_screen" data-fold="cta-georgetown">Explore the Georgetown campus<span class="arrow" aria-hidden="true"> →</span></a>
           </li>
-          <li class="door" data-door="anywhere">
+          <li class="door" data-door="anywhere" data-component="Door card">
             <p class="label door-label">Online</p>
             <h3 class="door-name">GT Anywhere</h3>
             <p class="door-line">Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown.</p>
@@ -65,14 +65,11 @@
           </li>
         </ul>
 
-        <div class="door-lines">
-          <p><span class="run-in">Georgetown Campus</span> Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
-          <p><span class="run-in">GT Anywhere</span> Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown.</p>
-        </div>
-
-        <!-- The week: five weekday columns, two school rows. Complete at rest; the V8 draw waits on D-039. -->
+        <!-- The week: five weekday columns, two school rows, each row named where it starts. Complete at rest;
+             the V8 draw waits on D-039. Each band is five day segments separated by gaps in the page ground, so the
+             five columns run through both rows; one stroke-only rect per band carries the forced-colours outline. -->
         <div class="week week-head">
-          <svg class="week-svg" focusable="false">
+          <svg class="week-svg" height="32" focusable="false">
             <line class="rule" x1="20%" y1="0" x2="20%" y2="100%"/>
             <line class="rule" x1="40%" y1="0" x2="40%" y2="100%"/>
             <line class="rule" x1="60%" y1="0" x2="60%" y2="100%"/>
@@ -85,47 +82,55 @@
           </svg>
         </div>
 
-        <div class="week week-row" data-row="georgetown">
-          <svg class="week-svg" focusable="false">
+        <div class="week week-row" data-row="georgetown" role="group" aria-labelledby="row-name-georgetown">
+          <p class="row-name" id="row-name-georgetown">Georgetown Campus</p>
+          <svg class="week-svg" height="92" focusable="false">
             <g class="band band-g">
-              <rect class="seg" x="0" y="12" width="20%" height="36"/><rect class="seg" x="20%" y="12" width="20%" height="36"/><rect class="seg" x="40%" y="12" width="20%" height="36"/><rect class="seg" x="60%" y="12" width="20%" height="36"/><rect class="seg" x="80%" y="12" width="20%" height="36"/>
+              <rect class="seg" x="0" y="0" width="20%" height="28"/><rect class="seg" x="20%" y="0" width="20%" height="28"/><rect class="seg" x="40%" y="0" width="20%" height="28"/><rect class="seg" x="60%" y="0" width="20%" height="28"/><rect class="seg" x="80%" y="0" width="20%" height="28"/>
             </g>
             <g class="band band-g">
-              <rect class="seg" x="0" y="56" width="20%" height="36"/><rect class="seg" x="20%" y="56" width="20%" height="36"/><rect class="seg" x="40%" y="56" width="20%" height="36"/><rect class="seg" x="60%" y="56" width="20%" height="36"/><rect class="seg" x="80%" y="56" width="20%" height="36"/>
+              <rect class="seg" x="0" y="34" width="20%" height="28"/><rect class="seg" x="20%" y="34" width="20%" height="28"/><rect class="seg" x="40%" y="34" width="20%" height="28"/><rect class="seg" x="60%" y="34" width="20%" height="28"/><rect class="seg" x="80%" y="34" width="20%" height="28"/>
             </g>
-            <text class="bar-label" x="12" y="30">Mornings from 9 to noon: about two hours of focused academics</text>
-            <text class="bar-label" x="12" y="74">Afternoons: workshops, projects and competitions</text>
-            <text class="cap" x="12" y="112">Every school day.</text>
+            <line class="gap" x1="20%" y1="0" x2="20%" y2="62"/>
+            <line class="gap" x1="40%" y1="0" x2="40%" y2="62"/>
+            <line class="gap" x1="60%" y1="0" x2="60%" y2="62"/>
+            <line class="gap" x1="80%" y1="0" x2="80%" y2="62"/>
+            <rect class="band-edge" x="0" y="0" width="100%" height="28"/>
+            <rect class="band-edge" x="0" y="34" width="100%" height="28"/>
+            <text class="bar-label" x="12" y="14">Mornings from 9 to noon: about two hours of focused academics</text>
+            <text class="bar-label" x="12" y="48">Afternoons: workshops, projects and competitions</text>
+            <text class="cap" x="0" y="82">Every school day. Guides on campus in every session.</text>
           </svg>
         </div>
 
-        <div class="week week-row" data-row="anywhere">
-          <svg class="week-svg" focusable="false">
+        <div class="week week-row" data-row="anywhere" role="group" aria-labelledby="row-name-anywhere">
+          <p class="row-name" id="row-name-anywhere">GT Anywhere</p>
+          <svg class="week-svg" height="58" focusable="false">
             <g class="band band-a">
-              <rect class="seg" x="0" y="12" width="20%" height="28"/><rect class="seg" x="20%" y="12" width="20%" height="28"/><rect class="seg" x="40%" y="12" width="20%" height="28"/><rect class="seg" x="60%" y="12" width="20%" height="28"/><rect class="seg" x="80%" y="12" width="20%" height="28"/>
+              <rect class="seg" x="0" y="0" width="20%" height="28"/><rect class="seg" x="20%" y="0" width="20%" height="28"/><rect class="seg" x="40%" y="0" width="20%" height="28"/><rect class="seg" x="60%" y="0" width="20%" height="28"/><rect class="seg" x="80%" y="0" width="20%" height="28"/>
             </g>
-            <line class="gap" x1="20%" y1="8" x2="20%" y2="44"/>
-            <line class="gap" x1="40%" y1="8" x2="40%" y2="44"/>
-            <line class="gap" x1="60%" y1="8" x2="60%" y2="44"/>
-            <line class="gap" x1="80%" y1="8" x2="80%" y2="44"/>
-            <text class="bar-label" x="12" y="58">Two to three hours of focused mastery academics a day, with live sessions from Guides</text>
-            <text class="cap" x="12" y="84">The rest of the day is yours.</text>
+            <line class="gap" x1="20%" y1="0" x2="20%" y2="28"/>
+            <line class="gap" x1="40%" y1="0" x2="40%" y2="28"/>
+            <line class="gap" x1="60%" y1="0" x2="60%" y2="28"/>
+            <line class="gap" x1="80%" y1="0" x2="80%" y2="28"/>
+            <rect class="band-edge" x="0" y="0" width="100%" height="28"/>
+            <text class="bar-label" x="12" y="14">Two to three hours of focused mastery academics a day, with live sessions from Guides</text>
+            <text class="cap" x="0" y="48">The rest of the day is yours.</text>
           </svg>
         </div>
 
-        <!-- Below the grid's minimum width the week becomes two day cards (HTML, so the labels wrap). -->
+        <!-- Below the grid's minimum width the week becomes two day cards (HTML, so the labels wrap). The five day
+             columns survive at card scale as gaps in the page ground across each band. -->
         <ul class="days">
           <li class="day" data-day="georgetown">
-            <p class="label">In person</p>
             <p class="day-name">Georgetown Campus</p>
             <ol class="bars">
               <li class="bar bar-g">Mornings from 9 to noon: about two hours of focused academics</li>
               <li class="bar bar-g">Afternoons: workshops, projects and competitions</li>
             </ol>
-            <p class="day-cap">Every school day.</p>
+            <p class="day-cap">Every school day. Guides on campus in every session.</p>
           </li>
           <li class="day" data-day="anywhere">
-            <p class="label">Online</p>
             <p class="day-name">GT Anywhere</p>
             <ol class="bars">
               <li class="bar bar-a">Two to three hours of focused mastery academics a day, with live sessions from Guides</li>
@@ -134,7 +139,12 @@
           </li>
         </ul>
 
-        <p class="strip"><span class="marks" aria-hidden="true"><span class="mark"></span><span class="mark"></span><span class="mark"></span><span class="mark"></span></span><span class="strip-text">Four intensive weekends a year in Georgetown</span></p>
+        <p class="strip"><span class="run-in">GT Anywhere</span><span class="marks" aria-hidden="true"><span class="mark"></span><span class="mark"></span><span class="mark"></span><span class="mark"></span></span><span class="strip-text">Four intensive weekends a year in Georgetown</span></p>
+
+        <div class="door-lines">
+          <p><span class="run-in">Georgetown Campus</span> Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
+          <p><span class="run-in">GT Anywhere</span> Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -147,7 +157,7 @@
     <div class="wrap">
       <h2 id="compare-heading" class="visually-hidden">Compare the two schools</h2>
       <p class="eyebrow">Compare</p>
-      <div class="compare-block">
+      <div class="compare-block" data-component="Comparison table">
         <table>
           <caption>Georgetown Campus and GT Anywhere, side by side</caption>
           <thead>
@@ -208,7 +218,7 @@
       </div>
       <p class="sources">Sources: admission bar, tuition and TEFA, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; Georgetown schedule, <a class="link" href="https://www.gt.school/academics" data-event="outbound_school_site" data-school="georgetown">gt.school/academics</a>; GT Anywhere schedule, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; intensive weekends, <a class="link" href="https://anywhere.gt.school/intensives" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/intensives</a>; weekly check-ins, <a class="link" href="https://www.gt.school/terms-of-use" data-event="outbound_school_site" data-school="georgetown">the Terms of Use</a> on both sites. Checked 2026-09-10.</p>
 
-      <ul class="doors-again">
+      <ul class="doors-again" data-component="Door list">
         <li>
           <p class="label">In person</p>
           <a class="btn btn-navy" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="after_comparison">Explore the Georgetown campus<span class="arrow" aria-hidden="true"> →</span></a>
@@ -219,7 +229,7 @@
         </li>
       </ul>
 
-      <div class="tefa">
+      <div class="tefa" data-component="TEFA module">
         <h3 class="label">Texas families</h3>
         <p>GT Anywhere is TEFA-eligible. The Texas Education Freedom Accounts program can cover tuition for eligible families.</p>
         <a class="link" href="https://anywhere.gt.school/academics" data-event="tefa_module_view" data-region-source="default">Check eligibility on the GT Anywhere site</a>
@@ -227,7 +237,7 @@
     </div>
   </section>
 
-  <section class="section surface proof" aria-labelledby="proof-heading">
+  <section class="section surface proof" aria-labelledby="proof-heading" data-component="Proof strip">
     <div class="wrap section-grid">
       <div class="section-head">
         <p class="eyebrow">Proof</p>
@@ -299,9 +309,9 @@
 
 </main>
 
-<footer class="site-footer on-navy">
+<footer class="site-footer on-navy" data-component="Footer">
   <div class="wrap footer-grid">
-    <div class="footer-facts">
+    <div class="footer-facts" data-component="Facts block">
       <p>GT School, Inc. is a selective school for gifted and talented children, kindergarten to 8th grade. Georgetown Campus: in person in Georgetown, Texas. GT Anywhere: online, with four in-person weekends a year in Georgetown.</p>
       <p class="footer-phone">(512) 270-9481</p>
     </div>

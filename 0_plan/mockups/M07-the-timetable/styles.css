@@ -47,16 +47,8 @@ h2 { font-size: var(--text-2xl); text-wrap: balance; }
 /* ---------- Focus (K3 section 5d): --color-focus at 2px offset on light surfaces; the two-colour ring where navy is the ground ---------- */
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .on-navy :focus-visible, .on-navy:focus-visible { outline: 2px solid var(--color-on-navy); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-navy); }
-@media (forced-colors: active) {
-  :focus-visible, .on-navy :focus-visible { outline: 3px solid CanvasText; box-shadow: none; }
-  .btn { border-color: ButtonText; }
-  .week-svg .band rect { fill: Canvas; stroke: CanvasText; }
-  .week-svg text { fill: CanvasText; }
-  .week-svg .rule { stroke: CanvasText; }
-  .week-svg .gap { stroke: Canvas; }
-  .mark { border: 1px solid CanvasText; }
-  .bar { border: 1px solid CanvasText; }
-}
+/* The forced-colours fallback is the last block in this file (SVG fill and stroke are author-controlled even under
+   forced colours, so those rules must outrank the token rules below by source order, not by weight). */
 
 /* ---------- Skip link ---------- */
 .skip-link { position: absolute; top: var(--space-2); left: var(--space-2); z-index: 1; padding: var(--space-3) var(--space-4); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; text-decoration: none; border-radius: var(--radius-sm); transform: translateY(-200%); }
@@ -80,9 +72,9 @@ h2 { font-size: var(--text-2xl); text-wrap: balance; }
 
 /* ---------- First screen: h1, provenance, the diagram. Height bands (K10 T-K10-8): tight at or below 639px, compressed to
    899px, relaxed from 900px where a bounded svh gap opens between the provenance line and the grid. ---------- */
-.first-screen { --fs-top: var(--space-4); --fs-h1-gap: var(--space-3); --fs-grid-gap: var(--space-4); padding-block: var(--fs-top) 0; }
+.first-screen { --fs-top: var(--space-4); --fs-h1-gap: var(--space-3); --fs-grid-gap: var(--space-4); --week-pad: var(--space-3); --lines-gap: var(--space-5); padding-block: var(--fs-top) 0; }
 @media (max-height: 639px) { .first-screen { --fs-top: var(--space-3); --fs-h1-gap: var(--space-3); --fs-grid-gap: var(--space-3); } }
-@media (min-height: 900px) { .first-screen { --fs-top: var(--space-5); --fs-h1-gap: var(--space-4); --fs-grid-gap: clamp(var(--space-5), 6svh, var(--space-8)); } .anchor-band { padding-top: var(--space-7); } }
+@media (min-height: 900px) { .first-screen { --fs-top: var(--space-5); --fs-h1-gap: var(--space-4); --fs-grid-gap: clamp(var(--space-5), 8svh, var(--space-10)); --week-pad: clamp(var(--space-3), 2.6svh, var(--space-7)); --lines-gap: clamp(var(--space-5), 5svh, var(--space-9)); } }
 .fs-wrap { container: fs / inline-size; }
 
 h1 { font-size: var(--text-3xl); max-width: 35ch; }
@@ -100,36 +92,43 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
 /* Doors as cards (M01 form): label, name, line, CTA on the school's tint; a list that holds N campuses (DD-21). */
 .doors { grid-row: 1; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
 .door { display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; padding: var(--space-3); border-radius: var(--radius-md); }
-.door[data-door="georgetown"] { background: var(--color-surface); }
+.door[data-door="georgetown"] { background: var(--color-georgetown-tint); }
 .door[data-door="anywhere"] { background: var(--color-anywhere-tint); }
 .door-name { margin-top: var(--space-2); font-size: var(--text-lg); }
 .door-line { margin-top: var(--space-3); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
-.door .cta { margin-top: var(--space-3); justify-self: start; }
-.door-lines { grid-row: 2; display: none; }
+.door .cta { margin-top: var(--space-3); justify-self: start; align-self: end; } /* end, not stretch: the button keeps its 44px in every height band */
+.door-lines { grid-row: 4; display: none; }
+.run-in { font-weight: 500; padding-inline-end: var(--space-2); color: var(--color-text); }
 
-/* Day cards: the week as two days (every weekday is the same), HTML so the labels wrap. */
-.days { grid-row: 3; padding-top: var(--space-5); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+/* Day cards: the week as two days (every weekday is the same), HTML so the labels wrap. The five day columns survive
+   here as gaps in the page ground across each band, the same grammar the grid form uses. */
+.days { grid-row: 2; padding-top: var(--space-4); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
 .day { padding: var(--space-3) 0 var(--space-4); border-top: var(--rule); }
-.day-name { margin-top: var(--space-2); font-size: var(--text-lg); font-family: var(--font-serif); line-height: var(--leading-tight); }
+.day-name { font-size: var(--text-lg); font-family: var(--font-serif); line-height: var(--leading-tight); }
 .bars { margin-top: var(--space-3); display: grid; gap: var(--space-2); }
-.bar { padding: var(--space-3) var(--space-4); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-prose); border-radius: var(--radius-sm); }
-.bar-g { background: var(--color-surface); }
-.bar-a { background: var(--color-anywhere-tint); }
+.bar { padding: var(--space-3) var(--space-4); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-prose); border-radius: var(--radius-sm);
+  background-image: linear-gradient(to right, transparent 0 calc(20% - 3px), var(--color-bg) calc(20% - 3px) calc(20% + 3px),
+    transparent calc(20% + 3px) calc(40% - 3px), var(--color-bg) calc(40% - 3px) calc(40% + 3px),
+    transparent calc(40% + 3px) calc(60% - 3px), var(--color-bg) calc(60% - 3px) calc(60% + 3px),
+    transparent calc(60% + 3px) calc(80% - 3px), var(--color-bg) calc(80% - 3px) calc(80% + 3px), transparent calc(80% + 3px)); }
+.bar-g { background-color: var(--color-georgetown-tint); }
+.bar-a { background-color: var(--color-anywhere-tint); }
 .day-cap { margin-top: var(--space-3); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
 
-/* The strip: four marks (the first screen's one accent use, as shapes, RF-37) and the deck's In-person time cell. */
-.strip { grid-row: 4; margin-top: var(--space-3); padding-block: var(--space-4) var(--space-5); border-top: var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); font-weight: 500; line-height: var(--leading-prose); color: var(--color-text-muted); }
+/* The strip: the school it belongs to, four marks (the first screen's one accent use, as shapes, RF-37) and the
+   deck's In-person time cell. */
+.strip { grid-row: 3; margin-top: var(--space-3); padding-block: var(--space-4) var(--space-5); border-top: var(--rule); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); font-weight: 500; line-height: var(--leading-prose); color: var(--color-text-muted); }
+.strip .run-in { padding-inline-end: 0; }
 .marks { display: inline-flex; gap: var(--space-2); }
 .mark { display: block; width: .75rem; height: .75rem; background: var(--color-accent); border-radius: var(--radius-sm); }
 
 /* Compact door rule (CONTRACT section 2, at M03's measured threshold): below 800px tall the doors carry label, name and CTA,
    and both lines follow the second CTA (stacked forms) or the strip (grid form) as two run-in paragraphs. */
+.door-lines p { line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.door-lines p + p { margin-top: var(--space-3); }
 @media (max-height: 799px) {
   .door .door-line { display: none; }
   .door-lines { display: block; padding-top: var(--space-5); }
-  .door-lines p { line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
-  .door-lines p + p { margin-top: var(--space-3); }
-  .run-in { font-weight: 500; padding-inline-end: var(--space-2); }
 }
 
 /* Two abreast from 40rem: doors side by side, day cards side by side (the two days beside each other, the thesis on tablets). */
@@ -148,34 +147,40 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
   .door-name { font-size: var(--text-md); }
 }
 
-/* ---------- The grid form, from a 60rem container: weekday header, two rows, the doors at the row ends ---------- */
+/* ---------- The grid form, from a 60rem container: weekday header, two rows, the doors at the row ends.
+   Each row's height is its own diagram's (name plus a fixed-height SVG plus padding); the door beside it takes the
+   compact form at every height here, so a three-line sentence can never stretch a row past its picture. The two
+   doors sit on the parent's two rows through `subgrid`, so each door ends exactly where its week row ends. ---------- */
 @container fs (inline-size >= 60rem) {
-  .diagram { grid-template-columns: minmax(0, 1fr) clamp(21.5rem, 33.3%, 30rem); grid-template-rows: auto auto auto auto auto; border-top: var(--rule); }
-  .week { display: block; position: relative; grid-column: 1; border-right: var(--rule); }
-  .week-head { grid-row: 1; min-height: 2rem; }
-  .week-row { grid-row: 2; min-height: 8.25rem; border-top: var(--rule); }
+  .diagram { grid-template-columns: minmax(0, 1fr) clamp(21.5rem, 33.3%, 30rem); grid-template-rows: auto auto auto auto auto; }
+  .week { display: block; grid-column: 1; border-right: var(--rule); }
+  .week-head { grid-row: 1; border-top: var(--rule); border-right: 0; }
+  .week-row { grid-row: 2; padding-block: var(--week-pad); border-top: var(--rule); }
   .week-row[data-row="anywhere"] { grid-row: 3; }
-  .week-svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: visible; }
-  .doors { grid-column: 2; grid-row: 2 / 4; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr 1fr; gap: 0; }
-  .door { border-radius: 0; background: transparent; padding: var(--space-3) 0 var(--space-3) var(--space-6); border-top: var(--rule); }
+  .row-name { font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-tight); margin-bottom: var(--space-3); }
+  .week-svg { display: block; width: 100%; overflow: visible; }
+  .doors { grid-column: 2; grid-row: 2 / 4; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: subgrid; gap: 0; }
+  .door { border-radius: 0; background: transparent; padding: var(--week-pad) 0 var(--week-pad) var(--space-6); border-top: var(--rule); } /* the same inset as the week row beside it, so the label starts on the row name's line and the CTA ends on the caption's */
   .door[data-door="georgetown"], .door[data-door="anywhere"] { background: transparent; }
+  .door .door-line { display: none; }
+  .door-lines { display: block; grid-column: 1 / -1; grid-row: 5; padding-top: var(--lines-gap); }
   .days { display: none; }
-  .strip { grid-column: 1 / -1; grid-row: 4; margin-top: 0; }
-  .door-lines { grid-column: 1 / -1; grid-row: 5; }
-  .door-lines p { max-inline-size: var(--measure-prose); }
+  .strip { grid-column: 1; grid-row: 4; margin-top: 0; }
 }
 @media (max-height: 799px) {
   @container fs (inline-size >= 60rem) { .door-lines { padding-top: var(--space-4); } }
 }
 
-/* SVG text bound to the tokens: labels --text-sm Inter Tight 500; captions muted; bars in the two tints; rules --color-border. */
+/* SVG text bound to the tokens: labels --text-sm Inter Tight 500; captions muted; bands in the two tints; rules
+   --color-border; the day gaps are the page ground, so the five columns run through every band. */
 .week-svg text { font-family: var(--font-sans); font-weight: 500; font-size: var(--text-sm); fill: var(--color-text); dominant-baseline: central; }
 .week-svg .day-label { text-anchor: middle; fill: var(--color-text-muted); }
 .week-svg .cap { fill: var(--color-text-muted); }
-.week-svg .band-g rect { fill: var(--color-surface); }
+.week-svg .band-g rect { fill: var(--color-georgetown-tint); }
 .week-svg .band-a rect { fill: var(--color-anywhere-tint); }
+.week-svg .band-edge { fill: none; stroke: none; } /* carries the band's outline under forced colours only */
 .week-svg .rule { stroke: var(--color-border); stroke-width: 1; shape-rendering: crispEdges; }
-.week-svg .gap { stroke: var(--color-bg); stroke-width: 8; }
+.week-svg .gap { stroke: var(--color-bg); stroke-width: 6; }
 
 /* ---------- Second screen: the compare anchor opens it ---------- */
 .anchor-band { padding-top: var(--space-6); }
@@ -192,6 +197,7 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
 .surface { background: var(--color-surface); --rule: 1px solid var(--color-border-strong); }
 
 /* ---------- Comparison (DD-06, DD-43, R6): a table from a 58rem container, stacked blocks below ---------- */
+.compare { padding-top: var(--space-6); } /* the anchor sentence opens this section: one band, not two */
 .compare .eyebrow { margin-bottom: var(--space-4); }
 .compare-block { container: compare / inline-size; }
 table { width: 100%; border-collapse: collapse; }
@@ -257,7 +263,8 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
 .logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); border-radius: var(--radius-sm); }
 .logo-plate { background: var(--color-bg); }
 .logo-navy { background: var(--color-navy); }
-.footer-logos img { height: 1.5rem; width: auto; }
+.footer-logos img { height: 27px; width: auto; } /* K12 V2: horizontal marks at least 27px at 390. 1.5rem was 24px */
+@container page (inline-size >= 48rem) { .footer-logos img { height: 32px; } } /* K12 V2: 32px at 1440 */
 @container page (inline-size >= 64rem) {
   .footer-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
   .footer-facts { grid-column: 1 / span 5; }
@@ -268,4 +275,21 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
 /* ---------- Reduced motion (R8): every duration zero, including pseudo-elements; nothing here animates anyway ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Forced colours (K3 F38), last in the file so it outranks the token rules above by source order.
+   The user agent forces HTML colours but not SVG fill and stroke, so the diagram is restated here: the bands drop to
+   Canvas with every internal stroke suppressed, and one stroke-only rect per band draws the outline, so no stroke can
+   cross a label (the crossing Departure 7 exists to remove). Each selector matches its token counterpart's weight. ---------- */
+@media (forced-colors: active) {
+  :focus-visible, .on-navy :focus-visible { outline: 3px solid CanvasText; box-shadow: none; }
+  .btn { border-color: ButtonText; }
+  .week-svg .band rect, .week-svg .band-g rect, .week-svg .band-a rect { fill: Canvas; stroke: none; }
+  .week-svg .band-edge { fill: none; stroke: CanvasText; stroke-width: 1; }
+  .week-svg text, .week-svg .day-label, .week-svg .cap { fill: CanvasText; }
+  .week-svg .rule { stroke: CanvasText; }
+  .week-svg .gap { stroke: Canvas; }
+  .row-name { color: CanvasText; }
+  .mark { border: 1px solid CanvasText; }
+  .bar { background-image: none; border: 1px solid CanvasText; }
 }

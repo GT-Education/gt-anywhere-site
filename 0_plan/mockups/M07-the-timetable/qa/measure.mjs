@@ -25,7 +25,11 @@ for (const [w, h] of GRID) {
   const r = await page.evaluate(() => {
     const grid = getComputedStyle(document.querySelector('.week')).display !== 'none';
     if (!grid) return { grid };
-    const texts = [...document.querySelectorAll('.week-svg text')].map(t => { const b = t.getBoundingClientRect(); const svg = t.closest('svg').getBoundingClientRect(); return { txt: t.textContent, l: b.left, r: b.right, t: b.top, b: b.bottom, svgR: svg.right, svgL: svg.left }; });
+    // the row names are HTML above their SVG, so measure them against their week row's box; everything else against its svg
+    // the row names are HTML above their SVG: measure the text itself (a Range, not the full-width block box), against
+    // their week row; everything else is SVG text measured against its svg
+    const inkBox = (t) => { if (t.classList.contains('row-name')) { const rg = document.createRange(); rg.selectNodeContents(t); return rg.getBoundingClientRect(); } return t.getBoundingClientRect(); };
+    const texts = [...document.querySelectorAll('.week-svg text, .row-name')].map(t => { const b = inkBox(t); const svg = (t.closest('svg') || t.closest('.week')).getBoundingClientRect(); return { txt: t.textContent, l: b.left, r: b.right, t: b.top, b: b.bottom, svgR: svg.right, svgL: svg.left }; });
     const pairs = []; for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++) { const a = texts[i], c = texts[j]; if (a.l < c.r && c.l < a.r && a.t < c.b && c.t < a.b) pairs.push(a.txt.slice(0, 18) + ' / ' + c.txt.slice(0, 18)); }
     const clipped = texts.filter(x => x.r > x.svgR + 0.5).map(x => x.txt.slice(0, 24));
     let min = Infinity, minTxt = ''; for (const x of texts) { const s = x.svgR - x.r; if (s < min) { min = s; minTxt = x.txt.slice(0, 22); } }
