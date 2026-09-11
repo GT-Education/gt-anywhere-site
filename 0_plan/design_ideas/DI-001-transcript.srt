@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:02,960
+Someone just open-sourced Claude Design and made it completely free.
+
+2
+00:00:03,240 --> 00:00:06,800
+It's called Open Design, and it looks and works just like Claude Design does,
+
+3
+00:00:06,920 --> 00:00:08,940
+but it comes with no usage limits or paywalls.
+
+4
+00:00:09,300 --> 00:00:12,200
+And the best part is you can use it with literally any AI model that you want,
+
+5
+00:00:12,280 --> 00:00:15,420
+including your ChatGPT subscription, APIs, or local models,
+
+6
+00:00:15,500 --> 00:00:17,300
+so you can practically run it completely free.
+
+7
+00:00:17,620 --> 00:00:20,520
+With it, you can also create animated websites, mobile app prototypes,
+
+8
+00:00:20,880 --> 00:00:22,560
+slides, and even full motion graphics.
+
+9
+00:00:23,160 --> 00:00:25,880
+Plus, just like Claude Design, you'll get a full interactive canvas
+
+10
+00:00:25,880 --> 00:00:28,200
+where you can keep prompting and refining over and over
+
+11
+00:00:28,200 --> 00:00:30,300
+until your design looks exactly how you want it to.
+
+12
+00:00:30,760 --> 00:00:31,920
+So, want to try it for yourselves?
+
+13
+00:00:32,060 --> 00:00:34,020
+Just comment design, and I'll send you the link directly.
+
