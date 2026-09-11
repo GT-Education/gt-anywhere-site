@@ -17,6 +17,6 @@
 | K12 Existing GT and Alpha branding | `K12-gt-branding.md` | Queued | Pending |
 | K13 Design systems and shells | `K13-design-systems.md` | Queued | Pending |
 | K14 Copy and voice for institutions | `K14-copy-voice.md` | Queued | Pending |
-| Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` | K5's eight captured (32 screenshots); K0 shortlist capture in progress | Pending |
+| Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` (grid: `exemplars/index.html`) | 26 sites captured at 390 and 1440 (JPEG), grid page for Johnny | Pending |
 | Design Director brief template | `BRIEF-TEMPLATE.md` | Written 2026-09-11; filled per mock after G-C | n/a |
 | Concept catalog | `CONCEPTS.md` | Queued (G-C) | Pending |
