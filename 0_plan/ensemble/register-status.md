@@ -1,14 +1,14 @@
 # Register status
 
-Generated 2026-09-11 02:06 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
+Generated 2026-09-11 02:10 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
 
 | Rows | Complete or superseded | Drafted | Reviewed | Rework | Escalated | Malformed |
 |---|---|---|---|---|---|---|
-| 182 | 180 | 0 | 1 | 1 | 0 | 0 |
+| 182 | 180 | 0 | 2 | 0 | 0 | 0 |
 
 ## Incomplete rows
 
 | Row | File | Line | State | Reasons |
 |---|---|---|---|---|
-| D-039 | `03-decisions-and-open-questions.md` | 47 | Rework | Astra checks Fable: Fail: The specific E6–E6e regression examples and factual corrections are fixed  |
+| D-039 | `03-decisions-and-open-questions.md` | 47 | Reviewed | Astra checks Fable: pending |
 | DD-42 | `07-design-decisions.md` | 60 | Reviewed | Astra checks Fable: pending |

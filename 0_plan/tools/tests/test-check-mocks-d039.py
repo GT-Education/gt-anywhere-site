@@ -33,6 +33,8 @@ CASES = {
  'quoted > inside a legitimate inline script tag still counts one inline script': ('data-d039="script"', LD, '<script data-note=">">1</script>', 'R2', 'PASS'),
  'entity-encoded submit type is rejected': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><button type="sub&#109;it">go</button>', 'R1', 'FAIL'),
  'a disguised closing tag does not shorten the inline script byte count': ('data-d039="script"', LD, '<script>const marker = "</scripture>"; /*' + 'x' * 2048 + '*/</script>', 'R2', 'FAIL'),
+ 'a commented-out input is not an input': ('', LD, '<!-- <input type="text" name="search"> -->', 'R1', 'PASS'),
+ 'a commented-out script is not a script': ('', LD, '<!-- <script src="../shared/reveal.js"></script> -->', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

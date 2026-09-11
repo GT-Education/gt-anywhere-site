@@ -70,6 +70,7 @@ def check(folder):
     return check_doc(doc, style, rat_text, folder)
 
 def check_doc(doc, style, rat_text, folder='(memory)'):
+    doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # commented-out markup is not markup: the tag scans and the text rules see the document without comments
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
