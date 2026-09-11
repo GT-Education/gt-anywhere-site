@@ -29,7 +29,6 @@ h1, h2, h3 { margin: 0; font-family: var(--font-serif); line-height: var(--leadi
 a {
   color: var(--color-text);
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
 }
 a:hover, a:focus-visible {
   color: var(--color-focus);
@@ -90,7 +89,14 @@ a:focus-visible {
   padding-block: var(--space-4);
   flex-wrap: wrap;
 }
-.lockup { display: inline-flex; }
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+}
 .lockup-mark {
   height: 36px;
   width: auto;
@@ -100,9 +106,18 @@ a:focus-visible {
 .utility-nav {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-5);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
+}
+.utility-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
 }
 
 /* ---------- Hero / first screen ---------- */
@@ -237,7 +252,6 @@ a.door-link:hover, a.door-link:focus-visible {
   text-decoration: none;
   text-underline-offset: 0.15em;
   border-radius: var(--radius-sm);
-  transition: color var(--duration-fast) var(--ease-standard);
 }
 @media (min-width: 768px) {
   .door-cta { width: auto; align-self: flex-start; }
@@ -256,12 +270,33 @@ a.door-link:focus-visible .door-cta {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.compare-anchor a { text-decoration: underline; }
+.compare-anchor a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 
 /* ---------- Sections, alternating surfaces ---------- */
 
 section { padding-block: var(--space-8); }
 .hero { padding-block: var(--space-6) var(--space-7); }
+
+/* Below 768px, trim the vertical rhythm above and around the compare anchor so its
+   44px target (rule 7) still lands inside an 844px viewport with both door CTAs
+   visible (finding 6). Desktop spacing (the base values above) is untouched. This
+   block must stay after both .hero declarations above — an earlier position would
+   lose the cascade to the plain (non-media) .hero rule on this line, which shares
+   its specificity and comes later in source order. */
+@media (max-width: 767px) {
+  .hero { padding-block: var(--space-4) var(--space-7); }
+  .doors { margin-top: var(--space-3); }
+  .compare-anchor { margin-top: var(--space-3); }
+}
+
 .comparison { background: var(--color-surface); }
 .proof-strip { background: var(--color-bg); }
 .steps { background: var(--color-surface); }
@@ -322,6 +357,7 @@ tbody th {
   .table-scroll { overflow-x: visible; }
   table { min-width: 0; }
   table, tbody, tr, th, td { display: block; width: 100%; }
+  caption { display: block; width: 100%; }
   thead {
     display: block;
     position: absolute;
@@ -369,9 +405,12 @@ tbody th {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
   background: none;
-  padding: var(--space-2) 0;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--text-sm);
@@ -399,7 +438,18 @@ tbody th {
   margin-bottom: var(--space-2);
 }
 .tefa-module p { font-size: var(--text-sm); margin-bottom: var(--space-2); }
-.tefa-module a { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; text-decoration: underline; }
+.tefa-module a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+}
 
 /* ---------- Proof strip ---------- */
 
@@ -451,6 +501,12 @@ tbody th {
   gap: var(--space-4) var(--space-6);
 }
 .apply-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--text-sm);
@@ -466,12 +522,29 @@ tbody th {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.cta-list a { text-decoration: underline; }
+.cta-list a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 
 /* ---------- Current families ---------- */
 
 .current-families p { max-width: var(--container-narrow); }
-.current-families a { font-weight: 600; text-decoration: underline; }
+.current-families a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+  font-weight: 600;
+  text-decoration: underline;
+}
 
 /* ---------- Footer ---------- */
 
@@ -498,11 +571,27 @@ tbody th {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.footer-nav a { text-decoration: underline; }
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 .footer-logo-link {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+.footer-logo-link[data-school="georgetown"] {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+.footer-logo-link[data-school="anywhere"] {
+  background: var(--color-navy);
 }
 .footer-logo-link img {
   height: 24px;
