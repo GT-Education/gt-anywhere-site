@@ -103,6 +103,16 @@ const FOLD_JS = `(() => {
       const tag = node.tagName.toUpperCase();
       if (REPLACED.includes(tag) || node.tagName.toLowerCase() === 'svg') add(box, tag.toLowerCase());
       else if (paints(node) && box.height <= 8) add(box, 'rule');
+      // A hairline drawn as a border on a tall block is a rule a reader sees, so record the painted edge
+      // itself rather than the block. Only horizontal edges: a vertical divider running off the bottom is
+      // the kind of thing that made an empty screen look continued.
+      for (const side of ['Top', 'Bottom']) {
+        const w = parseFloat(cs['border' + side + 'Width']);
+        if (w > 0 && cs['border' + side + 'Style'] !== 'none' && !TRANSPARENT.test(cs['border' + side + 'Color'])) {
+          const y = side === 'Top' ? box.top : box.bottom - w;
+          add({ top: y, bottom: y + w, width: box.width, height: w }, 'rule');
+        }
+      }
       for (const pseudo of ['::before', '::after']) { const ps = getComputedStyle(node, pseudo); if (ps.content && ps.content !== 'none' && ps.content !== 'normal' && box.height <= 8) add(box, 'mark'); }
       for (const c of node.childNodes) walk(c);
     };
@@ -121,7 +131,9 @@ const FOLD_JS = `(() => {
     if (k.bottom <= lastCta) continue;
     // At least 4px of the piece must actually show. A line whose top sits a fraction of a pixel above the
     // edge is not visible content, which is how M15's 834 by 1194 row passed while reading as finished.
-    if (k.top < vh) { const v = Math.min(k.bottom, vh); if (v - k.top >= 4 && v > lastVisible) { lastVisible = v; deepest = k; } }
+    // Count a piece that is wholly in view, or one cut by the edge with at least 4px showing. A line whose
+    // top sits a fraction of a pixel above the edge shows nothing, which is how M15's 834 by 1194 row passed.
+    if (k.top < vh) { const v = Math.min(k.bottom, vh); if ((k.bottom <= vh || v - k.top >= 4) && v > lastVisible) { lastVisible = v; deepest = k; } }
     if (k.bottom > vh + 2 && !below) below = k;
   }
   if (below && lastVisible >= vh - RESERVED - 1) {

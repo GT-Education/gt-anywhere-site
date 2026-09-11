@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:45.425Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:23:05.423Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -22,7 +22,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V16 | 1440 by 900 | fold | 876 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 555 | 682 | no | PASS no horizontal scroll |
-| V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | no | report: scrollWidth 1024 |
+| V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
 
@@ -56,7 +56,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V8 | yes | text cut by the edge, 722 to 742 |
 | V9 | yes | content reaches 840 of 844 and more follows below |
 | V10 | yes | text cut by the edge, 325 to 345 |
-| V11 | yes | content reaches 1015 of 1024 and more follows below |
+| V11 | yes | content reaches 1020 of 1024 and more follows below |
 | V12 | yes | text cut by the edge, 1189 to 1209 |
 | V13 | yes | content reaches 766 of 768 and more follows below |
 | V14 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
@@ -64,6 +64,6 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V16 | yes | text cut by the edge, 890 to 906 |
 | V17 | yes | content reaches 958 of 960 and more follows below |
 | V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
-| V19 | no | FALSE FLOOR: the last visible content ends at 534, 42px clear of the 576px edge, so the screen reads as finished |
+| V19 | yes | content reaches 562 of 576 and more follows below |
 
 ## Result: all required rows pass

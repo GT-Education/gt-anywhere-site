@@ -188,7 +188,10 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balan
 .fact-sources { display: flex; flex-direction: column; align-items: flex-start; margin-top: var(--space-3); font-size: var(--text-xs); line-height: var(--leading-prose); color: var(--color-text-muted); }
 .fact-sources a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; overflow-wrap: anywhere; }
 .fact-sources a:hover, .fact-sources a:focus-visible { color: var(--color-text); }
-.sources { margin-top: var(--space-5); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+/* 16px, not 24: the sources line is a caption on the block it cites, and at 834 by 1194 the extra 8px
+   put its first line exactly on the viewport edge, so the strip read as finished (Astra, and the runner's
+   own reserve test). Tighter also binds the line to the facts it sources. */
+.sources { margin-top: var(--space-4); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
 
 /* Comparison table: a real table at 768 and above with equal school columns; stacked blocks below, each cell labelled with its school */
 .compare-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: var(--space-6); }

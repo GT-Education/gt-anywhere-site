@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:20:32.809Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:22:52.710Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -59,9 +59,9 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V11 | yes | text cut by the edge, 1015 to 1035 |
 | V12 | yes | text cut by the edge, 1183 to 1203 |
 | V13 | yes | content reaches 765 of 768 and more follows below |
-| V14 | yes | surface changes from rgb(248, 232, 222) to color(srgb 0.980392 0.933333 0.903922) between the last CTA and the bottom edge, and the page continues below |
+| V14 | yes | content reaches 701 of 720 and more follows below |
 | V15 | yes | text cut by the edge, 636 to 657 |
-| V16 | yes | surface changes from rgb(248, 232, 222) to color(srgb 0.980392 0.933333 0.903922) between the last CTA and the bottom edge, and the page continues below |
+| V16 | yes | content reaches 884 of 900 and more follows below |
 | V17 | yes | content reaches 951 of 960 and more follows below |
 | V18 | no | FALSE FLOOR: the last visible content ends at -Infinity, Infinitypx clear of the 256px edge, so the screen reads as finished |
 | V19 | yes | text cut by the edge, 558 to 579 |
