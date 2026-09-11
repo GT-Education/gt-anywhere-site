@@ -63,9 +63,9 @@ ul, ol { padding: 0; list-style: none; }
 .text-link:hover { text-decoration-thickness: 2px; }
 
 .btn {
-  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-2);
   min-height: 44px; max-width: 100%;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-4);
   border: 1px solid transparent; border-radius: var(--radius-md);
   background: var(--color-navy); color: var(--color-on-navy);
   font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
@@ -112,27 +112,34 @@ h1 {
 
 /* Doors: a list that renders at two options and at five (DD-21) — auto-fit tracks, not two fixed halves. */
 .doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--space-3); }
+/* Card anatomy (DD-04's first cue, M01's placement): the neutral GT mark hangs in a 32px strip at the left and
+   spans the label and name rows, which already stand 54px together, so the icon costs the fold nothing (measured
+   at V1, V2, V3, V5, V10 and V13). The same mark on both doors: one school, two ways in. The line's row is the
+   flexible one, so the CTA sits on the card's floor. */
 .door {
-  display: flex; flex-direction: column;
+  display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: var(--space-3);
+  grid-template-rows: auto auto 1fr auto;
   padding: var(--space-4);
   border: 1px solid var(--color-border); border-radius: var(--radius-md);
 }
+.door-mark { grid-area: 1 / 1 / 3 / 2; align-self: start; width: 32px; height: 32px; }
 /* V1 door state (CONTRACT.md section 6): instant, colour only. The whole card answers the pointer and the
    keyboard, not just the button inside it. */
 .door:hover, .door:focus-within { border-color: var(--color-border-strong); }
 .door--georgetown { background: var(--color-georgetown-tint); }
 .door--anywhere { background: var(--color-anywhere-tint); }
 .door-label {
+  grid-area: 1 / 2 / 2 / 3;
   font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs);
   text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted);
 }
 .door-name {
+  grid-area: 2 / 2 / 3 / 3;
   font-family: var(--font-serif); font-weight: 400; font-size: var(--text-xl);
-  line-height: var(--leading-tight); margin-top: var(--space-3);
+  line-height: var(--leading-tight); margin-top: var(--space-3); overflow-wrap: anywhere;
 }
-.door-line { font-size: var(--text-base); line-height: var(--leading-prose); margin-top: var(--space-3); max-width: var(--measure-prose); }
-.door-cta, .door .btn { margin-top: var(--space-4); }
-.door .btn { align-self: flex-start; }
+.door-line { grid-area: 3 / 1 / 4 / 3; font-size: var(--text-base); line-height: var(--leading-prose); margin-top: var(--space-3); max-width: var(--measure-prose); }
+.door-cta, .door .btn { grid-area: 4 / 1 / 5 / 3; margin-top: var(--space-4); justify-self: start; }
 
 /* Compact door rule (CONTRACT.md section 2): the lines leave the cards and follow the second CTA as two run-in
    paragraphs, so neither line sits between the two CTAs. Exactly one copy of each line renders at any viewport. */
@@ -149,10 +156,21 @@ h1 {
   .door-cta { margin-top: var(--space-3); }
   .doors { gap: var(--space-2); }
 }
+/* The two controls are one object. At 375 and below the Georgetown label wraps to two lines and the GT Anywhere
+   label does not, so the pair stood 52.5px against 44 on the rows where the doors are stacked and a parent sees
+   them one under the other. The floor is the two-line box computed from the same tokens (2 x 1.25 leading x
+   --text-btn + 2 x --space-2 + the 2px border, plus 1px so the taller button takes the floor rather than sets
+   it), so both controls measure the same to the pixel. Above 389px both labels fit on one line at 44. */
+@media (max-width: 699px) {
+  /* stacked doors: the two controls are the same box, not two boxes of different widths */
+  .door .btn { justify-self: stretch; }
+}
+@media (max-width: 389px) {
+  .door .btn { min-height: calc(2 * var(--leading-body) * var(--text-btn) + 2 * var(--space-2) + 3px); }
+}
 @media (min-height: 781px) and (max-width: 1179px) {
   .door-line { display: block; }
   .door-lines { display: none; }
-  .door .btn { margin-top: auto; padding-top: 0; }
   .door-cta { margin-top: var(--space-4); }
 }
 
@@ -163,37 +181,56 @@ h1 {
 .compare-lead a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 .compare-lead a:hover { text-decoration-thickness: 2px; }
 
-/* ---------- The map ---------- */
-.map-fig { display: flex; justify-content: flex-start; }
-.map { display: block; width: 100%; height: auto; }
-.map--wide { display: none; max-width: 43.75rem; }
-.map--tall { max-width: 24rem; }
-@media (min-width: 700px) {
-  .map--wide { display: block; }
-  .map--tall { display: none; }
-}
-.land { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1; stroke-linejoin: round; }
-/* The brief sets the rings at --color-navy 30, 20 and 10 percent. Those alphas measure 1.9:1, 1.5:1 and
-   1.24:1 against the cream ground, so the outer ring would be all but invisible at one weight. The stroke
-   grows as the opacity falls, which keeps the brief's colour spec and gives the three rings comparable
-   presence; forced colours separates them by dash instead, where opacity does not apply. */
-.ring { fill: none; stroke: var(--color-navy); stroke-linecap: round; }
-.ring--1 { stroke-width: 1.5; stroke-opacity: .3; }
-.ring--2 { stroke-width: 2.5; stroke-opacity: .2; }
-.ring--3 { stroke-width: 4; stroke-opacity: .1; }
-.key-ring { fill: none; stroke: var(--color-navy); }
-.key-ring--1 { stroke-width: 1.25; stroke-opacity: .3; }
-.key-ring--2 { stroke-width: 1.5; stroke-opacity: .2; }
-.key-ring--3 { stroke-width: 2; stroke-opacity: .1; }
-.leader { stroke: var(--color-border-strong); stroke-width: 1; }
+/* ---------- The map ----------
+   One drawing, two crops. The 500-unit square viewBox holds the Texas outline (emitted by qa/M10-geometry.py and
+   placed with one transform), the Georgetown pin at its derived point, and three rings centred on that pin. The
+   frame crops it: preserveAspectRatio="xMidYMid slice" fills whatever box the aspect-ratio below asks for, so the
+   frame shows the same 500 by 352 band of it at every width, so the phone and the laptop see one picture at two
+   sizes rather than two drawings. Every ring is wider than the band's half-height and the outermost is wider than
+   its half-width, so no ring closes and every edge of the frame is crossed. Measured per ring per edge, at all
+   nineteen rows, in qa/measurements.md. */
+.map-fig { display: grid; gap: var(--space-4); max-width: 52rem; }
+.map { display: block; width: 100%; height: auto; aspect-ratio: 142 / 100; overflow: hidden; }
+
+/* Strokes do not scale with the crop: the drawing runs from a 0.68 scale on a 320px phone to 1.05 at 1440, and a
+   hairline that tracked that would be 0.7px on the row that needs it most. vector-effect keeps every line at its
+   declared CSS width at every viewport. */
+.land { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+/* The brief sets the rings at --color-navy 30, 20 and 10 percent. Measured, those alphas are 1.87:1, 1.49:1 and
+   1.21:1 on the cream ground: the rings are labelled graphical objects that carry the whole "online from anywhere"
+   half of the thesis, so WCAG 1.4.11's 3:1 applies and stroke weight is not contrast (studio critic, ruling 5).
+   They take --color-border-strong at full opacity (3.63:1 on the page ground, 3.31:1 where they cross the land)
+   and are separated the way the
+   forced-colours block already separates them, by dash pattern and width. Departure from the brief's colour spec,
+   declared in RATIONALE.md. */
+.ring { fill: none; stroke: var(--color-border-strong); vector-effect: non-scaling-stroke; }
+.ring--1 { stroke-width: 1.5; }
+.ring--2 { stroke-width: 1.25; stroke-dasharray: 10 7; }
+.ring--3 { stroke-width: 1.25; stroke-dasharray: 3 7; }
+/* The pin: --color-accent is 2.17:1 on the land fill and 2.38:1 on the page ground, so gold alone cannot carry a
+   labelled datum. The dot keeps the accent as its fill (RF-37: gold is a shape colour) and takes a --color-text
+   edge, which is 7.43:1 against the gold and 16.10:1 against the land, so the mark's boundary passes 1.4.11 and
+   the colour is a cue rather than the whole signal. The cream halo separates it from a ring passing behind. */
 .pin-halo { fill: var(--color-bg); }
-.pin { fill: var(--color-accent); }
-.map-label {
+.pin { fill: var(--color-accent); stroke: var(--color-text); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+/* The key. Two swatches at one size: the pin, and the country filled as the GT Anywhere surface with Texas picked
+   out inside it. The labels are HTML at --text-sm, so they render at 14 to 15px at every row instead of being
+   scaled by the SVG's viewport transform (Astra; studio critic, Typography). */
+.map-key { display: grid; gap: var(--space-3); }
+/* wrap, and overflow-wrap: anywhere on the door name: at a doubled root font the swatch and the name
+   each contribute a min-content wider than the column, which overflowed the page sideways at 375. */
+.map-key-item { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: 0; }
+.key-text {
   font-family: var(--font-sans); font-weight: 500; font-size: var(--text-sm);
-  fill: var(--color-text); letter-spacing: .01em;
+  line-height: var(--leading-body); color: var(--color-text); letter-spacing: .01em;
 }
-.inset-us { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1; stroke-linejoin: round; }
-.inset-tx { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.25; stroke-linejoin: round; }
+.key-glyph { flex: none; width: 6rem; height: auto; }
+.reach-us { fill: var(--color-anywhere-tint); stroke: var(--color-text); stroke-width: 1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.reach-tx { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+@media (min-width: 700px) {
+  .map-key { grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--space-5); }
+}
 
 /* Locations list: gt.school's footer pattern, not its implementation (DD-45, K12 F64). Three to five rows
    without a rewrite; the enrolling row is a real link, not an href="#" (K12 A13). */
@@ -232,7 +269,9 @@ h1 {
     align-items: start;
   }
   h1 { max-width: min(35ch, 66%); }   /* the contract's eight of twelve columns, not the full container */
-  .map-fig { grid-column: 1 / 8; grid-row: 1; order: 0; }
+  .map-fig { grid-column: 1 / 8; grid-row: 1; order: 0; max-width: none; grid-template-columns: minmax(0, 1fr) 17rem; column-gap: var(--space-5); align-items: center; }
+  .map-key { grid-template-columns: 1fr; gap: var(--space-5); }
+  .key-glyph { width: 7.5rem; }
   .choice .doors { grid-column: 8 / 13; grid-row: 1; order: 0; grid-template-columns: 1fr; grid-auto-rows: 1fr; align-self: stretch; }
   /* the lines span the two rows the left column uses for the compare sentence and the Locations list, so a
      tall lines block never opens a hole under the map (measured at V16 before the span: 190px of dead space) */
@@ -240,12 +279,13 @@ h1 {
   .compare-lead { grid-column: 1 / 8; grid-row: 2; order: 0; }
   .locations { grid-column: 1 / 8; grid-row: 3; order: 0; }
   .door { padding: var(--space-4) var(--space-5); }
-  .choice .door .btn { margin-top: auto; }
 }
 @media (min-width: 1400px) {
-  .first-screen { padding-block: var(--space-5) var(--space-8); }
+  .first-screen { padding-block: var(--space-5) var(--space-7); }
   .masthead { margin-bottom: var(--space-5); }
   .choice { row-gap: var(--space-5); }
+  .map-fig { grid-template-columns: minmax(0, 1fr) 20rem; }
+  .key-glyph { width: 10rem; }
 }
 
 /* Phone landscape (V10, 750 by 342): the contract's landscape recipe. The fixed sentence at the h1 clamp size
@@ -305,7 +345,10 @@ caption {
     text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-md);
     text-transform: none; letter-spacing: normal; color: var(--color-text); margin-bottom: 0;
   }
-  .compare-table th[scope="row"] { display: table-cell; width: 22%; margin-bottom: 0; }
+  /* table-layout: fixed takes its columns from the FIRST row, which is the head: without a width on the
+     empty corner cell it inherited the 39% meant for a content column and the two substantive columns
+     were squeezed to about 30.5 per cent each (Astra). The corner carries the row-label width instead. */
+  .compare-table th[scope="row"], .compare-table td.corner { display: table-cell; width: 22%; margin-bottom: 0; }
   .compare-table td { display: table-cell; width: 39%; }
   .compare-table td::before { display: none; }
   .compare-table td + td { margin-top: 0; }
@@ -401,7 +444,7 @@ caption {
 /* ---------- Forced colours (K3 F38). LAST in the stylesheet by intent: at equal specificity source order
    decides, and the M07 lesson is that a forced-colours block placed earlier silently loses to the token rules.
    A map is the hard case: fills and strokes are not forced by the user agent, so the land, the rings, the pin
-   and the inset would keep authored colours on a system ground and could vanish. Every one is restated here,
+   and the key's country would keep authored colours on a system ground and could vanish. Every one is restated here,
    and the rings are separated by dash pattern and width instead of opacity, which forced colours does not
    touch. ---------- */
 @media (forced-colors: active) {
@@ -409,16 +452,14 @@ caption {
   .site-header, .band, .proof, .families, .tefa, .door--georgetown, .door--anywhere, .status, .footer-logo--light { background: Canvas; color: CanvasText; }
   .site-footer { background: Canvas; color: CanvasText; border-top: 1px solid CanvasText; }
   .btn { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
-  .land, .inset-tx { fill: Canvas; stroke: CanvasText; stroke-width: 1.5; }
-  .inset-us { fill: Canvas; stroke: CanvasText; stroke-width: 1.5; }
-  .ring, .key-ring { stroke: CanvasText; stroke-opacity: 1; }
-  .ring--1, .key-ring--1 { stroke-width: 2; stroke-dasharray: none; }
-  .ring--2, .key-ring--2 { stroke-width: 1.5; stroke-dasharray: 8 5; }
-  .ring--3, .key-ring--3 { stroke-width: 1; stroke-dasharray: 3 4; }
-  .leader { stroke: CanvasText; stroke-width: 1.5; }
+  .land, .reach-tx, .reach-us { fill: Canvas; stroke: CanvasText; stroke-width: 1.5; }
+  .ring { stroke: CanvasText; }
+  .ring--1 { stroke-width: 2; stroke-dasharray: none; }
+  .ring--2 { stroke-width: 1.5; stroke-dasharray: 10 7; }
+  .ring--3 { stroke-width: 1.25; stroke-dasharray: 3 7; }
   .pin-halo { fill: Canvas; stroke: CanvasText; stroke-width: 1; }
-  .pin { fill: CanvasText; }
-  .map-label { fill: CanvasText; }
+  .pin { fill: CanvasText; stroke: Canvas; stroke-width: 1; }
+  .key-text { color: CanvasText; }
   .provenance, .eyebrow, .door-label, .status, .sources, .compare-table th[scope="row"], .compare-table td::before, .steps-list li::before, .footer-contact { color: CanvasText; }
   .door, .location, .facts li, .steps-list li, .connect-list a, .compare-table th, .compare-table td, .compare-table tr { border-color: CanvasText; }
   :focus-visible, .site-footer :focus-visible, .footer-logo--light:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }

@@ -1,12 +1,16 @@
 #!/usr/bin/env node
 // M10 "The Map": the measuring harness the brief's acceptance row asks for.
-//   1. SVG label overlap. For every <text> in the visible map it takes the rendered glyph extents
-//      (getExtentOfChar, not the loose bbox) and tests them against EVERY drawn shape in the same SVG —
-//      the land outlines, the three rings, the pin, the leaders, the inset — reporting the smallest
-//      clearance in CSS pixels. Land and inset hits are tested against the real path outline
-//      (isPointInFill plus a walk of the path with getPointAtLength), not against a bounding box.
-//   2. h1 line counts and the rendered size of the SVG labels, at every viewport in the matrix.
-//   3. First-screen element bottoms and the ink below them, to tune the fold rows.
+//   1. TYPE. Every label on the map is HTML now, so its rendered size is its computed size. The harness still
+//      reports the map SVG's screen scale per row, and multiplies computed font size by the element's screen
+//      transform for any <text> left inside an SVG, because the previous build reported the DECLARED size of
+//      scaled SVG text and was wrong below 1024 (Astra; studio critic, Typography).
+//   2. THE RINGS AGAINST THEIR FRAME. For every ring at every row it solves, analytically, whether the circle
+//      crosses each edge of the visible frame, and prints the crossing coordinates. A ring contained on all four
+//      edges is a closed circle round a campus, which is the catchment idiom the drawing must not use.
+//   3. CLEARANCE. The key's text and swatches against the map box, and the land against its frame, so a label
+//      never sits on the drawing and the state is never clipped.
+//   4. h1 line counts and first-screen element bottoms, to tune the fold rows.
+//   5. Element crops for the critics (qa/crop-*.jpg), regenerated from the same run as the numbers.
 // It drives the same Chromium the runner uses, from the npx cache, so the repository gains no dependency.
 // Usage: node 0_plan/mockups/M10-the-map/qa/M10-measure.mjs [> qa/measurements.md]
 import { createRequire } from 'node:module';
@@ -50,109 +54,70 @@ function serve() {
 }
 
 const MEASURE = `(() => {
-  const out = { labels: [], h1: null, bottoms: {}, ink: [] };
-  // ---------- 1. SVG label clearance ----------
-  const svgs = [...document.querySelectorAll('svg.map')].filter(s => s.getBoundingClientRect().width > 0);
-  const rectOf = (r) => ({ l: r.left, r: r.right, t: r.top, b: r.bottom });
-  const boxGap = (a, b) => {                      // 0 when the boxes intersect, else the gap in px
-    const dx = Math.max(a.l - b.r, b.l - a.r, 0);
-    const dy = Math.max(a.t - b.b, b.t - a.b, 0);
+  const out = { type: [], rings: [], clearance: [], h1: null, bottoms: {}, map: null };
+  const round = (v, n) => +v.toFixed(n);
+  // ---------- 1. type, and the map's own scale ----------
+  const svg = [...document.querySelectorAll('svg.map')].find(s => s.getBoundingClientRect().width > 0);
+  const ctm = svg.getScreenCTM();
+  const scale = Math.hypot(ctm.a, ctm.b);              // CSS px per SVG user unit, after the viewport transform
+  const mbox = svg.getBoundingClientRect();
+  const vb = svg.viewBox.baseVal;
+  // the frame in user units: what "xMidYMid slice" leaves visible of the viewBox at this box aspect
+  const halfX = Math.min(vb.width, mbox.width / scale) / 2, halfY = Math.min(vb.height, mbox.height / scale) / 2;
+  const cxv = vb.x + vb.width / 2, cyv = vb.y + vb.height / 2;
+  const frame = { l: cxv - halfX, r: cxv + halfX, t: cyv - halfY, b: cyv + halfY };
+  out.map = { scale: round(scale, 4), boxW: round(mbox.width, 1), boxH: round(mbox.height, 1),
+              frameW: round(halfX * 2, 1), frameH: round(halfY * 2, 1) };
+  for (const el of document.querySelectorAll('.key-text')) {
+    const cs = getComputedStyle(el);
+    out.type.push({ what: el.textContent.trim(), where: 'HTML', declaredPx: round(parseFloat(cs.fontSize), 2),
+                    renderedPx: round(parseFloat(cs.fontSize), 2), family: cs.fontFamily.split(',')[0].replace(/["']/g, '') });
+  }
+  // any text still inside an SVG is reported at fontSize x screen transform, which is what a reader sees
+  for (const t of document.querySelectorAll('svg text')) {
+    const m = t.getScreenCTM(); const k = Math.hypot(m.a, m.b);
+    const f = parseFloat(getComputedStyle(t).fontSize);
+    out.type.push({ what: t.textContent.trim(), where: 'SVG', declaredPx: round(f, 2), renderedPx: round(f * k, 2), family: 'svg' });
+  }
+  // ---------- 2. every ring against every edge of the visible frame ----------
+  for (const c of svg.querySelectorAll('circle.ring')) {
+    const cx = +c.getAttribute('cx'), cy = +c.getAttribute('cy'), r = +c.getAttribute('r');
+    const edge = (kind, d, lo, hi, at) => {           // does the circle cross this edge INSIDE the frame?
+      const h = r * r - d * d;
+      if (h < 0) return null;
+      const o = Math.sqrt(h);
+      const hits = [at - o, at + o].filter(v => v >= lo - 0.01 && v <= hi + 0.01);
+      return hits.length ? hits.map(v => round(v, 1)) : null;
+    };
+    const res = {
+      cls: c.getAttribute('class'), r,
+      left: edge('l', cx - frame.l, frame.t, frame.b, cy),
+      right: edge('r', frame.r - cx, frame.t, frame.b, cy),
+      top: edge('t', cy - frame.t, frame.l, frame.r, cx),
+      bottom: edge('b', frame.b - cy, frame.l, frame.r, cx),
+    };
+    res.edges = ['left', 'right', 'top', 'bottom'].filter(k => res[k]);
+    // a circle is drawn at all only if some part of it falls inside the frame
+    const far = Math.max(Math.hypot(cx - frame.l, cy - frame.t), Math.hypot(cx - frame.r, cy - frame.t),
+                         Math.hypot(cx - frame.l, cy - frame.b), Math.hypot(cx - frame.r, cy - frame.b));
+    res.visible = r <= far + 0.01;
+    out.rings.push(res);
+  }
+  // ---------- 3. clearance: the key against the drawing, and the land inside its frame ----------
+  const boxGap = (a, b) => {
+    const dx = Math.max(a.left - b.right, b.left - a.right, 0);
+    const dy = Math.max(a.top - b.bottom, b.top - a.bottom, 0);
     return Math.hypot(dx, dy);
   };
-  for (const svg of svgs) {
-    const texts = [...svg.querySelectorAll('text')];
-    const shapes = [...svg.querySelectorAll('circle, line, use, path, rect, polyline, polygon')];
-    for (const t of texts) {
-      // Per-glyph extents in screen space: the union box of a word would claim space the glyphs do not fill.
-      const glyphs = [];
-      for (let i = 0; i < t.getNumberOfChars(); i++) {
-        const e = t.getExtentOfChar(i);                       // user units
-        const m = t.getScreenCTM();
-        const p1 = svg.createSVGPoint(); p1.x = e.x; p1.y = e.y;
-        const p2 = svg.createSVGPoint(); p2.x = e.x + e.width; p2.y = e.y + e.height;
-        const a = p1.matrixTransform(m), b = p2.matrixTransform(m);
-        glyphs.push({ l: Math.min(a.x, b.x), r: Math.max(a.x, b.x), t: Math.min(a.y, b.y), b: Math.max(a.y, b.y) });
-      }
-      const union = glyphs.reduce((u, g) => ({ l: Math.min(u.l, g.l), r: Math.max(u.r, g.r), t: Math.min(u.t, g.t), b: Math.max(u.b, g.b) }), glyphs[0]);
-      let worst = { what: 'none', gap: Infinity };
-      const group = { land: Infinity, ring: Infinity, other: Infinity };
-      for (const s of shapes) {
-        const cls = s.getAttribute('class') || s.tagName;
-        let gap = Infinity;
-        if (s.tagName === 'circle') {
-          // analytic: the box intersects the annulus when the nearest point is inside r + half-stroke and the
-          // farthest is outside r - half-stroke. Clearance is the distance to that band.
-          const m = s.getScreenCTM();
-          const c = svg.createSVGPoint(); c.x = +s.getAttribute('cx'); c.y = +s.getAttribute('cy');
-          const cc = c.matrixTransform(m);
-          const scale = Math.hypot(m.a, m.b);
-          const r = (+s.getAttribute('r')) * scale;
-          const sw = (parseFloat(getComputedStyle(s).strokeWidth) || 0) * scale;
-          const filled = getComputedStyle(s).fill !== 'none';
-          for (const g of glyphs) {
-            const nx = Math.max(g.l, Math.min(cc.x, g.r)), ny = Math.max(g.t, Math.min(cc.y, g.b));
-            const near = Math.hypot(cc.x - nx, cc.y - ny);
-            const far = Math.max(Math.hypot(cc.x - g.l, cc.y - g.t), Math.hypot(cc.x - g.r, cc.y - g.t),
-                                 Math.hypot(cc.x - g.l, cc.y - g.b), Math.hypot(cc.x - g.r, cc.y - g.b));
-            const lo = filled ? 0 : r - sw / 2, hi = r + sw / 2;
-            let d;
-            if (far < lo) d = lo - far;              // box entirely inside the ring
-            else if (near > hi) d = near - hi;       // box entirely outside the ring
-            else d = 0;                              // the box straddles the stroke band
-            gap = Math.min(gap, d);
-          }
-        } else if (s.tagName === 'use' || s.tagName === 'path' || s.tagName === 'line') {
-          // sample the geometry itself, so a text box sitting in a bay of the coastline is not called a hit
-          let geo = s;
-          if (s.tagName === 'use') {
-            const href = s.getAttribute('href') || s.getAttribute('xlink:href');
-            geo = document.querySelector(href);
-          }
-          const m = s.getScreenCTM();
-          const pts = [];
-          if (geo && geo.getTotalLength) {
-            const L = geo.getTotalLength();
-            const step = Math.max(L / 900, 0.4);
-            for (let d = 0; d <= L; d += step) { const p = geo.getPointAtLength(d); pts.push(p); }
-          }
-          const sw = (parseFloat(getComputedStyle(s).strokeWidth) || 0) * Math.hypot(m.a, m.b) / 2;
-          const filled = geo && getComputedStyle(s).fill !== 'none';
-          for (const g of glyphs) {
-            for (const p of pts) {
-              const q = svg.createSVGPoint(); q.x = p.x; q.y = p.y;
-              const sp = q.matrixTransform(m);
-              const dx = Math.max(g.l - sp.x, sp.x - g.r, 0), dy = Math.max(g.t - sp.y, sp.y - g.b, 0);
-              gap = Math.min(gap, Math.max(Math.hypot(dx, dy) - sw, 0));
-              if (gap === 0) break;
-            }
-            if (gap === 0) break;
-            if (filled && geo.isPointInFill) {
-              // a glyph could sit wholly inside a filled shape without touching its outline
-              for (const [x, y] of [[g.l, g.t], [g.r, g.t], [g.l, g.b], [g.r, g.b], [(g.l + g.r) / 2, (g.t + g.b) / 2]]) {
-                const inv = m.inverse(); const q = svg.createSVGPoint(); q.x = x; q.y = y;
-                const lp = q.matrixTransform(inv);
-                const pt = svg.createSVGPoint(); pt.x = lp.x; pt.y = lp.y;
-                try { if (geo.isPointInFill(pt)) { gap = 0; break; } } catch (e) { /* not supported for this node */ }
-              }
-            }
-          }
-        }
-        if (gap < worst.gap) worst = { what: cls, gap };
-        const g = (cls.indexOf('land') >= 0 || cls.indexOf('inset-') >= 0) ? 'land' : (cls.indexOf('ring') >= 0 && cls.indexOf('key-ring') < 0) ? 'ring' : 'other';
-        if (gap < group[g]) group[g] = gap;
-      }
-      out.labels.push({
-        svg: svg.getAttribute('class'),
-        text: t.textContent,
-        fontPx: +parseFloat(getComputedStyle(t).fontSize).toFixed(2),
-        renderedPx: +(union.r - union.l).toFixed(1),
-        heightPx: +(union.b - union.t).toFixed(1),
-        nearest: worst.what,
-        clearancePx: worst.gap === Infinity ? null : +worst.gap.toFixed(2),
-        landPx: group.land === Infinity ? null : +group.land.toFixed(2),
-        ringPx: group.ring === Infinity ? null : +group.ring.toFixed(2),
-      });
-    }
+  for (const el of document.querySelectorAll('.key-text, .key-glyph')) {
+    out.clearance.push({ what: (el.textContent || '').trim() || el.getAttribute('class'),
+                         gapToMapPx: round(boxGap(el.getBoundingClientRect(), mbox), 2) });
+  }
+  const land = svg.querySelector('use.land');
+  if (land) {
+    const lb = land.getBoundingClientRect();
+    out.clearance.push({ what: 'land inside the frame',
+      gapToMapPx: round(Math.min(lb.left - mbox.left, mbox.right - lb.right, lb.top - mbox.top, mbox.bottom - lb.bottom), 2) });
   }
   // ---------- 2. h1 lines ----------
   const h1 = document.querySelector('h1');
@@ -164,7 +129,7 @@ const MEASURE = `(() => {
     widthPx: +h1.getBoundingClientRect().width.toFixed(1),
     heightPx: +h1.getBoundingClientRect().height.toFixed(1),
   };
-  // ---------- 3. first-screen bottoms and the ink below the last CTA ----------
+  // ---------- 4. first-screen bottoms and the ink below the last CTA ----------
   for (const [k, sel] of [['header', '[data-fold="header"]'], ['h1', '[data-fold="h1"]'], ['provenance', '[data-fold="provenance"]'],
                           ['cta-georgetown', '[data-fold="cta-georgetown"]'], ['cta-anywhere', '[data-fold="cta-anywhere"]'],
                           ['compare', '.compare-lead'], ['map', '.map-fig'], ['locations', '.locations'], ['band1', '.comparison']]) {
@@ -191,7 +156,7 @@ const MEASURE = `(() => {
   const page = await ctx.newPage();
   const lines = ['# M10 measurements', '', `Runner: \`qa/M10-measure.mjs\`, headless Chromium ${browser.version()}, ${new Date().toISOString()}.`, ''];
   lines.push('## h1 line counts and first-screen bottoms', '', '| Row | Viewport | h1 size | h1 width | h1 lines | h1 height | header | h1 | provenance | CTA Georgetown | CTA Anywhere | compare | map | locations | band 1 |', '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|');
-  const labelRows = [];
+  const typeRows = [], ringRows = [], clearRows = [];
   for (const [row, w, h] of ROWS) {
     await page.setViewportSize({ width: w, height: h });
     await page.goto(url, { waitUntil: 'load' });
@@ -200,23 +165,95 @@ const MEASURE = `(() => {
     const m = await page.evaluate(MEASURE);
     const b = m.bottoms;
     lines.push(`| ${row} | ${w} by ${h} | ${m.h1.fontPx}px | ${m.h1.widthPx} | **${m.h1.lines}** | ${m.h1.heightPx} | ${b.header} | ${b.h1} | ${b.provenance} | ${b['cta-georgetown']} | ${b['cta-anywhere']} | ${b.compare} | ${b.map} | ${b.locations} | ${b.band1} |`);
-    for (const l of m.labels) labelRows.push([row, w, l]);
+    for (const t of m.type) typeRows.push([row, w, m.map, t]);
+    for (const r of m.rings) ringRows.push([row, w, m.map, r]);
+    for (const c of m.clearance) clearRows.push([row, w, c]);
   }
-  lines.push('', '## SVG label clearance', '',
-    'Per-glyph extents (`getExtentOfChar`) against every drawn shape in the same SVG: the land outline and the',
-    'inset outlines sampled along the real path, the rings and the key rings solved analytically against the',
-    'stroke band, the pin and the leaders sampled. Clearance is in CSS pixels; 0 would be an overlap.', '',
-    '| Row | Width | Map | Label | Font | Rendered | Land px | Rings px | Nearest shape | Nearest px |', '|---|---|---|---|---|---|---|---|---|---|');
-  let worst = Infinity, worstRow = '';
-  for (const [row, w, l] of labelRows) {
-    lines.push(`| ${row} | ${w} | ${l.svg.replace('map map--', '')} | ${l.text} | ${l.fontPx}px | ${l.renderedPx}x${l.heightPx} | ${l.landPx} | ${l.ringPx} | ${l.nearest} | ${l.clearancePx} |`);
-    if (l.clearancePx !== null && l.clearancePx < worst) { worst = l.clearancePx; worstRow = `${row} ${l.text} vs ${l.nearest}`; }
+
+  lines.push('', '## Rendered type on the map', '',
+    'The two map labels are HTML, so nothing in the SVG viewport transform reaches them: their rendered size is',
+    'their computed size. The map scale column is the CSS pixels per SVG user unit at that row, printed so the',
+    'independence is visible rather than asserted. Any `<text>` still inside an SVG would be reported at computed',
+    'size times its screen transform, which is what a reader actually sees; there is none.', '',
+    '| Row | Width | Label | Where | Declared | **Rendered** | Map scale |', '|---|---|---|---|---|---|---|');
+  for (const [row, w, map, t] of typeRows) {
+    lines.push(`| ${row} | ${w} | ${t.what} | ${t.where} | ${t.declaredPx}px | **${t.renderedPx}px** | ${map.scale} |`);
   }
-  const wl = Math.min(...labelRows.map(([, , l]) => l.landPx === null ? Infinity : l.landPx));
-  const wr = Math.min(...labelRows.map(([, , l]) => l.ringPx === null ? Infinity : l.ringPx));
-  lines.push('', `**Smallest clearance to land: ${wl.toFixed(2)}px. Smallest clearance to a map ring: ${wr.toFixed(2)}px.**`,
-    `**Smallest clearance to any drawn shape: ${worst.toFixed(2)}px (${worstRow}). Zero overlapping pairs at any row.**`);
+  const rendered = typeRows.map(([, , , t]) => t.renderedPx);
+  const svgText = typeRows.filter(([, , , t]) => t.where === 'SVG').length;
+  lines.push('', `**Rendered label size across all ${ROWS.length} rows: ${Math.min(...rendered).toFixed(2)}px to ${Math.max(...rendered).toFixed(2)}px, inside --text-sm's 14 to 15px. ${svgText} labels remain inside an SVG.**`);
+
+  lines.push('', '## Every ring against every edge of its frame', '',
+    'Solved, not eyeballed: for each ring the harness intersects the circle with each edge of the frame the crop',
+    'actually shows (`xMidYMid slice` of the 500-unit viewBox) and prints the crossing coordinates in user units.',
+    'A ring with no crossing on any edge is a closed circle around the campus, which is the catchment idiom this',
+    'direction must not draw. "visible" is false when the whole frame falls inside the circle.', '',
+    '| Row | Width | Frame (user units) | Ring | r | Left | Right | Top | Bottom | Edges crossed | Visible |', '|---|---|---|---|---|---|---|---|---|---|---|');
+  let closed = 0; const edgesSeen = {};
+  for (const [row, w, map, r] of ringRows) {
+    const f = (v) => v ? v.join(', ') : '—';
+    lines.push(`| ${row} | ${w} | ${map.frameW} x ${map.frameH} | ${r.cls.replace('ring ', '')} | ${r.r} | ${f(r.left)} | ${f(r.right)} | ${f(r.top)} | ${f(r.bottom)} | **${r.edges.length}** | ${r.visible} |`);
+    if (r.visible && !r.edges.length) closed++;
+    edgesSeen[row] = new Set([...(edgesSeen[row] || []), ...r.edges]);
+  }
+  const rowsAllFour = Object.entries(edgesSeen).filter(([, s]) => s.size === 4).length;
+  lines.push('', `**Closed rings at any row: ${closed}. Rows where the ring set leaves the frame on all four edges: ${rowsAllFour} of ${ROWS.length}.**`);
+
+  lines.push('', '## Clearance', '',
+    'The key sits outside the drawing by construction: it is a sibling of the `<svg>`, not a layer over it. The',
+    'gap below is the distance in CSS pixels from each key element to the map box, and the last row is the',
+    'smallest distance from the Texas outline to the frame that crops it, which must stay positive or the state',
+    'itself would be cut.', '',
+    '| Row | Width | Element | Gap to the map box (px) |', '|---|---|---|---|');
+  let worstLand = Infinity, worstKey = Infinity;
+  for (const [row, w, c] of clearRows) {
+    lines.push(`| ${row} | ${w} | ${c.what} | ${c.gapToMapPx} |`);
+    if (c.what === 'land inside the frame') worstLand = Math.min(worstLand, c.gapToMapPx);
+    else worstKey = Math.min(worstKey, c.gapToMapPx);
+  }
+  lines.push('', `**Smallest gap between a key element and the drawing: ${worstKey.toFixed(2)}px. Smallest clearance from the Texas outline to its frame: ${worstLand.toFixed(2)}px. Zero overlapping pairs at any row.**`);
+
+  // ---------- 5. element crops for the critics ----------
+  const CROPS = [
+    ['map', '.map-fig', 1440, 900], ['map', '.map-fig', 390, 844], ['locations', '.locations', 390, 844],
+    ['table', '.compare-table', 1440, 900], ['table', '.compare-table', 390, 844],
+    ['proof', '.proof', 1440, 900], ['steps', '.steps', 1440, 900],
+    ['footer', '.site-footer', 1440, 900], ['footer', '.site-footer', 390, 844], ['doors', '.doors', 375, 629],
+  ];
+  for (const [name, sel, w, h] of CROPS) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.goto(url, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts ? document.fonts.ready : null);
+    await page.waitForTimeout(120);
+    const el = await page.$(sel);
+    if (!el) { lines.push(`(no element for crop ${name} at ${w}: ${sel})`); continue; }
+    await el.screenshot({ path: join(REPO, '0_plan/mockups/M10-the-map/qa', `crop-${name}-${w}.jpg`), type: 'jpeg', quality: 88 });
+  }
+  // ---------- 6. the Continuity row's side-by-side ----------
+  // The rubric asks for a rendered comparison with the live sites and the hard rules forbid opening them, so the
+  // pair is the repository's own mirror captures (0_plan/kb/exemplars/estate/, see mockups/shared/CONTINUITY.md)
+  // beside this mock's own first screen at the same two widths. Anywhere only: gt.school has no mirror here.
+  for (const [w, estate, mock] of [[390, 'anywhere-home-390-firstscreen.jpg', 'V9.jpg'], [1440, 'anywhere-home-1440-firstscreen.jpg', 'V16.jpg']]) {
+    const html = `<!doctype html><meta charset="utf-8"><style>
+      body{margin:0;background:#e9e5e2;font:13px/1.4 -apple-system,system-ui,sans-serif;color:#111}
+      .pair{display:flex;gap:16px;padding:16px;align-items:flex-start}
+      figure{margin:0;flex:1 1 0;min-width:0}
+      figcaption{padding:6px 2px;font-weight:600}
+      img{display:block;width:100%;height:auto;border:1px solid #b9b3ae}
+      </style><div class="pair">
+      <figure><figcaption>anywhere.gt.school, this repository's mirror, ${w}px</figcaption><img src="/0_plan/kb/exemplars/estate/${estate}"></figure>
+      <figure><figcaption>M10 The Map, ${w}px</figcaption><img src="/0_plan/mockups/M10-the-map/qa/${mock}"></figure>
+      </div>`;
+    await page.setViewportSize({ width: w === 390 ? 900 : 2000, height: 900 });
+    await page.setContent(html, { waitUntil: 'load' });
+    await page.waitForTimeout(150);
+    const pair = await page.$('.pair');
+    await pair.screenshot({ path: join(REPO, '0_plan/mockups/M10-the-map/qa', `continuity-${w}.jpg`), type: 'jpeg', quality: 86 });
+  }
+
+  lines.push('', `Element crops regenerated in this run: ${CROPS.map(([n, , w]) => `crop-${n}-${w}.jpg`).join(', ')}. Continuity pairs: continuity-390.jpg, continuity-1440.jpg.`);
+
   console.log(lines.join('\n'));
   await browser.close(); srv.close();
-  process.exit(worst > 0 ? 0 : 1);
+  process.exit(closed === 0 && worstKey > 0 && worstLand > 0 ? 0 : 1);
 })().catch((e) => { console.error('M10-measure: ' + e.stack); process.exit(2); });

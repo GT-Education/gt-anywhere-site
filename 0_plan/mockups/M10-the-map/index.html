@@ -63,52 +63,40 @@
 
       <div class="choice">
 
-        <!-- The map. Two compositions of one outline: a landscape one from 700px, a portrait one below it, so the
-             SVG label type stays inside --text-sm at every width instead of scaling with the column. -->
+        <!-- The map. ONE drawing at ONE frame, from 320px to 1920: a 500-unit square field of which the frame
+             shows a 500 by 352 band (preserveAspectRatio="xMidYMid slice"), so the phone and the laptop see the
+             same picture at different sizes rather than two drawings that have to agree. The three rings are
+             larger than the band and leave it on every edge instead of closing around the pin: a closed circle
+             round a campus is the idiom for catchment, which is the opposite of what this page claims. The two
+             labels are HTML, not SVG <text>, so they never scale with the drawing. -->
         <figure class="map-fig">
-          <svg class="map map--wide" viewBox="0 0 700 290" role="img" aria-label="A map of Texas. The Georgetown Campus is pinned at Georgetown, Texas, and three rings around the pin stand for online from anywhere. An inset shows the United States with Texas picked out.">
-            <g class="inset" transform="translate(400 6) scale(1.25)">
-              <use class="inset-us" href="#m10-us"/>
-              <use class="inset-tx" href="#m10-tx-in-us"/>
-            </g>
-            <use class="land" href="#m10-tx" transform="translate(36 6) scale(.925)"/>
-            <circle class="ring ring--1" cx="238.1" cy="159.6" r="78"/>
-            <circle class="ring ring--2" cx="238.1" cy="159.6" r="114"/>
-            <circle class="ring ring--3" cx="238.1" cy="159.6" r="150"/>
-            <line class="leader" x1="246" y1="159.6" x2="428" y2="159.6"/>
-            <line class="leader" x1="372" y1="232" x2="396" y2="232"/>
-            <circle class="pin-halo" cx="238.1" cy="159.6" r="7.5"/>
-            <circle class="pin" cx="238.1" cy="159.6" r="5"/>
-            <g class="key-ring-set" aria-hidden="true">
-              <circle class="key-ring key-ring--1" cx="412" cy="232" r="4"/>
-              <circle class="key-ring key-ring--2" cx="412" cy="232" r="8"/>
-              <circle class="key-ring key-ring--3" cx="412" cy="232" r="12"/>
-            </g>
-            <text class="map-label" x="434" y="164.6">Georgetown, Texas</text>
-            <text class="map-label" x="434" y="237">online from anywhere</text>
+          <svg class="map" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A map of Texas. The Georgetown Campus is pinned at Georgetown, Texas, and three rings widen from the pin and run off every edge of the frame.">
+            <circle class="ring ring--3" cx="250.1" cy="250.1" r="290"/>
+            <circle class="ring ring--2" cx="250.1" cy="250.1" r="235"/>
+            <circle class="ring ring--1" cx="250.1" cy="250.1" r="190"/>
+            <use class="land" href="#m10-tx" transform="translate(31.6 84)"/>
+            <circle class="pin-halo" cx="250.1" cy="250.1" r="10"/>
+            <circle class="pin" cx="250.1" cy="250.1" r="6"/>
           </svg>
-
-          <svg class="map map--tall" viewBox="0 0 344 556" role="img" aria-label="A map of Texas. The Georgetown Campus is pinned at Georgetown, Texas, and three rings around the pin stand for online from anywhere. An inset shows the United States with Texas picked out.">
-            <use class="land" href="#m10-tx" transform="translate(14 22) scale(.86)"/>
-            <circle class="ring ring--1" cx="201.9" cy="164.8" r="66"/>
-            <circle class="ring ring--2" cx="201.9" cy="164.8" r="100"/>
-            <circle class="ring ring--3" cx="201.9" cy="164.8" r="134"/>
-            <circle class="pin-halo" cx="201.9" cy="164.8" r="8"/>
-            <circle class="pin" cx="201.9" cy="164.8" r="5.5"/>
-            <circle class="pin-halo" cx="24" cy="332" r="8"/>
-            <circle class="pin" cx="24" cy="332" r="5.5"/>
-            <g class="key-ring-set" aria-hidden="true">
-              <circle class="key-ring key-ring--1" cx="24" cy="374" r="4.5"/>
-              <circle class="key-ring key-ring--2" cx="24" cy="374" r="9"/>
-              <circle class="key-ring key-ring--3" cx="24" cy="374" r="13.5"/>
-            </g>
-            <text class="map-label" x="48" y="337">Georgetown, Texas</text>
-            <text class="map-label" x="48" y="379">online from anywhere</text>
-            <g class="inset" transform="translate(24 404) scale(1.28)">
-              <use class="inset-us" href="#m10-us"/>
-              <use class="inset-tx" href="#m10-tx-in-us"/>
-            </g>
-          </svg>
+          <!-- The key. Two marks, one for each half of the sentence: a pin for the campus, the filled country for
+               the school. The country is the surface and Texas is picked out inside it, so the ink that stands for
+               reach is a place rather than an empty outline. -->
+          <figcaption class="map-key">
+            <p class="map-key-item">
+              <svg class="key-glyph" viewBox="-2 -2 204 112.8" aria-hidden="true" focusable="false">
+                <circle class="pin-halo" cx="176" cy="54.4" r="17"/>
+                <circle class="pin" cx="176" cy="54.4" r="10"/>
+              </svg>
+              <span class="key-text">Georgetown, Texas</span>
+            </p>
+            <p class="map-key-item">
+              <svg class="key-glyph" viewBox="-2 -2 204 112.8" aria-hidden="true" focusable="false">
+                <use class="reach-us" href="#m10-us"/>
+                <use class="reach-tx" href="#m10-tx-in-us"/>
+              </svg>
+              <span class="key-text">online from anywhere</span>
+            </p>
+          </figcaption>
         </figure>
 
         <!-- Components: Door list (N doors, two today) of Door cards, 1_spec/04 section 3. The list holds three to
@@ -116,12 +104,14 @@
         <h2 class="visually-hidden" id="doors-heading">Two ways to attend</h2>
         <ul class="doors" aria-labelledby="doors-heading" data-component="Door list">
           <li class="door door--georgetown" data-component="Door card">
+            <img class="door-mark" src="../shared/img/gt-icon.svg" width="32" height="32" alt="" aria-hidden="true" decoding="async">
             <p class="door-label">In person</p>
             <h3 class="door-name">Georgetown Campus</h3>
             <p class="door-line">Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
             <a class="btn door-cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="first_screen" data-fold="cta-georgetown"><span>Explore the Georgetown campus</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
           </li>
           <li class="door door--anywhere" data-component="Door card">
+            <img class="door-mark" src="../shared/img/gt-icon.svg" width="32" height="32" alt="" aria-hidden="true" decoding="async">
             <p class="door-label">Online</p>
             <h3 class="door-name">GT Anywhere</h3>
             <p class="door-line">Live mastery academics with Guides from wherever you live, and four <span class="nobr">in-person</span> weekends a year in Georgetown.</p>
@@ -220,11 +210,13 @@
 
       <ul class="doors doors--echo" data-component="Door list">
         <li class="door door--georgetown" data-component="Door card">
+          <img class="door-mark" src="../shared/img/gt-icon.svg" width="32" height="32" alt="" aria-hidden="true" decoding="async">
           <p class="door-label">In person</p>
           <p class="door-name">Georgetown Campus</p>
           <a class="btn" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="after_comparison"><span>Explore the Georgetown campus</span><span class="arrow" aria-hidden="true">&rarr;</span></a>
         </li>
         <li class="door door--anywhere" data-component="Door card">
+          <img class="door-mark" src="../shared/img/gt-icon.svg" width="32" height="32" alt="" aria-hidden="true" decoding="async">
           <p class="door-label">Online</p>
           <p class="door-name">GT Anywhere</p>
           <a class="btn" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="after_comparison"><span>Explore GT Anywhere</span><span class="arrow" aria-hidden="true">&rarr;</span></a>

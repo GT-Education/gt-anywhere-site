@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:22:14.496Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:43:32.323Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -65,6 +65,46 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | content reaches 951 of 960 and more follows below |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 558 to 579 |
+
+## Interactive targets under 44px
+
+BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.
+
+| Viewport | Target | Height | Width | Kind | Result |
+|---|---|---|---|---|---|
+| 320 by 256 | Skip to main content | 37.3px | 202px | short control | under 44, above the 24px floor |
+| 320 by 256 | anywhere.gt.school/academics | 15px | 160px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | gt.school/academics | 15px | 107px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | anywhere.gt.school/academics | 15px | 160px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | anywhere.gt.school/intensives | 15px | 156px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | the Terms of Use | 15px | 88px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | anywhere.gt.school/academics | 15px | 160px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | gt.school/academics | 15px | 107px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | anywhere.gt.school/academics | 15px | 160px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | anywhere.gt.school/intensives | 15px | 156px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 320 by 256 | the Terms of Use | 15px | 88px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | Skip to main content | 37.3px | 202px | short control | under 44, above the 24px floor |
+| 375 by 629 | anywhere.gt.school/academics | 15px | 161px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | gt.school/academics | 15px | 107px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | anywhere.gt.school/academics | 15px | 161px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | anywhere.gt.school/intensives | 15px | 156px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | the Terms of Use | 33px | 322px | short control | under 44, above the 24px floor |
+| 375 by 629 | anywhere.gt.school/academics | 15px | 161px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | gt.school/academics | 15px | 107px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | anywhere.gt.school/academics | 15px | 161px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | anywhere.gt.school/intensives | 15px | 156px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 375 by 629 | the Terms of Use | 33px | 322px | short control | under 44, above the 24px floor |
+| 1440 by 900 | Skip to main content | 38.5px | 212px | short control | under 44, above the 24px floor |
+| 1440 by 900 | anywhere.gt.school/academics | 16px | 174px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | gt.school/academics | 16px | 116px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | anywhere.gt.school/academics | 16px | 174px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | anywhere.gt.school/intensives | 16px | 169px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | the Terms of Use | 16px | 96px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | anywhere.gt.school/academics | 16px | 174px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | gt.school/academics | 16px | 116px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | anywhere.gt.school/academics | 16px | 174px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | anywhere.gt.school/intensives | 16px | 169px | short control | under 24px: check WCAG 2.5.8 spacing |
+| 1440 by 900 | the Terms of Use | 16px | 96px | short control | under 24px: check WCAG 2.5.8 spacing |
 
 ## Mark geometry (K12 V2)
 

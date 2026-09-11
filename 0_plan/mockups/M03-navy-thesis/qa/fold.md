@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:22:07.282Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:41:26.160Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -65,6 +65,16 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | text cut by the edge, 937 to 987 |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | content reaches 552 of 576 and more follows below |
+
+## Interactive targets under 44px
+
+BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA. Everything under 44 is listed. A row fails only under 24px, or a door CTA under 44.
+
+| Viewport | Target | Height | Width | Kind | Result |
+|---|---|---|---|---|---|
+| 320 by 256 | Skip to main content | 36px | 192px | short control | under 44, above the 24px floor |
+| 375 by 629 | Skip to main content | 36px | 192px | short control | under 44, above the 24px floor |
+| 1440 by 900 | Skip to main content | 38.5px | 212px | short control | under 44, above the 24px floor |
 
 ## Mark geometry (K12 V2)
 

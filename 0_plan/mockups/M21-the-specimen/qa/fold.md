@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:22:07.295Z; page `/0_plan/mockups/M21-the-specimen/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:43:46.933Z; page `/0_plan/mockups/M21-the-specimen/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -65,6 +65,21 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | text cut by the edge, 940 to 961 |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 560 to 581 |
+
+## Interactive targets under 44px
+
+BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.
+
+| Viewport | Target | Height | Width | Kind | Result |
+|---|---|---|---|---|---|
+| 320 by 256 | Skip to main content | 40px | 180px | short control | under 44, above the 24px floor |
+| 320 by 256 | Current families | 28px | 83px | short control | under 44, above the 24px floor |
+| 320 by 256 | Contact admissions | 28px | 104px | short control | under 44, above the 24px floor |
+| 375 by 629 | Skip to main content | 40px | 180px | short control | under 44, above the 24px floor |
+| 375 by 629 | Check eligibility on the GT An | 20px | 297px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Skip to main content | 42.5px | 198px | short control | under 44, above the 24px floor |
+| 1440 by 900 | Not sure which is right for yo | 21px | 436px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Check eligibility on the GT An | 21px | 334px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
 
 ## Mark geometry (K12 V2)
 

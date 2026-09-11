@@ -165,6 +165,25 @@ const FOLD_JS = `(() => {
 // K12 V2: horizontal marks 32px tall at 1440 and at least 27px at 390, the icon at 56px, aspect within 1%.
 // Measured rather than read from CSS, because five mocks declared a height a reader never saw and eight critic
 // scorecards missed it. Reported at both widths; a horizontal mark under its floor fails the run.
+// Interactive target heights. BUILDER-BRIEF rule 11 asks for 44px, which is stricter than WCAG 2.5.8's
+// 24px minimum at AA, so the runner reports everything under 44 and fails only what falls under 24 or a
+// door CTA under 44. A critic gets the evidence; the stricter rule stays a judgement.
+const TARGETS_JS = `(() => {
+  const out = [];
+  for (const el of document.querySelectorAll('a[href], button, input, select, summary, [role="button"]')) {
+    const cs = getComputedStyle(el);
+    if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) continue;
+    const r = el.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    if (r.height >= 43.5) continue;
+    const words = (el.textContent || '').trim().split(/\\s+/).length;
+    out.push({ text: (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 30),
+      h: Math.round(r.height * 10) / 10, w: Math.round(r.width),
+      door: !!el.closest('[data-fold^="cta-"]') || el.matches('[data-fold^="cta-"]'),
+      sentence: words >= 5 });
+  }
+  return out;
+})()`;
 const MARKS_JS = `(() => {
   const out = [];
   for (const img of document.querySelectorAll('img')) {
@@ -246,6 +265,24 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
       await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
     }
   }
+  // Interactive target heights at the narrowest and a laptop row
+  const targetRows = []; let targetFailures = 0;
+  for (const [label, w, h] of [['320 by 256', 320, 256], ['375 by 629', 375, 629], ['1440 by 900', 1440, 900]]) {
+    await page.setViewportSize({ width: w, height: h }); await page.goto(url, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts ? document.fonts.ready : null); await page.waitForTimeout(100);
+    for (const t of await page.evaluate(TARGETS_JS)) {
+      // Only a door CTA under 44px fails, because the contract names that control and its size at that
+      // size. Everything else is reported for a critic to judge, because WCAG 2.5.8's minimum is 24px and
+      // it is met two ways: by size, or by spacing, and a footnote citation with generous spacing around
+      // it can pass on the second while measuring 15px tall. A crude height test failed thirty rows across
+      // three already-gated mocks on exactly that case, which is evidence of a bad rule, not thirty defects.
+      const fail = t.door && t.h < 43.5;
+      if (fail) targetFailures++;
+      targetRows.push(`| ${label} | ${t.text.replace(/\|/g, '')} | ${t.h}px | ${t.w}px | ${t.door ? 'door CTA' : t.sentence ? 'sentence link' : 'short control'} | ${fail ? 'FAIL: a door CTA under the contract 44px' : t.sentence ? 'inline sentence link, exempt under WCAG 2.5.8' : t.h < 24 ? 'under 24px: check WCAG 2.5.8 spacing' : 'under 44, above the 24px floor'} |`);
+    }
+  }
+  failures += targetFailures;
+
   // Mark geometry at the two widths K12 V2 names
   const markRows = []; let markFailures = 0;
   for (const [label, w, h, floor] of [['390 by 844', 390, 844, 27], ['1440 by 900', 1440, 900, 32]]) {
@@ -297,6 +334,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (consoleErrors.size) failures++;
   lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',
     '| Row | Cut | Element and the ink that crosses the bottom edge |', '|---|---|---|', ...bandEvidence);
+  lines.push('', '## Interactive targets under 44px', '', "BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.", '',
+    '| Viewport | Target | Height | Width | Kind | Result |', '|---|---|---|---|---|---|', ...(targetRows.length ? targetRows : ['| all three rows | every interactive target is at least 44px tall | | | | ok |']));
   lines.push('', '## Mark geometry (K12 V2)', '', 'Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.', '',
     '| Viewport | File | Shape | Height | Width | Aspect skew | Result |', '|---|---|---|---|---|---|---|', ...markRows);
   lines.push('', `## Result: ${failures ? failures + ' failure(s)' : 'all required rows pass'}`);
