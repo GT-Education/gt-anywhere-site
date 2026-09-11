@@ -15,61 +15,6 @@ def visible_text(doc):
     d = re.sub(r'<[^>]+>', ' ', d)
     return H.unescape(d)
 
-RAW_TEXT = ('script', 'style', 'title')  # elements whose content is text, never markup (HTML raw-text and RCDATA elements a mock may contain)
-
-def walk(doc):
-    """One sequential pass over the document in source order. Yields ('comment', text) for each HTML comment,
-    ('raw', name, start_tag, body) for each script, style or title element, and ('other', text) for everything between.
-    Because the pass is sequential, a comment marker inside a raw-text body is text, a tag-like string inside a comment
-    or a style sheet is text, and a script inside a comment is comment text: none can be mistaken for an element."""
-    i = 0; n = len(doc); low = doc.lower()
-    while i < n:
-        cands = []
-        c = doc.find('<!--', i)
-        if c >= 0: cands.append((c, 'comment'))
-        for name in RAW_TEXT:
-            k = low.find('<' + name, i)
-            while k >= 0 and k + 1 + len(name) < n and (doc[k + 1 + len(name)].isalnum() or doc[k + 1 + len(name)] in '-_'):
-                k = low.find('<' + name, k + 1 + len(name))
-            if k >= 0: cands.append((k, name))
-        if not cands:
-            yield ('other', doc[i:]); return
-        j, kind = min(cands)
-        if j > i: yield ('other', doc[i:j])
-        if kind == 'comment':
-            e = doc.find('-->', j + 4); e = n if e < 0 else e + 3
-            yield ('comment', doc[j:e]); i = e
-        else:
-            k = j + 1 + len(kind); q = None
-            while k < n:
-                ch = doc[k]
-                if q:
-                    if ch == q: q = None
-                elif ch in '"\'': q = ch
-                elif ch == '>': break
-                k += 1
-            tag_end = k + 1
-            m = re.compile(r'</' + kind + r'(?=[\s/>])', re.I).search(doc, tag_end)
-            body_end = m.start() if m else n
-            if m:
-                gt = doc.find('>', m.end()); close_end = gt + 1 if gt >= 0 else n
-            else: close_end = n
-            yield ('raw', kind, doc[j:tag_end], doc[tag_end:body_end]); i = close_end
-
-def script_blocks(doc):
-    """(start_tag, body) for every script element that is not inside an HTML comment"""
-    return [(item[2], item[3]) for item in walk(doc) if item[0] == 'raw' and item[1] == 'script']
-
-def cleaned(doc):
-    """the document with HTML comments removed and raw-text bodies (script, style, title) removed, start tags kept,
-    for the element scans"""
-    out = []
-    for item in walk(doc):
-        if item[0] == 'other': out.append(item[1])
-        elif item[0] == 'raw': out.append(item[2] + '</' + item[1] + '>')
-        else: out.append(' ')
-    return ''.join(out)
-
 from html.parser import HTMLParser
 
 class _Elements(HTMLParser):
@@ -96,6 +41,32 @@ def elements(doc):
     if e._in == 'script': e.scripts.append((e._cur, ''.join(e._buf)))
     return e
 
+class _Cleaner(HTMLParser):
+    """Rebuilds the document without HTML comments and without the text of script, style and title elements, using the
+    standard-library tokenizer, so the text-based rules see the same elements the browser does."""
+    def __init__(self):
+        super().__init__(convert_charrefs=False); self.out = []; self._skip = 0
+    def handle_starttag(self, tag, attrs):
+        self.out.append(self.get_starttag_text() or '')
+        if tag.lower() in ('script', 'style', 'title'): self._skip += 1
+    def handle_startendtag(self, tag, attrs): self.out.append(self.get_starttag_text() or '')
+    def handle_endtag(self, tag):
+        if tag.lower() in ('script', 'style', 'title') and self._skip: self._skip -= 1
+        self.out.append('</' + tag + '>')
+    def handle_data(self, data):
+        if not self._skip: self.out.append(data)
+    def handle_entityref(self, name):
+        if not self._skip: self.out.append('&' + name + ';')
+    def handle_charref(self, name):
+        if not self._skip: self.out.append('&#' + name + ';')
+    def handle_decl(self, decl): self.out.append('<!' + decl + '>')
+    def handle_pi(self, data): self.out.append('<?' + data + '>')
+    def unknown_decl(self, data): self.out.append('<![' + data + ']>')
+    def handle_comment(self, data): self.out.append(' ')
+
+def cleaned(doc):
+    c = _Cleaner(); c.feed(doc); c.close(); return ''.join(c.out)
+
 def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
     if not os.path.exists(idx): return [('files','FAIL','index.html missing')]
@@ -107,7 +78,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     el = elements(doc)  # standard-library parse: elements, decoded attributes, script bodies, title text
     blocks = el.scripts  # (attrs, body) per script element, comments excluded by the tokenizer
     title_text = el.title
-    doc = cleaned(doc)  # for the text-based rules below: comments and raw-text bodies removed by the sequential walk
+    doc = cleaned(doc)  # for the text-based rules below: comments and raw-text bodies removed by the same tokenizer
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))

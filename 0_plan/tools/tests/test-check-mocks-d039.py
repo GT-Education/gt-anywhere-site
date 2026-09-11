@@ -49,4 +49,14 @@ for name, (attr_, head, body, rule, expect) in CASES.items():
     res = cm.check_doc(BASE % (attr_, head, body), '', 'D-039 declared' if attr_ else 'no declaration')
     got = [st for (rl, st, _) in res if rl.startswith(rule)][0]
     print(('ok   ' if got == expect else 'BAD  ') + name); ok = ok and got == expect
+# whole-gate check: an explanatory tooltip mentioning <script> or <input> must not change any rule's outcome on a real mock
+import glob
+m1 = sorted(glob.glob(os.path.join(ROOT, '0_plan/mockups/M1-*')))[0]
+doc = open(os.path.join(m1, 'index.html'), encoding='utf-8').read(); css = open(os.path.join(m1, 'styles.css'), encoding='utf-8').read(); rat = open(os.path.join(m1, 'RATIONALE.md'), encoding='utf-8').read()
+base_fails = [rl for rl, st, _ in cm.check_doc(doc, css, rat, m1) if st == 'FAIL']
+probe = doc.replace('<body', '<body><p title="The <script> adds optional reveals and the <input> radios work without JavaScript.">Motion notes</p><body', 1).replace('<body><p', '<p', 1) if '<body' in doc else doc
+probe = doc.replace('<body>', '<body><p title="The <script> adds optional reveals and the <input> radios work without JavaScript.">Motion notes</p>', 1) if '<body>' in doc else probe
+probe_fails = [rl for rl, st, _ in cm.check_doc(probe, css, rat, m1) if st == 'FAIL']
+same = probe_fails == base_fails
+print(('ok   ' if same else 'BAD  ') + 'a tooltip mentioning <script> and <input> changes no rule outcome on M1 (' + str(len(base_fails)) + ' vs ' + str(len(probe_fails)) + ' failures)'); ok = ok and same
 print('test-check-mocks-d039:', 'PASS' if ok else 'FAIL'); sys.exit(0 if ok else 1)
