@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:57:45.238Z; page `/0_plan/mockups/M05-front-door-of-the-estate/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T15:22:52.837Z; page `/0_plan/mockups/M05-front-door-of-the-estate/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V6 | 412 by 839 | fold | 815 | 57 | 242 | 271 | 403 | 528 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 57 | 240 | 270 | 402 | 527 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 57 | 243 | 272 | 405 | 530 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 57 | 271 | 300 | 432 | 557 | yes | report: page height 7540 |
+| V9 | 390 by 844 | emptiness |  | 57 | 271 | 300 | 432 | 557 | yes | report: page height 7416 |
 | V10 | 750 by 342 | fold | 318 | 57 | 160 | 186 | 299 | 299 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 57 | 285 | 323 | 549 | 549 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 57 | 292 | 330 | 557 | 557 | yes | PASS |

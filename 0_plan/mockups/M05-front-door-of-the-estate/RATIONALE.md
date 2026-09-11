@@ -452,3 +452,11 @@ h1 line counts as shipped (Literata 300, -0.027em): **V1 6 / 186px, V2 6 / 188, 
 | The compare anchor at V14 | On the first screen at V16 as the brief asks, below the fold at 1280 by 720. Getting it above 696 would need the diagram cut to about 140px, which costs a row name or the deck's own phrases |
 | The button corner | Taken as DD-47's uniform `--radius-md`, not the estate's composed cut. If the director wants this direction to carry the cut as its maximum-continuity experiment, it is a `clip-path` on `.btn` plus a re-proof of the focus ring, the hit area and forced colours on eight controls, and a declared DD-47 departure |
 | The grain | The estate's textured cream is not reproduced. Whether that matters is a taste call for Nari, and closing it needs a texture asset in `shared/img/` |
+
+**Director's change after the scoring.** The Locations list no longer renders the three coming-soon cities that
+gt.school's footer publishes today. The studio critic found the list flagged correctly but shipped incorrectly:
+`copy.md` section 9 grants those city names *on* Nari's confirmation, not pending it, and this page is what she is
+shown at G1, so rendering them would have put three campus claims in front of her as though the page had already
+taken that position. The markup carries a comment naming the three rows and the single condition for restoring
+them. The N-campus pattern the direction has to prove is unaffected, since the list, its status chip and its type
+are all still in place around Georgetown.
