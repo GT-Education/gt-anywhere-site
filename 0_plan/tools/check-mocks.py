@@ -110,7 +110,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     r('R18 provenance line once', text.count('The gifted school in the Alpha School network') == 1, f"{text.count('The gifted school in the Alpha School network')} occurrences")
     r('R19 compare anchor before the table', 'href="#compare"' in doc and doc.find('href="#compare"') < doc.find('<table'))
     r('R16 real logos in header and footer', 'gt-school-logo-h.svg' in doc and 'gt-anywhere-logo-h.svg' in doc, 'GT School and GT Anywhere logo SVGs required')
-    size = os.path.getsize(idx) + (os.path.getsize(css) if os.path.exists(css) else 0)
+    size = len(doc.encode('utf-8')) + len(style.encode('utf-8'))
     r('R14 size under 1 MB', size < 1_000_000, f'{size//1024} KB')
     if os.path.exists(rat):
         rt = open(rat, encoding='utf-8').read(); miss = [s for s in RATIONALE_SECTIONS if s.lower() not in rt.lower()]
