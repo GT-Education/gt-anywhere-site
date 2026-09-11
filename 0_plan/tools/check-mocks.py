@@ -23,21 +23,24 @@ def check(folder):
     if not os.path.exists(idx): return [('files','FAIL','index.html missing')]
     doc = open(idx, encoding='utf-8').read(); style = open(css, encoding='utf-8').read() if os.path.exists(css) else ''
     text = visible_text(doc)
-    d039 = re.search(r'<html\b[^>]*\bdata-d039="([^"]*)"', doc, re.I); d039 = set(d039.group(1).split()) if d039 else set()
+    d039m = re.search(r'<html\b[^>]*\bdata-d039\s*=\s*["\']([^"\']*)["\']', doc, re.I); d039 = set(d039m.group(1).split()) if d039m else set(); d039_empty = bool(d039m) and not d039
     if 'inputs' in d039:
-        comp = re.search(r'<html\b[^>]*\bdata-d039-component="router"', doc, re.I)
-        nonradio = re.findall(r'<input\b(?![^>]*type="radio")[^>]*>', doc, re.I)
-        r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not re.search(r'<(form|select|textarea)\b|type="submit"', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
+        comp = re.search(r'<html\b[^>]*\bdata-d039-component\s*=\s*["\']router["\']', doc, re.I)
+        inputs = re.findall(r'<input\b[^>]*>', doc, re.I)
+        nonradio = [t for t in inputs if not re.search(r'(?<![\w-])type\s*=\s*["\']?radio\b', t, re.I)]
+        submit = re.search(r'(?<![\w-])type\s*=\s*["\']?submit\b', doc, re.I)
+        r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not submit and not re.search(r'<(form|select|textarea)\b', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
     else:
-        r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b|type="submit"', doc, re.I))
+        r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b', doc, re.I) and not re.search(r'(?<![\w-])type\s*=\s*["\']?submit\b', doc, re.I))
     scripts = re.findall(r'<script\b[^>]*>', doc, re.I)
     if 'script' in d039:
-        inline = re.findall(r'<script\b(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>(.*?)</script>', doc, re.I|re.S)
-        r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and any('ld+json' in t for t in scripts) and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
+        external = [t for t in scripts if re.search(r'(?<![\w-])src\s*=', t, re.I)]
+        inline = re.findall(r'<script\b(?![^>]*(?<![\w-])src\s*=)(?![^>]*ld\+json)[^>]*>(.*?)</script>', doc, re.I|re.S)
+        r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and not external and any('ld+json' in t for t in scripts) and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, external {len(external)}, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
     else:
         r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in scripts[0], f'{len(scripts)} script tags')
     rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
-    r('R20 D-039 declaration valid and named in the rationale', (not d039) or (d039 <= {'script','inputs'} and 'D-039' in rat_text), f'tokens {sorted(d039)}; rationale names D-039: {"D-039" in rat_text}' if d039 else '')
+    r('R20 D-039 declaration valid and named in the rationale', (not d039m) or (bool(d039) and d039 <= {'script','inputs'} and 'D-039' in rat_text), ('empty declaration' if d039_empty else f'tokens {sorted(d039)}; rationale names D-039: {"D-039" in rat_text}') if d039m else '')
     hosts = set(re.findall(r'https?://([^/"\')\s]+)', doc+style))
     bad = sorted(h for h in hosts if h not in ALLOWED_HOSTS)
     r('R3 external hosts', not bad, ', '.join(bad))
