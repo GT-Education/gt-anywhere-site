@@ -1,0 +1,425 @@
+/* M10 "The Map" — 0_plan/mockups/M10-the-map/styles.css
+   Tokens: ../shared/tokens-v2.css (layer 1 extracted, layer 2 PROPOSED under DD-38, DD-39, MN-16).
+   Every colour, face, type size, space, radius, shadow and duration is a var(). The only bare lengths are
+   geometry: hairline widths, focus-ring bands, the 44px target floor, the 56px header row, the SVG's stroke
+   widths, the mark heights K12 V2 fixes in pixels, and the breakpoints. RATIONALE.md "Departures" lists them.
+   Order matters at the end of this file: the forced-colours block is last, so it outranks the token rules by
+   source order rather than losing to them at equal weight (the M07 lesson). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  /* only breaks a word that would otherwise leave the box: the runner's doubled-root test at V2 overflowed on
+     the h1's non-breaking pairs, the sources line's URLs and the location name */
+  overflow-wrap: break-word;
+}
+img, svg { max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.edge { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 700px) { .edge { padding-inline: var(--space-6); } }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.nobr { white-space: nowrap; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* K3's two-colour ring wherever an element sits on navy or straddles navy and light: a 2px --color-navy inner
+   band and a 2px --color-focus-on-dark outer band (14.58 between them), so one band passes on either ground.
+   --color-focus is 1.69 on navy and fails there, which is why the outer band is the on-dark focus colour. */
+.site-footer :focus-visible, .footer-logo--light:focus-visible {
+  outline: 2px solid var(--color-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-focus-on-dark);
+}
+
+.skip-link {
+  position: absolute; top: -999px; left: var(--space-4); z-index: 10;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg); color: var(--color-text);
+  border: 2px solid var(--color-focus); font-weight: 500; text-decoration: none;
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* ---------- Shared type roles (CONTRACT.md section 3) ---------- */
+.eyebrow {
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+.figure { font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+.arrow { flex: none; }
+.text-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.text-link:hover { text-decoration-thickness: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: 44px; max-width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent; border-radius: var(--radius-md);
+  background: var(--color-navy); color: var(--color-on-navy);
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
+  line-height: var(--leading-body); text-transform: uppercase;
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.btn:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+/* ---------- Header: a 56px row on the page ground, the mark at K12 V2's phone floor ---------- */
+.site-header { background: var(--color-bg); border-bottom: 1px solid var(--color-border); }
+.header-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-2) var(--space-3); min-height: 56px;
+}
+.lockup { display: inline-flex; align-items: center; min-height: 44px; }
+.lockup img { height: 27px; width: auto; }
+@media (min-width: 700px) { .lockup img { height: 32px; } }
+.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 var(--space-3); font-size: var(--text-xs); font-weight: 500; }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; }
+.utility-nav a:hover, .utility-nav a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 369px) { .utility-nav { flex-direction: column; align-items: flex-end; } }
+@media (min-width: 700px) { .utility-nav { gap: 0 var(--space-4); font-size: var(--text-sm); } }
+
+/* ---------- First screen ---------- */
+.first-screen { padding-block: var(--space-4) var(--space-6); }
+.masthead { margin-bottom: var(--space-5); }
+h1 {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-3xl);
+  line-height: var(--leading-tight); max-width: 35ch; margin-bottom: var(--space-3);
+}
+.provenance {
+  font-size: var(--text-sm); line-height: var(--leading-body); color: var(--color-text-muted);
+  font-style: italic; font-family: var(--font-serif);
+}
+
+/* The choice: on a phone the doors come first and the map is the second screen; from 1180 the map takes the
+   left seven columns and the doors the right five, with the compare sentence under the map as its caption. */
+.choice { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+.doors { order: 1; }
+.door-lines { order: 2; }
+.compare-lead { order: 3; }
+.map-fig { order: 4; }
+.locations { order: 5; }
+
+/* Doors: a list that renders at two options and at five (DD-21) — auto-fit tracks, not two fixed halves. */
+.doors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--space-3); }
+.door {
+  display: flex; flex-direction: column;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border); border-radius: var(--radius-md);
+}
+/* V1 door state (CONTRACT.md section 6): instant, colour only. The whole card answers the pointer and the
+   keyboard, not just the button inside it. */
+.door:hover, .door:focus-within { border-color: var(--color-border-strong); }
+.door--georgetown { background: var(--color-georgetown-tint); }
+.door--anywhere { background: var(--color-anywhere-tint); }
+.door-label {
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted);
+}
+.door-name {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-xl);
+  line-height: var(--leading-tight); margin-top: var(--space-3);
+}
+.door-line { font-size: var(--text-base); line-height: var(--leading-prose); margin-top: var(--space-3); max-width: var(--measure-prose); }
+.door-cta, .door .btn { margin-top: var(--space-4); }
+.door .btn { align-self: flex-start; }
+
+/* Compact door rule (CONTRACT.md section 2): the lines leave the cards and follow the second CTA as two run-in
+   paragraphs, so neither line sits between the two CTAs. Exactly one copy of each line renders at any viewport. */
+.door-lines { display: grid; gap: var(--space-3); }
+.door-lines li { font-size: var(--text-base); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.line-run-in { font-family: var(--font-serif); font-weight: 500; }
+.door-line { display: none; }
+/* Under 780px tall (and beside the map from 1180) the cards are compact blocks: CONTRACT.md section 2's
+   110px budget, measured here as label 16 + 8 + name + 8 + CTA 44 inside 8px of vertical padding. */
+@media (max-height: 780px), (min-width: 1180px) {
+  .masthead { margin-bottom: var(--space-4); }
+  .door { padding: var(--space-3) var(--space-4); }
+  .door-name { margin-top: var(--space-2); }
+  .door-cta { margin-top: var(--space-3); }
+  .doors { gap: var(--space-2); }
+}
+@media (min-height: 781px) and (max-width: 1179px) {
+  .door-line { display: block; }
+  .door-lines { display: none; }
+  .door .btn { margin-top: auto; padding-top: 0; }
+  .door-cta { margin-top: var(--space-4); }
+}
+
+.compare-lead {
+  font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-body);
+  max-width: var(--measure-prose);
+}
+.compare-lead a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.compare-lead a:hover { text-decoration-thickness: 2px; }
+
+/* ---------- The map ---------- */
+.map-fig { display: flex; justify-content: flex-start; }
+.map { display: block; width: 100%; height: auto; }
+.map--wide { display: none; max-width: 43.75rem; }
+.map--tall { max-width: 24rem; }
+@media (min-width: 700px) {
+  .map--wide { display: block; }
+  .map--tall { display: none; }
+}
+.land { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1; stroke-linejoin: round; }
+/* The brief sets the rings at --color-navy 30, 20 and 10 percent. Those alphas measure 1.9:1, 1.5:1 and
+   1.24:1 against the cream ground, so the outer ring would be all but invisible at one weight. The stroke
+   grows as the opacity falls, which keeps the brief's colour spec and gives the three rings comparable
+   presence; forced colours separates them by dash instead, where opacity does not apply. */
+.ring { fill: none; stroke: var(--color-navy); stroke-linecap: round; }
+.ring--1 { stroke-width: 1.5; stroke-opacity: .3; }
+.ring--2 { stroke-width: 2.5; stroke-opacity: .2; }
+.ring--3 { stroke-width: 4; stroke-opacity: .1; }
+.key-ring { fill: none; stroke: var(--color-navy); }
+.key-ring--1 { stroke-width: 1.25; stroke-opacity: .3; }
+.key-ring--2 { stroke-width: 1.5; stroke-opacity: .2; }
+.key-ring--3 { stroke-width: 2; stroke-opacity: .1; }
+.leader { stroke: var(--color-border-strong); stroke-width: 1; }
+.pin-halo { fill: var(--color-bg); }
+.pin { fill: var(--color-accent); }
+.map-label {
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--text-sm);
+  fill: var(--color-text); letter-spacing: .01em;
+}
+.inset-us { fill: var(--color-bg); stroke: var(--color-text-muted); stroke-width: 1; stroke-linejoin: round; }
+.inset-tx { fill: var(--color-surface); stroke: var(--color-text); stroke-width: 1.25; stroke-linejoin: round; }
+
+/* Locations list: gt.school's footer pattern, not its implementation (DD-45, K12 F64). Three to five rows
+   without a rewrite; the enrolling row is a real link, not an href="#" (K12 A13). */
+/* The list is bracketed by hairlines: a rule over each row and one under the list. The closing rule is also
+   the first screen's last ink, which is what keeps the fold from reading as finished at V16 (measured). */
+.locations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); gap: var(--space-3); border-bottom: 1px solid var(--color-border); }
+.location {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-3);
+  padding-top: var(--space-3); border-top: 1px solid var(--color-border);
+}
+.location-name {
+  font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-body);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em;
+  min-height: 44px; display: inline-flex; align-items: center;
+}
+.location-name:hover { text-decoration-thickness: 2px; }
+.status {
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .08em;
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm);
+  background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border);
+}
+
+/* ---------- Laptop: map left seven columns, doors right five ---------- */
+@media (min-width: 1180px) {
+  .first-screen { padding-block: var(--space-4) var(--space-7); }
+  /* The first screen never ends short of the fold. Where the map, the doors and the Locations list are shorter
+     than the viewport, the section stretches to the contract's reserve line (the 56px header row plus its rule
+     plus the reserved 24px), so the comparison band's hairline is always the cut a reader sees rather than a
+     false floor. Measured at V16 and V17, where the natural height is 788 against limits of 819 and 879. */
+  @supports (height: 100svh) { .first-screen { min-height: calc(100svh - 3.5rem - 1px - var(--space-5)); } }
+  .masthead { margin-bottom: var(--space-4); }
+  .choice {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-6); row-gap: var(--space-4);
+    align-items: start;
+  }
+  h1 { max-width: min(35ch, 66%); }   /* the contract's eight of twelve columns, not the full container */
+  .map-fig { grid-column: 1 / 8; grid-row: 1; order: 0; }
+  .choice .doors { grid-column: 8 / 13; grid-row: 1; order: 0; grid-template-columns: 1fr; grid-auto-rows: 1fr; align-self: stretch; }
+  /* the lines span the two rows the left column uses for the compare sentence and the Locations list, so a
+     tall lines block never opens a hole under the map (measured at V16 before the span: 190px of dead space) */
+  .door-lines { grid-column: 8 / 13; grid-row: 2 / span 2; order: 0; }
+  .compare-lead { grid-column: 1 / 8; grid-row: 2; order: 0; }
+  .locations { grid-column: 1 / 8; grid-row: 3; order: 0; }
+  .door { padding: var(--space-4) var(--space-5); }
+  .choice .door .btn { margin-top: auto; }
+}
+@media (min-width: 1400px) {
+  .first-screen { padding-block: var(--space-5) var(--space-8); }
+  .masthead { margin-bottom: var(--space-5); }
+  .choice { row-gap: var(--space-5); }
+}
+
+/* Phone landscape (V10, 750 by 342): the contract's landscape recipe. The fixed sentence at the h1 clamp size
+   needs four lines at 750 wide and will not fit 318px, so the h1 steps down one token to --text-xl on this row
+   only, as CONTRACT.md section 2 allows and M03 did. Declared as a departure in RATIONALE.md. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .first-screen { padding-block: var(--space-3); }
+  h1 { font-size: var(--text-xl); max-width: none; margin-bottom: var(--space-2); }
+  .masthead { margin-bottom: var(--space-3); }
+  .choice { gap: var(--space-3); }
+}
+
+/* ---------- Bands below the fold ---------- */
+.band { padding-block: var(--space-7); border-top: 1px solid var(--color-border); }
+@media (min-width: 700px) { .band { padding-block: var(--space-8); } }
+/* The band under the first screen opens tighter than the rest: with 64px of air the hairline and the eyebrow
+   can straddle the viewport edge and leave the first screen reading as finished (the runner's false-floor
+   test at V11 and V17). Measured: 32px puts ink inside the contract's reserved bottom 24px at every row. */
+.comparison { padding-top: var(--space-6); }
+.band h2 {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-2xl);
+  line-height: var(--leading-tight); max-width: 24ch;
+}
+.sources { margin-top: var(--space-5); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); max-width: var(--measure-prose); }
+
+/* Comparison: stacked labelled blocks below 768, a real table from 768 (R6, measured breakpoint) */
+.compare-table { width: 100%; border-collapse: collapse; margin-top: var(--space-5); }
+caption {
+  text-align: left; font-family: var(--font-serif); font-style: italic;
+  color: var(--color-text-muted); margin-bottom: var(--space-4); font-size: var(--text-sm);
+}
+.compare-table thead { display: none; }
+.compare-table tr { display: block; border-top: 1px solid var(--color-border); padding-block: var(--space-4); }
+.compare-table tr:first-child { border-top: 0; padding-top: 0; }
+.compare-table th[scope="row"] {
+  display: block; text-align: left;
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+.compare-table td { display: block; font-size: var(--text-base); line-height: var(--leading-prose); }
+.compare-table td::before {
+  content: attr(data-label);
+  display: block;
+  font-family: var(--font-serif); font-size: var(--text-sm); font-style: italic;
+  color: var(--color-text-muted);
+}
+.compare-table td + td { margin-top: var(--space-3); }
+@media (min-width: 768px) {
+  .compare-table { table-layout: fixed; }
+  .compare-table thead { display: table-header-group; }
+  .compare-table tr { display: table-row; padding-block: 0; border-top: 0; }
+  .compare-table tr:first-child { padding-top: 0; }
+  .compare-table th, .compare-table td { border-top: 1px solid var(--color-border); padding: var(--space-4) var(--space-4) var(--space-4) 0; vertical-align: top; }
+  .compare-table thead th { border-top: 0; border-bottom: 1px solid var(--color-text); padding-top: 0; }
+  .compare-table th[scope="col"] {
+    text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-md);
+    text-transform: none; letter-spacing: normal; color: var(--color-text); margin-bottom: 0;
+  }
+  .compare-table th[scope="row"] { display: table-cell; width: 22%; margin-bottom: 0; }
+  .compare-table td { display: table-cell; width: 39%; }
+  .compare-table td::before { display: none; }
+  .compare-table td + td { margin-top: 0; }
+  .corner { border-top: 0; }
+}
+.doors--echo { margin-top: var(--space-6); }
+.doors--echo .door-name { font-size: var(--text-lg); }
+.tefa {
+  margin-top: var(--space-6); padding: var(--space-5);
+  background: var(--color-anywhere-tint); border-radius: var(--radius-md);
+  max-width: var(--measure-prose);
+}
+.tefa h3 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); margin-bottom: var(--space-3); }
+.tefa p { line-height: var(--leading-prose); margin-bottom: var(--space-3); }
+
+/* Proof strip: the warm band, one fact per row on a hairline grid */
+.proof { background: var(--color-surface); }
+.facts { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+@media (min-width: 700px) { .facts { grid-template-columns: repeat(2, 1fr); column-gap: var(--space-6); } }
+.facts li {
+  padding-top: var(--space-3); border-top: 1px solid var(--color-border-strong);
+  font-size: var(--text-base); line-height: var(--leading-prose);
+}
+.proof .sources { color: var(--color-text-muted); }
+
+/* Application steps */
+.steps-intro { margin-top: var(--space-4); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.steps-list { counter-reset: step; display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+@media (min-width: 700px) { .steps-list { grid-template-columns: repeat(4, 1fr); column-gap: var(--space-5); } }
+.steps-list li {
+  counter-increment: step;
+  padding-top: var(--space-3); border-top: 1px solid var(--color-border-strong);
+  font-size: var(--text-base); line-height: var(--leading-prose);
+}
+.steps-list li::before {
+  content: counter(step);
+  display: block;
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums; color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+.apply { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+
+/* Connect */
+.connect-list { display: grid; gap: 0; margin-top: var(--space-5); }
+@media (min-width: 700px) { .connect-list { grid-template-columns: repeat(2, 1fr); column-gap: var(--space-6); } }
+.connect-list a {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: 44px; padding-block: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-md); text-decoration: none;
+}
+.connect-list a:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+/* Current families. The pale blue is GT Anywhere's cue on this page (the door, the TEFA module), so a band
+   that speaks for both schools stays on the page ground with its hairline. */
+.families { background: var(--color-bg); }
+.families-inner { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
+.families p { margin-top: var(--space-3); line-height: var(--leading-prose); }
+.families .text-link { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* ---------- Footer: the navy panel, both real marks on the ground each one needs ---------- */
+.site-footer { background: var(--color-navy); color: var(--color-on-navy); padding-block: var(--space-7); }
+.footer-grid { display: grid; gap: var(--space-6); }
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 1.2fr .8fr auto; gap: var(--space-7); } }
+.footer-facts { font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.footer-contact { margin-top: var(--space-3); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+.footer-links { display: grid; gap: 0; }
+.footer-links a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: var(--text-sm); text-decoration: none;
+}
+.footer-links a:hover, .footer-links a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
+.footer-logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.footer-logo { display: inline-flex; align-items: center; min-height: 44px; }
+.footer-logo--light { background: var(--color-bg); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+.footer-logo img { height: 27px; width: auto; }
+@media (min-width: 700px) { .footer-logo img { height: 32px; } }
+
+/* V10 anchor scroll (CONTRACT.md section 6): native smooth scrolling for the compare link, inside
+   prefers-reduced-motion: no-preference only. Nothing else on the page moves. */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ---------- Reduced motion (MN-16, R8): every duration --duration-none, every state visible ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: var(--duration-none) !important;
+    animation-duration: var(--duration-none) !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Forced colours (K3 F38). LAST in the stylesheet by intent: at equal specificity source order
+   decides, and the M07 lesson is that a forced-colours block placed earlier silently loses to the token rules.
+   A map is the hard case: fills and strokes are not forced by the user agent, so the land, the rings, the pin
+   and the inset would keep authored colours on a system ground and could vanish. Every one is restated here,
+   and the rings are separated by dash pattern and width instead of opacity, which forced colours does not
+   touch. ---------- */
+@media (forced-colors: active) {
+  body { background: Canvas; color: CanvasText; }
+  .site-header, .band, .proof, .families, .tefa, .door--georgetown, .door--anywhere, .status, .footer-logo--light { background: Canvas; color: CanvasText; }
+  .site-footer { background: Canvas; color: CanvasText; border-top: 1px solid CanvasText; }
+  .btn { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
+  .land, .inset-tx { fill: Canvas; stroke: CanvasText; stroke-width: 1.5; }
+  .inset-us { fill: Canvas; stroke: CanvasText; stroke-width: 1.5; }
+  .ring, .key-ring { stroke: CanvasText; stroke-opacity: 1; }
+  .ring--1, .key-ring--1 { stroke-width: 2; stroke-dasharray: none; }
+  .ring--2, .key-ring--2 { stroke-width: 1.5; stroke-dasharray: 8 5; }
+  .ring--3, .key-ring--3 { stroke-width: 1; stroke-dasharray: 3 4; }
+  .leader { stroke: CanvasText; stroke-width: 1.5; }
+  .pin-halo { fill: Canvas; stroke: CanvasText; stroke-width: 1; }
+  .pin { fill: CanvasText; }
+  .map-label { fill: CanvasText; }
+  .provenance, .eyebrow, .door-label, .status, .sources, .compare-table th[scope="row"], .compare-table td::before, .steps-list li::before, .footer-contact { color: CanvasText; }
+  .door, .location, .facts li, .steps-list li, .connect-list a, .compare-table th, .compare-table td, .compare-table tr { border-color: CanvasText; }
+  :focus-visible, .site-footer :focus-visible, .footer-logo--light:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+}

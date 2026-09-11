@@ -133,8 +133,25 @@ def main(scratch):
             print('Georgetown pin at %.2f %.2f  (fraction across %.4f, down %.4f)'
                   % (px, py, (px - min(xs)) / (max(xs) - min(xs)), (py - min(ys)) / (max(ys) - min(ys))))
         print(d)
+    # Texas inside the United States inset: the SAME fit transform as the inset outline, so the state sits where
+    # it really sits in the country rather than being placed by eye.
+    proj_us = [project(lower48, 39.5)]
+    xs = [p[0] for r in proj_us for p in r]; ys = [p[1] for r in proj_us for p in r]
+    aspect = (max(xs) - min(xs)) / (max(ys) - min(ys))
+    _, t_us = fit(proj_us, (0.0, 0.0, 200.0, 200.0 / aspect))
+    tx_in_us = [[t_us(p) for p in project(r, 39.5)] for r in tx_rings]
+    simp = [dp(r, 0.35) for r in tx_in_us]
+    d = d_string(simp)
+    report.append(('texas-in-us', d, simp, None, None))
+    print('\n--- texas-in-us ---')
+    print('points %s -> %s, tolerance 0.35 user units, d is %d bytes'
+          % ([len(r) for r in tx_in_us], [len(r) for r in simp], len(d.encode('utf-8'))))
+    xs = [p[0] for r in simp for p in r]; ys = [p[1] for r in simp for p in r]
+    print('bbox %.1f %.1f %.1f %.1f' % (min(xs), min(ys), max(xs), max(ys)))
+    print(d)
+
     ship = sum(len(d.encode('utf-8')) for _, d, _, _, _ in report)
-    print('\ncommitted path data (one Texas outline + the United States inset): %d bytes' % ship)
+    print('\ncommitted path data (Texas outline + United States inset + Texas inside the inset): %d bytes' % ship)
 
 
 if __name__ == '__main__':
