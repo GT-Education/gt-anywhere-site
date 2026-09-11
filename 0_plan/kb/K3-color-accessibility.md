@@ -5,9 +5,9 @@
 | Cluster | K3 of `18-knowledge-base-plan.md` section 1 |
 | Feeds | `tokens.css` departures, rubric row **Color and surface** (`17` section 6), the QA contrast tests (`17` section 4, `1_spec/13`), the Design Director brief's "Color and surface" field (`17` section 5) |
 | Method | **41 distinct sources fetched with content** by this agent on 2026-09-11 using WebFetch and WebSearch only. No browser tool used. No GT or Alpha page loaded. Twelve further URLs returned 403/404/title-only and are listed in section 6; nothing here rests on them |
-| Computation | Every ratio in section 5 was **computed by this agent** from the token hex values using the W3C formula (F5, F6) and cross-checked with APCA-W3 0.1.9 (F14). The arithmetic is shown once in 5a. No ratio is quoted from memory or from a third-party checker |
+| Computation | Every ratio in section 5 was **computed by this agent** from the token hex values using the W3C formula (F5, F6) and cross-checked with APCA-W3 0.1.9 (F14). The arithmetic is shown once in 5a. No ratio is quoted from memory or from a third-party checker. Added in the rework: a standalone color-vision-deficiency simulation (Machado, Oliveira and Fernandes 2009 severity-1.0 matrices) at `0_plan/kb/measurements/K3/cvd-simulation.py`, output `cvd-simulation.md`, self-checked against this file's own Normal-vision ratios before its numbers are used |
 | Caution | Contrast ratios are **measurements of the tokens**, not claims about GT School, so they need no claims-register row. REQ-022 and DEL-018 still govern any figure that reaches a page |
-| Status | Draft 2026-09-11, Fable. Astra E4 pending |
+| Status | Reworked 2026-09-11 after Astra's E4 (see the Rework log, section 8). Contrast tables and measured failures are findings; new-swatch proposals (5e) remain proposals for `07`, and "exactly two navy sections" (5g CS6) is an option per R15, not a rule |
 
 ---
 
@@ -107,7 +107,7 @@ How do you build one palette from two existing brands; what does contrast actual
 | P6 | **APCA is the second opinion, never the verdict.** Report Lc beside the ratio. Where APCA is harsher than WCAG, believe APCA; where it is more lenient, still ship the WCAG number, because WCAG 2.2 is the normative standard and WCAG 3 has no adopted algorithm | F14, F15, F16, F17 |
 | P7 | **The focus ring is two measurements, not one:** 3:1 against whatever it is adjacent to (1.4.11, Level AA), and 3:1 of change against the same pixels unfocused (2.4.13, Level AAA). A ring that straddles two surfaces must satisfy both on both | F4, F7, F9, F35, F36 |
 | P8 | **Where a ring can sit on more than one surface, use two colours ≥9:1 apart.** That is a proof, not a heuristic: one band is then guaranteed to clear 3:1 on any solid ground | F10, F35 |
-| P9 | **A dark surface is a dark blue-black, not black, and the text on it is off-white, not white.** Halation is a real, measurable harm to roughly half the population at some diopter, and the cost of avoiding it is nil | F30, F31, F32, F33 |
+| P9 | **A dark surface is a dark blue-black, not black, and the text on it is off-white, not white.** Halation is a documented, named-condition harm for readers with astigmatism, migraine, low vision or tired eyes (F30, F32); astigmatism itself is common in the cited cohorts (F31: "almost half of the population has at least 0.5 D"), but no source ties a halation-incidence rate to that prevalence figure. **Quantifying halation's reach as "roughly half the population" is Judgment, not a finding.** The cost of avoiding it — off-white on dark blue-black rather than pure white on near-black — is nil regardless of the exact share affected | F30, F31, F32, F33 |
 | P10 | **A tint may reinforce a distinction; it may never be the distinction.** If a parent must know which door is which, the answer is a word, a mark and a position — the tint is the fourth cue | F12, F40, F41, F42 |
 | P11 | **The accent is spent, not spread.** One accent event per screen, and the brighter the accent the smaller its legal role | F33, F34 |
 | P12 | **Every focus and border decision is checked under `forced-colors: active`,** because `box-shadow` vanishes there and `outline-color` is replaced | F38, F39 |
@@ -134,6 +134,23 @@ How do you build one palette from two existing brands; what does contrast actual
 ---
 
 ## 5. How it applies to GT
+
+F1 to F3 and F15 state the same WCAG and APCA thresholds in different units, and in one case a
+different rounding of the same figure. The table below is what every ratio and Lc reading in 5a
+to 5h is actually checked against, reconciled once so the working sections do not need to repeat it.
+
+| Requirement | Normal text | Large text | Non-text (1.4.11) |
+|---|---|---|---|
+| WCAG AA | 4.5:1 | 3.0:1 | 3.0:1 |
+| WCAG AAA | 7.0:1 | 4.5:1 | no AAA criterion exists for non-text |
+| APCA (second opinion, F15) | Lc 90 preferred, Lc 75 minimum for body columns | Lc 60 (24px/400 or 16px/700) to Lc 45 (36px/400 or 24px/700) for headlines | Lc 15 minimum, ≥5px in the smallest dimension |
+
+**Large-text pixel size:** WCAG defines large text as 18pt, or 14pt bold (F1). F3 quotes the W3C
+source's own conversion verbatim — "approximately 18.5px" for 14pt — but that is the source
+page's own loose rounding of `14 × 1.333 = 18.662`. Every working table from 5b onward instead
+uses the arithmetically precise **18.66px** for 14pt bold (and 24px for 18pt normal), and that is
+the pair every pass/fail verdict below was actually checked against. Both numbers describe the
+same threshold; only the rounding differs, and 18.66px is the one to use.
 
 ### 5a. The arithmetic, once
 
@@ -211,7 +228,11 @@ Against 4.5 (normal), 3.0 (large), 3.0 (non-text): **fail, fail, fail**. This co
 | anywhere tint #e4eef2 vs navy #002a3a | 12.79 | pass |
 | accent #e48b53 vs navy #002a3a | 5.83 | pass |
 
-The two school tints are **1.01:1 apart**. They are indistinguishable in grayscale (F41's test) and for a red-green colour-blind reader the warm/cool split is precisely the axis that collapses (F40, F42).
+The two school tints are **1.01:1 apart** by WCAG contrast — already too close to distinguish by lightness for any viewer, colorblind or not. They are indistinguishable in grayscale (F41's test).
+
+Whether the residual *hue* distinction (warm cream versus cool blue-tint) survives color-vision deficiency was not measured in the first draft and is measured now: `0_plan/kb/measurements/K3/cvd-simulation.py` simulates protanopia, deuteranopia and tritanopia (Machado, Oliveira and Fernandes 2009, severity 1.0) on both tints and reports the result at `0_plan/kb/measurements/K3/cvd-simulation.md`. Two numbers per vision type: the WCAG contrast ratio (unchanged in kind, still a luminance measure) and `deltaSRGB`, a plain Euclidean distance between the two simulated colors in 8-bit sRGB space — not a calibrated perceptual metric, but a reproducible number for whether the pair moves closer together or farther apart.
+
+**What the numbers show:** WCAG contrast barely moves (1.01 Normal, 1.04 Protanopia, 1.01 Deuteranopia, 1.02 Tritanopia) because Machado's matrices are built to hold luminance roughly constant — contrast ratio was never the mechanism separating this pair, for anyone. `deltaSRGB` is where the effect appears, and the direction matches what F40 and F42 would lead you to expect, even though neither by itself measures this specific pair: **21.4 under protanopia and 21.2 under deuteranopia, down from 28.9 under normal vision — a fall of about a quarter — while it *rises* to 31.4 under tritanopia.** The axis that narrows is specifically the red-green one (protanopia and deuteranopia); a blue-yellow deficiency (tritanopia) leaves the pair marginally *more* separable than normal vision does. So "the warm/cool split is precisely the axis that collapses" is correct for red-green color blindness specifically, not color blindness in general, and the mechanism is hue collapse, not a contrast-ratio effect — worth stating precisely because a reader who checked only WCAG contrast under CVD would see almost no change and wrongly conclude nothing is wrong.
 
 **Summary of failures:** **16 of the 33** text pairings fail normal AA (17 pass). Most of those failures are pairings nobody would reach for — white on cream, text on navy. Five failures matter because they are roles someone will reach for: accent as text on any of the three light surfaces (2.17 to 2.38), `--color-accent-contrast` on the accent fill (2.50), `--color-focus` on navy (1.69), `--color-text-muted` on navy (2.22), and `--color-border` on any light surface (1.42 to 1.56).
 
@@ -222,8 +243,10 @@ The two school tints are **1.01:1 apart**. They are indistinguishable in graysca
 | `--color-bg` #fcf4ef | `--color-text` #001117 (17.69, Lc +99.7) | `--color-text-muted` #5b5b5b (6.25, AA not AAA) | `--color-text`, `--color-navy` (13.88), `--color-accent-text` **proposed** (5.14) | `--color-accent`, `--color-accent-contrast`, `--color-border` |
 | `--color-surface` / `--color-georgetown-tint` #f8e8de | `--color-text` (16.10) | `--color-text-muted` (5.69) | `--color-text`, `--color-navy` (12.63), `--color-accent-text` (4.68) | `--color-accent`, `--color-accent-contrast`, `--color-border` |
 | `--color-anywhere-tint` #e4eef2 | `--color-text` (16.30) | `--color-text-muted` (5.76) | `--color-text`, `--color-navy` (12.79), `--color-accent-text` (4.73) | `--color-accent`, `--color-accent-contrast`, `--color-border` |
-| `--color-navy` #002a3a | `--color-accent-contrast` #fbfbfb (14.58) — but prefer `--color-text-on-dark` **proposed** for prose, per F30 | `--color-text-muted-on-dark` **proposed** #a3bfcb (7.81, AAA) | `--color-accent` #e48b53 (5.83) at ≥24px only; `--color-border` #cac6c4 (8.90) | `--color-text` (1.27), `--color-focus` (1.69), `--color-text-muted` (2.22) |
+| `--color-navy` #002a3a | `--color-accent-contrast` #fbfbfb (14.58) for headings and short strings only — prefer `--color-text-muted-on-dark` **proposed** for any running prose, per F30 and OQ-2 | `--color-text-muted-on-dark` **proposed** #a3bfcb (7.81, AAA) | `--color-accent` #e48b53 (5.83) at ≥24px only | `--color-text` (1.27), `--color-focus` (1.69), `--color-text-muted` (2.22) |
 | `--color-accent` #e48b53 as a fill | `--color-text` #001117 (7.43, AAA) | none available above 4.5 | `--color-navy` #002a3a (5.83) | **`--color-accent-contrast` #fbfbfb (2.50)** — the current default, and wrong |
+
+Note on `--color-border`: on navy it measures 8.90, which numerically clears every text threshold in 5b, but it is excluded from the Large display column above. P1 assigns it the rule/border role, not text; a colour used for two jobs is two tokens, so a border value is not listed as a text option even where its ratio would pass.
 
 Note on APCA: the two pairings that clear WCAG AAA but sit at only Lc 45–53 (`--color-text` on the accent fill, `--color-navy` on the accent fill) are the cases where APCA is harsher than WCAG. By P6 we believe the harsher number: text on the orange fill is **button-label and headline weight only**, never a paragraph — which is what it is used for anyway.
 
@@ -266,7 +289,7 @@ Rule for the brief: **`--color-focus` #004f71 is the default ring on the three l
 
 ### 5e. Proposals for the missing roles
 
-Five roles the palette does not have. None is an edit to `tokens.css` — each is a register row for `07`, per `09`.
+Five roles the palette does not have. None is an edit to `tokens.css` — each is a register row for `07`, per `09`; all five are already logged as **RF-07** in `0_plan/kb/REGISTER-FOLLOWUPS.md` and carried into **DD-39** in `07-design-decisions.md` ("Color roles: accent as text, on-accent, focus on dark, muted on dark, strong border; gold never as text"), pending Astra's E5 pass — these are proposals, not adopted tokens. Three of the five introduce a hex value `tokens.css` does not have today (PR-1 #a5501a, PR-4 #a3bfcb, PR-5 #857f7b) and so are **departures under DD-19**, flagged for the same G1 decision as the Anywhere tint; the other two only assign a new name to a value `tokens.css` already carries (PR-2 reuses `--color-accent-contrast`'s existing #fbfbfb; PR-3 reuses `--color-text`'s existing #001117) and so are role-reassignment proposals, not new-swatch departures.
 
 | Proposal | Token | Value | How it was derived | Measured |
 |---|---|---|---|---|
@@ -306,7 +329,7 @@ A 5 is every line of this, demonstrable from artefacts the QA runner already pro
 | CS3 | All running prose reaches **7:1** (AAA); nothing below 4.5:1 ships as text at any size | Runner contrast test, per node |
 | CS4 | APCA Lc is reported beside every ratio, and no text node sits below **Lc 60**; paragraphs reach **Lc 75** | Runner contrast test, second column |
 | CS5 | The accent appears as a text colour zero times on a light surface, and at most once per screen in any role | Palette usage map, counted |
-| CS6 | The dark surface is spent deliberately and countably — `K1` 5c budgets it at exactly two sections (proof strip, footer) — and is `--color-navy`, never black | Full-page capture plus the section-weight table |
+| CS6 | The dark surface is spent deliberately and countably. **Option (R15):** `K1` 5c's default is two sections (proof strip, footer); a brief may choose its own count instead, provided it states the count and holds to it. Whatever the count, the dark surface is always `--color-navy`, never black | Full-page capture plus the section-weight table |
 | CS7 | Text on navy is off-white or the muted-on-dark token, never pure `#ffffff`; headings on navy do not gain weight to compensate | Computed styles; halation rule F30, F31 |
 | CS8 | Every focus ring passes both measurements on **every** surface it can reach, including the straddle case; the two-colour ring is used wherever navy is adjacent | Runner focus test at 5d's per-surface matrix |
 | CS9 | A `forced-colors: active` render is captured, and every control and focus ring is still identifiable in it | One extra capture per mock |
@@ -381,3 +404,26 @@ Recorded so nothing above rests on them.
 | OQ-6 | Should the focus ring colour differ per school? | It would be a cheap continuity cue — blue for Anywhere, something warm for Georgetown | **No.** F44's rule is that the focus colour indicates focus and nothing else. Recommend recording this as a decision so it is not re-litigated |
 | OQ-7 | AAA as a target or as a ceiling? | P5 sets 7:1 for prose. `--color-text-muted` #5b5b5b reaches only 5.69–6.25, so the muted role cannot meet it on any light surface | Either accept AA for muted text (it is by definition not prose), or darken the muted token to ~#4a4a4a. Needs a register row; do not change the token silently |
 | OQ-8 | Do the in-app browsers (Instagram, TikTok) alter rendered colour? | REQ-024 requires verification there, and some in-app webviews apply their own colour management or a forced dark treatment. No source consulted addresses this | Measure it in the REQ-024 pass rather than assuming. Treat any shift as a finding against the tokens, not against the mock |
+
+---
+
+## 8. Rework log (E4)
+
+Every item in Astra's E4 row for K3 (`0_plan/ensemble/E4-knowledge-base.md` section A) and this
+cluster's entry in the rework pack (`0_plan/ensemble/prompts/REWORK-PACK.md`), addressed in order.
+All checked out against the file as described; none is recorded as a disagreement.
+
+| E4 item | What changed | Where |
+|---|---|---|
+| P9 "Halation is a real, measurable harm to roughly half the population" overstates what F30/F31 establish — astigmatism prevalence does not establish halation incidence | Reworded: halation is a documented harm for astigmatic, migraine, low-vision and tired-eye readers (F30, F32); astigmatism prevalence (F31) is a different figure, not a halation-incidence rate. The "roughly half the population" quantification is now labelled **Judgment**, not a finding. The actionable half of the principle (dark blue-black not black; off-white not white; the cost of avoiding halation is nil) is unchanged | P9 (section 3) |
+| Section 5b's "the warm/cool split is precisely the axis that collapses" had no color-vision measurement behind it | Wrote and ran `0_plan/kb/measurements/K3/cvd-simulation.py`: sRGB→linear→the Machado, Oliveira and Fernandes (2009) severity-1.0 matrices for protanopia, deuteranopia and tritanopia→linear→sRGB, applied to the swatches `tokens.css` defines (both school tints, navy, the accent/gold, the page surface, body text), read live from `tokens.css` rather than retyped. Self-checked against this file's own already-published Normal-vision ratios (accent-on-bg 2.38, the two tints 1.01, text-on-bg 17.69, all matched within ±0.01) before trusting the new numbers. Full output: `cvd-simulation.md`. The finding is rewritten to report what the numbers actually show: WCAG contrast on the tint pair barely moves across vision types (1.01 to 1.04) because Machado's matrices hold luminance roughly constant by design; a plain sRGB Euclidean distance (`deltaSRGB`, explicitly labelled non-perceptual, not CIE ΔE) falls from 28.9 (normal vision) to 21.2 to 21.4 under protanopia and deuteranopia, and *rises* to 31.4 under tritanopia — the collapse is specific to red-green deficiency, not to color blindness generally | 5b, "Surface against surface" |
+| "Exactly two navy sections" (CS6) stated K1's default section count as a requirement | Reworded as an **Option (R15)**: K1 5c's two-section default stands, but a brief may choose and hold to its own count instead | CS6 (5g) |
+| New swatch proposals (5e) needed the DD-19 departure process named and RF-07 cited | Added a paragraph citing RF-07 (`REGISTER-FOLLOWUPS.md`) and DD-39 (`07-design-decisions.md`, already logged from this cluster) and splitting the five proposals: PR-1, PR-4 and PR-5 introduce a hex value `tokens.css` does not have and are DD-19 departures; PR-2 and PR-3 only reassign an existing tokens.css value to a new role and are not | 5e intro |
+| APCA thresholds, allowed pairings and large-text thresholds disagreed within the file | Added one reconciled thresholds table (WCAG AA/AAA, APCA bands, the 18.5px-vs-18.66px large-text rounding — both describe the same 14pt-bold figure; 18.66px is what 5b onward was actually checked against) before 5a. Fixed 5c's navy row: the phantom token `` `--color-text-on-dark` `` (named nowhere else in the file) renamed to the token the file actually proposes and uses everywhere else for the same purpose, `` `--color-text-muted-on-dark` `` (matches PR-4 and OQ-2's own wording); removed `` `--color-border` `` from the Large-display *text* column on navy — P1 assigns it the rule/border role, not text, even though its 8.90 ratio numerically clears the text thresholds — and added a note explaining the exclusion | New preamble before 5a; 5c navy row and its trailing notes |
+| "Keep every measured contrast failure" | Verified: no row in 5b, 5c, 5d or 5f was altered by this rework; every fail verdict (accent as text on all three light surfaces, the contrast token on the accent fill, focus on navy, muted text on navy, the border on every light surface) stands exactly as measured | 5b, 5c, 5d, 5f (unchanged) |
+
+### Proposed register follow-ups
+
+| Register row | Proposal | Evidence | Recommended by |
+|---|---|---|---|
+| OQ-3 / RF-07 | When Nari decides the Georgetown-tint departure at G1 (OQ-3), attach the CVD simulation as supporting evidence: the two tints are already 1.01:1 apart (indistinguishable by lightness for any viewer) and, for the most common form of red-green color blindness (deuteranopia), the residual hue distinction narrows by about a quarter versus normal vision (deltaSRGB 21.2 vs 28.9) | `0_plan/kb/measurements/K3/cvd-simulation.md` | Fable |
