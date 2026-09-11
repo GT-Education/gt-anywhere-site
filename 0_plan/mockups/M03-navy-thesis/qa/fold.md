@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`; 2026-09-11T09:23:05.165Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`; 2026-09-11T10:15:21.247Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -21,8 +21,8 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V15 | 1366 by 648 | fold | 624 | 56 | 298 | 328 | 559 | 559 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 328 | 366 | 646 | 646 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 328 | 366 | 651 | 651 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 88 | 356 | 406 | 544 | 657 | yes | PASS no horizontal scroll |
-| V19 | 1024 by 576 | zoom |  | 56 | 254 | 284 | 527 | 527 | yes | report: scrollWidth 1024 |
+| V18 | 320 by 256 | reflow |  | 88 | 356 | 406 | 544 | 657 | no | PASS no horizontal scroll |
+| V19 | 1024 by 576 | zoom |  | 56 | 254 | 284 | 527 | 527 | no | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
 
@@ -34,7 +34,7 @@ PASS: no horizontal scroll at 375 with a 32px root.
 
 ## Focus and forced colours
 
-Captures: focus-cta.jpg (first door CTA focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
+Captures: focus-cta.jpg (first door CTA focused); focus-plate.jpg (header lockup link focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
 
 ## Console
 
