@@ -15,7 +15,7 @@
 | K10 Responsive and fluid layout | `K10-responsive.md` | Written 2026-09-11 (63 sources; 19-row viewport matrix from device descriptors; svh fold rule) | Pending |
 | K11 Performance and Core Web Vitals | `K11-performance.md` | Written 2026-09-11 (46 sources; 118 KB first-screen budget; tags weigh 298 KB) | Pending |
 | K12 Existing GT and Alpha branding | `K12-gt-branding.md` | In progress | Pending |
-| K13 Design systems and shells | `K13-design-systems.md` | In progress | Pending |
+| K13 Design systems and shells | `K13-design-systems.md` | Written 2026-09-11 (48 sources; three token tiers, 23-component inventory, 14 states) | Pending |
 | K14 Copy and voice for institutions | `K14-copy-voice.md` | In progress | Pending |
 | Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` (grid: `exemplars/index.html`) | 26 sites captured at 390 and 1440 (JPEG), grid page for Johnny | Pending |
 | Design Director brief template | `BRIEF-TEMPLATE.md` | Written 2026-09-11; filled per mock after G-C | n/a |
