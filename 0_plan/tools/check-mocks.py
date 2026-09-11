@@ -15,31 +15,42 @@ def visible_text(doc):
     d = re.sub(r'<[^>]+>', ' ', d)
     return H.unescape(d)
 
+def attr(tag, name):
+    """value of one attribute in one tag, or None; quoted or unquoted, spaces around = allowed, never fooled by other attributes' values"""
+    m = re.search(r'(?:^|\s)' + re.escape(name) + r'\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'=<>`]+))', tag, re.I)
+    return None if not m else (m.group(1) if m.group(1) is not None else (m.group(2) if m.group(2) is not None else m.group(3)))
+
 def check(folder):
-    res = []
-    def r(rule, ok, detail=''):
-        res.append((rule, 'PASS' if ok else 'FAIL', detail))
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
     if not os.path.exists(idx): return [('files','FAIL','index.html missing')]
     doc = open(idx, encoding='utf-8').read(); style = open(css, encoding='utf-8').read() if os.path.exists(css) else ''
+    rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
+    return check_doc(doc, style, rat_text, folder)
+
+def check_doc(doc, style, rat_text, folder='(memory)'):
+    res = []
+    def r(rule, ok, detail=''):
+        res.append((rule, 'PASS' if ok else 'FAIL', detail))
+    rat = os.path.join(folder, 'RATIONALE.md')
     text = visible_text(doc)
-    d039m = re.search(r'<html\b[^>]*\bdata-d039\s*=\s*["\']([^"\']*)["\']', doc, re.I); d039 = set(d039m.group(1).split()) if d039m else set(); d039_empty = bool(d039m) and not d039
+    _html = re.search(r'<html\b[^>]*>', doc, re.I); _decl = attr(_html.group(0), 'data-d039') if _html else None
+    d039m = _decl is not None; d039 = set(_decl.split()) if d039m else set(); d039_empty = d039m and not d039
     if 'inputs' in d039:
-        comp = re.search(r'<html\b[^>]*\bdata-d039-component\s*=\s*["\']router["\']', doc, re.I)
+        html_tag = re.search(r'<html\b[^>]*>', doc, re.I); comp = html_tag and (attr(html_tag.group(0), 'data-d039-component') or '').lower() == 'router'
         inputs = re.findall(r'<input\b[^>]*>', doc, re.I)
-        nonradio = [t for t in inputs if not re.search(r'(?<![\w-])type\s*=\s*["\']?radio\b', t, re.I)]
-        submit = re.search(r'(?<![\w-])type\s*=\s*["\']?submit\b', doc, re.I)
+        nonradio = [t for t in inputs if (attr(t, 'type') or 'text').lower() != 'radio']
+        submit = any((attr(t, 'type') or '').lower() == 'submit' for t in re.findall(r'<(?:input|button)\b[^>]*>', doc, re.I))
         r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not submit and not re.search(r'<(form|select|textarea)\b', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
     else:
-        r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b', doc, re.I) and not re.search(r'(?<![\w-])type\s*=\s*["\']?submit\b', doc, re.I))
+        r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b', doc, re.I) and not any((attr(t, 'type') or '').lower() == 'submit' for t in re.findall(r'<button\b[^>]*>', doc, re.I)))
     scripts = re.findall(r'<script\b[^>]*>', doc, re.I)
     if 'script' in d039:
-        external = [t for t in scripts if re.search(r'(?<![\w-])src\s*=', t, re.I)]
-        inline = re.findall(r'<script\b(?![^>]*(?<![\w-])src\s*=)(?![^>]*ld\+json)[^>]*>(.*?)</script>', doc, re.I|re.S)
-        r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and not external and any('ld+json' in t for t in scripts) and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, external {len(external)}, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
+        external = [t for t in scripts if attr(t, 'src') is not None]
+        ldjson = [t for t in scripts if 'ld+json' in (attr(t, 'type') or '')]
+        inline = [m.group(2) for m in re.finditer(r'(<script\b[^>]*>)(.*?)</script>', doc, re.I|re.S) if attr(m.group(1), 'src') is None and 'ld+json' not in (attr(m.group(1), 'type') or '')]
+        r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and not external and len(ldjson)==1 and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, external {len(external)}, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
     else:
-        r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in scripts[0], f'{len(scripts)} script tags')
-    rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
+        r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in (attr(scripts[0], 'type') or '') and attr(scripts[0], 'src') is None, f'{len(scripts)} script tags')
     r('R20 D-039 declaration valid and named in the rationale', (not d039m) or (bool(d039) and d039 <= {'script','inputs'} and 'D-039' in rat_text), ('empty declaration' if d039_empty else f'tokens {sorted(d039)}; rationale names D-039: {"D-039" in rat_text}') if d039m else '')
     hosts = set(re.findall(r'https?://([^/"\')\s]+)', doc+style))
     bad = sorted(h for h in hosts if h not in ALLOWED_HOSTS)
