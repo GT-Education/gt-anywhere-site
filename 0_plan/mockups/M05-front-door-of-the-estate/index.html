@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GT School: a selective school for gifted children, in Georgetown, Texas and online</title>
+<meta name="description" content="GT School is a selective K-8 school for gifted and talented children, in person in Georgetown, Texas or online with GT Anywhere. Compare the two and apply.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://gt.school/">
+<meta property="og:title" content="GT School: a selective school for gifted children, in Georgetown, Texas and online">
+<meta property="og:description" content="GT School is a selective K-8 school for gifted and talented children, in person in Georgetown, Texas or online with GT Anywhere. Compare the two and apply.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../shared/tokens-v2.css">
+<link rel="stylesheet" href="../shared/fonts.css">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "GT School",
+  "url": "https://gt.school/",
+  "sameAs": ["https://www.gt.school/", "https://anywhere.gt.school/"],
+  "subOrganization": [
+    { "@type": "EducationalOrganization", "name": "Georgetown Campus", "url": "https://www.gt.school/" },
+    { "@type": "EducationalOrganization", "name": "GT Anywhere", "url": "https://anywhere.gt.school/" }
+  ]
+}
+</script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Shell header. 1_spec/04 section 3 "Header (landing)": lockup, Current families, Contact admissions, no menu
+     (DD-12). The school-site header of 1_spec/04 keeps this geometry and adds the menu, the application CTA and
+     the campus switcher (DD-41). Diff in RATIONALE.md, "Shell diff against 1_spec/04". -->
+<header class="shell-header" data-fold="header" data-component="Header (landing)">
+  <div class="wrap wrap--header">
+   <div class="header-inner">
+    <a class="lockup" href="#top"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" decoding="async"></a>
+    <nav class="utility" aria-label="Utility">
+      <ul>
+        <li><a href="https://community.gt.school" data-event="families_click">Current families</a></li>
+        <li><a href="https://www.gt.school/contact">Contact admissions</a></li>
+      </ul>
+    </nav>
+   </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="first" aria-labelledby="umbrella">
+    <div class="wrap first-inner">
+
+      <h1 id="umbrella" data-fold="h1">GT School is a selective school for gifted and talented children,<span class="h1-turn"> in person at our Georgetown, Texas campus or online from&nbsp;anywhere.</span></h1>
+      <p class="provenance" data-fold="provenance" data-slot="provenance">The gifted school in the Alpha School network.</p>
+
+      <h2 class="visually-hidden">Two ways to attend</h2>
+      <ul class="doors" data-component="Door list">
+        <li class="door" data-school="georgetown" data-component="Door card">
+          <p class="door-label">
+            <svg class="cue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="3" width="12" height="18" rx="1"/><path d="M3 21h18"/><circle cx="14.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+            In person
+          </p>
+          <h3 class="door-name">Georgetown Campus</h3>
+          <p class="door-line" data-line="georgetown">Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
+          <a class="btn door-cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="first_screen" data-fold="cta-georgetown">Explore the Georgetown campus<span class="arrow" aria-hidden="true"> &rarr;</span></a>
+        </li>
+        <li class="door" data-school="anywhere" data-component="Door card">
+          <p class="door-label">
+            <svg class="cue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
+            Online
+          </p>
+          <h3 class="door-name">GT Anywhere</h3>
+          <p class="door-line" data-line="anywhere">Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown.</p>
+          <a class="btn door-cta" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="first_screen" data-fold="cta-anywhere">Explore GT Anywhere<span class="arrow" aria-hidden="true"> &rarr;</span></a>
+        </li>
+      </ul>
+
+      <!-- Phone rows only: the compact door rule of CONTRACT.md section 2 moves both door lines below the second
+           CTA as run-in paragraphs, so neither line sits between the two CTAs. -->
+      <ul class="door-lines">
+        <li><b class="run-in">Georgetown Campus<span class="visually-hidden">:</span></b> Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</li>
+        <li><b class="run-in">GT Anywhere<span class="visually-hidden">:</span></b> Live mastery academics with Guides from wherever you live, and four in-person weekends a year in Georgetown.</li>
+      </ul>
+
+      <!-- Schedule visual (1_spec/04 section 3, DD-34). Two rows, one per school, each two bands carrying the
+           deck's own cells. Complete at rest: nothing draws (the brief's Motion row). The screen-reader
+           equivalent is the comparison table's own "The day" and "In-person time" rows on this page. -->
+      <section class="diagram" aria-labelledby="day-heading" data-component="Schedule visual">
+        <h2 class="day-heading" id="day-heading">A day at GT</h2>
+
+        <div class="day-svg">
+          <div class="day-row" role="group" aria-labelledby="row-georgetown">
+            <p class="row-name" id="row-georgetown">Georgetown Campus</p>
+            <svg class="bands" height="64" focusable="false">
+              <rect class="bar bar-g" x="0" y="0" width="100%" height="28"/>
+              <rect class="bar bar-g" x="0" y="36" width="100%" height="28"/>
+              <rect class="tick" x="0" y="0" width="3" height="28"/>
+              <rect class="tick" x="0" y="36" width="3" height="28"/>
+              <text class="bar-label" x="18" y="21">Mornings from 9 to noon: about two hours of focused academics</text>
+              <text class="bar-label" x="18" y="55">Afternoons: workshops, projects and competitions</text>
+            </svg>
+          </div>
+
+          <div class="day-row" role="group" aria-labelledby="row-anywhere">
+            <p class="row-name" id="row-anywhere">GT Anywhere</p>
+            <svg class="bands" height="64" focusable="false">
+              <rect class="bar bar-a" x="0" y="0" width="100%" height="28"/>
+              <rect class="bar bar-a" x="0" y="36" width="100%" height="28"/>
+              <rect class="tick" x="0" y="0" width="3" height="28"/>
+              <rect class="tick" x="0" y="36" width="3" height="28"/>
+              <text class="bar-label" x="18" y="21">Two to three hours of focused mastery academics a day, with live sessions from Guides</text>
+              <g class="weekends" aria-hidden="true">
+                <rect class="mark" x="18" y="45" width="9" height="9"/>
+                <rect class="mark" x="31" y="45" width="9" height="9"/>
+                <rect class="mark" x="44" y="45" width="9" height="9"/>
+                <rect class="mark" x="57" y="45" width="9" height="9"/>
+              </g>
+              <text class="bar-label" x="78" y="55">Four intensive weekends a year in Georgetown</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Below the width at which an SVG label would be clipped, the same two rows render as HTML blocks so
+             the deck's sentences wrap. One form is displayed at a time, so nothing is announced twice. -->
+        <ul class="day-cards">
+          <li class="day-card">
+            <p class="row-name">Georgetown Campus</p>
+            <ol class="card-bars">
+              <li class="card-bar bar-g">Mornings from 9 to noon: about two hours of focused academics</li>
+              <li class="card-bar bar-g">Afternoons: workshops, projects and competitions</li>
+            </ol>
+          </li>
+          <li class="day-card">
+            <p class="row-name">GT Anywhere</p>
+            <ol class="card-bars">
+              <li class="card-bar bar-a">Two to three hours of focused mastery academics a day, with live sessions from Guides</li>
+              <li class="card-bar bar-a card-bar--weekends"><span class="card-marks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Four intensive weekends a year in Georgetown</li>
+            </ol>
+          </li>
+        </ul>
+      </section>
+
+      <p class="compare-lead"><a href="#compare" data-event="compare_view">Not sure which is right for your family? Compare the two.</a></p>
+
+    </div>
+  </section>
+
+  <!-- "Two schools, one GT School" (copy.md section 9). Both schools named as peers under one masterbrand, each
+       with its own real mark: the University of the Arts London "6 Colleges, 1 University" band (C30, DD-21). -->
+  <section class="band peers" aria-labelledby="peers-heading">
+    <div class="wrap">
+      <h2 id="peers-heading" class="peers-heading">Two schools, one GT School</h2>
+      <ul class="peer-list">
+        <li class="peer">
+          <a class="peer-plate" href="https://www.gt.school/" data-event="outbound_school_site" data-school="georgetown">
+            <img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" loading="lazy" decoding="async">
+            <span class="peer-name">Georgetown Campus</span>
+          </a>
+        </li>
+        <li class="peer">
+          <a class="peer-plate peer-plate--navy" href="https://anywhere.gt.school/" data-event="outbound_school_site" data-school="anywhere">
+            <img src="../shared/img/gt-anywhere-logo-h.svg" width="252" height="48" alt="GT Anywhere" loading="lazy" decoding="async">
+            <span class="peer-name">GT Anywhere</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band comparison" id="compare" aria-labelledby="compare-heading">
+    <div class="wrap">
+      <p class="eyebrow">Compare</p>
+      <h2 id="compare-heading">Compare the two schools</h2>
+      <table class="compare-table" data-component="Comparison table">
+        <caption>Georgetown Campus and GT Anywhere, side by side</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">Attribute</span></th>
+            <th scope="col">Georgetown Campus</th>
+            <th scope="col">GT Anywhere</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Same school, same academics</th>
+            <td data-label="Georgetown Campus">One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so.</td>
+            <td data-label="GT Anywhere">One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so.</td>
+          </tr>
+          <tr>
+            <th scope="row">Admissions</th>
+            <td data-label="Georgetown Campus">Students at or above the 90th percentile. Begin online, then an assessment and a family conversation.</td>
+            <td data-label="GT Anywhere">Students at or above the 90th percentile. Begin online, then an assessment and a family conversation.</td>
+          </tr>
+          <tr>
+            <th scope="row">After 8th grade</th>
+            <td data-label="Georgetown Campus">Families plan the path after 8th grade with admissions.</td>
+            <td data-label="GT Anywhere">Families plan the path after 8th grade with admissions.</td>
+          </tr>
+          <tr>
+            <th scope="row">The day</th>
+            <td data-label="Georgetown Campus">Mornings from 9 to noon: about two hours of focused academics in TimeBack blocks, with structured breaks. Afternoons: workshops, projects and competitions.</td>
+            <td data-label="GT Anywhere">Two to three hours of focused mastery academics a day, with live sessions from Guides. The rest of the day is yours.</td>
+          </tr>
+          <tr>
+            <th scope="row">Where and how</th>
+            <td data-label="Georgetown Campus">On campus in Georgetown, Texas, north of Austin.</td>
+            <td data-label="GT Anywhere">From home, anywhere in the United States.</td>
+          </tr>
+          <tr>
+            <th scope="row">Peers and community</th>
+            <td data-label="Georgetown Campus">A small cohort of gifted peers, together every school day.</td>
+            <td data-label="GT Anywhere">A cohort of gifted peers online every day, together in person each quarter.</td>
+          </tr>
+          <tr>
+            <th scope="row">In-person time</th>
+            <td data-label="Georgetown Campus">Every school day.</td>
+            <td data-label="GT Anywhere">Four intensive weekends a year in Georgetown.</td>
+          </tr>
+          <tr>
+            <th scope="row">Guides</th>
+            <td data-label="Georgetown Campus">Guides on campus in every session.</td>
+            <td data-label="GT Anywhere">Live Guides online, with a one-to-one check-in every week.</td>
+          </tr>
+          <tr>
+            <th scope="row">Tuition and access</th>
+            <td data-label="Georgetown Campus">Tuition on request. Ask admissions.</td>
+            <td data-label="GT Anywhere">$10,400 a year. Eligible Texas families can apply the TEFA voucher toward the full amount.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="sources">Sources: admission bar, tuition and TEFA, anywhere.gt.school/academics; Georgetown schedule, gt.school/academics; GT Anywhere schedule, anywhere.gt.school/academics; intensive weekends, anywhere.gt.school/intensives; weekly check-ins, the Terms of Use on both sites. Checked 2026-09-10.</p>
+
+      <ul class="doors-repeat">
+        <li><a class="btn" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="after_comparison">Explore the Georgetown campus<span class="arrow" aria-hidden="true"> &rarr;</span></a></li>
+        <li><a class="btn" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="after_comparison">Explore GT Anywhere<span class="arrow" aria-hidden="true"> &rarr;</span></a></li>
+      </ul>
+
+      <div class="tefa" data-component="TEFA module">
+        <h3>Texas families</h3>
+        <p>GT Anywhere is TEFA-eligible. The Texas Education Freedom Accounts program can cover tuition for eligible families.</p>
+        <a class="inline-link" href="https://anywhere.gt.school/academics" data-event="tefa_module_view" data-region-source="default">Check eligibility on the GT Anywhere site<span class="arrow" aria-hidden="true"> &rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band proof" aria-labelledby="proof-heading" data-component="Proof strip">
+    <div class="wrap">
+      <p class="eyebrow">Proof</p>
+      <h2 id="proof-heading">What is true of both schools</h2>
+      <ul class="facts">
+        <li>Admission at the 90th percentile and above.</li>
+        <li>Mastery-based: students advance on demonstrated mastery, measured with MAP assessments.</li>
+        <li>Guides, not lecturers: adults who coach, check in every week and hold the bar.</li>
+        <li>Kindergarten to 8th grade, in person or online.</li>
+      </ul>
+      <p class="sources">Sources: admission bar, tuition and TEFA, anywhere.gt.school/academics; Georgetown schedule, gt.school/academics; GT Anywhere schedule, anywhere.gt.school/academics; intensive weekends, anywhere.gt.school/intensives; weekly check-ins, the Terms of Use on both sites. Checked 2026-09-10.</p>
+    </div>
+  </section>
+
+  <section class="band steps" aria-labelledby="steps-heading">
+    <div class="wrap">
+      <p class="eyebrow">Admissions</p>
+      <h2 id="steps-heading">How to apply</h2>
+      <p class="steps-intro">GT School admits students at or above the 90th percentile.</p>
+      <ol class="steps-list">
+        <li>Begin your application online.</li>
+        <li>Complete the assessment.</li>
+        <li>Meet us for a family conversation.</li>
+        <li>Enroll and choose your start date.</li>
+      </ol>
+      <ul class="apply">
+        <li><a class="btn" href="https://apply.gt.school/?school=georgetown" data-event="cta_apply_click" data-school="georgetown" data-placement="steps">Begin application: Georgetown Campus<span class="arrow" aria-hidden="true"> &rarr;</span></a></li>
+        <li><a class="btn" href="https://apply.gt.school/?school=anywhere" data-event="cta_apply_click" data-school="anywhere" data-placement="steps">Begin application: GT Anywhere<span class="arrow" aria-hidden="true"> &rarr;</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band connect" aria-labelledby="connect-heading">
+    <div class="wrap">
+      <p class="eyebrow">Connect</p>
+      <h2 id="connect-heading">Questions before you apply</h2>
+      <ul class="connect-list">
+        <li><a href="https://anywhere.gt.school/academics" data-type="faq" data-event="cta_secondary_click"><span>Read the FAQ</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="https://www.gt.school/contact" data-type="advisor" data-event="cta_secondary_click"><span>Talk to admissions</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="https://www.gt.school/contact" data-type="tour" data-event="cta_secondary_click"><span>Ask about a tour of the Georgetown campus</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+        <li><a href="https://www.gt.school/contact" data-type="info_session" data-event="cta_secondary_click"><span>Ask about a virtual info session</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band families" aria-labelledby="families-heading">
+    <div class="wrap families-inner">
+      <div>
+        <p class="eyebrow">Families</p>
+        <h2 id="families-heading">Already a GT family?</h2>
+        <p class="families-line">Your hub, schedules and support live at community.gt.school.</p>
+      </div>
+      <a class="inline-link families-link" href="https://community.gt.school" data-event="families_click">Go to the family hub<span class="arrow" aria-hidden="true"> &rarr;</span></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Shell footer. 1_spec/04 section 3 "Footer": contact, sibling and umbrella links, legal; no accreditation
+     (G0.5 decision 3). Three columns as gt.school's own footer sets them, with its Locations list (K12 F64) and
+     the marks on their own panels (copy.md section 8). Diff in RATIONALE.md. -->
+<footer class="shell-footer on-navy" data-component="Footer">
+  <div class="wrap footer-grid">
+
+    <div class="footer-col footer-col--facts" data-component="Facts block">
+      <p class="footer-facts">GT School, Inc. is a selective school for gifted and talented children, kindergarten to 8th grade. Georgetown Campus: in person in Georgetown, Texas. GT Anywhere: online, with four in-person weekends a year in Georgetown.</p>
+      <p class="footer-contact"><span class="pill">(512) 270-9481</span></p>
+    </div>
+
+    <nav class="footer-col footer-col--nav" aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="https://www.gt.school/" data-event="outbound_school_site" data-school="georgetown">Georgetown Campus</a></li>
+        <li><a href="https://anywhere.gt.school/" data-event="outbound_school_site" data-school="anywhere">GT Anywhere</a></li>
+        <li><a href="https://apply.gt.school/?school=georgetown" data-event="cta_apply_click" data-school="georgetown" data-placement="footer">Apply: Georgetown Campus</a></li>
+        <li><a href="https://apply.gt.school/?school=anywhere" data-event="cta_apply_click" data-school="anywhere" data-placement="footer">Apply: GT Anywhere</a></li>
+        <li><a href="https://community.gt.school" data-event="families_click">Current families</a></li>
+        <li><a href="https://www.gt.school/privacy-policy">Privacy</a></li>
+        <li><a href="https://www.gt.school/terms-of-use">Terms</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col footer-col--locations">
+      <ul class="locations" aria-label="Locations">
+        <li class="location"><span class="location-name">Georgetown, Texas</span><span class="chip">Now enrolling</span></li>
+        <li class="location"><span class="location-name">Miami, FL</span><span class="chip chip--soon">Coming soon</span></li>
+        <li class="location"><span class="location-name">New York, NY</span><span class="chip chip--soon">Coming soon</span></li>
+        <li class="location"><span class="location-name">Bay Area, CA</span><span class="chip chip--soon">Coming soon</span></li>
+      </ul>
+    </div>
+
+    <div class="footer-marks">
+      <a class="mark-plate" href="https://www.gt.school/" data-event="outbound_school_site" data-school="georgetown"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" loading="lazy" decoding="async"></a>
+      <a class="mark-navy" href="https://anywhere.gt.school/" data-event="outbound_school_site" data-school="anywhere"><img src="../shared/img/gt-anywhere-logo-h.svg" width="252" height="48" alt="GT Anywhere" loading="lazy" decoding="async"></a>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
