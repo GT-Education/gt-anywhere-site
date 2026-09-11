@@ -31,6 +31,8 @@
 
 Fan-out ceiling stays four parallel design engineers plus one watchdog per wave.
 
+**Model change, 2026-09-11 (mid wave 2).** The Claude Fable 5.1 allowance was exhausted while M15, M07 and M02 were in review; three critic agents and the M09 engineer stopped with an out-of-credits error. From that point the studio side of the ensemble (Design Director, Design Engineers, Design Critic, Visual QA) runs on Claude Opus 5, and Astra stays `gpt-6-astra`. The pairing rule that matters is unchanged: the studio critic is the same model as the studio author, never a cheaper one, so the two ensemble columns remain independent. Scorecards keep the filenames `critic-fable-Mnn.md` and `critic-astra-Mnn.md`, which name the ensemble column rather than the model; every mock scored before 2026-09-11 23:00 was scored by Fable 5.1 and every mock after by Opus 5, and each scorecard's own header records which.
+
 ## 3. The tournament
 
 Volume alone will not raise quality; selection with iteration will. Twenty full mocks would spread the effort thin and give Nari twenty mediocre pages to judge. The recommended shape:

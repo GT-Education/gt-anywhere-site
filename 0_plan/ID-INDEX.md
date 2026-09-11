@@ -178,14 +178,14 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | D-029 | Real-device policy for in-app browser tests | `0_plan/03-decisions-and-open-questions.md:37` | `02-requirements-and-deliverables.md`, `12-register-loop.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
 | D-030 | How analytics assertions are made in the suite | `0_plan/03-decisions-and-open-questions.md:38` | `02-requirements-and-deliverables.md`, `12-register-loop.md`, `1_spec/13-testing-suite-spec.md` |
 | D-031 | Motion in the mocks, reopened | `0_plan/03-decisions-and-open-questions.md:39` | `05-landing-mockups-plan.md`, `07-design-decisions.md`, `12-register-loop.md`, `17-design-studio-runbook.md`, `18-knowledge-base-plan.md` |
-| D-032 | Number and completeness of landing mocks | `0_plan/03-decisions-and-open-questions.md:40` |  |
+| D-032 | Number and completeness of landing mocks | `0_plan/03-decisions-and-open-questions.md:40` | `05-landing-mockups-plan.md` |
 | D-033 | Claims register row shape and the claims checker scope (from K5, K6) | `0_plan/03-decisions-and-open-questions.md:41` |  |
 | D-034 | Design-system contract: switcher semantics now, token tiers and inventory at hardening (from K13) | `0_plan/03-decisions-and-open-questions.md:42` |  |
 | D-035 | Copy deck readability and the umbrella sentence question (from K14, K1, K6) | `0_plan/03-decisions-and-open-questions.md:43` |  |
 | D-036 | Escalations to Nari and counsel raised by the knowledge base | `0_plan/03-decisions-and-open-questions.md:44` | `07-design-decisions.md` |
 | D-037 | Image delivery and caching on Vercel (from K11, K9) | `0_plan/03-decisions-and-open-questions.md:45` |  |
 | D-038 | Font delivery: subset woff2, two preloads, metric-matched fallbacks (from K2) | `0_plan/03-decisions-and-open-questions.md:46` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
-| D-039 | Scripts and inputs in mocks under D-031 | `0_plan/03-decisions-and-open-questions.md:47` |  |
+| D-039 | Scripts and inputs in mocks under D-031 | `0_plan/03-decisions-and-open-questions.md:47` | `05-landing-mockups-plan.md`, `12-register-loop.md`, `17-design-studio-runbook.md` |
 
 ## Q: Open questions
 
