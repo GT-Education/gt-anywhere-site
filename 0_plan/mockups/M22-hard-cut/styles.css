@@ -61,14 +61,17 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .lockup { display: inline-flex; align-items: center; min-height: 44px; }
 .lockup img { height: 27px; width: auto; } /* K12 V2: at least 27px at 390 */
 @media (min-width: 768px) { .lockup img { height: 32px; } } /* K12 V2: 32px at 1440 */
-.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-3); font-size: var(--text-xs); font-weight: 500; }
+/* margin-inline-start: auto, not the parent's justify-content: at 360 and at 320 the nav wraps to a second header
+   row, where space-between leaves a single wrapped item at flex-start and the two links sat left under the mark.
+   The auto margin holds them right on both the wrapped and the unwrapped row (the same fix M21 shipped). */
+.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; margin-inline-start: auto; gap: var(--space-3); font-size: var(--text-xs); font-weight: 500; }
 .utility-nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; color: var(--color-text-muted); }
 .utility-nav a:hover, .utility-nav a:focus-visible { color: var(--color-text); text-decoration: underline; text-underline-offset: 0.2em; }
 @media (min-width: 768px) { .utility-nav { gap: var(--space-5); font-size: var(--text-sm); } }
 
 /* ---------- Chapters: the full-bleed grounds that carry the cut ----------
-   Each chapter opens TIGHT against the cut — 32px, then the bracketed label, then 24px, then the heading — and closes
-   with air. The label belongs at the edge because the label IS the page-turn: a reader who sees it knows a new chapter
+   Each chapter opens TIGHT against the cut — measured at 375, 834 and 1440: 16px, then the bracketed label, then
+   24px, then the heading — and closes with air. The label belongs at the edge because the label IS the page-turn: a reader who sees it knows a new chapter
    has started. It is also what makes the contract's reserve work at every row: the opener of the next chapter is
    always within about 110px of the boundary, so a sentence a parent reads crosses the bottom edge rather than a band
    of empty ground (the runner's false-floor test, `qa/fold.md`). */
@@ -107,11 +110,19 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   .chapter-inner > .families-line, .chapter-inner > .sources, .chapter-inner > .tefa { grid-column: 1 / span 8; }
 }
 
-/* The chapter opener, borrowed from Cloudstudio: a bracketed uppercase label in the mono face, tracked, CENTRED, with the
-   chapter's content left-aligned on the grid under it. The label is the page-turn. */
-.chapter-label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-5); }
+/* The chapter opener, borrowed from Cloudstudio: a bracketed uppercase label in the mono face, tracked, sitting
+   directly on top of the heading it opens. The label is the page-turn, so it has to belong to the chapter it turns
+   to. The brief says centred and the source centres it — but the source centres the HEADLINE with it, as one stack
+   (`tideline.html`'s `.stage` is `align-items: center; text-align: center`), and this page is left-aligned on one
+   edge by its own argument. Centred over left-aligned content the label attached to nothing: measured ink to ink on
+   the first build, its centre stood 688px right of the heading it opens at 1440 and 1920, and 608 at 1280. It now
+   starts on the heading's own left edge at every row, which is the source's relation transposed rather than its
+   alignment copied. That is a departure from the brief's "centred" and is escalated in RATIONALE.md with the
+   capture, not settled here. */
+.chapter-label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--space-5); }
 .on-navy .chapter-label { color: var(--color-text-muted-on-dark); }
 .brack { display: inline-block; margin-inline: 0.7em; }
+.chapter-label .brack:first-child { margin-inline-start: 0; } /* the opening bracket sits ON the left edge, not 0.7em inside it */
 
 /* The accent, once per chapter and never twice on one screen (K3 section 5f). House form: a 40 by 3px mark
    (M03 40 by 4, M09 40 by 8, M15 40 by 3); the two lengths are declared departures (RATIONALE.md). */
@@ -121,6 +132,14 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 
 /* ---------- Chapter 1: the choice ---------- */
 h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; text-wrap: balance; }
+/* Phone rows carry the estate's own heading tracking. CONTINUITY.md measures anywhere.gt.school's h1 at -1.6px on a
+   36px Literata heading, which is -0.0444em, so this is not a taste value: it lands 1.3 per cent inside the number
+   the destination site already sets, and one declaration closes both the rag and the tracking row in the Continuity
+   table. Measured on this build: 402, 412, 414 and 430 go from six lines with the worst interior line at 52 to 58
+   per cent of the widest to five at 78 to 79; 393 from seven lines to five; 360 to 390 from seven to six. It frees
+   31px at V2, 63px at V4 and 27px at V10, where the sentence drops from three lines to two. The limit is recorded
+   in RATIONALE.md: at 360 to 390 the fifth line stays a notch, 53 per cent of the widest. */
+@media (max-width: 767px) { h1 { letter-spacing: -0.045em; } }
 .provenance { margin-top: var(--space-4); font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
 
 .doors { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-6); }
@@ -146,21 +165,16 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
 .run-in { font-weight: 500; color: var(--color-text); margin-right: 0.35em; }
 @media (min-width: 768px) { .door-lines { display: none; } }
 
-/* The shortest phone rows (V2, 375 by 629, the binding fold case). The umbrella sentence sets in seven lines at 360 to
-   393px, which is one more than CONTRACT.md section 2 estimated and M12 measured, so the first screen gives back three
-   steps of air: the doors sit closer to the provenance, each CTA closer to its door name, and the two doors closer to
-   each other. Both CTAs stay above the fold and the first door line is then cut by the bottom edge instead of starting
-   below it, which is what the contract's reserve asks for. */
-@media (max-width: 767px) and (max-height: 639px) {
-  .doors { margin-top: var(--space-5); gap: var(--space-4); }
-  .door-cta { margin-top: var(--space-3); }
-  .door-lines { margin-top: var(--space-4); }
-}
+/* The shortest phone row (V2, 375 by 629) used to compress three gaps here, because the sentence set in seven lines.
+   With the tracking above it sets in six, and the compensation had turned harmful: compact, the first door line
+   finished 5px ABOVE the bottom edge (624 of 629); at the page's ordinary rhythm it is cut by the edge (620 to 640),
+   which is what the contract's reserve asks for, and V2 still keeps 35px of slack (570 of 605). Query deleted. */
 
 .compare-anchor { margin-top: var(--space-6); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-tight); }
-/* On phone widths the compare sentence follows the two door lines rather than the two doors, so it closes up one step:
-   at 390 by 844 (V9, the emptiness row) the 32px gap left a 42px band of bare cream at the bottom edge and the screen
-   read as finished with the sentence starting exactly at the edge. Measured, not guessed (qa/fold.md, Next band). */
+/* On phone widths the compare sentence follows the two door lines rather than the two doors, so it closes up one step
+   and takes that block's own rhythm. It began as a fold fix — at 390 by 844 the 32px gap left a 42px band of bare
+   cream at the edge — and with the shorter sentence the row now passes either way (the sentence is cut by the edge
+   at 817 to 847 with the full gap, 824 to 854 with this one). Kept as composition, re-measured, declared. */
 @media (max-width: 767px) { .compare-anchor { margin-top: var(--space-4); } }
 .compare-anchor a { display: inline-block; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; padding-block: var(--space-3); }
 .compare-anchor a:hover { text-decoration-thickness: 3px; }
@@ -182,6 +196,10 @@ h3 { font-size: var(--text-md); }
 caption { text-align: left; font-family: var(--font-serif); font-style: italic; font-size: var(--text-base); color: var(--color-text-muted); margin-bottom: var(--space-5); }
 thead th { text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: 0 var(--space-5) var(--space-3) 0; border-bottom: 1px solid var(--color-text); }
 tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-4) var(--space-5) var(--space-4) 0; border-bottom: 1px solid var(--color-border); }
+/* The two school columns are declared equal (18/41/41) rather than left to automatic sizing. Measured at 1280 the
+   automatic widths were 534 and 463, so the three rows that repeat one value word for word — the whole point of
+   DD-43 — wrapped differently in the two columns and read as two different answers. Astra's Craft finding. */
+thead th + th, tbody td { width: 41%; }
 tbody th { width: 18%; font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); padding-top: calc(var(--space-4) + 0.4em); }
 tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 @media (max-width: 767px) {
@@ -241,7 +259,10 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 /* ---------- Phone landscape (V10, 750 by 342): CONTRACT.md section 2's recipe ---------- */
 @media (max-height: 400px) and (min-width: 600px) {
   .chapter-choice { padding-block: var(--space-3) var(--space-6); }
-  h1 { font-size: var(--text-xl); max-width: none; }
+  /* The h1 steps down one token on this row only, which CONTRACT.md section 2's landscape recipe allows and asks to
+     be declared (RATIONALE.md, Departures). The tracking is repeated here because the landscape recipe has no upper
+     width bound: a 900 by 340 window takes this layout and would otherwise lose the step the phone rows get. */
+  h1 { font-size: var(--text-xl); max-width: none; letter-spacing: -0.045em; }
   .provenance { margin-top: var(--space-3); }
   .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); margin-top: var(--space-4); }
   .door-line { display: none; }

@@ -1,19 +1,19 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T19:10:25.978Z; page `/0_plan/mockups/M22-hard-cut/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T19:56:18.174Z; page `/0_plan/mockups/M22-hard-cut/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 92 | 325 | 362 | 503 | 635 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 56 | 291 | 328 | 453 | 569 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 56 | 294 | 331 | 471 | 604 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 56 | 294 | 331 | 472 | 604 | yes | PASS |
-| V5 | 414 by 715 | fold | 691 | 56 | 265 | 302 | 443 | 575 | yes | PASS |
-| V6 | 412 by 839 | fold | 815 | 56 | 265 | 302 | 442 | 575 | yes | PASS |
-| V7 | 402 by 681 | fold | 657 | 56 | 263 | 300 | 441 | 574 | yes | PASS |
-| V8 | 430 by 739 | fold | 715 | 56 | 267 | 304 | 445 | 578 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 56 | 294 | 331 | 471 | 604 | yes | report: page height 6472 |
-| V10 | 750 by 342 | fold | 318 | 56 | 147 | 177 | 304 | 304 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 92 | 294 | 331 | 472 | 604 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 56 | 260 | 297 | 437 | 570 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 56 | 262 | 299 | 440 | 572 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 56 | 231 | 268 | 408 | 541 | yes | PASS |
+| V5 | 414 by 715 | fold | 691 | 56 | 233 | 270 | 410 | 543 | yes | PASS |
+| V6 | 412 by 839 | fold | 815 | 56 | 233 | 270 | 410 | 543 | yes | PASS |
+| V7 | 402 by 681 | fold | 657 | 56 | 231 | 269 | 409 | 542 | yes | PASS |
+| V8 | 430 by 739 | fold | 715 | 56 | 234 | 271 | 412 | 545 | yes | PASS |
+| V9 | 390 by 844 | emptiness |  | 56 | 262 | 299 | 440 | 572 | yes | report: page height 6440 |
+| V10 | 750 by 342 | fold | 318 | 56 | 120 | 149 | 276 | 276 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 393 | 430 | 689 | 689 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 480 | 517 | 777 | 777 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 56 | 272 | 310 | 573 | 573 | yes | PASS |
@@ -21,7 +21,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V15 | 1366 by 648 | fold | 624 | 56 | 294 | 332 | 600 | 600 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 355 | 393 | 662 | 662 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 385 | 423 | 692 | 692 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 553 | 669 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 92 | 325 | 383 | 538 | 670 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 559 | 559 | no | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -46,16 +46,16 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | text cut by the edge, 733 to 753 |
-| V2 | yes | text cut by the edge, 611 to 631 |
-| V3 | yes | text cut by the edge, 654 to 674 |
-| V4 | yes | text cut by the edge, 654 to 674 |
-| V5 | yes | content reaches 710 of 715 and more follows below |
-| V6 | yes | content reaches 833 of 839 and more follows below |
-| V7 | yes | text cut by the edge, 672 to 692 |
-| V8 | yes | content reaches 736 of 739 and more follows below |
-| V9 | yes | text cut by the edge, 832 to 862 |
-| V10 | yes | text cut by the edge, 322 to 342 |
+| V1 | yes | content reaches 722 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 620 to 640 |
+| V3 | yes | text cut by the edge, 646 to 666 |
+| V4 | yes | content reaches 659 of 659 and more follows below |
+| V5 | yes | text cut by the edge, 706 to 726 |
+| V6 | yes | content reaches 825 of 839 and more follows below |
+| V7 | yes | content reaches 660 of 681 and more follows below |
+| V8 | yes | content reaches 728 of 739 and more follows below |
+| V9 | yes | text cut by the edge, 824 to 854 |
+| V10 | yes | text cut by the edge, 327 to 347 |
 | V11 | yes | text cut by the edge, 993 to 1035 |
 | V12 | yes | text cut by the edge, 1165 to 1207 |
 | V13 | yes | text cut by the edge, 739 to 783 |
