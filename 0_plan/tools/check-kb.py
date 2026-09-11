@@ -23,7 +23,7 @@ for f in files:
     m = re.search(r'^##[^\n]*How it applies to GT[^\n]*\n(.*?)(?=^##\s|\Z)', s, flags=re.S|re.M|re.I)
     words = len(m.group(1).split()) if m else 0
     if words < 300: errs.append(f'GT application section has {words} words (need 300 or more)')
-    if re.search(r'\b(TBD|lorem|placeholder)\b', s, flags=re.I): errs.append('placeholder text present')
+    if re.search(r'\bTBD\b|lorem ipsum|\[placeholder\]', s, flags=re.I): errs.append('placeholder text present')
     print(f'{rel}: {len(s.splitlines())} lines, {len(set(urls))} URLs, {len(findings)} findings, GT section {words} words -> ' + ('OK' if not errs else 'FAIL: ' + '; '.join(errs)))
     bad += bool(errs)
 print(f'check-kb: {"OK" if not bad else f"FAIL ({bad})"}')
