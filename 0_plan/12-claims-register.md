@@ -58,6 +58,9 @@
 | CR-036 | "This K-8 virtual academy attracted hundreds of students in its first months and continues to build momentum." | `https://www.gt.school/about-us` (#story) | Hundreds, first months | None found; no enrolment figure is published anywhere else on either estate | Unverified | Nari |  | 2026-09-11 |
 | CR-037 | "students achieving multiple grade levels of acceleration while deepening their academic interests" | `https://www.gt.school/about-us` (#story) | Multiple grade levels | Overlaps the speed claims CR-004 and CR-008 in substance while stating no multiple | Unverified | Nari |  | 2026-09-11 |
 | CR-038 | "a flagship K-8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable fact" | `https://www.gt.school/about-us` (#story) | 3X, stated as measurable | Same figure as CR-008 on the same site and CR-004 on Anywhere; this row records the stronger framing, that it is a measured fact rather than a target | Unverified | Nari |  | 2026-09-11 |
+| CR-039 | "Our Accredited K-8 Virtual School brings 3X learning velocity to your home." | `https://www.gt.school/about-us`, the two-door panel | Accredited, K-8, 3X | Repeats the unqualified accreditation of CR-003 and the velocity of CR-004 and CR-008 in one sentence, on the component whose job is routing | Unverified | Nari |  | 2026-09-11 |
+| CR-040 | "accessible anywhere and eligible for ESA funding" | `https://www.gt.school/about-us`, the two-door panel | ESA eligibility | Distinct from the TEFA eligibility in CR-021 and CR-022; no ESA row existed | Unverified | Nari |  | 2026-09-11 |
+| CR-041 | "We provide the full GT academic crucible - AI adaptive blocks and a global tribe of peers" | `https://www.gt.school/about-us`, the two-door panel | AI adaptive blocks, global tribe of peers | None; describes the product in terms no other surface uses | Unverified | Nari |  | 2026-09-11 |
 
 ## Live check, 2026-09-10
 
