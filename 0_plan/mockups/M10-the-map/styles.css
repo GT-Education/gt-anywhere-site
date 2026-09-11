@@ -472,3 +472,11 @@ caption {
 @media (forced-colors: active) {
   .footer-logo--navy { background: var(--color-navy); forced-color-adjust: none; }
 }
+
+/* A plate that keeps its own colours through forced colours also keeps its own focus ring, and the user
+   agent's ring is CanvasText: black in the light palette, measured at 1.39 to 1 against the retained
+   navy, which is no ring at all. Every mock in the programme had this the moment the mark was
+   protected. The ring is therefore stated in near-white, which is what the plate's own ground needs. */
+@media (forced-colors: active) {
+  .footer-logo--navy:focus-visible { outline-color: var(--color-on-navy); }
+}

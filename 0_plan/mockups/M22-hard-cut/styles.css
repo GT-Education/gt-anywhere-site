@@ -259,5 +259,21 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
    M09, M21, M23 and M25 already passed the same test. The runner now fails a run that leaves it
    unprotected, and eleven of the seventeen built mocks shipped the defect before it was measured. */
 @media (forced-colors: active) {
-  .footer-logo { background: var(--color-navy); forced-color-adjust: none; }
+  /* The two marks share a class and differ by a modifier: the GT School mark sits on a light plate and the
+     GT Anywhere mark on navy, so each keeps its own ground and takes the ring that reads against it. */
+  .footer-logo:not(.plate) { background: var(--color-navy); forced-color-adjust: none; }
+  .footer-logo.plate { background: var(--color-bg); forced-color-adjust: none; }
+}
+
+/* A plate that keeps its own colours through forced colours also keeps its own focus ring, and the user
+   agent's ring is CanvasText: black in the light palette, measured at 1.39 to 1 against the retained
+   navy, which is no ring at all. Every mock in the programme had this the moment the mark was
+   protected. The ring is therefore stated in near-white, which is what the plate's own ground needs. */
+@media (forced-colors: active) {
+  
+  /* A ring must read against the plate it sits on, and the plates differ: the GT Anywhere mark keeps a navy
+     ground and needs a near-white ring, while the GT School mark keeps a light ground and needs a navy one.
+     A single near-white ring for both measured 1.05 to 1 on the light plates, which is no ring at all. */
+    .footer-logo.plate:focus-visible { outline-color: var(--color-navy); }
+  .footer-logo:not(.plate):focus-visible { outline-color: var(--color-on-navy); }
 }

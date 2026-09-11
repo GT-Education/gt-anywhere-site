@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T18:55:28.764Z; page `/0_plan/mockups/M01-two-doors/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T19:08:38.515Z; page `/0_plan/mockups/M01-two-doors/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -72,7 +72,9 @@ Its wordmark is part near-white, so on a forced white ground it renders as "GT" 
 
 | Scheme | File | Result |
 |---|---|---|
+| light | focus ring on `mark link` | 14.58:1 against its own retained ground |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
+| dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px

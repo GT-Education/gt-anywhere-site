@@ -303,6 +303,33 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
     try {
       await fcp.goto(url, { waitUntil: 'load' });
       await fcp.evaluate(() => document.fonts ? document.fonts.ready : null); await fcp.waitForTimeout(150);
+      // A plate that keeps its own colours also keeps its own focus ring, and the user agent's ring is
+      // CanvasText: black in the light palette, which measured 1.39 to 1 against a retained navy plate in
+      // every mock in the programme the moment the mark was protected. Measure the ring the plate actually
+      // draws against the ground it actually keeps.
+      const ringReport = await fcp.evaluate(`(() => {
+        const lum = (c) => { const n = (c.match(/[0-9.]+/g) || []).slice(0, 3).map(Number).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * n[0] + 0.7152 * n[1] + 0.0722 * n[2]; };
+        const out = [];
+        for (const el of document.querySelectorAll('a[href], button')) {
+          let n = el, opted = false;
+          while (n) { if (getComputedStyle(n).forcedColorAdjust === 'none') { opted = true; break; } n = n.parentElement; }
+          if (!opted) continue;
+          el.focus();
+          const cs = getComputedStyle(el);
+          let bg = 'rgb(255, 255, 255)', p = el;
+          while (p) { const c = getComputedStyle(p).backgroundColor; if (c && c.indexOf('rgba(0, 0, 0, 0)') !== 0) { bg = c; break; } p = p.parentElement; }
+          const l1 = lum(cs.outlineColor), l2 = lum(bg);
+          const r = Math.round(((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)) * 100) / 100;
+          out.push({ text: (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 24) || 'mark link', ratio: r, on: bg });
+          el.blur();
+        }
+        return out;
+      })()`);
+      for (const r of ringReport) {
+        const bad = r.ratio < 3;
+        if (bad) fcFailures++;
+        fcRows.push(`| ${scheme} | focus ring on \`${r.text}\` | ${bad ? 'FAIL at ' + r.ratio + ':1 against its own retained ground' : r.ratio + ':1 against its own retained ground'} |`);
+      }
       const marks = await fcp.evaluate(FC_MARKS_JS);
       if (!marks.length) fcRows.push(`| ${scheme} | no GT Anywhere mark on the page | |`);
       for (const m of marks) {
