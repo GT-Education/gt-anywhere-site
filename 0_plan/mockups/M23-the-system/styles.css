@@ -468,6 +468,30 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
   :focus-visible, .on-navy :focus-visible, .plate:focus-visible { outline: calc(var(--m23-focus) + 1px) solid CanvasText; outline-offset: var(--m23-focus); box-shadow: none; }
 }
 
+/* A plate that keeps its own colours through forced colours also keeps its own focus ring, because an
+   element that opts out of the user's palette opts out of the ring the user agent would have drawn. The
+   ring must then read against the ground the plate keeps: navy on the light plates this mock uses, which
+   measures 13.88 to 1. A near-white ring was tried first and measured 1.05 to 1 on those same plates. */
+@media (forced-colors: active) {
+  .mark-plate:focus-visible,
+  .lockup.plate:focus-visible,
+  .footer-logo.plate:focus-visible { outline-color: var(--color-navy); }
+}
+  .steps-list li + li::after { background: CanvasText; forced-color-adjust: none; }
+  .node, .place-line, .banner, .steps-list li, .mark-plate--light { border-color: CanvasText; }
+  .node-strip, .steps-list li::before { border-bottom-color: CanvasText; }
+  .banner-glyph::after { border-bottom-color: CanvasText; forced-color-adjust: none; }
+  /* Every mark keeps its own panel under forced colours: the GT School mark is navy-and-orange and would vanish on a
+     dark system ground, the GT Anywhere mark is white lettering and would vanish on a light one. forced-color-adjust
+     is the one place where an authored colour is allowed to survive, and a school mark is exactly that case. */
+  .mark-plate, .lockup.plate, .footer-logo.plate { forced-color-adjust: none; }
+  .mark-plate--light, .lockup.plate, .footer-logo.plate { background: var(--color-bg); }
+  .mark-plate--navy { background: var(--color-navy); }
+  .cta, .btn { border: var(--m23-rule) solid CanvasText; }
+  .banner-glyph { border-color: CanvasText; border-right-color: Canvas; }
+  :focus-visible, .on-navy :focus-visible, .plate:focus-visible { outline: calc(var(--m23-focus) + 1px) solid CanvasText; outline-offset: var(--m23-focus); box-shadow: none; }
+}
+
 /* A plate that keeps its own colours through forced colours also keeps its own focus ring, and the user
    agent's ring is CanvasText: black in the light palette, measured at 1.39 to 1 against the retained
    navy, which is no ring at all. Every mock in the programme had this the moment the mark was
