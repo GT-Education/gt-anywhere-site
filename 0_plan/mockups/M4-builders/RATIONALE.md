@@ -345,3 +345,16 @@ fourth, or fifth entry would flow into the same list without a template change.
 
 **Files written:** `0_plan/mockups/M4-builders/index.html`, `0_plan/mockups/M4-builders/styles.css`,
 `0_plan/mockups/M4-builders/RATIONALE.md`. No file outside this folder was edited.
+
+## Design-lead pass (Fable, browser in the loop), 2026-09-10
+
+| Item | Change | Why |
+|---|---|---|
+| First screen | The science photograph fills the first viewport at 1440 (hero 65 to 897px); the headline sits on a translucent navy panel top-left; the two doors are docked at the foot of the photograph as light cards with a school-tint rule, so both CTAs (ending at 841 and 818px) are inside the first screen. At 390 the photo is a 280px band with the headline panel, then the two cards | M4's thesis is the image; the doors could not sit below a full-bleed photo without leaving the first screen, so they were docked onto it |
+| Compare anchor | Directly after the doors | E2 finding 5 |
+| Comparison | Tinted school headers, mono row labels, "Both schools" tag, stacked cards on mobile | Shared component treatment with M1 |
+| What students do | Moved after the comparison; four portrait photo tiles with captions on a translucent navy strip, edge to edge | The builder argument in one strip, after the routing job is done |
+| Proof, steps, connect | Facts as accent-ruled plates; steps as navy numbered circles on a hairline; four connect cards | Consistent affordances |
+| Footer | Navy, with the GT School logo on a light panel and the GT Anywhere logo on a bordered navy panel | Legibility of both marks (E2 finding 18) |
+
+Departures (DD-19): the translucent scrim is `color-mix()` of the navy token at 86 percent (the only non-token color expression on the page); the navy footer; eyebrows in Inconsolata (recorded in `copy.md`). Text over the photograph sits only on the scrim. Nothing animates. Both checkers pass.
