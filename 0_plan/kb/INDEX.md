@@ -23,4 +23,4 @@
 | Register follow-ups | `REGISTER-FOLLOWUPS.md` | 23 proposed row changes from K1 to K8; processed through the ensemble at E4 | Pending |
 | Resolutions after E4 | `KB-RESOLUTIONS.md` | Written 2026-09-11; the contract every rework and brief follows | n/a |
 | Twenty-direction slate | `DIRECTIONS.md` | Drafted 2026-09-11; exemplar moves after batches C and D; Johnny approves with the briefs | n/a |
-| Twenty Design Director briefs | `briefs/M01.md` to `briefs/M20.md` | Written 2026-09-11 in the `BRIEF-TEMPLATE.md` format, each citing three exemplar moves by screenshot filename and the clusters it applies; Astra E5 next; Johnny approves before G-D | E5 |
+| Twenty Design Director briefs | `briefs/M01.md` to `briefs/M20.md` | Rewritten 2026-09-11 against `briefs/CONTRACT.md` after Astra E5 (all twenty on Rework in pass 1); Astra E5b next; Johnny approves before G-D | E5: Rework; E5b pending |
