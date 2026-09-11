@@ -226,7 +226,7 @@ Measured by K9 on 2026-09-11 from `0_plan/mockups/shared/img/`: **25 `.webp` pho
 
 ### 10.1 The image direction for the twenty mocks
 
-The arithmetic first. Thirteen distinct scenes, twelve of them large enough to lead a screen (K9-F51), against twenty mocks. **Twenty photo-led directions cannot be built from this library without repeating scenes or upscaling.** The allocation:
+The arithmetic first. Eighteen distinct scenes, thirteen of them at or above the resolution floor, twelve recommended as leads (K9-F51), against twenty mocks. **Twenty photo-led directions cannot be built from this library without repeating a scene or upscaling past native.** The allocation:
 
 | Band | Count | What it is | Photography |
 |---|---|---|---|
