@@ -1,0 +1,77 @@
+/* tokens-v2.css — the working contract for the twenty mocks (G-D), 2026-09-11.
+   Layer 1 repeats tokens.css (values extracted from both live sites, DD-01, DD-19). Layer 2 adds the working
+   defaults the knowledge base proposed; each is labelled with its register row and stays PROPOSED until that row
+   is Agreed. tokens.css is untouched so the five earlier mocks keep rendering as reviewed. Provenance and status:
+   TOKENS-V2.md. Rule: a mock may use a layer-2 token only if its RATIONALE.md names the row. */
+:root {
+  /* ---------- Layer 1: extracted (tokens.css, unchanged) ---------- */
+  --font-serif: Literata, Georgia, "Palatino Linotype", sans-serif;
+  --font-sans: "Inter Tight", Arial, sans-serif;
+  --font-mono: Inconsolata, Arial, sans-serif;
+
+  --leading-tight: 1.15;
+  --leading-body: 1.25;
+
+  --color-bg: #fcf4ef;
+  --color-surface: #f8e8de;
+  --color-surface-alt: #002a3a;
+  --color-text: #001117;
+  --color-text-muted: #5b5b5b;
+  --color-accent: #e48b53;
+  --color-accent-contrast: #fbfbfb;
+  --color-border: #cac6c4;
+  --color-focus: #004f71;
+  --color-georgetown-tint: #f8e8de;
+  --color-anywhere-tint: #e4eef2;
+  --color-navy: #002a3a;
+
+  --space-1: .125rem; --space-2: .25rem; --space-3: .5rem; --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+  --space-7: 3rem; --space-8: 4rem; --space-9: 5rem; --space-10: 6rem; --space-11: 8rem; --space-12: 12rem;
+
+  --radius-sm: .25rem; --radius-md: .5rem; --radius-lg: .75rem;
+  --shadow-1: 1px 2px 14px #00000008;
+  --shadow-2: 0 -2px 16px #0000000d;
+  --container-max: 90rem;
+  --container-narrow: 48rem;
+
+  --duration-fast: 100ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* ---------- Layer 2: working defaults, PROPOSED ---------- */
+  /* Fluid type scale: K2 section 5a, DD-38 option (b), resolution R5 (the clamp is the working default; fit is
+     measured on the fixed copy). Replaces the fixed steps of tokens.css for the twenty mocks. */
+  --text-xs:   clamp(0.7500rem, 0.7292rem + 0.0926vw, 0.8125rem); /* 12 to 13px */
+  --text-sm:   clamp(0.8750rem, 0.8542rem + 0.0926vw, 0.9375rem); /* 14 to 15px */
+  --text-base: clamp(1.0000rem, 0.9583rem + 0.1852vw, 1.1250rem); /* 16 to 18px */
+  --text-md:   clamp(1.1250rem, 1.0833rem + 0.1852vw, 1.2500rem); /* 18 to 20px */
+  --text-lg:   clamp(1.2500rem, 1.1667rem + 0.3704vw, 1.5000rem); /* 20 to 24px */
+  --text-xl:   clamp(1.3750rem, 1.2500rem + 0.5556vw, 1.7500rem); /* 22 to 28px */
+  --text-2xl:  clamp(1.5000rem, 1.2917rem + 0.9259vw, 2.1250rem); /* 24 to 34px */
+  --text-3xl:  clamp(1.6875rem, 1.2917rem + 1.7593vw, 2.8750rem); /* 27 to 46px; tokens.css keeps 52px */
+  --text-btn:  clamp(1.0625rem, 1.0417rem + 0.0926vw, 1.1250rem); /* 17 to 18px, Inconsolata buttons only */
+
+  /* Prose leading: DD-38 option (b), RF-58. Body strings keep --leading-body 1.25; multi-line prose uses 1.5. */
+  --leading-prose: 1.5;
+  /* Prose measure: RF-55 (K1). */
+  --measure-prose: 65ch;
+
+  /* Colour roles: DD-39 option (a), RF-07 (K3 section 5e, K12 G8 to G10). Three values are new tints and are
+     DD-19 departures: --color-accent-text, --color-text-muted-on-dark, --color-border-strong. */
+  --color-accent-text: #a5501a;        /* accent as small text on light surfaces (7.0 on --color-bg per K3) */
+  --color-on-navy: #fbfbfb;            /* alias of --color-accent-contrast: text on navy (14.58) */
+  --color-on-accent: #001117;          /* text on the accent or gold fill (7.43), never #fbfbfb (2.50) */
+  --color-focus-on-dark: #fbfbfb;      /* focus ring on navy; --color-focus is 1.69 on navy and fails */
+  --color-text-muted-on-dark: #a3bfcb; /* muted text on navy (7.81 per E5a) */
+  --color-border-strong: #857f7b;      /* borders that must reach 3:1 on light surfaces */
+
+  /* Motion: MN-16 option (a), RF-53 (K4 F5, F22). ease is a vendor default; three named curves replace it.
+     Durations unchanged (100, 200, 300). Under prefers-reduced-motion: reduce every duration is --duration-none. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --duration-none: 0ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-base: 0ms; --duration-slow: 0ms; }
+}

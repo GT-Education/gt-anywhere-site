@@ -41,9 +41,9 @@ Table with `caption` "Georgetown Campus and GT Anywhere, side by side", column h
 
 | Row | Georgetown Campus | GT Anywhere | Source, flag |
 |---|---|---|---|
-| Same school, same academics | One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so. | Same | Both sites |
-| Admissions | Students at or above the 90th percentile. Begin online, then an assessment and a family conversation. | Same | CR-011; steps flagged Q-007 |
-| After 8th grade | Families plan the path after 8th grade with admissions. | Same | Q-013 |
+| Same school, same academics | One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so. | One school, one admissions bar, one mastery-based program. Students advance when they show mastery, not when the calendar says so. | Both sites; value repeated in both columns (DD-43, proposed; v1 read "Same") |
+| Admissions | Students at or above the 90th percentile. Begin online, then an assessment and a family conversation. | Students at or above the 90th percentile. Begin online, then an assessment and a family conversation. | CR-011; steps flagged Q-007; value repeated (DD-43, proposed) |
+| After 8th grade | Families plan the path after 8th grade with admissions. | Families plan the path after 8th grade with admissions. | Q-013; value repeated (DD-43, proposed) |
 | The day | Mornings from 9 to noon: about two hours of focused academics in TimeBack blocks, with structured breaks. Afternoons: workshops, projects and competitions. | Two to three hours of focused mastery academics a day, with live sessions from Guides. The rest of the day is yours. | CR-033, CR-034 |
 | Where and how | On campus in Georgetown, Texas, north of Austin. | From home, anywhere in the United States. | gt.school footer "Anywhere in the States" |
 | Peers and community | A small cohort of gifted peers, together every school day. | A cohort of gifted peers online every day, together in person each quarter. | No cohort number (CR-025, CR-026 conflict) |
@@ -85,7 +85,7 @@ The `school=` parameter name is DD-25's convention; the live apply.gt.school par
 |---|---|---|---|
 | Read the FAQ | https://anywhere.gt.school/academics | faq | FAQ lives on the Anywhere academics page today |
 | Talk to admissions | https://www.gt.school/contact | advisor | HubSpot meeting link TBD (MD-02) |
-| Ask about a campus tour | https://www.gt.school/contact | tour | Label matches the destination until a booking link exists; gt.school's own /book-a-tour is 404 (REQ-002) |
+| Ask about a tour of the Georgetown campus | https://www.gt.school/contact | tour | Label names the destination and the campus (R14, MD-02) until a booking link exists; gt.school's own /book-a-tour is 404 (REQ-002); v1 read "Ask about a campus tour" |
 | Ask about a virtual info session | https://www.gt.school/contact | info_session | Label matches the destination until a registration link exists (E2 finding 15) |
 
 All carry `data-event="cta_secondary_click"`.
@@ -133,3 +133,25 @@ All carry `data-event="cta_secondary_click"`.
 ## Motion (E2 finding 4)
 
 State changes on hover and focus are instant: `transition` may name only `transform` and `opacity`. Reduced motion removes transitions on elements and on `::before` and `::after`.
+
+## Section 9. Wayfinding vocabulary v2 (proposed for Nari; recorded here before any mock uses it)
+
+Words the twenty briefs need beyond the fixed slots. Each names the brief that needs it; none states a fact without a register row; none is used until it appears here.
+
+| Words | Brief | Use | Flag |
+|---|---|---|---|
+| "See the full comparison" | M06 | Link from the first-screen ledger to the complete table (`#compare`) | Wayfinding only |
+| "Talk to us" | M13 | Panel heading over the admissions links | Wayfinding only |
+| "Two schools, one GT School" | M05 | Band heading over the two school marks | Wayfinding only |
+| "Monday" to "Friday" | M07 | Column labels of the week grid | Calendar words, no fact |
+| "Morning", "Afternoon", "Across the year" | M14 | Step labels on the two timelines; each step's sentence is a door-line phrase | No fact beyond the door lines |
+| "Which school fits your family?" | M16 | Router card heading; the questions and result sentences wait on D-039 and Nari | Held until D-039 |
+| Photo captions, default state: `georgetown-dscf1931.webp` "A student works through a math problem."; `georgetown-guide.webp` "A Guide teaches at the whiteboard."; `anywhere-slider-2.webp` "Students play a strategy game in class." | M02, M04, M11, M13 and any brief using the default photographs | One sentence under the photograph, what is visible only; place is not named because the files do not establish it | K9 section 10; no adjective |
+| Schematic labels "In person" and "Online" on diagrams | M07, M10, M17 | Reuse the door labels | Fixed slots reused |
+
+## Version
+
+| Version | Date | Change |
+|---|---|---|
+| v1 | 2026-09-10 | Deck for the five mocks; E2 findings 4, 15, 18, 20 applied |
+| v1.1 | 2026-09-11 | Three "Same" cells repeat their value (DD-43, proposed); tour label per R14 (MD-02); Section 9 wayfinding vocabulary v2 added for the twenty briefs; captions for the three default photographs. The umbrella sentence, provenance line, doors, proof facts and sources line are unchanged (G0.5) |

@@ -46,7 +46,7 @@ If Johnny wants twenty, the honest place for twenty is R1 (concept boards are ch
 
 ## 4. Viewport matrix
 
-Every mock renders and passes on all of these. Rows are viewports, not screens: phone rows are Playwright's measured small viewports (browser chrome already subtracted; iOS costs 180 to 193px, Android 60 to 76px). "Fits the screen" means: header, umbrella sentence, provenance line and both door CTAs end at or above the viewport height minus 24px, measured in `svh` terms, with the next band visibly cut so the page does not end on a false floor. Source: `kb/K10-responsive.md` section 5, replacing the first draft's 16 rows (which mixed screens and viewports and duplicated Safari as an "in-app" row).
+Every mock renders and passes on all of these. Rows are viewports, not screens: phone rows are Playwright's measured small viewports (browser chrome already subtracted; iOS costs 180 to 193px, Android 60 to 76px). "Fits the screen" applies to V1 to V17 and means: header, umbrella sentence, provenance line and both door CTAs end at or above the viewport height minus 24px, measured in `svh` terms, with the next band visibly cut so the page does not end on a false floor. Source: `kb/K10-responsive.md` section 5, replacing the first draft's 16 rows (which mixed screens and viewports and duplicated Safari as an "in-app" row).
 
 | Row | Viewport | Class | Why |
 |---|---|---|---|
@@ -67,8 +67,8 @@ Every mock renders and passes on all of these. Rows are viewports, not screens: 
 | V15 | 1366 by 648 | Laptop | Derived from the 1366 by 768 screen |
 | V16 | 1440 by 900 | Laptop | The design width |
 | V17 | 1920 by 960 | Desktop | Derived from the most common desktop screen; must not look empty |
-| V18 | 320 by 256 | Reflow | WCAG 1.4.10 verbatim |
-| V19 | 1024 by 576 | Zoom | 1280 by 720 at 125 percent, as a viewport |
+| V18 | 320 by 256 | Reflow | WCAG 1.4.10 verbatim: no horizontal scroll, content and function preserved; the fold rule does not apply to this row (DD-44) |
+| V19 | 1024 by 576 | Zoom | 1280 by 720 at 125 percent, as a viewport: nothing clipped, nothing overlapping; the fold rule is reported, not required (DD-44) |
 
 In-app browsers (Instagram, Facebook, TikTok) have no published viewport heights; their envelope has not been measured. V2 to V8 with the 24px headroom stand in for them as a stress test until REQ-024's measurements in Instagram, Facebook and TikTok on iOS and Android (device, app version and toolbar state recorded) replace them (`kb/KB-RESOLUTIONS.md` R7). Tests at every row: no horizontal overflow; fold fit as defined; no element overlaps another; no clipped text; every interactive target at least 44 by 44; text contrast at AA from computed colors; visible focus with 3:1; one h1 and no skipped levels; images loaded after a stepped scroll and none broken; console clean; reduced-motion emulation shows no non-zero durations while the switcher still switches and focus stays visible; forced-colors renders legibly; links resolve; no `vh` outside an `@supports` fallback. Screenshots: viewport and full page per row; one scroll video per mock at V3 and V16.
 
