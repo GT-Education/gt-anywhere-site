@@ -13,6 +13,8 @@ Captured 2026-09-10. Method: Playwright headless-style captures of public third-
 | MIT Admissions | https://mitadmissions.org/ | mit-admissions-1440.jpg, mit-admissions-1440-full.jpg, mit-admissions-390.jpg, mit-admissions-390-full.jpg | MIT Admissions | "Home", 44px | MessinaSans | 8 | 1012 | Loaded clean on first try, no cookie banner |
 | Nord Anglia Education | https://www.nordangliaeducation.com/ | nord-anglia-1440.jpg, nord-anglia-1440-full.jpg, nord-anglia-390.jpg, nord-anglia-390-full.jpg | Nord Anglia Education \| International Day & Boarding Schools | "Create your Future", 48px | DMSans, Montserrat | 3 | 1006 | A "Cookie policy" modal covered the hero on first load at both viewports; removed via `browser_evaluate` (`.cookies-banner`) before every capture |
 
+The one move to borrow and the one to avoid for every exemplar, with the batch file that carries its sixteen-dimension table, is in `CONCEPTS.md` section 1 (written 2026-09-11 after the four catalog batches).
+
 ## Batch 2: K0 shortlist (calibration and additional education sites)
 
 Captured 2026-09-11. Method: same as Batch 1 — Playwright captures of public third-party pages, internal study only. Source list and rank: `kb/K0-design-hunt.md` section F8 (the 20-site shortlist). Screenshots saved to `0_plan/kb/exemplars/`. Of F8's 20 sites, MIT Admissions, Avenues, and Phillips Exeter Academy were already captured in Batch 1 above and are not repeated here. Vanguard is not in F8's top 20 (it ranks #40 in F6/F7, score 18) but is included below because the capture brief named it explicitly.
