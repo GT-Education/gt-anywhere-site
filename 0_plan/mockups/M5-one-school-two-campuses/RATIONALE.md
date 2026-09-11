@@ -222,3 +222,15 @@ Full mechanical run, after the E2 fix pass: **`python3 0_plan/tools/check-mocks.
 ## Known trade-off (from the brief's direction table)
 
 "Least dramatic by design." M5 has no full-bleed hero photo (M4), no editorial statement-plus-figures (M2), no large quiet display type (M3) and no split-hero drama (M1) — the campus switcher is a bordered card list and the schedule visual is a thin CSS bar. If Nari's read is that the winning direction needs a stronger opening emotional beat, this mock will not supply it; its argument is entirely that the system underneath — one header, one footer, one token set, one new comparison device — is itself the deliverable worth shipping (DEL-004), and that a parent who lands here should feel like they are already on "the" GT School site rather than a fifth different experiment.
+
+## Design-lead pass (Fable, browser in the loop), 2026-09-10
+
+| Item | Change | Why |
+|---|---|---|
+| Shell header | Logo, a campus switcher (two in-page anchors with format and school name, no door events) and the utility links; one row at 1440, two compact rows at 390 | The switcher is the component the school sites inherit (DD-21, MN-14); it never duplicates the door CTAs (E2 finding 11) |
+| First screen | Headline, then two campus panels built from one component: tinted head with format and name (non-interactive), photograph, one line, navy button; at 390 the panel becomes a photo-column card | One component, two instances: the design system on display |
+| Schedule | "A day at GT" as two rows of equal segments, structured time tinted with an accent rule, open time dashed; no proportional claim; screen-reader table kept | The centrepiece of the comparison, honest about what it does not know (E2 finding 12) |
+| Comparison, proof, steps, connect, families | The shared component vocabulary: tinted school headers, "Both schools" tag, stacked cards on mobile, surface plates, navy numbered steps, connect cards, families bar | Coherence itself is the message |
+| Shell footer | Navy, three columns, both logos on their panels | The footer the sites inherit |
+
+Departures (DD-19): the navy footer; eyebrows in Inconsolata (recorded in `copy.md`). Nothing animates. Both checkers pass.
