@@ -30,7 +30,6 @@ def attrs(tag):
         out.setdefault(name, '' if val is None else H.unescape(val))  # character references decoded, so sub&#109;it is submit
     return out
 
-
 def tags(doc, name):
     """every start tag <name ...> in document order, each returned whole; the scan honours quotes, so a > inside a
     quoted attribute value does not end the tag. Returns (tag_text, end_index) pairs."""
