@@ -35,7 +35,6 @@ h1, h2, h3 { margin: 0; font-family: var(--font-serif); line-height: var(--leadi
 a {
   color: var(--color-text);
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
 }
 a:hover, a:focus-visible {
   color: var(--color-focus);
@@ -96,7 +95,7 @@ a:focus-visible {
   padding-block: var(--space-4);
   flex-wrap: wrap;
 }
-.lockup { display: inline-flex; align-items: center; }
+.lockup { display: inline-flex; align-items: center; min-height: 44px; }
 .lockup img { height: 2rem; width: auto; }
 
 .utility-nav ul {
@@ -110,6 +109,12 @@ a:focus-visible {
 .utility-nav {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
+}
+.utility-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
 }
 
 /* ---------- Hero / first screen ---------- */
@@ -165,7 +170,6 @@ a:focus-visible {
   font-weight: 700;
   font-size: var(--text-base);
 }
-.switch-label:hover, .switch-label:focus-visible { color: var(--color-focus); text-decoration: underline; }
 .switch-icon { width: 1.1em; height: 1.1em; flex: 0 0 auto; }
 
 .panel-row {
@@ -214,6 +218,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  padding-inline: var(--space-2);
   margin-top: var(--space-1);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
@@ -231,7 +236,13 @@ a:focus-visible {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.compare-anchor a { text-decoration: underline; }
+.compare-anchor a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 
 /* ---------- Sections, alternating surfaces (unchanged from M1: coherence is the point) ---------- */
 
@@ -297,7 +308,6 @@ h2 {
 @media (min-width: 768px) {
   .schedule-seg + .schedule-seg { border-top: 0; border-left: 1px solid var(--color-border); }
 }
-.schedule-seg--major { flex: 3; }
 .schedule-seg--georgetown { background: var(--color-georgetown-tint); }
 .schedule-seg--anywhere { background: var(--color-anywhere-tint); }
 .schedule-seg--rest { background: var(--color-surface); }
@@ -411,6 +421,7 @@ tbody th {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+  padding-inline: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--text-sm);
@@ -434,7 +445,16 @@ tbody th {
   margin-bottom: var(--space-2);
 }
 .tefa-module p { font-size: var(--text-sm); margin-bottom: var(--space-2); }
-.tefa-module a { font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; text-decoration: underline; }
+.tefa-module a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+}
 
 /* ---------- Proof strip ---------- */
 
@@ -486,6 +506,10 @@ tbody th {
   gap: var(--space-4) var(--space-6);
 }
 .apply-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: var(--text-sm);
@@ -501,12 +525,25 @@ tbody th {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.cta-list a { text-decoration: underline; }
+.cta-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 
 /* ---------- Current families ---------- */
 
 .current-families p { max-width: var(--container-narrow); }
-.current-families a { font-weight: 600; text-decoration: underline; }
+.current-families a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  font-weight: 600;
+  text-decoration: underline;
+}
 
 /* ---------- Footer (partial) ---------- */
 
@@ -523,6 +560,20 @@ tbody th {
   margin-bottom: var(--space-5);
 }
 .footer-logos img { height: 1.5rem; width: auto; }
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-sm);
+}
+.footer-logo-link[data-school="georgetown"] {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+.footer-logo-link[data-school="anywhere"] {
+  background: var(--color-navy);
+}
 .facts-block {
   max-width: var(--container-narrow);
   font-size: var(--text-sm);
@@ -545,7 +596,13 @@ tbody th {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
-.footer-nav a { text-decoration: underline; }
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  text-decoration: underline;
+}
 
 /* ---------- Reduced motion (rule 10) ---------- */
 
