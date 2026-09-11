@@ -4,7 +4,8 @@
    radius and duration is a var(); zero raw hex. The values outside the token set (1px rules, the 40 by 8px seam mark,
    the 2px focus bands, the 44px target floor, letter-spacing, ch measures, the breakpoints and the height queries)
    are listed in RATIONALE.md, Departures.
-   The only motion is V2, the door line reveal at 768 and above under (hover: hover): opacity and transform only. */
+   Motion: none. The door state is V1, instant (K4 section 8.1); nothing in this file transitions, keyframes or
+   animates. The brief's V2 reveal was built and withdrawn after measurement (RATIONALE.md, Motion spec). */
 
 /* ---------- Reset and shared rhythm ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -18,6 +19,10 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 a { color: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .arrow { flex: none; }
+/* Binds a hyphenated phrase so it cannot break after the hyphen ("four in-person weekends" broke as "in-" /
+   "person" at 1440). A span, not a non-breaking hyphen: the copy string stays the one in copy.md, character
+   for character. Same job as the h1's two &nbsp;. */
+.nobr { white-space: nowrap; }
 
 /* One page edge. --edge is the type inset inside a coloured room; --inset is the margin the rooms themselves take
    from the viewport (24px only at 768 to 1023, per the brief). Header, masthead, rooms and every band below the
@@ -38,8 +43,11 @@ h3 { font-size: var(--text-md); }
 
 /* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
 :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-/* On the navy room and the navy footer: --color-focus is 1.69 against navy and fails, so --color-focus-on-dark. */
-.place--anywhere :focus-visible, .on-navy :focus-visible { outline: 2px solid var(--color-focus-on-dark); outline-offset: 2px; }
+/* On the navy room and in the navy footer, CONTRACT.md section 4 specifies K3's two-colour ring, not one band:
+   a 2px --color-navy inner band and a 2px --color-focus-on-dark outer band (14.58 between them), so one band
+   passes whatever the element sits on — the off-white door CTA, the navy ground, or the edge between them.
+   --color-focus is 1.69 against navy and fails, which is why the outer band is the on-dark focus colour. */
+.place--anywhere :focus-visible, .on-navy :focus-visible { outline: 2px solid var(--color-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-focus-on-dark); }
 /* The header sits directly on top of both rooms: at 768 and above its right half stands over navy and a ring at
    2px offset crosses the colour edge. K3's two-colour ring (2px --color-navy inner band, 2px --color-on-navy outer
    band, 14.58 between them) so one band always passes, whichever ground it lands on. The same ring on the footer's
@@ -64,11 +72,13 @@ h3 { font-size: var(--text-md); }
 
 /* ---------- First screen: a light band (h1 + provenance), then the two rooms to the fold ---------- */
 .first-screen { display: flex; flex-direction: column; }
-/* The rooms run to within --space-7 of the fold so the next band is always cut and the page never ends on a false
-   floor. svh only (no vh anywhere); without svh support the first screen sizes to its content. */
-/* Above 1000px of viewport height (portrait tablets) the rooms are left at their content height: stretching them
-   over a 1024px screen leaves a void no four-element column can fill, and there the comparison band below carries
-   the continuation instead. Measured at V11 and V12. */
+/* The rooms run to within --space-8 of the fold, and that 64px reserve is where the compare sentence lands, so
+   the next screen is always cut by the bottom edge and the page never ends on a false floor. svh only (no vh
+   anywhere); without svh support the first screen sizes to its content. Where the rooms are taller than the
+   reserve allows, the laptop tiers below give up rings of padding until they are not.
+   Above 1000px of viewport height (portrait tablets) the rooms keep their content height instead: a room stretched
+   over a 1024px screen would carry a 300px floor, and there the comparison band below carries the continuation.
+   Measured at V11 and V12. */
 @media (max-height: 1000px) {
   @supports (height: 100svh) {
     .first-screen { min-height: calc(100svh - var(--chrome) - var(--space-8)); }
@@ -89,11 +99,31 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
 .places { display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: var(--inset); }
 @media (min-width: 768px) { .places { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .place { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: var(--space-4) var(--edge); border: 1px solid transparent; }
+/* From 768 the two rooms share one row structure (subgrid): label, name, line, CTA, mark, floor. One shared grid
+   rather than two independent columns is what makes the pair equal — the line row is as tall as the taller of the
+   two lines, so both CTAs and both marks sit on one line however either line wraps, and the CTA row is as tall as
+   the taller button, so the two buttons are the same height when one label wraps and the other does not (DD-26,
+   C01; measured at 768, where "Explore the Georgetown campus" takes two lines and "Explore GT Anywhere" one).
+   The last row is the floor: where the first screen is taller than the rooms' content the leftover lands under
+   the mark as the room's floor, instead of opening a hole between the door name and the CTA. */
+@media (min-width: 768px) {
+  .places { grid-template-rows: auto auto auto auto auto 1fr; }
+  .place { display: grid; grid-template-rows: subgrid; grid-row: span 6; justify-items: start; align-items: start; }
+  .place-cta { align-self: stretch; }
+}
 @media (min-width: 768px) { .place { padding-block: var(--space-6) var(--space-6); } }
 @media (min-width: 1024px) { .place { padding-block: var(--space-7) var(--space-7); } }
 @media (min-width: 1440px) { .place { padding-block: var(--space-8) var(--space-8); } }
 .place--georgetown { background: var(--color-surface); color: var(--color-text); border-color: var(--color-surface); }
 .place--anywhere { background: var(--color-navy); color: var(--color-on-navy); border-color: var(--color-navy); }
+/* The roofline. Against the masthead the navy room's ceiling is a 13.88 step and the warm room's is 1.10, so the
+   warm room read as a tint and the navy as an object. A --color-border hairline along the ceiling — the same
+   weight as the floor rule under the rooms at .band--lead — draws both ceilings the same way, and the two rooms
+   then sit between a ceiling and a floor. It is painted on the border the rooms already carry, so nothing moves.
+   Stacked, only the warm room has the masthead above it; the navy room's ceiling there is the warm room, and a
+   grey hairline between two rooms would be a third colour in the seam. */
+.place--georgetown { border-top-color: var(--color-border); }
+@media (min-width: 768px) { .place--anywhere { border-top-color: var(--color-border); } }
 .place--anywhere .place-label { color: var(--color-text-muted-on-dark); }
 
 /* Label row. Below 768 it also carries the school mark (measured: the mark cannot sit at the base of a stacked
@@ -106,9 +136,9 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
    navy room, and preserved in forced colours where the room's own background is replaced. In the stacked label
    row the plate takes inline padding only, so the row stays the height of the mark on the binding fold row. */
 .place-mark--plate { background: var(--color-navy); padding-inline: var(--space-2); margin-inline: calc(-1 * var(--space-2)); }
-/* From 768 the mark falls to the base of the room, with the same ring of padding on both so the two mark blocks
-   are the same height and the rooms' CTAs land on one line however long either line runs (DD-26). The CTA above
-   carries the auto margin, so the pair sits on the floor of the room. */
+/* From 768 the mark closes the room's content block, with the same ring of padding on both so the two mark blocks
+   are the same height. The shared subgrid rows above are what land the two CTAs and the two marks on one line
+   (DD-26), whatever either room's line does. */
 @media (min-width: 768px) {
   .place-mark { order: 5; margin-top: var(--space-6); padding: var(--space-2); margin-inline: calc(-1 * var(--space-2)); }
   .place-mark img { height: 32px; }
@@ -118,20 +148,22 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
 .place-line { margin-top: var(--space-3); margin-bottom: var(--space-4); max-width: var(--measure-prose); font-size: var(--text-base); line-height: var(--leading-prose); }
 .place--anywhere .place-line { color: var(--color-on-navy); }
 .place-cta { margin-top: 0; }
-@media (min-width: 768px) { .place-cta { margin-top: auto; } .place-line { margin-bottom: var(--space-5); } }
+@media (min-width: 768px) { .place-line { margin-bottom: var(--space-5); } }
 
-/* V2, the door line reveal (CONTRACT.md section 6; K4 P12). Only at 768 and above and only where a pointer can
-   hover: the line rests at opacity 0, 4px low, and rises over --duration-base with --ease-out when the room is
-   hovered or holds focus. Its box is in flow at every state, so nothing on the page moves. Below 768 and under
-   (hover: none) the line is simply visible. */
-@media (min-width: 768px) and (hover: hover) {
-  .place-line { opacity: 0; transform: translateY(4px); transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out); }
-  .place:hover .place-line, .place:focus-within .place-line { opacity: 1; transform: translateY(0); }
-}
+/* The door state is V1, instant (CONTRACT.md section 6; K4 section 8.1 V1). The brief offered V2, the hover
+   reveal, as "Considered": it was built, measured and withdrawn. Reserved but empty, the line's space read as a
+   void at every laptop row (85px at 1280, 140 at 1440, 200 at 1920) and the first screen carried no fact for a
+   reader who does not hover, so both lines are simply visible at every width. Nothing fades, nothing moves.
+
+   The whole room is the link the Door card specifies (1_spec/04 section 3: "Whole card is one link with a
+   full-name label"). .place is already the positioned ancestor, so the CTA's ::after covers the room: one tab
+   stop, one accessible name, and hover, focus and click all mean the same thing over the same area. */
+.place-cta::after, .places--echo .btn::after { content: ''; position: absolute; inset: 0; }
 
 /* The first screen's one accent use: a 40px --color-accent mark centred on the colour edge, the hinge between the
-   two rooms. 8px across the edge, 40px along it; vertical seam from 768, horizontal seam when the rooms stack. */
-.seam-mark { position: absolute; z-index: 1; background: var(--color-accent); top: 0; left: 50%; width: 40px; height: 8px; transform: translate(-50%, -50%); }
+   two rooms. 8px across the edge, 40px along it; vertical seam from 768, horizontal seam when the rooms stack.
+   It paints above the room's stretched link and takes no pointer events, so the whole room stays one click. */
+.seam-mark { position: absolute; z-index: 1; pointer-events: none; background: var(--color-accent); top: 0; left: 50%; width: 40px; height: 8px; transform: translate(-50%, -50%); }
 @media (min-width: 768px) { .seam-mark { top: 50%; left: 0; width: 8px; height: 40px; } }
 
 /* Compact door rule (CONTRACT.md section 2), at this mock's measured threshold: phones under 780px tall and every
@@ -160,6 +192,7 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
    their own room (so a line is never read against the wrong colour), which is also what cuts the fold here. */
 @media (max-height: 479px) and (min-width: 600px) {
   .masthead { padding-block: var(--space-3) var(--space-3); }
+  .place--anywhere { border-top-color: var(--color-border); } /* side by side here too, so both ceilings are drawn */
   h1 { font-size: var(--text-xl); max-width: none; }
   .provenance { margin-top: var(--space-2); }
   .places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -172,13 +205,21 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
   .seam-mark { top: 50%; left: 0; width: 8px; height: 40px; }
 }
 
-/* Short laptops and the zoom row (V15 1366 by 648, V19 1024 by 576): the first screen gives up a ring of padding so
-   both CTAs and the next band stay in view without changing the h1's size. Under 600px tall (V19) the compact door
-   rule above also fires, so the lines follow the second CTA there. */
+/* Laptop rows shorter than the design height, in two steps. The first screen is built to stop --space-8 above the
+   fold so the compare sentence lands in that reserve and is cut by the bottom edge; measured, the untrimmed first
+   screen overruns the reserve by 47px at both 1280 by 720 and 1366 by 648, and the sentence fell below the edge
+   with only the floor rule showing. Each step gives up a ring of padding rather than changing the h1's size.
+   Under 600px tall (V19) the compact door rule above also fires, so the lines follow the second CTA there. */
+@media (min-width: 1024px) and (max-height: 767px) {
+  .masthead { padding-block: var(--space-5) var(--space-5); }
+  .place { padding-block: var(--space-6) var(--space-6); }
+  .place-mark { margin-top: var(--space-5); }
+}
 @media (min-width: 1024px) and (max-height: 699px) {
   .masthead { padding-block: var(--space-4) var(--space-4); }
-  .place { padding-block: var(--space-5) var(--space-5); }
-  .place-mark { margin-top: var(--space-5); }
+  .place { padding-block: var(--space-4) var(--space-4); }
+  .place-line { margin-bottom: var(--space-4); }
+  .place-mark { margin-top: var(--space-4); }
 }
 
 /* ---------- Buttons: the estate's face and case (Inconsolata 600 uppercase, K12 G15, G17), 44px floor ---------- */
@@ -277,9 +318,12 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 .footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
 .footer-logo--light { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
+/* K12 G4 and V2: horizontal marks 32px on desktop, never below 27px. Both footer marks step at 768 with the
+   header lockup and the two room marks, so every mark on the page is 27px on phones and 32px above — and the
+   two schools' marks are the same height as each other wherever they sit. */
 .footer-logo img { height: 27px; width: auto; }
+@media (min-width: 768px) { .footer-logo img { height: 32px; } }
 .footer-logo--navy { padding-inline: 0; background: var(--color-navy); }
-.footer-logo--navy img { height: 32px; }
 
 /* ---------- Forced colours (K3 F38) ----------
    Every background is replaced there, so the colour edge and the two rooms would read as one plane. The rooms keep
@@ -288,7 +332,10 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
    white lettering and keeps its navy plate through forced-color-adjust. */
 @media (forced-colors: active) {
   .place { border-color: CanvasText; }
-  .seam-mark { background: CanvasText; }
+  /* The accent mark is withdrawn here. As CanvasText it became a solid blob sitting on the CanvasText column
+     rule and read as a swelling in the divider, not as a mark. It carries no meaning (aria-hidden, decorative),
+     so the honest forced-colours state is the drawn boundary alone. */
+  .seam-mark { display: none; }
   .place-mark--plate, .footer-logo--navy, .footer-logo--light { forced-color-adjust: none; }
   .btn { border-color: ButtonText; }
   :focus-visible, .place--anywhere :focus-visible, .on-navy :focus-visible, .site-header :focus-visible, .footer-logo--light:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
