@@ -410,3 +410,14 @@ Contrast ratios, including the new footer focus-outline color, were computed by 
 from the token values, not read from a running contrast checker. A live pass should
 confirm all of the above — the 844px fits, the footer focus ring, and every tap
 target's true rendered width — before this mock goes to Nari.
+
+## Design-lead pass (Fable, browser in the loop), 2026-09-10
+
+| Item | Change | Why |
+|---|---|---|
+| First screen | Navy, edge to edge: the umbrella sentence in very large Literata (3.5rem at 1440), the provenance line in italic, a hairline, then two quiet plates (square photograph, mono format label, school name, one line, an underlined CTA with an accent underline). Both CTAs end at 846px at 1440; the first screen carries the umbrella fact (DD-29) | Prestige as restraint: one dark surface, one large statement, nothing competing |
+| Below | One narrow column (52rem) with generous vertical space; each section is one idea: a ruled, prose-led comparison; four facts one per line; a numbered ledger of steps with outlined buttons; an index of ways to connect; a one-line families bar | Restraint that still carries a fact on every screen |
+| Header | Navy with the real logo on a small light plate so the mark keeps its colors | Brand continuity on a dark surface |
+| Footer | Light surface, three columns, both logos on their panels | Legibility (E2 finding 18) |
+
+Departures (DD-19): the navy first screen and header (Anywhere's tertiary color as a full surface); quiet CTAs are underlined text links with an accent underline at rest, which keeps AA contrast and a visible affordance (DD-10). Eyebrows in Inconsolata are recorded in `copy.md`. Nothing animates. Both checkers pass.
