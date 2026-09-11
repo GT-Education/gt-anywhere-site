@@ -18,7 +18,8 @@ for f in files:
     fbody = '\n'.join(fsecs)
     rows = [l for l in fbody.splitlines() if l.startswith('|') and not re.match(r'^\|\s*-', l) and not re.match(r'^\|\s*(#|Field|Site|Source|Candidate)\b', l)]
     subs = re.findall(r'^###\s', fbody, flags=re.M)
-    findings = rows + subs
+    labels = re.findall(r'\b(?:K\d+-)?F\d{1,3}\b', fbody)
+    findings = rows + subs + labels
     if len(findings) < 10: errs.append(f'only {len(findings)} findings rows or subsections')
     m = re.search(r'^##[^\n]*How it applies to GT[^\n]*\n(.*?)(?=^##\s|\Z)', s, flags=re.S|re.M|re.I)
     words = len(m.group(1).split()) if m else 0
