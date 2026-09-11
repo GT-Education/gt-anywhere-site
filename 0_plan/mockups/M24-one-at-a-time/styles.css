@@ -71,7 +71,8 @@ em { font-family: var(--font-serif); font-style: italic; }
 h1 { font-weight: var(--h1-weight); font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; margin-inline: auto; text-wrap: balance; }
 /* From 768 the h1 is held to eight of twelve columns with 32px gutters, the brief's width: the calc is that grid
    (8 columns plus 7 gutters of a 12-column content width), and the contract's 35ch cap still binds where it is
-   narrower. Measured: 800px at 1280, 907px at 1440, which are the contract's own 8-column figures. */
+   narrower. Measured: 800px at 1280 and 907px at 1440. 907 is the contract's own 8-column figure; 800 is not its
+   779, because the contract's V14 row assumes a 1184px content width and this page's .wrap gives 1216 at 1280. */
 @media (min-width: 768px) { h1 { max-width: min(35ch, calc((100% - 352px) / 12 * 8 + 224px)); } }
 .provenance { margin-top: var(--space-4); font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
 
@@ -127,23 +128,38 @@ h1 { font-weight: var(--h1-weight); font-size: var(--text-3xl); line-height: var
 /* --color-border-strong, not --color-border: this one rule is the ink a reader sees at the bottom edge on the rows
    where the first screen fits, so it has to clear 3:1 (3.63:1 computed against --color-bg; --color-border is 1.56:1). */
 .beats { border-top: 1px solid var(--color-border-strong); }
+/* One beat is one screen, which is what makes the direction's name true inside a viewport rather than only
+   across the page: each beat is at least a viewport tall and its block is optically centred in it, so no second
+   object is ever partly visible beside the one a parent is reading. The brief asks for at least 96px of clear
+   space, so this is compliance, not departure. `safe` keeps the block at the top instead of clipping it on a
+   short landscape row that cannot hold it. `svh` is DD-44's unit; no `vh` appears in this file. */
+.beat { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; align-content: safe center; }
+@supports (height: 100svh) { .beat { min-height: 100svh; } }
 .beat-inner { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: var(--beat-air); }
 .obj { display: block; width: var(--obj-size); height: var(--obj-size); margin-bottom: var(--beat-air); }
 .o-line { fill: none; stroke: var(--color-navy); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.o-fill { fill: var(--color-navy); stroke: none; }
-/* the accent shapes carry a navy hairline of their own, so the shape's boundary is 17.69:1 against the ground
-   even though the fill measures 2.38:1 (K12 F88): the orange emphasises, the outline delimits. */
-.o-accent { fill: var(--color-accent); stroke: var(--color-navy); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+/* The accent is the one thing the eye is meant to land on in a frame that is three quarters empty, spent twice
+   on a page of 9.2 screens at 1440 by 900, so it takes the darker token: --color-accent-text is 5.14:1 where
+   --color-accent is 2.38 (CONTRACT.md section 3, "a line that carries the argument must reach 3:1"; K12 F88).
+   Fill only, no hairline: --color-navy on --color-accent-text is 2.70:1, so a navy outline on this fill would be
+   noise on the shape rather than its boundary. Each accent shape is already delimited by the navy hairlines of
+   the object around it: the arc's band outline and its ninth tick, and the fork's stem and two arms. */
+.o-accent { fill: var(--color-accent-text); stroke: none; }
 .o-mark { fill: none; stroke: var(--color-navy); stroke-width: 8; stroke-linecap: round; }
-.beat-label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+/* One small-type voice, and the beats' own label carried into every band below them so the page does not change
+   author at the table: the tracked label over a single line is the beat grammar, and the words are copy.md's own
+   allowed eyebrow list ("Compare", "Proof", "Admissions", "Connect", "Families"). */
+.beat-label, .band-label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+.band-label { margin-bottom: var(--space-3); }
 /* the sentence takes the object's own width, so the beat reads as one column and no line runs past 45 characters (measured) */
 .beat-line { margin-top: var(--space-4); font-family: var(--font-serif); font-size: var(--text-base); line-height: var(--leading-prose); max-width: var(--obj-size); text-wrap: balance; }
 
 /* ---------- Second half: the table, the proof, the steps, the connect list, the families bar ---------- */
 .band { padding-block: var(--space-8); }
+/* One ground to the footer. The bands below the beats are separated by the same rule the beats open with, never
+   by a change of surface: --color-border-strong is 3.63:1 against --color-bg, where --color-border is 1.56. */
+.comparison, .proof, .steps, .connect, .families { border-top: 1px solid var(--color-border-strong); }
 @media (min-width: 768px) { .band { padding-block: var(--space-9); } }
-.comparison { border-top: 1px solid var(--color-border-strong); }
-.connect { padding-top: 0; } /* steps and connect share one section gap on the same ground */
 h2 { font-size: var(--text-2xl); max-width: 30ch; }
 h3 { font-size: var(--text-md); }
 
@@ -169,16 +185,14 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 .doors-repeat, .apply { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
 .link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; text-decoration: underline; text-underline-offset: 0.2em; }
 
-.tefa { margin-top: var(--space-7); padding: var(--space-5); background: var(--color-anywhere-tint); border-radius: var(--radius-md); max-width: var(--measure-prose); }
+.tefa { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--color-border-strong); max-width: var(--measure-prose); }
 .tefa p { margin-top: var(--space-3); }
 .tefa .link { margin-top: var(--space-2); }
 
-.proof { background: var(--color-surface); }
 .facts { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: var(--space-6); }
 @media (min-width: 768px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-7); } }
 .facts li { padding-block: var(--space-5); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
 
-.steps-intro { margin-top: var(--space-4); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
 .steps-list { counter-reset: step; margin-top: var(--space-6); max-width: var(--measure-prose); }
 .steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr); align-items: baseline; padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); }
 .steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
@@ -189,7 +203,6 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 .connect-list li:last-child a { border-bottom: 1px solid var(--color-border); }
 .connect-list a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
 
-.families { border-top: 1px solid var(--color-border); }
 .families-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-5); }
 .families h2 { font-size: var(--text-xl); }
 .families p { margin-top: var(--space-2); color: var(--color-text-muted); }
@@ -217,11 +230,11 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 /* ---------- Forced colours, last in the file (M07's lesson) ----------
    Fills and strokes are both forced by the UA, so the drawn objects are re-declared here rather than left to the
    mapping: one outline per band, filled shapes solid, hairlines hairline. The distinction a reader needs — which
-   segment of the arc is filled, which tiles are filled — is carried by fill against stroke, and survives. */
+   segment of the arc is filled, where the fork branches — is carried by fill against stroke, and survives. */
 @media (forced-colors: active) {
   :focus-visible, .on-navy :focus-visible, .plate:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
   .o-line { fill: none; stroke: CanvasText; }
-  .o-fill, .o-accent { fill: CanvasText; stroke: none; }
+  .o-accent { fill: CanvasText; stroke: none; }
   .o-mark { fill: none; stroke: CanvasText; }
   .door-cta, .btn { border: 1px solid ButtonText; }
   .footer-logo.plate { border: 1px solid CanvasText; }

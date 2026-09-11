@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T17:05:33.840Z; page `/0_plan/mockups/M24-one-at-a-time/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T18:14:31.598Z; page `/0_plan/mockups/M24-one-at-a-time/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V6 | 412 by 839 | fold | 815 | 92 | 301 | 338 | 466 | 579 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 92 | 299 | 336 | 457 | 570 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 267 | 304 | 425 | 538 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 92 | 330 | 367 | 487 | 600 | yes | report: page height 8623 |
+| V9 | 390 by 844 | emptiness |  | 92 | 330 | 367 | 487 | 600 | yes | report: page height 9856 |
 | V10 | 750 by 342 | fold | 318 | 56 | 147 | 177 | 284 | 284 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 316 | 353 | 663 | 663 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 283 | 321 | 731 | 731 | yes | PASS |

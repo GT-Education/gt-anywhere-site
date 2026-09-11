@@ -42,15 +42,18 @@ all four beats, which is what makes the page read as a sequence rather than a la
 | `insp-palebeat` one-object beat section | Yes: one centred object per section, at most 320px square, in a fixed field of air; sections stack with identical margins so the page reads as beats | |
 | `insp-palebeat` caption-below-object | Yes: no headline competes with the object; a `--font-mono` `--text-xs` tracked label and one deck sentence at `--text-base` sit well below it | |
 | `insp-palebeat` monoline geometric objects | Yes, as original geometry built from GT's own facts (below). Hairline strokes at 1.5px, flat fills, no gradient | The source's "single soft radial glow" is refused: a gradient is the one thing on this page that could not be drawn from a fact |
-| `insp-palebeat` pale lilac canvas `#E7E2F1` | No | DD-48. The ground is `--color-bg` `#fcf4ef`, the estate's own cream, because a parent hands off from this page to two sites measured on that ground (`shared/CONTINUITY.md`). A borrowed canvas would fail the Continuity row by construction |
+| `insp-palebeat` pale lilac canvas `#E7E2F1` | No | DD-48. The ground is `--color-bg` `#fcf4ef`, the estate's own cream, because a parent hands off from this page to two sites whose shared ground is measured for one of them, anywhere.gt.school (`shared/CONTINUITY.md`); gt.school has no mirror here. A borrowed canvas would fail the Continuity row by construction |
 | `insp-palebeat` one accent hue **per beat, changed between sections** | The "exactly one accent per beat, never two at once" half only | The **changing hue** is refused. Four sections in four saturated hues would give a school four unrelated colours and no brand. GT has one accent, `--color-accent`; two of the four beats spend it once, and two spend none |
 | `insp-palebeat` type: "lowercase 13-15px caption", "tracked uppercase 10px label" | The scale and the subordination | The faces and the exact sizes: Literata, Inter Tight and Inconsolata are fixed by K12's "what never changes" list, and the contract's smallest step is `--text-xs` (12 to 13px), so nothing on this page is set at 10px |
 | `insp-palebeat` motion: 0.10s snaps between absolute stillness | The stillness | The snap. It is a film's device between cuts; a page has no cuts. Nothing on this page animates at all |
 | `insp-palebeat` "no headline" | | Refused by the contract, as above. The fixed sentence is the h1 at every row |
-| `insp-outship` long still hold, one italic emphasis word per sentence | Yes: each beat sentence sets exactly one word in Literata italic, chosen so it never falls at a line end (measured) | Its cream `#FAF5EC`, vermilion `#E45D34`, violet, sage and tan; its hard cuts to a near-black scene; its glyph-particle fields and score pills. All palette, all refused under DD-48 |
+| `insp-outship` long still hold, one italic emphasis word per sentence | Yes: each beat sentence sets exactly one word in Literata italic, chosen so it never falls at a line end (re-measured this pass at 375, 390, 1280 and 1440; the first build's *advance* did fall at one and is gone with that sentence) | Its cream `#FAF5EC`, vermilion `#E45D34`, violet, sage and tan; its hard cuts to a near-black scene; its glyph-particle fields and score pills. All palette, all refused under DD-48 |
 
-Nothing in `examples/stillpoint.html` or `examples/kilnworks.html` was copied: no selector, no value and no shape
-from either file appears here. Both were read as whole pages for their composition and then closed.
+No code was taken from `examples/stillpoint.html` or `examples/kilnworks.html`: nothing was copied from either
+file, and both were read as whole pages for their composition and then closed. The overlap a reviewer will see is
+the borrowing itself and is declared above — a section that holds one object in air, a caption set well below it,
+`min-height` on that section — and it is composition, not code. The class names, the token values and every number
+in this stylesheet are this build's own.
 
 ## h1
 
@@ -63,7 +66,8 @@ phone setting never ends on a one-word line.
 **Measure.** The contract caps the h1 at 35ch; the brief puts it at eight columns. Both are applied: below 768 the
 content column binds, and from 768 the width is `min(35ch, calc((100% - 352px) / 12 * 8 + 224px))`, which is
 literally eight of twelve columns with 32px gutters. Measured widths: 459px at 768, 629px at 1024, **800px at
-1280** and **907px at 1440** — the contract's own 8-column figures (section 2) to the pixel. 35ch would have been
+1280** and **907px at 1440**. 907 is the contract's own 8-column figure (section 2) to the pixel; 800 is not its
+779, because the contract's V14 row assumes a 1184px content width and this page's `.wrap` gives 1216px at 1280. 35ch would have been
 932px at 1440, wider than eight columns, so the grid binds there and the contract's cap binds nowhere.
 
 **Line counts, measured.** 7 lines at 360, 375 and 390 (217, 219, 222px); 6 at 414 and 430 (193, 195px); 3 at 750
@@ -79,16 +83,18 @@ exactly one `h1`.
 ## The four objects: what each is built from, and why it implies no unregistered figure
 
 Every object is original monoline geometry drawn for this page. None is a chart: none has an axis, a scale label,
-a legend or a tick that stands for a unit the page does not name in words directly beneath it. **No object contains
+a legend or a tick that stands for a unit the page does not name in words directly beneath it. Beat 2's marks are
+the one case worth stating plainly — they stand for no unit at all, which is why they are a cadence and not a
+scale, and the two tracks carry the same number of them so no comparison of quantity is on offer. **No object contains
 text of any kind** — there are zero `<text>` nodes in the four SVGs, measured — so M10's defect (labels declared at
 14px rendering at 11 to 13px because they scaled with the viewport transform) cannot occur here by construction,
 and there is no SVG font size to report.
 
 | Beat | Object | What it is built from | Why it implies no figure the deck does not carry |
 |---|---|---|---|
-| 1. Admissions | A 270° segmented arc: one stroked band outline, nine radial ticks dividing it into ten equal segments, and the tenth segment filled with `--color-accent` | Percentile is the deck's own unit, and a percentile scale divides into ten. The filled tenth is the admitted band | The only quantity drawn is "one tenth", which is the deck's own "at or above the 90th percentile" (CR-011) stated in the sentence below it. The arc carries no numerals, no axis and no scale label |
-| 2. Mastery | Nine rounded tiles, three by three, four filled `--color-navy` and five hairline; the filled run stops **inside** the second row, not at its end | Nine tiles are the deck's own span, Kindergarten plus grades 1 to 8, which the page states in words twice (proof strip fact four, footer facts block) | Nine is a deck figure. The filled run is a position in that span, not a quantity the page asserts: no numeral appears, nothing says how far a child gets, and the ragged edge is the deck's own "students advance when they show mastery, not when the calendar says so" |
-| 3. Two ways to attend | Two concentric hairline rings and one filled `--color-accent` dot at their shared centre; the two gaps (dot to inner ring, inner to outer) are equal at 64 and 65 user units so the object reads as a rhythm of three rather than as a target | Two rings are the two ways to attend — the campus you travel to and the country GT Anywhere reaches. The dot is the one school both belong to | Two is the deck's own count of doors. Nothing measures a radius, a distance or a population. The bullseye association is the known risk of any concentric pair and is named here rather than hidden; the sentence beneath and the label say what the rings are |
+| 1. Admissions | A 270° segmented arc: one stroked band outline, nine radial ticks dividing it into ten equal segments, and the tenth segment filled with `--color-accent-text` | Percentile is the deck's own unit, and a percentile scale divides into ten. The filled tenth is the admitted band | The only quantity drawn is "one tenth", which is the deck's own "at or above the 90th percentile" (CR-011) stated in the sentence below it. The arc carries no numerals, no axis and no scale label |
+| 2. Mastery | Two parallel hairlines, each running the full width of the frame and cut by both its edges, each crossed by seven hairline marks: the upper at a constant pitch of 48 user units, the lower at pitches of 54, 34, 74, 34, 36 and 56. Both series begin at 16 and end at 304, so the two tracks have the same count and the same span | The contrast the sentence beneath states in its own words: "Students advance when they show mastery, **not when the calendar says so**." The even track is the calendar; the uneven one is mastery | **Nothing is filled and nothing is a part of a whole**, so there is no proportion to read: the object states a difference of cadence, not a quantity. The two counts are deliberately equal, so neither track can be read as more steps, fewer steps, faster or slower — no speed claim is available even by implication. Seven is not a figure this deck carries in any role, the tracks are cut by the frame at both ends so no total is drawn, and the object carries no numeral, no axis, no scale and no label |
+| 3. Two ways to attend | A symmetric two-branch fork: one short hairline stem rising from (160, 264) to a single filled accent dot at (160, 198), then two arms of equal length (165.76 user units from the branch point to each terminal's centre, 134.76 of it drawn between the dot's edge and the terminal's) and mirrored angle (41.5° either side of the vertical) ending in two identical hairline terminals of the same radius, at (50, 74) and (270, 74). Mirror-symmetric about the vertical axis to the user unit | One school at the branch point, two ways to attend from it. The terminals are identical because the two schools are peers | Two is the deck's own count of doors, and it is a count with no denominator (CONTRACT.md section 3). **Nothing is nested inside anything**, which is the point: the fork has no containing shape, so it cannot say that one way to attend lives inside the other. Nothing measures a radius, a distance or a population, and neither arm is longer, thicker, higher or nearer than the other, so the drawing cannot prefer a school. It survives forced colours as geometry rather than as tint (`qa/M24-beat3-forced.jpg`) |
 | 4. Across the year | A hairline running the object's full width, crossed by four marks at the eighth, three-eighths, five-eighths and seven-eighths points | Four marks are the four intensive weekends (CR-032); the even spacing is the deck's own "together in person each quarter"; the line is the year, with runway at both ends | Four is a register-backed figure in the deck's own words. The marks **cross** the line rather than rise from it, which is what keeps this from reading as a bar chart with an unlabelled axis. No month, no date, no duration is implied, and the deck's own caution that the weekends are not placed on a calendar is honoured by drawing no calendar |
 
 **Forced colours.** The brief's requirement is that the objects survive when fills are dropped and only outlines
@@ -98,16 +104,30 @@ shapes become `fill: CanvasText; stroke: none`. M07's defect was a per-segment s
 labels; here the arc is drawn as **one outline per band** (a single stroked path for the whole band, plus nine
 separate tick strokes that stop at the band's edges) and there are no labels to strike. Verified by eye in
 `qa/M24-beat1-forced.jpg` (the filled segment stays solid black inside a hairline band), `qa/M24-beat2-forced.jpg`
-(four solid tiles against five hairline tiles) and `qa/M24-beat3-forced.jpg` (the accent dot stays solid).
+(both cadences survive, because the whole distinction is where the marks fall and none of it was ever carried by a
+colour), `qa/M24-beat3-forced.jpg` (a black branch with a filled node and two identical open terminals: no target,
+no nesting) and `qa/M24-beat4-forced.jpg`. **That test is now the second reason the rings had to go**: with the
+tints removed they were a rifle target, and an object whose only defence against a misreading is a colour the user
+agent may remove is not carrying its meaning in its geometry (CONTRACT.md section 3, "nesting is hierarchy").
 
-**The accent as a graphical object, measured.** `--color-accent` `#e48b53` is 2.38:1 against `--color-bg` (K12
-F88), which is below 3:1. Two mitigations, both deliberate: the accent shapes carry a `--color-navy` hairline of
-their own, so the shape's **boundary** is 13.9:1 against the ground; and neither accent shape carries information
-that is not also in the sentence directly beneath it, so nothing on the page is available only through colour
-(WCAG 1.4.1 and 1.4.11 in substance). A critic who would rather spend `--color-accent-text` (`#a5501a`, 5.14:1)
-as the fill has a one-token change available; the estate's own accent was kept because DD-39 rules gold and accent
-surface-and-shape colours on light, the brief names the accent for these two shapes, and this page spends it
-exactly twice.
+**The accent as a graphical object, measured.** The two accent shapes take **`--color-accent-text`** (`#a5501a`),
+which is **5.14:1** against `--color-bg` (computed here, and the token's own recorded figure). `--color-accent`
+`#e48b53` was the first build's choice and measures **2.38:1** (K12 F88), below 3:1; its two mitigations both
+reproduced — the navy hairline made the shape's boundary 13.88:1 on the ground, and neither shape carries
+information that is not also in the sentence beneath it — and neither was about what the accent is *for* here. In
+this direction the accent is the one thing the eye is meant to land on in a frame that is three quarters empty,
+spent exactly twice on a page that runs 9.2 screens at 1440 by 900 (11.7 at 390 by 844). At 2.38 it landed
+quieter than the navy hairlines around it, so the loudest mark in the object was its own outline. CONTRACT.md
+section 3 now states the rule generally ("a line that carries the argument must reach 3:1") and names this mock's
+fills as one of the three cases that produced it.
+
+**The hairline goes with the swap.** `--color-navy` on `--color-accent-text` is **2.70:1** (computed), so a navy
+outline on the darker fill stops delimiting the shape and becomes noise on it. `.o-accent` is therefore fill only.
+Nothing is lost: each accent shape is already bounded by navy hairlines that belong to the object around it — the
+arc's band outline and its ninth tick close the filled segment on all four sides, and the fork's stem and two arms
+meet the dot — and forced colours collapses fill and stroke to `CanvasText` in any case. Measured ratios used
+above, all against `--color-bg` `#fcf4ef`: `--color-accent-text` 5.14, `--color-navy` 13.88, `--color-text` 17.69,
+`--color-border-strong` 3.63, `--color-focus` 8.20.
 
 ## Brief compliance
 
@@ -117,15 +137,15 @@ exactly twice.
 | Source language | `insp-palebeat` primary (one unchanging ground, one centred object per beat, three quarters air, small type well below, no competing headline after the first screen, one accent per beat); `insp-outship` support (long still hold, one italic word per sentence). Both borrowed as grammar only | Met |
 | What is deliberately not borrowed | Named, item by item, in the borrowing table above: the lilac canvas, the per-section accent change, the source's absence of a headline, its radial-glow gradient, its 10px type and its snap | Met |
 | Thesis | One thing per screen after the choice: one drawn object and one deck sentence per beat, four beats, then the table | Met |
-| Exemplars | `examples/stillpoint.html` read as a whole page for the beat sequence (no code taken). Barnes (C03) for one saturated colour spent once — here twice on a page of nine screens, once per beat that spends it. Exeter (C04) for a figure that carries a label and a link — here each object carries a label and the sentence it illustrates. `every-1440-full.jpg`'s dense directory (C26) avoided: the page has one dense object, the comparison table, and says so | Met |
-| Composition | First screen as the contract requires: header 56 (92 where the mark holds its floor and the header takes two rows), h1 at eight columns, provenance, two doors with both CTAs, compare anchor, all present at every row. From the beats' opening rule the page is beats: each a full-width section on `--color-bg`, one centred object at most 320px square, 96px of clear space above and below at 1024 and up and 64px on phones (measured 96/96 at 1440), then a `--font-mono` `--text-xs` uppercase tracked label and the deck sentence at `--text-base`, centred, at most 45 characters a line (measured longest line 31). Four beats in the brief's order: the admission bar, the program, the two places, the year. Then the comparison table, the one dense object | Met |
-| Typography | Contract roles. The beat sentences are the deck's own, set in Literata 400 (the contract's "Literata where a brief says so"), each with exactly one word in Literata italic placed mid-line: *admits*, *advance*, *or*, *year*. Measured: none falls at a line end at 375, 1280 or 1440 | Met |
-| Color and surface | One ground, `--color-bg`, from the header to the families bar; the footer is the page's one change of ground, to `--color-navy`. Objects drawn in `--color-navy` at 1.5px non-scaling hairlines (13.9:1 on the ground). Exactly one accent use in beat 1 (the filled arc segment), one in beat 3 (the dot), none in beats 2 and 4, none anywhere else on the page — measured, `.o-accent` count per beat is 1, 0, 1, 0. Focus per contract | Met |
+| Exemplars | `examples/stillpoint.html` read as a whole page for the beat sequence (no code taken). Barnes (C03) for one saturated colour spent once — here twice on a page of 9.2 screens at 1440 by 900, once per beat that spends it. Exeter (C04) for a figure that carries a label and a link — here each object carries a label and the sentence it illustrates. `every-1440-full.jpg`'s dense directory (C26) avoided: the page has one dense object, the comparison table, and says so | Met |
+| Composition | First screen as the contract requires: header 56 (92 where the mark holds its floor and the header takes two rows), h1 at eight columns, provenance, two doors with both CTAs, all present at every row; the compare anchor is on the first screen from 768 up and falls below it on the phone rows, declared under Departures. From the beats' opening rule the page is beats: each a full-width section on `--color-bg` **at least one viewport tall (`min-height: 100svh`), its block optically centred**, one centred object at most 320px square, at least 96px of clear space above and below at 1024 and up and 64px on phones (measured 96/96 at 1440 and 64/64 at 390, with the centring adding 146px more at 390 by 844 and 185 at 1440 by 900), then a `--font-mono` `--text-xs` uppercase tracked label and the deck sentence at `--text-base`, centred, at most 45 characters a line (measured longest line 33, beat 2 at 1440). Four beats in the brief's order: the admission bar, the program, the two places, the year. Then the comparison table, the one dense object. **Measured this pass: at every one of the four beat-top scroll positions, at 1440 by 900, 1280 by 720, 390 by 844 and 375 by 629, exactly one object is at least a quarter visible, and it is 100 per cent visible.** The beat language is carried below the table as the tracked label over each band's heading | Met |
+| Typography | Contract roles. The beat sentences are the deck's own, set in Literata 400 (the contract's "Literata where a brief says so"), each with exactly one word in Literata italic placed mid-line: *admits*, *mastery*, *or*, *year*. Measured this pass at **375, 390, 1280 and 1440**, line by line: none falls at a line end at any of the four. The first build's beat 2 set *advance*, which ended line one at every width, against this rule and against the first build's own claim to the contrary; that sentence is gone and the replacement was measured before it was claimed | Met |
+| Color and surface | One ground, `--color-bg`, from the header to the families bar, and **it is now true of the build**: the first build tinted the proof band (`--color-surface`) and the TEFA module (`--color-anywhere-tint`), so the page had four grounds where this row said one. Both are on `--color-bg` and separated by the `--color-border-strong` rule the beats open with, which is the page's one structural device (3.63:1); the footer is the page's one change of ground, to `--color-navy`. Objects drawn in `--color-navy` at 1.5px non-scaling hairlines (13.88:1 on the ground), except beat 4's four marks at 8px, declared under Departures. Exactly one accent use in beat 1 (the filled arc segment), one in beat 3 (the fork's dot), none in beats 2 and 4, none anywhere else on the page — measured, `.o-accent` count per beat is 1, 0, 1, 0, and 2 on the page. The accent is `--color-accent-text` at 5.14:1, fill only. Focus per contract | Met |
 | Imagery | Diagrammatic. No photograph in either state: this direction's argument is that one drawn fact per screen is enough, and a photograph would be the one element on the page that is not drawn from a register row. Stated as a decision, not an omission (Assets) | Met |
 | Motion | Still. `styles.css` declares no `transition` and no keyframe rule; the runner measured every computed transition and animation duration at 0s under `prefers-reduced-motion: reduce`. V1 and V3 are instant; V10 is the native anchor scroll inside `no-preference` only. The source's snap is not borrowed | Met |
 | Copy | Sections 0 to 8 verbatim. Beat labels from section 9 and the allowed-headings table (below). No new words; no figure the deck does not carry | Met, with the section 9 reading stated below |
 | Conversion | Doors on the first screen at every row; compare anchor under them; four beats; the table with repeated values and the doors repeated after it; TEFA module; proof strip and sources line; application steps; four secondary CTAs; current families; navy footer with both marks and the facts block | Met |
-| Acceptance | `check-mocks.py` 36 of 36; `check-claims.py` clean; the runner's Result line "all required rows pass" (16 fold rows, reflow, zoom, reduced motion, doubled root font, console, mark geometry). Exactly one object and one line per beat, verified in the captures and measured (1 `svg`, 1 `p` per beat). No beat carries two accent uses, measured. Every object checked in a forced-colours capture. DD-38, DD-39, DD-47 and DD-48 named here, with DD-46 and D-039 | Met; critics pending |
+| Acceptance | `check-mocks.py` **37 pass, 0 fail**; `check-claims.py` clean; the runner's Result line "all required rows pass" (16 fold rows, reflow, zoom, reduced motion, doubled root font, console, mark geometry). Exactly one object and one line per beat, verified in the captures and measured (1 `svg`, 1 `p` per beat). No beat carries two accent uses, measured. Every object checked in a forced-colours capture. DD-38, DD-39, DD-47 and DD-48 named here, with DD-46 and D-039 | Met; critics pending |
 
 ### Beat labels and the section 9 reading
 
@@ -140,12 +160,28 @@ mock reads it that way and says so rather than assuming it silently.
 | Two ways to attend | An allowed section 1 heading, and in the same section 9 M02 row |
 | Across the year | Section 9, the M14 step-labels row |
 
+The five band labels below the beats — "Compare", "Proof", "Admissions", "Connect", "Families" — are `copy.md`'s
+own allowed eyebrow list ("Eyebrow labels (any mock): one-word section labels in Inconsolata above an h2"), used
+in exactly that role. "Admissions" therefore appears twice as a label, over beat 1 and over "How to apply"; both
+are the deck's own word for the same subject in its two places on the page, and a one-word tracked label is
+wayfinding rather than a restatement of a fact.
+
 Each beat's sentence is a complete fixed slot, quoted whole, never a clause lifted out of a cell: "GT School
-admits students at or above the 90th percentile." (section 5 line); "Mastery-based: students advance on
-demonstrated mastery, measured with MAP assessments." (section 4 fact two); "Kindergarten to 8th grade, in person
-or online." (section 4 fact four); "Four intensive weekends a year in Georgetown." (section 3, In-person time, GT
+admits students at or above the 90th percentile." (section 5 line); "One school, one admissions bar, one
+mastery-based program. Students advance when they show mastery, not when the calendar says so." (section 3, "Same
+school, same academics", the value both columns carry under DD-43); "Kindergarten to 8th grade, in person or
+online." (section 4 fact four); "Four intensive weekends a year in Georgetown." (section 3, In-person time, GT
 Anywhere column). Where a brief wanted a partial cell, the mechanism is to record it in section 9 first (as M07
 did); no partial cell is used here, so `copy.md` needed no change and none was made.
+
+**What the sentences were changed to, and why (the critics' fix 3).** The first build made the page state its four
+things twice: beat 2 was proof fact two verbatim, beat 3 is proof fact four verbatim, beat 1 was the steps lede
+verbatim, and CR-011 appeared five times. Two of the three are closed. Beat 2 now takes the sentence the new
+object actually draws, which the proof strip does not carry. The steps lede is removed, so the admission bar is
+stated once as prose (beat 1), once in the proof strip's own different words, and twice in the table where DD-43
+requires the value in both columns: **CR-011 is now 4 on the page, down from 5**, and `check-claims.py` counts it.
+Beat 3 still shares its sentence with proof fact four; the reason is in the iteration section below, and it is the
+one required fix this pass did not fully close.
 
 ## Fold: designed to, then measured
 
@@ -170,7 +206,7 @@ padding `--space-3`, the h1 one token down at `--text-xl` across the full conten
 scroll; the fold rule does not apply (DD-44).
 
 All other measured rows, second CTA bottom against the limit: V1 595 of 716; V3 584 of 640; V4 584 of 635; V6 579
-of 815; V7 570 of 657; V8 538 of 715; V9 600 (emptiness row, page height 8623); V11 663 of 1000; V12 731 of 1170;
+of 815; V7 570 of 657; V8 538 of 715; V9 600 (emptiness row, page height 9856); V11 663 of 1000; V12 731 of 1170;
 V13 506 of 744; V15 468 of 624; V17 623 of 936; V19 406 of 552 (zoom row, reported: scroll width 1024, nothing
 clipped). Sixteen fold rows; all sixteen pass.
 
@@ -208,11 +244,11 @@ The first screen's height is `calc(100svh - var(--header-h) - var(--fold-tail))`
 | DD-10, MD-25, C06 | Exclusivity is selectivity: the first beat is the admission bar, drawn and stated. Tuition appears only where the deck places it (table row, TEFA module). No wealth cue, no price on any beat |
 | DD-12, DD-13 | Header: lockup, "Current families", "Contact admissions", no menu, no phone number; the number is in the footer only |
 | DD-14, MD-23 | Designed at 375 first. The two doors are equal in every dimension: same label role, same name size, same CTA width (both `display: flex` inside a 22rem door column, so the longer label does not make a longer button), same 44px target |
-| DD-21 | The doors are a `<ul>` and the lines a `<ul>`; both grids come from `repeat(2, …)`, so three to five entries is one value changed in one place. The beats do not encode two: the arc, the tiles and the marks are school-wide facts, and the rings are "two ways to attend", which DD-21's own wording (several campuses plus one virtual school) keeps true |
+| DD-21 | The doors are a `<ul>` and the lines a `<ul>`; both grids come from `repeat(2, …)`, so three to five entries is one value changed in one place. The beats do not encode two: the arc, the two cadence tracks and the four marks are school-wide facts, and the fork draws two **ways**, not two **places** — it is a branch, so a third arm is one more path from the same point, which DD-21's own wording (several campuses plus one virtual school) keeps true. Nothing on the page is nested inside anything (CONTRACT.md section 3, "nesting is hierarchy") |
 | DD-25, REQ-070 | Every application link carries `?school=`; links go only to gt.school, anywhere.gt.school, apply.gt.school, community.gt.school and `#compare` |
 | DD-29 | Every screen carries a fact at rest: the first screen the two door lines, then one deck sentence per beat, then the table, the proof strip, the steps and the footer facts block |
 | DD-38 (b), R5, RF-55, RF-58 | Fluid clamps `--text-xs` to `--text-3xl` and `--text-btn`; `--leading-prose` 1.5 on every multi-line string; `--leading-body` 1.25 on single-line labels and buttons; `--measure-prose` 65ch on the prose blocks; `--h1-weight` exposes the 300-against-400 test |
-| DD-39 (a), RF-07, K3 5c to 5f | `--color-text-muted` for labels, door lines and the beat labels (6.25:1 on `--color-bg`); `--color-border-strong` for the two structural rules (3.63:1); `--color-on-navy` and `--color-text-muted-on-dark` in the footer (14.58 and 7.81); the accent as a shape only, twice, each time with its own navy hairline |
+| DD-39 (a), RF-07, K3 5c to 5f | `--color-text-muted` for labels, door lines and the beat labels (6.25:1 on `--color-bg`); `--color-border-strong` for the two structural rules (3.63:1); `--color-on-navy` and `--color-text-muted-on-dark` in the footer (14.58 and 7.81); the accent as a shape only, twice, as `--color-accent-text` at 5.14:1 and fill only. DD-39 (a) rules where the accent may be used, not that any ratio is adequate wherever it is allowed; CONTRACT.md section 3's "a line that carries the argument must reach 3:1" settles the ratio, and `--color-accent-text` is the DD-19 departure already recorded against this row |
 | DD-43 | The three shared rows repeat their value in both columns; below 768 each cell is labelled with its school name |
 | DD-44, K10 | No `vh` anywhere; `svh` inside `@supports`; the first screen is sized so the next band is visibly cut at every row; height queries at 400 (with width 600), 620 (with width 768) and 679 |
 | DD-46 | Door button fill: the contract's surface-dependent treatment. The doors sit on a light ground, so they are a `--color-navy` fill with `--color-on-navy` text (14.58:1), which is the fill the estate itself uses for the application action on its own first screen. Orange fill was not used: K12 F87 measures the estate's near-white on orange at 2.50:1 |
@@ -239,7 +275,8 @@ The first screen's height is `calc(100svh - var(--header-h) - var(--fold-tail))`
 | `--color-text-muted-on-dark` (`#a3bfcb`, a new tint) | Footer facts block | DD-39 (a), RF-07; DD-19 departure |
 | `--color-border-strong` (`#857f7b`, a new tint) | The two structural rules: the beats' opening rule and the comparison band's top rule (3.63:1 on `--color-bg`, where `--color-border` is 1.56:1) | DD-39 (a), RF-07; DD-19 departure |
 | `--duration-none` | The reduced-motion block, elements and pseudo-elements | MN-16 (a), RF-53, R8 |
-| Not used | `--color-accent-text` (no accent text anywhere; the step numerals are `--color-text-muted` so the page's accent budget stays with the two beats), `--color-on-accent`, `--color-focus-on-dark` (the two-colour ring replaces it), `--ease-standard`, `--ease-out`, `--ease-in` (nothing moves) | |
+| `--color-accent-text` (`#a5501a`) | The two accent shapes, as a fill: the arc's tenth segment and the fork's branch dot. 5.14:1 on `--color-bg` where `--color-accent` is 2.38 | DD-39 (a), RF-07; DD-19 departure, and CONTRACT.md section 3 |
+| Not used | `--color-accent` (the page spends no accent at 2.38 anywhere), `--color-surface` and `--color-anywhere-tint` (one ground to the footer), `--color-on-accent` (no text sits on an accent fill), `--color-focus-on-dark` (the two-colour ring replaces it), `--ease-standard`, `--ease-out`, `--ease-in` (nothing moves) | |
 
 ## Motion spec
 
@@ -276,9 +313,9 @@ anywhere.gt.school at 390 and 1440. `gt.school` has no mirror here and is unmeas
 | The first screen's application action | Navy `rgb(0, 42, 58)` fill, near-white label, Inconsolata uppercase | Navy fill, `--color-on-navy` label, Inconsolata 600 uppercase | Match on fill and face (DD-46). The estate's computed 500 weight cannot be matched: `shared/fonts.css` ships Inconsolata 400 and 600 only, and CONTINUITY.md records that the estate's 500 may itself be synthesised |
 | Button silhouette | Three different constructions across the estate (composed cut corner, clipped polygon, four rounded corners) | One uniform `--radius-md` on all four sides | DD-47, applied as decided. It is the shape the estate's own desktop header uses on the control a parent clicks to apply |
 | Grained cream, wave linework, composited hero cut-out | Present on the estate's first screen | Absent | A deliberate difference. This direction's surface is flat by argument: the only marks on the ground are the four objects |
-| Utility type | The estate's footer sets navigation in uppercase Inconsolata | The header's utility links, the door labels, the beat labels, the table row labels and the buttons are all uppercase Inconsolata | Match, and taken up on purpose: the contract allows a brief to keep Inconsolata as the utility face (section 3), and doing so gives this page one small-type voice instead of two |
+| Utility type | The estate's footer sets navigation in uppercase Inconsolata (`CONTINUITY.md`, footer row) | The header's utility links, the door labels, the beat labels, the five band labels and the table row labels are uppercase Inconsolata; the buttons are Inconsolata 600 in **sentence case**, which is the deck's own CTA wording and is not uppercased | Match on the face, with the button case stated rather than claimed: the first build's rationale called the buttons uppercase and they are not |
 | Italic emphasis | The estate's h1 sets its second half in Literata italic (measured weight 400, in accent orange) | Each beat sentence sets exactly one word in Literata italic, in `--color-text` | Match on the device, deliberate difference on the colour: accent italic at that size would be 2.38:1 text and fail AA (K12 F88), which is the estate's own defect and is not copied |
-| Both marks | Footer carries both, the Anywhere mark on navy | Same, both at 32px, the Anywhere mark on the navy panel and the School mark on a cream plate | Match |
+| Both marks in the footer | **Unverified against the estate.** `CONTINUITY.md` measures the Anywhere footer for its navigation type, its pills and its legal row, and does not record it carrying both marks; the requirement here is `copy.md` section 8's, not a measurement | Both at 32px, the Anywhere mark on the navy panel and the School mark on a cream plate (checker R16) | Built to the deck slot; the estate column is a gap in the reference, not a match claim |
 
 Could the school sites inherit this shell? The header, footer, button, table and focus treatment are all
 token-level and would transfer. The beat section is the part that is specific to an umbrella page: it argues
@@ -296,8 +333,12 @@ across two schools at once, so a school site would use the objects singly rather
 | The h1 at `--text-xl` with its 35ch cap removed on the V10 landscape row | The contract's own landscape recipe, which allows one token down on that row; stated there as a departure to declare. Measured: 3 lines, 83px, and the row passes at 284 of 318 | `@media (max-height: 400px) and (min-width: 600px)` |
 | Two new tints, `--color-text-muted-on-dark` and `--color-border-strong` | DD-19 departures already recorded against DD-39 (a); both are used in the roles that row proposes | Footer, the two structural rules |
 | The beat sentence's measure is `--obj-size`, not `--measure-prose` | The sentence takes the object's own width so a beat reads as one column. Measured consequence: the longest rendered line on any beat is 31 characters, inside the brief's 45 | `.beat-line` |
-| The accent fill at 2.38:1 with a navy hairline | Argued above under the objects. A critic who prefers `--color-accent-text` has a one-token change | `.o-accent` |
-| Eyebrow labels dropped from the bands below the beats | The four beat labels are the page's label voice; repeating "Compare / Proof / Admissions / Connect" over the h2s would add a second small-type line to every screen, which is the opposite of this direction | `.band` |
+| `min-height: 100svh` on every beat, with the block optically centred (`align-content: safe center`) | What makes "one at a time" true inside a viewport rather than only across the page. The brief asks for *at least* 96px of clear space, so a taller field is compliance, not departure. `safe` keeps the block at the top instead of clipping it on the two rows whose content is taller than the viewport (V10 750 by 342 and V18 320 by 256, measured: section height equals content height, nothing clipped). `svh` is DD-44's unit; no `vh` appears in the file. **Its cost is length**: the page is 9,856px at 390 by 844, up from 8,623, and that is stated under the length note below rather than buried | `.beat` |
+| Beat 4's four marks at `stroke-width: 8`, where the brief says objects are drawn in 1.5px hairlines | Astra named this as an undeclared miss and was right to. It is declared now and kept: beat 2 draws cadence as hairline marks crossing a hairline track, and beat 4 draws four register-backed weekends crossing the year. If both were 1.5px the two objects would read as the same drawing at two spacings; the weight is what separates a counted fact from a rhythm. Every other stroke on the page is 1.5px | `.o-mark` |
+| The compare anchor falls below the first screen on the phone rows | The contract's compact door rule puts both door lines after the second CTA on viewports under 700px tall, and the anchor follows them. Both CTAs clear the fold at every row (the tightest is V2 at 581 of 605), which is the contract's requirement; the brief's "compare anchor on the first screen" holds from 768 up. Astra asked for this to be acknowledged as a departure rather than absorbed, and it is | `.compare-lead` |
+| The steps band's lede removed (`copy.md` section 5's line) | It repeated beat 1 word for word, and the admission bar was on the page five times. The four numbered steps and the heading are unchanged; no words were added | `.steps` |
+| The accent fill at `--color-accent-text`, not `--color-accent` | The brief's Color row names "one accent"; this is the accent's readable token, not a different colour. 5.14:1 against 2.38, and CONTRACT.md section 3 now requires 3:1 of a line that carries the argument | `.o-accent` |
+| Band labels carried below the beats | A reversal of the first build, which dropped them and argued that a second small-type line was the opposite of this direction. The critic's answer is the right one: a tracked label over a single line **is** the beat grammar, and without it the page changed author at the table and argued its thesis on four screens of nine. The words are `copy.md`'s own allowed eyebrow list | `.band-label` |
 
 ## Flagged slots
 
@@ -338,7 +379,7 @@ across two schools at once, so a school site would use the objects singly rather
 
 ## Self-check
 
-**Checkers.**
+**Checkers.** Re-run after the last write to `index.html` and `styles.css` on this pass.
 
 ```
 $ python3 0_plan/tools/check-mocks.py 0_plan/mockups/M24-one-at-a-time
@@ -349,7 +390,7 @@ $ python3 1_spec/tools/check-claims.py
 ## 0_plan/mockups/M24-one-at-a-time/index.html
 | Figure on the page | Register row | Occurrences | Status |
 |---|---|---|---|
-| "designed for students in the 90th+ percentile" | CR-011 | 5 | Unverified, public |
+| "designed for students in the 90th+ percentile" | CR-011 | 4 | Unverified, public |
 | "$10,400/year — GT Anywhere annual tuition, fully or partially covered | CR-021 | 1 | Unverified, public |
 | Four in-person intensive weekends a year in Georgetown (four named 202 | CR-032 | 4 | Unverified, public |
 | Georgetown mornings: "two 50-minute blocks and one 25-minute block wit | CR-033 | 2 | Unverified, public |
@@ -359,11 +400,15 @@ $ python3 1_spec/tools/check-claims.py
 check-claims: OK
 ```
 
+CR-011 is **4**, down from the first build's 5: beat 1, the proof strip's own wording, and the two table cells
+DD-43 requires. Every other count is unchanged.
+
 **Runner.** `node 0_plan/tools/shots.mjs 0_plan/mockups/M24-one-at-a-time` — Result line, verbatim:
 `## Result: all required rows pass`. Sixteen fold rows pass, V18 reflows with no horizontal scroll, V19 is
 reported, reduced motion shows every computed duration 0s, the doubled root font at 375 gives no horizontal
 scroll, the console is clean, every interactive target is at least 44px tall, and both marks clear K12 V2's
-floors at 390 and 1440 with 0% aspect skew.
+floors at 390 and 1440 with 0% aspect skew. Every fold bottom is identical to the first build's, because nothing
+on the first screen changed.
 
 The five rows the brief and the contract single out, pasted from `qa/fold.md` in the runner's own columns so R37
 can compare them against the current pass rather than take this file's word for it:
@@ -378,18 +423,43 @@ can compare them against the current pass rather than take this file's word for 
 
 **Rows verified individually, by opening the capture.** V2 (`qa/V2.jpg`), V9 (`qa/V9.jpg`, the emptiness row),
 V14 (`qa/V14.jpg`), V16 (`qa/V16.jpg`), the full-page captures V2-full and V14-full, the forced-colours capture,
-`qa/focus-cta.jpg` and `qa/focus-footer-plate.jpg`, plus per-beat captures written for this build in normal and
-forced colours: `qa/M24-beat1-normal.jpg` to `qa/M24-beat4-normal.jpg`, `qa/M24-beat1-forced.jpg` to
-`qa/M24-beat4-forced.jpg`, and `qa/M24-focus-door-zoom.jpg` at 3× for the button corner and focus ring.
+`qa/focus-cta.jpg` and `qa/focus-footer-plate.jpg`, plus the nine per-beat and focus captures, **all re-taken on
+this pass after the last stylesheet write**: `qa/M24-beat1-normal.jpg` to `qa/M24-beat4-normal.jpg`,
+`qa/M24-beat1-forced.jpg` to `qa/M24-beat4-forced.jpg`, and `qa/M24-focus-door-zoom.jpg` at 3× for the button
+corner and focus ring. The first build's nine predated its last stylesheet write by six minutes, which the critic
+caught; each of the nine is now taken at the beat's own scroll position, so the capture is the screen a parent
+sees rather than a crop of it.
 
-**Measured, per beat, at 1440** (one object, one line, one accent at most):
+**Measured, per beat, at 1440 by 900** (one object, one line, one accent at most):
 
-| Beat | Objects | Paragraphs | SVG text nodes | Accent uses | Object box | Clear space above / below | Visual lines | Longest line, characters |
+| Beat | Objects | Paragraphs | SVG text nodes | Accent uses | Object box | Clear space above / below | Visual lines | Longest line |
 |---|---|---|---|---|---|---|---|---|
-| Admissions | 1 | 1 | 0 | 1 | 320 by 320 | 96 / 96 | 2 | 29 |
-| Mastery | 1 | 1 | 0 | 0 | 320 by 320 | 96 / 96 | 3 | 31 |
-| Two ways to attend | 1 | 1 | 0 | 1 | 320 by 320 | 96 / 96 | 2 | 27 |
-| Across the year | 1 | 1 | 0 | 0 | 320 by 320 | 96 / 96 | 2 | 24 |
+| Admissions | 1 | 1 | 0 | 1 | 320 by 320 | 96 / 96 (185 more from the centring) | 2 | 244px |
+| Mastery | 1 | 1 | 0 | 0 | 320 by 320 | 96 / 96 | 4 | 308px, 33 characters |
+| Two ways to attend | 1 | 1 | 0 | 1 | 320 by 320 | 96 / 96 | 2 | 224px |
+| Across the year | 1 | 1 | 0 | 0 | 320 by 320 | 96 / 96 | 2 | 210px |
+
+The same four rows at 390 by 844: object 281 by 281, clear space 64 / 64 with 146px more from the centring, lines
+2 / 4 / 2 / 2, accents 1 / 0 / 1 / 0, SVG text nodes 0 everywhere. At 375 by 629 beat 2 sets in 5 lines and every
+beat still holds one object and one paragraph. **Zero `<text>` nodes in all four objects at all four widths**, so
+M10's defect (labels declared at one size rendering smaller because they scaled with the viewport transform)
+cannot occur here by construction; neither replacement object introduced one.
+
+**One object per screen, measured.** At each of the four beat-top scroll positions, the number of objects at least
+a quarter visible:
+
+| Viewport | Beat 1 top | Beat 2 top | Beat 3 top | Beat 4 top |
+|---|---|---|---|---|
+| 1440 by 900 | 1 (100%) | 1 (100%) | 1 (100%) | 1 (100%) |
+| 1280 by 720 | 1 (100%) | 1 (100%) | 1 (100%) | 1 (100%) |
+| 390 by 844 | 1 (100%) | 1 (100%) | 1 (100%) | 1 (100%) |
+| 375 by 629 | 1 (100%) | 1 (100%) | 1 (100%) | 1 (100%) |
+
+The first build measured **two** objects at least a quarter visible at three of the four positions at both 1440 by
+900 and 390 by 844, and showed beat 1 entire plus four tiles of beat 2 on one phone screen. Beat sections now
+measure 900 / 900 / 900 / 900 at 1440 by 900 and 844 / 844 / 844 / 844 at 390 by 844, against 694–721 and 552–576
+before. On the two rows whose content is taller than the viewport the section is exactly its content height and
+nothing is clipped: 594 / 644 / 594 / 594 at 750 by 342, and 501 / 573 / 501 / 501 at 320 by 256.
 
 **Rule greps** (BUILDER-BRIEF, run on `index.html` and `styles.css`): `grep -c "<form"` 0; `grep -c "<script"` 1
 (the JSON-LD block); external hosts only in `href` destinations on the five allowed domains; no placeholder text;
@@ -397,7 +467,8 @@ the only numerals in visible text are 90th, $10,400, 9, 8th, (512) 270-9481 and 
 text (the `data-type="advisor"` attribute value is the spec's and is allowed); "Georgetown Campus" and "GT Anywhere"
 in full everywhere; every image carries `alt`, `width` and `height`; one `h1`; skip link to `#main`; `header`,
 `nav`, `main`, `footer` landmarks; the comparison is a real `<table>` with `<caption>` and `scope`; no raw hex in
-`styles.css`.
+`styles.css`; `grep -n "transition\|animation\|@keyframes"` returns the file-header comment and the
+reduced-motion reset, and nothing else.
 
 **Build passes.** (1) First build: all sixteen fold rows passed; the doubled-root-font test failed at 375 with a
 scroll width of 507. (2) Diagnosed with a scratch probe rather than guessed: the h1's no-break space sets
@@ -410,21 +481,75 @@ characters, one over the brief's 45. (5) Capped the h1 at eight columns with the
 932px at 1440 where eight columns is 907. (6) Read `qa/focus-cta.jpg`: the two-colour ring was invisible on the
 navy door CTAs against cream (near-white outer band, 1.02:1), so those controls returned to the light-surface
 ring; re-captured at 3× to confirm. (7) Raised the two structural rules to `--color-border-strong` so the ink a
-reader sees at the bottom edge clears 3:1. Final pass: all checkers clean, Result line as quoted.
+reader sees at the bottom edge clears 3:1. (8) **This pass, after both critics**: the two objects replaced, the
+beats raised to a viewport each, the duplication cut, the accent taken to its readable token with its hairline
+dropped, the two tinted bands returned to the one ground, the band labels carried down, and every figure in this
+file that did not reproduce corrected. Both checkers and the runner re-run after the last write; the nine stale
+captures re-taken and opened. Every object and every band was read in a capture at 2× or 3× before this section
+was written.
 
 **First screen at 390 by 844, stated.** Header, the umbrella sentence, the provenance line, both door names and
 both door CTAs are above the fold; the two door lines follow the second CTA and are cut by the bottom edge, which
-is what tells a parent the page continues. Nothing else competes.
+is what tells a parent the page continues. The compare anchor follows them, below the fold on that row. Nothing
+else competes. The first screen is unchanged from the first build, and so are all nineteen fold measurements.
 
 **Console.** Zero errors, measured by the runner across all nineteen rows.
+
+**Length, stated rather than buried.** The page is **9,856px at 390 by 844**, up from 8,623: **+1,233px net**,
+and the arithmetic is roughly +1,170 from required fix 4 (four beats at 844 each instead of 552 to 576), +65 from
+giving the connect band its own section gap once every band gained a rule, and about −60 given back by cutting the
+steps lede. So the duplication cut does not pay for the viewport beats — the page was already the longest in the
+programme and this pass made it longer. That is the direction's declared cost (C29, which the critic watched
+rather than scored), and it buys the one thing the name promises: no parent ever sees two of these objects at
+once. If Nari judges the length the larger risk, the lever is the beats' `min-height`, not the copy: dropping it
+returns about 1,170px and returns the defect.
+
+## Iteration one, 2026-09-11: what both critics asked for and what this pass did
+
+Both cards scored Imagery below 4 (Fable 2, Astra 3) and Fable added Composition 3 and Colour and surface 3, with
+Objective 5 and Motion 5 on both. The director's corrected brief replaced two of the four objects and put both
+rules into `CONTRACT.md` section 3. Nine required fixes; eight are closed, one is closed in part.
+
+| # | Required fix | What changed | Evidence |
+|---|---|---|---|
+| 1 | Replace the concentric rings with a symmetric two-branch fork | Beat 3 is a stem to one accent dot, two arms of equal length and mirrored angle, two identical terminals. Nothing is nested, so the shape cannot say one way to attend lives inside the other; nothing is a target, in either colour state; no `<text>` node was added | `qa/M24-beat3-normal.jpg`, `-forced.jpg`; objects table above |
+| 2 | Redraw the mastery object so it carries no proportion | Beat 2 is two parallel tracks, one evenly marked and one not, cut by the frame at both ends, with the **same number of marks on each** so no quantity, ratio or speed can be read. The nine tiles with four filled — a completion figure of about 44 per cent against no register row — are gone | `qa/M24-beat2-normal.jpg`, `-forced.jpg`; objects table |
+| 3 | Break the duplication | Beat 2 takes a sentence the proof strip does not carry, and it is the sentence the new object draws. The steps lede, which repeated beat 1 word for word, is removed. CR-011 goes 5 → 4, the floor the table (×2 under DD-43), the proof strip and the one beat allow. **Beat 3 still shares proof fact four**; see "not done" below | `check-claims.py`; `index.html` |
+| 4 | Make "one at a time" true in a viewport | `min-height: 100svh` on `.beat` with the block optically centred. Measured at four widths: **exactly one object at least a quarter visible at every beat-top scroll position, at 100 per cent** — against two objects at three of four positions before | Self-check, "One object per screen, measured" |
+| 5 | Take the darker accent token and drop the navy hairline | `.o-accent` is `--color-accent-text`, fill only. 5.14:1 on the ground against 2.38; navy on that fill is 2.70:1, so the hairline would have been noise | Self-check; `styles.css` `.o-accent` |
+| 6 | Hold one ground to the footer | `.proof` and `.tefa` are on `--color-bg`, separated by the `--color-border-strong` rule the beats open with. That rule now runs across all five bands below the beats, so the connect band's `padding-top: 0` — which existed only because the proof band's tint used to be the separator — came out with it. Two grounds on the page: cream, then the navy footer | `qa/V14-full.jpg`; `styles.css` |
+| 7 | Move beat 2's italic off a line end | The sentence itself changed, so the italic moved to *mastery*. Every italic re-measured at 375, 390, 1280 and 1440: none falls at a line end | Self-check, per-beat table |
+| 8 | Carry one beat device into the bands below the table | The tracked label over a single line, on all five bands below the beats, from `copy.md`'s own allowed eyebrow list. The page no longer changes author at the table | `qa/V14-full.jpg` |
+| 9 | Correct three figures and re-take nine stale captures | `styles.css` said 17.69:1 where navy on cream is 13.88; the Acceptance row said 36 of 36 against 37; the single-ground sentence was false and is now true of the build. The nine captures are re-taken after the last write, at each beat's own scroll position | Self-check |
+
+**Astra's separate findings, also applied.** The "800px at 1280 is the contract's own figure" claim is corrected
+(the contract's V14 row is 779 and assumes a 1184px content width; this page's `.wrap` gives 1216). The buttons
+were described as uppercase and are sentence case. "Both destination sites measured" and "the estate's footer
+carries both marks" were not supported by `CONTINUITY.md` and are now stated as what they are. Beat 4's 8px marks
+and the phone compare anchor are declared under Departures instead of passing unremarked. The "no selector, no
+value and no shape overlaps the examples" claim was too absolute and now says what is actually true: no code was
+taken, and the overlap a reviewer will see is the borrowing, which is declared.
+
+**What this pass judged wrong and did not do.**
+
+| Not done | Why |
+|---|---|
+| **Break beat 3's duplication with proof fact four** (`index.html` beat 3 against the proof strip's fourth item) | The critic's instruction is "give the beats four sentences the proof strip does not carry", and for this beat the deck has no fourth sentence to give. The alternatives were each worse than the duplication. Taking the two "Where and how" cells ("On campus in Georgetown, Texas, north of Austin. From home, anywhere in the United States.") would force the beat's one italic word onto *campus* or *home* — a typographic preference for one school on the one beat whose whole job is that the two are peers (C01, DD-21, DD-46). Taking a section 9 sentence allocated to another brief would be copy invention through the back door. Dropping the proof strip and letting the four beats be `copy.md` section 4's four facts — the critic's own first option — is ruled out by the corrected brief, which fixes the four beats as the admission bar, the program, the two places and the year, and names a four-mark row for the weekends; taking it would delete the object the critic called the best on the page and leave "Guides, not lecturers" with no drawing. I judged one shared sentence, seven screens apart, the smallest of those costs. It is flagged rather than absorbed |
+| **Normalise all four objects' visible bounds** (Astra, Composition) | Done for the two objects this pass redrew — beats 2, 3 and 4 now draw inside the same y 56–264 band of the 320 box — but beat 1's arc still runs y 20–259, 36 units taller at the top. Shrinking the arc would change an object neither critic faulted and which carries the one proportion the register does hold (CR-011's top decile), for a 36-unit gain. Surgical beats symmetrical here |
+| **Close the arc's residual reading** (Fable, logged not required: ten segments can be read as an acceptance rate rather than a score band) | The critic logged it as accepted because the sentence directly beneath names the unit. Weighting the boundary tick would add a second stroke weight to an object that reads correctly today, and beat 2 now uses stroke weight to carry a distinction of its own. Left as the critic left it |
+| **Reduce the page's height** | It went the other way: 8,623px → 9,856px at 390, because required fix 4 gives each beat a viewport. Stated in the Self-check under "Length" rather than hidden, with the lever named, because it is the one figure that moved against the programme's grain this pass |
 
 ## What a critic should press on
 
 Named here rather than left to be found. (1) The first screen is not a beat and cannot be; the direction's claim is
-weaker on screen one than anywhere else, and the slack there is distributed air, not composition by intent. (2) The
-two concentric rings read as a bullseye before they read as two ways to attend; the label and sentence carry the
-meaning, and an alternative geometry would have to leave the brief's "two concentric rings". (3) The accent fills
-measure 2.38:1 on cream and are redeemed by their own navy outline and by carrying no unique information; a
-one-token change to `--color-accent-text` is available. (4) The page is 8,623px tall at 390 because four beats each
-take a screen; that is the direction's cost, and the comparison table is deliberately the one dense object that
-repays the scroll.
+weaker on screen one than anywhere else, and the slack there is distributed air, not composition by intent. (2)
+Beat 3's sentence is still the proof strip's fourth fact word for word — the one required fix this pass did not
+fully close, argued above rather than hidden. (3) The page is **9,856px** at 390, up from 8,623, because each of
+the four beats is now a viewport; that is the direct cost of making the direction's name true inside a screen, and
+the comparison table is deliberately the one dense object that repays the scroll. (4) Beat 2's two tracks carry
+seven marks each: a reader can count seven, and the defence is that seven is not a figure this deck carries in any
+role, that nothing is filled so there is no part of a whole, and that the two counts are equal so no comparison of
+quantity or speed is available — but it is the place to press if the contract's "if a reader can count it, it is a
+number" is read more strictly than its own "a count with no denominator is allowed". (5) The band labels are a
+reversal of the first build's argued refusal; if Nari reads five small tracked words as clutter rather than as the
+beat grammar carried down, they come out in one commit.
