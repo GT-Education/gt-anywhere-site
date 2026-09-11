@@ -12,7 +12,7 @@ Both models' findings are attached by path. Nothing here is decided; every row n
 | G-D Twenty complete mocks | Not started; waits on your decisions below and on D-028 | `17` section 11 |
 | Register | Nineteen knowledge-base rows complete through E5a to E5c; D-039 escalated at the three-attempt ceiling; DD-42 corrected and awaiting one re-audit | `ensemble/register-status.md`, `12-register-loop.md` rows 9 and 10 and escalation row 23 |
 | Shared contract for the builds | `tokens-v2.css` (proposed values labelled by row), `copy.md` v1.1, `CONTRACT.md` v2.1 (computed fold method, compact door rule, colour and focus per surface, photograph states and crops, motion vocabulary) | `0_plan/mockups/shared/`, `0_plan/kb/briefs/CONTRACT.md` |
-| Mock checker | 36 rules; every rule reads the document through Python's standard-library HTML parser after Astra's parser probes; D-039 exception mechanism with 34 in-memory checks including a whole-gate probe; all five earlier mocks still pass | `0_plan/tools/check-mocks.py`, `0_plan/tools/tests/test-check-mocks-d039.py` |
+| Mock checker | 36 rules; every rule reads the document through Python's standard-library HTML parser after Astra's parser probes; D-039 exception mechanism with 35 in-memory checks including two whole-gate probes on M1; all five earlier mocks still pass | `0_plan/tools/check-mocks.py`, `0_plan/tools/tests/test-check-mocks-d039.py` |
 
 ## 2. What you decide
 
