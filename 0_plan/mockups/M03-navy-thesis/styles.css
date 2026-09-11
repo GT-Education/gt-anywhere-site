@@ -1,0 +1,224 @@
+/* M03 Navy Thesis (G-D build wave, 2026-09-11). Lens order L4 exclusivity, L3 mission, L1 objective, L2 continuity.
+   The statement first, large, on navy; the doors are the second sentence. Two dark sections only: the first screen
+   (header included) and the footer. Every colour, face, size, space, radius and duration is a var(--...) from
+   ../shared/tokens-v2.css; the non-token values (1px hairlines, 2px ring bands, the 44px target floor, the brief's
+   40px accent rule, the container and height thresholds) are named in RATIONALE.md, Departures. No transitions:
+   every state change is instant (R9); the reduced-motion block zeroes durations anyway (R8). */
+
+/* ---------- Reset and base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--color-bg); }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); overflow-wrap: break-word; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---------- Page margin schedule (K1 section 5a, Option under R15): 24 / 32 / 48 / 64 ---------- */
+:root { --page-margin: var(--space-5); --hairline: var(--color-border); }
+@media (min-width: 768px) { :root { --page-margin: var(--space-6); } }
+@media (min-width: 1024px) { :root { --page-margin: var(--space-7); } }
+@media (min-width: 1440px) { :root { --page-margin: var(--space-8); } }
+.wrap { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--page-margin); }
+main, .site-footer { container: page / inline-size; }
+
+/* ---------- Type roles (CONTRACT section 3) ---------- */
+h1, h2, h3, .display { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+h2 { font-size: var(--text-2xl); text-wrap: balance; }
+.label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.prose { line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.sources { margin-top: var(--space-6); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); max-inline-size: var(--measure-prose); }
+
+/* Links on light surfaces: underlined at rest (DD-10), the underline in the strong border role (3.63 on --color-bg). */
+.link { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-border-strong); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.link:hover, .link:focus-visible { text-decoration-color: currentColor; }
+
+/* Buttons: the estate's face (Inconsolata, K12), 44px floor, .5rem radius. Sentence case is this mock's choice. */
+.btn { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem; max-width: 100%; padding: var(--space-3) var(--space-4); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-decoration: none; border-radius: var(--radius-md); border: 1px solid transparent; }
+.btn-light { background: var(--color-on-navy); color: var(--color-text); }
+.btn-light:hover { background: var(--color-bg); }
+.btn-navy { background: var(--color-navy); color: var(--color-on-navy); }
+.btn-navy:hover { background: var(--color-text); }
+.btn-outline { border-color: var(--color-navy); color: var(--color-navy); }
+.btn-outline:hover { background: var(--color-navy); color: var(--color-on-navy); }
+
+/* ---------- Focus (K3 section 5d): --color-focus on light; the two-colour ring wherever navy is adjacent ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.on-navy :focus-visible, .on-navy:focus-visible { outline: 2px solid var(--color-focus-on-dark); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-navy); }
+@media (forced-colors: active) {
+  :focus-visible, .on-navy :focus-visible { outline: 3px solid CanvasText; box-shadow: none; }
+  .btn { border-color: ButtonText; }
+}
+
+/* ---------- Skip link ---------- */
+.skip-link { position: absolute; top: var(--space-2); left: var(--space-2); z-index: 1; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); font-family: var(--font-mono); font-weight: 600; text-decoration: none; border-radius: var(--radius-sm); transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
+/* ---------- Navy surfaces ---------- */
+.on-navy { background: var(--color-navy); color: var(--color-on-navy); --hairline: var(--color-border); }
+@supports (color: color-mix(in srgb, red 40%, transparent)) { .on-navy { --hairline: color-mix(in srgb, var(--color-border) 40%, transparent); } }
+.on-navy .label { color: var(--color-text-muted-on-dark); }
+.on-navy .link { color: var(--color-on-navy); text-decoration-color: var(--color-text-muted-on-dark); }
+.on-navy .link:hover, .on-navy .link:focus-visible { text-decoration-color: currentColor; }
+.accent-rule { display: block; width: 2.5rem; height: var(--space-2); background: var(--color-accent); }
+
+/* ---------- Header: 56px, the GT School mark on a light plate, two utility links, no menu (DD-12) ---------- */
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 3.5rem; }
+.lockup { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-2); background: var(--color-bg); border-radius: var(--radius-sm); }
+.lockup img { height: clamp(1.25rem, 5.56vw, 1.75rem); width: auto; }
+.utility-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-3); font-weight: 500; font-size: var(--text-xs); }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+@media (min-width: 768px) {
+  .lockup { padding-inline: var(--space-3); }
+  .utility-nav { gap: var(--space-5); font-size: var(--text-sm); }
+}
+
+/* ---------- First screen: the thesis, then the doors. Grid with one slack row (K10 section 5d) ---------- */
+.first-screen {
+  --fold-density: compressed;
+  --fs-top: var(--space-4); --fs-rule-gap: var(--space-4); --fs-h1-gap: var(--space-3); --fs-doors-gap: var(--space-5); --fs-bottom: var(--space-6);
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto;
+  min-block-size: calc(100svh - var(--space-11));
+  padding-block: var(--fs-top) var(--fs-bottom);
+}
+@supports not (height: 100svh) { .first-screen { min-block-size: calc(100vh - var(--space-11)); } }
+@media (min-height: 900px) { .first-screen { --fold-density: relaxed; --fs-top: var(--space-6); --fs-rule-gap: var(--space-5); --fs-h1-gap: var(--space-4); --fs-doors-gap: var(--space-7); --fs-bottom: var(--space-7); } }
+@media (max-height: 639px) { .first-screen { --fs-top: var(--space-3); --fs-rule-gap: var(--space-3); --fs-doors-gap: var(--space-4); } }
+@media (max-height: 479px) { .first-screen { min-block-size: auto; } }
+
+.thesis { grid-row: 1; container: thesis / inline-size; }
+.thesis .accent-rule { margin-bottom: var(--fs-rule-gap); }
+h1 { font-size: var(--text-3xl); max-width: 35ch; }
+@media (min-width: 768px) { h1 { text-wrap: balance; } } /* four lines here; the seven-line phone setting is left unbalanced (K10 T-K10-15) */
+@container page (inline-size >= 64rem) { h1 { max-width: min(35ch, calc(75% - .5rem)); } } /* nine of twelve columns (eight gutters of 32px), capped at the contract's 35ch */
+[data-h1-weight="300"] h1 { font-weight: 300; } /* DD-38 test hook: flip the attribute on <html> to compare 300 against 400 */
+/* "from anywhere." stays together so the last h1 line is never one word; released when the thesis column is narrower
+   than the pair can be (a doubled root font on a phone), measured in rem so the test tracks the type, not the device. */
+@container thesis (inline-size >= 12rem) { .nowrap { white-space: nowrap; } }
+.provenance { margin-top: var(--fs-h1-gap); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); }
+
+.doors-block { grid-row: 3; margin-top: var(--fs-doors-gap); container: doors / inline-size; }
+.doors-heading { margin-bottom: var(--space-3); }
+.doors { display: grid; grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid var(--hairline); }
+.door { display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; border-top: 1px solid var(--hairline); padding-block: var(--space-4); }
+.door-name { margin-top: var(--space-2); font-size: var(--text-xl); }
+.door-line { margin-top: var(--space-3); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-inline-size: var(--measure-prose); }
+.door .cta { margin-top: var(--space-3); justify-self: start; }
+.door-lines { grid-row: 4; display: none; }
+
+/* Compact door rule, this mock's measured threshold (RATIONALE, fold estimate): below 780px tall on stacked
+   layouts the rows carry label, name and CTA; both lines follow the second CTA as two run-in paragraphs. */
+@media (max-width: 1023px) and (max-height: 779px) {
+  .doors-heading { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .door { padding-block: var(--space-3); }
+  .door .door-line { display: none; }
+  .door-lines { display: block; margin-top: var(--space-5); }
+  .door-lines p { line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-inline-size: var(--measure-prose); }
+  .door-lines p + p { margin-top: var(--space-4); }
+  .run-in { font-weight: 500; color: var(--color-on-navy); padding-inline-end: var(--space-2); }
+}
+
+/* Landscape phone (V10, 750 by 342): the thesis and the compact door rows side by side, the h1 one step down, so both
+   CTAs still end above the fold limit; the run-in lines follow under both columns. */
+@media (max-height: 479px) and (min-width: 600px) {
+  .first-screen { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; }
+  .thesis { grid-row: 1; grid-column: 1; }
+  .doors-block { grid-row: 1; grid-column: 2; margin-top: 0; }
+  .door-lines { grid-row: 2; grid-column: 1 / -1; }
+  h1 { font-size: var(--text-xl); }
+}
+
+/* The 6-and-6 pair from a 58rem door container (a 1024 viewport at the 48px margin). */
+@container doors (inline-size >= 58rem) {
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-8); }
+  .door { padding-block: var(--space-4) var(--space-5); }
+}
+
+/* ---------- Second screen: the compare anchor opens it ---------- */
+.anchor-band { padding-block: var(--space-7) 0; }
+.anchor-band a { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-inline-size: var(--measure-prose); text-wrap: balance; }
+
+.section { padding-block: clamp(var(--space-8), 2rem + 5vw, var(--space-11)); }
+.section-grid { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--space-6); }
+.section-head .label { margin-bottom: var(--space-3); }
+@container page (inline-size >= 64rem) {
+  .section-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .section-head { grid-column: 1 / span 4; }
+  .section-body { grid-column: 5 / span 8; }
+}
+.surface { background: var(--color-surface); --hairline: var(--color-border-strong); }
+
+/* ---------- Comparison (DD-06, DD-43, R6): a table from a 60rem container, stacked blocks below ---------- */
+.compare .label { margin-bottom: var(--space-4); }
+.compare-block { container: compare / inline-size; }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-family: var(--font-serif); font-size: var(--text-2xl); line-height: var(--leading-tight); text-wrap: balance; padding-bottom: var(--space-6); }
+thead th { text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: 0 var(--space-5) var(--space-4) 0; border-bottom: 1px solid var(--color-text); }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: 1px solid var(--color-border); }
+tbody th { width: 25%; font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); padding-top: calc(var(--space-5) + var(--space-2)); }
+tbody td { width: 37.5%; line-height: var(--leading-prose); }
+tbody td:last-child, thead th:last-child { padding-right: 0; }
+@container compare (inline-size < 60rem) {
+  table, caption, tbody, tr, th, td { display: block; width: 100%; }
+  thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  tbody tr { padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
+  tbody th, tbody td { width: 100%; border: 0; padding: 0; }
+  tbody th { padding-bottom: var(--space-3); }
+  tbody td + td { margin-top: var(--space-4); }
+  tbody td::before { content: attr(data-label); display: block; font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-tight); margin-bottom: var(--space-2); }
+}
+.doors-again { margin-top: var(--space-7); display: flex; flex-wrap: wrap; gap: var(--space-5) var(--space-8); }
+.doors-again .label { margin-bottom: var(--space-3); }
+.tefa { margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--color-text); max-inline-size: var(--measure-prose); }
+.tefa h3 { margin-bottom: var(--space-3); }
+.tefa p { line-height: var(--leading-prose); }
+.tefa a { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: var(--space-2); }
+
+/* ---------- Proof strip: exactly the four facts, then the sources line ---------- */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)); column-gap: var(--space-6); }
+.facts li { padding-block: var(--space-5); border-top: 1px solid var(--hairline); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
+
+/* ---------- Application steps ---------- */
+.steps-line { font-size: var(--text-md); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.steps-list { margin-top: var(--space-6); counter-reset: step; }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr); padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-body); }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+.apply { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); }
+
+/* ---------- Secondary CTAs: a hairline list, arrow at the end (a COLLINS row) ---------- */
+.link-list li a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); text-decoration: none; }
+.link-list li:last-child a { border-bottom: 1px solid var(--color-border); }
+.link-list li a::after { content: "\2192" / ""; font-family: var(--font-mono); }
+.link-list li a:hover, .link-list li a:focus-visible { text-decoration: underline; text-underline-offset: .18em; }
+
+/* ---------- Current families ---------- */
+.families { padding-block: var(--space-8); }
+.families p { line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.families .btn { margin-top: var(--space-5); }
+
+/* ---------- Footer: the second dark section, the proof-band role (Vanguard) ---------- */
+.site-footer { padding-block: var(--space-9) var(--space-8); }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+.footer-facts .accent-rule { margin-bottom: var(--space-5); }
+.footer-facts p { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-inline-size: 48ch; }
+.footer-phone { margin-top: var(--space-4); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); color: var(--color-on-navy); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.footer-logos { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-4); }
+.logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); border-radius: var(--radius-sm); }
+.logo-plate { background: var(--color-bg); }
+.logo-navy { background: var(--color-navy); }
+.footer-logos img { height: 1.5rem; width: auto; }
+@container page (inline-size >= 64rem) {
+  .footer-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .footer-facts { grid-column: 1 / span 5; }
+  .footer-nav { grid-column: 7 / span 3; }
+  .footer-logos { grid-column: 10 / span 3; flex-direction: column; }
+}
+
+/* ---------- Reduced motion (R8): every duration zero, including pseudo-elements; nothing here animates anyway ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+}

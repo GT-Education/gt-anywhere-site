@@ -151,6 +151,7 @@ Words the twenty briefs need beyond the fixed slots. Each names the brief that n
 | Schematic labels "In person" and "Online" on diagrams | M07, M10, M17 | Reuse the door labels | Fixed slots reused |
 | Locations list status strings "Now enrolling" and "Coming soon", and the city names, as gt.school's footer publishes them (K12 F64) | M05, M10 | Footer or map list; the coming-soon cities appear only with Nari's confirmation recorded in the rationale | A statement about future campuses: Nari confirms before use |
 | The list heading for M19 reuses the allowed section 6 heading "Questions before you apply" | M19 | Heading over the question list | Allowed heading reused |
+| "Skip to main content" | Every mock | The skip link the checker requires (R9); visually hidden until focused | Control label, no fact |
 | "Across the day" | M14 | Step label for the GT Anywhere day (with "Morning", "Afternoon", "Across the year" above) | No fact beyond the deck cell |
 | "Schematic: the weekends are not placed on a calendar." | M17 | Caption under the rhythm band | States the absence of dates |
 | Row labels "Peers", "Afternoons", "In person", "Guides" | M18 | Labels over the deck's own sentences in the two activity lists | Wayfinding only |
