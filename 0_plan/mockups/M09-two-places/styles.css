@@ -344,5 +344,5 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 /* ---------- Reduced motion (MN-16, R8): every duration --duration-none, every state visible ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
-  .place-line { opacity: 1 !important; transform: none !important; }
+  /* the .place-line reduced-motion guard was removed with the reveal it guarded: the line is visible at rest at every width (studio critic, iteration 1 fix 2) */
 }
