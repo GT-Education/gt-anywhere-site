@@ -48,8 +48,14 @@ for (const [w,h,tag] of [[390,844,'390'],[1440,900,'1440']]) {
     const body=getComputedStyle(document.body);
     const links=[...document.querySelectorAll('a')].filter(visible);
     return {bodyFont:body.fontFamily.split(',')[0].replace(/"/g,''), bodyColor:body.color, bodyBg:body.backgroundColor,
-      h1:firstVisible('h1'), h1Italic:firstVisible('h1 em, h1 i, h1 [class*=italic], h1 span'),
-      applyActions: links.filter(a=>/begin application/i.test(a.textContent||'')).map(a=>describe(a,'link reading Begin application')),
+      h1:firstVisible('h1'),
+      h1Spans: [...document.querySelectorAll('h1 span, h1 em, h1 i')].filter(visible).map(el=>{const d=describe(el,'h1 child'); const cs=getComputedStyle(el); return {text:d.text, weight:d.weight, style:cs.fontStyle, color:d.color};}),
+      applyActions: links.filter(a=>/begin application/i.test(a.textContent||'')).map(a=>{
+        const d=describe(a,'link reading Begin application'); const cs=getComputedStyle(a);
+        const cls=String(a.className);
+        const kids=[...a.querySelectorAll('*')].map(k=>({tag:k.tagName.toLowerCase(), cls:String(k.className).split(' ')[0], clip:getComputedStyle(k).clipPath, radius:getComputedStyle(k).borderRadius})).filter(k=>k.clip!=='none'||k.radius!=='0px');
+        return {...d, classes:cls, ownClip:cs.clipPath, parts:kids.slice(0,6)};
+      }),
       firstScreenLinks: links.filter(a=>a.getBoundingClientRect().y<innerHeight).slice(0,14).map(a=>{const d=describe(a,'first-screen link'); return {t:d.text.slice(0,24), y:d.box.y, bg:d.bg, from:d.fillFrom};}),
       visibleLinkCount: links.length,
       headerLinks: links.filter(a=>a.getBoundingClientRect().y<110).map(a=>(a.textContent||'').trim().replace(/\\s+/g,' ').slice(0,28)).filter(Boolean)};

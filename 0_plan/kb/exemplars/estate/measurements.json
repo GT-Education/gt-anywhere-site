@@ -29,26 +29,56 @@
           "h": 130
         }
       },
-      "h1Italic": {
-        "selector": "h1 em, h1 i, h1 [class*=italic], h1 span",
-        "text": "The MIT of K-8.",
-        "font": "Literata",
-        "size": "36px",
-        "weight": "300",
-        "color": "rgb(0, 17, 23)",
-        "bg": "rgba(0, 0, 0, 0)",
-        "fillFrom": "the element itself",
-        "radius": "0px",
-        "pad": "0px",
-        "transform": "none",
-        "spacing": "-1.6px",
-        "box": {
-          "x": 20,
-          "y": 96,
-          "w": 350,
-          "h": 43
+      "h1Spans": [
+        {
+          "text": "The MIT of K-8.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "The MIT of K-8.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who ask for more academics.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who ask for more academics.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who",
+          "weight": "400",
+          "style": "italic",
+          "color": "rgb(228, 139, 83)"
+        },
+        {
+          "text": "ask for more academics.",
+          "weight": "400",
+          "style": "italic",
+          "color": "rgb(228, 139, 83)"
+        },
+        {
+          "text": "What is",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "GT Anywhere",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
         }
-      },
+      ],
       "applyActions": [
         {
           "selector": "link reading Begin application",
@@ -68,7 +98,29 @@
             "y": 724,
             "w": 220,
             "h": 96
-          }
+          },
+          "classes": "button is-hero-cta is-apply w-inline-block",
+          "ownClip": "none",
+          "parts": [
+            {
+              "tag": "div",
+              "cls": "button-bg",
+              "clip": "none",
+              "radius": "8px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_filler",
+              "clip": "none",
+              "radius": "8px 8px 0px 0px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_corner-wrap",
+              "clip": "none",
+              "radius": "0px 0px 8px"
+            }
+          ]
         },
         {
           "selector": "link reading Begin application",
@@ -88,7 +140,29 @@
             "y": 12030,
             "w": 220,
             "h": 92
-          }
+          },
+          "classes": "button is-cta w-inline-block",
+          "ownClip": "none",
+          "parts": [
+            {
+              "tag": "div",
+              "cls": "button-bg",
+              "clip": "none",
+              "radius": "8px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_filler",
+              "clip": "none",
+              "radius": "8px 8px 0px 0px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_corner-wrap",
+              "clip": "none",
+              "radius": "0px 0px 8px"
+            }
+          ]
         }
       ],
       "firstScreenLinks": [
@@ -139,26 +213,74 @@
           "h": 281
         }
       },
-      "h1Italic": {
-        "selector": "h1 em, h1 i, h1 [class*=italic], h1 span",
-        "text": "The MIT of K-8.",
-        "font": "Literata",
-        "size": "58.5px",
-        "weight": "300",
-        "color": "rgb(0, 17, 23)",
-        "bg": "rgba(0, 0, 0, 0)",
-        "fillFrom": "the element itself",
-        "radius": "0px",
-        "pad": "0px",
-        "transform": "none",
-        "spacing": "-1.6px",
-        "box": {
-          "x": 40,
-          "y": 128,
-          "w": 512,
-          "h": 70
+      "h1Spans": [
+        {
+          "text": "The MIT of K-8.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "The MIT of K-8.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "For students who",
+          "weight": "400",
+          "style": "italic",
+          "color": "rgb(228, 139, 83)"
+        },
+        {
+          "text": "ask for more academics.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "ask for more academics.",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "ask for",
+          "weight": "400",
+          "style": "italic",
+          "color": "rgb(228, 139, 83)"
+        },
+        {
+          "text": "more academics.",
+          "weight": "400",
+          "style": "italic",
+          "color": "rgb(228, 139, 83)"
+        },
+        {
+          "text": "What is",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
+        },
+        {
+          "text": "GT Anywhere",
+          "weight": "300",
+          "style": "normal",
+          "color": "rgb(0, 17, 23)"
         }
-      },
+      ],
       "applyActions": [
         {
           "selector": "link reading Begin application",
@@ -178,7 +300,29 @@
             "y": 764,
             "w": 220,
             "h": 96
-          }
+          },
+          "classes": "button is-hero-cta is-apply w-inline-block",
+          "ownClip": "none",
+          "parts": [
+            {
+              "tag": "div",
+              "cls": "button-bg",
+              "clip": "none",
+              "radius": "8px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_filler",
+              "clip": "none",
+              "radius": "8px 8px 0px 0px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_corner-wrap",
+              "clip": "none",
+              "radius": "0px 0px 8px"
+            }
+          ]
         },
         {
           "selector": "link reading Begin application",
@@ -198,7 +342,29 @@
             "y": 10556,
             "w": 220,
             "h": 92
-          }
+          },
+          "classes": "button is-cta w-inline-block",
+          "ownClip": "none",
+          "parts": [
+            {
+              "tag": "div",
+              "cls": "button-bg",
+              "clip": "none",
+              "radius": "8px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_filler",
+              "clip": "none",
+              "radius": "8px 8px 0px 0px"
+            },
+            {
+              "tag": "div",
+              "cls": "button-bg_corner-wrap",
+              "clip": "none",
+              "radius": "0px 0px 8px"
+            }
+          ]
         }
       ],
       "firstScreenLinks": [
@@ -231,6 +397,6 @@
       "app.vidzflow.com": 2
     }
   },
-  "capturedAt": "2026-09-11T12:17:08.270Z",
+  "capturedAt": "2026-09-11T14:40:13.584Z",
   "source": "the repository mirror of anywhere.gt.school, served from 127.0.0.1; nothing was loaded from production"
 }
