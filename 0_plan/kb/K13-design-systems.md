@@ -458,7 +458,7 @@ Listed so that nothing above is built on them, and so a later pass knows what is
 | C14 animates layout | Removed the `V7` / `grid-template-rows`-as-animation framing; the accordion's open/close is now an instant state change, per R9 ("disclosures and layout changes are instant") | Component table, row C14 |
 | "Thirteen viewports" is now nineteen | Changed "13 matrix sizes" to "19 matrix sizes" — the only such reference in the file | Section 8.6, "what is never animated" row |
 | Hard component and partial restrictions, and the three-departure cap | Reworded CT3 (departure cap), CT4 (partial reuse) and CT11 (component-inventory ceiling) so each is an option a brief may adopt (R15); the scored test becomes documentation quality — name the token, the reason, the register row — not a hard count or a forbidden departure | Section 8.7, rows CT3, CT4, CT11 |
-| Token tiers, versioning and switcher semantics need register rows | Not re-proposed: the switcher-semantics correction is now **DD-41**; token tiers, the naming anatomy, the `--color-accent-contrast` rename and the 23-component/14-state inventory are now **D-034** (both in `07-design-decisions.md`; D-034 also in `03-decisions-and-open-questions.md`). Both are cited in place of "new rows" | Section 8.8, "`07` register" row |
+| Token tiers, versioning and switcher semantics need register rows | Not re-proposed: the switcher-semantics correction is now **DD-41**; token tiers, the naming anatomy, the `--color-accent-contrast` rename and the 23-component/14-state inventory are now **D-034** (in `03-decisions-and-open-questions.md`; D-034 also in `03-decisions-and-open-questions.md`). Both are cited in place of "new rows" | Section 8.8, "`07` register" row |
 
 ### Additional fixes (not in Astra's E4 list)
 
@@ -473,4 +473,4 @@ None. Every E4 item for K13 checked out against the file: the quoted text and nu
 
 ### Proposed register follow-ups
 
-None. This cluster's fed proposals already exist in the register: **DD-41** (doors and the campus switcher are different components, `07-design-decisions.md`) and **D-034** (design-system contract — switcher semantics now, token tiers/versioning/inventory at hardening, `07-design-decisions.md` and `03-decisions-and-open-questions.md`). No new rows are proposed here.
+None. This cluster's fed proposals already exist in the register: **DD-41** (doors and the campus switcher are different components, `07-design-decisions.md`) and **D-034** (design-system contract — switcher semantics now, token tiers/versioning/inventory at hardening, `03-decisions-and-open-questions.md`). No new rows are proposed here.

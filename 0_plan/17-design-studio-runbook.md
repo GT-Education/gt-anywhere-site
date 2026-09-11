@@ -169,3 +169,11 @@ Johnny read sections 3 and 10 and decided: twenty final mocks, fully complete, n
 | G-D Twenty complete mocks | Twenty mocks under `0_plan/mockups/M01..M20/`, each built from its brief, passing the viewport matrix (section 4) with zero failures, both critics at or above 4 on every rubric row, both checkers green, Astra pass, rationale complete, gallery and `06` current | 5 waves of 4 design engineers plus watchdog | 4 iterations per mock, then escalate with evidence |
 
 Anti-shallow rule for every goal: an artifact is not complete because it exists; it is complete when its acceptance line is demonstrated with evidence a reader can open (a file, a screenshot, a measurement, a source URL). A loop iteration that produces no measurable delta is a stall and is logged as one.
+
+## 12. Ceiling escalations (2026-09-11)
+
+| Goal | Passes run | Astra's position | Fable's position | Johnny decides |
+|---|---|---|---|---|
+| G-A Planning from research | E4, rework of all fifteen clusters, E4b | Rework on all fifteen: cluster scoring anchors still fail the fixed copy, some counts and status claims remain wrong; every measurement script reproduces | Build under `kb/briefs/CONTRACT.md` v2.1 and score mocks with the runbook rubric (R15), treating the E4b list as a tracked backlog worked in parallel | (a) build now with the backlog, (b) a third rework and review pass first (about half a day), or (c) fix only the decision-compatibility anchors, then build |
+| G-C Concept catalog and briefs | E5, contract freeze and rewrite of all twenty briefs, E5b | Rework on all twenty: the shared fold estimate corrected, but captions, geometry and a few contradictions remain; no third review loop proposed | Approve the slate and the twenty briefs as the working basis under CONTRACT v2.1 with the E5b per-brief list as the first build-wave fix list | (a) approve as the working basis, (b) rewrite once more before approval, or (c) approve a first wave of five and hold the rest |
+| D-039 Scripts and inputs in mocks | E6 to E6j | Agrees with option (a) in substance and with the no-declaration position; kept failing the cell while any in-scope parser probe passed the checker | (a), with the checker now at twenty-eight fixtures | (a) or (b) |

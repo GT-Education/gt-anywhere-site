@@ -6,7 +6,7 @@ Fable's verification of `0_plan/ensemble/E4-knowledge-base.md`. Where clusters c
 |---|---|---|---|
 | R1 | Accreditation | No claim, no mark, no scoring credit until Nari and counsel confirm the status (G0.5 item 3). K5's "unused asset" recommendation is removed | A published claim is not a verified status; K12 found the qualifier hidden with `display:none` |
 | R2 | Umbrella sentence | The decided 22-word sentence stands. Layout, fold arithmetic and rubric anchors accommodate it; K14's 20-word candidates go to Nari as RF-41, not into scoring | G0.5 item 1 |
-| R3 | Georgetown tuition | "Tuition on request" stands and must be able to score 4 or 5 on every rubric row; the evidence supports escalation (RF-16, RF-43), not a price | G0.5 item 4 |
+| R3 | Georgetown tuition | "Tuition on request" stands and must be able to reach 5 on every rubric row (runbook section 6); the evidence supports escalation (RF-16, RF-43), not a price | G0.5 item 4 |
 | R4 | Type families and roles | DD-01's three families stay. Display weight (Literata 300 or 400), body role and leading are tested on the fixed copy before any shared rule; until then briefs may choose within the families | DD-01, DD-36 |
 | R5 | H1 scale and line counts | No universal line quota. Fit is measured on the fixed copy at every matrix row; K2's clamp (46px top) is the working default, adjustable per brief within DD-19 | Measured fit beats estimated arithmetic |
 | R6 | Mobile comparison breakpoint | Determined by the actual cell content and available width in the runner, not by a fixed number; stacked cards below the measured threshold, table above; DD-06's readable HTML table kept | DD-06 |

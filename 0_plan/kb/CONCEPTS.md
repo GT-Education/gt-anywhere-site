@@ -85,7 +85,7 @@
 | C42 | A minimal header whose depth appears one interaction later | Yale Architecture, Harvard (C) | Composition | DD-12 minimal landing shell; DD-41 | Use | M05 and every header |
 | C43 | Hero scene differs between 1440 and 390 beyond cropping | Yale Architecture, Equinox (C) | Continuity | The same scene at every row; crops per `ASSETS.md` | Avoid | None |
 | C44 | A body-level search or filter tool as primary wayfinding | UAL, ASU (D) | Objective | The landing has two destinations, not a catalog | Not applicable | None |
-| C45 | A compare or decision-support control beside the choice | Getty, menu-gated (B); Vanguard, a Compare services link (K0 F2); absent in the other 24 | Objective | DD-23 compare anchor is GT's differentiator | Use | All: the compare anchor lands within the first two screens |
+| C45 | A compare or decision-support control beside the choice | Getty, menu-gated (B); Vanguard, a Compare services link in the fetched text (K0 F2; its placement is text-derived, not rendered); absent in the other 24 | Objective | DD-23 compare anchor is GT's differentiator | Use | All: the compare anchor lands within the first two screens |
 | C46 | A membership or apply CTA permanent in the header | Tate, Equinox, CGA (C) | Composition | DD-12: admissions contact as a utility link; the doors are the primary CTAs | Adapt | All |
 | C47 | Illustration in place of photography where photographs would be generic | MIT (A); Every (B) | Imagery | DD-08, DD-31: a candidate treatment, not demonstrated equivalent (K0 rework) | Adapt | M07, M10, M17 diagrams |
 
