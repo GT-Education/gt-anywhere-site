@@ -1,0 +1,3 @@
+| ID | Result | Finding |
+|---|---|---|
+| D-039 | Pass | Verified by Fable 2026-09-11: D-031 in 03 authorizes considered motion; K4 section 8.1 V6 and V8 specify observers; E5-briefs.md section D separates M16's scope from checker alignment; DIRECTIONS.md M16 keeps the static fallback and Nari's copy approval; before this pass check-mocks.py R1 accepted any input type once inputs were declared and R20 accepted unknown tokens (both now fixed: radios only with data-d039-component="router", tokens limited to script and inputs); RF-30 and AN-19 carry the transfer budgets separately. The 2,048-byte figure is labelled a proposed ceiling in the corrected Fable cell |

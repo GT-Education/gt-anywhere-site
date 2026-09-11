@@ -25,7 +25,9 @@ def check(folder):
     text = visible_text(doc)
     d039 = re.search(r'<html\b[^>]*\bdata-d039="([^"]*)"', doc, re.I); d039 = set(d039.group(1).split()) if d039 else set()
     if 'inputs' in d039:
-        r('R1 no forms (D-039: non-submitting inputs declared)', not re.search(r'<(form|select|textarea)\b|type="submit"', doc, re.I))
+        comp = re.search(r'<html\b[^>]*\bdata-d039-component="router"', doc, re.I)
+        nonradio = re.findall(r'<input\b(?![^>]*type="radio")[^>]*>', doc, re.I)
+        r('R1 no forms (D-039: router radios only)', bool(comp) and not nonradio and not re.search(r'<(form|select|textarea)\b|type="submit"', doc, re.I), '' if comp else 'inputs declared without data-d039-component="router"')
     else:
         r('R1 no forms', not re.search(r'<(form|input|select|textarea)\b|type="submit"', doc, re.I))
     scripts = re.findall(r'<script\b[^>]*>', doc, re.I)
@@ -35,7 +37,7 @@ def check(folder):
     else:
         r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in scripts[0], f'{len(scripts)} script tags')
     rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
-    r('R20 D-039 declaration named in the rationale', (not d039) or ('D-039' in rat_text), 'data-d039 present without D-039 in RATIONALE.md' if d039 and 'D-039' not in rat_text else '')
+    r('R20 D-039 declaration valid and named in the rationale', (not d039) or (d039 <= {'script','inputs'} and 'D-039' in rat_text), f'tokens {sorted(d039)}; rationale names D-039: {"D-039" in rat_text}' if d039 else '')
     hosts = set(re.findall(r'https?://([^/"\')\s]+)', doc+style))
     bad = sorted(h for h in hosts if h not in ALLOWED_HOSTS)
     r('R3 external hosts', not bad, ', '.join(bad))

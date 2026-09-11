@@ -1,6 +1,6 @@
 # Register status
 
-Generated 2026-09-11 01:31 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
+Generated 2026-09-11 01:35 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
 
 | Rows | Complete or superseded | Drafted | Reviewed | Rework | Escalated | Malformed |
 |---|---|---|---|---|---|---|
@@ -10,4 +10,4 @@ Generated 2026-09-11 01:31 by `0_plan/tools/check-register.py`. Goal: every row 
 
 | Row | File | Line | State | Reasons |
 |---|---|---|---|---|
-| D-039 | `03-decisions-and-open-questions.md` | 47 | Reviewed | Astra checks Fable: Fail: The attribution “Forms that submit stay banned everywhere (CLAUDE.md hard ; Fable checks Astra: pending |
+| D-039 | `03-decisions-and-open-questions.md` | 47 | Reviewed | Astra checks Fable: pending |
