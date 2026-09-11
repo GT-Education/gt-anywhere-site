@@ -22,6 +22,11 @@ CASES = {
  'empty declaration fails R20': ('data-d039=""', LD, '', 'R20', 'FAIL'),
  'unknown token fails R20': ('data-d039="fetch"', LD, '', 'R20', 'FAIL'),
  'absent declaration needs no rationale mention': ('', LD, '', 'R20', 'PASS'),
+ 'input whose value impersonates type=radio is rejected': ('data-d039="inputs" data-d039-component="router"', LD, '<input value=" type=radio " type="text">', 'R1', 'FAIL'),
+ 'button whose value impersonates type=button is rejected as submit': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><button value=" type=button " type="submit">go</button>', 'R1', 'FAIL'),
+ 'JSON-LD tag with a bare src is rejected without a declaration': ('', '<script type="application/ld+json" src>{}</script>', '', 'R2', 'FAIL'),
+ 'JSON-LD tag with a bare src is rejected beside a declared inline script': ('data-d039="script"', '<script type="application/ld+json" src>{}</script>', '<script>1</script>', 'R2', 'FAIL'),
+ 'bare data-d039 attribute fails R20': ('data-d039', LD, '', 'R20', 'FAIL'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

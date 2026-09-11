@@ -15,10 +15,24 @@ def visible_text(doc):
     d = re.sub(r'<[^>]+>', ' ', d)
     return H.unescape(d)
 
+ATTR_RE = re.compile(r'\s+([^\s"\'=<>`/]+)(?:\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'=<>`]+)))?')
+
+def attrs(tag):
+    """all attributes of one tag as {lowercase name: value}; the tag is tokenized left to right so a quoted value is
+    consumed whole and never rescanned (a value containing type=radio cannot impersonate a type attribute); a boolean
+    attribute (bare name) maps to ''"""
+    m = re.match(r'<\s*[^\s/>]+', tag)
+    body = tag[m.end():] if m else tag
+    out = {}
+    for a in ATTR_RE.finditer(body):
+        name = a.group(1).lower()
+        val = a.group(2) if a.group(2) is not None else (a.group(3) if a.group(3) is not None else a.group(4))
+        out.setdefault(name, '' if val is None else val)
+    return out
+
 def attr(tag, name):
-    """value of one attribute in one tag, or None; quoted or unquoted, spaces around = allowed, never fooled by other attributes' values"""
-    m = re.search(r'(?:^|\s)' + re.escape(name) + r'\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s"\'=<>`]+))', tag, re.I)
-    return None if not m else (m.group(1) if m.group(1) is not None else (m.group(2) if m.group(2) is not None else m.group(3)))
+    """value of one attribute, '' for a bare boolean attribute, None if absent"""
+    return attrs(tag).get(name.lower())
 
 def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
