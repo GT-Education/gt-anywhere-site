@@ -101,6 +101,8 @@ You are reworking ONE knowledge-base cluster after an independent review. Repo: 
 - Permissions are not inferred from publication (AD-11); point to RF-24/RF-25
 - Source count: 39 external plus five local
 
+- E5a (Astra): F49's "ceiling of the whole library is 1,440 px" is contradicted by the excluded `anywhere-student-home.webp` at 1036 by 1464; restate the ceiling for the usable files and name the exclusion. Reconcile the 23-of-25 face count with `0_plan/mockups/shared/ASSETS.md`, which classifies 22 files face-visible and three face-not-visible (the fourth candidate shows a partially visible child's face); use ASSETS.md's classification
+
 ### K10 `K10-responsive.md`
 - F25 "Instagram and Facebook draw the same number of bars Safari draws" and "Safari is a proxy ± about 15px": not established by safe-area figures; mark Judgment (R7)
 - F38 195.5%: recompute with the clamp minimum (same fix as K2) and show the working
@@ -127,6 +129,8 @@ You are reworking ONE knowledge-base cluster after an independent review. Repo: 
 - A universal blue focus ring fails on navy per K3's measurement; focus on dark surfaces uses the on-dark focus role proposed in RF-07
 - Ledger: six Georgetown assets are named, five are counted; reconcile
 - Keep the hidden accreditation qualifier and the network-attributed testimonials as evidence supporting the DD-17/MD-05 holds
+
+- E5a (Astra): F64 to F66 describe the live components with a dead enrolling link (`href="#"`), an `80vh` split height and accreditation copy inside the component; the GT application must say the patterns are reused, not the implementation. F69's hidden qualifier is verified in the local mirror homepage; say that live status needs a fresh text fetch
 
 ### K13 `K13-design-systems.md`
 - F24 "Forty-seven is the ceiling; GT should be an order of magnitude smaller": an inventory is not evidence of a limit; mark Judgment
