@@ -208,9 +208,9 @@ Status values: `Not started`, `In progress`, `Done`, `Blocked`, `n/a`. Check col
 | 15 | Fable verification of Astra | Corrections logged in the status table | Not started | n/a | Pending | n/a | |
 | 16 | Package for Nari | Gallery plus rationale plus register; DEL-005 marked ready | Not started | n/a | n/a | n/a | **G1: Nari picks a direction** |
 | 17 | Harden the winner | Analytics events, SEO meta, full a11y audit, Lighthouse, then DEL-006 and DEL-007 | Not started | n/a | n/a | n/a | After G1 |
-| 18 | G-A Planning from research | `18-knowledge-base-plan.md` executed to `kb/` (K0 to K14), Astra E4 | In progress 2026-09-11: K1 and K5 written; K0, K2, K3, K4 running | Pending (E4) | Pending | n/a | Johnny sees the index |
-| 19 | G-B Design hunt | 40 or more candidates, 20 kept with screenshots in `kb/EXEMPLARS.md` | Queued | Pending | n/a | n/a | Johnny sees the grid |
-| 20 | G-C Concept catalog | `kb/CONCEPTS.md` and twenty direction briefs | Queued | Pending | n/a | n/a | Johnny approves the briefs |
+| 18 | G-A Planning from research | `18-knowledge-base-plan.md` executed to `kb/` (K0 to K14), Astra E4 | All fifteen clusters written 2026-09-11 (25 to 63 fetched sources each, measured findings), gated by `check-kb.py`; 45 register follow-ups filed | Running (E4) | Pending | n/a | Johnny sees the index |
+| 19 | G-B Design hunt | 40 or more candidates, 20 kept with screenshots in `kb/EXEMPLARS.md` | Done 2026-09-11: 81 candidates scored, 26 reference pages captured at 390 and 1440, grid at `kb/exemplars/index.html` | Pending (E4) | n/a | n/a | Johnny sees the grid |
+| 20 | G-C Concept catalog | `kb/CONCEPTS.md` and twenty direction briefs | In progress 2026-09-11: four catalog batches running over the 26 exemplars (`kb/CONCEPTS-BRIEF.md`) | Pending (E5) | n/a | n/a | Johnny approves the briefs |
 | 21 | G-D Twenty complete mocks | `mockups/M01..M20`, viewport matrix, two critics, checkers, Astra | Queued; needs D-028 | Pending | Pending | Pending | Johnny, then Nari at G1 |
 
 ### 8b. Completion checklist (what E3 validates)
