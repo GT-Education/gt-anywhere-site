@@ -4,11 +4,11 @@
 |---|---|---|---|
 | K0 Design hunt (candidates across sectors) | `K0-design-hunt.md` | In progress | Pending |
 | K1 Web design philosophy and composition | `K1-composition.md` | Written 2026-09-11 (51 sources, 10 principles) | Pending |
-| K2 Typography on the web | `K2-typography.md` | In progress | Pending |
+| K2 Typography on the web | `K2-typography.md` | Written 2026-09-11 (51 sources, 9 font measurements, fluid scale proposed) | Pending |
 | K3 Color, surface and accessibility | `K3-color-accessibility.md` | In progress | Pending |
 | K4 Motion in elite and educational sites | `K4-motion.md` | In progress | Pending |
 | K5 Exemplars: elite K-12 and university admissions | `K5-education-exemplars.md` | Written 2026-09-11 (22 sites measured, 8 to capture) | Pending |
-| K6 Landing page conversion and message match | `K6-conversion.md` | Queued | Pending |
+| K6 Landing page conversion and message match | `K6-conversion.md` | In progress | Pending |
 | K7 Brand architecture and positioning | `K7-brand-architecture.md` | Queued | Pending |
 | K8 Digital marketing and advertising | `K8-marketing-advertising.md` | Queued | Pending |
 | K9 Imagery and photography direction | `K9-imagery.md` | Queued | Pending |
