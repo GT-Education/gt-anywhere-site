@@ -180,3 +180,15 @@ All greps run from `0_plan/mockups/M2-the-institute/` against the final files.
 ## Rules I could not fully satisfy
 
 None. Every rule in the brief's table passed its check as written above, and `check-mocks.py`/`check-claims.py` both report a clean pass after this fix round. The one genuine constraint this mock accepts rather than "satisfies" is PQ-10 (accreditation/outcomes) — that is not a rule violation, it is the deliberate content gap M2's own Fixed column names ("Only register-backed figures; no outcome figure exists yet"), documented above rather than hidden. The 1440×900 arithmetic in Self-check item 17 is a model, not a browser measurement (out of scope for this task); it carries a comfortable margin under deliberately pessimistic assumptions, but the browser verification pass this project requires for any real gate (`0_plan/09` — driven in an actual browser, not a grep) has not been run against it.
+
+## Design-lead pass (Fable, browser in the loop), 2026-09-10
+
+| Item | Change | Why |
+|---|---|---|
+| First screen | A journal front page: the h1 in large Literata across seven columns, an accent rule, the provenance line in italic; a right-hand column with the structural register (mono labels, hairlines) and "A closer look", a three-row comparison (Where and how, In-person time, Tuition and access) inside the first viewport at 1440 (DD-03); the two doors as two columns divided by a hairline with outlined ink buttons | M2 reads "MIT" as evidence: structure, labels and rules, not ornament |
+| Ledger | Comparison as a ruled table: two-pixel rule under the school names, mono row labels, "Both schools" tag on shared rows; stacked on mobile | The spreadsheet look replaced by a ledger that belongs to the direction |
+| Proof | Four numbered pull statements in two columns with hairlines | Evidence presented as statements, not bullets |
+| Apply | Two-column ledger: the promise on the left, four numbered steps and two solid ink buttons on the right | A process with a visible order |
+| Questions, families, footer | An index with arrows; a one-line families bar; a three-column footer with mono facts, links and both logos on their panels | Consistent with the ruled system |
+
+Departures (DD-19): none beyond the shared ones; navy appears only as the GT Anywhere logo panel. Ink-filled buttons use `--color-text` on `--color-bg`, both site swatches. Eyebrows in Inconsolata are recorded in `copy.md`. Nothing animates. Both checkers pass.
