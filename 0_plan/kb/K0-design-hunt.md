@@ -8,7 +8,7 @@
 | Corpus | 81 candidates in the table below. 73 carry fetched evidence (72 by `curl` returning HTTP 200, plus University of the Arts London recovered by WebFetch after `curl` was refused). 8 fetches failed and are marked as failures in their rows, not described from memory |
 | Date | 2026-09-11 |
 | Tools | WebSearch, WebFetch, and `curl` text fetches. No browser was opened. No GT or Alpha page was loaded at all |
-| Status | Drafted by Fable. Astra E4 review pending |
+| Status | Drafted by Fable. Reworked by Fable after Astra's E4 review, 2026-09-11 -- see "Rework log (E4)" at the end of this file |
 
 ## Question
 
@@ -29,6 +29,8 @@
 | Motion probe | HTML and CSS scanned for 30 motion signatures (GSAP, Lenis, Framer Motion, Locomotive, AOS, Swiper, Splide, Slick, Flickity, Barba, ScrollMagic, Lottie, three.js, Webflow IX2, view transitions, autoplay video, `@keyframes`, timed `transition`) and for `prefers-reduced-motion` | The motion column and the reduced-motion verdict |
 | Not done | No page was rendered. Nothing was screenshotted | **Composition and Imagery scores below are provisional.** They are inferred from structure, density, type stack and the award citation, and must be re-scored against screenshots under the `18` section 3 exemplar capture protocol before the rubric in `17` section 6 is calibrated from them |
 
+**Update, after this file was drafted.** Rendered captures (Playwright, 390 and 1440) plus sixteen-dimension concept-catalog tables now exist for 26 sites, collected in `0_plan/kb/CONCEPTS-A.md` through `CONCEPTS-D.md` and `0_plan/kb/EXEMPLARS.md`, with screenshots in `0_plan/kb/exemplars/`. Twenty-four of those are candidates scored in F7 below: this file's entire twenty-site shortlist (F8) plus four more from the wider candidate table -- Success Academy, Caltech Undergraduate Admissions, Nord Anglia Education and Vanguard. For those 24 rows, the Composition and Imagery scores in F7 and the ranking in F8 are the text proxies this section describes, now superseded by the rendered analysis; this rework points to the concept-catalog files rather than re-scoring them here (DD-19). The other two captured sites are Sora Schools (row 28 below, whose `curl`/WebFetch fetch failed here but which a later Playwright browser reached without incident -- see Q-K0-2) and BASIS Curriculum Schools, a different site from row 6's BASIS Independent Schools and not part of this file's 81-candidate corpus at all. The remaining 49 scored candidates stay provisional pending capture.
+
 The **Primary CTAs above the fold** column needs a caveat. A text fetch cannot see a fold. For 7 candidates the count is a rendered read via WebFetch and is stated as such. For the rest the column reports a proxy: the number of unique link and button labels in the top 35 percent of `<body>`. That proxy is useless as an absolute, and excellent as a comparison, which is how it is used below.
 
 ### F1. The measured spread, across all 73 fetched pages
@@ -44,16 +46,16 @@ The **Primary CTAs above the fold** column needs a caveat. A text fetch cannot s
 | Type delivery | 20 pages pull Google Fonts, 8 pull Adobe Fonts, and the strongest-scoring institutions self-host a proprietary or licensed face (Lyon, RISD Sans, Neue, MoMA Sans, SFMOMA Sans VF, Tate, ImperialText-VF, Ravensbourne Sans, Fidelity Sans, Sohne, Signifier, Suisse Intl) |
 | Platform concentration | 13 of the elite K-12 sites run Finalsite (identified by the `fsRedactorFont` editor marker): Lakeside, Nueva, Harker, Horace Mann, Groton, Shady Side, Colorado Academy, Paideia, Bryn Mawr, Laguna Blanca, Vail Mountain, Garrison Forest, Dwight |
 
-### F2. Only two pages in 73 offer a compare affordance next to the doors
+### F2. Only two pages in 73 name a compare control in their text, and only one of the two actually sits beside the doors
 
-Searching the visible text of all 73 fetched pages for a comparison control returns exactly two hits:
+Searching the visible text of all 73 fetched pages for a comparison control returns exactly two hits. A text fetch can show that a control's words exist and roughly where in the markup (nav dropdown versus page body); it cannot show visual proximity on a rendered page. **The "next to the doors" framing in this finding's original title was a placement claim a text fetch cannot support and is corrected below**; what the search actually shows is presence, not position, except where a later rendered capture confirms or corrects a specific site:
 
 | Site | Control | Where it sits |
 |---|---|---|
-| Getty | `Compare Museums` -> `https://www.getty.edu/visit/` | Directly beside the two door links in the Visit menu |
-| Vanguard | `Compare services` | Beside the audience doors in the first screen |
+| Getty | `Compare Museums` -> `https://www.getty.edu/visit/` | **Judgment, since corrected by rendered evidence.** The original text-fetch read this as sitting beside the two door links in the Visit menu. `0_plan/kb/CONCEPTS-B.md`'s Getty section rendered all four captures (1440 and 390, fold and full page) and found `Compare Museums` hover-gated inside the `Visit` nav dropdown, absent from every capture, while the shared sentence and the two door links sit in an "Our Locations" card one scroll below the first screen with no compare link beside them there. Getty's compare control exists, but one interaction deeper and one scroll away from the doors, not next to them |
+| Vanguard | `Compare services` | Beside the audience doors in the first screen. Not re-rendered for this rework, but independently corroborated: `0_plan/kb/CONCEPTS.md` C45 cites this same link as GT's nearest usable precedent, so the finding stands |
 
-This matters more than any other single finding in K0. A parent choosing between a Georgetown campus and an online school is doing a comparison, and 71 of 73 sites that route to multiple options give them two links and no way to weigh them.
+This matters more than any other single finding in K0. A parent choosing between a Georgetown campus and an online school is doing a comparison, and a text search of all 73 pages found a named comparison control on only two of them.
 
 ### F3. Getty is the closest working model of GT's exact problem
 
@@ -69,7 +71,7 @@ Measured from the fetched markup:
 | Type | Graphik Web for text, Linotype Sabon for display |
 | Motion | CSS transitions and keyframes only. No JavaScript motion library. No `prefers-reduced-motion` |
 
-One shared sentence of framing, two equally weighted doors, and a third link for the undecided. That is the shape of the GT landing.
+One shared sentence of framing, two equally weighted doors, and a third link for the undecided. That is the shape of the GT landing -- but it is not the shape of this page. Rendered captures (`0_plan/kb/CONCEPTS-B.md`) show Getty splits these three elements across two depths: the sentence and the two doors sit in a body card one scroll below the first screen, and the compare link is a hover-gated nav item never visible in any capture (F2). Learn the shape; GT's version must put all three in one place, which Getty itself does not.
 
 ### F4. ASU is the closest working model of the campus-or-online switch
 
@@ -85,7 +87,7 @@ ASU's homepage carries both delivery modes on one page as a tab pair, verified f
 
 The lesson is structural, not visual: the audience question ("who is the student?") is asked once, and the delivery question ("where?") switches which host answers it. ASU never makes a parent read two parallel sites to compare.
 
-### F5. The most structurally relevant school sites are the least well designed
+### F5. The most structurally relevant school sites scored lowest on this file's own, provisional craft read
 
 | Site | Structure | Craft |
 |---|---|---|
@@ -95,6 +97,8 @@ The lesson is structural, not visual: the audience question ("who is the student
 | Nord Anglia | One persistent `FIND A SCHOOL` control carries all routing across four regions | 45 above-fold labels, no type family exposed, Swiper and autoplay video with no `prefers-reduced-motion` |
 
 Study these four for mechanism. Do not study them for craft. The reverse holds for COLLINS, Barnes and Yale Architecture: study those for craft, and ignore their routing, which solves an easier problem.
+
+This craft ranking is a text proxy (F0), not a rendered review, and DD-19 requires rendered evidence before a compositional judgment calibrates a rubric. Of these four, only Nord Anglia has since been rendered and catalogued (`0_plan/kb/CONCEPTS-B.md`); Dwight, Nueva and Stanford Online High School have not. Re-rank against the concept catalog (`0_plan/kb/CONCEPTS-A.md` to `CONCEPTS-D.md`) and the screenshots in `0_plan/kb/exemplars/` as more of the mechanism-relevant set is captured, rather than trusting the structure-only read above.
 
 ### F6. The candidate table
 
@@ -170,7 +174,7 @@ Sector is marked `Education` or `Calibration`. The **Type families** column repo
 | 66 | Cleveland Clinic | https://my.clevelandclinic.org/ | Calibration - health system, 6 regions | Six named locations routed from one header | Region names (Abu Dhabi, Canada, Florida, London, Nevada, Ohio) are the first six links in the document | "We’re here when you need us — for every care in the world." = 58 ch | 178 unique link/button labels in the top 35% of `<body>` | Yes - Locations, Online, Virtual | __Roboto_a857ad; __Roboto_Fallback_a857ad; __Source_Sans_3_8bd802; __Source_Sans_3_Fallback_8bd802 -- video-hero (RM yes) |
 | 67 | Mayo Clinic | https://www.mayoclinic.org/ | Calibration - health system | Three named campuses | **FETCH FAILED** - curl 403 + WebFetch ECONNREFUSED (Akamai `Access Denied`, ref #18.6e24c317) | n/a | n/a | n/a | n/a |
 | 68 | Johns Hopkins Medicine | https://www.hopkinsmedicine.org/ | Calibration - health system | Multi-site academic medical centre | **FETCH FAILED** - curl 403 (Cloudflare `Attention Required!`) | n/a | n/a | n/a | n/a |
-| 69 | Vanguard | https://investor.vanguard.com/ | Calibration - finance, audience doors | Personal / advisor / institutional routing | A `Compare services` link offered beside the doors, as Getty does | "Investing for everything it's worth" = 35 ch | 16 unique link/button labels in the top 35% of `<body>` | Yes - Online | FF Mark; FF Mark Narrow; Thorndale; Univers-Basic-Light -- none declared (RM yes) |
+| 69 | Vanguard | https://investor.vanguard.com/ | Calibration - finance, audience doors | Personal / advisor / institutional routing | A `Compare services` link offered beside the doors -- unlike Getty's own menu-gated version (F2, `CONCEPTS-B.md`) | "Investing for everything it's worth" = 35 ch | 16 unique link/button labels in the top 35% of `<body>` | Yes - Online | FF Mark; FF Mark Narrow; Thorndale; Univers-Basic-Light -- none declared (RM yes) |
 | 70 | Fidelity | https://www.fidelity.com/ | Calibration - finance | Personal vs workplace routing | Proprietary Fidelity Sans and Fidelity Slab; reduced-motion in HTML and CSS | "Invest today and plan for tomorrow" = 34 ch | 55 unique link/button labels in the top 35% of `<body>` | Yes - Online | Fidelity Sans; Fidelity Slab; FidelitySans -- scrollreveal; CSS only (RM yes) |
 | 71 | American Express | https://www.americanexpress.com/ | Calibration - finance, two brands | Personal and Business as sibling doors | `Cards / Banking / Travel / Rewards / Business` - five peer doors in one bar | **no `<h1>` in markup** (og:title 48 ch) | 41 unique link/button labels in the top 35% of `<body>` | Yes - Online | Helvetica Medium; Lucida Grande; Roboto Medium; BentonSans -- CSS only (RM yes) |
 | 72 | NatWest Group | https://www.natwestgroup.com/ | Calibration - bank holding two brands | A group site sitting above its consumer brands | The group site never sells - it routes only, which is what an umbrella page does | "NatWest Group" = 13 ch | 85 unique link/button labels in the top 35% of `<body>` | Yes - Online | SFMono-Regular; nw-icons; RNHouseSansW01 -- vimeo/yt-embed (RM yes) |
@@ -188,11 +192,13 @@ Sector is marked `Education` or `Calibration`. The **Type families** column repo
 
 Each of the 73 fetched candidates is scored 1 to 5 on six rows. The 8 failed fetches are not scored.
 
+**Provisional scores now superseded for 24 rows.** See the update note in F0: rendered captures and concept-catalog analysis (`0_plan/kb/CONCEPTS-A.md` to `CONCEPTS-D.md`, `0_plan/kb/exemplars/`) now exist for this file's whole twenty-site shortlist (F8) plus Success Academy, Caltech Undergraduate Admissions, Nord Anglia Education and Vanguard. For those 24 rows, treat the Comp and Img columns below as superseded by the rendered analysis; this rework does not re-score them. The remaining 49 scored rows stay provisional pending capture.
+
 | Row | What a 5 means | Evidence class |
 |---|---|---|
-| Comp (composition) | A grid, a rhythm and a hierarchy a designer would recognise; every section has a reason to look as it does | **Provisional.** Inferred from density, structure and citation, pending screenshots |
+| Comp (composition) | A grid, a rhythm and a hierarchy a designer would recognise; every section has a reason to look as it does | **Provisional for 49 of 73.** Inferred from density, structure and citation, pending screenshots. Superseded for 24 rows by rendered captures -- see the note above |
 | Type (typography) | A deliberate pairing and scale; a display face with personality that does not hurt reading | Measured from declared `font-family` and `@font-face` |
-| Img (imagery) | Photographs carry weight and are specific to the institution; no stock | **Provisional.** Inferred from hero markup and citation, pending screenshots |
+| Img (imagery) | Photographs carry weight and are specific to the institution; no stock | **Provisional for 49 of 73.** Inferred from hero markup and citation, pending screenshots. Superseded for 24 rows by rendered captures -- see the note above |
 | Routing | A visitor can tell in seconds which door is theirs, and act | Measured from door structure and above-fold labels |
 | Restraint | Nothing on the page that does not earn its place | Measured from label counts, CTA counts and motion payload |
 | Relevance | How closely this page's job resembles GT's: route a parent to a selective campus school or a selective online school | Judgment against `00-context.md` facts 1 to 5 |
@@ -275,12 +281,14 @@ Each of the 73 fetched candidates is scored 1 to 5 on six rows. The 8 failed fet
 
 ### F8. The shortlist: the twenty worth the studio's time
 
-The top twenty by total score. Nine are education sites, eleven are calibration references from other sectors. That imbalance is itself a finding: on this corpus, the sector that shares GT's job does it with less craft than museums, agencies and editorial products do.
+The top twenty by total score. All twenty are now rendered and catalogued (`0_plan/kb/CONCEPTS-A.md` to `CONCEPTS-D.md`, `0_plan/kb/exemplars/`; see the note in F7); the Comp and Img columns behind this ranking are superseded there, and this rework does not re-rank the list from renders.
+
+By kind, the twenty split evenly: ten education sites, ten calibration references from other sectors (corrected; this section originally miscounted the split as nine and eleven). The craft gap is a finding about concentration, not an overall imbalance: the top four places, and seven of the top nine, go to calibration references (museums, an agency, an editorial site) -- education's best showing, University of Hull, ranks fifth. By the full twenty the count evens out, but the sector that shares GT's job still does not reach the very top of this corpus as often as museums, agencies and editorial products do.
 
 | Rank | # | Site | Kind | Total | Why it is on the shortlist |
 |---|---|---|---|---|---|
 | 1 | 81 | COLLINS | Calibration | 28 | The ceiling for restraint: a 19-character headline, two CTAs, then four named doors |
-| 2 | 56 | Getty | Calibration | 28 | The closest working model of GT's exact problem: two named doors plus a compare link |
+| 2 | 56 | Getty | Calibration | 28 | The closest working model of GT's exact problem: two named doors and a compare link -- though rendered review shows Getty itself keeps the compare link a scroll and a menu away from the doors, not beside them (F2) |
 | 3 | 59 | Barnes Foundation | Calibration | 27 | 17 above-fold labels. Restraint is the entire design |
 | 4 | 58 | MoMA | Calibration | 27 | A proprietary face carrying display and text, with a second site named as a sibling |
 | 5 | 43 | University of Hull | Education | 27 | The door metaphor as the headline, two CTAs, and a real editorial type pairing |
@@ -306,7 +314,7 @@ Beside these, four low-scoring pages are compulsory reading for **mechanism only
 
 **1. COLLINS (calibration, agency).** Learn: the headline is `Rewrite your worth.` at 19 characters, followed by two CTAs and then four named programme doors (`Brand Refresh`, `Reposition`, `Expansion`, `Turnaround`). A short declarative headline plus a small set of named doors is the entire first screen, and it reads as more confident than any school page in the corpus. The type is Graphik with Portrait Text, a grotesque paired with a display serif, which is close to what Inter Tight and Literata can do for GT. Avoid: COLLINS sells to a professional buyer who already knows the category. Its doors assume vocabulary. GT's parent does not know what "Anywhere" means, so GT's door labels must name the thing, not the offer.
 
-**2. Getty (calibration, museum with two sites).** Learn: everything about the routing. `Our Locations`, one shared sentence (`our two unique sites`), two peer CTAs, and a `Compare Museums` link for the parent who cannot choose. Graphik Web with Linotype Sabon. CSS-only motion, no library. Avoid: Getty's `<h1>` is missing entirely, and it declares no `prefers-reduced-motion` despite shipping keyframe animations. Copy the routing pattern, not the markup hygiene.
+**2. Getty (calibration, museum with two sites).** Learn: everything about the routing. `Our Locations`, one shared sentence (`our two unique sites`), two peer CTAs, and a `Compare Museums` link for the parent who cannot choose. Graphik Web with Linotype Sabon. CSS-only motion, no library. Avoid: Getty's `<h1>` is missing entirely, and it declares no `prefers-reduced-motion` despite shipping keyframe animations. Also avoid the depth: rendered review (`0_plan/kb/CONCEPTS-B.md`) found the compare link hover-gated inside the Visit menu and the two doors one scroll below the first screen -- never together in any of the four captures. Copy the routing pattern's words, not its markup hygiene or its depth; GT's sentence, both doors and its compare anchor belong in one screen, which Getty itself does not manage.
 
 **3. Barnes Foundation (calibration, museum).** Learn: 17 unique above-fold labels, Calibre with FF Milo Serif Text, and a 6-character `<h1>`. Barnes proves an institution can be serious without a mega menu. This is the answer to every "but we need everything in the nav" argument the GT landing will face. Avoid: Barnes routes to one building. Its restraint is cheaper than GT's, because GT must still make a choice legible. Do not copy the navigation depth, only the discipline.
 
@@ -348,15 +356,15 @@ Beside these, four low-scoring pages are compulsory reading for **mechanism only
 
 | # | Principle | Traceable to |
 |---|---|---|
-| P1 | The landing states one shared sentence, then offers two equally weighted doors, then offers a third control for the undecided. Not two links and a hope | F2, F3 (Getty is the only site in 73 that does all three) |
+| P1 | The landing states one shared sentence, then offers two equally weighted doors, then offers a third control for the undecided, all in one place. Not two links and a hope | F2, F3 (Getty is the only site in 73 whose text names all three elements -- a shared sentence, two doors, a compare link -- though rendered review shows Getty itself splits them across two depths, so GT must do what Getty does not: put all three on one screen) |
 | P2 | Ask the audience question once, and let the door switch which answer the parent gets. Do not build two parallel pages a parent must compare by hand | F4 (ASU's seven shared audience labels across both panels) |
 | P3 | A door must name itself and say who it is for in one line. A door label alone is not routing | F8 entry 6 (Every), F9 entry 12 (Crimson Global Academy) |
 | P4 | Above the fold, two primary CTAs. Not six | F1 (Hull 2, COLLINS 2, Every 2, against MIT Admissions 6 and Bryn Mawr 6) |
-| P5 | Spend the type budget on one or two real families, self-hosted, and use them properly. One face used well beats three families used adequately | F1 type delivery, F9 entries 4, 16, 17, 18 |
-| P6 | Restraint is the measurable difference between the shortlist and the rest. Median above-fold label count is 32 across the twenty shortlisted pages against 138.5 across the ten densest | F1 (Stanford Admission 7, Barnes 17, Avenues 17 against Quinnipiac 194, Colorado Academy 176) |
+| P5 | An observation about this corpus, not a GT rule: among the highest-scoring pages, the type budget is spent on one or two real, self-hosted families used well, rather than three used adequately. DD-01 already retains three families for GT (Literata, Inter Tight, Inconsolata); Inconsolata's job is data labels, not display, so the corpus pattern and DD-01 do not compete | F1 type delivery, F9 entries 4, 16, 17, 18 |
+| P6 | Restraint is the measurable difference between the shortlist and the rest. Median above-fold label count is 19.5 across the twenty shortlisted pages against 138.5 across the ten densest (corrected; recomputed from the twenty F6 values sorted -- 2, 2, 2, 4, 6, 16, 17, 17, 18, 18, 21, 27, 36, 40, 40, 53, 70, 71, 78, 95 -- median is the mean of the 10th and 11th, (18+21)/2 = 19.5; this section originally stated 32) | F1, F6, F7 (Hull 2, Every 2, COLLINS 2, Barnes 17, Avenues 17 against Quinnipiac 194, Colorado Academy 176) |
 | P7 | If a page declares motion, it declares `prefers-reduced-motion`. 13 of 21 motion-carrying pages in this corpus fail this, including four the design press praises | F1, and D-031 / `17` section 7 |
 | P8 | The routing component is built for N doors from the start. Tate ships four, Dwight ships nine, UAL ships six, all with the same component | F5, F9 entries 8 and 20, DD-21 |
-| P9 | Illustration or commissioned photography, never stock. MIT Admissions is the precedent that an elite institution can lead with illustrated portraits and lose nothing | F9 entry 11, DD-08, DD-31, Nari 00:08:49 |
+| P9 | Illustration or commissioned photography, never stock. MIT Admissions shows an elite institution leading with illustrated portraits instead of photography on its live admissions homepage. **Judgment, not measurement**: no credibility outcome was tested here, so illustration is a candidate treatment for DD-08/DD-31 to evaluate, not a demonstrated equivalent to photography | F9 entry 11, DD-08, DD-31, Nari 00:08:49 |
 | P10 | Exclusivity is carried by restraint, specificity and imagery. Never by price, wealth cues or aspiration signalling | F9 entry 15, `0_plan/08` principle 3, MD-25 |
 
 ## Anti-patterns
@@ -378,27 +386,27 @@ Beside these, four low-scoring pages are compulsory reading for **mechanism only
 
 | Where | What changes |
 |---|---|
-| The Design Director brief (`17` section 5, Exemplars) | Every brief names three exemplars from F8 with the specific move each contributes. The default trio for a routing-led direction is Getty (the two-door plus compare), Hull (the headline and the two-CTA fold), and Yale Architecture or Barnes (the composition ceiling). A type-led direction substitutes Exeter or RISD. An imagery-led direction substitutes MIT Admissions |
-| The rubric (`17` section 6) | Calibrate each row against a named page: Composition 5 = Yale School of Architecture or Barnes; Typography 5 = Exeter, RISD or Harvard; Imagery 5 = MIT Admissions (illustration) or Equinox (commissioned); Objective 5 = Getty; Restraint 5 = COLLINS or Barnes; Continuity has no exemplar here and must come from K12 |
+| The Design Director brief (`17` section 5, Exemplars) | Every brief names three exemplars from F8 with the specific move each contributes. The default trio for a routing-led direction is Getty (the two-door pattern; its compare link is menu-gated, not beside the doors -- F2), Hull (the headline and the two-CTA fold), and Yale Architecture or Barnes (the composition ceiling). A type-led direction substitutes Exeter or RISD. An imagery-led direction substitutes MIT Admissions |
+| The rubric (`17` section 6) | Calibrate each row against a named page -- all now corroborated by rendered captures in `CONCEPTS-A.md` to `CONCEPTS-D.md`, not only this file's provisional scores: Composition 5 = Yale School of Architecture or Barnes; Typography 5 = Exeter, RISD or Harvard; Imagery 5 = MIT Admissions (illustration) or Equinox (commissioned); Objective 5 = Hull, whose two CTAs are confirmed inside the fold by a rendered read (F6 row 43) -- Getty calibrates the two-door-plus-compare pattern (P1), not the ten-second objective, since its own compare link sits outside the first screen (F2); Restraint 5 = COLLINS or Barnes; Continuity has no exemplar here and must come from K12 |
 | The first screen | One shared sentence about GT School, two doors of equal weight (Georgetown, Anywhere), each with one line naming who it is for, and a third control for the undecided. Two primary CTAs, not six (P1, P3, P4) |
-| The compare control | F2 says 71 of 73 sites skip this and it is the thing a parent actually needs. Propose a `Compare the two schools` link beside the doors as a new requirement in `0_plan/02`, referencing Getty and Vanguard as precedent. It does not exist in the current plan |
+| The compare control | F2's text search found a named comparison control on only two of 73 sites, and it is the thing a parent actually needs. This is not a gap in the current plan: **DD-23** already specifies a "Not sure? Compare" anchor after the first-screen doors (`0_plan/07`, verdict Agree, both checks Pass, status Proposed). F2 and Vanguard's placement (`CONCEPTS.md` C45) strengthen that existing decision with corpus evidence that it is rare and valuable; Getty's own execution (menu-gated, one scroll removed -- F2, `CONCEPTS-B.md`) is the placement to avoid, not to copy |
 | The doors component | Built for N from the start (P8, DD-21). Every door is its own URL so paid social can land on it directly, which is where ASU fails (A10, REQ-024) |
-| `tokens.css` | The shortlist supports the existing Literata plus Inter Tight decision: the top-scoring institutions self-host one or two real families (Lyon, RISD Sans, MoMA Sans, Signifier plus Suisse Intl, Canela plus GT America). No third display face (A5). Self-host, do not call Google Fonts (F1, and K11 performance) |
-| Imagery (DD-08, DD-31) | MIT Admissions is the precedent to put in front of Nari for the escalated home-learning photograph: an elite institution leading with illustrated portraits rather than photography loses nothing in credibility (P9) |
+| `tokens.css` | The shortlist supports the existing DD-01 decision, not a reduction of it: the top-scoring institutions self-host one or two real families (Lyon, RISD Sans, MoMA Sans, Signifier plus Suisse Intl, Canela plus GT America) used well (P5, an observation about the corpus, not a GT rule). No two competing display serifs (A5) -- DD-01's three retained families already avoid this, since only Literata is a display face. Self-host, do not call Google Fonts (F1, and K11 performance) |
+| Imagery (DD-08, DD-31) | MIT Admissions is a precedent to put in front of Nari for the escalated home-learning photograph: an elite institution leads with illustrated portraits rather than photography on its live admissions homepage. **Judgment, not measurement** (P9): no credibility outcome was tested; illustration is a candidate treatment for DD-08/DD-31 to evaluate, not a demonstrated equivalent |
 | Motion (D-031, `17` section 7, MN rows) | The register's original finding that comparable institutions do not animate is only half right: 21 of 73 load a motion library. The sharper finding is that 13 of those 21 never ask about reduced motion. GT's position should be that motion is allowed where it serves orientation, and `prefers-reduced-motion` is non-negotiable (P7, A3) |
 | QA (`1_spec/13`) | Add a check that every mock has exactly one `<h1>` containing a sentence, not a label. A1 shows this is the most common defect among the very sites GT is being compared against, and it is trivially testable |
 | Claims (REQ-022, DEL-018) | A9 gives a live example of the failure mode. The three speed claims and the 1400+ SAT target must not reach the landing without register rows, however natural they look next to Crimson Global Academy's headline |
-| `kb/EXEMPLARS.md` and `kb/exemplars/` | The 20 in F8 are the capture list for the `18` section 3 protocol. Until they are screenshotted at 390 by 844 and 1440 by 900, the Composition and Imagery scores here stay provisional (F0) |
+| `kb/EXEMPLARS.md` and `kb/exemplars/` | The 20 in F8 were the capture list for the `18` section 3 protocol, and all 20 are now screenshotted at 390 and 1440 and catalogued in `CONCEPTS-A.md` to `CONCEPTS-D.md` (see the update notes at F0 and F7); their Composition and Imagery scores in this file are superseded there, not re-scored here. The other 49 scored candidates remain uncaptured and stay provisional (F0) |
 
 ## Open questions
 
 | # | Question | Why it could not be answered |
 |---|---|---|
-| Q-K0-1 | How do the shortlist pages actually compose at 390 and 1440? | No browser was opened, per the cluster brief. Composition and Imagery scores in F7 are inferred from structure and citation, not seen. They must be re-scored under the `18` section 3 capture protocol before the `17` section 6 rubric is calibrated from them |
-| Q-K0-2 | What do The Met, Art Institute of Chicago, SWISS, Mayo Clinic, Johns Hopkins, Sora Schools, Marriott and KLM actually do? | All eight refused both `curl` and WebFetch with bot-protection challenges (Cloudflare, Akamai, Vercel Security Checkpoint). Their rows record the failure. The Met and Mayo Clinic are genuine losses, both being two-or-three-site institutions. They would need a headless browser run by the test runner (D-028) |
+| Q-K0-1 | How do the shortlist pages actually compose at 390 and 1440? | Partly answered since this file was drafted: rendered captures and concept-catalog analysis now exist for all twenty shortlist pages (`CONCEPTS-A.md` to `CONCEPTS-D.md`, `0_plan/kb/exemplars/`). This file's own F7/F8 scores are not updated from them by design -- this rework points to the concept catalog rather than re-scoring in place; the `17` section 6 rubric should calibrate from the rendered analysis, not from F7 |
+| Q-K0-2 | What do The Met, Art Institute of Chicago, SWISS, Mayo Clinic, Johns Hopkins, Sora Schools, Marriott and KLM actually do? | All eight refused both `curl` and WebFetch with bot-protection challenges (Cloudflare, Akamai, Vercel Security Checkpoint). Their rows record the failure. One of the eight is no longer a loss: a later Playwright browser capture reached Sora Schools without incident (`0_plan/kb/EXEMPLARS.md` batch 1), confirming this file's own guess that a headless browser would clear the block (D-028). The Met and Mayo Clinic remain the genuine losses, both being two-or-three-site institutions; the other five (Art Institute, SWISS, Johns Hopkins, Marriott, KLM) are untried by that method |
 | Q-K0-3 | What are the real durations and easings on the shortlist? | A text fetch names the libraries but not the values. `17` section 7 and cluster K4 need computed styles, which needs the headless runner. K0 supplies the list of which pages to probe: the 21 that load a motion library |
 | Q-K0-4 | Is the "above the fold" CTA count right? | Only 7 of 73 are rendered reads. The rest use the top-35-percent-of-body proxy described in F0. Trustworthy as a comparison, not as an absolute. Re-measure the shortlist during exemplar capture |
-| Q-K0-5 | Does the compare affordance (F2) actually help a parent, or does it add a third decision? | Two precedents is thin evidence. This is a design hypothesis, not a finding. It belongs in `0_plan/07` as a decision row with both models' recommendations before any mock builds it |
+| Q-K0-5 | Does the compare affordance (F2) actually help a parent, or does it add a third decision? | Two precedents is thin evidence for whether it helps, but the affordance itself is not an open design question: **DD-23** already is that decision row in `0_plan/07` (Fable recommends, Astra agrees, both checks Pass, status Proposed). This finding adds corpus evidence for a decision that already exists, rather than proposing a new one. What remains open is narrower: whether the anchor actually helps or adds a third decision for a real parent -- a question for parent testing (T-051, REQ-012), not a design hypothesis DD-23 still needs settled |
 | Q-K0-6 | Why is the education cohort so much weaker than the calibration cohort? | The corpus suggests platform concentration (13 Finalsite sites, A4) but K0 cannot separate cause from correlation. Relevant to `0_plan/03` only if GT is ever asked to consider a school-CMS vendor, which the dependency-free rule already rules out |
 | Q-K0-7 | Which of these pages would Nari recognise as "the most serious K-8 option"? | Not a research question. It is G1. The shortlist gives her named alternatives instead of adjectives |
 
@@ -413,4 +421,29 @@ Beside these, four low-scoring pages are compulsory reading for **mechanism only
 | AREA 17 | https://area17.com/ | Client list naming Barnes Foundation and Art Institute of Chicago |
 | `0_plan/18-knowledge-base-plan.md` section 1, clusters K5 and K7 | repo | The elite K-12 and university admissions list, and the brand-architecture case studies |
 | All 73 fetched pages | see the URL column in F6 | Every measured value in this file. Raw HTML retained during the session; re-fetchable from the URLs given |
+
+## Rework log (E4)
+
+| E4 item | What changed | Where |
+|---|---|---|
+| F2 "Only two pages in 73 offer a compare affordance next to the doors" | Reworded the heading and table: the "next to the doors" placement claim is marked as a text-fetch limitation; Getty's "directly beside the two door links" cell is marked Judgment and corrected with `CONCEPTS-B.md`'s rendered finding (hover-gated in the Visit menu, absent from all four captures; doors one scroll below the first screen). Vanguard's placement finding is kept as stands, with `CONCEPTS.md` C45 cited as independent corroboration. The closing sentence changed from an absence claim ("71 of 73... give them two links and no way to weigh them") to what a text search can actually show (a named control found on only two of 73) | Findings F2 |
+| Rendered evidence: `CONCEPTS-B.md`'s Getty section (compare control menu-gated, doors one scroll down) | Cited this correction everywhere the file described Getty's compare affordance as unified with the doors on one screen | Findings F3 (closing sentence), F9 entry 2 (Avoid clause), F6 candidate table row 69 (Vanguard's "as Getty does" phrase), F8 shortlist row for Getty; Principles P1 (parenthetical); How it applies to GT (Design Director brief row, rubric row's Objective-5 anchor) |
+| F5 "the most structurally relevant school sites are the least well designed" | Reworded the heading to mark the craft ranking as this file's own provisional, text-proxy read; added a note that only Nord Anglia of the four has since been rendered, pointing to the concept catalog and `kb/exemplars/` for the re-rank (DD-19) | Findings F5 |
+| GT application: MIT's illustration "loses nothing in credibility" has no measurement | Marked Judgment in both places the claim appeared; reframed illustration as a candidate treatment for DD-08/DD-31 to evaluate, not a demonstrated equivalent to photography | How it applies to GT (Imagery row); Principles P9 |
+| The Compare affordance is already DD-23 | Reworded from "propose... as a new requirement... it does not exist in the current plan" to naming DD-23's existing status in `0_plan/07` (verdict Agree, both checks Pass, status Proposed) and framing this file's finding as corpus evidence strengthening that decision, not a new proposal | How it applies to GT (the compare control row); Open questions Q-K0-5 |
+| P5 (one or two type families) conflicts with DD-01's three retained families | Reworded from a GT prescription to an observation about this corpus; noted DD-01 already retains three families and that Inconsolata's role (data labels) does not compete with a "one or two display families" reading | Principles P5; How it applies to GT (`tokens.css` row) |
+| Provisional visual scores cannot calibrate the rendered rubric; say so where the scores appear | Added an update note identifying that rendered captures and concept-catalog analysis now exist for 24 of the 73 scored rows (this file's whole twenty-site shortlist plus Success Academy, Caltech Undergraduate Admissions, Nord Anglia Education and Vanguard), marked those rows' Comp/Img scores superseded, and pointed to `CONCEPTS-A.md` to `CONCEPTS-D.md` and `kb/exemplars/` rather than re-scoring them here. Reworded F8's intro and the `kb/EXEMPLARS.md` GT-application row on the same basis; updated Q-K0-1 to reflect that captures now exist | Findings F0 (new paragraph), F7 (intro paragraph, Comp/Img evidence-class cells), F8 (intro paragraph); How it applies to GT (`kb/EXEMPLARS.md` row); Open questions Q-K0-1 |
+| Not an E4 item -- found under rule 3 (fix every arithmetic error) | P6's "median above-fold label count is 32 across the twenty shortlisted pages" was wrong. Recomputed from the twenty shortlisted pages' own F6 values, sorted ascending (2, 2, 2, 4, 6, 16, 17, 17, 18, 18, 21, 27, 36, 40, 40, 53, 70, 71, 78, 95), the median (mean of the 10th and 11th values, 18 and 21) is 19.5. The illustrative example "Stanford Admission 7" was also dropped -- Stanford Undergraduate Admission is not one of the twenty shortlisted pages -- and replaced with three pages that are (Hull 2, Every 2, COLLINS 2). The ten-densest median, 138.5, was independently verified and is unchanged | Principles P6 |
+| Not an E4 item -- found under rule 3 (fix every arithmetic error) | F8's "Nine are education sites, eleven are calibration references" miscounted its own twenty-row table (verified programmatically): the split is ten and ten. Reworded the "imbalance" framing to the finding the count actually supports -- calibration references dominate the top of the list (all of the top four, seven of the top nine) while the full twenty is even | Findings F8 |
+| Administrative | Status row updated to record the rework and point to this log; Q-K0-2 updated to note that Sora Schools, one of K0's eight fetch failures, was separately reached by a later Playwright capture | Header table; Open questions Q-K0-2 |
+
+No E4 item for K0 was found factually wrong about the file; all seven per-cluster items and the Getty citation were verified against the file, `0_plan/07-design-decisions.md`, `CONCEPTS-B.md` and `CONCEPTS.md` before being applied. No disagreements to record for this cluster.
+
+### Proposed register follow-ups (not applied; for the ensemble to route)
+
+| Register row | Proposal | Evidence | Recommended by |
+|---|---|---|---|
+| DD-19 (rerank after rendered review); informs DD-21 | Capture Dwight School, Nueva School and Stanford Online High School in the next exemplar-capture wave. These are F5's most structurally relevant school-site analogues for DD-21's N-campus requirement, and only one of the four (Nord Anglia) has been rendered so far | Findings F5; `0_plan/kb/CONCEPTS-B.md` (Nord Anglia only); `0_plan/kb/exemplars/` (the other three absent) | Fable |
+| `17` section 6 (design rubric), no existing row | Swap the Objective-5 calibration anchor from Getty to Hull, or confirm another page whose both CTAs are confirmed inside the fold by a rendered read; Getty's own compare link sits outside the first screen | Findings F2; `0_plan/kb/CONCEPTS-B.md`; F6 row 43 (Hull's rendered above-fold CTA count) | Fable |
+| n/a (research backlog, not a decision/requirement row) | Attempt a Playwright-browser recapture of the seven bot-blocked candidates still unresolved (The Met, Art Institute of Chicago, SWISS, Mayo Clinic, Johns Hopkins, Marriott, KLM) before treating them as permanent losses; Sora Schools, blocked identically by `curl` and WebFetch, was reached cleanly by Playwright | Open questions Q-K0-2; `0_plan/kb/EXEMPLARS.md` batch 1 (Sora Schools) | Fable |
 
