@@ -104,8 +104,24 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
     } else { result = `report: page height ${m.docHeight}`; }
     lines.push(`| ${row} | ${w} by ${h} | ${rule} | ${limit ?? ''} | ${m.bottoms.header ?? ''} | ${m.bottoms.h1 ?? ''} | ${m.bottoms.provenance ?? ''} | ${m.bottoms['cta-georgetown'] ?? ''} | ${m.bottoms['cta-anywhere'] ?? ''} | ${m.cut ? 'yes' : 'no'} | ${result} |`);
     if (KEY.has(row) || ALL) await page.screenshot({ path: join(qa, `${row}.jpg`), type: 'jpeg', quality: w >= 1024 ? 55 : 68 });
-    if (row === 'V2' || row === 'V14') await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
+    if (row === 'V2' || row === 'V14') {
+      // walk the page so lazy images load, wait for every image to decode, return to the top, then capture the whole page
+      await page.evaluate(async () => { const step = Math.max(200, window.innerHeight - 40); for (let y = 0; y < document.documentElement.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } window.scrollTo(0, 0); });
+      await page.evaluate(() => Promise.all([...document.images].map(i => (i.decode ? i.decode() : Promise.resolve()).catch(() => null))));
+      await page.waitForTimeout(150);
+      await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
+    }
   }
+  // keyboard focus captures at V14: the first door CTA, then the GT Anywhere footer mark link
+  await page.setViewportSize({ width: 1280, height: 720 }); await page.goto(url, { waitUntil: 'load' });
+  const cta = await page.$('a[data-event="door_click"][data-placement="first_screen"]');
+  if (cta) { await cta.focus(); await page.waitForTimeout(80); await page.screenshot({ path: join(qa, 'focus-cta.jpg'), type: 'jpeg', quality: 60 }); }
+  const footLink = await page.$('footer a[href*="anywhere.gt.school"]');
+  if (footLink) { await footLink.scrollIntoViewIfNeeded(); await footLink.focus(); await page.waitForTimeout(80); await page.screenshot({ path: join(qa, 'focus-footer.jpg'), type: 'jpeg', quality: 60 }); }
+  // forced colours at V14
+  const ctx3 = await browser.newContext({ forcedColors: 'active' }); const p3 = await ctx3.newPage();
+  await p3.setViewportSize({ width: 1280, height: 720 }); await p3.goto(url, { waitUntil: 'load' });
+  await p3.screenshot({ path: join(qa, 'forced-colors.jpg'), type: 'jpeg', quality: 60 }); await ctx3.close();
   // reduced motion at V14
   const ctx2 = await browser.newContext({ reducedMotion: 'reduce' }); const p2 = await ctx2.newPage();
   await p2.setViewportSize({ width: 1280, height: 720 }); await p2.goto(url, { waitUntil: 'load' });
@@ -120,6 +136,7 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (motion.length) failures++;
   lines.push('', '## Root font doubled at V2 (a stand-in for a large text setting)', '', zoomW <= 375 ? 'PASS: no horizontal scroll at 375 with a 32px root.' : `FAIL: scrollWidth ${zoomW} at 375 with a 32px root.`);
   if (zoomW > 375) failures++;
+  lines.push('', '## Focus and forced colours', '', `Captures: ${cta ? 'focus-cta.jpg (first door CTA focused)' : 'no first-screen door CTA found for the focus capture'}; ${footLink ? 'focus-footer.jpg (GT Anywhere footer link focused)' : 'no GT Anywhere footer link found'}; forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.`);
   lines.push('', '## Console', '', consoleErrors.size ? `FAIL: ${[...consoleErrors].join(' | ')}` : 'PASS: no console errors.');
   if (consoleErrors.size) failures++;
   lines.push('', `## Result: ${failures ? failures + ' failure(s)' : 'all required rows pass'}`);
