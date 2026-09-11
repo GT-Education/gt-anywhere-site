@@ -28,7 +28,7 @@ function findPlaywright() {
   return hits;
 }
 const ALL = process.argv.includes('--all');
-const KEY = new Set(['V2', 'V5', 'V9', 'V10', 'V13', 'V14', 'V16', 'V17', 'V18']); // screenshots kept for these rows unless --all; every row is measured
+const KEY = new Set(['V2', 'V5', 'V9', 'V13', 'V14', 'V16', 'V18']); // screenshots kept for these rows unless --all; every row is measured
 const ROWS = [
   ['V1', 360, 740, 'fold'], ['V2', 375, 629, 'fold'], ['V3', 390, 664, 'fold'], ['V4', 393, 659, 'fold'], ['V5', 414, 715, 'fold'],
   ['V6', 412, 839, 'fold'], ['V7', 402, 681, 'fold'], ['V8', 430, 739, 'fold'], ['V9', 390, 844, 'emptiness'], ['V10', 750, 342, 'fold'],
@@ -103,8 +103,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
       result = `report: scrollWidth ${m.scrollWidth}` + (m.scrollWidth > w ? ' (horizontal scroll)' : '');
     } else { result = `report: page height ${m.docHeight}`; }
     lines.push(`| ${row} | ${w} by ${h} | ${rule} | ${limit ?? ''} | ${m.bottoms.header ?? ''} | ${m.bottoms.h1 ?? ''} | ${m.bottoms.provenance ?? ''} | ${m.bottoms['cta-georgetown'] ?? ''} | ${m.bottoms['cta-anywhere'] ?? ''} | ${m.cut ? 'yes' : 'no'} | ${result} |`);
-    if (KEY.has(row) || ALL) await page.screenshot({ path: join(qa, `${row}.jpg`), type: 'jpeg', quality: 72 });
-    if (row === 'V2' || row === 'V14') await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 60, fullPage: true });
+    if (KEY.has(row) || ALL) await page.screenshot({ path: join(qa, `${row}.jpg`), type: 'jpeg', quality: w >= 1024 ? 55 : 68 });
+    if (row === 'V2' || row === 'V14') await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
   }
   // reduced motion at V14
   const ctx2 = await browser.newContext({ reducedMotion: 'reduce' }); const p2 = await ctx2.newPage();
