@@ -107,7 +107,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
     if (row === 'V2' || row === 'V14') {
       // walk the page so lazy images load, wait for every image to decode, return to the top, then capture the whole page
       await page.evaluate(async () => { const step = Math.max(200, window.innerHeight - 40); for (let y = 0; y < document.documentElement.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 40)); } window.scrollTo(0, 0); });
-      await page.evaluate(() => Promise.all([...document.images].map(i => (i.decode ? i.decode() : Promise.resolve()).catch(() => null))));
+      // lazy images below the fold never settle decode(); make them eager for the capture and race each decode against a 3 s timeout
+      await page.evaluate(() => Promise.all([...document.images].map(i => { i.loading = 'eager'; const d = i.decode ? i.decode() : Promise.resolve(); return Promise.race([d.catch(() => null), new Promise(r => setTimeout(r, 3000))]); })));
       await page.waitForTimeout(150);
       await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
     }

@@ -29,13 +29,17 @@ a:hover { text-decoration-color: currentColor; }
 .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); min-height: 3.5rem; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-4); }
 @media (min-width: 768px) { .bar { padding-inline: var(--space-7); } }
 .lockup { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
-.lockup img { height: 24px; width: auto; }
+.lockup img { height: 27px; width: auto; } /* K12 G4: never below 27px */
 .utility { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); font-family: var(--font-sans); font-size: var(--text-xs); }
-.utility a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-2); }
-@media (min-width: 768px) { .utility { gap: var(--space-4); font-size: var(--text-sm); } .utility a { padding-inline: var(--space-3); } }
+.utility a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-1); }
+@media (min-width: 768px) { .lockup img { height: 32px; } .utility { gap: var(--space-4); font-size: var(--text-sm); } .utility a { padding-inline: var(--space-3); } }
 
 /* ---------- The letter: h1, provenance, one accent rule, two doors, postscript ---------- */
-.letter { padding-block: var(--space-4) var(--space-7); }
+/* The letter is a three-track grid: [free] [prose 65ch] [free]. Prose sits in the middle track; the h1 starts on the same left
+   edge and may run into the right track up to its own 35ch measure (the contract's h1 cap), so the sentence holds four lines from 768. */
+.letter { display: grid; grid-template-columns: minmax(0, 1fr) min(100%, var(--measure-prose)) minmax(0, 1fr); padding-block: var(--space-4) var(--space-7); padding-inline: var(--space-5); }
+.letter > * { grid-column: 2; }
+.letter > h1 { grid-column: 2 / 4; } /* default stretch, capped by max-width 35ch; start-aligned, and a long word still breaks at large text sizes */
 h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; text-wrap: balance; }
 /* At 360 to 413px wide the sentence sets in seven lines, past Chromium's six-line balance limit (K2 F-22); a no-break space
    before the last word in the markup holds "from anywhere." together there (measured: `text-wrap: pretty` left the orphan). */
@@ -65,11 +69,19 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
   .door-cta { margin-top: var(--space-4); }
 }
 
-/* Compact door rule (CONTRACT section 2): under 700px tall, and also under 375px wide where the seven-line h1 and five-line
-   door lines overflow V1 (360 by 740) by 26px. The doors become compact blocks (opener, CTA) and both door lines follow the
+/* Short laptop rooms (from 768 wide, under 700 tall: V15, V19) keep the letter form with the vertical gaps at 8px. */
+@media (min-width: 768px) and (max-height: 699px) {
+  .letter { padding-top: var(--space-3); }
+  .provenance { margin-top: var(--space-3); }
+  .rule { margin: var(--space-3) 0; }
+  .door + .door { margin-top: var(--space-3); }
+}
+
+/* Compact door rule (CONTRACT section 2): phone rows under 700px tall, and also under 375px wide where the seven-line h1 and
+   five-line door lines overflow V1 (360 by 740) by 26px. The doors become compact blocks (opener, CTA) and both door lines follow the
    second CTA as run-in paragraphs opened by the door name. Reordering is CSS only: the list items become `display: contents`
    and their children take grid order; the DOM and focus order are unchanged (opener, line, CTA per door). */
-@media (max-height: 699px), (max-width: 374px) {
+@media (max-width: 767px) and (max-height: 699px), (max-width: 374px) {
   .doors { display: grid; row-gap: var(--space-3); }
   .door { display: contents; }
   .door:nth-child(1) > * { order: 1; }
@@ -84,6 +96,23 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
   .door-cta { margin-top: 0; margin-bottom: var(--space-4); }
 }
 
+/* Phone landscape (CONTRACT section 2 recipe, V10 750 by 342): the h1 steps down to --text-xl without the 35ch cap on this row
+   only (declared departure), gaps at --space-3, and the two compact door blocks sit side by side with both lines below the fold. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .letter { padding-top: var(--space-3); }
+  .letter > h1 { font-size: var(--text-xl); max-width: none; }
+  .provenance { margin-top: var(--space-3); }
+  .rule { margin: var(--space-3) 0; }
+  .doors { grid-template-columns: 1fr 1fr; column-gap: var(--space-4); }
+  .door:nth-child(1) > .door-opener { grid-area: 1 / 1; }
+  .door:nth-child(1) > .door-cta { grid-area: 2 / 1; }
+  .door:nth-child(2) > .door-opener { grid-area: 1 / 2; }
+  .door:nth-child(2) > .door-cta { grid-area: 2 / 2; }
+  .door:nth-child(1) > .door-line { grid-area: 3 / 1 / 4 / 3; }
+  .door:nth-child(2) > .door-line { grid-area: 4 / 1 / 5 / 3; }
+  .door-cta { margin-bottom: 0; }
+}
+
 /* ---------- Sections below the letter: hairline, tracked eyebrow (Barnes, C27), quiet h2 ---------- */
 .section { padding-bottom: var(--space-9); }
 .section > .col { border-top: 1px solid var(--color-border); padding-top: var(--space-6); }
@@ -96,7 +125,7 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
 /* Comparison: a real table, read as stacked definition rows at every width (the letter's column never reaches the
    45-character cell floor two columns would need, K2 section 5b); from 768 the attribute sits in the margin. */
 .compare-table { display: block; width: 100%; margin-top: var(--space-6); border-collapse: collapse; }
-.compare-table caption { display: block; text-align: left; margin-bottom: var(--space-4); font-family: var(--font-sans); font-style: italic; font-size: var(--text-sm); color: var(--color-text-muted); }
+.compare-table caption { display: block; text-align: left; margin-bottom: var(--space-4); font-family: var(--font-sans); font-weight: 500; font-size: var(--text-sm); color: var(--color-text-muted); } /* roman: fonts.css has no Inter Tight italic */
 .compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; text-align: left; }
 .compare-table tr { padding-block: var(--space-5); border-top: 1px solid var(--color-border); }
 .compare-table td { margin-top: var(--space-3); font-size: var(--text-base); line-height: var(--leading-prose); text-wrap: pretty; }
@@ -145,7 +174,7 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
 .footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); text-decoration: none; }
 .logo-plate { background: var(--color-bg); } /* the GT School mark only on a light panel */
-.logo-plate img, .logo-navy img { height: 24px; width: auto; }
+.logo-plate img, .logo-navy img { height: 32px; width: auto; } /* K12 G4: 32px marks */
 /* K3's two-colour ring on and across navy: inner on-navy band, outer navy band; one band clears 3:1 on any ground */
 .site-footer :focus-visible { outline: 2px solid var(--color-on-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-navy); }
 @media (forced-colors: active) { :focus-visible { outline: 3px solid CanvasText; box-shadow: none; } }
