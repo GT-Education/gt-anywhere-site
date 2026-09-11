@@ -8,10 +8,10 @@
 | K3 Color, surface and accessibility | `K3-color-accessibility.md` | Written 2026-09-11 (41 sources, 33 pairings computed, 5 token roles proposed) | Pending |
 | K4 Motion in elite and educational sites | `K4-motion.md` | In progress | Pending |
 | K5 Exemplars: elite K-12 and university admissions | `K5-education-exemplars.md` | Written 2026-09-11 (22 sites measured, 8 to capture) | Pending |
-| K6 Landing page conversion and message match | `K6-conversion.md` | In progress | Pending |
+| K6 Landing page conversion and message match | `K6-conversion.md` | Written 2026-09-11 (43 sources; first-screen budget; REQ-022 scope finding) | Pending |
 | K7 Brand architecture and positioning | `K7-brand-architecture.md` | In progress | Pending |
 | K8 Digital marketing and advertising | `K8-marketing-advertising.md` | In progress | Pending |
-| K9 Imagery and photography direction | `K9-imagery.md` | Queued | Pending |
+| K9 Imagery and photography direction | `K9-imagery.md` | In progress | Pending |
 | K10 Responsive and fluid layout | `K10-responsive.md` | Queued | Pending |
 | K11 Performance and Core Web Vitals | `K11-performance.md` | Queued | Pending |
 | K12 Existing GT and Alpha branding | `K12-gt-branding.md` | Queued | Pending |
