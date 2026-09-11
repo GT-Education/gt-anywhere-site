@@ -2,6 +2,7 @@
 """Mechanical gate for the landing mocks (0_plan/mockups/M*/): the rules in shared/BUILDER-BRIEF.md.
 Usage: python3 0_plan/tools/check-mocks.py [folder ...]   (default: every 0_plan/mockups/M*/)"""
 import re, sys, os, glob, html as H
+from html.parser import HTMLParser
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ALLOWED_HOSTS = {'www.gt.school','gt.school','anywhere.gt.school','apply.gt.school','community.gt.school','schema.org'}
 ALLOWED_NUMS = {'90','10,400','9','8','512','270','9481','2026','09','10','844','390','1440'}
@@ -10,12 +11,21 @@ RATIONALE_SECTIONS = ['Direction','h1','Decisions applied','Motion spec','Assets
 MOTION_OK = {'opacity','transform'}
 
 def visible_text(doc):
-    d = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)
-    d = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', d, flags=re.S|re.I)
-    d = re.sub(r'<[^>]+>', ' ', d)
-    return H.unescape(d)
+    """the document's text content as a reader sees it: no comments, no script, style or title text, character
+    references decoded, by the standard-library tokenizer"""
+    class _T(HTMLParser):
+        def __init__(self): super().__init__(convert_charrefs=True); self.parts = []; self._skip = 0
+        def handle_starttag(self, tag, attrs):
+            if tag.lower() in ('script', 'style', 'title'): self._skip += 1
+            self.parts.append(' ')
+        def handle_endtag(self, tag):
+            if tag.lower() in ('script', 'style', 'title') and self._skip: self._skip -= 1
+            self.parts.append(' ')
+        def handle_data(self, data):
+            if not self._skip: self.parts.append(data)
+    t = _T(); t.feed(doc); t.close(); return ''.join(t.parts)
 
-from html.parser import HTMLParser
+
 
 class _Elements(HTMLParser):
     """Element inventory by the standard-library HTML parser: start tags with decoded attributes, script bodies, the

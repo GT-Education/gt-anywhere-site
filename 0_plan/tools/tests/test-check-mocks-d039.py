@@ -57,6 +57,13 @@ base_fails = [rl for rl, st, _ in cm.check_doc(doc, css, rat, m1) if st == 'FAIL
 probe = doc.replace('<body', '<body><p title="The <script> adds optional reveals and the <input> radios work without JavaScript.">Motion notes</p><body', 1).replace('<body><p', '<p', 1) if '<body' in doc else doc
 probe = doc.replace('<body>', '<body><p title="The <script> adds optional reveals and the <input> radios work without JavaScript.">Motion notes</p>', 1) if '<body>' in doc else probe
 probe_fails = [rl for rl, st, _ in cm.check_doc(probe, css, rat, m1) if st == 'FAIL']
+# and the same tooltip combined with a declared observer script before </body>: every rule must keep its outcome
+declared = doc.replace('<html', '<html data-d039="script"', 1).replace('</body>', '<script>document.querySelectorAll("[data-reveal]").forEach(function(e){e.dataset.seen=1})</script></body>', 1)
+declared_probe = declared.replace('<body>', '<body><p title="The <script> adds optional reveals.">Motion notes</p>', 1)
+rat_d = rat + '\nD-039 declared for the observer script.'
+d_fails = [rl for rl, st, _ in cm.check_doc(declared, css, rat_d, m1) if st == 'FAIL']; dp_fails = [rl for rl, st, _ in cm.check_doc(declared_probe, css, rat_d, m1) if st == 'FAIL']
+same2 = d_fails == dp_fails
+print(('ok   ' if same2 else 'BAD  ') + 'the tooltip beside a declared observer script changes no rule outcome on M1 (' + str(len(d_fails)) + ' vs ' + str(len(dp_fails)) + ' failures)'); ok = ok and same2
 same = probe_fails == base_fails
 print(('ok   ' if same else 'BAD  ') + 'a tooltip mentioning <script> and <input> changes no rule outcome on M1 (' + str(len(base_fails)) + ' vs ' + str(len(probe_fails)) + ' failures)'); ok = ok and same
 print('test-check-mocks-d039:', 'PASS' if ok else 'FAIL'); sys.exit(0 if ok else 1)
