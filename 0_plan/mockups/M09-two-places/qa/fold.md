@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:44:39.017Z; page `/0_plan/mockups/M09-two-places/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:56:39.332Z; page `/0_plan/mockups/M09-two-places/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V6 | 412 by 839 | fold | 815 | 56 | 265 | 294 | 528 | 763 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 56 | 287 | 316 | 454 | 584 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 267 | 296 | 450 | 604 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 56 | 294 | 323 | 556 | 791 | yes | report: page height 6719 |
+| V9 | 390 by 844 | emptiness |  | 56 | 294 | 323 | 556 | 791 | yes | report: page height 6679 |
 | V10 | 750 by 342 | fold | 318 | 56 | 147 | 173 | 290 | 290 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 229 | 267 | 553 | 553 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 235 | 272 | 525 | 525 | yes | PASS |
@@ -51,18 +51,18 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V3 | yes | ul.place-lines ink 601 to 774 |
 | V4 | yes | ul.place-lines ink 601 to 775 |
 | V5 | yes | ul.place-lines ink 636 to 786 |
-| V6 | yes | section.band ink 780 to 911 |
+| V6 | yes | section.band ink 780 to 927 |
 | V7 | yes | ul.place-lines ink 602 to 776 |
 | V8 | yes | ul.place-lines ink 638 to 788 |
-| V9 | yes | section.band ink 808 to 939 |
+| V9 | yes | section.band ink 808 to 955 |
 | V10 | yes | p.place-line ink 300 to 370 |
-| V11 | yes | section.band ink 846 to 2586 |
-| V12 | yes | section.band ink 818 to 2481 |
-| V13 | yes | section.band ink 705 to 814 |
-| V14 | yes | section.band ink 703 to 813 |
-| V15 | yes | section.band ink 631 to 742 |
-| V16 | yes | section.band ink 836 to 947 |
-| V17 | yes | section.band ink 896 to 1007 |
+| V11 | yes | section.band ink 782 to 2517 |
+| V12 | yes | section.band ink 754 to 2412 |
+| V13 | yes | section.band ink 705 to 830 |
+| V14 | yes | section.band ink 703 to 829 |
+| V15 | yes | section.band ink 631 to 758 |
+| V16 | yes | section.band ink 836 to 963 |
+| V17 | yes | section.band ink 896 to 1023 |
 | V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
 | V19 | yes | ul.place-lines ink 548 to 656 |
 

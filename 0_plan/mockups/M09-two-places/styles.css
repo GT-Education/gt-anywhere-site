@@ -1,0 +1,301 @@
+/* M09 "Two Places". Design-engineer build, 2026-09-11 (Fable fork; measured by 0_plan/tools/shots.mjs).
+   Brief: 0_plan/kb/briefs/M09.md under CONTRACT.md v2.1. Tokens: ../shared/tokens-v2.css; the layer-2 tokens used
+   are named in RATIONALE.md with their register rows (DD-38, DD-39, MN-16, D-039). Every colour, face, size, space,
+   radius and duration is a var(); zero raw hex. The values outside the token set (1px rules, the 40 by 8px seam mark,
+   the 2px focus bands, the 44px target floor, letter-spacing, ch measures, the breakpoints and the height queries)
+   are listed in RATIONALE.md, Departures.
+   The only motion is V2, the door line reveal at 768 and above under (hover: hover): opacity and transform only. */
+
+/* ---------- Reset and shared rhythm ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--color-bg); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } } /* V10 anchor scroll, native */
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-prose); overflow-wrap: break-word; }
+img { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+p, h1, h2, h3 { margin: 0; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+a { color: inherit; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.arrow { flex: none; }
+
+/* One page edge. --edge is the type inset inside a coloured room; --inset is the margin the rooms themselves take
+   from the viewport (24px only at 768 to 1023, per the brief). Header, masthead, rooms and every band below the
+   fold share it, so one vertical line runs the length of the page. --chrome is the header's own height, used by
+   the first screen's svh calculation. */
+:root { --edge: var(--space-5); --inset: 0px; --chrome: calc(var(--space-6) + var(--space-5)); }
+@media (max-width: 369px) { :root { --chrome: calc(var(--space-6) + var(--space-5) + var(--space-6)); } }
+@media (min-width: 768px) { :root { --edge: var(--space-6); --inset: var(--space-5); } }
+@media (min-width: 1024px) { :root { --edge: var(--space-7); --inset: 0px; } }
+@media (min-width: 1440px) { :root { --edge: var(--space-8); } }
+.edge { padding-inline: calc(var(--inset) + var(--edge)); }
+
+/* ---------- Type roles (CONTRACT.md section 3) ---------- */
+.eyebrow, .place-label { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+h2 { font-size: var(--text-2xl); max-width: 30ch; text-wrap: balance; }
+h3 { font-size: var(--text-md); }
+.figure { font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* On the navy room and the navy footer: --color-focus is 1.69 against navy and fails, so --color-focus-on-dark. */
+.place--anywhere :focus-visible, .on-navy :focus-visible { outline: 2px solid var(--color-focus-on-dark); outline-offset: 2px; }
+/* The header sits directly on top of both rooms: at 768 and above its right half stands over navy and a ring at
+   2px offset crosses the colour edge. K3's two-colour ring (2px --color-navy inner band, 2px --color-on-navy outer
+   band, 14.58 between them) so one band always passes, whichever ground it lands on. The same ring on the footer's
+   light logo plate, which straddles navy. */
+.site-header :focus-visible, .footer-logo--light:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-on-navy); }
+
+/* ---------- Skip link ---------- */
+.skip-link { position: absolute; top: -999px; left: var(--space-4); z-index: 10; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); border: 2px solid var(--color-focus); font-weight: 500; }
+.skip-link:focus { top: var(--space-4); }
+
+/* ---------- Header: 56px on --color-bg, the GT School mark at its 27px floor (K12 G4) ---------- */
+.site-header { background: var(--color-bg); }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); min-height: calc(var(--space-6) + var(--space-5)); }
+.lockup { display: inline-flex; align-items: center; min-height: 44px; }
+.lockup img { height: 27px; width: auto; }
+@media (min-width: 768px) { .lockup img { height: 32px; } }
+.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 var(--space-3); font-size: var(--text-xs); font-weight: 500; }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; }
+.utility-nav a:hover, .utility-nav a:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
+@media (max-width: 369px) { .utility-nav { flex-direction: column; align-items: flex-end; } }
+@media (min-width: 768px) { .utility-nav { gap: 0 var(--space-4); font-size: var(--text-sm); } }
+
+/* ---------- First screen: a light band (h1 + provenance), then the two rooms to the fold ---------- */
+.first-screen { display: flex; flex-direction: column; }
+/* The rooms run to within --space-7 of the fold so the next band is always cut and the page never ends on a false
+   floor. svh only (no vh anywhere); without svh support the first screen sizes to its content. */
+/* Above 1000px of viewport height (portrait tablets) the rooms are left at their content height: stretching them
+   over a 1024px screen leaves a void no four-element column can fill, and there the comparison band below carries
+   the continuation instead. Measured at V11 and V12. */
+@media (max-height: 1000px) {
+  @supports (height: 100svh) {
+    .first-screen { min-height: calc(100svh - var(--chrome) - var(--space-8)); }
+    .places { flex: 1 0 auto; }
+  }
+}
+
+.masthead { padding-block: var(--space-4) var(--space-4); background: var(--color-bg); }
+@media (min-width: 1024px) { .masthead { padding-block: var(--space-5) var(--space-6); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); } .masthead > * { grid-column: 1 / span 10; } }
+@media (min-width: 1440px) { .masthead { padding-block: var(--space-6) var(--space-7); } }
+h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; }
+.provenance { margin-top: var(--space-3); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
+@media (min-width: 768px) { .provenance { margin-top: var(--space-4); } }
+@media (min-width: 1440px) { .provenance { margin-top: var(--space-5); } }
+
+/* The two rooms. Stacked below 768 (warm, then navy); 6 and 6 with no gutter from 768, inset --inset from the
+   viewport at 768 to 1023 and full-bleed from 1024, where the colour edge is the only divider. */
+.places { display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: var(--inset); }
+@media (min-width: 768px) { .places { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.place { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: var(--space-4) var(--edge); border: 1px solid transparent; }
+@media (min-width: 768px) { .place { padding-block: var(--space-6) var(--space-6); } }
+@media (min-width: 1024px) { .place { padding-block: var(--space-7) var(--space-7); } }
+@media (min-width: 1440px) { .place { padding-block: var(--space-8) var(--space-8); } }
+.place--georgetown { background: var(--color-surface); color: var(--color-text); border-color: var(--color-surface); }
+.place--anywhere { background: var(--color-navy); color: var(--color-on-navy); border-color: var(--color-navy); }
+.place--anywhere .place-label { color: var(--color-text-muted-on-dark); }
+
+/* Label row. Below 768 it also carries the school mark (measured: the mark cannot sit at the base of a stacked
+   room and keep both CTAs above a 629px fold). From 768 the wrapper dissolves and the mark falls to the base. */
+.place-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); width: 100%; }
+@media (min-width: 768px) { .place-top { display: contents; } }
+.place-mark { display: block; }
+.place-mark img { height: 27px; width: auto; }
+/* The GT Anywhere mark is white lettering, so it keeps a --color-navy ground of its own: invisible against the
+   navy room, and preserved in forced colours where the room's own background is replaced. In the stacked label
+   row the plate takes inline padding only, so the row stays the height of the mark on the binding fold row. */
+.place-mark--plate { background: var(--color-navy); padding-inline: var(--space-2); margin-inline: calc(-1 * var(--space-2)); }
+/* From 768 the mark falls to the base of the room, with the same ring of padding on both so the two mark blocks
+   are the same height and the rooms' CTAs land on one line however long either line runs (DD-26). The CTA above
+   carries the auto margin, so the pair sits on the floor of the room. */
+@media (min-width: 768px) {
+  .place-mark { order: 5; margin-top: var(--space-6); padding: var(--space-2); margin-inline: calc(-1 * var(--space-2)); }
+  .place-mark img { height: 32px; }
+}
+
+.place-name { margin-top: var(--space-3); font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); }
+.place-line { margin-top: var(--space-3); margin-bottom: var(--space-4); max-width: var(--measure-prose); font-size: var(--text-base); line-height: var(--leading-prose); }
+.place--anywhere .place-line { color: var(--color-on-navy); }
+.place-cta { margin-top: 0; }
+@media (min-width: 768px) { .place-cta { margin-top: auto; } .place-line { margin-bottom: var(--space-5); } }
+
+/* V2, the door line reveal (CONTRACT.md section 6; K4 P12). Only at 768 and above and only where a pointer can
+   hover: the line rests at opacity 0, 4px low, and rises over --duration-base with --ease-out when the room is
+   hovered or holds focus. Its box is in flow at every state, so nothing on the page moves. Below 768 and under
+   (hover: none) the line is simply visible. */
+@media (min-width: 768px) and (hover: hover) {
+  .place-line { opacity: 0; transform: translateY(4px); transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out); }
+  .place:hover .place-line, .place:focus-within .place-line { opacity: 1; transform: translateY(0); }
+}
+
+/* The first screen's one accent use: a 40px --color-accent mark centred on the colour edge, the hinge between the
+   two rooms. 8px across the edge, 40px along it; vertical seam from 768, horizontal seam when the rooms stack. */
+.seam-mark { position: absolute; z-index: 1; background: var(--color-accent); top: 0; left: 50%; width: 40px; height: 8px; transform: translate(-50%, -50%); }
+@media (min-width: 768px) { .seam-mark { top: 50%; left: 0; width: 8px; height: 40px; } }
+
+/* Compact door rule (CONTRACT.md section 2), at this mock's measured threshold: phones under 780px tall and every
+   landscape phone. Each room carries label, name and CTA; both lines follow the second CTA on --color-bg, each
+   opened by its door name as a run-in label. */
+.place-lines { display: none; }
+.place-lines li { max-width: var(--measure-prose); line-height: var(--leading-prose); }
+.place-lines li + li { margin-top: var(--space-3); }
+.line-run-in { font-weight: 500; margin-right: 0.35em; }
+@media (max-width: 767px) and (max-height: 779px), (max-height: 479px), (min-width: 1024px) and (max-height: 599px) {
+  .place { padding-block: var(--space-4); }
+  .place-line { display: none; }
+  .place-cta { margin-top: var(--space-4); }
+  .place-lines { display: block; padding-block: var(--space-4) var(--space-5); }
+}
+/* Under 700px tall on a phone the room gives up its second ring of padding: the binding fold case (V2, 629). */
+@media (max-width: 767px) and (max-height: 699px), (max-height: 479px) {
+  .masthead { padding-block: var(--space-3) var(--space-4); }
+  .place { padding-block: var(--space-3); }
+  .place-cta { margin-top: var(--space-3); }
+  .place-lines { padding-block: var(--space-3) var(--space-4); }
+}
+
+/* Phone landscape (V10, 750 by 342): the contract's landscape recipe. The rooms go side by side even though the
+   viewport is under 768, the h1 steps down one token, and each room's line and mark fall below the fold inside
+   their own room (so a line is never read against the wrong colour), which is also what cuts the fold here. */
+@media (max-height: 479px) and (min-width: 600px) {
+  .masthead { padding-block: var(--space-3) var(--space-3); }
+  h1 { font-size: var(--text-xl); max-width: none; }
+  .provenance { margin-top: var(--space-2); }
+  .places { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .place-top { display: contents; }
+  .place-line { display: block; order: 4; margin-top: var(--space-3); margin-bottom: 0; }
+  .place-cta { order: 3; }
+  .place-mark { order: 5; margin-top: var(--space-3); }
+  .place-name { font-size: var(--text-lg); }
+  .place-lines { display: none; }
+  .seam-mark { top: 50%; left: 0; width: 8px; height: 40px; }
+}
+
+/* Short laptops and the zoom row (V15 1366 by 648, V19 1024 by 576): the first screen gives up a ring of padding so
+   both CTAs and the next band stay in view without changing the h1's size. Under 600px tall (V19) the compact door
+   rule above also fires, so the lines follow the second CTA there. */
+@media (min-width: 1024px) and (max-height: 699px) {
+  .masthead { padding-block: var(--space-4) var(--space-4); }
+  .place { padding-block: var(--space-5) var(--space-5); }
+  .place-mark { margin-top: var(--space-5); }
+}
+
+/* ---------- Buttons: the estate's face and case (Inconsolata 600 uppercase, K12 G15, G17), 44px floor ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 44px; max-width: 100%; padding: var(--space-2) var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; overflow-wrap: anywhere; }
+.btn--on-light { background: var(--color-navy); color: var(--color-on-navy); }
+.btn--on-navy { background: var(--color-on-navy); color: var(--color-text); }
+.btn:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* ---------- Bands below the fold ---------- */
+.band { padding-block: var(--space-8); }
+@media (min-width: 768px) { .band { padding-block: var(--space-9); } }
+/* The floor line of the two rooms and the opening of the second screen. The rooms stop --space-7 short of the fold,
+   so this rule and the first band of the compare sentence are always cut by the viewport edge: the page never ends
+   on a false floor (runbook section 4). */
+.band--lead { border-top: 1px solid var(--color-border); padding-block: var(--space-6) var(--space-8); }
+.comparison { padding-top: 0; } /* the lead band above it already carries the section gap */
+.compare-lead { font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-width: var(--measure-prose); }
+.compare-lead a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.compare-lead a:hover { text-decoration-thickness: 2px; }
+.eyebrow { margin-bottom: var(--space-3); }
+.sources { margin-top: var(--space-6); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+
+/* Comparison: a real table from 768 with equal school columns; stacked blocks below, each cell labelled */
+.compare-table { width: 100%; max-width: var(--container-max); table-layout: fixed; border-collapse: collapse; margin-top: var(--space-6); }
+caption { text-align: left; font-family: var(--font-serif); font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+thead th, thead td { text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: 0 var(--space-4) var(--space-3) 0; border-bottom: 1px solid var(--color-text); }
+thead .corner { width: 20%; }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-4) var(--space-4) var(--space-4) 0; border-bottom: 1px solid var(--color-border); }
+tbody th { font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); padding-top: calc(var(--space-4) + 0.4em); }
+tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
+@media (max-width: 767px) {
+  .compare-table, .compare-table caption, .compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; width: 100%; }
+  .compare-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  tbody tr { padding-block: var(--space-4); border-bottom: 1px solid var(--color-border); }
+  tbody th, tbody td { border: 0; padding: 0; }
+  tbody th { margin-bottom: var(--space-3); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 400; letter-spacing: 0; text-transform: none; line-height: var(--leading-tight); color: var(--color-text); }
+  tbody td + td { margin-top: var(--space-3); }
+  tbody td::before { content: attr(data-label); display: block; font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-1); }
+}
+
+/* The rooms again, compressed, where the choice is made a second time (no accent: the mark is spent once) */
+.places--echo { margin-top: var(--space-8); }
+.places--echo .place { padding-block: var(--space-5); }
+@media (min-width: 1024px) { .places--echo .place { padding-block: var(--space-6); } }
+.echo-name { margin-top: var(--space-2); margin-bottom: var(--space-4); font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); }
+.places--echo .btn { margin-top: auto; }
+
+/* TEFA module on the Anywhere tint */
+.tefa { margin-top: var(--space-8); padding: var(--space-5); background: var(--color-anywhere-tint); border-radius: var(--radius-sm); max-width: var(--measure-prose); }
+.tefa p { margin-top: var(--space-3); }
+.tefa .text-link { margin-top: var(--space-2); }
+
+/* Proof: the four facts of copy.md section 4 on the warm surface, the roof both rooms share */
+.proof { background: var(--color-surface); }
+.facts { margin-top: var(--space-6); max-width: var(--container-max); border-bottom: 1px solid var(--color-border); }
+@media (min-width: 768px) { .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); border-bottom: 0; } }
+@media (min-width: 1024px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.facts li { padding-block: var(--space-5); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); max-width: 40ch; }
+
+/* Steps */
+.steps-intro { margin-top: var(--space-4); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.steps-list { counter-reset: step; margin-top: var(--space-6); max-width: var(--measure-prose); }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr); align-items: baseline; padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+.apply { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+
+/* Connect */
+.connect { padding-top: 0; }
+.connect-list { margin-top: var(--space-6); max-width: var(--measure-prose); }
+.connect-list a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: calc(var(--space-6) + var(--space-5)); padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-weight: 500; text-decoration: none; }
+.connect-list li:last-child a { border-bottom: 1px solid var(--color-border); }
+.connect-list a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Text links on light surfaces. inline-block, not inline-flex, so the arrow stays on the last word when the label
+   wraps (it floated to the far right of a two-line label at 375). */
+.text-link { display: inline-block; min-height: 44px; padding-block: var(--space-2); font-weight: 500; text-decoration: underline; text-underline-offset: 0.18em; }
+.text-link:hover { text-decoration-thickness: 2px; }
+
+/* Current families */
+.families { border-top: 1px solid var(--color-border); }
+.families-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-5); }
+.families h2 { font-size: var(--text-xl); }
+.families p { margin-top: var(--space-2); color: var(--color-text-muted); }
+
+/* ---------- Footer: navy, facts block, links, both marks on their own panels ---------- */
+.on-navy { background: var(--color-navy); color: var(--color-on-navy); }
+.site-footer { padding-block: var(--space-8) var(--space-7); }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+@media (min-width: 900px) { .footer-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-8); } }
+.footer-facts { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-width: 48ch; }
+.footer-contact { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
+.footer-logo--light { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
+.footer-logo img { height: 27px; width: auto; }
+.footer-logo--navy { padding-inline: 0; background: var(--color-navy); }
+.footer-logo--navy img { height: 32px; }
+
+/* ---------- Forced colours (K3 F38) ----------
+   Every background is replaced there, so the colour edge and the two rooms would read as one plane. The rooms keep
+   a CanvasText border (the seam becomes a drawn line), the hinge mark becomes CanvasText, and the two marks keep
+   their own grounds: the GT School mark is navy-and-gold artwork that reads on Canvas, the GT Anywhere mark is
+   white lettering and keeps its navy plate through forced-color-adjust. */
+@media (forced-colors: active) {
+  .place { border-color: CanvasText; }
+  .seam-mark { background: CanvasText; }
+  .place-mark--plate, .footer-logo--navy, .footer-logo--light { forced-color-adjust: none; }
+  .btn { border-color: ButtonText; }
+  :focus-visible, .place--anywhere :focus-visible, .on-navy :focus-visible, .site-header :focus-visible, .footer-logo--light:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+}
+
+/* ---------- Reduced motion (MN-16, R8): every duration --duration-none, every state visible ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+  .place-line { opacity: 1 !important; transform: none !important; }
+}
