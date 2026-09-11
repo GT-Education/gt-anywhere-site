@@ -256,6 +256,13 @@ ul, ol { padding: 0; list-style: none; }
   .line-cell__name { font-weight: 500; }
 }
 
+/* Phone rows around 740 tall (V1 360 by 740, V8 430 by 739): the lines row finished 6px above the bottom edge and the
+   long comparison row below it opened past the edge with its text out of sight, so the ledger read as closed. Sixteen
+   more pixels above the lines put the row itself across the edge. Nothing above the lines moves. */
+@media (max-width: 899px) and (min-height: 720px) and (max-height: 760px) {
+  .ledger .ledger__lines { padding-top: var(--space-5); }
+}
+
 /* Two-up stacked form, 736 to 899px (landscape phones, portrait tablets): the doors side by side, each row's two
    school cells side by side under the row label, the foot CTAs side by side. 736px is the narrowest width at which
    "Explore the Georgetown campus" stays on one line in two equal doors. */

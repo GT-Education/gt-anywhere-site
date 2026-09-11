@@ -1,13 +1,13 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:44:31.468Z; page `/0_plan/mockups/M08-the-letter/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:49:32.656Z; page `/0_plan/mockups/M08-the-letter/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
 | V1 | 360 by 740 | fold | 716 | 56 | 289 | 326 | 419 | 510 | yes | PASS |
 | V2 | 375 by 629 | fold | 605 | 56 | 291 | 328 | 421 | 512 | yes | PASS |
 | V3 | 390 by 664 | fold | 640 | 56 | 294 | 331 | 424 | 515 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 56 | 294 | 331 | 424 | 515 | no | FAIL false floor: nothing visible continues past the bottom edge |
+| V4 | 393 by 659 | fold | 635 | 56 | 294 | 331 | 424 | 515 | yes | PASS |
 | V5 | 414 by 715 | fold | 691 | 56 | 265 | 302 | 488 | 665 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 56 | 265 | 302 | 488 | 665 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 56 | 263 | 300 | 393 | 485 | yes | PASS |
@@ -48,11 +48,11 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 |---|---|---|
 | V1 | yes | p.door-line ink 693 to 801 |
 | V2 | yes | p.door-line ink 544 to 680 |
-| V3 | yes | p.door-line ink 651 to 759 |
-| V4 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V3 | yes | p.door-line ink 647 to 755 |
+| V4 | yes | p.door-line ink 647 to 756 |
 | V5 | yes | p.postscript ink 697 to 745 |
 | V6 | yes | section.section ink 793 to 3428 |
-| V7 | yes | p.door-line ink 621 to 729 |
+| V7 | yes | p.door-line ink 617 to 725 |
 | V8 | yes | p.postscript ink 699 to 748 |
 | V9 | yes | section.section ink 822 to 3578 |
 | V10 | yes | p.door-line ink 278 to 363 |
@@ -66,4 +66,4 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
 | V19 | yes | p.postscript ink 563 to 588 |
 
-## Result: 1 failure(s)
+## Result: all required rows pass

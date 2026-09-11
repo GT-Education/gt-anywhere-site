@@ -107,9 +107,11 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
 /* Phone rows between 640 and 699 tall (V3 664, V4 659, V7 681): the two moved door lines sit closer to the second CTA and to
    each other (16 and 12px), so the second paragraph starts inside the viewport and is cut by its bottom edge instead of the
    first ending just above it (a false floor measured at 655 of 664 and 659). Only the last door's CTA margin changes (the gap
-   below the second CTA), so neither CTA moves. */
+   below the second CTA), so neither CTA moves. The margin is now zero rather than 4px: at 393 by 659 the second paragraph
+   began exactly at the 8px threshold the runner requires above the bottom edge, so the reader saw its leading and not its
+   first line. The row gap still holds the two paragraphs 12px apart. */
 @media (max-width: 767px) and (min-height: 640px) and (max-height: 699px) {
-  .door:last-child > .door-cta { margin-bottom: var(--space-2); }
+  .door:last-child > .door-cta { margin-bottom: 0; }
   .door > .door-line { margin-top: var(--space-2); }
 }
 

@@ -95,6 +95,14 @@ h1 { font-weight: var(--h1-weight); font-size: var(--text-3xl); line-height: var
    line sits under its own card in the same column and the run-in name is hidden visually, kept for readers. */
 .door-lines { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin-top: var(--space-4); font-size: var(--text-base); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); }
 .door-lines li { max-width: var(--measure-prose); }
+
+/* Phone rows where the statement is ordered below the lines: the lines sit lower so the second one is cut by the bottom
+   edge rather than ending just above it. At 430 by 739 it finished at 737 of 739 and the statement's rule opened past the
+   edge, so the screen read as complete with the admissions statement invisible. Nothing above the lines moves. This sits
+   after the base rule above, which would otherwise win on source order. */
+@media (max-width: 767px) and (min-height: 700px) and (max-height: 759px) {
+  .door-lines { margin-top: calc(var(--space-4) + var(--space-3)); }
+}
 .door-run-in { font-weight: 500; color: var(--color-on-navy); margin-right: 0.35em; }
 @media (min-width: 768px) {
   .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }

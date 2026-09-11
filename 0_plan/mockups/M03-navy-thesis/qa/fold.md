@@ -1,11 +1,11 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:44:18.836Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:48:26.768Z; page `/0_plan/mockups/M03-navy-thesis/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
 | V1 | 360 by 740 | fold | 716 | 88 | 341 | 370 | 500 | 613 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 88 | 327 | 356 | 478 | 591 | no | FAIL false floor: nothing visible continues past the bottom edge |
+| V2 | 375 by 629 | fold | 605 | 88 | 327 | 356 | 478 | 591 | yes | PASS |
 | V3 | 390 by 664 | fold | 640 | 56 | 314 | 343 | 472 | 586 | yes | PASS |
 | V4 | 393 by 659 | fold | 635 | 56 | 314 | 343 | 473 | 586 | yes | PASS |
 | V5 | 414 by 715 | fold | 691 | 56 | 285 | 314 | 444 | 557 | yes | PASS |
@@ -47,7 +47,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
 | V1 | yes | div.wrap ink 648 to 828 |
-| V2 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V2 | yes | div.wrap ink 618 to 798 |
 | V3 | yes | div.wrap ink 621 to 801 |
 | V4 | yes | div.wrap ink 621 to 802 |
 | V5 | yes | div.wrap ink 592 to 749 |
@@ -55,7 +55,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V7 | yes | div.wrap ink 623 to 803 |
 | V8 | yes | div.wrap ink 595 to 751 |
 | V9 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
-| V10 | yes | div.wrap ink 317 to 428 |
+| V10 | yes | div.wrap ink 309 to 420 |
 | V11 | yes | section.section ink 1002 to 3416 |
 | V12 | yes | section.section ink 1027 to 3399 |
 | V13 | yes | surface changes from rgb(0, 42, 58) to rgb(252, 244, 239) between the last CTA and the bottom edge, and the page continues below |
@@ -66,4 +66,4 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
 | V19 | no | nothing visible starts below the last CTA and crosses the bottom edge |
 
-## Result: 1 failure(s)
+## Result: all required rows pass
