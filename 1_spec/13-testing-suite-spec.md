@@ -138,3 +138,24 @@ Each row is one assertion set. Layer codes are from section 1. Automation: `auto
 | T-169 | External-system checks documented as procedures with evidence templates (TC-039 to TC-042, TC-051, TC-052, TC-056) | S5 | Fable | AN-07, AN-14 | Each has a template and a first run | `1_spec/runs/` | 60 min |
 | T-170 | Mock gate run (TC-070) against all five mocks before E2 | S4 | Watchdog, Haiku 4.5 | REQ-019 | Report per mock | `1_spec/runs/T-170.md` | 60 min |
 | T-171 | Phase 0 regression (TC-071) against both live sites monthly | S0 onward | Watchdog, Haiku 4.5 | REQ-001 | Zero hits | Output | 30 min |
+
+## 14. Mock visual QA layer (added 2026-09-11, runs with D-028)
+
+Source: `0_plan/17-design-studio-runbook.md` section 4. Implemented as Playwright Test specs under `tests/mocks/` once D-028 is approved; until then the same measurements run through the shared browser one size at a time.
+
+| Test | Viewports | Pass condition | Evidence |
+|---|---|---|---|
+| Fold fit | All 16 in the matrix | Header, umbrella sentence, provenance line and both first-screen door CTAs fully inside the viewport with no scroll | Viewport screenshot per size, JSON of bounding boxes |
+| No horizontal overflow | All | `document.documentElement.scrollWidth` equals the viewport width | JSON |
+| No overlap | All | No two text-bearing elements' bounding boxes intersect unless one contains the other | List of intersecting pairs, empty |
+| No clipped text | All | No text node's scroll size exceeds its box in either axis | List, empty |
+| Target size | All | Every link and button at least 44 by 44 CSS pixels | List of offenders, empty |
+| Text contrast | All | Every text node against its effective background at or above 4.5:1, or 3:1 for text 24px and larger or 19px bold | Per-node computed table |
+| Focus visibility | 390 and 1440 | Every focusable element shows a focus indicator with 3:1 against its surroundings when tabbed | Tab-order screenshots |
+| Heading structure | All | Exactly one h1; heading levels do not skip | JSON |
+| Images | All | After a stepped scroll (four steps, 600 ms apart) every image is complete with a natural width above zero; every image has alt | List, empty |
+| Console | All | Zero errors and zero warnings | Console capture |
+| Reduced motion | 390 and 1440 with `reduce` emulated | No computed transition duration or animation on any element | JSON |
+| Links | Once | Every href resolves to an allowed host or an in-page anchor that exists | List |
+| Video | 390 by 844 and 1440 by 900 | A recorded scroll from top to bottom at reading speed, for the critic and for Nari | `.webm` per mock and size |
+
