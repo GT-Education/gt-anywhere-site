@@ -8,7 +8,7 @@
 | Sources not fetched | Ten, listed in section 10. Nothing below is built on them |
 | Caution | Every number below is a fact about **another organisation's** design system (a duration in Carbon, a step count in Radix, a component count in USWDS). None is a claim about GT School, so none needs a claims-register row. REQ-022 and DEL-018 still govern anything that reaches a GT surface |
 | Relation to other clusters | K13 **consumes** K2 section 5 (the fluid type scale), K3 section 5 (five proposed colour roles, the accent demotion, the rename), K4 section 8 (the ten-move motion vocabulary and the easing proposal) and K7 section 5d (the doors/switcher split), and reconciles them into one token architecture. Where K13 and `1_spec/04` disagree, section 5 says so explicitly and the change goes through the register, never straight into the spec |
-| Status | Draft 2026-09-11, Fable. Astra E4 pending |
+| Status | Draft 2026-09-11, Fable. Astra E4 reviewed 2026-09-11 (verdict: Rework, `ensemble/E4-knowledge-base.md`); reworked 2026-09-11 per `kb/KB-RESOLUTIONS.md` — see the "Rework log (E4)" section at the end of this file |
 
 ---
 
@@ -57,7 +57,7 @@ Six questions, in order.
 | K13-F21 | USWDS's customisation model is the key one for GT: a consumer configures a **settings layer** and never edits source. Settings "are Sass variables that begin with the `$theme-` prefix and are typically defined with USWDS design tokens", and the configuration "accepts only current USWDS settings variables" — anything else "will result in an error". Customisation is bounded by the system, so upgrades survive | USWDS, *Settings*, https://designsystem.digital.gov/documentation/settings/ (fetched 2026-09-11) |
 | K13-F22 | GOV.UK offers the same two-track distribution: npm (which lets a team "selectively include the CSS for individual components" and override colours) or "download and include compiled stylesheets, JavaScript and the asset files", which forfeits selective imports and templating | GOV.UK Design System, *Production*, https://design-system.service.gov.uk/get-started/production/ (fetched 2026-09-11) |
 | K13-F23 | Brad Frost's governance process makes the **one-off versus pattern** decision an explicit gate (step 3 of 10): a "snowflake" is "a one-off component that only really pertains to one specific product", versus a component that is "part of library that serves all products". Snowflakes are logged against the product backlog so they can be refactored later. "Establishing a design system governance process is perhaps one of the most important things you can do to prevent entropy" | Brad Frost, *A design system governance process*, 4 November 2019, https://bradfrost.com/blog/post/a-design-system-governance-process/ (fetched 2026-09-11) |
-| K13-F24 | USWDS publishes **47 components** (Accordion … Validation) and defines them modestly: "USWDS components are simple and consistent solutions to common user-interface needs." Forty-seven is the ceiling for a system serving "dozens of agencies and nearly 200 sites" — evidence that a component set for two sites should be an order of magnitude smaller | USWDS, *Components overview*, https://designsystem.digital.gov/components/overview/ and *About*, https://designsystem.digital.gov/about/ (both fetched 2026-09-11) |
+| K13-F24 | USWDS publishes **47 components** (Accordion … Validation) for a system serving "dozens of agencies and nearly 200 sites," and defines them modestly: "USWDS components are simple and consistent solutions to common user-interface needs." **Judgment:** treating 47-for-nearly-200-sites as a ceiling that scales down to "an order of magnitude smaller" for a two-site system is this agent's inference, not something either source states — no source ties a component count to a site count, and an inventory is evidence of what USWDS shipped, not of a limit any other system must respect | USWDS, *Components overview*, https://designsystem.digital.gov/components/overview/ and *About*, https://designsystem.digital.gov/about/ (both fetched 2026-09-11) |
 | K13-F25 | Atomic design's contribution is the vocabulary for *where* a component sits, and the argument for a living page over static comps: a system lets you "create systems that promote consistency and scalability while simultaneously showing things in their final context" | Brad Frost, *Atomic Web Design*, 10 June 2013, https://bradfrost.com/blog/post/atomic-web-design/ (fetched 2026-09-11) |
 | K13-F26 | The style-guide-as-artifact predates design systems and its failure mode was identified early: guides are "maintained by front-end developers… documenting every component and its code on the site in one place", and the risk is post-launch drift, when "new designers and developers come in and make adjustments". The prescription is to start from base elements — "headings, links, tables, blockquotes, ordered lists, unordered lists and forms" — and show interaction states | Anna Debenham, *Front-end Style Guides*, 24 ways, 7 December 2011, https://24ways.org/2011/front-end-style-guides/ (fetched 2026-09-11) |
 
@@ -88,7 +88,7 @@ Six questions, in order.
 | # | Finding | Source |
 |---|---|---|
 | K13-F44 | CSS custom properties give a dependency-free system the two things a build step is usually bought for: **inheritance** ("Inherited: yes") and **cascade participation** — "Custom properties are scoped to the element(s) they are declared on, and participate in the cascade". A property redefined on a container overrides it for that subtree only, which is how a per-school theme works with no compiler | MDN, *Custom properties (`--*`)*, last modified 2 February 2026, https://developer.mozilla.org/en-US/docs/Web/CSS/--* (fetched 2026-09-11) |
-| K13-F45 | Cascade layers remove the last real argument for a preprocessor in a small system: "The first declared layer gets the lowest priority and the last declared layer gets the highest priority", which "enables using simpler CSS selectors because you do not have to ensure that a selector will have high enough specificity to override competing rules" | MDN, *`@layer`*, last modified 20 April 2026, https://developer.mozilla.org/en-US/docs/Web/CSS/@layer (fetched 2026-09-11) |
+| K13-F45 | MDN on `@layer`: "The first declared layer gets the lowest priority and the last declared layer gets the highest priority", which "enables using simpler CSS selectors because you do not have to ensure that a selector will have high enough specificity to override competing rules." **Judgment:** that this "removes the last real argument for a preprocessor" is this agent's inference, not MDN's claim — MDN does not compare `@layer` to a preprocessor, and nesting, mixins and loops are preprocessor arguments cascade layers do not address | MDN, *`@layer`*, last modified 20 April 2026, https://developer.mozilla.org/en-US/docs/Web/CSS/@layer (fetched 2026-09-11) |
 | K13-F46 | `:focus-visible` "applies while an element matches the `:focus` pseudo-class and the UA determines via heuristics that the focus should be made evident", and lets authors "change the appearance of the focus indicator without changing when the focus indicator appears". A `@supports not selector(:focus-visible)` fallback is the documented pattern | MDN, *`:focus-visible`*, last modified 10 September 2026, https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible (fetched 2026-09-11) |
 | K13-F47 | Carbon's motion scale is six durations — `duration-fast-01` 70 ms, `fast-02` 110, `moderate-01` 150, `moderate-02` 240, `slow-01` 400, `slow-02` 700 — with nine easings built from three types (standard, entrance, exit) × two styles (productive, expressive); `motion(standard, productive)` is `cubic-bezier(0.2, 0, 0.38, 0.9)`. The sizing law: "the larger the change in distance (traveled) or size (scaling) of the element, the longer the animation takes." Accessibility line: "Always provide alternatives for interface state transitions. Consider simplified or reduced motion designs for mobile and tablet" | Carbon, `elements/motion/overview.mdx`, https://raw.githubusercontent.com/carbon-design-system/carbon-website/main/src/pages/elements/motion/overview.mdx (fetched 2026-09-11) |
 | K13-F48 | `prefers-reduced-motion` has exactly two values — `no-preference` ("evaluates as false") and `reduce` — and MDN's worked example **replaces** an animation rather than deleting it: a pulse becomes a dissolve under `reduce` | MDN, *`prefers-reduced-motion`*, last modified 10 June 2026, https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion (fetched 2026-09-11) |
@@ -128,10 +128,10 @@ Six questions, in order.
 | K13-A6 | **Two headers that are two designs.** If the landing header and the school header are authored separately, they will diverge within one release. GOV.UK's answer is two *components in one system*, sharing the same tokens and the same source order | K13-F29 |
 | K13-A7 | **A switcher built as a `<select>` or a listbox.** It steals arrow keys, hides the destinations from a link-list reader, and needs JavaScript to do what an anchor does for free | K13-F42, K13-F36 |
 | K13-A8 | **Hover-expanded chrome.** "Hover is difficult for some users and won't work on touch screens" — and two thirds of GT sessions are mobile | K13-F36, fact 5 |
-| K13-A9 | **A sticky header on a 596–675 px in-app viewport.** It costs first-screen height the routing page cannot spare and puts SC 2.4.11 at risk on every focusable control below it | K13-F41, `17` §4 |
+| K13-A9 | **A sticky header on the in-app-viewport stand-in.** `17` §4's V2–V8 rows (629–839 px, 24px headroom already subtracted) are the stress test until REQ-024 measures the real apps. A sticky header costs first-screen height the routing page cannot spare and puts SC 2.4.11 at risk on every focusable control below it | K13-F41, `17` §4 |
 | K13-A10 | **A styleguide that lists tokens and components but not states, measurements or drift.** That is a swatch page; it will pass while the sites rot | K13-F26, K13-F14 |
 | K13-A11 | **Editing the copy, not the source.** USWDS forbids it structurally by making settings the only surface; GT has no compiler to enforce it, so the checker must | K13-F21, K13-F20 |
-| K13-A12 | **A blanket `transition-duration: 0.01ms !important` reduced-motion nuke.** It kills focus and hover feedback along with the decoration, and fails K4's clause (b). MDN and web.dev both model replacement, not deletion | K13-F48, K13-F49, K4 §8.4 |
+| K13-A12 | **A blanket `transition-duration: 0.01ms !important` reduced-motion nuke.** Hover, focus and every other rest-state style still render — a duration override changes only how fast the page arrives at a state, never whether the state exists. What actually breaks: `0.01ms` is not the `--duration-none: 0ms` token, so §8.5's D2 literal-drift sweep cannot catch it, and it exempts any movement driven by toggling a class in JavaScript rather than transitioning a CSS property — exactly the case K13-P12's `no-preference` gate exists to close. MDN and web.dev both model a token or a gated replacement, not a universal duration override | K13-F48, K13-F49, K4 §8.4 |
 | K13-A13 | **Borrowing a whole vocabulary because it is published.** Material ships 16 durations and 11 easings; Carbon ships 6 and 9. GT needs 4 and 3. Adopting a large scale to look rigorous is the same error as inventing one | K13-F5, K13-F47, K13-P3 |
 
 ---
@@ -225,7 +225,7 @@ Twenty directions must differ in layout, hierarchy, density, imagery and copy (D
 | C11 | Comparison table | §3 | S1, S8, S9, S10, S13, S14 | Real `table`, `scope`, `caption`; stacked to 1199 px per K2 §5b | V7 |
 | C12 | Proof strip / figure with footnote | §4 | S1, S3, S9, S12 | Footnote is a link to the claims-register source; figure never animates (K4-A8) | V6 ×1 max |
 | C13 | Application steps | §5 | S1, S9, S14 | Ordered list; step numbers are content, not decoration | none |
-| C14 | Accordion / disclosure | §3, FAQ | S1, S3, S8, S11, S13 | `button` + `aria-expanded`; jQuery-free; `grid-template-rows` not `max-height` | V7 |
+| C14 | Accordion / disclosure | §3, FAQ | S1, S3, S8, S11, S13 | `button` + `aria-expanded`; jQuery-free; open/close is an instant state change, not an animated reveal (disclosures are instant, R9) | none |
 | C15 | TEFA module | §4 | S1, S9, plus shown/hidden by expiry | Region-independent copy readable by all | none |
 | C16 | Schedule visual | §3 | S1, S11, S13 | Also rendered as a table for screen readers | V8 |
 | C17 | Photo strip | §3 | S1, S2, S4, S14 | User-driven scroll only; `scroll-snap-type: x proximity`; no autoplay | V9 |
@@ -236,7 +236,7 @@ Twenty directions must differ in layout, hierarchy, density, imagery and copy (D
 | C22 | Focus ring (cross-cutting) | — | S3, S12 | K3 §5d per-surface table; two-colour ring wherever navy is adjacent; `:focus-visible` with a `@supports not selector()` fallback (K13-F46) | never animated (V3) |
 | C23 | Decision helper (Phase 2) | — | S1, S3, S11, S13 | Buttons with full labels; result announced; hidden without JS | V5 |
 
-Twenty-three entries, of which **two (C2, C20) are not in `1_spec/04` §3 today** and one (C8) is specified there with the wrong semantics. Twenty-three against USWDS's forty-seven for two hundred sites (K13-F24) is the right order of magnitude for two.
+Twenty-three entries, of which **two (C2, C20) are not in `1_spec/04` §3 today** and one (C8) is specified there with the wrong semantics. Twenty-three is what this pass through `copy.md` and the shell actually enumerates for GT's two sites, not a fraction of USWDS's forty-seven arrived at by scaling — F24 marks that scaling inference Judgment. The two counts are smaller-and-larger in the same direction (a two-site system needs fewer components than one serving nearly 200), but the ratio itself proves nothing.
 
 ### 8.3 The shell: what the landing has, what the school sites have, and the switcher
 
@@ -253,18 +253,20 @@ K7 §5d established that the doors and the switcher are two different components
 | Footer — meta band | mandatory | mandatory, identical | Canada.ca sub-footer (K13-F28); NHS meta band (K13-F32) |
 | Footer — sibling link | n/a | mandatory, both directions | K7 §5d's Davidson fallback, promoted to a shell requirement |
 | Footer — umbrella block | n/a | mandatory: GT School mark, both school links, the facts block | USWDS identifier, the parent-agency block that is separate from the footer (K13-F34) |
-| Sticky behaviour | none on the first screen | none below 768 px | SC 2.4.11 (K13-F41); in-app viewports are 596–675 px tall (`17` §4) |
+| Sticky behaviour | none on the first screen | none below 768 px | SC 2.4.11 (K13-F41); the in-app stand-in rows (V2–V8) run 629–839 px tall (`17` §4) |
 
 **The switcher, specified.** This is the single largest correction K13 makes to `1_spec/04`.
 
 ```html
 <nav class="switcher" aria-label="GT School campuses">
   <ul>
-    <li><a href="https://gt.school/georgetown" aria-current="true">Georgetown Campus <span>In person</span></a></li>
+    <li><a href="https://georgetown.gt.school/" aria-current="true">Georgetown Campus <span>In person</span></a></li>
     <li><a href="https://anywhere.gt.school/">GT Anywhere <span>Online</span></a></li>
   </ul>
 </nav>
 ```
+
+Hosts shown are SE-01's decided subdomain architecture (`gt.school` for the landing, `georgetown.gt.school`, `anywhere.gt.school`). Today Georgetown is still served from `www.gt.school`; the subdomain move is not implemented in the mocks (R16).
 
 | Property | Rule | Why |
 |---|---|---|
@@ -371,7 +373,7 @@ K4 §8.5 proposes the token block; K13 fixes its shape and its provenance.
 | Reduced motion, the duration half | Override at `:root` under `reduce`. One block, and every transition in the system collapses | K13-F48 |
 | Reduced motion, the movement half | Gate the *transform* behind `no-preference` using a tier-2 token with a `var()` fallback of zero, so the movement never exists for a reduced-motion reader while the fade and the state change survive: `.door__line { transform: translateY(var(--door-line-rise, 0)); }` with `@media (prefers-reduced-motion: no-preference) { .door__line { --door-line-rise: 4px; } }` | K13-F49, K13-F44, K4-F38 |
 | Why both, and not one | Durations are tokens — one place, so an override is safe. Transforms are per-component — many places, and only the `no-preference` gate guarantees the hidden state never exists for a reader who has motion off. MDN models the override; web.dev models the gate; GT needs both, for different halves | K13-F48, K13-F49 |
-| What is never animated | Focus rings (V3), figures (K4-A8), the LCP element, and anything above the fold at any of the 13 matrix sizes | K4 §8.2 |
+| What is never animated | Focus rings (V3), figures (K4-A8), the LCP element, and anything above the fold at any of the 19 matrix sizes | K4 §8.2 |
 
 ### 8.7 A calibrated 5 for the rubric row **Continuity (L2)**
 
@@ -381,15 +383,15 @@ The row asks two questions — *"Does it look like the front door of the two sit
 |---|---|---|
 | CT1 | Every value in the mock's CSS resolves to a **tier-1** token. Zero literals; zero `--gt-` primitives referenced outside `tokens.css` | D2 sweep in the QA file |
 | CT2 | The mock's stamped system version matches `design-system/VERSION`, and `check-design-system.mjs` is clean on the mock directory (D1, D2, D3) | Checker output, pasted into the QA file |
-| CT3 | Every declared departure names the token, the reason and the register row; at most three per mock | Rationale table (DD-19) |
-| CT4 | Header and footer are the **partials**, included by marker, not re-authored. The marker regions hash-match source byte-for-byte | D1 per region |
+| CT3 | Every declared departure names the token, the reason and the register row in the rationale table. A per-mock departure count (three, in the first draft) is an option a brief may set for itself (R15), not a scoring floor — the row credits the naming, not the count | Rationale table (DD-19) |
+| CT4 | Reusing the header and footer **partials** by marker rather than re-authoring them is an option a brief may adopt (R15); where a direction does reuse them, the marker regions hash-match source byte-for-byte as the strongest evidence for this row. A direction that authors its own shell is not disqualified from a 5, provided the departure is named in the rationale (CT3) | D1 per region, or the rationale table where a direction departs |
 | CT5 | **Shell isolation:** lifting the header and footer partials into a bare HTML page with only `tokens.css` renders them correctly — no dependency on the mock's own stylesheet | `tests/shell-isolation.spec.ts`, screenshots at 390 and 1440 |
 | CT6 | The same partial renders both school variants (`data-school="georgetown"`, `data-school="anywhere"`) with only the name, the nav items and the contact block differing | Two captures per viewport |
 | CT7 | Side-by-side with the two live sites (from the mirror and R1/R4 text evidence, never a browser on GT) reads as one family, and the critic **names three specific shared signals** — not "it feels consistent" | Side-by-side grid plus the critic's three named signals |
 | CT8 | Repeated navigation occupies the same relative order on the landing capture and both school-shell captures (SC 3.2.3), and the same control carries the same accessible name on all three (SC 3.2.4) | Accessibility-tree dump per surface, diffed |
 | CT9 | Switcher and sibling link are word-for-word mirrored in both directions; the switcher marks the current school with `aria-current`; neither is a listbox or a `<select>` | Markup assertion |
 | CT10 | **The N-campus proof:** adding a third school changes one data file and zero CSS rules, captured at N=3 in both the door list and the switcher | Capture at N=3, plus the diff |
-| CT11 | No snowflakes: every component is in §8.2's inventory, or is declared a one-off in the rationale with the reason it will not be promoted | Component census against §8.2 |
+| CT11 | Drawing every component from §8.2's inventory is an option a brief may adopt (R15), not a ceiling; a component outside the inventory is fine, provided the rationale names it as a one-off (K13-F23's snowflake gate) and says whether it is a candidate for promotion | Component census against §8.2 |
 | CT12 | No cascade dependence: the mock renders identically with `gt.page` loaded after a stub of the live Webflow stylesheet | One extra capture |
 
 **Exemplars for this row:** **Canada.ca** (K13-F27, K13-F28) for a shell that hundreds of independently-run sites inherit unchanged, including the sentence to borrow — "Don't customize the mandatory elements"; **NHS** (K13-F31) for the one legitimate per-organisation variation, done as a header *variant* rather than a second header; **USWDS's identifier** (K13-F34) for the footer block that makes the parent unmistakable on every child site. **Anti-exemplar:** the checked-in mirror itself, where nav, footer and the application modal are duplicated verbatim across nine pages with no source — the exact entropy K13-F23 describes.
@@ -403,7 +405,7 @@ The row asks two questions — *"Does it look like the front door of the two sit
 | `1_spec/04` §5 | Partial markers gain closing markers; the sync step writes `MANIFEST.json`; V-032 becomes `check-design-system.mjs` with the three drift classes |
 | `1_spec/04` §8 | T-064 now includes the tier split and the alias table; T-067 includes the manifest and the checker; T-071's acceptance becomes SG1–SG10, not "every token and component appears" |
 | `mockups/shared/tokens.css` | Tier 0 block added; K2's `clamp()` values; K3's PR-1…PR-5; `--ease-emphasized` deleted; `--ease-out`/`--ease-in` added; reduced-motion override block added; `@layer` order declared |
-| `07` register | New rows: the tier split and naming anatomy; the `--color-accent-contrast` rename and its alias period; the switcher-semantics correction (contradicts `1_spec/04` §3 as written, so it must go through the ensemble, not straight into the spec); MN-13's easing amendment already proposed by K4 |
+| `07` register | The switcher-semantics correction is now **DD-41** (doors and the campus switcher are different components), recommended (a); the tier split, naming anatomy, the `--color-accent-contrast` rename and its alias period, and the 23-component/14-state inventory are now **D-034** (design-system contract), recommended (a): switcher semantics now, the rest at hardening after G1. Neither is re-proposed here. MN-13's easing amendment remains K4's, already proposed |
 | `17` §5 brief | A new **System** field per mock: which components from §8.2 it uses, which states it must show, and any declared departure |
 | `17` §6 rubric | The Continuity row gets CT1–CT12 |
 | `1_spec/13` and the runner | New deterministic tests: D1/D2/D3 drift, CT5 shell isolation, CT6 both school variants, CT8 accessibility-tree diff across three surfaces, CT10 at N=3, CT12 cascade isolation |
@@ -441,3 +443,34 @@ Listed so that nothing above is built on them, and so a later pass knows what is
 | Australian Government Design System | `designsystem.gov.au/components/header/` | DNS resolution failed |
 | U-M global header | `vpcomm.umich.edu/resources/global-header/` | HTTP 403 |
 | WebSearch | — | Session budget exhausted at the first call, so **no finding here was discovered by search**; every source was reached by a canonical or raw-repository URL |
+
+---
+
+## 11. Rework log (E4)
+
+| E4 item | What changed | Where |
+|---|---|---|
+| F24: "Forty-seven is the ceiling; GT should be an order of magnitude smaller" | Kept USWDS's 47-component fact and its "nearly 200 sites" context; marked the scale-down inference **Judgment**, in its own words | Finding K13-F24 |
+| (downstream use of F24) | Removed the claim that 23 "is the right order of magnitude" against 47; reworded to say 23 is what the GT-specific inventory enumerates, not a fraction of 47 arrived at by scaling | Section 8.2, closing paragraph |
+| F45: "cascade layers remove the last real argument for a preprocessor" | Kept the two verified MDN `@layer` quotes; marked the preprocessor-replacement claim **Judgment**, noting MDN makes no such comparison and that nesting, mixins and loops are preprocessor arguments cascade layers don't touch | Finding K13-F45 |
+| A12: near-zero durations "kill focus and hover feedback along with the decoration" | Corrected: rest-state styling survives; only the transition into it is instantaneous. Reworded around the real defect — `0.01ms` is not the `--duration-none` token, so the D2 drift sweep can't catch it, and it exempts JS-driven `transform` toggles that the `no-preference` gate is meant to close | Anti-pattern K13-A12 |
+| Switcher example uses `gt.school/georgetown` | Changed the `href` to `https://georgetown.gt.school/` per SE-01's decided subdomain architecture; added a note that these are the future hosts and that Georgetown is live today at `www.gt.school` (R16) | Section 8.3, switcher code sample |
+| C14 animates layout | Removed the `V7` / `grid-template-rows`-as-animation framing; the accordion's open/close is now an instant state change, per R9 ("disclosures and layout changes are instant") | Component table, row C14 |
+| "Thirteen viewports" is now nineteen | Changed "13 matrix sizes" to "19 matrix sizes" — the only such reference in the file | Section 8.6, "what is never animated" row |
+| Hard component and partial restrictions, and the three-departure cap | Reworded CT3 (departure cap), CT4 (partial reuse) and CT11 (component-inventory ceiling) so each is an option a brief may adopt (R15); the scored test becomes documentation quality — name the token, the reason, the register row — not a hard count or a forbidden departure | Section 8.7, rows CT3, CT4, CT11 |
+| Token tiers, versioning and switcher semantics need register rows | Not re-proposed: the switcher-semantics correction is now **DD-41**; token tiers, the naming anatomy, the `--color-accent-contrast` rename and the 23-component/14-state inventory are now **D-034** (both in `07-design-decisions.md`; D-034 also in `03-decisions-and-open-questions.md`). Both are cited in place of "new rows" | Section 8.8, "`07` register" row |
+
+### Additional fixes (not in Astra's E4 list)
+
+| What | Why | Where |
+|---|---|---|
+| Header `Status` field | Updated to record this rework, matching the wording K1, K6 and K12 already use | Header metadata table |
+| "596–675 px" in-app-viewport figure | Matched no row of the current 19-row matrix (`17` §4); the actual V2–V8 stand-in range is 629–839 px. Found while applying rule 7 alongside the "thirteen viewports" fix | Anti-pattern K13-A9; section 8.3 "Sticky behaviour" row |
+
+### Disagreements with Astra
+
+None. Every E4 item for K13 checked out against the file: the quoted text and numbers were present as described, and the underlying criticism held up — an inventory is not a limit; MDN's `@layer` article doesn't compare to a preprocessor; the resolution requires state feedback to survive reduced motion, not just the decoration; the switcher example predated SE-01; the current matrix is 19 rows, not 13; and R15 makes composition and component counts options, not mandates.
+
+### Proposed register follow-ups
+
+None. This cluster's fed proposals already exist in the register: **DD-41** (doors and the campus switcher are different components, `07-design-decisions.md`) and **D-034** (design-system contract — switcher semantics now, token tiers/versioning/inventory at hardening, `07-design-decisions.md` and `03-decisions-and-open-questions.md`). No new rows are proposed here.
