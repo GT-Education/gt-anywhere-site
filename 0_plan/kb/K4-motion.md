@@ -88,7 +88,7 @@
 | S61 | [Motionographer, "What is web animation? Rachel Nabors explains it all"](https://motionographer.com/2015/08/17/what-is-web-animation-rachel-nabors-explains-it-all/) | Rachel Nabors, interviewed by Justin Cone, 2015-08-17 | "There are many properties that can be animated that do not involve movement (opacity, color, blur, form)" |
 | S62 | [A Book Apart, *Animation at Work*](https://abookapart.com/products/animation-at-work) | Rachel Nabors, 2017 | "Animation isn't merely decorative"; animation that "works to ease cognitive load" |
 
-**61 sources: 30 sites fetched (29 measurable) plus 31 documents.**
+**62 source rows in one series: S1 to S30 are external sites fetched over the network (29 with measurable CSS), S31 is GT's own mirror read from disk, S32 to S62 are documents. 61 of the 62 were fetched by K4 on 2026-09-10.**
 
 ## 2. Findings — what the craft-led field actually ships
 
@@ -318,7 +318,7 @@ The proposed token set these reference (`tokens.css`, extended — see §8.5):
 
 ### 8.3 Which directions earn motion
 
-**The rule: a direction earns motion only if its thesis contains a choice or a state the visitor operates. If its thesis is about tone, restraint, type or a single linear read, motion is decoration by definition and the direction stays still.** Applying it to the twelve directions that are named today — the five built (`05` §4) and the seven proposed in `17` §3 — with the eight remaining slots left to G-C:
+**The rule: a direction earns motion only if its thesis contains a choice or a state the visitor operates. If its thesis is about tone, restraint, type or a single linear read, motion is decoration by definition and the direction stays still.** Applying it to the twelve directions that are named today — the five built (`05` §4, so **M1 to M5**) and the seven proposed in `17` §3, which have no ids yet and are given provisional **C1 to C7** here — with the eight remaining slots (**C8 to C15**) left to G-C. The `C` prefix is provisional and local to K4; G-C assigns the real `M06` to `M20` ids.
 
 | # | Direction | Thesis | Verdict | Vocabulary allowed |
 |---|---|---|---|---|
