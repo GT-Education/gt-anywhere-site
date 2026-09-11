@@ -90,7 +90,7 @@ Written before any engineer starts, from the knowledge base:
 
 ## 6. Design rubric (the critic's scorecard)
 
-Scored 1 to 5 per row, per mock, by the Fable critic and by Astra; both must be at or above 4 on every row for the mock to leave R2.
+Scored 1 to 5 per row, per mock, by the Fable critic and by Astra; both must be at or above 4 on every row for the mock to leave the build loop. Anchors are decision-compatible: a mock that carries the decided umbrella sentence, "Tuition on request", no accreditation claim and the fixed copy can reach 5 on every row; the rubric scores how well the direction executes its argument within the decisions, never conformity to one cluster's composition (see `kb/KB-RESOLUTIONS.md`).
 
 | Row | Question the critic answers | Evidence required |
 |---|---|---|

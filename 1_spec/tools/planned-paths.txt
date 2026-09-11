@@ -91,3 +91,4 @@ tests/mocks/
 0_plan/kb/CONCEPTS-C.md
 0_plan/kb/CONCEPTS-D.md
 0_plan/kb/exemplars/index.html
+0_plan/kb/KB-RESOLUTIONS.md
