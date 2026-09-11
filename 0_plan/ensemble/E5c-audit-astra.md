@@ -1,0 +1,4 @@
+| ID | Result | Finding |
+|---|---|---|
+| DD-38 | Pass | Verified by Fable 2026-09-11: R4 and R5 read as cited in 0_plan/kb/KB-RESOLUTIONS.md; the h1 in copy.md section 1 is 22 words and 132 characters (counted); measure.py re-run reproduces 0_plan/kb/measurements/K2/output.md byte for byte, including M-02 Literata 1.485; K2 F-07 quotes Butterick 120 to 145 percent; K1 section 5a line 187 gives "about 10 lines" as an estimate |
+| D-038 | Pass | Verified by Fable 2026-09-11: 18 TTF files totalling 4,506,720 bytes under the site-id directory, 0 preload links in index.html, 0 woff2 files under assets; K2 section 5c (line 312) qualifies metric matching, the fallback can still wrap; 58 weight-600 declarations across the five mock stylesheets with 13 in --font-mono rules (audit agent counts 15, 10, 6, 14, 13); fonts.css declares Inconsolata 600; K2 M-08's blanket "all render at 700" corrected by Fable in this pass to 45 of 58 |

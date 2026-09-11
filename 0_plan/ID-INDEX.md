@@ -1,6 +1,6 @@
 # ID index
 
-Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-links.py` fails the build if a referenced id has no definition.
+Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-links.py` fails the build if a referenced id has no definition.
 
 | Series | Count |
 |---|---|
@@ -177,14 +177,14 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | D-028 | Test runner and where it lives | `0_plan/03-decisions-and-open-questions.md:36` | `02-requirements-and-deliverables.md`, `05-landing-mockups-plan.md`, `12-register-loop.md`, `17-design-studio-runbook.md`, `1_spec/13-testing-suite-spec.md` |
 | D-029 | Real-device policy for in-app browser tests | `0_plan/03-decisions-and-open-questions.md:37` | `02-requirements-and-deliverables.md`, `12-register-loop.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
 | D-030 | How analytics assertions are made in the suite | `0_plan/03-decisions-and-open-questions.md:38` | `02-requirements-and-deliverables.md`, `12-register-loop.md`, `1_spec/13-testing-suite-spec.md` |
-| D-031 | Motion in the mocks, reopened | `0_plan/03-decisions-and-open-questions.md:39` | `07-design-decisions.md`, `17-design-studio-runbook.md`, `18-knowledge-base-plan.md` |
+| D-031 | Motion in the mocks, reopened | `0_plan/03-decisions-and-open-questions.md:39` | `05-landing-mockups-plan.md`, `07-design-decisions.md`, `12-register-loop.md`, `17-design-studio-runbook.md`, `18-knowledge-base-plan.md` |
 | D-032 | Number and completeness of landing mocks | `0_plan/03-decisions-and-open-questions.md:40` |  |
-| D-033 | Claims register row shape and the claims checker scope (from K5, K6) | `0_plan/03-decisions-and-open-questions.md:41` | `05-landing-mockups-plan.md` |
+| D-033 | Claims register row shape and the claims checker scope (from K5, K6) | `0_plan/03-decisions-and-open-questions.md:41` |  |
 | D-034 | Design-system contract: switcher semantics now, token tiers and inventory at hardening (from K13) | `0_plan/03-decisions-and-open-questions.md:42` |  |
 | D-035 | Copy deck readability and the umbrella sentence question (from K14, K1, K6) | `0_plan/03-decisions-and-open-questions.md:43` |  |
 | D-036 | Escalations to Nari and counsel raised by the knowledge base | `0_plan/03-decisions-and-open-questions.md:44` | `07-design-decisions.md` |
 | D-037 | Image delivery and caching on Vercel (from K11, K9) | `0_plan/03-decisions-and-open-questions.md:45` |  |
-| D-038 | Font delivery: subset woff2, two preloads, metric-matched fallbacks (from K2) | `0_plan/03-decisions-and-open-questions.md:46` | `05-landing-mockups-plan.md` |
+| D-038 | Font delivery: subset woff2, two preloads, metric-matched fallbacks (from K2) | `0_plan/03-decisions-and-open-questions.md:46` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## Q: Open questions
 
@@ -273,14 +273,14 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | DD-35 | Product visibility | `0_plan/07-design-decisions.md:53` | `08-effectiveness-and-expanded-considerations.md`, `1_spec/05-school-sites-spec.md` |
 | DD-36 | Twice-exceptional readability | `0_plan/07-design-decisions.md:54` | `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
 | DD-37 | Share or print affordance | `0_plan/07-design-decisions.md:55` | `05-landing-mockups-plan.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/03-landing-page-spec.md` |
-| DD-38 | Type roles, display weight, leading and the fluid h1 scale (from K2, K1, K12) | `0_plan/07-design-decisions.md:56` | `05-landing-mockups-plan.md` |
+| DD-38 | Type roles, display weight, leading and the fluid h1 scale (from K2, K1, K12) | `0_plan/07-design-decisions.md:56` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
 | DD-39 | Color roles: accent as text, on-accent, focus on dark, muted on dark, strong border; gold never as text (from  | `0_plan/07-design-decisions.md:57` |  |
 | DD-40 | Naming and the provenance line (from K7) | `0_plan/07-design-decisions.md:58` |  |
 | DD-41 | Doors and the campus switcher are different components (from K7, K13) | `0_plan/07-design-decisions.md:59` | `03-decisions-and-open-questions.md` |
 | DD-42 | Photograph parity on the doors, and permissions (from K9) | `0_plan/07-design-decisions.md:60` | `03-decisions-and-open-questions.md` |
 | DD-43 | Comparison table cells repeat the value; no "Same" cells (from K6) | `0_plan/07-design-decisions.md:61` |  |
 | DD-44 | Fold and viewport contract: svh, the 19-row matrix, runner tests (from K10, K6, K5) | `0_plan/07-design-decisions.md:62` |  |
-| DD-45 | Inherit gt.school's two-door component and Locations list for N campuses (from K12) | `0_plan/07-design-decisions.md:63` | `05-landing-mockups-plan.md` |
+| DD-45 | Inherit gt.school's two-door component and Locations list for N campuses (from K12) | `0_plan/07-design-decisions.md:63` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## MD: Marketing decisions
 
@@ -332,7 +332,7 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | MN-13 | Motion tokens | `0_plan/07-design-decisions.md:112` | `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
 | MN-14 | Continuity across the hop to a school site | `0_plan/07-design-decisions.md:113` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
 | MN-15 | Motion in in-app browsers | `0_plan/07-design-decisions.md:114` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-register-loop.md`, `13-journey-map.md`, `17-design-studio-runbook.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| MN-16 | Motion vocabulary and the property contract under D-031 (from K4) | `0_plan/07-design-decisions.md:115` | `05-landing-mockups-plan.md` |
+| MN-16 | Motion vocabulary and the property contract under D-031 (from K4) | `0_plan/07-design-decisions.md:115` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## AN: Analytics and GA4 decisions
 
@@ -356,7 +356,7 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | AN-16 | Search and answer-engine visibility | `0_plan/07-design-decisions.md:138` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
 | AN-17 | HubSpot tracking | `0_plan/07-design-decisions.md:139` | `10-analytics-current-state.md`, `1_spec/06-analytics-tracking-spec.md` |
 | AN-18 | Retention, QA and documentation | `0_plan/07-design-decisions.md:140` | `05-landing-mockups-plan.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AN-19 | Consent-first tag loading, byte budgets and absolute vitals targets (from K11, K8) | `0_plan/07-design-decisions.md:141` | `05-landing-mockups-plan.md` |
+| AN-19 | Consent-first tag loading, byte budgets and absolute vitals targets (from K11, K8) | `0_plan/07-design-decisions.md:141` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## AD: Advertising channel decisions
 
@@ -376,7 +376,7 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | AD-12 | Organic profile links | `0_plan/07-design-decisions.md:160` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/08-advertising-spec.md` |
 | AD-13 | Network cross-traffic | `0_plan/07-design-decisions.md:161` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
 | AD-14 | Ownership and budget governance | `0_plan/07-design-decisions.md:162` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
-| AD-15 | Click identifiers and source values on outbound door links (from K8) | `0_plan/07-design-decisions.md:163` | `05-landing-mockups-plan.md` |
+| AD-15 | Click identifiers and source values on outbound door links (from K8) | `0_plan/07-design-decisions.md:163` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## CB: Chatbot platform decisions
 
@@ -459,9 +459,9 @@ Generated 2026-09-10 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | CR-001 | "Yes. We are fully accredited by Cognia and TEFA-eligible." | `0_plan/12-claims-register.md:23` | `02-requirements-and-deliverables.md`, `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `07-design-decisions.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/07-seo-aeo-spec.md` |
 | CR-002 | "GT School - Virtual is a Candidate for Accreditation with Cognia..." | `0_plan/12-claims-register.md:24` | `15-positioning-brief.md` |
 | CR-003 | "Accredited K-8 virtual academy for exceptional students delivering 4x faster learning..." (JSON-LD) and "Our  | `0_plan/12-claims-register.md:25` | `02-requirements-and-deliverables.md`, `03-decisions-and-open-questions.md`, `07-design-decisions.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/07-seo-aeo-spec.md` |
-| CR-004 | "Delivering 3x faster learning" | `0_plan/12-claims-register.md:26` | `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md` |
-| CR-005 | "delivering 4x faster learning" (structured data) / "Adaptive platform proven to deliver 4X learning velocity" | `0_plan/12-claims-register.md:27` | `07-design-decisions.md`, `15-positioning-brief.md`, `1_spec/07-seo-aeo-spec.md` |
-| CR-006 | "3-7x faster learning" | `0_plan/12-claims-register.md:28` | `15-positioning-brief.md` |
+| CR-004 | "Delivering 3x faster learning" | `0_plan/12-claims-register.md:26` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md` |
+| CR-005 | "delivering 4x faster learning" (structured data) / "Adaptive platform proven to deliver 4X learning velocity" | `0_plan/12-claims-register.md:27` | `03-decisions-and-open-questions.md`, `07-design-decisions.md`, `15-positioning-brief.md`, `1_spec/07-seo-aeo-spec.md` |
+| CR-006 | "3-7x faster learning" | `0_plan/12-claims-register.md:28` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md` |
 | CR-007 | "Growth Factor target (3X for grades 3+, 2X for grades K-2)" | `0_plan/12-claims-register.md:29` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md`, `1_spec/03-landing-page-spec.md` |
 | CR-008 | "3X learning velocity" | `0_plan/12-claims-register.md:30` | `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md` |
 | CR-009 | "1400+ SATs by 8th grade" | `0_plan/12-claims-register.md:31` | `15-positioning-brief.md` |
