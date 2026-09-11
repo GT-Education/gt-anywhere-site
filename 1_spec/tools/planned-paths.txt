@@ -83,3 +83,6 @@ tests/mocks/
 0_plan/kb/BRIEF-TEMPLATE.md
 0_plan/kb/exemplars/<slug>-1440.png
 0_plan/kb/REGISTER-FOLLOWUPS.md
+0_plan/kb/CONCEPTS-BRIEF.md
+0_plan/kb/briefs/
+0_plan/kb/briefs/M01..M20.md

@@ -19,5 +19,5 @@
 | K14 Copy and voice for institutions | `K14-copy-voice.md` | Queued | Pending |
 | Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` (grid: `exemplars/index.html`) | 26 sites captured at 390 and 1440 (JPEG), grid page for Johnny | Pending |
 | Design Director brief template | `BRIEF-TEMPLATE.md` | Written 2026-09-11; filled per mock after G-C | n/a |
-| Concept catalog | `CONCEPTS.md` | Queued (G-C) | Pending |
+| Concept catalog | `CONCEPTS.md` (brief: `CONCEPTS-BRIEF.md`) | Brief written; catalog runs after E4 | Pending |
 | Register follow-ups | `REGISTER-FOLLOWUPS.md` | 23 proposed row changes from K1 to K8; processed through the ensemble at E4 | Pending |
