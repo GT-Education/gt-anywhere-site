@@ -1,0 +1,3 @@
+| ID | Result | Finding |
+|---|---|---|
+| D-039 | Fail | D-031, MN-16’s Proposed/Partly status, K4 §8.1 V6/V8, M16’s gates, CLAUDE.md wording, RF-30/AN-19 and resolution R8 are supported. Checker claims remain overstated: `0_plan/tools/check-mocks.py` R1 accepts `<input type="text" data-type="radio">` with the router declaration and accepts `<button type=submit>`; R2 accepts `<script src = "/example.js"></script>` beside JSON-LD because its exclusion matches only `src=`. Read-only, in-memory checks reproduced these passes. R20 rejects unknown tokens but still skips the rationale requirement for absent or empty declarations. The ordinary router requirement, script count and 2,048 UTF-8-byte boundary work as described. |
