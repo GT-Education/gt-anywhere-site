@@ -60,10 +60,66 @@ const FOLD_JS = `(() => {
   };
   const out = {}; for (const [k, el] of Object.entries(els)) out[k] = el ? Math.round(el.getBoundingClientRect().bottom + window.scrollY) : null;
   const vh = window.innerHeight; let cut = false;
-  // the next band is cut when some element that starts BELOW the last door CTA (so it is not the first screen itself) begins inside the viewport and continues past its bottom edge
+  // A band counts as cut only when its INK (text, a painted edge, an image) starts below the last door CTA,
+  // is visible at least 8px above the viewport bottom, and continues past that edge. Section padding and the
+  // empty leading of a line box are not ink: they made empty space read as continuation (M02 critic, V16).
+  const TRANSPARENT = /rgba\\(\\s*0,\\s*0,\\s*0,\\s*0\\s*\\)|^transparent$/;
+  const bgOf = (el) => { const c = getComputedStyle(el).backgroundColor; return TRANSPARENT.test(c) ? null : c; };
+  const behind = (el) => { for (let p = el.parentElement; p; p = p.parentElement) { const c = bgOf(p); if (c) return c; } return bgOf(document.documentElement) || 'rgb(255, 255, 255)'; };
+  // A surface change only reads as an edge when a reader can see it. M15's first-screen tint is
+  // --color-surface on --color-bg, a computed 1.10:1 step, which both critics read as blank cream.
+  const lum = (c) => { const n = (c.match(/[\\d.]+/g) || []).slice(0, 3).map(Number).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * n[0] + 0.7152 * n[1] + 0.0722 * n[2]; };
+  const ratio = (a, b) => { const l1 = lum(a), l2 = lum(b); return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05); };
+  const VISIBLE_EDGE = 1.2;
+  const paints = (el) => {
+    const cs = getComputedStyle(el);
+    if (cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) return false;
+    if (['IMG', 'SVG', 'HR', 'CANVAS', 'VIDEO', 'INPUT', 'BUTTON', 'SELECT', 'TEXTAREA'].includes(el.tagName)) return true;
+    if (el.tagName.toLowerCase() === 'svg') return true;
+    if (cs.backgroundImage && cs.backgroundImage !== 'none') return true;
+    const own = bgOf(el); if (own) { const back = behind(el); if (own !== back && ratio(own, back) >= VISIBLE_EDGE) return true; }
+    for (const side of ['Top', 'Right', 'Bottom', 'Left']) {
+      if (parseFloat(cs['border' + side + 'Width']) > 0 && cs['border' + side + 'Style'] !== 'none' && !TRANSPARENT.test(cs['border' + side + 'Color'])) return true;
+    }
+    if (cs.boxShadow && cs.boxShadow !== 'none') return true;
+    if (cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) > 0) return true;
+    return false;
+  };
+  const ink = (root) => {
+    let top = Infinity, bottom = -Infinity;
+    const add = (r) => { if (r && r.height > 0 && r.width > 0) { if (r.top < top) top = r.top; if (r.bottom > bottom) bottom = r.bottom; } };
+    const walk = (node) => {
+      if (node.nodeType === 3) { if (node.textContent.trim()) { const rg = document.createRange(); rg.selectNodeContents(node); for (const r of rg.getClientRects()) add(r); } return; }
+      if (node.nodeType !== 1) return;
+      const cs = getComputedStyle(node);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return;
+      for (const pseudo of ['::before', '::after']) { const ps = getComputedStyle(node, pseudo); if (ps.content && ps.content !== 'none' && ps.content !== 'normal') add(node.getBoundingClientRect()); }
+      if (paints(node)) add(node.getBoundingClientRect());
+      for (const c of node.childNodes) walk(c);
+    };
+    walk(root);
+    return { top, bottom };
+  };
   const lastCta = Math.max(out['cta-georgetown'] || 0, out['cta-anywhere'] || 0) - window.scrollY;
-  for (const el of document.body.querySelectorAll('section, div, table, tbody, tr, td, th, dl, dd, li, article, figure, footer, p, h2, h3, ul, ol')) { const r = el.getBoundingClientRect(); if (r.height > 8 && r.top >= lastCta && r.top < vh - 4 && r.bottom > vh) { cut = true; break; } }
-  return { bottoms: out, cut, scrollWidth: document.documentElement.scrollWidth, docHeight: document.documentElement.scrollHeight };
+  let cutBy = null;
+  for (const el of document.body.querySelectorAll('section, div, table, tbody, tr, td, th, dl, dd, li, article, figure, footer, p, h2, h3, ul, ol')) {
+    const r = el.getBoundingClientRect();
+    if (!(r.height > 8 && r.top >= lastCta && r.top < vh - 4 && r.bottom > vh)) continue;
+    const i = ink(el);
+    if (i.top >= lastCta && i.top < vh - 8 && i.bottom > vh + 2) { cut = true; cutBy = (el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '')) + ' ink ' + Math.round(i.top) + ' to ' + Math.round(i.bottom); break; }
+  }
+  // A band edge also reads as continuation when the first screen's own surface ENDS inside the viewport and a
+  // different surface runs off the bottom: M03 and M12 close a navy hero onto cream with nothing literally cut,
+  // and a reader plainly sees more page. Sampling the effective background answers that where element geometry cannot.
+  if (!cut && document.documentElement.scrollHeight > window.scrollY + vh + 2) {
+    const bgAt = (x, y) => { let el = document.elementFromPoint(x, y); while (el) { const c = bgOf(el); if (c) return c; el = el.parentElement; } return 'rgb(255, 255, 255)'; };
+    for (const x of [Math.min(16, Math.round(window.innerWidth / 4)), Math.round(window.innerWidth / 2)]) {
+      const above = bgAt(x, Math.min(vh - 3, Math.max(1, lastCta + 6)));
+      const edge = bgAt(x, vh - 2);
+      if (above && edge && ratio(above, edge) >= VISIBLE_EDGE) { cut = true; cutBy = 'surface changes from ' + above + ' to ' + edge + ' between the last CTA and the bottom edge, and the page continues below'; break; }
+    }
+  }
+  return { bottoms: out, cut, cutBy, scrollWidth: document.documentElement.scrollWidth, docHeight: document.documentElement.scrollHeight };
 })()`;
 const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelectorAll('*')) { for (const pseudo of [null, '::before', '::after']) { const cs = getComputedStyle(el, pseudo); const td = cs.transitionDuration.split(',').map(s => parseFloat(s) || 0); const ad = cs.animationDuration.split(',').map(s => parseFloat(s) || 0); if (td.some(d => d > 0) || ad.some(d => d > 0)) { bad.push((el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '') + (pseudo || '')) + ' ' + cs.transitionDuration + ' ' + cs.animationDuration); if (bad.length > 40) return bad; } } } return bad; })()`;
 
@@ -76,11 +132,26 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   const rel = folder.slice(REPO.length).replace(/\\/g, '/');
   const url = `http://127.0.0.1:${port}${rel}/index.html`;
   let browser;
-  try { browser = await chromium.launch(); } catch (e) { try { browser = await chromium.launch({ channel: 'chrome' }); } catch (e2) { throw new Error('no Chromium available: ' + e.message.split('\n')[0]); } }
+  // Prefer a pinned build so two runs of the same page are comparable: the version Playwright bundles,
+  // else the newest Chrome for Testing already in the Playwright cache, else the browser installed on this machine.
+  let browserKind = 'bundled Chromium';
+  const cachedBuilds = () => {
+    const root = join(os.homedir(), 'Library/Caches/ms-playwright');
+    try {
+      return readdirSync(root).filter(d => /^chromium-\d+$/.test(d)).sort((a, b) => Number(b.split('-')[1]) - Number(a.split('-')[1]))
+        .map(d => join(root, d, 'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing')).filter(existsSync);
+    } catch (e) { return []; }
+  };
+  try { browser = await chromium.launch(); } catch (e) {
+    for (const exe of cachedBuilds()) {
+      try { browser = await chromium.launch({ executablePath: exe }); browserKind = 'cached Chrome for Testing ' + exe.split('/').find(x => x.startsWith('chromium-')); break; } catch (e2) { /* try the next build */ }
+    }
+    if (!browser) { try { browser = await chromium.launch({ channel: 'chrome' }); browserKind = 'installed Chrome (no pinned build available)'; } catch (e3) { throw new Error('no Chromium available: ' + e.message.split('\n')[0]); } }
+  }
   const qa = join(folder, 'qa'); mkdirSync(qa, { recursive: true });
-  const lines = ['# Fold and matrix run', '', `Runner: \`0_plan/tools/shots.mjs\` with Playwright from \`${used}\`; ${new Date().toISOString()}; page \`${rel}/index.html\`.`, '',
+  const lines = ['# Fold and matrix run', '', `Runner: \`0_plan/tools/shots.mjs\` with Playwright from \`${used}\`, ${browserKind} ${browser.version()}; ${new Date().toISOString()}; page \`${rel}/index.html\`.`, '',
     '| Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |', '|---|---|---|---|---|---|---|---|---|---|---|'];
-  const consoleErrors = new Set(); let failures = 0;
+  const consoleErrors = new Set(); let failures = 0; const bandEvidence = [];
   const ctx = await browser.newContext({ deviceScaleFactor: 1 });
   const page = await ctx.newPage();
   page.on('console', (m) => { if (m.type() === 'error') consoleErrors.add(m.text().slice(0, 160)); });
@@ -97,13 +168,14 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
     if (rule === 'fold') {
       const missing = need.filter(k => m.bottoms[k] == null);
       const over = need.filter(k => m.bottoms[k] != null && m.bottoms[k] > limit);
-      result = missing.length ? `FAIL missing ${missing.join(', ')}` : over.length ? `FAIL over: ${over.join(', ')}` : (m.cut ? 'PASS' : 'PASS (no band cut: check for a false floor)');
+      result = missing.length ? `FAIL missing ${missing.join(', ')}` : over.length ? `FAIL over: ${over.join(', ')}` : (m.cut ? 'PASS' : 'FAIL false floor: nothing visible continues past the bottom edge');
       if (result.startsWith('FAIL')) failures++;
     } else if (rule === 'reflow') {
       result = m.scrollWidth <= w ? 'PASS no horizontal scroll' : `FAIL scrollWidth ${m.scrollWidth}`; if (result.startsWith('FAIL')) failures++;
     } else if (rule === 'zoom') {
       result = `report: scrollWidth ${m.scrollWidth}` + (m.scrollWidth > w ? ' (horizontal scroll)' : '');
     } else { result = `report: page height ${m.docHeight}`; }
+    bandEvidence.push(`| ${row} | ${m.cut ? 'yes' : 'no'} | ${m.cutBy || 'nothing visible starts below the last CTA and crosses the bottom edge'} |`);
     lines.push(`| ${row} | ${w} by ${h} | ${rule} | ${limit ?? ''} | ${m.bottoms.header ?? ''} | ${m.bottoms.h1 ?? ''} | ${m.bottoms.provenance ?? ''} | ${m.bottoms['cta-georgetown'] ?? ''} | ${m.bottoms['cta-anywhere'] ?? ''} | ${m.cut ? 'yes' : 'no'} | ${result} |`);
     if (KEY.has(row) || ALL) await page.screenshot({ path: join(qa, `${row}.jpg`), type: 'jpeg', quality: w >= 1024 ? 55 : 68 });
     if (row === 'V2' || row === 'V14') {
@@ -144,6 +216,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   lines.push('', '## Focus and forced colours', '', `Captures: ${cta ? 'focus-cta.jpg (first door CTA focused)' : 'no first-screen door CTA found for the focus capture'}; ${plate ? 'focus-plate.jpg (header lockup link focused)' : 'no header link found'}; ${footLink ? 'focus-footer.jpg (GT Anywhere footer link focused)' : 'no GT Anywhere footer link found'}; forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.`);
   lines.push('', '## Console', '', consoleErrors.size ? `FAIL: ${[...consoleErrors].join(' | ')}` : 'PASS: no console errors.');
   if (consoleErrors.size) failures++;
+  lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',
+    '| Row | Cut | Element and the ink that crosses the bottom edge |', '|---|---|---|', ...bandEvidence);
   lines.push('', `## Result: ${failures ? failures + ' failure(s)' : 'all required rows pass'}`);
   writeFileSync(join(qa, 'fold.md'), lines.join('\n') + '\n');
   await browser.close(); srv.close();

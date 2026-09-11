@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`; 2026-09-11T10:15:56.459Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T11:44:25.263Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -11,7 +11,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V5 | 414 by 715 | fold | 691 | 56 | 213 | 238 | 433 | 562 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 56 | 213 | 238 | 513 | 723 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 56 | 212 | 238 | 432 | 562 | yes | PASS |
-| V8 | 430 by 739 | fold | 715 | 56 | 214 | 239 | 434 | 564 | yes | PASS |
+| V8 | 430 by 739 | fold | 715 | 56 | 214 | 239 | 434 | 564 | no | FAIL false floor: nothing visible continues past the bottom edge |
 | V9 | 390 by 844 | emptiness |  | 56 | 212 | 237 | 512 | 721 | yes | report: page height 5211 |
 | V10 | 750 by 342 | fold | 318 | 56 | 147 | 199 | 297 | 297 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 229 | 255 | 546 | 546 | yes | PASS |
@@ -40,4 +40,30 @@ Captures: focus-cta.jpg (first door CTA focused); focus-plate.jpg (header lockup
 
 PASS: no console errors.
 
-## Result: all required rows pass
+## Next band evidence
+
+What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.
+
+| Row | Cut | Element and the ink that crosses the bottom edge |
+|---|---|---|
+| V1 | yes | tr.ledger__lines ink 604 to 776 |
+| V2 | yes | tr.ledger__lines ink 578 to 750 |
+| V3 | yes | tr.ledger__lines ink 579 to 751 |
+| V4 | yes | tr.ledger__lines ink 579 to 752 |
+| V5 | yes | tr.ledger__lines ink 580 to 729 |
+| V6 | yes | tbody ink 731 to 2265 |
+| V7 | yes | tr.ledger__lines ink 580 to 752 |
+| V8 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V9 | yes | tbody ink 729 to 2286 |
+| V10 | yes | tr.ledger__lines ink 315 to 411 |
+| V11 | yes | tbody ink 554 to 1680 |
+| V12 | yes | tbody ink 535 to 1589 |
+| V13 | yes | tbody ink 559 to 1411 |
+| V14 | yes | tbody ink 583 to 1317 |
+| V15 | yes | tbody ink 591 to 1329 |
+| V16 | yes | tbody ink 614 to 1355 |
+| V17 | yes | tbody ink 614 to 1355 |
+| V18 | no | nothing visible starts below the last CTA and crosses the bottom edge |
+| V19 | yes | tbody ink 559 to 1411 |
+
+## Result: 1 failure(s)
