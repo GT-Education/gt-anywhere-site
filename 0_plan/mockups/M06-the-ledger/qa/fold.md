@@ -1,10 +1,10 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:50:34.076Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:22:14.496Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 56 | 238 | 263 | 457 | 586 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 93 | 275 | 300 | 494 | 623 | yes | PASS |
 | V2 | 375 by 629 | fold | 605 | 56 | 211 | 236 | 430 | 560 | yes | PASS |
 | V3 | 390 by 664 | fold | 640 | 56 | 212 | 237 | 432 | 561 | yes | PASS |
 | V4 | 393 by 659 | fold | 635 | 56 | 212 | 237 | 432 | 561 | yes | PASS |
@@ -46,7 +46,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | text cut by the edge, 724 to 744 |
+| V1 | yes | text cut by the edge, 729 to 749 |
 | V2 | yes | content reaches 622 of 629 and more follows below |
 | V3 | yes | text cut by the edge, 651 to 671 |
 | V4 | yes | text cut by the edge, 651 to 671 |
@@ -65,5 +65,18 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | content reaches 951 of 960 and more follows below |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 558 to 579 |
+
+## Mark geometry (K12 V2)
+
+Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.
+
+| Viewport | File | Shape | Height | Width | Aspect skew | Result |
+|---|---|---|---|---|---|---|
+| 390 by 844 | `gt-school-logo-h.svg` | horizontal | 27px | 117.3px | 0% | ok |
+| 390 by 844 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
+| 390 by 844 | `gt-anywhere-logo-h.svg` | horizontal | 38.1px | 200px | 0% | ok |
+| 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
+| 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
+| 1440 by 900 | `gt-anywhere-logo-h.svg` | horizontal | 38.1px | 200px | 0% | ok |
 
 ## Result: all required rows pass

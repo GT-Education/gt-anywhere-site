@@ -1,13 +1,13 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:50:47.344Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:22:28.927Z; page `/0_plan/mockups/M12-selective-by-rigor/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 56 | 289 | 326 | 461 | 588 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 56 | 291 | 328 | 463 | 590 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 56 | 294 | 331 | 465 | 593 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 56 | 294 | 331 | 465 | 593 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 92 | 325 | 362 | 497 | 624 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 92 | 327 | 356 | 483 | 602 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 56 | 294 | 323 | 449 | 569 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 56 | 294 | 323 | 449 | 569 | yes | PASS |
 | V5 | 414 by 715 | fold | 691 | 56 | 265 | 302 | 437 | 564 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 56 | 265 | 302 | 597 | 725 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 56 | 263 | 300 | 435 | 563 | yes | PASS |
@@ -21,7 +21,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V15 | 1366 by 648 | fold | 624 | 56 | 286 | 324 | 473 | 473 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 555 | 682 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 92 | 356 | 406 | 539 | 658 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -46,8 +46,8 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | content reaches 739 of 740 and more follows below |
-| V2 | yes | text cut by the edge, 609 to 629 |
+| V1 | yes | text cut by the edge, 723 to 743 |
+| V2 | yes | text cut by the edge, 621 to 641 |
 | V3 | yes | text cut by the edge, 660 to 680 |
 | V4 | yes | content reaches 656 of 659 and more follows below |
 | V5 | yes | text cut by the edge, 696 to 716 |
@@ -65,5 +65,18 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V17 | yes | content reaches 958 of 960 and more follows below |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | content reaches 562 of 576 and more follows below |
+
+## Mark geometry (K12 V2)
+
+Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.
+
+| Viewport | File | Shape | Height | Width | Aspect skew | Result |
+|---|---|---|---|---|---|---|
+| 390 by 844 | `gt-school-logo-h.svg` | horizontal | 27px | 117.3px | 0% | ok |
+| 390 by 844 | `gt-school-logo-h.svg` | horizontal | 27px | 117.3px | 0% | ok |
+| 390 by 844 | `gt-anywhere-logo-h.svg` | horizontal | 32px | 168px | 0% | ok |
+| 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
+| 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
+| 1440 by 900 | `gt-anywhere-logo-h.svg` | horizontal | 32px | 168px | 0% | ok |
 
 ## Result: all required rows pass

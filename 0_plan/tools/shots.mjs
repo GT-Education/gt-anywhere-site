@@ -162,6 +162,24 @@ const FOLD_JS = `(() => {
   }
   return { bottoms: out, cut, cutBy, scrollWidth: document.documentElement.scrollWidth, docHeight: document.documentElement.scrollHeight };
 })()`;
+// K12 V2: horizontal marks 32px tall at 1440 and at least 27px at 390, the icon at 56px, aspect within 1%.
+// Measured rather than read from CSS, because five mocks declared a height a reader never saw and eight critic
+// scorecards missed it. Reported at both widths; a horizontal mark under its floor fails the run.
+const MARKS_JS = `(() => {
+  const out = [];
+  for (const img of document.querySelectorAll('img')) {
+    const src = (img.getAttribute('src') || '');
+    if (!/logo|icon|mark/i.test(src)) continue;
+    const r = img.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) continue;
+    const nat = img.naturalWidth && img.naturalHeight ? img.naturalWidth / img.naturalHeight : null;
+    const shown = r.width / r.height;
+    out.push({ src: src.split('/').pop(), w: Math.round(r.width * 10) / 10, h: Math.round(r.height * 10) / 10,
+      shape: nat && nat > 2 ? 'horizontal' : (nat ? 'icon' : 'unknown'),
+      skew: nat ? Math.round(Math.abs(shown - nat) / nat * 1000) / 10 : null });
+  }
+  return out;
+})()`;
 const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelectorAll('*')) { for (const pseudo of [null, '::before', '::after']) { const cs = getComputedStyle(el, pseudo); const td = cs.transitionDuration.split(',').map(s => parseFloat(s) || 0); const ad = cs.animationDuration.split(',').map(s => parseFloat(s) || 0); if (td.some(d => d > 0) || ad.some(d => d > 0)) { bad.push((el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '') + (pseudo || '')) + ' ' + cs.transitionDuration + ' ' + cs.animationDuration); if (bad.length > 40) return bad; } } } return bad; })()`;
 
 (async () => {
@@ -228,6 +246,22 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
       await page.screenshot({ path: join(qa, `${row}-full.jpg`), type: 'jpeg', quality: 48, fullPage: true });
     }
   }
+  // Mark geometry at the two widths K12 V2 names
+  const markRows = []; let markFailures = 0;
+  for (const [label, w, h, floor] of [['390 by 844', 390, 844, 27], ['1440 by 900', 1440, 900, 32]]) {
+    await page.setViewportSize({ width: w, height: h }); await page.goto(url, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts ? document.fonts.ready : null); await page.waitForTimeout(120);
+    const marks = await page.evaluate(MARKS_JS);
+    for (const m of marks) {
+      const low = m.shape === 'horizontal' && m.h < floor - 0.5;
+      const skewed = m.skew != null && m.skew > 1;
+      if (low || skewed) markFailures++;
+      markRows.push(`| ${label} | \`${m.src}\` | ${m.shape} | ${m.h}px | ${m.w}px | ${m.skew == null ? 'n/a' : m.skew + '%'} | ${low ? `FAIL under the ${floor}px floor` : skewed ? 'FAIL aspect distorted' : 'ok'} |`);
+    }
+    if (!marks.length) markRows.push(`| ${label} | no mark image found | | | | | FAIL no mark on the page |`), markFailures++;
+  }
+  failures += markFailures;
+
   // keyboard focus captures at V14: the first door CTA, then the GT Anywhere footer mark link
   await page.setViewportSize({ width: 1280, height: 720 }); await page.goto(url, { waitUntil: 'load' });
   const cta = await page.$('a[data-event="door_click"][data-placement="first_screen"]');
@@ -263,6 +297,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (consoleErrors.size) failures++;
   lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',
     '| Row | Cut | Element and the ink that crosses the bottom edge |', '|---|---|---|', ...bandEvidence);
+  lines.push('', '## Mark geometry (K12 V2)', '', 'Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.', '',
+    '| Viewport | File | Shape | Height | Width | Aspect skew | Result |', '|---|---|---|---|---|---|---|', ...markRows);
   lines.push('', `## Result: ${failures ? failures + ' failure(s)' : 'all required rows pass'}`);
   writeFileSync(join(qa, 'fold.md'), lines.join('\n') + '\n');
   await browser.close(); srv.close();
