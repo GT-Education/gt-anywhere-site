@@ -228,7 +228,8 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
 .logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); border-radius: var(--radius-sm); }
 .logo-plate { background: var(--color-bg); }
 .logo-navy { background: var(--color-navy); }
-.footer-logos img { height: 1.5rem; width: auto; }
+.footer-logos img { height: 27px; width: auto; } /* K12 V2: horizontal marks at least 27px at 390. 1.5rem was 24px */
+@container page (inline-size >= 48rem) { .footer-logos img { height: 32px; } } /* K12 V2: 32px at 1440 */
 @container page (inline-size >= 64rem) {
   .footer-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
   .footer-facts { grid-column: 1 / span 5; }

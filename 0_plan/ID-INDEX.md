@@ -282,7 +282,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | DD-43 | Comparison table cells repeat the value; no "Same" cells (from K6) | `0_plan/07-design-decisions.md:61` |  |
 | DD-44 | Fold and viewport contract: svh, the 19-row matrix, runner tests (from K10, K6, K5) | `0_plan/07-design-decisions.md:62` | `17-design-studio-runbook.md` |
 | DD-45 | Inherit gt.school's two-door component and Locations list for N campuses (from K12) | `0_plan/07-design-decisions.md:63` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
-| DD-46 | Door button fill on the umbrella page: navy, or the estate's accent orange (from the measured mirror, `0_plan/ | `0_plan/07-design-decisions.md:64` |  |
+| DD-46 | Door button fill on the umbrella page, against the measured estate (`0_plan/mockups/shared/CONTINUITY.md`) | `0_plan/07-design-decisions.md:64` |  |
 
 ## MD: Marketing decisions
 

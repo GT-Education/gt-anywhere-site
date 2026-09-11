@@ -1,0 +1,236 @@
+{
+  "390": {
+    "viewport": {
+      "w": 390,
+      "h": 844
+    },
+    "blockedAtThisPoint": 10,
+    "facts": {
+      "bodyFont": "Intertight",
+      "bodyColor": "rgb(0, 17, 23)",
+      "bodyBg": "rgb(252, 244, 239)",
+      "h1": {
+        "selector": "h1",
+        "text": "The MIT of K-8. For students who ask for more academics.",
+        "font": "Literata",
+        "size": "36px",
+        "weight": "300",
+        "color": "rgb(0, 17, 23)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fillFrom": "the element itself",
+        "radius": "0px",
+        "pad": "0px",
+        "transform": "none",
+        "spacing": "-1.6px",
+        "box": {
+          "x": 20,
+          "y": 96,
+          "w": 350,
+          "h": 130
+        }
+      },
+      "h1Italic": {
+        "selector": "h1 em, h1 i, h1 [class*=italic], h1 span",
+        "text": "The MIT of K-8.",
+        "font": "Literata",
+        "size": "36px",
+        "weight": "300",
+        "color": "rgb(0, 17, 23)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fillFrom": "the element itself",
+        "radius": "0px",
+        "pad": "0px",
+        "transform": "none",
+        "spacing": "-1.6px",
+        "box": {
+          "x": 20,
+          "y": 96,
+          "w": 350,
+          "h": 43
+        }
+      },
+      "applyActions": [
+        {
+          "selector": "link reading Begin application",
+          "text": "Now Enrolling for Fall 2026 -Now Enrolling for Fall 2026 -BE",
+          "font": "Inconsolata",
+          "size": "16px",
+          "weight": "500",
+          "color": "rgb(251, 251, 251)",
+          "bg": "rgb(0, 42, 58)",
+          "fillFrom": "div.button-bg_filler",
+          "radius": "8px 8px 0px 0px",
+          "pad": "16px 24px 16px 16px",
+          "transform": "uppercase",
+          "spacing": "normal",
+          "box": {
+            "x": 20,
+            "y": 724,
+            "w": 220,
+            "h": 96
+          }
+        },
+        {
+          "selector": "link reading Begin application",
+          "text": "Begin ApplicationBegin Application",
+          "font": "Inconsolata",
+          "size": "16px",
+          "weight": "500",
+          "color": "rgb(251, 251, 251)",
+          "bg": "rgb(228, 139, 83)",
+          "fillFrom": "div.button-bg_filler",
+          "radius": "8px 8px 0px 0px",
+          "pad": "16px",
+          "transform": "uppercase",
+          "spacing": "normal",
+          "box": {
+            "x": 52,
+            "y": 12030,
+            "w": 220,
+            "h": 92
+          }
+        }
+      ],
+      "firstScreenLinks": [
+        {
+          "t": "",
+          "y": 22,
+          "bg": "rgba(0, 0, 0, 0)",
+          "from": "the element itself"
+        },
+        {
+          "t": "Now Enrolling for Fall 2",
+          "y": 724,
+          "bg": "rgb(0, 42, 58)",
+          "from": "div.button-bg_filler"
+        }
+      ],
+      "visibleLinkCount": 19,
+      "headerLinks": []
+    }
+  },
+  "1440": {
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "blockedAtThisPoint": 20,
+    "facts": {
+      "bodyFont": "Intertight",
+      "bodyColor": "rgb(0, 17, 23)",
+      "bodyBg": "rgb(252, 244, 239)",
+      "h1": {
+        "selector": "h1",
+        "text": "The MIT of K-8. For students who ask for more academics.",
+        "font": "Literata",
+        "size": "58.5px",
+        "weight": "300",
+        "color": "rgb(0, 17, 23)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fillFrom": "the element itself",
+        "radius": "0px",
+        "pad": "0px",
+        "transform": "none",
+        "spacing": "-1.6px",
+        "box": {
+          "x": 40,
+          "y": 128,
+          "w": 512,
+          "h": 281
+        }
+      },
+      "h1Italic": {
+        "selector": "h1 em, h1 i, h1 [class*=italic], h1 span",
+        "text": "The MIT of K-8.",
+        "font": "Literata",
+        "size": "58.5px",
+        "weight": "300",
+        "color": "rgb(0, 17, 23)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "fillFrom": "the element itself",
+        "radius": "0px",
+        "pad": "0px",
+        "transform": "none",
+        "spacing": "-1.6px",
+        "box": {
+          "x": 40,
+          "y": 128,
+          "w": 512,
+          "h": 70
+        }
+      },
+      "applyActions": [
+        {
+          "selector": "link reading Begin application",
+          "text": "Now Enrolling for Fall 2026 -Now Enrolling for Fall 2026 -BE",
+          "font": "Inconsolata",
+          "size": "16px",
+          "weight": "500",
+          "color": "rgb(251, 251, 251)",
+          "bg": "rgb(0, 42, 58)",
+          "fillFrom": "div.button-bg_filler",
+          "radius": "8px 8px 0px 0px",
+          "pad": "16px 24px 16px 16px",
+          "transform": "uppercase",
+          "spacing": "normal",
+          "box": {
+            "x": 1180,
+            "y": 764,
+            "w": 220,
+            "h": 96
+          }
+        },
+        {
+          "selector": "link reading Begin application",
+          "text": "Begin ApplicationBegin Application",
+          "font": "Inconsolata",
+          "size": "16px",
+          "weight": "500",
+          "color": "rgb(251, 251, 251)",
+          "bg": "rgb(228, 139, 83)",
+          "fillFrom": "div.button-bg_filler",
+          "radius": "8px 8px 0px 0px",
+          "pad": "16px",
+          "transform": "uppercase",
+          "spacing": "normal",
+          "box": {
+            "x": 1132,
+            "y": 10556,
+            "w": 220,
+            "h": 92
+          }
+        }
+      ],
+      "firstScreenLinks": [
+        {
+          "t": "",
+          "y": 30,
+          "bg": "rgba(0, 0, 0, 0)",
+          "from": "the element itself"
+        },
+        {
+          "t": "Now Enrolling for Fall 2",
+          "y": 764,
+          "bg": "rgb(0, 42, 58)",
+          "from": "div.button-bg_filler"
+        }
+      ],
+      "visibleLinkCount": 21,
+      "headerLinks": []
+    }
+  },
+  "blocked": {
+    "total": 20,
+    "byHost": {
+      "cdn.jsdelivr.net": 6,
+      "www.googletagmanager.com": 2,
+      "js.hs-scripts.com": 2,
+      "external.vidzflow.com": 4,
+      "connect.facebook.net": 2,
+      "analytics.tiktok.com": 2,
+      "app.vidzflow.com": 2
+    }
+  },
+  "capturedAt": "2026-09-11T12:17:08.270Z",
+  "source": "the repository mirror of anywhere.gt.school, served from 127.0.0.1; nothing was loaded from production"
+}
