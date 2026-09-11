@@ -37,6 +37,7 @@ CASES = {
  'a commented-out script is not a script': ('', LD, '<!-- <script src="../shared/reveal.js"></script> -->', 'R2', 'PASS'),
  'an input mentioned in a script comment is not an input': ('data-d039="script inputs" data-d039-component="router"', LD, '<input type="radio"><script>// Keep the <input> radios usable without JavaScript.\nlet a=1</script>', 'R1', 'PASS'),
  'a script tag mentioned in a script comment is not a script': ('data-d039="script"', LD, '<script>// This <script> enhances the static page with optional reveals.\nlet a=1</script>', 'R2', 'PASS'),
+ 'an HTML comment marker inside a script comment does not swallow the script end tag': ('data-d039="script"', LD, '<script>// The <!-- marker in source is a comment; observe the section element.\nlet a=1</script><!-- later comment -->', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

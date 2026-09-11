@@ -98,9 +98,9 @@ def check(folder):
     return check_doc(doc, style, rat_text, folder)
 
 def check_doc(doc, style, rat_text, folder='(memory)'):
-    doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # commented-out markup is not markup: the tag scans and the text rules see the document without comments
-    blocks = script_blocks(doc)  # script bodies are read here for the byte count, then removed before any other tag scan
-    doc = without_script_bodies(doc)
+    blocks = script_blocks(doc)  # script bodies are read first, on the untouched document, for the byte count and the JSON-LD
+    doc = without_script_bodies(doc)  # then removed, so text inside a script is never scanned as markup
+    doc = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S)  # then commented-out markup is removed: it is not markup either
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
