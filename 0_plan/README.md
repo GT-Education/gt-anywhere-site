@@ -28,6 +28,9 @@ Reading order for a new session: `00-context.md`, then this index, then `09-oper
 | 12b | [12-claims-register.md](12-claims-register.md) | The claims register (DEL-018): every figure that may appear on any surface, its source, conflicts, status and approved wording. Rows land from research R4; Nari approves | Skeleton |
 | 15 | [15-positioning-brief.md](15-positioning-brief.md) | The one-page positioning brief for gate G0.5: umbrella promise, per-school promises, proof and its status, tone, affiliation stance, price and access stance, what we will not say, decisions for Nari | Draft v0.1 |
 | 16 | [16-g05-decision-record.md](16-g05-decision-record.md) | G0.5 decision record: the six positioning decisions, what changed and what stays open | Draft v0.1 |
+| 17 | [17-design-studio-runbook.md](17-design-studio-runbook.md) | The design studio: roles, viewport matrix, rubric, motion reopened, the goal loops for twenty complete mocks (Johnny's decision 2026-09-11) | Decided
+| 18 | [18-knowledge-base-plan.md](18-knowledge-base-plan.md) | Research swarm plan: fourteen clusters, exemplar protocol, file format; outputs in `kb/` | In progress
+| kb | [kb/INDEX.md](kb/INDEX.md) | The knowledge base the studio builds from | In progress
 | 2_deliverables | [../2_deliverables/README.md](../2_deliverables/README.md) | Frozen, versioned releases of the deliverables (DEL ids) for presentation; working copies stay here | Live
 | | `research/` | R1 design tokens, R2 brand semiotics, R3 conversion and marketing, R4 content and proof with the gt.school crawl; the evidence base behind every v0.2 register position | Four reports, 2026-09-10 |
 | | `mockups/shared/tokens.css` | Draft tokens extracted by R1 from both sites' CSS; owned by `design-system/` after T-063 | Draft |

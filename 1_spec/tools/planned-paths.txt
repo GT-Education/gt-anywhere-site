@@ -69,3 +69,14 @@ tests/package.json
 0_plan/mockups/shared/copy.md
 0_plan/mockups/shared/fonts.css
 0_plan/tools/check-mocks.py
+0_plan/17-design-studio-runbook.md
+0_plan/18-knowledge-base-plan.md
+0_plan/kb/
+0_plan/kb/INDEX.md
+0_plan/kb/EXEMPLARS.md
+0_plan/kb/CONCEPTS.md
+0_plan/kb/exemplars/
+0_plan/kb/<cluster>.md
+0_plan/kb/*.md
+0_plan/mockups/M01..M20/
+tests/mocks/
