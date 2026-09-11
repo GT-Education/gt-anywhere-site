@@ -135,8 +135,8 @@ hairline, accent rule, eyebrow, heading ink):
 | V11, 768 by 1024 | 579 | 609 | 690 | 709 to 724 | 727 to 769 | the second row of cells and the fact inside it (993 to 1072) |
 
 On the compact phone rows the second run-in paragraph is sliced mid-line (V1 to V5, V7, V8, V10); V6 and V9 keep
-the lines inside the door rows and are cut by the compare anchor, and so is V19. V12 is the one row where nothing
-is sliced (see the runner section). Before this iteration V14 showed 45px of `--color-surface` on `--color-bg` and
+the lines inside the door rows and are cut by the compare anchor, and so is V19. V12 was the one row where nothing
+was sliced; it is now cut by the sources line (see the runner section). Before this iteration V14 showed 45px of `--color-surface` on `--color-bg` and
 nothing else (anchor 627, surface 675), V15 showed 20px, and at V5 the last run-in line completed at 713 against a
 715px edge: three false floors, all three now cut by content.
 
@@ -478,7 +478,7 @@ first qualifying box in the DOM, so here is what is actually sliced on every row
 | V6, V9, V19 | The compare anchor: its accent rule and sentence (V6 795 to 858 across 839; V19 565 to 606 across 576) |
 | V13, V14, V15, V16 | The strip's heading "What is true of both schools" (V13 738 to 782 across 768; V14 690 to 738 across 720; V15 626 to 675 across 648; V16 874 to 924 across 900), with the band's hairline, accent rule and "PROOF" complete above it |
 | V11, V17 | The strip's ledger: at V11 the second row of fact cells and the fact text inside it (993 to 1072 across 1024); at V17 the cells' continuous hairline at 943 with 17px of the cells below it |
-| V12 | The weakest of the sixteen and the one row where nothing is sliced: at 834 by 1194 the whole strip fits, its last footnote row ends at 1137, the sources paragraph begins exactly at the edge and the band's tint and bottom hairline run past it. The band is plainly unfinished, but a critic is entitled to call this the softest cut on the page |
+| V12 | Cut by the sources line, 1186 to 1203. This row was the mock's one false floor and is the only change in the mock made by the design director rather than the engineer: at 834 by 1194 the whole strip fitted, its last footnote row ended at 1137, the sources paragraph began exactly on the edge, and only the band's tint and bottom hairline ran past it, so the screen read as finished. Astra rejected it and the runner's rule agreed once corrected. The sources line now sits 16px below the facts it cites rather than 24px, which puts a whole line of it across the edge here and binds the caption to the block it sources at every other row |
 | V18 | Reflow row; a cut is not required and none is reported |
 
 The block above is the final run, not an earlier one: it is `qa/fold.md` on disk apart from the four header lines the
@@ -550,3 +550,5 @@ mirror; no production hostname was opened).
 | Header under 370px | Two link rows (88px) at V1 and V18 to keep the 27px mark; 56px from 370 |
 | Cell width at 1024 | Closed. Four across as the brief requires gave 216px cells and about 22 characters a line at 1024 to 1279; the strip now holds two by two to 1279 and takes the brief's four-across from 1280 (Departures). If the director wants four across at 1024, the fact text has to step to `--text-base` there, which departs from the brief's type row instead |
 | Index gap | RF-07, RF-25, RF-37, RF-53, RF-55, RF-58 are cited here from `kb/REGISTER-FOLLOWUPS.md` (via `CONTRACT.md` and `TOKENS-V2.md`) and are not listed in `0_plan/ID-INDEX.md`, the gap M12's critic reported; not this mock's file |
+
+**Director's changes after the second scoring.** Two, both named here so the record separates them from the engineer's work. The sources line moved from 24px to 16px below the facts, closing the V12 false floor above. And both footer marks now stand at 32px at every width: K12 V2 sets 32px at 1440 with a 27px floor at 390, and 27px cleared that floor, but the two marks sit one above the other in the footer, so at 27px against the GT Anywhere mark's 32px the umbrella brand read smaller than its own sub-brand on the width that carries two thirds of sessions. The runner now writes `qa/focus-footer-plate.jpg` itself, so that capture can no longer go stale while the rest of the folder moves.

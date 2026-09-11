@@ -236,6 +236,10 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (plate) { await plate.focus(); await page.waitForTimeout(80); await page.screenshot({ path: join(qa, 'focus-plate.jpg'), type: 'jpeg', quality: 60 }); }
   const footLink = await page.$('footer a[href*="anywhere.gt.school"]');
   if (footLink) { await footLink.scrollIntoViewIfNeeded(); await footLink.focus(); await page.waitForTimeout(80); await page.screenshot({ path: join(qa, 'focus-footer.jpg'), type: 'jpeg', quality: 60 }); }
+  // The footer mark on its own plate: the two-colour ring has to read against the plate as well as the page,
+  // and hand-made captures of it went stale silently because no runner pass rewrote them (M15 critic, fix 9).
+  const footPlate = await page.$('footer a:has(img), footer [class*="plate"] a, footer [class*="logo"] a');
+  if (footPlate) { await footPlate.scrollIntoViewIfNeeded(); await footPlate.focus(); await page.waitForTimeout(80); await page.screenshot({ path: join(qa, 'focus-footer-plate.jpg'), type: 'jpeg', quality: 60 }); }
   // forced colours at V14
   const ctx3 = await browser.newContext({ forcedColors: 'active' }); const p3 = await ctx3.newPage();
   await p3.setViewportSize({ width: 1280, height: 720 }); await p3.goto(url, { waitUntil: 'load' });
@@ -254,7 +258,7 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
   if (motion.length) failures++;
   lines.push('', '## Root font doubled at V2 (a stand-in for a large text setting)', '', zoomW <= 375 ? 'PASS: no horizontal scroll at 375 with a 32px root.' : `FAIL: scrollWidth ${zoomW} at 375 with a 32px root.`);
   if (zoomW > 375) failures++;
-  lines.push('', '## Focus and forced colours', '', `Captures: ${cta ? 'focus-cta.jpg (first door CTA focused)' : 'no first-screen door CTA found for the focus capture'}; ${plate ? 'focus-plate.jpg (header lockup link focused)' : 'no header link found'}; ${footLink ? 'focus-footer.jpg (GT Anywhere footer link focused)' : 'no GT Anywhere footer link found'}; forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.`);
+  lines.push('', '## Focus and forced colours', '', `Captures: ${cta ? 'focus-cta.jpg (first door CTA focused)' : 'no first-screen door CTA found for the focus capture'}; ${footPlate ? 'focus-footer-plate.jpg (the footer mark on its plate); ' : ''}${plate ? 'focus-plate.jpg (header lockup link focused)' : 'no header link found'}; ${footLink ? 'focus-footer.jpg (GT Anywhere footer link focused)' : 'no GT Anywhere footer link found'}; forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.`);
   lines.push('', '## Console', '', consoleErrors.size ? `FAIL: ${[...consoleErrors].join(' | ')}` : 'PASS: no console errors.');
   if (consoleErrors.size) failures++;
   lines.push('', '## Next band evidence', '', 'What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.', '',

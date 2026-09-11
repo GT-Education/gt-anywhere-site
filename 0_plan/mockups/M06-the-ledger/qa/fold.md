@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:44:15.553Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:50:34.076Z; page `/0_plan/mockups/M06-the-ledger/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -34,7 +34,7 @@ PASS: no horizontal scroll at 375 with a 32px root.
 
 ## Focus and forced colours
 
-Captures: focus-cta.jpg (first door CTA focused); focus-plate.jpg (header lockup link focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
+Captures: focus-cta.jpg (first door CTA focused); focus-footer-plate.jpg (the footer mark on its plate); focus-plate.jpg (header lockup link focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
 
 ## Console
 

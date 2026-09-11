@@ -254,8 +254,10 @@ tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
 .footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
 .footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
 .footer-logo.plate { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
-.footer-logo img { height: 27px; width: auto; } /* K12 V2's phone floor */
-@media (min-width: 768px) { .footer-logo img { height: 32px; } } /* K12 V2: 32px at 1440, the same step the header takes */
+/* Both marks stand at 32px at every width. K12 V2 sets 32px at 1440 and a 27px floor at 390, and 27 cleared
+   the floor, but the two marks sit one above the other in the footer: at 27 against the Anywhere mark's 32 the
+   umbrella brand read smaller than its own sub-brand, on the width carrying two thirds of sessions. */
+.footer-logo img { height: 32px; width: auto; }
 .footer-logo--anywhere { padding-inline: 0; }
 .footer-logo--anywhere img { height: 32px; }
 

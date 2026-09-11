@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:44:47.989Z; page `/0_plan/mockups/M09-two-places/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T13:46:46.947Z; page `/0_plan/mockups/M09-two-places/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -17,12 +17,12 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V11 | 768 by 1024 | fold | 1000 | 56 | 229 | 267 | 553 | 553 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 235 | 272 | 525 | 525 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 56 | 258 | 296 | 584 | 584 | yes | PASS |
-| V14 | 1280 by 720 | fold | 696 | 56 | 279 | 317 | 582 | 582 | yes | PASS |
-| V15 | 1366 by 648 | fold | 624 | 56 | 278 | 316 | 542 | 542 | yes | PASS |
-| V16 | 1440 by 900 | fold | 876 | 56 | 300 | 346 | 699 | 699 | yes | PASS |
-| V17 | 1920 by 960 | fold | 936 | 56 | 300 | 346 | 759 | 759 | yes | PASS |
+| V14 | 1280 by 720 | fold | 696 | 56 | 279 | 317 | 558 | 558 | yes | PASS |
+| V15 | 1366 by 648 | fold | 624 | 56 | 278 | 316 | 526 | 526 | yes | PASS |
+| V16 | 1440 by 900 | fold | 876 | 56 | 300 | 346 | 646 | 646 | yes | PASS |
+| V17 | 1920 by 960 | fold | 936 | 56 | 300 | 346 | 646 | 646 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 88 | 344 | 394 | 540 | 670 | no | PASS no horizontal scroll |
-| V19 | 1024 by 576 | zoom |  | 56 | 250 | 288 | 442 | 442 | yes | report: scrollWidth 1024 |
+| V19 | 1024 by 576 | zoom |  | 56 | 250 | 288 | 434 | 434 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
 
@@ -59,11 +59,11 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V11 | yes | text cut by the edge, 1012 to 1032 |
 | V12 | yes | content reaches 1186 of 1194 and more follows below |
 | V13 | yes | content reaches 768 of 768 and more follows below |
-| V14 | yes | content reaches 704 of 720 and more follows below |
-| V15 | yes | content reaches 632 of 648 and more follows below |
+| V14 | yes | text cut by the edge, 686 to 721 |
+| V15 | yes | text cut by the edge, 629 to 664 |
 | V16 | yes | text cut by the edge, 866 to 901 |
 | V17 | yes | text cut by the edge, 926 to 961 |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
-| V19 | yes | content reaches 570 of 576 and more follows below |
+| V19 | yes | content reaches 572 of 576 and more follows below |
 
 ## Result: all required rows pass
