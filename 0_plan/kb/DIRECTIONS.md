@@ -52,3 +52,10 @@
 | Principles applied by cluster and finding id | Reworked K0 to K14 |
 | Measured h1 fit at V2, V5, V14 | The build wave's measurements on the fixed copy (R5) |
 | Acceptance | `17` sections 4 and 6 |
+
+## 4. Reserve directions (named replacements, so the slate stays at twenty under D-032)
+
+| Id | Working title | Thesis | Replaces | Lens order | First screen | Imagery | Composition | Motion |
+|---|---|---|---|---|---|---|---|---|
+| R1 | Plain Text | Confidence needs no decoration: a full-width document with a contents list, hairline rules and navy links, no cards and no surfaces; the argument is that the facts hold up unadorned | M04 if photograph permissions are refused for the whole library | L3, L4, L1, L2 | Light | None | Single column at `--container-max`, contents list on the left from 1024 | Still |
+| R2 | The Schedule Card | One card, the two days side by side as a printed schedule, the doors as the card's two signatures | M13 if the human-path direction cannot be built without a form | L1, L3, L2, L4 | Light | None | One centred card, 65ch | Still |

@@ -68,7 +68,7 @@
 | C23 | One typographic emphasis device carried across every headline | Hull, Every (B) | Typography | DD-01 families; no fourth face | Use | M02, M08 |
 | C24 | Footer parity: two locations with equal, complete address blocks | Getty, MoMA (B); Tate galleries list (C) | Continuity | K7 section 5; DD-45 | Use | All |
 | C25 | Sentence-case section headers | Getty, Barnes, MoMA, Every (B) | Typography | `copy.md` allowed headings | Use | All |
-| C26 | A persistent, redundant "which of ours is yours" directory | Every (B, floating panel plus grid); Getty (B, partial) | Objective | No sticky header height on the phone (K1 section 8) | Adapt | M16, M10 |
+| C26 | A persistent, redundant "which of ours is yours" directory | Every (B, floating panel plus grid); Getty (B, partial) | Objective | The landing header is not sticky, so a persistent directory may not spend header height on the phone (K1 section 5b row 1) | Adapt | M16, M10 |
 | C27 | Tracked-out eyebrow label before every heading | Barnes, Hull, Every (B); SFMOMA, COLLINS (D) | Typography | `copy.md` allowed eyebrows; muted, never the accent | Use | M02, M05, M15 |
 | C28 | Decorative textured strip along a hero photograph's edge | Nord Anglia, Hull (B) | Composition | Cheap asymmetry; never a wayfinding device | Adapt | M11 |
 | C29 | Extreme page length for a routing job | MoMA, Every, Pentagram (B) | Composition | The landing routes; length matches the job | Avoid | None |
