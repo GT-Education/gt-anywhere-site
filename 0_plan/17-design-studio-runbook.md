@@ -51,7 +51,7 @@ Every mock renders and passes on all of these. "Fits the screen" means: header, 
 | Class | Sizes | Why |
 |---|---|---|
 | Phone | 360 by 780, 390 by 844, 412 by 915, 430 by 932 | Two thirds of sessions are mobile (fact 5); Android and iPhone widths |
-| Phone in an app browser | 390 by 664, 412 by 780 | Instagram and TikTok webviews take 150 to 180px; paid social lands here (REQ-024) |
+| Phone in an app browser | 393 by 596, 390 by 600, 430 by 675, 412 by 775 (bounds derived in `kb/K8` from device descriptors minus a persistent 64px toolbar; REQ-024 replaces them with real measurements) | Instagram, Facebook and TikTok webviews keep their toolbars, so the small viewport is the only viewport there; the earlier 390 by 664 row was mobile Safari, not a webview (K8) |
 | Tablet | 768 by 1024, 820 by 1180, 1024 by 1366 | iPad portrait and landscape |
 | Laptop | 1280 by 720, 1366 by 768, 1440 by 900, 1536 by 864 | The most common desktop sizes; 1280 by 720 is the hardest fold |
 | Desktop | 1920 by 1080 | Large screens must not look empty |

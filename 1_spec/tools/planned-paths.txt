@@ -82,3 +82,4 @@ tests/package.json
 tests/mocks/
 0_plan/kb/BRIEF-TEMPLATE.md
 0_plan/kb/exemplars/<slug>-1440.png
+0_plan/kb/REGISTER-FOLLOWUPS.md

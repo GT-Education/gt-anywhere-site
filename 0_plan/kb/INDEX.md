@@ -20,3 +20,4 @@
 | Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` (grid: `exemplars/index.html`) | 26 sites captured at 390 and 1440 (JPEG), grid page for Johnny | Pending |
 | Design Director brief template | `BRIEF-TEMPLATE.md` | Written 2026-09-11; filled per mock after G-C | n/a |
 | Concept catalog | `CONCEPTS.md` | Queued (G-C) | Pending |
+| Register follow-ups | `REGISTER-FOLLOWUPS.md` | 23 proposed row changes from K1 to K8; processed through the ensemble at E4 | Pending |
