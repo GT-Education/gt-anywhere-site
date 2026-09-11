@@ -31,6 +31,8 @@ CASES = {
  'JSON-LD tag with a quoted > and a bare src is rejected': ('', '<script type="application/ld+json" data-note=">" src>{}</script>', '', 'R2', 'FAIL'),
  'bare data-d039 after a quoted > in the html tag fails R20': ('title=">" data-d039', LD, '', 'R20', 'FAIL'),
  'quoted > inside a legitimate inline script tag still counts one inline script': ('data-d039="script"', LD, '<script data-note=">">1</script>', 'R2', 'PASS'),
+ 'entity-encoded submit type is rejected': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><button type="sub&#109;it">go</button>', 'R1', 'FAIL'),
+ 'a disguised closing tag does not shorten the inline script byte count': ('data-d039="script"', LD, '<script>const marker = "</scripture>"; /*' + 'x' * 2048 + '*/</script>', 'R2', 'FAIL'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

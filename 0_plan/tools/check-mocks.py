@@ -27,7 +27,7 @@ def attrs(tag):
     for a in ATTR_RE.finditer(body):
         name = a.group(1).lower()
         val = a.group(2) if a.group(2) is not None else (a.group(3) if a.group(3) is not None else a.group(4))
-        out.setdefault(name, '' if val is None else val)
+        out.setdefault(name, '' if val is None else H.unescape(val))  # character references decoded, so sub&#109;it is submit
     return out
 
 def attr(tag, name):
@@ -58,8 +58,8 @@ def script_blocks(doc):
     """(start_tag, body) for every <script> element, quote-aware"""
     res = []
     for tag, end in tags(doc, 'script'):
-        close = doc.lower().find('</script', end)
-        res.append((tag, doc[end:close] if close >= 0 else doc[end:]))
+        m = re.compile(r'</script(?=[\s/>])', re.I).search(doc, end)  # the real end tag; </scripture> is not one
+        res.append((tag, doc[end:m.start()] if m else doc[end:]))
     return res
 
 def check(folder):
