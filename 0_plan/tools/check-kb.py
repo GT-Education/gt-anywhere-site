@@ -13,9 +13,14 @@ for f in files:
         if not any(sec.lower() in h.lower() for h in heads): errs.append(f'missing section: {sec}')
     urls = re.findall(r'https?://[^\s)\]|>]+', s)
     if len(set(urls)) < 20: errs.append(f'only {len(set(urls))} distinct URLs (need 20 or more)')
-    findings = re.findall(r'^\|?\s*\**F-?\d+\**\s*[|:]', s, flags=re.M) or re.findall(r'^\s*\d+\.\s', s, flags=re.M)
-    if len(findings) < 10: errs.append(f'only {len(findings)} numbered findings')
-    m = re.search(r'How it applies to GT(.*?)(?:^#{1,3}\s|\Z)', s, flags=re.S|re.M|re.I)
+    # findings: table rows and numbered subsections inside every level-2 "Findings" section
+    fsecs = re.findall(r'^##[^\n]*Findings[^\n]*\n(.*?)(?=^##\s|\Z)', s, flags=re.S|re.M|re.I)
+    fbody = '\n'.join(fsecs)
+    rows = [l for l in fbody.splitlines() if l.startswith('|') and not re.match(r'^\|\s*-', l) and not re.match(r'^\|\s*(#|Field|Site|Source|Candidate)\b', l)]
+    subs = re.findall(r'^###\s', fbody, flags=re.M)
+    findings = rows + subs
+    if len(findings) < 10: errs.append(f'only {len(findings)} findings rows or subsections')
+    m = re.search(r'^##[^\n]*How it applies to GT[^\n]*\n(.*?)(?=^##\s|\Z)', s, flags=re.S|re.M|re.I)
     words = len(m.group(1).split()) if m else 0
     if words < 300: errs.append(f'GT application section has {words} words (need 300 or more)')
     if re.search(r'\b(TBD|lorem|placeholder)\b', s, flags=re.I): errs.append('placeholder text present')
