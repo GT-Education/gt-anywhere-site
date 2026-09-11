@@ -55,17 +55,19 @@ ul, ol { padding: 0; list-style: none; }
 /* ---------- Header: 56px, not sticky (DD-12, K1 section 5b) ---------- */
 
 .header { min-height: 3.5rem; background: var(--color-bg); border-bottom: 1px solid var(--color-border); }
-.header__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); min-height: calc(3.5rem - 1px); }
+.header__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); min-height: calc(3.5rem - 1px); }
 .lockup { display: flex; align-items: center; min-height: 44px; flex: 0 0 auto; }
 .lockup img { width: 6.5rem; height: auto; }
-/* The nav gives way before the mark does: at a doubled root font the links wrap and the header grows. */
+/* The nav gives way before the mark does: when the two links cannot fit beside the lockup (320px wide, or a doubled
+   root font) the whole nav drops onto its own row under the mark, right-aligned, and the header grows. */
 .utility {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-2); flex: 0 1 auto; min-width: 0;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--space-2);
+  flex: 0 1 auto; min-width: 0; margin-left: auto;
   font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body);
 }
 .utility a {
   display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-1);
-  text-decoration: none; text-align: right;
+  text-decoration: none; white-space: nowrap;
 }
 .utility a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 @media (min-width: 768px) {
@@ -83,38 +85,38 @@ ul, ol { padding: 0; list-style: none; }
   font-size: var(--text-2xl); line-height: var(--leading-tight); letter-spacing: -0.01em;
   max-width: 35ch; text-wrap: balance;
 }
-.provenance { margin-top: var(--space-3); font-size: var(--text-sm); line-height: var(--leading-body); color: var(--color-text-muted); }
+.masthead__row { margin-top: var(--space-3); padding-bottom: var(--space-3); border-bottom: 3px solid var(--color-accent); }
+.provenance { flex: none; font-size: var(--text-sm); line-height: var(--leading-body); color: var(--color-text-muted); }
 @media (min-width: 768px) {
   .masthead__h1 { font-size: var(--text-3xl); }
 }
 @media (min-width: 1024px) {
   .masthead {
     display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6);
-    padding-top: var(--space-5);
+    padding-top: var(--space-4);
   }
   .masthead > * { grid-column: 1 / span 8; }
+  /* Provenance left, the anchor right over the school columns, one accent rule under both: the ledger's top edge. */
+  .masthead > .masthead__row { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-6); }
+  .anchor { margin-top: 0; }
+  .anchor a { justify-content: flex-end; text-align: right; }
 }
 @media (min-width: 1440px) { .masthead { padding-top: var(--space-6); } }
 
 /* ---------- The ledger ---------- */
 
-.ledger-section { padding-top: var(--space-4); }
-@media (min-width: 1024px) { .ledger-section { padding-top: var(--space-5); } }
-@media (min-width: 1440px) { .ledger-section { padding-top: var(--space-6); } }
+.ledger-section { padding-top: 0; }
 
-/* The compare anchor introduces the table; its 3px rule is the page's one accent use and the ledger's top edge. */
-.anchor {
-  padding-bottom: var(--space-3);
-  border-bottom: 3px solid var(--color-accent);
-  font-size: var(--text-sm); line-height: var(--leading-prose);
-}
+/* The compare anchor introduces the table at --text-md, so it ranks above the provenance line; the 3px accent rule
+   under the provenance-and-anchor row is the page's one accent use and the ledger's top edge. */
+.anchor { margin-top: var(--space-4); font-size: var(--text-md); line-height: var(--leading-prose); }
 .anchor a {
   display: flex; align-items: flex-end; min-height: 44px; text-wrap: balance;
   color: var(--color-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
 }
 .anchor a:hover { text-decoration-thickness: 2px; }
 
-.ledger { width: 100%; margin-top: var(--space-3); border-collapse: collapse; table-layout: fixed; }
+.ledger { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .ledger__col-label { width: 23%; }
 .ledger__col-school { width: 38.5%; }
 .ledger th, .ledger td { padding: var(--space-4) var(--space-4) var(--space-4) 0; text-align: left; vertical-align: top; }
@@ -129,7 +131,7 @@ ul, ol { padding: 0; list-style: none; }
   font-size: var(--text-xs); font-weight: 500; line-height: var(--leading-body);
   letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted);
 }
-.door__icon { width: 0.875rem; height: 0.875rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.door__icon { width: 1.25rem; height: 1.25rem; flex: none; color: var(--color-text); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
 .door__name { display: block; margin-top: var(--space-2); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); }
 .door__line { display: block; margin-top: var(--space-3); margin-bottom: var(--space-4); font-size: var(--text-base); line-height: var(--leading-prose); }
 .door__inner .cta { margin-top: auto; } /* the CTAs share one baseline across both doors */
@@ -160,8 +162,30 @@ ul, ol { padding: 0; list-style: none; }
 .ledger tbody tr:hover { background: var(--color-surface); }
 .ledger__row--tuition td { font-variant-numeric: tabular-nums; }
 
+/* Long rows (two-sentence cells): native disclosures on the stacked forms, one per cell with the school name as the
+   summary, opened instantly (V7). In the table form the content is always shown and the summary hidden. */
+.disclosure { margin: 0; }
+.disclosure > summary {
+  display: flex; align-items: center; gap: var(--space-3); min-height: 44px; cursor: pointer; list-style: none;
+  font-size: var(--text-xs); font-weight: 500; line-height: var(--leading-body);
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted);
+}
+.disclosure > summary::-webkit-details-marker { display: none; }
+.disclosure > summary::before {
+  content: ""; width: 0.5em; height: 0.5em; flex: none;
+  border-right: 1.5px solid var(--color-text); border-bottom: 1.5px solid var(--color-text); transform: rotate(-45deg);
+}
+.disclosure[open] > summary::before { transform: rotate(45deg); }
+.disclosure__body { margin: 0; padding-bottom: var(--space-2); }
+@media (min-width: 900px) {
+  @supports selector(::details-content) {
+    .disclosure > summary { display: none; }
+    .disclosure::details-content { content-visibility: visible; display: block; }
+  }
+}
+
 /* Foot: the doors repeated (DD-23) as the ledger's closing row, under a double rule. */
-.ledger tfoot td { padding-top: var(--space-4); border-top: 1px solid var(--color-border); border-bottom: 3px double var(--color-border); }
+.ledger tfoot td { padding-top: var(--space-4); padding-left: var(--space-4); border-top: 1px solid var(--color-border); border-bottom: 3px double var(--color-border); }
 .ledger tfoot .ledger__corner { border-bottom: 3px double var(--color-border); }
 
 /* Tail: the sources block (Vanguard's footnote convention) under the label and Georgetown columns, the TEFA module
@@ -205,6 +229,7 @@ ul, ol { padding: 0; list-style: none; }
   .ledger tbody th, .ledger tbody td { border-top: 0; }
   .ledger tbody th { padding-right: 0; }
   .ledger tbody td { margin-top: var(--space-3); }
+  .ledger tbody td.ledger__cell--long::before { content: none; }
   .ledger tbody td::before {
     content: attr(data-label);
     display: block; margin-bottom: var(--space-1);
@@ -296,6 +321,10 @@ ul, ol { padding: 0; list-style: none; }
   font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text-muted);
 }
 .steps__apply { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+@media (max-width: 767px) {
+  .steps__apply { display: grid; grid-auto-rows: 1fr; }
+  .steps__apply .cta--outline { display: flex; }
+}
 
 /* Secondary CTAs: COLLINS rows, name left, arrow right, hairline between. */
 .link-rows { margin-top: var(--space-5); max-width: var(--measure-prose); border-bottom: 1px solid var(--color-border); }
@@ -338,6 +367,22 @@ ul, ol { padding: 0; list-style: none; }
   .footer__logos { grid-column: 1 / span 3; }
   .footer__facts { grid-column: 4 / span 5; }
   .footer__nav { grid-column: 10 / span 3; }
+}
+
+/* Phone landscape (V10, 750 by 342; CONTRACT section 2 recipe): the h1 takes the full width at --text-xl and the
+   anchor steps to --text-sm on this row only (declared departures), the provenance and the anchor share one row, the
+   doors sit side by side with label and name on one line, their lines below the fold. */
+@media (min-width: 600px) and (max-height: 400px) {
+  .masthead { padding-top: var(--space-3); }
+  .masthead__h1 { font-size: var(--text-xl); max-width: none; }
+  .masthead__row { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-4); }
+  .anchor { margin-top: 0; font-size: var(--text-sm); }
+  .anchor a { justify-content: flex-end; text-align: right; }
+  .ledger thead .door { padding: var(--space-3); }
+  .door__inner { display: block; }
+  .door__label { vertical-align: baseline; }
+  .door__name { display: inline; margin: 0 0 0 var(--space-3); }
+  .door__inner .cta { margin-top: var(--space-3); }
 }
 
 /* ---------- Reduced motion and forced colours ---------- */
