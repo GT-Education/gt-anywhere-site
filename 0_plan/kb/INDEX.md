@@ -22,3 +22,4 @@
 | Concept catalog | `CONCEPTS.md` (brief: `CONCEPTS-BRIEF.md`) | Brief written; catalog runs after E4 | Pending |
 | Register follow-ups | `REGISTER-FOLLOWUPS.md` | 23 proposed row changes from K1 to K8; processed through the ensemble at E4 | Pending |
 | Resolutions after E4 | `KB-RESOLUTIONS.md` | Written 2026-09-11; the contract every rework and brief follows | n/a |
+| Twenty-direction slate | `DIRECTIONS.md` | Drafted 2026-09-11; exemplar moves after batches C and D; Johnny approves with the briefs | n/a |
