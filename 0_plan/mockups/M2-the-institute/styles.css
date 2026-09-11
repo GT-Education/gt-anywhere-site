@@ -45,6 +45,9 @@ h1, h2, h3, p { margin: 0; }
   padding: var(--space-3) var(--space-4);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
 }
 
 /* Focus visibility, everywhere */
@@ -54,9 +57,11 @@ a:focus-visible {
 }
 
 /* Reduced motion — nothing in this mock transitions (M2's motion stance is Static,
-   0_plan/05 §6), so this is a defensive no-op guard rather than an override of active motion. */
+   0_plan/05 §6), so this is a defensive no-op guard rather than an override of active motion.
+   Selector list (not the bare universal selector) covers ::before/::after explicitly, since a
+   pseudo-element rule needs its own selector to match (fix pass, E2 finding 3 / check-mocks R10). */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  *, *::before, *::after { transition: none !important; }
 }
 
 .wrap {
@@ -81,6 +86,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   padding-block: var(--space-3);
+  min-height: 2.75rem;
 }
 .lockup img {
   display: block;
@@ -99,8 +105,10 @@ a:focus-visible {
   text-underline-offset: 0.2em;
   color: var(--color-text-muted);
   padding-block: var(--space-4);
+  padding-inline: var(--space-3);
   display: inline-flex;
   align-items: center;
+  min-height: 2.75rem;
 }
 .site-header nav a:hover,
 .site-header nav a:focus-visible {
@@ -181,15 +189,23 @@ a:focus-visible {
   border: 1px solid var(--color-border);
   padding: var(--space-3);
 }
-/* Decorative door icon: hidden at mobile widths to keep the first screen compact
-   (rule 8); reintroduced at 48rem where there is width to spare. It is aria-hidden
-   and redundant with the door's own label/heading either way (see RATIONALE Assets). */
+/* Compact, meaningful format icon beside the label at every width, including 390px
+   (fix pass, E2 finding 8 / rule 10): a small home glyph for "In person", a small globe
+   glyph for "Online". Both aria-hidden and redundant with the door's own label/heading
+   either way (see RATIONALE Assets); sized up slightly at 48rem where there is more
+   room to spare, but never hidden. */
+.door-format {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-1);
+}
 .door-icon {
-  display: none;
-  width: var(--space-6);
-  height: var(--space-6);
+  display: block;
+  width: var(--space-4);
+  height: var(--space-4);
   color: var(--color-text-muted);
-  margin-block-end: var(--space-2);
+  flex-shrink: 0;
 }
 .door-label {
   font-family: var(--font-sans);
@@ -198,8 +214,6 @@ a:focus-visible {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  display: block;
-  margin-block-end: var(--space-1);
 }
 .door h3 {
   font-family: var(--font-serif);
@@ -224,6 +238,7 @@ a:focus-visible {
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: none;
+  min-height: 2.75rem;
 }
 .cta:hover, .cta:focus-visible {
   background: var(--color-text);
@@ -235,12 +250,26 @@ a:focus-visible {
   font-size: var(--text-sm);
 }
 .compare-prompt a {
+  display: inline-flex;
+  align-items: center;
+  padding-block: var(--space-4);
+  min-height: 2.75rem;
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 .compare-prompt a:hover,
 .compare-prompt a:focus-visible {
   color: var(--color-text-muted);
+}
+
+/* First-viewport comparison preview (rule 11 / DD-03): M2 is the one direction that
+   attempts the comparison inside the desktop first viewport. Hidden below 90rem so it
+   never touches the 390 or 768 layouts; becomes a side panel beside the doors at 90rem
+   and up (see the breakpoints section). It repeats three of the full table's rows
+   verbatim and is aria-hidden because it duplicates content the real <table> below
+   already carries in accessible form — see RATIONALE. */
+.mini-compare {
+  display: none;
 }
 
 /* ---------- Shared section rhythm ---------- */
@@ -393,6 +422,7 @@ tbody tr:last-child td {
   display: inline-flex;
   align-items: center;
   padding-block: var(--space-4);
+  min-height: 2.75rem;
 }
 .tefa a:hover, .tefa a:focus-visible { color: var(--color-text-muted); }
 
@@ -463,6 +493,7 @@ tbody tr:last-child td {
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   text-decoration: none;
+  min-height: 2.75rem;
 }
 .secondary-ctas a:hover,
 .secondary-ctas a:focus-visible {
@@ -498,7 +529,19 @@ tbody tr:last-child td {
 .footer-logos a {
   display: inline-flex;
   align-items: center;
-  padding-block: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+/* Each real logo file, unmodified, on the panel background it needs to read against
+   (fix pass, E2 finding 18): the Anywhere mark's white lettering goes on the dark navy
+   token it was drawn for; the GT School mark stays on a light panel, matching gt.school's
+   own footer treatment. */
+.footer-logo--georgetown {
+  background: var(--color-bg);
+}
+.footer-logo--anywhere {
+  background: var(--color-navy);
 }
 .footer-logos img {
   display: block;
@@ -524,7 +567,11 @@ tbody tr:last-child td {
   color: var(--color-text-muted);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding-block: var(--space-4);
+  padding-inline: var(--space-3);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
 }
 .site-footer nav a:hover,
 .site-footer nav a:focus-visible {
@@ -541,14 +588,14 @@ tbody tr:last-child td {
   table { min-width: 32rem; }
   .register { grid-template-columns: repeat(4, 1fr); }
   .doors { grid-template-columns: repeat(2, 1fr); }
-  .door-icon { display: block; }
+  .door-icon { width: var(--space-5); height: var(--space-5); }
   .doors--compact { grid-template-columns: repeat(2, 1fr); }
   .apply-links { grid-template-columns: repeat(2, 1fr); }
   .secondary-ctas { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 90rem) {
-  .hero h1 { font-size: var(--text-3xl); max-width: 22ch; }
+  .hero h1 { font-size: var(--text-3xl); max-width: none; }
   .provenance { font-size: var(--text-base); }
   .register dd { font-size: var(--text-md); }
   .door h3 { font-size: var(--text-2xl); }
@@ -558,4 +605,76 @@ tbody tr:last-child td {
   .steps-intro,
   .steps li,
   .families p { font-size: var(--text-md); }
+
+  /* Rule 11 / DD-03: M2 is the one direction that attempts the comparison inside the
+     desktop first viewport. The hero (only the hero — every other section keeps the
+     shared 48rem/768px reading column) widens to a two-column layout so the preview
+     panel sits beside the doors instead of stacking beneath them; stacking beneath would
+     add height to the same column the doors are in and risk pushing the door CTAs below
+     900px, where a side column cannot, since its own height never affects hero-main's.
+     The h1's max-width is relaxed from 22ch to none in the same breakpoint (it now wraps
+     at the hero-main column's own width, about 29-30 characters per line) so it renders
+     five to six lines instead of seven, clearing enough vertical room that the doors'
+     CTAs stay above 900px once the panel is added; see RATIONALE self-check for the
+     arithmetic. Both are named, flagged departures from the shared narrow-column
+     treatment, not a change to it. */
+  .hero {
+    max-width: 74rem;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-7);
+  }
+  .hero-main {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .mini-compare {
+    display: block;
+    flex: 0 0 20rem;
+    align-self: flex-end;
+    border: 1px solid var(--color-border);
+    padding: var(--space-4);
+  }
+  .mini-compare-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-block-end: var(--space-3);
+  }
+  .mini-compare-row {
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-3);
+  }
+  .mini-compare-row:first-of-type {
+    border-top: none;
+    padding-block-start: 0;
+  }
+  .mini-compare-attr {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-block-end: var(--space-2);
+  }
+  .mini-compare-cell {
+    font-family: var(--font-serif);
+    font-size: var(--text-xs);
+    line-height: var(--leading-body);
+    margin-block-end: var(--space-2);
+  }
+  .mini-compare-cell:last-child { margin-block-end: 0; }
+  .mini-compare-cell strong { font-family: var(--font-sans); font-weight: 600; }
+  .mini-compare-more {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-block-start: var(--space-3);
+    padding-block-start: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
 }

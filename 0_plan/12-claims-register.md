@@ -30,7 +30,7 @@
 | CR-008 | "3X learning velocity" | `https://www.gt.school/` (and 8 other pages) | 3X | None internally; conflicts with CR-005/CR-006 across sites | Unverified | Nari |  | 2026-09-10 |
 | CR-009 | "1400+ SATs by 8th grade" | `index.html` (Anywhere); `https://www.gt.school/`, `/academics` | 1400+ | CR-010 | Unverified | Nari |  | 2026-09-10 |
 | CR-010 | "score 1350+ on their SAT tests by eighth grade" | `https://www.gt.school/resources/gt-school-a-new-option-for-gifted-kids-in-texas` | 1350+ | CR-009 | Unverified | Nari |  | 2026-09-10 |
-| CR-011 | "designed for students in the 90th+ percentile" | `academics/index.html` (Anywhere) | 90th+ percentile | None found elsewhere; gap vs. CR-014/CR-016 framing | Unverified | Crystal |  | 2026-09-10 |
+| CR-011 | "designed for students in the 90th+ percentile" | `academics/index.html` (Anywhere) | 90th+ percentile | None found elsewhere; gap vs. CR-014/CR-016 framing | Unverified, public | Crystal |  | 2026-09-10 |
 | CR-012 | "Top 1-2% nationally" | `index.html` (Anywhere) | Top 1-2% | CR-016 | Unverified | Nari |  | 2026-09-10 |
 | CR-013 | "94th percentile in Reading to the 98th in Math and Science" | `https://www.gt.school/academics` | 94th–98th percentile | CR-014, CR-015 (different framing) | Unverified | Nari |  | 2026-09-10 |
 | CR-014 | "Our students outperform 91% of students nationally" | `https://www.gt.school/` (x2) | 91% | CR-015, CR-016 | Unverified | Nari |  | 2026-09-10 |
@@ -40,8 +40,8 @@
 | CR-018 | "86% have mastered two or more subjects at least two grade levels above their age grade" | `https://www.gt.school/academics` | 86% | None | Unverified | Nari |  | 2026-09-10 |
 | CR-019 | "Our students' Science scores average in the 98th percentile nationally" | `https://www.gt.school/programs` | 98th percentile (Science) | CR-020 (same subject, different frame) | Unverified | Nari |  | 2026-09-10 |
 | CR-020 | "Four in five score in the top 25% nationally in Science" | `https://www.gt.school/programs` | 80% in top 25% | CR-019 | Unverified | Nari |  | 2026-09-10 |
-| CR-021 | "$10,400/year — GT Anywhere annual tuition, fully or partially covered by TEFA" | `index.html` (Anywhere) | $10,400/yr, hedged coverage | CR-022, CR-023, CR-024 | Unverified | Nari |  | 2026-09-10 |
-| CR-022 | "The $10,474 TEFA voucher fully covers the $10,400 GT Anywhere tuition." | `academics/index.html` (Anywhere) | $10,474 fully covers $10,400 | CR-021, CR-023 | Unverified | Nari |  | 2026-09-10 |
+| CR-021 | "$10,400/year — GT Anywhere annual tuition, fully or partially covered by TEFA" | `index.html` (Anywhere) | $10,400/yr, hedged coverage | CR-022, CR-023, CR-024 | Unverified, public | Nari |  | 2026-09-10 |
+| CR-022 | "The $10,474 TEFA voucher fully covers the $10,400 GT Anywhere tuition." | `academics/index.html` (Anywhere) | $10,474 fully covers $10,400 | CR-021, CR-023 | Unverified, public | Nari |  | 2026-09-10 |
 | CR-023 | "...net family cost of $0 if you have a child who is already outpacing their class." | `advisors/index.html` (Anywhere) | $0, conditioned | CR-021, CR-022 | Unverified | Nari |  | 2026-09-10 |
 | CR-024 | "A limited number of $10,000 scholarships are available for founding families" | `https://www.gt.school/` (all 11 pages) | $10,000 scholarship | CR-021–CR-023 (no stated relationship to a list price) | Unverified | Nari |  | 2026-09-10 |
 | CR-025 | "curated cohort... of 8-12 fellow intellectuals" | `advisors/index.html` (Anywhere) | 8-12 students | CR-026 | Unverified | Nari |  | 2026-09-10 |
