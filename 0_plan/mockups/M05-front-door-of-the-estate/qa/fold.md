@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:53:28.768Z; page `/0_plan/mockups/M05-front-door-of-the-estate/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T14:57:45.238Z; page `/0_plan/mockups/M05-front-door-of-the-estate/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|

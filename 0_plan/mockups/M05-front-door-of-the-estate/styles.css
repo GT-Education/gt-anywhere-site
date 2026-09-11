@@ -10,11 +10,13 @@
 
 :root {
   /* The three continuity levers. CONTINUITY.md measures the estate at Literata 300 with -1.6px tracking on a
-     58.5px h1, and Inconsolata 500 at 16px on its buttons. Decisions and reasons: RATIONALE.md. */
+     58.5px h1, and Inconsolata at 16px with a computed weight of 500 on its buttons. Decisions and reasons:
+     RATIONALE.md, "The continuity argument". The button CORNER is not a lever: DD-47 settles it (see .btn). */
   --h1-weight: 300;            /* the estate's display weight, held at every size (measured, RATIONALE.md) */
   --h1-track: -0.027em;        /* the estate's -1.6px at its own 58.5px design size, taken proportionally */
   --btn-size: 1rem;            /* the estate's 16px button, against the contract's --text-btn 17 to 18px */
-  --btn-weight: 600;           /* the estate sets 500; shared/fonts.css ships Inconsolata 400 and 600 only */
+  --btn-weight: 600;           /* the estate computes 500, which its registered faces may be synthesising;
+                                  shared/fonts.css ships Inconsolata 400 and 600 only, so 500 is unclaimable */
   --btn-track: 0.06em;
 }
 
@@ -183,8 +185,17 @@ h1 { font-weight: var(--h1-weight); font-size: var(--text-3xl); letter-spacing: 
 .peer-name { font-family: var(--font-mono); font-weight: var(--btn-weight); font-size: var(--btn-size); letter-spacing: var(--btn-track); text-transform: uppercase; line-height: var(--leading-body); }
 .peer-plate:hover .peer-name { text-decoration: underline; text-underline-offset: 0.2em; }
 
-/* ---------- Buttons: the estate's silhouette, the contract's surface-dependent fill (DD-46 option a) ---------- */
-.btn { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-3) var(--space-5); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: var(--btn-weight); font-size: var(--btn-size); letter-spacing: var(--btn-track); text-transform: uppercase; line-height: var(--leading-body); text-decoration: none; overflow-wrap: anywhere; border-radius: var(--radius-md) var(--radius-md) 0 0; }
+/* ---------- Buttons: DD-47's uniform corner, DD-46's surface-dependent fill ----------
+   Corrected 2026-09-11 after Astra's E9 reading of the mirror's markup. The first build drew
+   `--radius-md --radius-md 0 0` on the belief that the estate's button carries a notch at the lower
+   right. It does not, and no single estate silhouette exists: the first-screen and pre-footer cards
+   COMPOSE a cut corner from a `.button-bg` at 8px, a `.button-bg_filler` at `8px 8px 0 0` and a
+   `.button-bg_corner-wrap` at `0 0 8px`; the footer button clips a 14px polygon; and the desktop
+   header button — the control a parent actually clicks to apply — keeps four rounded corners. The
+   filler's radius drawn on its own, which is what the first build shipped, renders a SQUARE lower
+   right and matches neither the estate nor the contract. This mock now takes the uniform
+   `--radius-md` corner: DD-47's shared default, and the estate's own application-control shape. */
+.btn { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-3) var(--space-5); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: var(--btn-weight); font-size: var(--btn-size); letter-spacing: var(--btn-track); text-transform: uppercase; line-height: var(--leading-body); text-decoration: none; overflow-wrap: anywhere; border-radius: var(--radius-md); }
 .btn:hover { text-decoration: underline; text-underline-offset: 0.2em; }
 .inline-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; text-decoration: underline; text-underline-offset: 0.18em; }
 .inline-link:hover { text-decoration-thickness: 2px; }
