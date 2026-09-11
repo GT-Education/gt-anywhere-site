@@ -1,0 +1,284 @@
+/* M02 The Journal (G-D build wave, 2026-09-11). Lens order L3 mission, L1 objective, L2 continuity, L4 exclusivity.
+   A school that writes like a school: a masthead, a register of facts, a comparison a parent can read in one screen.
+   Every colour, face, size, space, radius and duration is a var(--...) from ../shared/tokens-v2.css; the non-token
+   values (1px hairlines, the 44px target floor, the 56px header, the 35ch measure, the breakpoints and height bands)
+   are named in RATIONALE.md, Departures. No transition property anywhere: every state change is instant (MN-16, R9).
+   The reduced-motion block zeroes durations anyway (R8). Native anchor scroll only under no-preference (V10). */
+
+/* ---------- Reset and base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--color-bg); -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); overflow-wrap: break-word; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---------- Page margins (K1 section 5a schedule, Option under R15): 24 / 32 / 48 / 64; content 1184 at 1280, 1312 at 1440 and 1920 ---------- */
+:root { --page-margin: var(--space-5); --section-pad: clamp(var(--space-7), 1rem + 3vw, var(--space-8)); } /* 48px to 64px: the hairlines separate the sections, so the page stays near four screens at 1440 (C29) */
+@media (min-width: 768px) { :root { --page-margin: var(--space-6); } }
+@media (min-width: 1024px) { :root { --page-margin: var(--space-7); } }
+@media (min-width: 1440px) { :root { --page-margin: var(--space-8); } }
+.wrap { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--page-margin); }
+
+/* ---------- Type roles (CONTRACT section 3; brief, Typography) ---------- */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+.eyebrow { font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+/* The eyebrow-plus-rule opener (Barnes, C27): the 32 by 2px accent rule under a section eyebrow is that screen's one accent use, decorative. */
+.eyebrow--rule::after { content: ""; display: block; width: var(--space-6); margin-top: var(--space-3); border-top: var(--space-1) solid var(--color-accent); }
+.sources { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text); max-width: var(--measure-prose); overflow-wrap: anywhere; } /* the source paths break at a doubled root font */
+/* Links in running text: underlined at rest in the muted role (6.25 on --color-bg), currentColor on hover and focus. */
+.link { text-decoration: underline; text-decoration-color: var(--color-text-muted); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.link:hover, .link:focus-visible { text-decoration-color: currentColor; }
+
+/* Buttons: the estate's face and case (Inconsolata 600 uppercase, .5rem radius, K12 F41 and G15), 44px floor, navy fill with on-navy text (14.58). */
+.cta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 2.75rem; padding: var(--space-3) var(--space-4); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; border: 1px solid var(--color-navy); border-radius: var(--radius-md); }
+.cta:hover { background: var(--color-text); border-color: var(--color-text); }
+.cta--outline { background: transparent; color: var(--color-navy); }
+.cta--outline:hover { background: var(--color-navy); color: var(--color-on-navy); border-color: var(--color-navy); }
+.cta__arrow { flex: none; }
+@media (min-width: 768px) { .cta { display: inline-flex; } }
+
+/* ---------- Focus (K3 section 5d): --color-focus at 2px offset on the light surfaces; the two-colour ring (2px navy inner band,
+   2px on-navy outer band) on and across navy, so one band clears 3:1 on any ground (K3 F10) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.on-navy :focus-visible, .on-navy:focus-visible, .skip-link:focus-visible { outline: 2px solid var(--color-focus-on-dark); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-navy); }
+@media (forced-colors: active) {
+  :focus-visible, .on-navy :focus-visible, .skip-link:focus-visible { outline: 3px solid CanvasText; box-shadow: none; }
+  .cta, .footer__plate, .tefa { border: 1px solid CanvasText; }
+}
+
+/* ---------- Skip link (copy.md section 9): hidden by transform until focused, then a navy tab at the top left ---------- */
+.skip-link { position: absolute; top: var(--space-2); left: var(--space-2); z-index: 1; padding: var(--space-3) var(--space-4); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); text-transform: uppercase; text-decoration: none; border-radius: var(--radius-sm); transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
+/* ---------- Masthead bar: 56px, the GT School mark left, the two utility links right, no menu (DD-12). The 2px accent rule
+   under it is the first screen's one accent use (brief, Colour), decorative. Below 390px the two links stack at the right so
+   the mark keeps its 27px floor (K12 V2); at a doubled root font the nav drops under the mark rather than over it. ---------- */
+.header { border-bottom: var(--space-1) solid var(--color-accent); }
+.header__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--space-4); min-height: calc(3.5rem - var(--space-1)); }
+.lockup { display: inline-flex; align-items: center; min-height: 2.75rem; flex: none; }
+.lockup img { height: clamp(1.725rem, 1.5rem + 1vw, 2rem); width: auto; } /* 27.6px at 360, 32px from 800 */
+.utility { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-4); margin-left: auto; font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); }
+.utility a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: none; white-space: nowrap; }
+.utility a:hover { text-decoration: underline; text-underline-offset: .18em; }
+@media (max-width: 389px) { .utility { flex-direction: column; align-items: flex-end; gap: 0; } }
+@media (min-width: 768px) { .utility { gap: var(--space-5); font-size: var(--text-sm); } }
+
+/* ---------- First screen: h1 across eight columns, the standfirst under a short rule, a full-width rule, the two doors.
+   Height bands (K10 T-K10-8): compressed under 900px tall with a tighter sub-band at or under 639px; relaxed from 900px. ---------- */
+.first { --fold-density: compressed; --fs-top: var(--space-4); --fs-h1-gap: var(--space-3); --fs-doors-gap: var(--space-5); --fs-door-bottom: var(--space-4); --fs-closer-gap: var(--space-5); --fs-lines-gap: var(--space-6); }
+@media (max-height: 759px) { .first { --fs-door-bottom: var(--space-3); --fs-closer-gap: var(--space-4); } } /* the short laptop rows (V14, V15, V19): the first excerpt row completes inside 720 */
+@media (max-height: 639px) { .first { --fs-top: var(--space-3); --fs-doors-gap: var(--space-4); --fs-lines-gap: var(--space-4); } }
+@media (min-height: 940px) { .first { --fold-density: relaxed; --fs-top: var(--space-6); --fs-h1-gap: var(--space-4); --fs-doors-gap: var(--space-6); --fs-closer-gap: var(--space-6); } }
+
+.masthead { padding-top: var(--fs-top); container-type: inline-size; }
+.h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; text-wrap: pretty; }
+/* Hull's one emphasis device (C23): "in person" and "online" in Literata Italic, styling only; each phrase stays on one line. */
+.h1 i { font-style: italic; white-space: nowrap; }
+/* "from anywhere." stays together so the last line is never one word; released when the column is narrower than 12rem (a
+   doubled root font on a phone), measured in rem so the test tracks the type, not the device. */
+@container (inline-size >= 12rem) { .h1 .nb { white-space: nowrap; } }
+.door__line .nb, .door-lines .nb { white-space: nowrap; } /* "in-person" never splits at its hyphen in the door lines */
+@media (min-width: 768px) { .h1 { text-wrap: balance; } } /* four lines here; the seven-line phone setting takes pretty (K10 T-K10-15) */
+@media (min-width: 1024px) { .h1 { max-width: min(35ch, calc(75% - .5rem)); } } /* nine of twelve columns from 1024 to 1279 (eight would set five lines at 1024, declared) */
+@media (min-width: 1280px) { .h1 { max-width: min(35ch, calc(66.6667% - .6667rem)); } } /* the brief's eight columns with 32px gutters, capped at the contract's 35ch */
+.standfirst { margin-top: var(--fs-h1-gap); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); max-width: var(--measure-prose); }
+.standfirst::before { content: ""; display: block; width: var(--space-6); margin-bottom: var(--space-3); border-top: 1px solid var(--color-text); }
+
+/* Doors: a list (DD-21) under one continuous rule; each door is label, name, line, CTA in text (no card, no tint). Stacked
+   below 768 with a rule between rows; two columns with a 24px gutter from 768 (32px from 1024), CTAs sharing one baseline. */
+.doors-section { margin-top: var(--fs-doors-gap); }
+.doors { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--color-border); }
+.door { display: flex; flex-direction: column; align-items: stretch; padding-block: var(--space-3); }
+.door + .door { border-top: 1px solid var(--color-border); }
+.door__name { margin-top: var(--space-2); font-size: var(--text-lg); line-height: var(--leading-body); }
+.door__line { margin-top: var(--space-3); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.door .cta { margin-top: var(--space-4); }
+.door-lines { display: none; }
+@media (min-width: 768px) {
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .door + .door { border-top: 0; }
+  .door { align-items: flex-start; padding-block: var(--space-4) var(--fs-door-bottom); }
+  .door__line { margin-bottom: var(--space-4); }
+  .door .cta { margin-top: auto; }
+}
+@media (min-width: 1024px) { .doors { column-gap: var(--space-6); } }
+
+/* Compact door rule (CONTRACT section 2, at this direction's measured threshold: three-line door lines put V5's second CTA at
+   about 711 of 691 with the lines inside the doors, so the rule runs below 800px tall, not 700): label, name, CTA in each door;
+   both lines follow the second CTA as two run-in paragraphs. */
+@media (max-width: 767px) and (max-height: 799px) {
+  .door__line { display: none; }
+  .door .cta { margin-top: var(--space-3); }
+  .door-lines { display: block; margin-top: var(--fs-lines-gap); } /* 32px, so the lines cross the fold on 700 to 799px viewports (V8 ended on a false floor at 16); 16px under 640 */
+  .door-lines p { line-height: var(--leading-prose); max-width: var(--measure-prose); }
+  .door-lines p + p { margin-top: var(--space-4); }
+  .run-in { font-weight: 500; padding-inline-end: var(--space-2); }
+}
+
+/* Phone landscape (V10, 750 by 342; CONTRACT section 2 recipe): masthead padding 8, h1 one token down at --text-xl across the
+   full column (declared departure), provenance, the two compact doors side by side, their lines below the fold. */
+@media (min-width: 600px) and (max-height: 400px) {
+  .first { --fs-top: var(--space-3); --fs-h1-gap: var(--space-2); --fs-doors-gap: var(--space-3); }
+  .h1 { font-size: var(--text-xl); max-width: none; text-wrap: balance; }
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .door + .door { border-top: 0; }
+  .door { align-items: stretch; padding-block: var(--space-2) var(--space-3); }
+  .door__line { display: none; }
+  .door .cta { margin-top: var(--space-3); }
+  .door-lines { display: block; margin-top: var(--space-4); }
+  .door-lines p { line-height: var(--leading-prose); max-width: var(--measure-prose); }
+  .door-lines p + p { margin-top: var(--space-4); }
+  .run-in { font-weight: 500; padding-inline-end: var(--space-2); }
+}
+
+/* ---------- "A closer look": the compare anchor sentence, then a three-row excerpt of the comparison as a real table with a
+   caption, then the closing line. Inside the first screen from 1024 (the anchor lands above the fold at V14 and V16); the
+   second screen on phones. ---------- */
+.closer { margin-top: var(--fs-closer-gap); padding-bottom: var(--space-6); } /* the closing line says the comparison continues below, so the compare section follows at 32px, not a full section gap */
+.anchor { font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.anchor a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-decoration-color: var(--color-text-muted); text-decoration-thickness: 1px; text-underline-offset: .18em; text-wrap: balance; }
+.anchor a:hover, .anchor a:focus-visible { text-decoration-color: currentColor; }
+.ctable--excerpt { margin-top: var(--space-3); }
+.closer__more { margin-top: var(--space-3); font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); text-align: right; }
+
+/* ---------- Comparison tables (the excerpt and the full table share one design; DD-06, DD-43): label column and two school
+   columns, --text-sm labels, --text-base cells at 1.5, --color-surface stripes bleeding 8px past the text so the text stays
+   flush with the page's left edge, a --color-text rule under the column heads. Table form from 900px (R6, measured: the
+   longest cell runs four lines in a 326px cell at 900); stacked blocks with the school name on every cell below. ---------- */
+.ctable { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.ctable caption { text-align: left; caption-side: top; }
+.ctable__col-label { width: 22%; }
+.ctable__col-school { width: 39%; }
+/* Text flush with the page's left edge so the table's rules align with the door rule above; the stripe starts at the text. */
+.ctable th, .ctable td { text-align: left; vertical-align: top; padding: var(--space-3) var(--space-4) var(--space-3) 0; }
+.ctable thead th { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-md); line-height: var(--leading-body); padding-block: var(--space-3); }
+.ctable thead th, .ctable thead .ctable__corner { border-bottom: 1px solid var(--color-text); }
+.ctable tbody th { padding-top: calc(var(--space-3) + var(--space-1)); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text); }
+.ctable tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
+.ctable tbody tr:nth-child(odd) { background: var(--color-surface); }
+.ctable tbody tr:last-child > * { border-bottom: 1px solid var(--color-border); }
+.ctable__tabular { font-variant-numeric: tabular-nums; }
+/* The excerpt's caption is its kicker: the tracked eyebrow over the table's top rule. */
+.ctable__kicker { padding: var(--space-3) 0; font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); border-bottom: 1px solid var(--color-text); }
+/* The full table's caption is the compare section's visible title (the h2 is visually hidden so "compare" is not said three times). */
+.ctable__title { padding: 0 0 var(--space-5); font-family: var(--font-serif); font-size: var(--text-2xl); line-height: var(--leading-tight); text-wrap: balance; }
+@media (max-width: 899px) {
+  .ctable, .ctable caption, .ctable tbody, .ctable tr, .ctable th, .ctable td { display: block; }
+  .ctable colgroup { display: none; }
+  .ctable thead { display: block; position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .ctable__kicker { border-bottom: 0; }
+  .ctable tbody tr { padding: var(--space-4) 0; border-top: 1px solid var(--color-border); }
+  .ctable tbody tr:last-child { border-bottom: 1px solid var(--color-border); }
+  .ctable tbody tr:last-child > * { border-bottom: 0; }
+  .ctable tbody th { padding: 0; }
+  .ctable tbody td { padding: var(--space-3) 0 0; }
+  .ctable tbody td::before { content: attr(data-label); display: block; margin-bottom: var(--space-1); font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+}
+/* Two-up stacked form, 768 to 899: the row label across both, the two school cells side by side (the brief's two-column grid). */
+@media (min-width: 768px) and (max-width: 899px) {
+  .ctable tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .ctable tbody th { grid-column: 1 / -1; }
+}
+
+/* ---------- Sections after the first screen: hairline between sections, fluid padding (the one non-token block gap, K1 CP6),
+   the label-column grid from 1024 (eyebrow and h2 in columns 1 to 4, content in 5 to 12; the comparison takes all twelve). ---------- */
+.section { padding-block: var(--section-pad); border-top: 1px solid var(--color-border); }
+.section-grid { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: var(--space-5); }
+.section h2 { margin-top: var(--space-4); font-size: var(--text-2xl); text-wrap: balance; max-width: 20ch; }
+.surface { background: var(--color-surface); }
+@media (min-width: 1024px) {
+  .section-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); row-gap: var(--space-6); }
+  .section-head { grid-column: 1 / span 4; }
+  .section-body { grid-column: 5 / span 8; }
+  .section-body--full { grid-column: 1 / -1; }
+}
+
+/* Comparison section: the table, the doors again (label and CTA only, DD-23), then the sources line beside the TEFA box. */
+.doors--again { margin-top: var(--space-6); }
+.doors--again .door .cta { margin-top: var(--space-3); }
+.compare__tail { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-6); } /* an explicit minmax(0, 1fr) track, so an unbreakable source path cannot widen the column */
+.tefa { padding: var(--space-5); background: var(--color-anywhere-tint); border-radius: var(--radius-sm); max-width: var(--measure-prose); }
+.tefa h3 { font-size: var(--text-md); }
+.tefa p { margin-top: var(--space-2); font-size: var(--text-sm); line-height: var(--leading-prose); }
+.tefa a { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem; font-weight: 500; font-size: var(--text-sm); }
+@media (min-width: 768px) {
+  .compare__tail { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-6); align-items: start; }
+}
+
+/* Proof strip in Exeter's shape (C04): the heading in the label column, four fact modules in a two-by-two grid, each a rule,
+   a label and the statement (the module designed once and repeated, Barnes, C21); the linked sources line under them. The
+   grid has no column gap so the rules run continuous; the gutter is padding inside the modules. */
+.facts { display: grid; grid-template-columns: minmax(0, 1fr); }
+.fact { padding-block: var(--space-4) var(--space-5); border-top: 1px solid var(--color-border); }
+.fact__text { margin-top: var(--space-2); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
+.proof .sources { margin-top: var(--space-5); }
+@media (min-width: 640px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(odd) { padding-right: var(--space-5); }
+  .fact:nth-child(even) { padding-left: var(--space-5); }
+}
+@media (min-width: 1024px) {
+  .fact:nth-child(odd) { padding-right: var(--space-6); }
+  .fact:nth-child(even) { padding-left: var(--space-6); }
+}
+
+/* Steps: the lead in Literata, four numbered rows with CSS counters in the figure face, two outlined application buttons. */
+.steps__lead { font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.steps__list { counter-reset: step; margin-top: var(--space-5); max-width: var(--measure-prose); border-bottom: 1px solid var(--color-border); }
+.steps__list li { counter-increment: step; display: grid; grid-template-columns: var(--space-7) minmax(0, 1fr); padding-block: var(--space-3); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); }
+.steps__list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+.steps__apply { display: grid; gap: var(--space-3); margin-top: var(--space-5); }
+@media (min-width: 768px) { .steps__apply { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); } }
+
+/* Secondary CTAs: a hairline list in Literata, the arrow at the right (a COLLINS row). */
+.link-rows { max-width: var(--measure-prose); border-bottom: 1px solid var(--color-border); }
+.link-rows a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-body); text-decoration: none; }
+.link-rows a::after { content: "\2192" / ""; font-family: var(--font-mono); }
+.link-rows a:hover, .link-rows a:focus-visible { text-decoration: underline; text-underline-offset: .18em; }
+
+/* Current families: one sentence, one outlined button, deliberately small. */
+.families { padding-block: var(--space-7); border-top: 1px solid var(--color-border); }
+.families__bar { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.families h2 { font-size: var(--text-lg); }
+.families p { margin-top: var(--space-2); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+@media (min-width: 768px) {
+  .families__bar { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-6); }
+}
+
+/* ---------- Footer: the page's one navy surface. The GT School mark on a --color-bg plate, the GT Anywhere mark directly on
+   the panel (copy.md section 8); the facts block muted-on-dark, the links and phone in on-navy. Both marks load eagerly. ---------- */
+.on-navy { background: var(--color-navy); color: var(--color-on-navy); }
+.footer { padding-block: var(--space-8); }
+.footer__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+.footer__logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-5); }
+.footer__plate { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); background: var(--color-bg); border-radius: var(--radius-sm); }
+.footer__plate img { height: 1.75rem; width: auto; }
+.footer__anywhere { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.footer__anywhere img { height: 2rem; width: auto; }
+.footer__facts p { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-width: 48ch; }
+.footer__contact { margin-top: var(--space-3); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+.footer__facts .footer__contact { color: var(--color-on-navy); font-size: var(--text-base); }
+.footer__nav { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; font-size: var(--text-sm); }
+.footer__nav a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: none; }
+.footer__nav a:hover { text-decoration: underline; text-underline-offset: .18em; }
+@media (min-width: 768px) {
+  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .footer__logos { grid-column: 1 / -1; }
+  .footer__nav { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+}
+@media (min-width: 1024px) {
+  .footer__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .footer__logos { grid-column: 1 / span 3; flex-direction: column; align-items: flex-start; }
+  .footer__facts { grid-column: 4 / span 4; }
+  .footer__nav { grid-column: 8 / span 5; }
+}
+
+/* ---------- Reduced motion (R8): every duration zero on elements and pseudo-elements; the anchor scroll is instant ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; }
+}

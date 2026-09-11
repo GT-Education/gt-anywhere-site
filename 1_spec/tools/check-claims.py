@@ -16,7 +16,7 @@ NOT_CLAIMS = {'8', '8th', '512', '270', '9481', '2026', '09', '10', '390', '844'
 
 def visible_text(doc):
     d = re.sub(r'<!--.*?-->', ' ', doc, flags=re.S); d = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', d, flags=re.S|re.I)
-    return H.unescape(re.sub(r'<[^>]+>', ' ', d))
+    return re.sub(r'\s+', ' ', H.unescape(re.sub(r'<[^>]+>', ' ', d)))
 
 def register():
     rows = {}
