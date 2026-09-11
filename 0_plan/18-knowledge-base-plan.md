@@ -4,7 +4,7 @@
 |---|---|
 | Purpose | The research swarm that gives the design studio (`17-design-studio-runbook.md`) a foundation: web design philosophy and craft, digital design systems, motion, imagery, accessibility, performance, digital marketing and advertising, and the existing GT and Alpha branding, each written up with sources and "how it applies to GT" |
 | Output | `0_plan/kb/<cluster>.md`, one file per cluster below, plus `0_plan/kb/INDEX.md` and `0_plan/kb/EXEMPLARS.md` (the reference pages with screenshots in `0_plan/kb/exemplars/`) |
-| Rules | Every claim carries a source with a URL and date; no live GT or Alpha page is loaded in a browser (text fetch only); screenshots of third-party sites are for internal reference and are not reused in mocks; findings that change a register row go through the ensemble, never straight into `07` |
+| Rules | Every claim carries a source with a URL and date; no live GT or Alpha page is loaded in a browser (text fetch only); screenshots of third-party sites are for internal reference and are not reused in mocks; findings that change a register row go through the ensemble, never straight into `07`. Operational note 2026-09-11: the session's web-search budget (200 searches) was exhausted during wave three, so later agents reach sources by canonical URL; the Opus session limit interrupted one agent, which was relaunched on Sonnet |
 | Owner | Fable synthesizes; Sonnet agents retrieve; Astra checks for unsourced claims (E4) |
 | Status | Proposed 2026-09-11 |
 
