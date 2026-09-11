@@ -59,7 +59,7 @@ probe = doc.replace('<body>', '<body><p title="The <script> adds optional reveal
 probe_fails = [rl for rl, st, _ in cm.check_doc(probe, css, rat, m1) if st == 'FAIL']
 # and the same tooltip combined with a declared observer script before </body>: every rule must keep its outcome
 declared = doc.replace('<html', '<html data-d039="script"', 1).replace('</body>', '<script>document.querySelectorAll("[data-reveal]").forEach(function(e){e.dataset.seen=1})</script></body>', 1)
-declared_probe = declared.replace('<body>', '<body><p title="The <script> adds optional reveals.">Motion notes</p>', 1)
+declared_probe = declared.replace('<body>', '<body><p title="The <script> adds optional reveals; the <h1>, the <img src=x>, the <meta name=robots> and the <main id=main> are all just words here.">Motion notes</p>', 1)
 rat_d = rat + '\nD-039 declared for the observer script.'
 d_fails = [rl for rl, st, _ in cm.check_doc(declared, css, rat_d, m1) if st == 'FAIL']; dp_fails = [rl for rl, st, _ in cm.check_doc(declared_probe, css, rat_d, m1) if st == 'FAIL']
 same2 = d_fails == dp_fails

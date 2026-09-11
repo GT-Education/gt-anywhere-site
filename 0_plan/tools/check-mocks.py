@@ -116,8 +116,8 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     hosts = set(re.findall(r'https?://([^/"\')\s]+)', doc+style))
     bad = sorted(h for h in hosts if h not in ALLOWED_HOSTS)
     r('R3 external hosts', not bad, ', '.join(bad))
-    srcs = re.findall(r'<img[^>]+src="([^"]+)"', doc, re.I) + re.findall(r'url\((["\']?)([^)"\']+)\1\)', style)
-    srcs = [s if isinstance(s,str) else s[1] for s in srcs]
+    els = lambda name: [a for t, a in el.tags if t == name]  # parsed elements by name
+    srcs = [a['src'] for a in els('img') if a.get('src')] + [m[1] for m in re.findall(r'url\((["\']?)([^)"\']+)\1\)', style)]
     badsrc = [s for s in srcs if not (s.startswith('../shared/') or s.startswith('/assets/'))]
     r('R3b local assets only', not badsrc, ', '.join(badsrc[:5]))
     ph = re.findall(r'lorem|\bTBD\b|placeholder|\bTODO\b|\bXXX\b|\[[^\]]{2,40}\]', text, re.I)
@@ -128,20 +128,21 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     r('R6 no "advisor" in text', not re.search(r'advis', text, re.I))
     r('R7 full names', text.count('Georgetown Campus')>=2 and text.count('GT Anywhere')>=2, f"Georgetown Campus x{text.count('Georgetown Campus')}, GT Anywhere x{text.count('GT Anywhere')}")
     r('R8 title', bool(title_text) and 'GT School' in title_text and 'selective school for gifted children' in title_text, (title_text or '')[:80])
-    r('R8 robots noindex', bool(re.search(r'<meta[^>]+name="robots"[^>]+noindex', doc, re.I)))
-    r('R8 canonical', 'href="https://gt.school/"' in doc)
-    r('R8 description', bool(re.search(r'<meta[^>]+name="description"', doc, re.I)))
-    r('R8 open graph', 'property="og:title"' in doc)
+    metas = els('meta')
+    r('R8 robots noindex', any((a.get('name') or '').lower() == 'robots' and 'noindex' in (a.get('content') or '').lower() for a in metas))
+    r('R8 canonical', any((a.get('rel') or '').lower() == 'canonical' and a.get('href') == 'https://gt.school/' for a in els('link')))
+    r('R8 description', any((a.get('name') or '').lower() == 'description' and (a.get('content') or '').strip() for a in metas))
+    r('R8 open graph', any((a.get('property') or '').lower() == 'og:title' for a in metas))
     ldt = next((b for a, b in blocks if 'ld+json' in (a.get('type') or '')), '')  # the JSON-LD body from the parse
     r('R8 JSON-LD organization', 'EducationalOrganization' in ldt and 'subOrganization' in ldt, '')
     r('R8 JSON-LD no claims', not re.search(r'accredit|faster|SAT|percent', ldt, re.I))
-    r('R9 lang', bool(re.search(r'<html[^>]+lang="en"', doc, re.I)))
-    r('R9 one h1', len(re.findall(r'<h1\b', doc, re.I))==1, f"{len(re.findall(r'<h1\b', doc, re.I))} h1")
-    r('R9 skip link', bool(re.search(r'<a[^>]+href="#main[^"]*"', doc, re.I)) and bool(re.search(r'<main[^>]+id="main', doc, re.I)))
-    r('R9 landmarks', all(re.search(rf'<{t}\b', doc, re.I) for t in ['header','nav','main','footer']))
-    imgs = re.findall(r'<img\b[^>]*>', doc, re.I)
-    r('R9 alt on every image', all(re.search(r'\balt=', i) for i in imgs), f'{len(imgs)} images')
-    r('R9 table caption and scope', '<caption' in doc and 'scope="col"' in doc)
+    r('R9 lang', (html_el.get('lang') or '').lower() == 'en')
+    r('R9 one h1', len(els('h1'))==1, f"{len(els('h1'))} h1")
+    r('R9 skip link', any((a.get('href') or '').startswith('#main') for a in els('a')) and any((a.get('id') or '').startswith('main') for a in els('main')))
+    r('R9 landmarks', all(els(t) for t in ['header','nav','main','footer']))
+    imgs = els('img')
+    r('R9 alt on every image', all('alt' in a for a in imgs), f'{len(imgs)} images')
+    r('R9 table caption and scope', bool(els('caption')) and any((a.get('scope') or '').lower() == 'col' for a in els('th')))
     r('R9 focus-visible styled', ':focus-visible' in style and '--color-focus' in style)
     trans = re.findall(r'transition\s*:\s*([^;]+);', style)
     badt = []
@@ -159,9 +160,9 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     counts = {e: len(re.findall(rf'data-event="{e}"', doc)) for e in EVENTS}
     missing = [f'{e} {c}/{n}' for e,n in EVENTS.items() if (c:=counts[e]) < n]
     r('R12 data-event coverage', not missing, ', '.join(missing))
-    dims = [i for i in imgs if not (re.search(r'\bwidth=', i) and re.search(r'\bheight=', i))]
+    dims = [a for a in imgs if not ('width' in a and 'height' in a)]
     r('R13 image dimensions', not dims, f'{len(dims)} without width/height')
-    eager = [i for i in imgs if 'loading="lazy"' not in i and '.svg' not in i]
+    eager = [a for a in imgs if (a.get('loading') or '').lower() != 'lazy' and '.svg' not in (a.get('src') or '')]
     r('R13 at most two eager photos (the first screen); svg logos exempt', len(eager) <= 2, f'{len(eager)} eager')
     for s in set(x for x in srcs if x.startswith('../shared/')):
         if not os.path.exists(os.path.normpath(os.path.join(folder, s))): r('R13 asset exists', False, s)
