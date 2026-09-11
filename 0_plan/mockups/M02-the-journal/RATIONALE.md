@@ -134,7 +134,7 @@ Height bands (`--fold-density`, K10 T-K10-8): compressed below 940px tall (masth
 | DD-21 | Doors are `<ul><li>` on the first screen and after the comparison; a third campus is a third `<li>` (the pair grid becomes `auto-fit`) and a third `<th scope="col">` with a third cell per row; designed for, not demonstrated (no copy exists) |
 | DD-25, DD-27, REQ-070 | Two "Begin application" links with `?school=`; full school names; no unscoped application link |
 | DD-26, K6 section 5b | Both doors identical in markup and treatment; CTAs share one baseline in the pair (`margin-top: auto`); the first-screen CTA bottoms are identical on every row from V10 up (`qa/fold.md`) |
-| DD-29 | Every screen carries a fact: the first screen carries the door lines everywhere and, from 900px wide and 700px tall, the pull-out's three compared rows whole |
+| DD-29 | Every screen carries a fact: the first screen carries the door lines everywhere and, from 1152px wide at 700px tall or 1024px wide at 768px, the pull-out's three compared rows whole |
 | DD-38 (b), R5 | Layer-2 type scale and `--leading-prose` throughout; the h1 clamp kept at `--text-3xl` on every row but the landscape one; line counts computed and measured above |
 | DD-39 (a), RF-07 | `--color-on-navy` (CTA text, footer), `--color-text-muted-on-dark` (footer facts; a new tint, DD-19 departure), `--color-focus-on-dark` (outer band of the footer ring); accent never as text |
 | DD-44 | The fold measured by the runner at all 19 rows; height bands; `data-fold` hooks; no `vh` anywhere |
@@ -552,3 +552,14 @@ mid-sentence), V2, V5, V6 and V11 (the phone and tablet forms).
 Two amendments this iteration needs and this build cannot make: the brief's Composition and Conversion rows still put the excerpt on the phone's second screen, which Departures 24 no longer does, and its Composition row still describes the door's line between the name and the CTA at the laptop rows, which Departures 25 no longer does. Both were the critics' own asks; the brief is the director's to amend.
 
 Also pending: a screen-reader pass on the stacked and two-up table forms (row label, then each cell announcing its school name); text contrast from computed colours (K3's arithmetic is cited, not re-measured here); 200 percent browser zoom at V14 (the runner covers V19 as the 125 percent stand-in and the doubled root at V2); the scroll videos at V3 and V16; the in-app browser measurements under REQ-024; Nari's view of the four fact labels and of "Mastery" (Departures 11, `copy.md` section 9); a rendered side-by-side against gt.school, which has no mirror in this repository (Continuity); and, if the four-screen target at 1440 is held to strictly, a decision on which comparison rows the pull-out may omit, since the remaining 0.30 screen is table.
+
+**Director's change after the second scoring.** The pull-out's gate. The studio critic swept 48 cells and found the
+claim false: gated at 900 by 700, the third row bottomed at 758 in a 700px screen, and it was clipped again at 960,
+1024 and 1100 wide, which is the very defect the gate exists to prevent. Its suggested floor of 1152 at 700 was also
+still clipped, at 708 of 700, so the gate was rebuilt from a measured sweep of nine widths against eight heights.
+Two things set the fit: the rows grow shorter as the page widens, 746px deep at 1024 against 695px at 1280, and the
+density band from 800px tall spends about 84px more above the pull-out and pushes it down. The gate now reads 1024 to
+1151 wide with 768 to 799 of height, 1152 and wider with 720, and 1152 and wider from 800 tall. Re-swept, no room in
+the grid renders a clipped pull-out, and it still appears at 1024 by 768, 1280 by 720, 1440 by 900 and 1920 by 960.
+Where a clause excludes a room the pull-out might have survived, the anchor sentence carries the hinge alone, because
+a hidden pull-out is a smaller fault than a clipped one.

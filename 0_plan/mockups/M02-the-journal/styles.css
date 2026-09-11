@@ -181,14 +181,23 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
    object, not the comparison table moved up: bounded above and below by a --color-text rule, no stripes, 16/42/42 columns
    against the table's 22/39/39, cells in the reading face (Literata) against the table's Inter Tight, row labels and school
    names as tracked eyebrows against the table's sentence-case labels and serif heads, and the kicker in the corner cell.
-   It renders only where all three rows complete in one screen — measured at 900px wide and 700px tall and up — so a parent
-   never reads a clipped preview of the table below it. ---------- */
+   It renders only where all three rows complete in one screen, so a parent never reads a clipped preview of the table
+   below it. The first gate said 900 by 700 and over-claimed: at 900 by 700 the third row bottoms at 758, 58px past the
+   edge, and it was clipped again at 960, 1024 and 1100 wide (the studio critic, across 48 cells). The three clauses
+   below come from a measured sweep of nine widths against eight heights, not a guess. Two things set the fit: the rows
+   grow shorter as the page widens, 746px deep at 1024 against 695px at 1280, and the density band from 800px tall
+   spends about 84px more above the pull-out, pushing it down. So 1024 to 1151 wide needs 768 to 799 of height, 1152
+   and wider needs 720, and from 800 tall only 1152 and wider still fits. Where a clause excludes a room the pull-out
+   might have survived, the anchor sentence carries the hinge alone: a hidden pull-out is a smaller fault than a
+   clipped one, which is the defect this gate exists to prevent. ---------- */
 .closer { margin-top: var(--fs-closer-gap); }
 .anchor { font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
 .anchor a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-decoration-color: var(--color-text-muted); text-decoration-thickness: 1px; text-underline-offset: .18em; text-wrap: balance; }
 .anchor a:hover, .anchor a:focus-visible { text-decoration-color: currentColor; }
 .pullout, .pullout__foot { display: none; }
-@media (min-width: 900px) and (min-height: 700px) {
+@media (min-width: 1152px) and (min-height: 720px) and (max-height: 799px),
+       (min-width: 1024px) and (min-height: 768px) and (max-height: 799px),
+       (min-width: 1152px) and (min-height: 800px) {
   .pullout { display: table; }
   .pullout__foot { display: flex; }
 }
