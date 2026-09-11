@@ -12,11 +12,11 @@
 | K7 Brand architecture and positioning | `K7-brand-architecture.md` | Written 2026-09-11 (55 sources; masterbrand with two co-driver sub-brands, token-endorsed by Alpha) | Pending |
 | K8 Digital marketing and advertising | `K8-marketing-advertising.md` | Written 2026-09-11 (46 sources; in-app viewport bounds; UTM and click-id findings that contradict AD-03, AN-08, AN-11) | Pending |
 | K9 Imagery and photography direction | `K9-imagery.md` | Written 2026-09-11 (39 sources; library measured; door symmetry and consent findings) | Pending |
-| K10 Responsive and fluid layout | `K10-responsive.md` | In progress | Pending |
-| K11 Performance and Core Web Vitals | `K11-performance.md` | In progress | Pending |
+| K10 Responsive and fluid layout | `K10-responsive.md` | Written 2026-09-11 (63 sources; 19-row viewport matrix from device descriptors; svh fold rule) | Pending |
+| K11 Performance and Core Web Vitals | `K11-performance.md` | Written 2026-09-11 (46 sources; 118 KB first-screen budget; tags weigh 298 KB) | Pending |
 | K12 Existing GT and Alpha branding | `K12-gt-branding.md` | In progress | Pending |
 | K13 Design systems and shells | `K13-design-systems.md` | In progress | Pending |
-| K14 Copy and voice for institutions | `K14-copy-voice.md` | Queued | Pending |
+| K14 Copy and voice for institutions | `K14-copy-voice.md` | In progress | Pending |
 | Exemplars with screenshots | `EXEMPLARS.md`, `exemplars/` (grid: `exemplars/index.html`) | 26 sites captured at 390 and 1440 (JPEG), grid page for Johnny | Pending |
 | Design Director brief template | `BRIEF-TEMPLATE.md` | Written 2026-09-11; filled per mock after G-C | n/a |
 | Concept catalog | `CONCEPTS.md` (brief: `CONCEPTS-BRIEF.md`) | Brief written; catalog runs after E4 | Pending |

@@ -46,18 +46,31 @@ If Johnny wants twenty, the honest place for twenty is R1 (concept boards are ch
 
 ## 4. Viewport matrix
 
-Every mock renders and passes on all of these. "Fits the screen" means: header, umbrella sentence, provenance line and both door CTAs are fully visible without scrolling, and nothing overflows horizontally.
+Every mock renders and passes on all of these. Rows are viewports, not screens: phone rows are Playwright's measured small viewports (browser chrome already subtracted; iOS costs 180 to 193px, Android 60 to 76px). "Fits the screen" means: header, umbrella sentence, provenance line and both door CTAs end at or above the viewport height minus 24px, measured in `svh` terms, with the next band visibly cut so the page does not end on a false floor. Source: `kb/K10-responsive.md` section 5, replacing the first draft's 16 rows (which mixed screens and viewports and duplicated Safari as an "in-app" row).
 
-| Class | Sizes | Why |
-|---|---|---|
-| Phone | 360 by 780, 390 by 844, 412 by 915, 430 by 932 | Two thirds of sessions are mobile (fact 5); Android and iPhone widths |
-| Phone in an app browser | 393 by 596, 390 by 600, 430 by 675, 412 by 775 (bounds derived in `kb/K8` from device descriptors minus a persistent 64px toolbar; REQ-024 replaces them with real measurements) | Instagram, Facebook and TikTok webviews keep their toolbars, so the small viewport is the only viewport there; the earlier 390 by 664 row was mobile Safari, not a webview (K8) |
-| Tablet | 768 by 1024, 820 by 1180, 1024 by 1366 | iPad portrait and landscape |
-| Laptop | 1280 by 720, 1366 by 768, 1440 by 900, 1536 by 864 | The most common desktop sizes; 1280 by 720 is the hardest fold |
-| Desktop | 1920 by 1080 | Large screens must not look empty |
-| Zoom | 1280 by 720 at 125 percent, 390 by 844 at 200 percent text | Accessibility zoom and reading-mode sizes |
+| Row | Viewport | Class | Why |
+|---|---|---|---|
+| V1 | 360 by 740 | Phone | Galaxy S8 descriptor |
+| V2 | 375 by 629 | Phone | iPhone 13 mini: the binding fold case |
+| V3 | 390 by 664 | Phone | iPhone 13 and 14; the most common iPhone width in US mobile |
+| V4 | 393 by 659 | Phone | iPhone 15 |
+| V5 | 414 by 715 | Phone | iPhone 11; the single most common US mobile device size, missing from the first draft |
+| V6 | 412 by 839 | Phone | Pixel 7 |
+| V7 | 402 by 681 | Phone | Derived: a 4.99 percent device less 193px chrome |
+| V8 | 430 by 739 | Phone | iPhone 15 Plus |
+| V9 | 390 by 844 | Phone, large viewport | Emptiness test only, not a fold test |
+| V10 | 750 by 342 | Phone landscape | iPhone 13 landscape |
+| V11 | 768 by 1024 | Tablet | iPad; the 768 breakpoint is on 57 percent of pages |
+| V12 | 834 by 1194 | Tablet | iPad Pro 11 |
+| V13 | 1024 by 768 | Tablet landscape | Wide and short is the harder fold |
+| V14 | 1280 by 720 | Laptop | Playwright's default; the hardest common laptop fold |
+| V15 | 1366 by 648 | Laptop | Derived from the 1366 by 768 screen |
+| V16 | 1440 by 900 | Laptop | The design width |
+| V17 | 1920 by 960 | Desktop | Derived from the most common desktop screen; must not look empty |
+| V18 | 320 by 256 | Reflow | WCAG 1.4.10 verbatim |
+| V19 | 1024 by 576 | Zoom | 1280 by 720 at 125 percent, as a viewport |
 
-Tests run at every size: no horizontal overflow; first screen fits as defined; no element overlaps another (bounding-box intersection test on text elements); no text is clipped; every interactive target at least 44 by 44; contrast of every text node against its background at AA; visible focus on every focusable element with 3:1 against its surroundings; one h1; images loaded (after a stepped scroll) and none broken; console clean; reduced-motion run shows no transitions or animations; links resolve to the allowed hosts. Screenshots: viewport and full page per size; one scroll video per mock at 390 by 844 and 1440 by 900.
+In-app browsers (Instagram, Facebook, TikTok) have no published viewport heights; their envelope sits inside Safari's measured chrome, so they are covered by V2 to V8 with the 24px headroom, and REQ-024 adds one real device measurement. Tests at every row: no horizontal overflow; fold fit as defined; no element overlaps another; no clipped text; every interactive target at least 44 by 44; text contrast at AA from computed colors; visible focus with 3:1; one h1 and no skipped levels; images loaded after a stepped scroll and none broken; console clean; reduced-motion emulation shows no non-zero durations while the switcher still switches and focus stays visible; forced-colors renders legibly; links resolve; no `vh` outside an `@supports` fallback. Screenshots: viewport and full page per row; one scroll video per mock at V3 and V16.
 
 ## 5. The Design Director brief, per mock
 
