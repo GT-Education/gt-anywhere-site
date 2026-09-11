@@ -269,7 +269,7 @@ h1 {
     align-items: start;
   }
   h1 { max-width: min(35ch, 66%); }   /* the contract's eight of twelve columns, not the full container */
-  .map-fig { grid-column: 1 / 8; grid-row: 1; order: 0; max-width: none; grid-template-columns: minmax(0, 1fr) 17rem; column-gap: var(--space-5); align-items: center; }
+  .map-fig { grid-column: 1 / 8; grid-row: 1; order: 0; max-width: none; grid-template-columns: minmax(0, 1fr) 18rem; /* 18rem, not 17: at 17 the longer key line wrapped under its swatch between 1180 and 1399 while the shorter stayed inline, so the key took two shapes (studio critic, fix 2) */ column-gap: var(--space-5); align-items: center; }
   .map-key { grid-template-columns: 1fr; gap: var(--space-5); }
   .key-glyph { width: 7.5rem; }
   .choice .doors { grid-column: 8 / 13; grid-row: 1; order: 0; grid-template-columns: 1fr; grid-auto-rows: 1fr; align-self: stretch; }

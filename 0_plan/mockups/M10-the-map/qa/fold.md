@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T16:44:17.588Z; page `/0_plan/mockups/M10-the-map/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T17:08:26.732Z; page `/0_plan/mockups/M10-the-map/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -18,7 +18,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V12 | 834 by 1194 | fold | 1170 | 57 | 236 | 262 | 498 | 498 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 57 | 251 | 277 | 411 | 411 | yes | PASS |
 | V14 | 1280 by 720 | fold | 696 | 57 | 272 | 298 | 442 | 592 | yes | PASS |
-| V15 | 1366 by 648 | fold | 624 | 57 | 279 | 305 | 461 | 621 | yes | PASS |
+| V15 | 1366 by 648 | fold | 624 | 57 | 279 | 305 | 455 | 610 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 57 | 293 | 319 | 481 | 640 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 57 | 293 | 319 | 481 | 640 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 89 | 353 | 396 | 560 | 696 | no | PASS no horizontal scroll |
@@ -60,7 +60,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V12 | yes | content reaches 1182 of 1194 and more follows below |
 | V13 | yes | svg cut by the edge, 606 to 1192 |
 | V14 | yes | text cut by the edge, 714 to 740 |
-| V15 | yes | content reaches 638 of 648 and more follows below |
+| V15 | yes | text cut by the edge, 642 to 669 |
 | V16 | yes | content reaches 877 of 900 and more follows below |
 | V17 | yes | content reaches 937 of 960 and more follows below |
 | V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |

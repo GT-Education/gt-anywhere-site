@@ -94,11 +94,11 @@ compares.
 
 | Row | Viewport | Limit | Designed-to sum | Measured CTA Georgetown | Measured CTA Anywhere | Slack | Result |
 |---|---|---|---|---|---|---|---|
-| V2 | 375 by 629 | 605 | 57 + 16 + 219 + 8 + 22 + 16 + 129 + 4 + 129 = **600** | 457 | **593** | 12 | PASS |
-| V5 | 414 by 715 | 691 | 57 + 16 + 193 + 8 + 22 + 16 + 119 + 4 + 119 = **554** | 421 | **548** | 143 | PASS |
-| V10 | 750 by 342 | 318 | 57 + 8 + 83 + 4 + 22 + 8 + 119 = **301** (doors side by side) | 295 | **295** | 23 | PASS |
-| V14 | 1280 by 720 | 696 | 57 + 16 + 199 + 8 + 22 + 16 + module 304 − 8 = **614** | 442 | **592** | 104 | PASS |
-| V16 | 1440 by 900 | 876 | 57 + 24 + 212 + 8 + 22 + 24 + module 314 − 8 = **653** | 481 | **640** | 236 | PASS |
+| V2 | 375 by 629 | fold | 605 | 57 | 292 | 318 | 457 | 593 | yes | PASS |
+| V5 | 414 by 715 | fold | 691 | 57 | 266 | 291 | 421 | 548 | yes | PASS |
+| V10 | 750 by 342 | fold | 318 | 57 | 148 | 170 | 295 | 295 | yes | PASS |
+| V14 | 1280 by 720 | fold | 696 | 57 | 272 | 298 | 442 | 592 | yes | PASS |
+| V16 | 1440 by 900 | fold | 876 | 57 | 293 | 319 | 481 | 640 | yes | PASS |
 
 The V2 slack is the tightest number on the page and it is spent deliberately: 12px buys the two doors a
 control of identical height at 320, 360 and 375 (see "The two controls" below).
@@ -560,7 +560,7 @@ exempts because its height is set by the line it sits in).
 | V12 | 834 by 1194 | fold | 1170 | 57 | 236 | 262 | 498 | 498 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 57 | 251 | 277 | 411 | 411 | yes | PASS |
 | V14 | 1280 by 720 | fold | 696 | 57 | 272 | 298 | 442 | 592 | yes | PASS |
-| V15 | 1366 by 648 | fold | 624 | 57 | 279 | 305 | 461 | 621 | yes | PASS |
+| V15 | 1366 by 648 | fold | 624 | 57 | 279 | 305 | 455 | 610 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 57 | 293 | 319 | 481 | 640 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 57 | 293 | 319 | 481 | 640 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 89 | 353 | 396 | 560 | 696 | no | PASS no horizontal scroll |
@@ -765,3 +765,11 @@ so the swatch carries two units of padding.
 3. `qa/continuity-1440.jpg`, which is the Continuity row's own required evidence.
 4. The V2 fold row: 593 of 605 is the tightest number on the page, and 12px of it is spent on control
    parity by choice.
+
+**Director's change and one reversal, after the second scoring.** The key column went from 17rem to 18rem, because
+between 1180 and 1399 the longer key line wrapped under its swatch while the shorter stayed inline, so the key took
+two shapes on one page; the studio critic measured that and the change is its fix 2. Its fix 1, re-anchoring the
+map's crop to the left so the rings read as a wave crossing the frame rather than a target centred on the campus, was
+applied and then reverted: probing the rendered drawing afterwards could not confirm the improvement, and a
+compositional change to a drawing that already passes both critics is the engineer's call to make with its own
+measuring harness, not the director's to ship unverified. It stands as the named route from Imagery 4 to 5.
