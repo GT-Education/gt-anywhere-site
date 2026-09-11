@@ -242,3 +242,17 @@ Also verified: all element `id`s in the document are unique, every `aria-labelle
 ## Known trade-off (from the brief's direction table)
 
 The split hero is a two-panel visual today and does not, by itself, communicate "this scales to five campuses." What does scale is the markup underneath it: the door list is a real `<ul>` on an `auto-fit` grid, so a third, fourth or fifth `<li>` renders in the same component without a rebuild — the visual becomes a wrapped grid of tiles rather than a forced two-panel split the moment a third door is added. This is exactly the trade-off the BUILDER-BRIEF's direction table calls out for M1 and asks to be flagged rather than solved: M1's hypothesis is that two doors, presented as fast and unambiguous as possible, is the right test *for today's two schools*; DD-21 compliance is delivered at the markup layer, not the visual layer.
+
+## Design-lead pass (Fable, browser in the loop), 2026-09-10
+
+| Item | Change | Why |
+|---|---|---|
+| First screen | Headline band, then two edge-to-edge door panels: photo on top, tinted content panel with label, name, one line and a navy button; both panels fill the first viewport at 1440 (doors 312 to 881px, CTAs end at 849px); at 390 the doors are photo-left cards ending at 720px with the compare link at 768px | Design judged by eye against screenshots, not by rules alone; the split screen is M1's thesis |
+| Comparison | Same table semantics restyled as a component: tinted column headers per school, mono row labels, "Both schools" tag on shared rows, stacked cards on mobile | The spreadsheet look was the weakest part of every mock |
+| Proof | Navy band with four facts as bordered plates | Contrast and weight for the one section that carries belief |
+| Steps | Numbered sequence on a hairline, four across at desktop; navy application buttons | A sequence reads as a process, a list reads as a list |
+| Connect and families | Four cards with arrows; a families bar with an outlined button | Secondary actions get affordance without competing with the doors |
+| Footer | Three columns: facts and phone, links, the two logos on their own panels (GT Anywhere on navy, GT School on light) | Brand continuity and legibility (E2 finding 18) |
+| Header | Logo plus two utility links, "Contact admissions" as an outlined button; one row at every width | Routing page, no menu (DD-12) |
+
+Departures from the sites' surfaces, for Nari at G1 (DD-19): the navy proof band and the navy footer logo panel (Anywhere's tertiary color, used as a section surface); the light blue Anywhere door tint (`--color-anywhere-tint`, a derived value); mono eyebrows ("Compare", "Proof", "Admissions", "Connect") as section labels, recorded in `copy.md`. Motion: nothing animates; hover and focus states change color and underline instantly. All 35 checker rules and the claims checker pass after the pass.

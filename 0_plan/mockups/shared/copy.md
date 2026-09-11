@@ -127,6 +127,7 @@ All carry `data-event="cta_secondary_click"`.
 | 6 | "More ways to connect", "Other ways to connect", "Questions before you apply" |
 | 7 | "Current families", "Already a GT family?" |
 | M4 | "What students do", with captions that describe only what is visible |
+| Eyebrow labels (any mock) | One-word section labels in Inconsolata above an h2: "Compare", "Proof", "Admissions", "Connect", "Families" |
 
 ## Motion (E2 finding 4)
 

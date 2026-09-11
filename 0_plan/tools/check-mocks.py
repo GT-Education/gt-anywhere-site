@@ -66,7 +66,7 @@ def check(folder):
             if prop not in MOTION_OK and prop != 'none': badt.append(prop)
             if 'var(--duration-' not in part and prop != 'none': badt.append(f'{prop}:no-token-duration')
     r('R10 transitions within budget', not badt, ', '.join(sorted(set(badt)))[:160])
-    r('R10 no keyframe animation', not re.search(r'@keyframes|\banimation\s*:', style))
+    r('R10 no keyframe animation', not re.search(r'@keyframes|\banimation\s*:(?!\s*none\b)', style))
     rm = style[style.find('prefers-reduced-motion'):] if 'prefers-reduced-motion' in style else ''
     r('R10 reduced-motion block covers pseudo-elements', 'prefers-reduced-motion' in style and ('::after' in rm or '::before' in rm))
     hexes = sorted(set(re.findall(r'#[0-9a-fA-F]{3,8}\b', style)))
