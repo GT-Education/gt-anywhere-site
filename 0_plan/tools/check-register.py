@@ -18,7 +18,7 @@ corpus = ''
 SOURCE_FILES = ['0_plan/inputs/transcript-2026-09-10-website-redo.md', 'index.html', 'academics/index.html', 'advisors/index.html',
                 'intensives/index.html', 'academic-calendar/index.html', 'tools/MIRROR-LOG.json', 'README.md',
                 '0_plan/10-analytics-current-state.md', '0_plan/12-claims-register.md', '0_plan/TRUTH.md', '0_plan/SOURCES.md',
-                '0_plan/05-landing-mockups-plan.md'] + sorted(glob.glob(os.path.join(REPO, '0_plan', 'research', 'R*.md')))
+                '0_plan/05-landing-mockups-plan.md'] + sorted(glob.glob(os.path.join(REPO, '0_plan', 'research', 'R*.md'))) + sorted(glob.glob(os.path.join(REPO, '0_plan', 'kb', '**', '*.md'), recursive=True)) + sorted(glob.glob(os.path.join(REPO, '0_plan', 'ensemble', 'E*.md'))) + sorted(glob.glob(os.path.join(REPO, '0_plan', 'mockups', 'shared', '*.md')))
 for rel in SOURCE_FILES:
     rel = os.path.relpath(rel, REPO) if os.path.isabs(rel) else rel
     p_ = os.path.join(REPO, rel)
