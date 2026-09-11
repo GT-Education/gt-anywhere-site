@@ -36,7 +36,7 @@ h2 { font-size: var(--text-2xl); margin-bottom: var(--space-6); letter-spacing: 
 @media (min-width: 768px) { .lockup img { height: 28px; } }
 .utility-nav { display: flex; gap: var(--space-1); font-family: var(--font-sans); font-size: var(--text-xs); }
 .utility-nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: var(--space-2); color: var(--color-accent-contrast); text-decoration-color: var(--color-focus); white-space: nowrap; }
-.utility-nav a:focus-visible { outline-color: var(--color-accent-contrast); }
+.utility-nav a:focus-visible, .site-header a:focus-visible, .lockup:focus-visible { outline-color: var(--color-accent-contrast); }
 @media (min-width: 768px) { .utility-nav { gap: var(--space-4); font-size: var(--text-sm); } .utility-nav a { padding-inline: var(--space-3); } }
 
 /* ---------- First screen: navy, very large Literata, two quiet plates ---------- */
@@ -120,7 +120,7 @@ tbody td[colspan]::before { content: attr(data-label); display: block; font-fami
 /* ---------- Connect, families ---------- */
 .secondary-list li a { display: flex; align-items: center; justify-content: space-between; min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-family: var(--font-sans); font-size: var(--text-base); font-weight: 600; text-decoration: none; }
 .secondary-list li:last-child a { border-bottom: 1px solid var(--color-border); }
-.secondary-list li a::after { content: "\2192"; color: var(--color-accent); }
+.secondary-list li a::after { content: "\2192"; color: currentColor; }
 .secondary-list li a:hover, .secondary-list li a:focus-visible { text-decoration: underline; text-decoration-color: currentColor; }
 .families-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-5); }
 .current-families h2 { font-size: var(--text-xl); margin-bottom: var(--space-2); }

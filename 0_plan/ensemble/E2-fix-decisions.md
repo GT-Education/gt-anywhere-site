@@ -25,7 +25,7 @@ Fable's verification of Astra's E2 review (`E2-mocks.md`): each finding checked 
 | 18 | GT Anywhere logo's white lettering on a light panel | Confirmed from the SVG | Apply | Anywhere logo on a `--color-navy` panel, GT School logo on a light panel | All builders |
 | 19 | M1 mobile caption squeezed | Confirmed in `M1-390-full.png` | Apply | Caption as a full-width block in the mobile table treatment | M1 |
 | 20 | Copy outside `copy.md` | Confirmed; all of it wayfinding or directed by the brief | Apply | Allowed headings recorded in `copy.md`; M5 rationale labels updated | Fable, M5 |
-| 21 | TTF fonts, no woff2 subsetting or preload | Confirmed; an optimization gap, not a measured failure | Decline for the mocks | Subsetting needs a font tool (a dependency, stop-and-ask); scheduled as T-065 for the winner in S5 | Johnny approves the tool |
+| 21 | TTF fonts, no woff2 subsetting or preload | Confirmed; an optimization gap, not a measured failure | Decline for the mocks | Subsetting needs a font tool (a dependency, stop-and-ask); preload markup needs no tool and is added with T-065, the S3 fonts task, before the winner hardens in S5 | Johnny approves the tool |
 | 22 | No mock attempts the first-screen comparison at 1440 | Confirmed against `1_spec/03` section 4 | Apply | M2 adds a compact three-row comparison inside the first viewport at 1440 without pushing the door CTAs below 900px | M2 |
 
 Astra's requirement scores that stay Partial or Fail after this pass, by design: REQ-016 (steps unverified until Q-007), REQ-022 (register rows Unverified until Nari approves, T-053), REQ-074 (axe and keyboard evidence arrive with the runner, D-028).
