@@ -1,0 +1,370 @@
+/* M14 "The Day". Design engineer build, 2026-09-11. Brief: 0_plan/kb/briefs/M14.md under CONTRACT.md v2.1.
+   Tokens: ../shared/tokens-v2.css (layer-2 rows DD-38, DD-39, MN-16 and the D-039 acceptance row are named in
+   RATIONALE.md). Every colour, face, size, space, radius and duration is a var(): zero raw hex in this file.
+   The lengths outside the token set (1px hairlines, the 3px accent rule, the 2px focus bands, the 9px node and
+   finish square and its 4px rail offset, the 44px target floor, the 27 and 32px mark heights, letter-spacing,
+   ch measures, the breakpoints and the height queries) are listed in RATIONALE.md, Departures.
+
+   The direction: two days told step by step. The page's key is set on the first screen and carried down —
+   --color-georgetown-tint (the same value as --color-surface, named for the school) is Georgetown Campus,
+   --color-anywhere-tint is GT Anywhere, --color-bg is both schools at once, --color-navy is the action, and the
+   node shape beside each door label (solid for Georgetown, open for GT Anywhere) becomes that school's rail node
+   on the second screen. Nothing animates: no transition, no keyframe rule. The forced-colours block is the LAST
+   block in the stylesheet, so it outranks the token rules by source order (M07's finding). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--color-bg); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } } /* V10 anchor scroll, native */
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-prose); overflow-wrap: break-word; }
+img { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+p, h1, h2, h3 { margin: 0; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+a { color: inherit; }
+b { font-weight: 500; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.nowrap { white-space: nowrap; } /* holds the compound "in-person" whole; changes no character */
+.arrow { flex: none; }
+
+/* Grid: one column with 24px margins below 768; 32px margins from 768; twelve columns with a 32px gutter and
+   48px margins from 1280, capped at --container-max. */
+.wrap { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 768px) { .wrap { padding-inline: var(--space-6); } }
+@media (min-width: 1280px) { .wrap { padding-inline: var(--space-7); } }
+
+/* ---------- Type roles (CONTRACT.md section 3) ---------- */
+.eyebrow { font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-3); }
+.door-label { font-size: var(--text-sm); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+h2 { font-size: var(--text-2xl); max-width: 30ch; text-wrap: balance; }
+h3 { font-size: var(--text-md); }
+.figure { font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; } /* register figures only, in the deck's words */
+.accent-rule { display: block; width: 100%; height: 3px; background: var(--color-accent); } /* the first screen's one accent use (K3 section 5f) */
+
+/* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* Over navy (the footer) and on the mark plate that straddles navy and light: K3's two-colour ring, a 2px
+   --color-navy inner band and a 2px --color-on-navy outer band, 14.58 between them, so one band clears 3:1
+   on either ground (K3 F10). */
+.on-navy :focus-visible, .plate:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-on-navy); }
+
+/* ---------- Skip link and header ---------- */
+.skip-link { position: absolute; top: -999px; left: var(--space-4); z-index: 10; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); border: 2px solid var(--color-focus); font-weight: 500; }
+.skip-link:focus { top: var(--space-4); }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); min-height: 3.5rem; }
+.lockup { display: inline-flex; align-items: center; min-height: 44px; }
+.lockup img { height: 27px; width: auto; } /* K12 V2's phone floor; 32px from 768 up */
+@media (min-width: 768px) { .lockup img { height: 32px; } }
+.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 var(--space-3); font-size: var(--text-xs); font-weight: 500; }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; }
+.utility-nav a:hover, .utility-nav a:focus-visible { text-decoration: underline; text-underline-offset: 0.2em; }
+@media (max-width: 369px) { .utility-nav { flex-direction: column; align-items: flex-end; } } /* the mark keeps its 27px floor; the header is two link rows tall */
+@media (min-width: 768px) { .utility-nav { gap: 0 var(--space-4); margin-right: calc(-1 * var(--space-3)); font-size: var(--text-sm); } .utility-nav a { padding-inline: var(--space-3); } }
+
+/* ---------- First screen: h1, provenance, two doors, the compare anchor ---------- */
+.first-screen { padding-block: var(--space-3) 0; }
+@media (min-width: 768px) { .first-screen { padding-block: var(--space-5) 0; } }
+@media (min-width: 1280px) { .first-screen { padding-block: var(--space-6) 0; } }
+@media (min-width: 1440px) { .first-screen { padding-block: var(--space-7) 0; } }
+.first-inner { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) {
+  .first-inner { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .first-inner > * { grid-column: 1 / -1; }
+  .first-inner > h1, .first-inner > .provenance, .first-inner > .compare-lead { grid-column: 1 / span 9; }
+}
+@media (min-width: 1280px) { .first-inner > h1, .first-inner > .provenance, .first-inner > .compare-lead { grid-column: 1 / span 8; } }
+
+h1 { font-size: var(--text-3xl); max-width: 35ch; text-wrap: balance; } /* balance acts at six lines or fewer (K2 F-22); the markup's two no-break spaces hold "in person" and "from anywhere." whole */
+.provenance { margin-top: var(--space-3); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
+
+/* The doors: two cards of equal weight. grid-auto-rows: 1fr makes the pair equal in height stacked and side by
+   side alike, and the card's flexible line row lands both buttons on one baseline (M01's measured parity). */
+.doors { display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 1fr; gap: var(--space-3); margin-top: var(--space-5); }
+@media (min-width: 768px) { .doors { gap: var(--space-5); margin-top: var(--space-6); } }
+/* Side by side from 1024. Below that they stack full width: at a 340px tablet card the longer CTA label wraps
+   to two lines while the shorter does not, and two doors of equal weight cannot have one button twice as tall. */
+@media (min-width: 1024px) { .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-8); } }
+@media (min-width: 1440px) { .doors { margin-top: var(--space-7); } }
+
+.door { display: flex; flex-direction: column; padding: var(--space-4); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); }
+/* The tint is the school's cue and never the only thing drawing the card: --color-surface on --color-bg is a
+   1.10:1 step, so every door keeps a hairline and survives forced colours. */
+.door--georgetown { background: var(--color-georgetown-tint); }
+.door--anywhere { background: var(--color-anywhere-tint); }
+@media (min-width: 768px) { .door { padding: var(--space-5); } }
+@media (min-width: 1280px) { .door { padding: var(--space-6); } }
+
+/* The door cue (DD-04): label plus a node. The node is the same 9px shape that carries each school's rail on
+   the second screen — solid for Georgetown Campus, open for GT Anywhere — so the key a parent learns here is
+   the key the timelines use. Neither shape outranks the other; the label and the name carry the meaning. */
+.door-label { display: flex; align-items: center; gap: var(--space-3); }
+.node { flex: none; width: 9px; height: 9px; border: 1px solid var(--color-text); }
+.door--georgetown .node { background: var(--color-text); }
+.door-name { margin-top: var(--space-1); font-size: var(--text-xl); }
+.door-line { flex: 1; margin-top: var(--space-4); max-width: var(--measure-prose); line-height: var(--leading-prose); }
+.door-cta { margin-top: var(--space-4); }
+@media (min-width: 768px) { .door-cta { margin-top: var(--space-5); } }
+
+/* Buttons: the estate's face, case and navy fill (K12 F41, G15, G17) at the runbook's 44px floor. DD-46 keeps the
+   fill surface-dependent (navy with a near-white label on light surfaces, 14.58); DD-47 keeps ONE --radius-md
+   corner on all four sides — the estate's own header-button shape, and not the 8px 8px 0 0 filler radius, which
+   is one layer of a three-layer composition and draws a square lower-right corner matching neither side. */
+.btn { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); width: 100%; min-height: 44px; padding: var(--space-2) var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; overflow-wrap: anywhere; }
+.btn:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* The door lines when the compact rule is in force: hidden in the card, shown after the second CTA (below). */
+.door-lines { display: none; margin-top: var(--space-6); }
+.door-lines li { max-width: var(--measure-prose); line-height: var(--leading-prose); }
+.door-lines li + li { margin-top: var(--space-5); }
+.door-run-in { margin-right: 0.35em; }
+
+/* The compare anchor closes the choosing, and the accent rule under it is the line where choosing ends and the
+   day begins. The rule's bottom margin is the whole gap to the day band, which pays no top padding of its own. */
+.compare-lead { margin-top: var(--space-5); }
+@media (min-width: 1280px) { .compare-lead { margin-top: var(--space-6); } }
+.compare-lead p { font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-width: var(--measure-prose); }
+.compare-lead a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.compare-lead a:hover { text-decoration-thickness: 2px; }
+.first-inner > .accent-rule { margin-top: var(--space-5); margin-bottom: var(--space-8); }
+@media (min-width: 768px) { .first-inner > .accent-rule { margin-top: var(--space-6); margin-bottom: var(--space-9); } }
+@media (min-width: 1280px) { .first-inner > .accent-rule { margin-bottom: var(--space-10); } }
+
+/* Compact door rule (CONTRACT.md section 2): phones and landscape phones drop the line out of the card and set
+   both lines as run-in paragraphs after the second CTA, so nothing sits between the two CTAs. */
+@media (max-width: 767px), (max-height: 479px) {
+  .door { padding: var(--space-3); }
+  .door .door-line { display: none; }
+  .door-cta { margin-top: var(--space-3); }
+  .door-lines { display: block; }
+  /* The compact card gives the button 294px at 360 wide; "EXPLORE THE GEORGETOWN CAMPUS" in Inconsolata 600
+     needs 296 with the default ring of padding, so the longer label wrapped to two lines while the shorter did
+     not and the two doors stopped being equal (measured at V1 and V18). The ring, not the label or the type
+     size, is what gives way. */
+  .door-cta { padding-inline: var(--space-3); gap: var(--space-2); }
+}
+@media (max-width: 767px) {
+  .first-screen { padding-block: var(--space-3) 0; }
+  .doors { margin-top: var(--space-5); }
+  .compare-lead { margin-top: var(--space-5); }
+}
+
+/* Phone landscape (V10, 750 by 342, limit 318): CONTRACT.md section 2's recipe. Section padding --space-3, the
+   h1 one token down across the full width (a declared departure), the two compact doors side by side, lines below. */
+@media (max-height: 479px) and (min-width: 600px) {
+  .first-screen { padding-block: var(--space-3) 0; }
+  h1 { font-size: var(--text-xl); max-width: none; }
+  .provenance { margin-top: var(--space-3); }
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); margin-top: var(--space-3); }
+  .door-name { font-size: var(--text-lg); }
+  .door-lines { margin-top: var(--space-5); }
+  .compare-lead { margin-top: var(--space-5); }
+  .first-inner > .accent-rule { margin-top: var(--space-5); margin-bottom: var(--space-7); }
+}
+
+/* Short laptops (V13 1024 by 768, V14 1280 by 720, V15 1366 by 648). One rule in three steps: the shorter the
+   viewport, the more first-screen air it gives back, so the day band's own heading — not a strip of cream — is
+   what the bottom edge cuts. Below 600px tall at a desktop width the page is being zoomed (V19), and there the
+   first screen rightly ends on the compare anchor, as it does on phones. */
+@media (min-width: 1024px) and (max-height: 789px) {
+  .first-screen { padding-block: var(--space-5) 0; }
+  .doors { margin-top: var(--space-4); }
+  .door { padding: var(--space-4); }
+  .door-cta { margin-top: var(--space-4); }
+  .compare-lead { margin-top: var(--space-4); }
+  .first-inner > .accent-rule { margin-top: var(--space-4); margin-bottom: var(--space-6); }
+}
+@media (min-width: 1024px) and (min-height: 600px) and (max-height: 689px) {
+  .first-screen { padding-block: var(--space-4) 0; }
+  .doors { margin-top: var(--space-3); }
+  .door { padding: var(--space-3); }
+  .door-cta { margin-top: var(--space-3); }
+  .compare-lead { margin-top: var(--space-3); }
+  .first-inner > .accent-rule { margin-top: var(--space-3); margin-bottom: var(--space-6); }
+}
+
+/* ---------- Bands: the page's rhythm ----------
+   Every band pays its own top padding and none of its bottom, so the space between two bands is one interval.
+   The day band pays nothing: the accent rule's bottom margin is that gap, and the short-laptop tiers spend it. */
+.band { padding-block: var(--space-9) 0; }
+@media (min-width: 768px) { .band { padding-block: var(--space-10) 0; } }
+@media (min-width: 1280px) { .band { padding-block: var(--space-11) 0; } }
+.band.day { padding-top: 0; }
+.band.connect { padding-top: var(--space-8); }
+@media (min-width: 1280px) { .band.connect { padding-top: var(--space-9); } }
+.band.families { padding-bottom: var(--space-9); }
+@media (min-width: 1280px) { .band.families { padding-bottom: var(--space-10); } }
+
+/* From 1024 a band whose content is prose-measured runs its eyebrow and heading in four columns at the left and
+   its rows across the remaining eight, so the page's lower half shares the table's left and right edges. */
+@media (min-width: 1024px) {
+  .band-split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); align-items: start; }
+  .band-label { grid-column: 1 / span 4; }
+  .band-body { grid-column: 5 / -1; }
+  .band-body > :first-child { margin-top: 0; }
+  .band-body .steps-list { max-width: none; }
+}
+
+/* ---------- The two days: parallel timelines (C31), one step module repeated (C21) ---------- */
+/* Six and six from 768 with a gutter; stacked below, Georgetown first, which is also the order at 390 where the
+   orienting column is promoted (C18). The school name is a column HEAD on the page ground over a rule, and the
+   timeline is the tinted body under it: the same construction as the comparison table's two tinted columns
+   under their serif headers, so a parent reads this band with the key the table uses. It is also what keeps the
+   band's ink continuous — heading, name, first label, first sentence — which is what the false-floor test wants
+   at the laptop rows (measured; see RATIONALE.md, Fold). Subgrid puts both names in one row and both bodies in
+   the next, so the two bodies are one height and the two finish marks land on one line. */
+.days { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-5); }
+.day-col { display: flex; flex-direction: column; }
+.day-name { font-family: var(--font-serif); font-size: var(--text-lg); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-text); }
+.day-body { flex: 1; display: flex; flex-direction: column; padding: var(--space-5) var(--space-5) 0; border: 1px solid var(--color-border); border-top: 0; border-radius: 0 0 var(--radius-sm) var(--radius-sm); }
+.day-col--georgetown .day-body { background: var(--color-georgetown-tint); }
+.day-col--anywhere .day-body { background: var(--color-anywhere-tint); }
+/* Two columns from 768. Subgrid puts both names in one row and both bodies in the next, so the two bodies are
+   one height and the two finish marks sit on one line. It is declared after the base rules, not before them,
+   or the base display: flex wins on source order and the columns fall out of alignment (measured). */
+@media (min-width: 768px) {
+  /* row-gap 0: the two subgrid rows are the column head and its body, and the head's rule is the body's ceiling.
+     The base row-gap is the space between the two stacked schools below 768 and must not survive into this. */
+  .days { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto 1fr; row-gap: 0; column-gap: var(--space-6); }
+  .day-col { grid-row: span 2; display: grid; grid-template-rows: subgrid; }
+}
+@media (min-width: 1280px) { .days { column-gap: var(--space-8); margin-top: var(--space-6); } .day-body { padding: var(--space-6) var(--space-6) 0; } }
+
+/* The rail: one continuous hairline from the first node's centre to the finish line, at the nodes' own centre
+   (4.5px). It is a border rather than a fill so forced colours keeps it, and it runs beside the labels, never
+   through one (M07's finding: one outline per band, never a stroke across a word). */
+.day-track { position: relative; display: flex; flex-direction: column; flex: 1; padding-left: var(--space-6); }
+.day-track::before { content: ""; position: absolute; left: 4px; top: calc(0.6em + 4px); bottom: 0; border-left: 1px solid var(--color-border); }
+
+.step { position: relative; }
+.step + .step { margin-top: var(--space-5); }
+/* The node: the school's own shape, on the rail, painted over it. */
+.step::before { content: ""; position: absolute; left: calc(-1 * var(--space-6)); top: 0.6em; width: 9px; height: 9px; border: 1px solid var(--color-text); }
+.day-col--georgetown .step::before { background: var(--color-text); }
+.day-col--anywhere .step::before { background: var(--color-anywhere-tint); }
+
+/* The time label with a hairline running out to the column edge: Every's repeated module read as a timeline
+   tick (C21). The rule starts after the words and never crosses them. */
+.step-time { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+.step-time::after { content: ""; flex: 1; border-top: 1px solid var(--color-border); }
+.step-line { margin-top: var(--space-3); font-size: var(--text-base); line-height: var(--leading-prose); max-width: 42ch; }
+
+/* The same finish: each rail runs to its column's own floor — the tinted body's bottom edge — and ends in the
+   second screen's one accent use (K3 section 5f), a 9px --color-accent square straddling that edge, the filled
+   twin of the rail's nodes. margin-top: auto holds it on the floor and keeps at least --space-5 of air under
+   the last sentence; the two bodies are one subgrid row, so the two marks sit on one line. Two days of
+   different shape, one finish: the band's argument, drawn rather than claimed. */
+.day-finish { display: block; position: relative; margin-top: auto; padding-top: var(--space-5); }
+.day-finish::before { content: ""; position: absolute; left: calc(-1 * var(--space-6)); bottom: -4px; width: 9px; height: 9px; background: var(--color-accent); }
+
+/* Short laptops again: the band opens one step tighter under its heading, so the day's own column head — the
+   school's name — is what the bottom edge cuts rather than a strip of cream (measured at V13, V14 and V15). */
+@media (min-width: 1024px) and (max-height: 789px) { .days { margin-top: var(--space-5); } }
+
+/* ---------- Comparison: the doors' colour key becomes the table's two columns ---------- */
+.compare-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: var(--space-6); }
+caption { text-align: left; font-family: var(--font-serif); font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+thead th, thead td { text-align: left; vertical-align: bottom; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: var(--space-4); border-bottom: 1px solid var(--color-text); }
+thead .corner { width: 20%; padding-inline: 0; border-bottom-color: var(--color-border); }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-4); border-bottom: 1px solid var(--color-border); }
+tbody th { padding-inline: 0 var(--space-4); font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); padding-top: calc(var(--space-4) + 0.4em); }
+tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
+.col-georgetown { background: var(--color-georgetown-tint); }
+.col-anywhere { background: var(--color-anywhere-tint); }
+tbody tr:last-child .col-georgetown, tbody tr:last-child .col-anywhere { border-bottom-left-radius: var(--radius-sm); border-bottom-right-radius: var(--radius-sm); }
+@media (max-width: 767px) {
+  .compare-table, .compare-table caption, .compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; width: 100%; }
+  .compare-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  tbody tr { margin-bottom: var(--space-5); }
+  tbody th { margin-bottom: var(--space-3); padding: 0; border: 0; font-family: var(--font-serif); font-size: var(--text-md); font-weight: 400; letter-spacing: 0; text-transform: none; line-height: var(--leading-tight); color: var(--color-text); }
+  tbody td { border: 0; border-radius: var(--radius-sm); }
+  tbody td + td { margin-top: var(--space-3); }
+  tbody td::before { content: attr(data-label); display: block; font-size: var(--text-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-2); }
+}
+
+/* The doors repeated, each under the column it belongs to (DD-21: a list that could hold more entries) */
+.doors-repeat { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+@media (min-width: 768px) {
+  .doors-repeat { grid-template-columns: 20% minmax(0, 1fr) minmax(0, 1fr); column-gap: 0; margin-top: var(--space-5); }
+  .doors-repeat li { padding-inline: var(--space-4); }
+  .doors-repeat li:nth-child(1) { grid-column: 2; }
+  .doors-repeat li:nth-child(2) { grid-column: 3; }
+}
+
+.sources { margin-top: var(--space-6); font-size: var(--text-sm); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+
+/* TEFA module, on the GT Anywhere tint because it is a GT Anywhere fact */
+.tefa { margin-top: var(--space-7); padding: var(--space-5); background: var(--color-anywhere-tint); border: 1px solid var(--color-border); border-radius: var(--radius-sm); max-width: var(--measure-prose); }
+.tefa p { margin-top: var(--space-3); }
+.tefa .text-link { margin-top: var(--space-2); }
+
+/* Text links on light surfaces: underlined at rest, 44px target. One flex item, so a wrapped label keeps its
+   arrow on the last line instead of parking it at the right edge. */
+.text-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; text-decoration: underline; text-underline-offset: 0.18em; }
+.text-link:hover { text-decoration-thickness: 2px; }
+.text-link .arrow { display: inline; }
+
+/* ---------- Proof strip: neutral ground, because these four facts belong to both doors ---------- */
+.facts { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: var(--space-6); border-bottom: 1px solid var(--color-border); }
+@media (min-width: 768px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 0; } }
+@media (min-width: 1280px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.fact { padding-block: var(--space-5); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); max-width: 40ch; }
+@media (min-width: 768px) { .fact { padding-inline-end: var(--space-6); } }
+
+/* ---------- Application steps ---------- */
+.steps-intro { margin-top: var(--space-4); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.steps-list { counter-reset: step; margin-top: var(--space-6); max-width: var(--measure-prose); }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-7) minmax(0, 1fr); align-items: baseline; padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-md); line-height: var(--leading-prose); }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+/* The two application links keep the doors' pairing but not their tint: copy.md section 5 gives both schools the
+   same four steps, so this band is shared ground. Natural widths side by side from 768, so neither outweighs. */
+.apply { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+.apply .btn { width: auto; }
+
+/* ---------- Secondary CTAs ---------- */
+.connect-list { margin-top: var(--space-6); max-width: var(--measure-prose); }
+.connect-list a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-weight: 500; text-decoration: none; }
+.connect-list li:last-child a { border-bottom: 1px solid var(--color-border); }
+.connect-list a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* ---------- Current families ---------- */
+.families { border-top: 1px solid var(--color-border); }
+.families-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-5); }
+.families h2 { font-size: var(--text-xl); }
+.families p { margin-top: var(--space-2); color: var(--color-text-muted); }
+
+/* ---------- Footer: navy, the facts block, the links, both marks on the panels copy.md section 8 assigns ---------- */
+.on-navy { background: var(--color-navy); color: var(--color-on-navy); }
+.site-footer { padding-block: var(--space-8) var(--space-7); }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+@media (min-width: 900px) { .footer-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-8); } }
+.footer-facts { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-width: 48ch; }
+.footer-contact { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+.footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); }
+.footer-logo.plate { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
+/* Both marks at 32px at every width: K12 V2 sets 32px at 1440 with a 27px phone floor, and where two marks sit
+   together the umbrella mark may not read smaller than its own sub-brand on the width carrying two thirds of
+   sessions. */
+.footer-logo img { height: 32px; width: auto; }
+.footer-logo--anywhere { padding-inline: 0; }
+
+/* ---------- Reduced motion (MN-16, R8): every duration --duration-none, elements and pseudo-elements ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Forced colours (K3 F38). LAST block in the file, so it outranks the token rules by source order
+     rather than losing to them at equal weight (M07's finding). One outline per surface; no stroke crosses a
+     word; the rails, the ticks and the finish lines survive because every one of them is a border. ---------- */
+@media (forced-colors: active) {
+  :focus-visible, .on-navy :focus-visible, .plate:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+  .btn { border-color: ButtonText; }
+  .accent-rule { background: CanvasText; }
+  .door, .day-body, .tefa { border-color: CanvasText; }
+  .node, .step::before { border-color: CanvasText; background: Canvas; }
+  .door--georgetown .node, .day-col--georgetown .step::before { background: CanvasText; }
+  .day-finish::before { border: 1px solid CanvasText; background: CanvasText; }
+}
