@@ -317,10 +317,10 @@ check-claims: OK
 ```
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 56 | 289 | 326 | 461 | 588 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 56 | 291 | 328 | 463 | 590 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 56 | 294 | 331 | 465 | 593 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 56 | 294 | 331 | 465 | 593 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 92 | 325 | 362 | 497 | 624 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 92 | 327 | 356 | 483 | 602 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 56 | 294 | 323 | 449 | 569 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 56 | 294 | 323 | 449 | 569 | yes | PASS |
 | V5 | 414 by 715 | fold | 691 | 56 | 265 | 302 | 437 | 564 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 56 | 265 | 302 | 597 | 725 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 56 | 263 | 300 | 435 | 563 | yes | PASS |
@@ -334,7 +334,7 @@ check-claims: OK
 | V15 | 1366 by 648 | fold | 624 | 56 | 286 | 324 | 473 | 473 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 300 | 338 | 631 | 631 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 555 | 682 | yes | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 92 | 356 | 406 | 539 | 658 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 258 | 296 | 442 | 442 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -388,3 +388,5 @@ side-by-side with the live sites (the studio does not open them).
 | Composition at 1280 and above | The h1 and the block occupy the left nine columns; the right three are navy above the full-width cards, as the brief's nine-column composition implies. Fable suggests the block in columns 10 to 12; that is a brief change to call |
 | Door cue glyphs | Line glyphs in `currentColor` rather than `gt-icon.svg`, to keep the first screen's accent count at one (Taste decisions). Reversible in two lines if the mark is ruled outside the count |
 | Index gap | RF-07, RF-25, RF-53, RF-55, RF-58 exist in `kb/REGISTER-FOLLOWUPS.md` and are cited by CONTRACT.md and this rationale, but `0_plan/ID-INDEX.md` does not list them (Fable critic, finding e) |
+
+**Director's change after the gate.** The fold figures above were re-measured after a change the design director made rather than the engineer: the header mark was raised from a clamp that gave 26px at 390 and 28px on the desktop to 27px and 32px, which wraps the header to two rows at 375, and the first screen gives that space back through tighter provenance and door spacing on rows under 680px tall. The runner's mark-geometry check, added the same day, is what found the original size. Both CTAs still sit above the fold on every row and every row is still cut by content.

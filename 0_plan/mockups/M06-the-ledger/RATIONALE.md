@@ -350,7 +350,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 56 | 238 | 263 | 457 | 586 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 93 | 275 | 300 | 494 | 623 | yes | PASS |
 | V2 | 375 by 629 | fold | 605 | 56 | 211 | 236 | 430 | 560 | yes | PASS |
 | V3 | 390 by 664 | fold | 640 | 56 | 212 | 237 | 432 | 561 | yes | PASS |
 | V4 | 393 by 659 | fold | 635 | 56 | 212 | 237 | 432 | 561 | yes | PASS |
@@ -367,7 +367,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V15 | 1366 by 648 | fold | 624 | 56 | 278 | 346 | 575 | 575 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 300 | 368 | 598 | 598 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 300 | 368 | 598 | 598 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 93 | 302 | 345 | 546 | 675 | yes | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 93 | 302 | 345 | 546 | 675 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 250 | 318 | 543 | 543 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -394,3 +394,5 @@ Captures: `qa/V1.jpg` to `qa/V19.jpg` (viewport), `qa/V2-full.jpg` and `qa/V14-f
 ### Pending for the director
 
 The critics' re-score after iteration 1; the screen-reader pass on the stacked, two-up and landscape forms (header cells announcing label, name and CTA in order; the disclosure summaries announcing the school name and state); text contrast from computed colours (the K3 section 5c arithmetic is cited, not re-measured); 200 percent browser zoom at V14 (the runner covers V19 as the 125 percent stand-in and the doubled root at V2); the scroll videos at V3 and V16; the in-app browser measurements under REQ-024; and a view on the three-row disclosure against the two-screen wish on phones.
+
+**Director's change after the gate.** The fold figures above were re-measured after a change the design director made rather than the engineer: the header mark was raised from a 6.5rem width to a 27px height at 390 and 32px from 768, so the header stands 93px on the narrowest rows and everything below it moves down by the same amount. The runner's mark-geometry check, added the same day, is what found the original size. Both CTAs still sit above the fold on every row and every row is still cut by content.

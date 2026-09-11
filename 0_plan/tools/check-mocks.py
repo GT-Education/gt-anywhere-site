@@ -176,6 +176,36 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
         rt = open(rat, encoding='utf-8').read(); miss = [s for s in RATIONALE_SECTIONS if s.lower() not in rt.lower()]
         r('R15 rationale sections', not miss, ', '.join(miss))
     else: r('R15 rationale exists', False)
+    # R37: the rationale's pasted runner evidence must come from the current run. Nearly every mock in the
+    # programme has been caught pasting an earlier run's output beside a newer fold report, always with the
+    # same numbers and a different provenance line, and a reviewer has no way to see it without diffing.
+    fold = os.path.join(folder, 'qa', 'fold.md')
+    if os.path.exists(fold) and os.path.exists(rat):
+        rt = open(rat, encoding='utf-8').read()
+        ft = open(fold, encoding='utf-8').read()
+        # Compare the measurements, not the provenance line: a re-run with identical numbers is a timestamp
+        # difference, while a row whose figures have moved means the rationale argues from a page that no
+        # longer exists. Only the second is a failure.
+        def rows(text):
+            out = {}
+            for ln in text.split('\n'):
+                ln = ln.strip()
+                if not ln.startswith('| V'):
+                    continue
+                cells = [c.strip() for c in ln.strip('|').split('|')]
+                if len(cells) < 8:
+                    continue
+                nums = tuple(c for c in cells[1:] if c.replace('.', '', 1).isdigit())
+                if nums:
+                    out.setdefault(cells[0], set()).add(nums)
+            return out
+        live_rows, pasted_rows = rows(ft), rows(rt)
+        drift = sorted(k for k, v in pasted_rows.items() if k in live_rows and not (v & live_rows[k]))
+        if pasted_rows:
+            r('R37 pasted fold figures match the current run', not drift,
+              'rows measured differently in qa/fold.md: ' + ', '.join(drift) if drift else '')
+        else:
+            r('R37 pasted fold figures match the current run', True, 'no fold table pasted')
     return res
 
 folders = [a for a in sys.argv[1:] if not a.startswith('--')] or sorted(glob.glob(os.path.join(REPO, '0_plan', 'mockups', 'M*')))
