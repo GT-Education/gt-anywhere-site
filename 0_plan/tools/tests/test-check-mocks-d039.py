@@ -38,6 +38,9 @@ CASES = {
  'an input mentioned in a script comment is not an input': ('data-d039="script inputs" data-d039-component="router"', LD, '<input type="radio"><script>// Keep the <input> radios usable without JavaScript.\nlet a=1</script>', 'R1', 'PASS'),
  'a script tag mentioned in a script comment is not a script': ('data-d039="script"', LD, '<script>// This <script> enhances the static page with optional reveals.\nlet a=1</script>', 'R2', 'PASS'),
  'an HTML comment marker inside a script comment does not swallow the script end tag': ('data-d039="script"', LD, '<script>// The <!-- marker in source is a comment; observe the section element.\nlet a=1</script><!-- later comment -->', 'R2', 'PASS'),
+ 'an input mentioned in a CSS comment is not an input': ('data-d039="inputs" data-d039-component="router"', LD + '<style>/* Keep the <input> radios usable without JavaScript. */ body{margin:0}</style>', '<input type="radio">', 'R1', 'PASS'),
+ 'a script mentioned in a CSS comment is not a script': ('', LD + '<style>/* the <script> below is JSON-LD */ body{margin:0}</style>', '', 'R2', 'PASS'),
+ 'a tag-like string in the title is not an element': ('', '<title>Compare <input> vs output</title>' + LD, '', 'R1', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

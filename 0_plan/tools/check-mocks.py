@@ -54,28 +54,32 @@ def tags(doc, name):
         out.append((doc[i:j+1], j+1)); i = j + 1
     return out
 
-SCRIPT_END = re.compile(r'</script(?=[\s/>])', re.I)
+RAW_TEXT = ('script', 'style', 'title')  # elements whose content is text, never markup (HTML raw-text and RCDATA elements a mock may contain)
 
 def walk(doc):
     """One sequential pass over the document in source order. Yields ('comment', text) for each HTML comment,
-    ('script', start_tag, body) for each script element, and ('other', text) for everything between. Because the
-    pass is sequential, a comment marker inside a script body is script text, and a script inside a comment is comment
-    text: neither can be mistaken for the other."""
+    ('raw', name, start_tag, body) for each script, style or title element, and ('other', text) for everything between.
+    Because the pass is sequential, a comment marker inside a raw-text body is text, a tag-like string inside a comment
+    or a style sheet is text, and a script inside a comment is comment text: none can be mistaken for an element."""
     i = 0; n = len(doc); low = doc.lower()
     while i < n:
-        c = doc.find('<!--', i); sidx = low.find('<script', i)
-        while sidx >= 0 and sidx + 7 < n and (doc[sidx + 7].isalnum() or doc[sidx + 7] in '-_'):
-            sidx = low.find('<script', sidx + 7)
-        nxt = [x for x in (c, sidx) if x >= 0]
-        if not nxt:
+        cands = []
+        c = doc.find('<!--', i)
+        if c >= 0: cands.append((c, 'comment'))
+        for name in RAW_TEXT:
+            k = low.find('<' + name, i)
+            while k >= 0 and k + 1 + len(name) < n and (doc[k + 1 + len(name)].isalnum() or doc[k + 1 + len(name)] in '-_'):
+                k = low.find('<' + name, k + 1 + len(name))
+            if k >= 0: cands.append((k, name))
+        if not cands:
             yield ('other', doc[i:]); return
-        j = min(nxt)
+        j, kind = min(cands)
         if j > i: yield ('other', doc[i:j])
-        if j == c:
+        if kind == 'comment':
             e = doc.find('-->', j + 4); e = n if e < 0 else e + 3
             yield ('comment', doc[j:e]); i = e
         else:
-            k = j + 7; q = None
+            k = j + 1 + len(kind); q = None
             while k < n:
                 ch = doc[k]
                 if q:
@@ -84,21 +88,24 @@ def walk(doc):
                 elif ch == '>': break
                 k += 1
             tag_end = k + 1
-            m = SCRIPT_END.search(doc, tag_end)
+            m = re.compile(r'</' + kind + r'(?=[\s/>])', re.I).search(doc, tag_end)
             body_end = m.start() if m else n
-            close_end = m.end() + (doc.find('>', m.end()) - m.end() + 1 if m and doc.find('>', m.end()) >= 0 else 0) if m else n
-            yield ('script', doc[j:tag_end], doc[tag_end:body_end]); i = close_end
+            if m:
+                gt = doc.find('>', m.end()); close_end = gt + 1 if gt >= 0 else n
+            else: close_end = n
+            yield ('raw', kind, doc[j:tag_end], doc[tag_end:body_end]); i = close_end
 
 def script_blocks(doc):
     """(start_tag, body) for every script element that is not inside an HTML comment"""
-    return [(t, b) for kind, *rest in walk(doc) if kind == 'script' for t, b in [rest]]
+    return [(item[2], item[3]) for item in walk(doc) if item[0] == 'raw' and item[1] == 'script']
 
 def cleaned(doc):
-    """the document with HTML comments removed and script bodies removed (script start tags kept), for element scans"""
+    """the document with HTML comments removed and raw-text bodies (script, style, title) removed, start tags kept,
+    for the element scans"""
     out = []
     for item in walk(doc):
         if item[0] == 'other': out.append(item[1])
-        elif item[0] == 'script': out.append(item[1] + '</script>')
+        elif item[0] == 'raw': out.append(item[2] + '</' + item[1] + '>')
         else: out.append(' ')
     return ''.join(out)
 
@@ -111,7 +118,8 @@ def check(folder):
 
 def check_doc(doc, style, rat_text, folder='(memory)'):
     blocks = script_blocks(doc)  # scripts outside HTML comments, bodies intact, for the byte count and the JSON-LD
-    doc = cleaned(doc)  # one sequential walk: comments removed, script bodies removed, so neither hides or fakes an element
+    title_text = next((item[3] for item in walk(doc) if item[0] == 'raw' and item[1] == 'title'), None)  # the title's text, read before cleaning
+    doc = cleaned(doc)  # one sequential walk: comments and raw-text bodies removed, so none hides or fakes an element
     res = []
     def r(rule, ok, detail=''):
         res.append((rule, 'PASS' if ok else 'FAIL', detail))
@@ -150,8 +158,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     r('R5 numbers on the whitelist', not badn, ', '.join(badn))
     r('R6 no "advisor" in text', not re.search(r'advis', text, re.I))
     r('R7 full names', text.count('Georgetown Campus')>=2 and text.count('GT Anywhere')>=2, f"Georgetown Campus x{text.count('Georgetown Campus')}, GT Anywhere x{text.count('GT Anywhere')}")
-    title = re.search(r'<title>(.*?)</title>', doc, re.S|re.I)
-    r('R8 title', bool(title) and 'GT School' in title.group(1) and 'selective school for gifted children' in title.group(1), title.group(1)[:80] if title else 'none')
+    r('R8 title', bool(title_text) and 'GT School' in title_text and 'selective school for gifted children' in title_text, (title_text or '')[:80])
     r('R8 robots noindex', bool(re.search(r'<meta[^>]+name="robots"[^>]+noindex', doc, re.I)))
     r('R8 canonical', 'href="https://gt.school/"' in doc)
     r('R8 description', bool(re.search(r'<meta[^>]+name="description"', doc, re.I)))
