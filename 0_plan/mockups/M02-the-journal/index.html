@@ -32,7 +32,7 @@
 <body id="top">
 <a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="header" data-fold="header">
+<header class="header" data-fold="header" data-component="Header (landing)">
   <div class="wrap header__bar">
     <a class="lockup" href="#top"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" decoding="async"></a>
     <nav class="utility" aria-label="Utility">
@@ -53,40 +53,46 @@
 
     <section class="wrap doors-section" aria-labelledby="doors-heading">
       <h2 id="doors-heading" class="visually-hidden">Two ways to attend</h2>
-      <ul class="doors">
-        <li class="door" data-door="georgetown">
+      <ul class="doors" data-component="Door list">
+        <li class="door" data-door="georgetown" data-component="Door card">
           <p class="eyebrow door__label">In person</p>
           <h3 class="door__name">Georgetown Campus</h3>
           <p class="door__line">Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
-          <a class="cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="first_screen" data-fold="cta-georgetown">Explore the Georgetown campus<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="first_screen" data-fold="cta-georgetown" data-component="CTA">Explore the Georgetown campus<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
         </li>
-        <li class="door" data-door="anywhere">
+        <li class="door" data-door="anywhere" data-component="Door card">
           <p class="eyebrow door__label">Online</p>
           <h3 class="door__name">GT Anywhere</h3>
           <p class="door__line">Live mastery academics with Guides from wherever you live, and four <span class="nb">in-person</span> weekends a year in Georgetown.</p>
-          <a class="cta" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="first_screen" data-fold="cta-anywhere">Explore GT Anywhere<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="cta" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="first_screen" data-fold="cta-anywhere" data-component="CTA">Explore GT Anywhere<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
         </li>
       </ul>
-      <!-- Compact door rule (CONTRACT section 2): on short phone viewports the two lines follow the second CTA, each
-           opened by its door name as a run-in label. Exactly one copy of each line is displayed at any viewport. -->
-      <div class="door-lines">
-        <p><b class="run-in">Georgetown Campus</b> Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
-        <p><b class="run-in">GT Anywhere</b> Live mastery academics with Guides from wherever you live, and four <span class="nb">in-person</span> weekends a year in Georgetown.</p>
-      </div>
     </section>
 
-    <section class="wrap closer" aria-labelledby="closer-caption">
-      <p class="anchor"><a href="#compare" data-event="compare_view">Not sure which is right for your family? Compare the two.</a></p>
-      <table class="ctable ctable--excerpt" role="table">
-        <caption id="closer-caption" class="ctable__kicker">A closer look</caption>
+    <!-- The two door lines as run-in paragraphs (CONTRACT section 2's compact door rule, extended to the laptop rows).
+         They follow the second CTA on phones and, from 900px, follow the pull-out, where `order` moves them past it;
+         the DOM keeps them beside their doors, so the reading order stays doors, lines, anchor. Exactly one copy of
+         each line is displayed at any viewport: these, or the lines inside the doors. -->
+    <div class="wrap door-lines">
+      <p><b class="run-in">Georgetown Campus</b> Two hours of mastery academics each morning on our Georgetown, Texas campus, afternoons for workshops and building.</p>
+      <p><b class="run-in">GT Anywhere</b> Live mastery academics with Guides from wherever you live, and four <span class="nb">in-person</span> weekends a year in Georgetown.</p>
+    </div>
+
+    <section class="wrap closer" aria-labelledby="closer-kicker">
+      <p class="anchor" data-component-proposed="Compare anchor"><a href="#compare" data-event="compare_view">Not sure which is right for your family? Compare the two.</a></p>
+      <!-- The first-screen pull-out: not the comparison table moved up. Its own object — bounded top and bottom by a
+           --color-text rule, no stripes, 16/42/42 columns against the table's 22/39/39, cells in the reading face and
+           labels as tracked eyebrows, the kicker in the corner cell. It renders only where all three rows complete
+           (900px wide and 700px tall and up, measured); below that the anchor sentence carries the hinge alone. -->
+      <table class="pullout" role="table" data-component-proposed="First-screen pull-out">
         <colgroup>
-          <col class="ctable__col-label">
-          <col class="ctable__col-school">
-          <col class="ctable__col-school">
+          <col class="pullout__col-label">
+          <col class="pullout__col-school">
+          <col class="pullout__col-school">
         </colgroup>
         <thead role="rowgroup">
           <tr role="row">
-            <td role="cell" class="ctable__corner"></td>
+            <td role="cell" id="closer-kicker" class="pullout__kicker">A closer look</td>
             <th scope="col" role="columnheader">Georgetown Campus</th>
             <th scope="col" role="columnheader">GT Anywhere</th>
           </tr>
@@ -94,22 +100,22 @@
         <tbody role="rowgroup">
           <tr role="row">
             <th scope="row" role="rowheader">Where and how</th>
-            <td role="cell" data-label="Georgetown Campus">On campus in Georgetown, Texas, north of Austin.</td>
-            <td role="cell" data-label="GT Anywhere">From home, anywhere in the United States.</td>
+            <td role="cell">On campus in Georgetown, Texas, north of Austin.</td>
+            <td role="cell">From home, anywhere in the United States.</td>
           </tr>
           <tr role="row">
             <th scope="row" role="rowheader">The day</th>
-            <td role="cell" data-label="Georgetown Campus">Mornings from 9 to noon: about two hours of focused academics in TimeBack blocks, with structured breaks. Afternoons: workshops, projects and competitions.</td>
-            <td role="cell" data-label="GT Anywhere">Two to three hours of focused mastery academics a day, with live sessions from Guides. The rest of the day is yours.</td>
+            <td role="cell">Mornings from 9 to noon: about two hours of focused academics in TimeBack blocks, with structured breaks. Afternoons: workshops, projects and competitions.</td>
+            <td role="cell">Two to three hours of focused mastery academics a day, with live sessions from Guides. The rest of the day is yours.</td>
           </tr>
           <tr role="row">
             <th scope="row" role="rowheader">In-person time</th>
-            <td role="cell" data-label="Georgetown Campus">Every school day.</td>
-            <td role="cell" data-label="GT Anywhere">Four intensive weekends a year in Georgetown.</td>
+            <td role="cell">Every school day.</td>
+            <td role="cell">Four intensive weekends a year in Georgetown.</td>
           </tr>
         </tbody>
       </table>
-      <p class="closer__more">The full comparison continues below.</p>
+      <p class="pullout__foot"><a class="pullout__sources link" href="#sources">Sources</a><span class="closer__more">The full comparison continues below.</span></p>
     </section>
 
   </div>
@@ -121,7 +127,7 @@
         <h2 id="compare-heading" class="visually-hidden">Compare the two schools</h2>
       </div>
       <div class="section-body section-body--full">
-        <table class="ctable ctable--full" role="table">
+        <table class="ctable ctable--full" role="table" data-component="Comparison table">
           <caption class="ctable__title">Georgetown Campus and GT Anywhere, side by side</caption>
           <colgroup>
             <col class="ctable__col-label">
@@ -184,20 +190,20 @@
           </tbody>
         </table>
 
-        <ul class="doors doors--again" aria-label="Two ways to attend">
-          <li class="door" data-door="georgetown">
+        <ul class="doors doors--again" aria-label="Two ways to attend" data-component="Door list">
+          <li class="door" data-door="georgetown" data-component="Door card">
             <p class="eyebrow door__label">In person</p>
             <a class="cta" href="https://www.gt.school/" data-event="door_click" data-school="georgetown" data-placement="after_comparison">Explore the Georgetown campus<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
           </li>
-          <li class="door" data-door="anywhere">
+          <li class="door" data-door="anywhere" data-component="Door card">
             <p class="eyebrow door__label">Online</p>
             <a class="cta" href="https://anywhere.gt.school/" data-event="door_click" data-school="anywhere" data-placement="after_comparison">Explore GT Anywhere<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
           </li>
         </ul>
 
         <div class="compare__tail">
-          <p class="sources">Sources: admission bar, tuition and TEFA, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; Georgetown schedule, <a class="link" href="https://www.gt.school/academics" data-event="outbound_school_site" data-school="georgetown">gt.school/academics</a>; GT Anywhere schedule, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; intensive weekends, <a class="link" href="https://anywhere.gt.school/intensives" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/intensives</a>; weekly check-ins, <a class="link" href="https://www.gt.school/terms-of-use" data-event="outbound_school_site" data-school="georgetown">the Terms of Use</a> on both sites. Checked 2026-09-10.</p>
-          <aside class="tefa" aria-labelledby="tefa-heading">
+          <p class="sources" id="sources">Sources: admission bar, tuition and TEFA, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; Georgetown schedule, <a class="link" href="https://www.gt.school/academics" data-event="outbound_school_site" data-school="georgetown">gt.school/academics</a>; GT Anywhere schedule, <a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/academics</a>; intensive weekends, <a class="link" href="https://anywhere.gt.school/intensives" data-event="outbound_school_site" data-school="anywhere">anywhere.gt.school/intensives</a>; weekly check-ins, <a class="link" href="https://www.gt.school/terms-of-use" data-event="outbound_school_site" data-school="georgetown">the Terms of Use</a> on both sites. Checked 2026-09-10.</p>
+          <aside class="tefa" aria-labelledby="tefa-heading" data-component="TEFA module">
             <h3 id="tefa-heading">Texas families</h3>
             <p>GT Anywhere is TEFA-eligible. The Texas Education Freedom Accounts program can cover tuition for eligible families.</p>
             <a class="link" href="https://anywhere.gt.school/academics" data-event="tefa_module_view" data-region-source="default">Check eligibility on the GT Anywhere site<span class="cta__arrow" aria-hidden="true">&rarr;</span></a>
@@ -214,17 +220,17 @@
         <h2 id="proof-heading">What is true of both schools</h2>
       </div>
       <div class="section-body">
-        <ul class="facts">
+        <ul class="facts" data-component="Proof strip">
           <li class="fact">
-            <p class="eyebrow">Admissions</p>
+            <p class="eyebrow"><a class="link" href="https://anywhere.gt.school/academics" data-event="outbound_school_site" data-school="anywhere">Admissions</a></p>
             <p class="fact__text">Admission at the 90th percentile and above.</p>
           </li>
           <li class="fact">
-            <p class="eyebrow">Same school, same academics</p>
+            <p class="eyebrow">Mastery</p>
             <p class="fact__text">Mastery-based: students advance on demonstrated mastery, measured with MAP assessments.</p>
           </li>
           <li class="fact">
-            <p class="eyebrow">Guides</p>
+            <p class="eyebrow"><a class="link" href="https://www.gt.school/terms-of-use" data-event="outbound_school_site" data-school="georgetown">Guides</a></p>
             <p class="fact__text">Guides, not lecturers: adults who coach, check in every week and hold the bar.</p>
           </li>
           <li class="fact">
@@ -240,12 +246,12 @@
   <section class="section steps surface" aria-labelledby="steps-heading">
     <div class="wrap section-grid">
       <div class="section-head">
-        <p class="eyebrow eyebrow--rule">Admissions</p>
+        <p class="eyebrow eyebrow--rule eyebrow--accent">Admissions</p>
         <h2 id="steps-heading">How to apply</h2>
       </div>
       <div class="section-body">
         <p class="steps__lead">GT School admits students at or above the 90th percentile.</p>
-        <ol class="steps__list">
+        <ol class="steps__list" data-component-proposed="Application steps">
           <li>Begin your application online.</li>
           <li>Complete the assessment.</li>
           <li>Meet us for a family conversation.</li>
@@ -266,7 +272,7 @@
         <h2 id="connect-heading">Questions before you apply</h2>
       </div>
       <div class="section-body">
-        <ul class="link-rows">
+        <ul class="link-rows" data-component-proposed="Secondary link rows">
           <li><a href="https://anywhere.gt.school/academics" data-event="cta_secondary_click" data-type="faq">Read the FAQ</a></li>
           <li><a href="https://www.gt.school/contact" data-event="cta_secondary_click" data-type="advisor">Talk to admissions</a></li>
           <li><a href="https://www.gt.school/contact" data-event="cta_secondary_click" data-type="tour">Ask about a tour of the Georgetown campus</a></li>
@@ -276,7 +282,7 @@
     </div>
   </section>
 
-  <section class="families" aria-labelledby="families-heading">
+  <section class="families" aria-labelledby="families-heading" data-component-proposed="Current families band">
     <div class="wrap families__bar">
       <div>
         <h2 id="families-heading">Current families</h2>
@@ -288,13 +294,13 @@
 
 </main>
 
-<footer class="footer on-navy">
+<footer class="footer on-navy" data-component="Footer">
   <div class="wrap footer__grid">
     <div class="footer__logos">
       <a class="footer__plate" href="https://www.gt.school/" data-event="outbound_school_site" data-school="georgetown"><img src="../shared/img/gt-school-logo-h.svg" width="139" height="32" alt="GT School" decoding="async"></a>
       <a class="footer__anywhere" href="https://anywhere.gt.school/" data-event="outbound_school_site" data-school="anywhere"><img src="../shared/img/gt-anywhere-logo-h.svg" width="252" height="48" alt="GT Anywhere" decoding="async"></a>
     </div>
-    <div class="footer__facts">
+    <div class="footer__facts" data-component="Facts block">
       <p>GT School, Inc. is a selective school for gifted and talented children, kindergarten to 8th grade. Georgetown Campus: in person in Georgetown, Texas. GT Anywhere: online, with four in-person weekends a year in Georgetown.</p>
       <p class="footer__contact">(512) 270-9481</p>
     </div>

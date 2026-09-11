@@ -26,8 +26,12 @@ a { color: inherit; }
 /* ---------- Type roles (CONTRACT section 3; brief, Typography) ---------- */
 h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
 .eyebrow { font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
-/* The eyebrow-plus-rule opener (Barnes, C27): the 32 by 2px accent rule under a section eyebrow is that screen's one accent use, decorative. */
-.eyebrow--rule::after { content: ""; display: block; width: var(--space-6); margin-top: var(--space-3); border-top: var(--space-1) solid var(--color-accent); }
+/* The eyebrow-plus-rule opener (Barnes, C27): a 32 by 2px rule under each section eyebrow. The rule is --color-text, because
+   two of these openers share a screen at every laptop row and the masthead rule already spends the first screen's accent
+   (CONTRACT section 4, one accent use per screen). The accent is kept for one opener, "Admissions" — the page's conversion
+   moment and the one no other accent can reach on any screen (critic, Colour and surface). */
+.eyebrow--rule::after { content: ""; display: block; width: var(--space-6); margin-top: var(--space-3); border-top: var(--space-1) solid var(--color-text); }
+.eyebrow--accent::after { border-top-color: var(--color-accent); }
 .sources { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text); max-width: var(--measure-prose); overflow-wrap: anywhere; } /* the source paths break at a doubled root font */
 /* Links in running text: underlined at rest in the muted role (6.25 on --color-bg), currentColor on hover and focus. */
 .link { text-decoration: underline; text-decoration-color: var(--color-text-muted); text-decoration-thickness: 1px; text-underline-offset: .18em; }
@@ -48,6 +52,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 @media (forced-colors: active) {
   :focus-visible, .on-navy :focus-visible, .skip-link:focus-visible { outline: 3px solid CanvasText; box-shadow: none; }
   .cta, .footer__plate, .tefa { border: 1px solid CanvasText; }
+  /* forced colours flattens the stripes, which are the table's only row separation, so the rows carry their own rule here */
+  .ctable tbody tr { border-top: 1px solid CanvasText; }
 }
 
 /* ---------- Skip link (copy.md section 9): hidden by transform until focused, then a navy tab at the top left ---------- */
@@ -68,11 +74,15 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 @media (min-width: 768px) { .utility { gap: var(--space-5); font-size: var(--text-sm); } }
 
 /* ---------- First screen: h1 across eight columns, the standfirst under a short rule, a full-width rule, the two doors.
-   Height bands (K10 T-K10-8): compressed under 900px tall with a tighter sub-band at or under 639px; relaxed from 900px. ---------- */
-.first { --fold-density: compressed; --fs-top: var(--space-4); --fs-h1-gap: var(--space-3); --fs-doors-gap: var(--space-5); --fs-door-bottom: var(--space-4); --fs-closer-gap: var(--space-5); --fs-lines-gap: var(--space-6); }
-@media (max-height: 759px) { .first { --fs-door-bottom: var(--space-3); --fs-closer-gap: var(--space-4); } } /* the short laptop rows (V14, V15, V19): the first excerpt row completes inside 720 */
-@media (max-height: 639px) { .first { --fs-top: var(--space-3); --fs-doors-gap: var(--space-4); --fs-lines-gap: var(--space-4); } }
-@media (min-height: 940px) { .first { --fold-density: relaxed; --fs-top: var(--space-6); --fs-h1-gap: var(--space-4); --fs-doors-gap: var(--space-6); --fs-closer-gap: var(--space-6); } }
+   A flex column, so the door lines can follow the pull-out from 900px without leaving their doors in the DOM (`order`).
+   Height bands (K10 T-K10-8): compressed under 940px tall, a short band at or under 799px (the short-laptop composition:
+   tighter gaps and a tighter pull-out, so all three rows complete inside 720), a tighter sub-band at or under 639px;
+   relaxed from 940px. The bottom gap is 8px because the compare section's own top padding closes the seam. ---------- */
+.first { display: flex; flex-direction: column; padding-bottom: var(--space-5); --fold-density: compressed; --fs-top: var(--space-4); --fs-h1-gap: var(--space-4); --fs-doors-gap: var(--space-5); --fs-door-bottom: var(--space-4); --fs-closer-gap: var(--space-5); --fs-lines-gap: var(--space-6); --fs-pullout-pad: var(--space-3); }
+@media (max-height: 799px) { .first { --fs-doors-gap: var(--space-4); --fs-door-bottom: var(--space-3); } }
+@media (max-height: 639px) { .first { --fs-top: var(--space-3); --fs-doors-gap: var(--space-3); --fs-lines-gap: var(--space-4); } }
+@media (min-width: 900px) and (max-height: 799px) { .first { --fs-top: var(--space-3); } } /* a short laptop screen buys its top margin back for the comparison */
+@media (min-height: 940px) { .first { --fold-density: relaxed; --fs-top: var(--space-6); --fs-doors-gap: var(--space-6); --fs-closer-gap: var(--space-6); --fs-pullout-pad: var(--space-4); } } /* the pull-out's rows breathe only where the screen is 940px tall */
 
 .masthead { padding-top: var(--fs-top); container-type: inline-size; }
 .h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; text-wrap: pretty; }
@@ -85,6 +95,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 @media (min-width: 768px) { .h1 { text-wrap: balance; } } /* four lines here; the seven-line phone setting takes pretty (K10 T-K10-15) */
 @media (min-width: 1024px) { .h1 { max-width: min(35ch, calc(75% - .5rem)); } } /* nine of twelve columns from 1024 to 1279 (eight would set five lines at 1024, declared) */
 @media (min-width: 1280px) { .h1 { max-width: min(35ch, calc(66.6667% - .6667rem)); } } /* the brief's eight columns with 32px gutters, capped at the contract's 35ch */
+/* The standfirst's 32px rule keeps 16px of clearance under the h1's descenders at every band, so it reads as the mark that
+   introduces the standfirst and never as an underline of the word above it (critic, Typography). */
 .standfirst { margin-top: var(--fs-h1-gap); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); max-width: var(--measure-prose); }
 .standfirst::before { content: ""; display: block; width: var(--space-6); margin-bottom: var(--space-3); border-top: 1px solid var(--color-text); }
 
@@ -107,6 +119,35 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 }
 @media (min-width: 1024px) { .doors { column-gap: var(--space-6); } }
 
+/* From 900px (where the pull-out renders and the comparison takes its table form) the doors are label, name, CTA, and the two
+   supporting lines follow the pull-out as run-in paragraphs in the same two columns: the compact door rule of CONTRACT
+   section 2 applied to the laptop rows, so the comparison — the direction's argument — lands inside the first screen and the
+   prose that elaborates it is what the fold cuts. `order` moves the block past the pull-out; the DOM order stays doors,
+   lines, anchor, pull-out, so the reading order still puts each line beside its door. */
+@media (min-width: 900px) {
+  .door__line { display: none; }
+  .door .cta { margin-top: var(--space-4); }
+  .door-lines { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); order: 1; margin-top: var(--fs-lines-gap); }
+  .door-lines p { line-height: var(--leading-prose); max-width: var(--measure-prose); }
+  .run-in { font-weight: 500; padding-inline-end: var(--space-2); }
+}
+
+/* The short-laptop composition (900px and wider, 700 to 799px tall: V13 and V14). The door's label and name share one line,
+   the gaps close, and the pull-out's head tightens, so all three unchanged pull-out rows complete inside 720px — Astra's ask,
+   measured. Nothing else changes: the prose stays at 1.5 and every control keeps its 44px floor. */
+@media (min-width: 900px) and (min-height: 700px) and (max-height: 799px) {
+  .first { --fs-doors-gap: var(--space-3); --fs-closer-gap: var(--space-3); }
+  .door { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: var(--space-3); padding-block: var(--space-3) var(--fs-door-bottom); }
+  .door__label { grid-column: 1; grid-row: 1; }
+  .door__name { grid-column: 2; grid-row: 1; margin-top: 0; }
+  .door .cta { grid-column: 1 / -1; grid-row: 2; align-self: end; justify-self: start; margin-top: var(--space-3); }
+  .pullout { margin-top: 0; }
+  .pullout thead > tr > * { padding-block: var(--space-2); }
+}
+
+/* Under 700px tall the pull-out is gone, so the lines close up and the Compare opener takes the fold. */
+@media (min-width: 900px) and (max-height: 699px) { .door-lines { margin-top: var(--space-4); } }
+
 /* Compact door rule (CONTRACT section 2, at this direction's measured threshold: three-line door lines put V5's second CTA at
    about 711 of 691 with the lines inside the doors, so the rule runs below 800px tall, not 700): label, name, CTA in each door;
    both lines follow the second CTA as two run-in paragraphs. */
@@ -122,7 +163,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 /* Phone landscape (V10, 750 by 342; CONTRACT section 2 recipe): masthead padding 8, h1 one token down at --text-xl across the
    full column (declared departure), provenance, the two compact doors side by side, their lines below the fold. */
 @media (min-width: 600px) and (max-height: 400px) {
-  .first { --fs-top: var(--space-3); --fs-h1-gap: var(--space-2); --fs-doors-gap: var(--space-3); }
+  .first { --fs-top: var(--space-3); --fs-h1-gap: var(--space-3); --fs-doors-gap: var(--space-3); }
+  .standfirst::before { display: none; } /* the rule cannot keep its 16px of clearance on a 342px-tall row, so it is dropped rather than printed under "Texas" (critic, Typography) */
   .h1 { font-size: var(--text-xl); max-width: none; text-wrap: balance; }
   .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
   .door + .door { border-top: 0; }
@@ -135,20 +177,42 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
   .run-in { font-weight: 500; padding-inline-end: var(--space-2); }
 }
 
-/* ---------- "A closer look": the compare anchor sentence, then a three-row excerpt of the comparison as a real table with a
-   caption, then the closing line. Inside the first screen from 1024 (the anchor lands above the fold at V14 and V16); the
-   second screen on phones. ---------- */
-.closer { margin-top: var(--fs-closer-gap); padding-bottom: var(--space-6); } /* the closing line says the comparison continues below, so the compare section follows at 32px, not a full section gap */
+/* ---------- "A closer look": the compare anchor sentence, then the pull-out, then its foot line. The pull-out is its own
+   object, not the comparison table moved up: bounded above and below by a --color-text rule, no stripes, 16/42/42 columns
+   against the table's 22/39/39, cells in the reading face (Literata) against the table's Inter Tight, row labels and school
+   names as tracked eyebrows against the table's sentence-case labels and serif heads, and the kicker in the corner cell.
+   It renders only where all three rows complete in one screen — measured at 900px wide and 700px tall and up — so a parent
+   never reads a clipped preview of the table below it. ---------- */
+.closer { margin-top: var(--fs-closer-gap); }
 .anchor { font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
 .anchor a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-decoration-color: var(--color-text-muted); text-decoration-thickness: 1px; text-underline-offset: .18em; text-wrap: balance; }
 .anchor a:hover, .anchor a:focus-visible { text-decoration-color: currentColor; }
-.ctable--excerpt { margin-top: var(--space-3); }
-.closer__more { margin-top: var(--space-3); font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); text-align: right; }
+.pullout, .pullout__foot { display: none; }
+@media (min-width: 900px) and (min-height: 700px) {
+  .pullout { display: table; }
+  .pullout__foot { display: flex; }
+}
+.pullout { width: 100%; margin-top: var(--space-3); border-collapse: collapse; table-layout: fixed; border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text); }
+.pullout__col-label { width: 16%; }
+.pullout__col-school { width: 42%; }
+.pullout th, .pullout td { text-align: left; vertical-align: top; padding: var(--fs-pullout-pad) var(--space-4) var(--fs-pullout-pad) 0; }
+.pullout thead > tr > * { padding-block: var(--space-3); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; }
+.pullout thead .pullout__kicker { font-size: var(--text-xs); color: var(--color-text-muted); }
+.pullout tbody th { font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.pullout tbody td { font-family: var(--font-serif); font-size: var(--text-base); line-height: var(--leading-prose); }
+.pullout tbody tr + tr > * { border-top: 1px solid var(--color-border); }
+/* The foot line: the pull-out's own evidence link at the left (C04's linked form on the screen that carries the figures) and
+   the closing line at the right, on one row, so sourcing the first screen costs no height. */
+.pullout__foot { align-items: baseline; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-3); }
+.pullout__sources { display: inline-flex; align-items: center; min-height: 2.75rem; margin-block: calc((2.75rem - 1rem) / -2); font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); } /* the 44px target grows into the gap above and below the foot line, so the line keeps its place */
+.closer__more { font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); text-align: right; }
 
-/* ---------- Comparison tables (the excerpt and the full table share one design; DD-06, DD-43): label column and two school
-   columns, --text-sm labels, --text-base cells at 1.5, --color-surface stripes bleeding 8px past the text so the text stays
-   flush with the page's left edge, a --color-text rule under the column heads. Table form from 900px (R6, measured: the
-   longest cell runs four lines in a 326px cell at 900); stacked blocks with the school name on every cell below. ---------- */
+/* ---------- The comparison table (DD-06, DD-43; the pull-out above has its own design): a 22/39/39 label and school columns,
+   --text-sm sentence-case labels, --text-base Inter Tight cells at 1.5, serif column heads over a --color-text rule, and
+   --color-surface stripes on the odd rows. The stripe is a plate, not a fill clipped to the text: it runs 8px past the text
+   at the page edge by a box-shadow on the outer cell, so the rules stay on the cells at the text edge and keep their
+   alignment with the door rule above (critic, Craft). Table form from 900px (R6, measured: the longest cell runs four lines
+   in a 326px cell at 900); stacked blocks with the school name on every cell below. ---------- */
 .ctable { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .ctable caption { text-align: left; caption-side: top; }
 .ctable__col-label { width: 22%; }
@@ -159,18 +223,19 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 .ctable thead th, .ctable thead .ctable__corner { border-bottom: 1px solid var(--color-text); }
 .ctable tbody th { padding-top: calc(var(--space-3) + var(--space-1)); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text); }
 .ctable tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
-.ctable tbody tr:nth-child(odd) { background: var(--color-surface); }
+.ctable tbody tr:nth-child(odd) > * { background: var(--color-surface); }
+.ctable tbody tr:nth-child(odd) > *:first-child { box-shadow: -8px 0 0 var(--color-surface); } /* the 8px plate edge; no vertical bleed, so the unstriped rows stay clean */
 .ctable tbody tr:last-child > * { border-bottom: 1px solid var(--color-border); }
 .ctable__tabular { font-variant-numeric: tabular-nums; }
-/* The excerpt's caption is its kicker: the tracked eyebrow over the table's top rule. */
-.ctable__kicker { padding: var(--space-3) 0; font-weight: 500; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); border-bottom: 1px solid var(--color-text); }
 /* The full table's caption is the compare section's visible title (the h2 is visually hidden so "compare" is not said three times). */
 .ctable__title { padding: 0 0 var(--space-5); font-family: var(--font-serif); font-size: var(--text-2xl); line-height: var(--leading-tight); text-wrap: balance; }
 @media (max-width: 899px) {
   .ctable, .ctable caption, .ctable tbody, .ctable tr, .ctable th, .ctable td { display: block; }
   .ctable colgroup { display: none; }
   .ctable thead { display: block; position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
-  .ctable__kicker { border-bottom: 0; }
+  /* stacked form: the row is the block, so the plate is drawn on the row and its 8px edges on both sides */
+  .ctable tbody tr:nth-child(odd) { background: var(--color-surface); box-shadow: -8px 0 0 var(--color-surface), 8px 0 0 var(--color-surface); }
+  .ctable tbody tr:nth-child(odd) > * { background: none; box-shadow: none; }
   .ctable tbody tr { padding: var(--space-4) 0; border-top: 1px solid var(--color-border); }
   .ctable tbody tr:last-child { border-bottom: 1px solid var(--color-border); }
   .ctable tbody tr:last-child > * { border-bottom: 0; }
@@ -197,7 +262,22 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
   .section-body--full { grid-column: 1 / -1; }
 }
 
-/* Comparison section: the table, the doors again (label and CTA only, DD-23), then the sources line beside the TEFA box. */
+/* Comparison section: the table, the doors again (label and CTA only, DD-23), then the sources line beside the TEFA box.
+   Its top padding is the seam with the anchor sentence, which introduces it ("Compare the two."), so the sentence, the
+   hairline and the Compare opener read as one move and the opener is inside the first screen wherever the pull-out is not. */
+.compare { padding-top: var(--space-6); }
+/* Where the pull-out cannot render — a phone, a tablet, or a screen under 700px tall — the anchor sentence hands straight to
+   the comparison: the seam closes and the Compare opener and the table's title come inside the first screen, so the screen
+   still ends on the comparison and not on blank page (critic, Craft: the false floor). */
+@media (max-width: 899px) {
+  .first { padding-bottom: 0; }
+  .compare { padding-top: var(--space-3); }
+  .compare .section-grid { row-gap: var(--space-3); }
+}
+@media (min-width: 900px) and (max-height: 699px) {
+  .first { padding-bottom: 0; }
+  .compare { padding-top: var(--space-5); }
+}
 .doors--again { margin-top: var(--space-6); }
 .doors--again .door .cta { margin-top: var(--space-3); }
 .compare__tail { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); margin-top: var(--space-6); } /* an explicit minmax(0, 1fr) track, so an unbreakable source path cannot widen the column */
@@ -214,6 +294,9 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
    grid has no column gap so the rules run continuous; the gutter is padding inside the modules. */
 .facts { display: grid; grid-template-columns: minmax(0, 1fr); }
 .fact { padding-block: var(--space-4) var(--space-5); border-top: 1px solid var(--color-border); }
+/* Two of the four labels are the fact's evidence link (Exeter's label-and-link form, C04, for the two facts copy.md gives a
+   destination). The 44px target grows into the module's padding, so the label's line keeps its place in the module. */
+.fact .eyebrow a { display: inline-flex; align-items: center; min-height: 2.75rem; margin-block: calc((2.75rem - 1rem) / -2); }
 .fact__text { margin-top: var(--space-2); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
 .proof .sources { margin-top: var(--space-5); }
 @media (min-width: 640px) {
@@ -256,7 +339,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(
 .footer__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
 .footer__logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-5); }
 .footer__plate { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); background: var(--color-bg); border-radius: var(--radius-sm); }
-.footer__plate img { height: 1.75rem; width: auto; }
+.footer__plate img { height: 2rem; width: auto; } /* K12 V2: horizontal marks 32px at 1440 and never under 27px at 390 (CONTINUITY.md) */
 .footer__anywhere { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .footer__anywhere img { height: 2rem; width: auto; }
 .footer__facts p { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-width: 48ch; }
