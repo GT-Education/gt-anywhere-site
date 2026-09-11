@@ -1,6 +1,6 @@
 # Register status
 
-Generated 2026-09-11 03:17 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
+Generated 2026-09-11 03:23 by `0_plan/tools/check-register.py`. Goal: every row Complete (`12-register-loop.md`).
 
 | Rows | Complete or superseded | Drafted | Reviewed | Rework | Escalated | Malformed |
 |---|---|---|---|---|---|---|
@@ -10,5 +10,5 @@ Generated 2026-09-11 03:17 by `0_plan/tools/check-register.py`. Goal: every row 
 
 | Row | File | Line | State | Reasons |
 |---|---|---|---|---|
-| D-039 | `03-decisions-and-open-questions.md` | 47 | Rework | Astra checks Fable: Fail: `python3 0_plan/tools/tests/test-check-mocks-d039.py` exits 0 with all 28  |
+| D-039 | `03-decisions-and-open-questions.md` | 47 | Rework | Astra checks Fable: Fail: The requested test exits 0 with all 31 fixtures passing; the recorded E6–E |
 | DD-42 | `07-design-decisions.md` | 60 | Reviewed | Astra checks Fable: pending |

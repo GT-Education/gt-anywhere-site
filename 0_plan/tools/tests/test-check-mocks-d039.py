@@ -41,6 +41,8 @@ CASES = {
  'an input mentioned in a CSS comment is not an input': ('data-d039="inputs" data-d039-component="router"', LD + '<style>/* Keep the <input> radios usable without JavaScript. */ body{margin:0}</style>', '<input type="radio">', 'R1', 'PASS'),
  'a script mentioned in a CSS comment is not a script': ('', LD + '<style>/* the <script> below is JSON-LD */ body{margin:0}</style>', '', 'R2', 'PASS'),
  'a tag-like string in the title is not an element': ('', '<title>Compare <input> vs output</title>' + LD, '', 'R1', 'PASS'),
+ 'tag-like text inside another element\'s quoted attribute is not an input': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><p title="The <input> radios work without JavaScript.">Keyboard support</p>', 'R1', 'PASS'),
+ 'tag-like text inside a quoted attribute is not a script': ('', LD, '<p title="The <script> adds optional reveals.">Motion notes</p>', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():
