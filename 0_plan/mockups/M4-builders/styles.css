@@ -6,7 +6,7 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   line-height: var(--leading-body);
 }
 
@@ -67,6 +67,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   color: var(--color-text);
   display: inline-block;
+  font-family: var(--font-sans);
 }
 .link-underline::after {
   content: "";
@@ -116,18 +117,22 @@ a { color: inherit; text-decoration: none; }
   gap: var(--space-2);
   padding: var(--space-3) 0;
 }
-.logo { display: inline-flex; }
+.logo { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .logo img { height: 1.5rem; width: auto; }
 .primary-nav { display: flex; gap: var(--space-4); flex-wrap: wrap; }
 .primary-nav a { font-size: var(--text-sm); padding: var(--space-4) 0; }
 
-/* Hero — full-bleed photo, compact at mobile so the doors clear the fold */
+/* Hero — full-bleed photo, compact at mobile so the doors clear the fold.
+   The headline sits in a translucent scrim confined to a smaller footprint
+   (tighter padding, no font-size bump at mobile) than the opaque, full-height
+   panel this replaced, so the photo — the students and the experiment — reads
+   through the covered area and is fully clear everywhere else (E2 finding 10). */
 .hero {
   position: relative;
   width: 100%;
   overflow: hidden;
   aspect-ratio: 6 / 5;
-  max-height: 15rem;
+  max-height: 17rem;
 }
 .hero-media {
   width: 100%;
@@ -140,8 +145,8 @@ a { color: inherit; text-decoration: none; }
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-text);
-  padding: var(--space-4) 0;
+  background: color-mix(in srgb, var(--color-text) 80%, transparent);
+  padding: var(--space-3) 0;
 }
 .hero-h1 {
   font-size: var(--text-lg);
@@ -151,7 +156,6 @@ a { color: inherit; text-decoration: none; }
   max-width: 34rem;
 }
 .provenance {
-  font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: var(--color-bg);
   margin: 0;
@@ -195,21 +199,21 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: var(--space-1);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .04em;
   color: var(--color-text-muted);
 }
-.door-icon { width: .6rem; height: .6rem; flex-shrink: 0; background: currentColor; }
-.door-icon-person { border-radius: 50%; }
-.door-icon-online { border-radius: var(--radius-sm); }
+.door-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
 .door-name { font-family: var(--font-serif); font-size: var(--text-md); font-weight: 600; }
 .door-line { font-size: var(--text-xs); color: var(--color-text); }
 .door-cta {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: 600;
   background: var(--color-text);
@@ -249,6 +253,7 @@ a { color: inherit; text-decoration: none; }
 /* Compare anchor */
 .compare-anchor-section { padding: var(--space-5) 0; background: var(--color-bg); }
 .compare-anchor { font-size: var(--text-md); margin: 0; }
+.compare-anchor a { padding: var(--space-4) 0; }
 
 /* Comparison — stacks to one column per row at mobile (no horizontal scroll); becomes
    a normal table at 768px+. Real <table> markup throughout either way. */
@@ -332,6 +337,7 @@ table.compare td::before {
 }
 .tefa h3 { font-size: var(--text-md); margin: 0 0 var(--space-2) 0; }
 .tefa p:last-child { margin-bottom: 0; }
+.tefa a { padding: var(--space-4) 0; }
 
 /* Proof strip */
 .proof-section { padding: var(--space-6) 0; background: var(--color-bg); }
@@ -383,13 +389,14 @@ table.compare td::before {
 .secondary-section { padding: var(--space-6) 0; background: var(--color-bg); }
 .secondary-ctas { display: flex; flex-direction: column; margin-top: var(--space-3); }
 .secondary-ctas li {
-  padding: var(--space-4) 0;
   border-bottom: 1px solid var(--color-border);
   font-size: var(--text-base);
 }
+.secondary-ctas a { padding: var(--space-4) 0; }
 
 /* Current families */
 .families-section { padding: var(--space-6) 0; background: var(--color-surface); }
+.families-section a { padding: var(--space-4) 0; }
 
 /* Footer */
 .site-footer { background: var(--color-text); color: var(--color-bg); }
@@ -398,25 +405,25 @@ table.compare td::before {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-4);
-  background: var(--color-bg);
-  border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-3);
-  width: fit-content;
   margin-bottom: var(--space-5);
 }
 .footer-logo-link {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  padding: 0 var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
+.footer-logo-georgetown { background: var(--color-bg); }
+.footer-logo-anywhere { background: var(--color-navy); }
 .footer-logo-link img { height: 1.5rem; width: auto; }
 .footer-logo-link:hover,
 .footer-logo-link:focus-visible {
   opacity: .75;
 }
 .site-footer .footer-logo-link:focus-visible { outline-color: var(--color-focus); }
+.site-footer .footer-logo-anywhere:focus-visible { outline-color: var(--color-accent-contrast); }
 
 .footer-inner { padding: var(--space-6) 0; }
 .footer-facts { font-size: var(--text-sm); max-width: 44rem; }
@@ -430,7 +437,7 @@ table.compare td::before {
 .footer-links a,
 .footer-facts,
 .footer-contact { color: var(--color-bg); }
-.footer-links a { padding: var(--space-4) 0; }
+.footer-links a { padding: var(--space-4) var(--space-3); }
 .site-footer .link-underline:hover,
 .site-footer .link-underline:focus-visible { color: var(--color-accent); }
 .site-footer :focus-visible { outline-color: var(--color-accent); }
@@ -445,15 +452,15 @@ table.compare td::before {
   .strip { grid-template-columns: repeat(2, 1fr); }
   .apply-links { flex-direction: row; }
   .secondary-ctas { flex-direction: row; flex-wrap: wrap; gap: var(--space-6); }
-  .secondary-ctas li { border-bottom: none; padding: var(--space-4) 0; }
+  .secondary-ctas li { border-bottom: none; }
 }
 
 /* Desktop: full-bleed hero at its intended scale, four-across strip */
 @media (min-width: 62em) {
   .wrap { padding: 0 var(--space-6); }
   .hero { aspect-ratio: 16 / 7; max-height: 32rem; }
-  .hero-panel { padding: var(--space-7) 0; }
-  .hero-h1 { font-size: var(--text-3xl); max-width: 46rem; }
+  .hero-panel { padding: var(--space-5) 0; }
+  .hero-h1 { font-size: var(--text-2xl); max-width: 46rem; }
   .provenance { font-size: var(--text-sm); }
   .strip { grid-template-columns: repeat(4, 1fr); }
   .section-heading { font-size: var(--text-2xl); }
@@ -463,5 +470,5 @@ table.compare td::before {
 
 /* Motion: transform/opacity only, tokens only; nothing on the hero photo or the h1 */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  *, *::before, *::after { transition: none !important; }
 }
