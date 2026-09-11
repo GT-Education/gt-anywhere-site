@@ -62,7 +62,7 @@ const FOLD_JS = `(() => {
   const vh = window.innerHeight; let cut = false;
   // the next band is cut when some element that starts BELOW the last door CTA (so it is not the first screen itself) begins inside the viewport and continues past its bottom edge
   const lastCta = Math.max(out['cta-georgetown'] || 0, out['cta-anywhere'] || 0) - window.scrollY;
-  for (const el of document.body.querySelectorAll('section, div, table, footer, p, h2, ul, ol')) { const r = el.getBoundingClientRect(); if (r.height > 8 && r.top >= lastCta && r.top < vh - 4 && r.bottom > vh) { cut = true; break; } }
+  for (const el of document.body.querySelectorAll('section, div, table, tbody, tr, td, th, dl, dd, li, article, figure, footer, p, h2, h3, ul, ol')) { const r = el.getBoundingClientRect(); if (r.height > 8 && r.top >= lastCta && r.top < vh - 4 && r.bottom > vh) { cut = true; break; } }
   return { bottoms: out, cut, scrollWidth: document.documentElement.scrollWidth, docHeight: document.documentElement.scrollHeight };
 })()`;
 const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelectorAll('*')) { for (const pseudo of [null, '::before', '::after']) { const cs = getComputedStyle(el, pseudo); const td = cs.transitionDuration.split(',').map(s => parseFloat(s) || 0); const ad = cs.animationDuration.split(',').map(s => parseFloat(s) || 0); if (td.some(d => d > 0) || ad.some(d => d > 0)) { bad.push((el.tagName.toLowerCase() + (el.className ? '.' + String(el.className).split(' ')[0] : '') + (pseudo || '')) + ' ' + cs.transitionDuration + ' ' + cs.animationDuration); if (bad.length > 40) return bad; } } } return bad; })()`;
