@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Regenerates 0_plan/mockups/index.html from the mock folders: the twenty directions (M01 to M20) with thesis, build state,
+"""Regenerates 0_plan/mockups/index.html from the mock folders: twenty-five directions (M01 to M20 from the research slate,
+M21 to M25 from the Design Library) with thesis, build state,
 runner result and critic verdicts, then the earlier five. Run after every wave: python3 0_plan/tools/build-gallery.py"""
 import re, os, glob, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,7 +32,7 @@ def card(mid, name, thesis, folder, state, run, crit):
     return f'''<li class="card"><p class="eyebrow">{mid}</p><h3>{html.escape(name)}</h3><p class="thesis">{html.escape(thesis)}</p><p class="state"><b>{html.escape(state)}</b> {html.escape(run)}<br>{html.escape(crit)}</p><p class="links">{links}</p></li>'''
 def main():
     sl = slate(); cards = []
-    for mid in [f'M{i:02d}' for i in range(1, 21)]:
+    for mid in [f'M{i:02d}' for i in range(1, 26)]:  # M01 to M20 from the research slate, M21 to M25 from the Design Library (DD-48)
         folders = glob.glob(os.path.join(MOCKS, mid + '-*'))
         name, thesis = sl.get(mid, (mid, ''))
         if folders:
