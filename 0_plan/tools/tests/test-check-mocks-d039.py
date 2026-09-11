@@ -43,6 +43,8 @@ CASES = {
  'a tag-like string in the title is not an element': ('', '<title>Compare <input> vs output</title>' + LD, '', 'R1', 'PASS'),
  'tag-like text inside another element\'s quoted attribute is not an input': ('data-d039="inputs" data-d039-component="router"', LD, '<input type="radio"><p title="The <input> radios work without JavaScript.">Keyboard support</p>', 'R1', 'PASS'),
  'tag-like text inside a quoted attribute is not a script': ('', LD, '<p title="The <script> adds optional reveals.">Motion notes</p>', 'R2', 'PASS'),
+ 'JSON-LD with an upper-case MIME type is still JSON-LD': ('', '<script type="application/LD+JSON">{}</script>', '', 'R2', 'PASS'),
+ 'JSON-LD with an upper-case MIME type beside a declared inline script': ('data-d039="script"', '<script type="application/LD+JSON">{}</script>', '<script>1</script>', 'R2', 'PASS'),
 }
 ok = True
 for name, (attr_, head, body, rule, expect) in CASES.items():

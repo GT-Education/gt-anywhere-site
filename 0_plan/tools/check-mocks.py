@@ -107,11 +107,11 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     scripts = [a for a, _ in blocks]
     if 'script' in d039:
         external = [a for a in scripts if 'src' in a]
-        ldjson = [a for a in scripts if 'ld+json' in (a.get('type') or '')]
-        inline = [body for a, body in blocks if 'src' not in a and 'ld+json' not in (a.get('type') or '')]
+        ldjson = [a for a in scripts if 'ld+json' in (a.get('type') or '').lower()]
+        inline = [body for a, body in blocks if 'src' not in a and 'ld+json' not in (a.get('type') or '').lower()]
         r('R2 one JSON-LD script plus one declared inline script of at most 2 KB (D-039)', len(scripts)==2 and not external and len(ldjson)==1 and len(inline)==1 and len(inline[0].encode('utf-8'))<=2048, f'{len(scripts)} script tags, external {len(external)}, inline bytes {sum(len(x.encode("utf-8")) for x in inline)}')
     else:
-        r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in (scripts[0].get('type') or '') and 'src' not in scripts[0], f'{len(scripts)} script tags')
+        r('R2 one JSON-LD script only', len(scripts)==1 and 'ld+json' in (scripts[0].get('type') or '').lower() and 'src' not in scripts[0], f'{len(scripts)} script tags')
     r('R20 D-039 declaration valid and named in the rationale', (not d039m) or (bool(d039) and d039 <= {'script','inputs'} and 'D-039' in rat_text), ('empty declaration' if d039_empty else f'tokens {sorted(d039)}; rationale names D-039: {"D-039" in rat_text}') if d039m else '')
     hosts = set(re.findall(r'https?://([^/"\')\s]+)', doc+style))
     bad = sorted(h for h in hosts if h not in ALLOWED_HOSTS)
@@ -133,7 +133,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     r('R8 canonical', any((a.get('rel') or '').lower() == 'canonical' and a.get('href') == 'https://gt.school/' for a in els('link')))
     r('R8 description', any((a.get('name') or '').lower() == 'description' and (a.get('content') or '').strip() for a in metas))
     r('R8 open graph', any((a.get('property') or '').lower() == 'og:title' for a in metas))
-    ldt = next((b for a, b in blocks if 'ld+json' in (a.get('type') or '')), '')  # the JSON-LD body from the parse
+    ldt = next((b for a, b in blocks if 'ld+json' in (a.get('type') or '').lower()), '')  # the JSON-LD body from the parse
     r('R8 JSON-LD organization', 'EducationalOrganization' in ldt and 'subOrganization' in ldt, '')
     r('R8 JSON-LD no claims', not re.search(r'accredit|faster|SAT|percent', ldt, re.I))
     r('R9 lang', (html_el.get('lang') or '').lower() == 'en')
