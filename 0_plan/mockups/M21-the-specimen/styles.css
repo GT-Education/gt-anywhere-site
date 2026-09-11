@@ -1,0 +1,454 @@
+/* M21 "The Specimen" — 0_plan/mockups/M21-the-specimen/styles.css
+   Tokens: ../shared/tokens-v2.css (layer 1 extracted; layer 2 PROPOSED under DD-38, DD-39, MN-16).
+   Every colour, face, type size, space, radius and duration is a var(). Zero raw hex.
+   The bare lengths are geometry, listed in RATIONALE.md "Departures": the 1px hairline, the 6px
+   corner handle and its 14px arms, the 12px registration mark, the 16px door glyph, the 2px focus
+   bands, the 44px target floor, the 56px header row, the 27/28/32px mark heights K12 V2 fixes in
+   pixels, the table column percentages, and the breakpoints.
+   Order matters at the end of this file: the forced-colours block is LAST, so it outranks the token
+   rules by source order instead of losing to them at equal weight (the M07 lesson). */
+
+/* ---------- Layer 3: the sheet's own values (declared departures) ---------- */
+:root {
+  --sheet-max: 86rem;              /* 1376px: the 12-column sheet at the 1440 design width */
+  --sheet-margin: var(--space-5);  /* page margin at phone widths */
+  --rail: var(--space-4);          /* the two margin rules sit this far outside the content column */
+  --grid-gutter: var(--space-6);   /* 32px, the contract's gutter */
+  --grid-cols: 1;                  /* below 768 the construction grid is the two margin rules only */
+  --anno: 0.625rem;                /* 10px: the annotation size, the floor the brief sets */
+  --anno-track: .08em;
+  --h1-weight: 400;                /* DD-38's 300-against-400 test is one edit here */
+  --span8: calc((100% + var(--grid-gutter)) * 8 / 12 - var(--grid-gutter));
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  overflow-wrap: break-word;
+}
+/* Strings that carry a host name set their own intrinsic width unless they may break anywhere:
+   `break-word` wraps but does not shrink min-content, which is what overflowed the doubled-root
+   test at V2 ("community.gt.school." in a grid item). M10 met the same defect. */
+.lede, .sources, .footer-facts, .footer-links a, .compare td, .door-lines li, .tefa p, .connect a,
+.provenance { overflow-wrap: anywhere; }
+.families-body > *, .footer-body > * { min-width: 0; }
+img, svg { max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- Chapters: three grounds, alternating hard, never blended ---------- */
+.chapter { position: relative; }
+.chapter--bg {
+  --ground: var(--color-bg);
+  --ink: var(--color-text);
+  --muted: var(--color-text-muted);
+  --grid-ink: var(--color-border);
+  --rule-ink: var(--color-border-strong);
+}
+.chapter--surface {
+  --ground: var(--color-surface);
+  --ink: var(--color-text);
+  --muted: var(--color-text-muted);
+  --grid-ink: var(--color-border);
+  --rule-ink: var(--color-border-strong);
+}
+.chapter--navy {
+  --ground: var(--color-navy);
+  --ink: var(--color-on-navy);
+  --muted: var(--color-text-muted-on-dark);
+  /* the brief: on navy the grid is --color-border reduced, but never below 3:1 against the ground.
+     Measured: 50% mixes to rgb(101, 120, 127), 3.20:1 on navy. The rule ink is 3.36:1. */
+  --grid-ink: color-mix(in srgb, var(--color-border) 50%, var(--color-navy));
+  --rule-ink: color-mix(in srgb, var(--color-text-muted-on-dark) 55%, var(--color-navy));
+}
+.chapter { background: var(--ground); color: var(--ink); }
+/* Every chapter boundary is a drawn hard edge as well as a ground change: --color-bg against
+   --color-surface is a computed 1.10:1 step, which a reader does not see as an edge on its own. */
+main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink); }
+.site-header { border-bottom: 1px solid var(--rule-ink); }
+
+/* ---------- The sheet and its construction grid ---------- */
+.sheet {
+  position: relative;
+  width: min(100% - 2 * var(--sheet-margin), var(--sheet-max));
+  margin-inline: auto;
+}
+/* The two margin rules sit OUTSIDE the content column, so no knockout can ever cover them and no
+   glyph can ever reach them: the clearance is --rail at every row. */
+.rule-left, .rule-right {
+  position: absolute; top: 0; bottom: 0; width: 1px;
+  background: var(--grid-ink);
+}
+.rule-left { left: calc(var(--rail) * -1); }
+.rule-right { right: calc(var(--rail) * -1); }
+/* The column lines, drawn as real elements on a real CSS grid rather than as a background gradient:
+   a gradient is not repainted under forced colours and cannot be measured, and this direction's
+   acceptance row asks for the clearance from every visible line to be measured. Below 768 there are
+   no column lines (the brief): the two margin rules are the grid. */
+.grid {
+  position: absolute; inset: 0; pointer-events: none;
+  display: grid; grid-template-columns: repeat(var(--grid-cols), 1fr); column-gap: var(--grid-gutter);
+}
+.grid i { display: none; border-left: 1px solid var(--grid-ink); }
+.sheet-body { position: relative; padding-block: var(--space-6); }
+
+/* A part placed on the sheet occludes the construction lines under it, the way a selected object
+   occludes the canvas grid. This is what keeps the grid from ever crossing a glyph.
+   The spread is 0.2em rather than zero because Literata's font box stands proud of a 1.15 line box
+   by 0.17 to 0.18 em (measured: 8px at the 46px h1, 6px at the 34px h2), so a line would otherwise
+   show through an ascender. A spread scales with the type and costs no layout. */
+.knock { background: var(--ground); box-shadow: 0 0 0 0.2em var(--ground); }
+
+/* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* K3's two-colour ring wherever the element sits on navy or straddles navy and light. */
+.chapter--navy :focus-visible, .mark-plate--navy:focus-visible {
+  outline: 2px solid var(--color-navy); outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--color-focus-on-dark);
+}
+
+.skip-link {
+  position: absolute; top: -999px; left: var(--space-4); z-index: 10;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg); color: var(--color-text);
+  border: 2px solid var(--color-focus); font-weight: 500; text-decoration: none;
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* ---------- The annotation: the sheet's technical voice ---------- */
+.anno {
+  font-family: var(--font-mono); font-weight: 600;
+  font-size: var(--anno); line-height: var(--leading-body);
+  text-transform: uppercase; letter-spacing: var(--anno-track);
+  color: var(--muted);
+}
+.chapter-anno { margin-block-end: var(--space-3); }
+.chapter-title {
+  font-family: var(--font-serif); font-weight: 400;
+  font-size: var(--text-2xl); line-height: var(--leading-tight);
+}
+.lede {
+  font-size: var(--text-md); line-height: var(--leading-prose);
+  max-width: var(--measure-prose); margin-block-start: var(--space-4);
+}
+.sources {
+  font-size: var(--text-xs); line-height: var(--leading-prose);
+  color: var(--muted); max-width: var(--measure-prose);
+  margin-block-start: var(--space-5);
+}
+.text-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.text-link:hover { text-decoration-thickness: 2px; }
+.arrow { flex: none; }
+
+/* ---------- Buttons: DD-46 surface-dependent fill, DD-47 uniform corner ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: 44px; max-width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid transparent; border-radius: var(--radius-md);
+  background: var(--color-navy); color: var(--color-on-navy);
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
+  line-height: var(--leading-body); text-transform: uppercase;
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.chapter--navy .btn { background: var(--color-on-navy); color: var(--color-text); }
+.btn:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+/* ---------- Header: a 56px row on the page ground, the grid running through it ---------- */
+.site-header .header-body {
+  padding-block: 0;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-2) var(--space-3); min-height: 56px;
+}
+.lockup { display: inline-flex; align-items: center; min-height: 44px; padding-inline-end: var(--space-3); }
+.lockup img { height: 28px; width: auto; display: block; }
+.utility { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 var(--space-3); padding-inline-start: var(--space-3); }
+.utility a {
+  display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap;
+  font-size: var(--text-xs); font-weight: 500; text-decoration: none;
+}
+.utility a:hover { text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 359px) { .utility { flex-direction: column; align-items: flex-end; gap: 0; } .utility a { min-height: 28px; } }
+
+/* ---------- First screen ---------- */
+.first-body { padding-block: var(--space-5) var(--space-6); }
+
+/* A registration mark at the sheet's opposite corner from the specimen's own handles, so the two
+   devices do not cluster. The brief's specimen number is not drawn here: see RATIONALE.md. */
+.reg-mark { position: absolute; top: 0; right: 0; width: 12px; height: 12px; }
+.reg-mark::before, .reg-mark::after { content: ""; position: absolute; background: var(--rule-ink); }
+.reg-mark::before { left: 0; right: 0; top: 50%; height: 1px; }
+.reg-mark::after { top: 0; bottom: 0; left: 50%; width: 1px; }
+
+/* The specimen: the fixed sentence, marked at its four corners as an object selected on a canvas. */
+.specimen {
+  position: relative;
+  font-family: var(--font-serif); font-size: var(--text-3xl);
+  max-width: min(35ch, 100%);
+}
+.specimen h1 {
+  font: inherit; font-weight: var(--h1-weight);
+  line-height: var(--leading-tight); text-wrap: balance;
+}
+/* The handle sits 7px OUTSIDE the frame, so neither its arm nor its square can ever touch a glyph:
+   at V10 and V16 the frame's left edge is the text's left edge, and a handle drawn on the corner
+   struck the G of "GT School" and the T of "Texas". Measured clearance to the nearest glyph 4px,
+   to the margin rule 5px. */
+.mark { position: absolute; width: 14px; height: 14px; }
+.mark::before {
+  content: ""; position: absolute; width: 6px; height: 6px;
+  background: var(--color-accent); outline: 1px solid var(--ink);
+}
+.mark--tl { top: -7px; left: -7px; border-top: 1px solid var(--rule-ink); border-left: 1px solid var(--rule-ink); }
+.mark--tr { top: -7px; right: -7px; border-top: 1px solid var(--rule-ink); border-right: 1px solid var(--rule-ink); }
+.mark--bl { bottom: -7px; left: -7px; border-bottom: 1px solid var(--rule-ink); border-left: 1px solid var(--rule-ink); }
+.mark--br { bottom: -7px; right: -7px; border-bottom: 1px solid var(--rule-ink); border-right: 1px solid var(--rule-ink); }
+.mark--tl::before { top: -3px; left: -3px; }
+.mark--tr::before { top: -3px; right: -3px; }
+.mark--bl::before { bottom: -3px; left: -3px; }
+.mark--br::before { bottom: -3px; right: -3px; }
+
+.provenance {
+  margin-block-start: var(--space-4);
+  font-size: var(--text-sm); line-height: var(--leading-body); color: var(--muted);
+  max-width: var(--measure-prose);
+}
+
+/* The measure line: dashed, a different class of line from the solid construction grid. */
+.measure { margin-block-start: var(--space-5); display: flex; align-items: center; gap: var(--space-3); }
+.measure-rule { flex: 1 1 0; border-top: 1px dashed var(--rule-ink); }
+.measure-anno { flex: none; }
+
+.doors { position: relative; display: grid; gap: var(--space-4); margin-block-start: var(--space-4); }
+.door { display: flex; flex-direction: column; align-items: flex-start; border-top: 1px solid var(--rule-ink); padding-block-start: var(--space-3); }
+.door-anno { display: flex; align-items: center; gap: var(--space-2); }
+.glyph { width: 16px; height: 16px; flex: none; }
+.door-name {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-xl);
+  line-height: var(--leading-tight); margin-block-start: var(--space-2);
+}
+.door-cta { align-self: stretch; margin-block-start: var(--space-3); }
+
+.door-lines { margin-block-start: var(--space-5); display: grid; gap: var(--space-4); }
+.door-lines li { font-size: var(--text-base); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.run-in { font-weight: 500; }
+
+.compare-lead { margin-block-start: var(--space-5); font-size: var(--text-base); line-height: var(--leading-prose); }
+
+/* ---------- Comparison ---------- */
+.compare { width: 100%; border-collapse: collapse; margin-block-start: var(--space-5); }
+.compare caption {
+  text-align: left; font-family: var(--font-mono); font-weight: 600;
+  font-size: var(--anno); text-transform: uppercase; letter-spacing: var(--anno-track);
+  color: var(--muted); padding-block-end: var(--space-3);
+  background: var(--ground); box-shadow: 0 0 0 0.2em var(--ground);
+}
+.compare th, .compare td {
+  background: var(--ground);
+  text-align: left; vertical-align: top; font-weight: 400;
+  font-size: var(--text-base); line-height: var(--leading-prose);
+  padding: var(--space-4) var(--space-4) var(--space-4) 0;
+  border-top: 1px solid var(--rule-ink);
+}
+.compare thead th {
+  font-family: var(--font-serif); font-size: var(--text-md);
+  border-top: 0; padding-block-start: 0;
+}
+.compare tbody th { font-weight: 500; }
+.compare td:last-child, .compare th:last-child { padding-inline-end: 0; }
+
+.doors--repeat { margin-block-start: var(--space-6); }
+.doors--repeat .door { gap: 0; }
+.doors--repeat .btn { align-self: stretch; margin-block-start: var(--space-3); }
+
+.tefa { margin-block-start: var(--space-6); padding-block-start: var(--space-4); border-top: 1px solid var(--rule-ink); max-width: var(--measure-prose); }
+.tefa h3 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); }
+.tefa p { margin-block-start: var(--space-3); font-size: var(--text-base); line-height: var(--leading-prose); }
+
+/* ---------- Proof ---------- */
+/* The reading measure caps the BLOCK, not the item, so every ruled row fills its own column and the
+   rules of a chapter line up with its controls. Prose is still inside --measure-prose per column. */
+.facts { margin-block-start: var(--space-5); display: grid; gap: 0; max-width: var(--measure-prose); }
+.facts li {
+  border-top: 1px solid var(--rule-ink); padding-block: var(--space-4);
+  font-size: var(--text-base); line-height: var(--leading-prose);
+}
+
+/* ---------- Steps ---------- */
+.steps { counter-reset: step; margin-block-start: var(--space-5); }
+.steps li {
+  counter-increment: step; position: relative;
+  border-top: 1px solid var(--rule-ink); padding: var(--space-4) 0 var(--space-4) var(--space-6);
+  font-size: var(--text-base); line-height: var(--leading-prose);
+}
+.steps li::before {
+  content: counter(step); position: absolute; left: 0; top: var(--space-4);
+  font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm); color: var(--muted);
+}
+.apply { margin-block-start: var(--space-5); display: grid; gap: var(--space-3); }
+.apply .btn { width: 100%; }
+
+/* ---------- Connect ---------- */
+.connect { margin-block-start: var(--space-5); }
+.connect li { border-top: 1px solid var(--rule-ink); }
+.connect a {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  min-height: 44px; padding-block: var(--space-3);
+  font-size: var(--text-base); text-decoration: none;
+}
+.connect a:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+/* ---------- Families ---------- */
+.families-body { display: grid; gap: var(--space-5); }
+
+/* ---------- Footer ---------- */
+.footer-body { display: grid; gap: var(--space-6); padding-block: var(--space-7); }
+.footer-facts { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--muted); max-width: var(--measure-prose); }
+.footer-contact { margin-block-start: var(--space-3); font-size: var(--text-sm); }
+.footer-links { display: grid; gap: 0; }
+.footer-links a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: var(--text-sm); text-decoration: none;
+}
+.footer-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.footer-marks { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+.mark-plate { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-3) var(--space-4); }
+.mark-plate--light { background: var(--color-bg); }
+.mark-plate--navy { background: var(--color-navy); }
+.mark-plate img { height: 28px; width: auto; display: block; }
+
+/* ---------- 768: the grid becomes two columns; the doors sit side by side ---------- */
+@media (min-width: 768px) {
+  :root { --sheet-margin: var(--space-6); --grid-cols: 2; }
+  .grid i:nth-child(-n+2) { display: block; }
+  .grid i:nth-child(2) { border-right: 1px solid var(--grid-ink); }
+  .sheet-body { padding-block: var(--space-8); }
+  .first-body { padding-block: var(--space-6) var(--space-7); }
+  .lockup img, .mark-plate img { height: 32px; }
+  .utility a { font-size: var(--text-sm); }
+  .utility { gap: 0 var(--space-5); }
+  .doors { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
+  /* the measure line drops between the two doors, in the gutter, dashed like the line above it */
+  .doors::before {
+    content: ""; position: absolute; left: 50%; top: calc(var(--space-4) * -1); bottom: 0;
+    border-left: 1px dashed var(--rule-ink);
+  }
+  .doors--repeat::before { content: none; }
+  .door-lines { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
+  .run-in { display: none; }
+  .facts {
+    grid-template-columns: 1fr 1fr; column-gap: var(--grid-gutter);
+    max-width: calc(2 * var(--measure-prose) + var(--grid-gutter));
+  }
+  .apply { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
+  .families-body { grid-template-columns: 1fr auto; align-items: center; }
+  .footer-body { grid-template-columns: 2fr 1fr; gap: var(--space-7) var(--grid-gutter); }
+  .footer-marks { grid-column: 1 / -1; }
+  .compare th, .compare td { padding-inline-end: var(--space-5); }
+  .compare thead th:first-child { width: 22%; }
+  .compare thead th:nth-child(2), .compare thead th:nth-child(3) { width: 39%; }
+}
+
+/* ---------- 1024: the full twelve-column construction grid ---------- */
+@media (min-width: 1024px) {
+  :root { --sheet-margin: var(--space-7); --grid-cols: 12; }
+  .grid i { display: block; }
+  .grid i:nth-child(2) { border-right: 0; }
+  .grid i:nth-child(12) { border-right: 1px solid var(--grid-ink); }
+  .specimen { max-width: min(35ch, var(--span8)); }
+  .footer-body { grid-template-columns: 2fr 1fr 1fr; }
+  .footer-marks { grid-column: auto; flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Stacked comparison below the measured breakpoint (R6) ---------- */
+@media (max-width: 767px) {
+  .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: auto; }
+  .compare tbody th { border-top: 1px solid var(--rule-ink); padding: var(--space-4) 0 var(--space-2); }
+  .compare td { border-top: 0; padding: 0 0 var(--space-4); }
+  .compare td::before {
+    content: attr(data-label); display: block;
+    font-family: var(--font-mono); font-weight: 600; font-size: var(--anno);
+    text-transform: uppercase; letter-spacing: var(--anno-track); color: var(--muted);
+    margin-block-end: var(--space-2);
+  }
+  .compare td + td { padding-block-start: var(--space-3); }
+}
+
+/* ---------- Short viewports: the sheet tightens so both CTAs stay above the fold ---------- */
+@media (max-height: 699px) {
+  .first-body { padding-block: var(--space-3) var(--space-5); }
+  .provenance { margin-block-start: var(--space-3); }
+  .measure { margin-block-start: var(--space-3); }
+  .doors { margin-block-start: var(--space-3); gap: var(--space-3); }
+  .door { padding-block-start: var(--space-2); }
+  .door-lines { margin-block-start: var(--space-4); }
+  .compare-lead { margin-block-start: var(--space-4); }
+}
+
+/* ---------- V10, the phone held sideways (CONTRACT.md section 2's landscape recipe) ---------- */
+@media (max-height: 400px) and (min-width: 600px) {
+  .first-body { padding-block: var(--space-3) var(--space-4); }
+  .specimen { font-size: var(--text-xl); max-width: 100%; }
+  .provenance { max-width: 100%; margin-block-start: var(--space-3); }
+  .measure { margin-block-start: var(--space-3); }
+  .doors { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); margin-block-start: var(--space-3); }
+  /* the h1 steps down to --text-xl on this row, so the door name steps down with it and the
+     hierarchy between the sentence and the two names is kept */
+  .door-name { font-size: var(--text-md); }
+  .doors::before {
+    content: ""; position: absolute; left: 50%; top: calc(var(--space-3) * -1); bottom: 0;
+    border-left: 1px dashed var(--rule-ink);
+  }
+  .door-lines { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); margin-block-start: var(--space-3); }
+  .run-in { display: none; }
+}
+
+/* ---------- Motion: nothing animates; every state is visible at rest (MN-16, R8) ---------- */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: var(--duration-none) !important;
+    animation-duration: var(--duration-none) !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Forced colours (K3 F38). LAST in the file by intent (the M07 lesson) ---------- */
+@media (forced-colors: active) {
+  body { background: Canvas; color: CanvasText; }
+  .chapter, .chapter--bg, .chapter--surface, .chapter--navy {
+    --ground: Canvas; --ink: CanvasText; --muted: CanvasText;
+    --grid-ink: CanvasText; --rule-ink: CanvasText;
+    background: Canvas; color: CanvasText;
+  }
+  .grid i { border-color: CanvasText; }
+  .rule-left, .rule-right, .reg-mark::before, .reg-mark::after { background: CanvasText; }
+  .knock, .compare th, .compare td { background: Canvas; }
+  .mark::before { background: Highlight; outline: 1px solid CanvasText; }
+  .btn, .chapter--navy .btn { background: ButtonFace; color: ButtonText; border: 1px solid ButtonText; }
+  .mark-plate--light { background: Canvas; border: 1px solid CanvasText; }
+  /* The GT Anywhere mark is white lettering: on a forced Canvas it would disappear. The panel keeps
+     its navy so the brand asset stays legible, which is what forced-color-adjust exists for. */
+  .mark-plate--navy { forced-color-adjust: none; background: var(--color-navy); border: 1px solid CanvasText; }
+  .anno, .provenance, .sources, .footer-facts, .compare caption, .compare td::before, .steps li::before { color: CanvasText; }
+  .door, .facts li, .steps li, .connect li, .tefa, .compare th, .compare td, .site-header, .site-footer, main > .chapter + .chapter { border-color: CanvasText; }
+  .measure-rule, .doors::before { border-color: CanvasText; }
+  :focus-visible, .chapter--navy :focus-visible, .mark-plate--navy:focus-visible {
+    outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none;
+  }
+}
