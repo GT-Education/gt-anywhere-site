@@ -10,7 +10,9 @@
 
 /* ---------- Layer 3: the sheet's own values (declared departures) ---------- */
 :root {
-  --sheet-max: 86rem;              /* 1376px: the 12-column sheet at the 1440 design width */
+  --sheet-max: 86rem;              /* 1376px: the CAP on the 12-column sheet. With --sheet-margin at
+                                      --space-7 from 1024 the sheet measures 1344 at 1440 and the cap
+                                      binds only from 1472 up. */
   --sheet-margin: var(--space-5);  /* page margin at phone widths */
   --rail: var(--space-4);          /* the two margin rules sit this far outside the content column */
   --grid-gutter: var(--space-6);   /* 32px, the contract's gutter */
@@ -54,25 +56,30 @@ ul, ol { padding: 0; list-style: none; }
   --ground: var(--color-bg);
   --ink: var(--color-text);
   --muted: var(--color-text-muted);
-  --grid-ink: var(--color-border);
+  --grid-ink: color-mix(in srgb, var(--color-border-strong) 90%, var(--color-bg));
   --rule-ink: var(--color-border-strong);
 }
 .chapter--surface {
   --ground: var(--color-surface);
   --ink: var(--color-text);
   --muted: var(--color-text-muted);
-  --grid-ink: var(--color-border);
-  --rule-ink: var(--color-border-strong);
+  --grid-ink: color-mix(in srgb, var(--color-border-strong) 96%, var(--color-surface));
+  --rule-ink: color-mix(in srgb, var(--color-text) 5%, var(--color-border-strong));
 }
 .chapter--navy {
   --ground: var(--color-navy);
   --ink: var(--color-on-navy);
   --muted: var(--color-text-muted-on-dark);
-  /* the brief: on navy the grid is --color-border reduced, but never below 3:1 against the ground.
-     Measured: 50% mixes to rgb(101, 120, 127), 3.20:1 on navy. The rule ink is 3.36:1. */
-  --grid-ink: color-mix(in srgb, var(--color-border) 50%, var(--color-navy));
-  --rule-ink: color-mix(in srgb, var(--color-text-muted-on-dark) 55%, var(--color-navy));
+  --grid-ink: color-mix(in srgb, var(--color-border) 48%, var(--color-navy));
+  --rule-ink: color-mix(in srgb, var(--color-text-muted-on-dark) 58%, var(--color-navy));
 }
+/* Both line classes are specified as a RATIO against the ground they are drawn on, not as a token
+   that happens to land where it lands: construction grid 3.1:1 and drawn rule 3.6:1 on all three
+   grounds, measured per chapter in qa/measurements.md. The brief's floor (the grid never below 3:1
+   on navy) sets the grid's target; the rule keeps --color-border-strong's own value on --color-bg
+   and the other two grounds are mixed to match it, so the scaffolding is one weight everywhere and
+   the structure one weight above it. Before this pass the grid measured 1.56 / 1.42 / 3.27, more
+   than twice as present on navy as on cream. */
 .chapter { background: var(--ground); color: var(--ink); }
 /* Every chapter boundary is a drawn hard edge as well as a ground change: --color-bg against
    --color-surface is a computed 1.10:1 step, which a reader does not see as an edge on its own. */
@@ -107,8 +114,10 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
 /* A part placed on the sheet occludes the construction lines under it, the way a selected object
    occludes the canvas grid. This is what keeps the grid from ever crossing a glyph.
    The spread is 0.2em rather than zero because Literata's font box stands proud of a 1.15 line box
-   by 0.17 to 0.18 em (measured: 8px at the 46px h1, 6px at the 34px h2), so a line would otherwise
-   show through an ascender. A spread scales with the type and costs no layout. */
+   by 0.1675 em on each side (CONTRACT.md section 3: 7.71px at 46px, 5.70px at 34px), so a line would
+   otherwise show through the type. What overflows is the font box, not the ascender: the ink that
+   clears a block edge is the descender on its last line. A spread scales with the type and costs no
+   layout. */
 .knock { background: var(--ground); box-shadow: 0 0 0 0.2em var(--ground); }
 
 /* ---------- Focus (K3 section 5d; CONTRACT.md section 4) ---------- */
@@ -121,6 +130,7 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
 
 .skip-link {
   position: absolute; top: -999px; left: var(--space-4); z-index: 10;
+  display: inline-flex; align-items: center; min-height: 44px;
   padding: var(--space-3) var(--space-4);
   background: var(--color-bg); color: var(--color-text);
   border: 2px solid var(--color-focus); font-weight: 500; text-decoration: none;
@@ -180,10 +190,17 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
   font-size: var(--text-xs); font-weight: 500; text-decoration: none;
 }
 .utility a:hover { text-decoration: underline; text-underline-offset: .2em; }
-@media (max-width: 359px) { .utility { flex-direction: column; align-items: flex-end; gap: 0; } .utility a { min-height: 28px; } }
+/* Under 359px the two utility links stack instead of sitting side by side. They keep the 44px
+   target: the header row grows to hold them, which is the right trade on the reflow row, where the
+   fold rule does not apply (DD-44). */
+@media (max-width: 359px) { .utility { flex-direction: column; align-items: flex-end; gap: 0; } }
 
 /* ---------- First screen ---------- */
-.first-body { padding-block: var(--space-5) var(--space-6); }
+/* The bottom padding is one step less than a chapter's own, so the hard edge onto the comparison
+   chapter is never further below the last line than the contract's reserved 24px band. At 412 by
+   839 the shorter h1 left the compare sentence 27px clear of the bottom edge with only padding
+   showing, and the runner called the false floor. */
+.first-body { padding-block: var(--space-5); }
 
 /* A registration mark at the sheet's opposite corner from the specimen's own handles, so the two
    devices do not cluster. The brief's specimen number is not drawn here: see RATIONALE.md. */
@@ -231,7 +248,11 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
 .measure-rule { flex: 1 1 0; border-top: 1px dashed var(--rule-ink); }
 .measure-anno { flex: none; }
 
-.doors { position: relative; display: grid; gap: var(--space-4); margin-block-start: var(--space-4); }
+/* One value drives two things: the gap between the measure line and the doors, and the distance the
+   dashed drop rises out of the doors to meet it. They were separate before, so the height query
+   moved the doors up and left the drop's offset behind, and the drop started inside the measure
+   label at the two short-desktop rows. A height query now changes --doors-gap and both follow. */
+.doors { --doors-gap: var(--space-4); position: relative; display: grid; gap: var(--space-4); margin-block-start: var(--doors-gap); }
 .door { display: flex; flex-direction: column; align-items: flex-start; border-top: 1px solid var(--rule-ink); padding-block-start: var(--space-3); }
 .door-anno { display: flex; align-items: center; gap: var(--space-2); }
 .glyph { width: 16px; height: 16px; flex: none; }
@@ -343,7 +364,7 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
   .doors { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
   /* the measure line drops between the two doors, in the gutter, dashed like the line above it */
   .doors::before {
-    content: ""; position: absolute; left: 50%; top: calc(var(--space-4) * -1); bottom: 0;
+    content: ""; position: absolute; left: 50%; top: calc(var(--doors-gap) * -1); bottom: 0;
     border-left: 1px dashed var(--rule-ink);
   }
   .doors--repeat::before { content: none; }
@@ -374,9 +395,31 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
 }
 
 /* ---------- Stacked comparison below the measured breakpoint (R6) ---------- */
+/* ---------- Under 1024: the specimen frame reaches the column edge, so the cross moves ---------- */
+/* Below 768 the frame spans the whole content column, so its top-right handle lands in the sheet's
+   own top-right corner, where the registration cross sits: at 375 the two marks overlapped, and at
+   the other phone rows they stood 5px apart and read as one confused mark. From 768 to 1023 the
+   frame is 35ch inside a two-column sheet and the two marks stand 13px apart at 768, which is one
+   mark's width and the same defect a size smaller. From 1024 the frame is eight of twelve columns
+   and is four columns clear of the sheet's right edge by construction, so the cross keeps the top
+   right there — the corner it was moved to in the first place, to escape the top-LEFT handle. */
+@media (max-width: 1023px) {
+  .first-body .reg-mark { top: auto; bottom: 0; }
+}
+
 @media (max-width: 767px) {
+  /* One step of negative tracking on the phone band, and the step is chosen by measurement, not by
+     taste: it is the smallest value that brings the fixed 132-character sentence under Chrome's
+     six-line ceiling for text-wrap: balance at the narrowest phone row in the matrix (360). Above
+     that ceiling the browser stops balancing and falls back to a greedy wrap, which is what put a
+     171px line between a 297px and a 248px one at 375. Declared in Departures; the estate's own
+     heading tracking is -1.6px, a 5.9 per cent negative track at this size, so this is milder. */
+  .specimen h1 { letter-spacing: -0.045em; }
   .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .compare, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: auto; }
+  /* `caption` must be in this list. Left at display: table-caption inside a table whose own display
+     is block, it shrink-to-fits an anonymous table box: 58px wide and six lines at every phone row,
+     against 1344 by one line at 1440. */
+  .compare, .compare caption, .compare tbody, .compare tr, .compare th, .compare td { display: block; width: auto; }
   .compare tbody th { border-top: 1px solid var(--rule-ink); padding: var(--space-4) 0 var(--space-2); }
   .compare td { border-top: 0; padding: 0 0 var(--space-4); }
   .compare td::before {
@@ -393,7 +436,9 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
   .first-body { padding-block: var(--space-3) var(--space-5); }
   .provenance { margin-block-start: var(--space-3); }
   .measure { margin-block-start: var(--space-3); }
-  .doors { margin-block-start: var(--space-3); gap: var(--space-3); }
+  /* row-gap only: the column gap is the 32px construction gutter, and tightening it here moved
+     door two off the column-seven line at the short-desktop rows. */
+  .doors { --doors-gap: var(--space-3); row-gap: var(--space-3); }
   .door { padding-block-start: var(--space-2); }
   .door-lines { margin-block-start: var(--space-4); }
   .compare-lead { margin-block-start: var(--space-4); }
@@ -405,12 +450,12 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
   .specimen { font-size: var(--text-xl); max-width: 100%; }
   .provenance { max-width: 100%; margin-block-start: var(--space-3); }
   .measure { margin-block-start: var(--space-3); }
-  .doors { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); margin-block-start: var(--space-3); }
+  .doors { --doors-gap: var(--space-3); grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); }
   /* the h1 steps down to --text-xl on this row, so the door name steps down with it and the
      hierarchy between the sentence and the two names is kept */
   .door-name { font-size: var(--text-md); }
   .doors::before {
-    content: ""; position: absolute; left: 50%; top: calc(var(--space-3) * -1); bottom: 0;
+    content: ""; position: absolute; left: 50%; top: calc(var(--doors-gap) * -1); bottom: 0;
     border-left: 1px dashed var(--rule-ink);
   }
   .door-lines { grid-template-columns: 1fr 1fr; gap: var(--grid-gutter); margin-block-start: var(--space-3); }

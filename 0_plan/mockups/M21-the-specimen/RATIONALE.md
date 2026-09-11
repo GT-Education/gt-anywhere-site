@@ -5,7 +5,7 @@
 | Mock | M21 "The Specimen", brief `0_plan/kb/briefs/M21.md`, under `CONTRACT.md` v2.1 |
 | Lens order | L4 exclusivity, L1 objective, L3 mission, L2 continuity |
 | Source languages | Design Library (`~/projects/libraries/design`): `insp-lilium` "Specimen Brutalism" (primary), `insp-tsai2020` "Civic Hairline" (support). Composition, rhythm and structural devices only; no palette, no typeface (**DD-48** option a) |
-| Built | 2026-09-11 by a Fable design-engineer fork. Measured with `node 0_plan/tools/shots.mjs` (the 19-row matrix, mark geometry, forced colours, reduced motion, doubled root font) and with `qa/M21-measure.mjs`, written for this mock, which measures the h1 line count, the construction grid's clearance from every glyph at every row, and every annotation's contrast against its own painted ground. No production host was opened; no browser tool other than these two harnesses |
+| Built | 2026-09-11 by a Fable design-engineer fork; iterated the same day against both critics' round-one cards (`0_plan/ensemble/critic-fable-M21.md`, `critic-astra-M21.md`; see Iteration, last section). Measured with `node 0_plan/tools/shots.mjs` (the 19-row matrix, mark geometry, interactive target heights, forced colours, reduced motion, doubled root font) and with `qa/M21-measure.mjs`, written for this mock, which measures the h1 line count, **every drawn line class's clearance from the nearest ink at every row**, and every annotation's contrast against its own painted ground. No production host was opened; no browser tool other than these two harnesses |
 | Files | `index.html`, `styles.css` (links `../shared/tokens-v2.css`, `../shared/fonts.css`), this file, `qa/` |
 | State | No JavaScript (**D-039** escalated and undecided): one `<script>`, the JSON-LD block, and no `data-d039` declaration. The page is complete at rest. No photograph in either state |
 | Claims on the page | 90th percentile (CR-011), $10,400 (CR-021), four in-person / intensive weekends (CR-032), 9 to noon and about two hours (CR-033), two to three hours (CR-034), weekly check-ins (CR-035). Every row is **"Unverified, public"** in `0_plan/12-claims-register.md`: allowed on a mock, blocked for production (REQ-022, DEL-018) |
@@ -56,16 +56,23 @@ door names are h3; every later chapter opens with an h2. One h1, no skipped leve
 
 | Rows | Width band | h1 size | Lines | h1 height |
 |---|---|---|---|---|
-| V1 to V4, V9 | 360 to 393 (and 390 at V9) | 27.00 to 27.58px | **7** | 217 to 222px |
-| V5 to V8 | 402 to 430 | 27.74 to 28.23px | **6** | 191 to 195px |
-| V10 | 750 landscape, `--text-xl` | 24.17px | **3** | 83px |
+| V1, V2, V3, V9 | 360 to 390 | 27.00 to 27.53px | **6** | 186 to 190px |
+| V4 to V8 | 393 to 430 | 27.58 to 28.23px | **5** | 159 to 162px |
+| V10 | 750 landscape, `--text-xl` | 24.17px | **2** | 56px |
 | V11, V12 | 768, 834 | 34.18, 35.34px | **4** | 157, 163px |
 | V13, V19 | 1024 | 38.68px | **5** | 222px |
 | V14 to V17 | 1280 to 1920 | 43.19 to 46.00px | **4** | 199 to 212px |
-| V18 | 320 reflow | 27.00px | **8** | 248px |
+| V18 | 320 reflow | 27.00px | **7** | 217px |
 
-This is M12's measured pattern (7 at phone, 6 at large phone, 4 at laptop), not the contract's
-23-characters-a-line estimate, and the fold sums below are built on the measured counts.
+Below 768 the sentence carries one step of negative tracking, `-0.045em` (Departures, and the round-one
+critique's "even the phone rag"). The step is not a taste: **it is the smallest value that brings the
+132-character sentence under Chrome's six-line ceiling for `text-wrap: balance` at 360**, the narrowest
+phone row in the matrix. Above six lines Chrome stops balancing and falls back to a greedy wrap, which
+is what put a 171px line between a 297px and a 248px one at 375. The counts above are the result: 6 at
+360 to 390, 5 at 393 to 430, 2 at V10. From 768 up the tracking is normal and the counts are unchanged
+from the first build. V18 at 320 is still seven lines and still greedily wrapped; it is the reflow row.
+The fold sums below are built on the measured counts, not on the contract's 23-characters-a-line
+estimate.
 
 ## What was borrowed, and what was deliberately not
 
@@ -73,12 +80,12 @@ This is M12's measured pattern (7 at phone, 6 at large phone, 4 at laptop), not 
 
 | Device in the source | How it is used here |
 |---|---|
-| "Lay a construction grid of 1px hairlines across every scene" | 1px `--color-border` hairlines at the twelve column positions from 1024, at two columns from 768 to 1023, and two margin rules below 768, running the full height of every chapter behind everything |
+| "Lay a construction grid of 1px hairlines across every scene" | 1px hairlines at the twelve column positions from 1024, at two columns from 768 to 1023, and two margin rules below 768, running the full height of every chapter behind everything, drawn at one measured ratio (3.1:1) on all three grounds |
 | "Mark the hero object with small square corner handles as if it were selected on a canvas" | The h1 sits in a selection frame with a 6px `--color-accent` square and a 14px hairline bracket at each of its four corners. This is the first screen's one accent use |
 | "Thin dashed measure lines" | The dashed rule that carries "Two ways to attend" across the sheet, and the dashed drop that falls from its centre into the gutter between the two doors. Measure lines are dashed; construction lines are solid; they are different classes of line and are drawn differently, which is the drafting convention the source is quoting |
 | "8 to 9px uppercase monospace annotations in the margins" | Inconsolata 600 at 10px, uppercase, 0.08em tracking, in `--color-text-muted` on light and `--color-text-muted-on-dark` on navy. 10px, not 8 to 9, because the brief sets 10px as the floor |
 | "Full-bleed scenes alternate hard between grounds, never blended" | Seven chapters rotating `--color-bg`, `--color-navy`, `--color-surface` with a drawn rule at every boundary and no gradient anywhere |
-| A registration mark on the sheet | A 12px hairline cross at the first sheet's top right corner, opposite the specimen's own handles |
+| A registration mark on the sheet | A 12px hairline cross at a corner of the first sheet that the specimen's own handles are not in: the top right from 1024, where the frame is eight of twelve columns and four columns clear of the sheet's right edge, and the bottom right under 1024, where the frame reaches the column edge and its top-right handle takes that corner |
 
 **Deliberately not borrowed, each as a decision rather than an omission:**
 
@@ -112,15 +119,15 @@ is one language on this page.
 | Source language | Both languages read in `library-data.js` and `examples/larkspur.html` before any code; borrowings and refusals tabulated above; no code copied, no palette, no face | Met |
 | What is deliberately not borrowed | Six refusals from `insp-lilium` and five from `insp-tsai2020`, each with its reason | Met |
 | Thesis | The page is a specimen sheet: the grid it is built on is visible at every row, the fixed sentence is marked as the specimen, and every part carries a technical annotation | Met |
-| Exemplars | `~/projects/libraries/design/examples/larkspur.html`, read whole, for the language as a page: the selection stage, the margin annotations, the hard-cut grounds. In this repository, `0_plan/kb/exemplars/collins-1440-full.jpg`, looked at with the Read tool: its Programs section is a small uppercase eyebrow, a serif statement, then four rows divided by hairlines with a name at the left and a short line at the right, and it closes on a hard cut to a near-black ground. That is the form of this page's comparison, proof, steps and connect chapters — ruled rows, no cards, no fills — and of its chapter boundaries. `0_plan/kb/exemplars/exeter-1440.jpg` for the labelled figure: the door here is a labelled part, annotation over name over control. Avoided: `0_plan/kb/exemplars/nord-anglia-1440-full.jpg`'s four identical calls to action (C22) — this page has two door CTAs on the first screen, the same two once after the table, two application links in the steps and four text links in Connect, every one labelled by its destination | Met |
+| Exemplars | `~/projects/libraries/design/examples/larkspur.html`, read whole, for the language as a page: the selection stage, the margin annotations, the hard-cut grounds. In this repository, `0_plan/kb/exemplars/collins-1440-full.jpg`, looked at with the Read tool: its Programs section is a small uppercase eyebrow, a serif statement, then four rows divided by hairlines with a name at the left and a short line at the right, and it closes on a hard cut to a near-black ground. That is the form of this page's comparison, proof, steps and connect chapters — ruled rows, no cards, no fills — and of its chapter boundaries. `0_plan/kb/exemplars/exeter-1440-full.jpg` for the labelled figure (the labelled figures are in the full-page capture; `exeter-1440.jpg` is its hero alone): the door here is a labelled part, annotation over name over control. Avoided: `0_plan/kb/exemplars/nord-anglia-1440-full.jpg`'s four identical calls to action (C22) — this page has two door CTAs on the first screen, the same two once after the table, two application links in the steps and four text links in Connect, every one labelled by its destination | Met |
 | Composition | Header 56 on `--color-bg`; the construction grid at twelve columns from 1024, two from 768 to 1023, and two margin rules below 768, full height behind everything; h1 across eight columns with four 6px `--color-accent` corner handles; provenance below it; doors six and six with a dashed measure line carrying "Two ways to attend"; margin annotations in `--font-mono` 10px uppercase `--color-text-muted` tracked 0.08em; chapters alternating hard between the three grounds with a hard edge at every boundary | Met, with two departures named below (the specimen number; the door's fold-position annotation) |
 | Typography | Contract roles exactly. Annotations `--font-mono` at 10px, never smaller, always `--color-text-muted` on light or `--color-text-muted-on-dark` on navy. No display type above `--text-3xl` | Met |
-| Colour and surface | `--color-bg` first screen; grounds rotate to `--color-navy` and `--color-surface`; grid hairlines `--color-border`; the corner handles the one `--color-accent` use on the first screen; on navy the grid is `--color-border` reduced to **3.27:1** against the ground, measured; focus per contract, two-colour ring on navy | Met, measured below |
-| Imagery | The school marks only, both eager-decoded, sized by height to K12 V2 (28px at 390, 32px at 1440, aspect skew 0%). **No photograph in either state** | Met |
+| Colour and surface | `--color-bg` first screen; grounds rotate to `--color-navy` and `--color-surface`; the grid is a hairline specified as a **ratio** rather than as a token, 3.10 to 3.12:1 on all three grounds (mixed from `--color-border-strong` on light, `--color-border` on navy), so the brief's "never below 3:1 on navy" is met on navy and matched on the other two; the corner handles the one `--color-accent` use on the first screen; focus per contract, two-colour ring on navy | Met, measured below |
+| Imagery | The school marks only, **all three eager** (no `loading="lazy"` anywhere), sized by height to K12 V2 (28px at 390, 32px at 1440, aspect skew 0% on all three files in the runner's own table). **No photograph in either state** | Met, measured |
 | Motion | Still. No `transition`, no `@keyframes`. V1 and V3 instant; V10 native anchor scroll under `no-preference` only; reduced motion zeroes every duration | Met |
 | Copy | `copy.md` sections 0 to 8 verbatim. From section 9: the schematic labels "In person" and "Online" reused on the doors, and the skip-link label. Allowed headings: "Two ways to attend" (section 1), "Compare the two schools", "What is true of both schools", "How to apply", "Questions before you apply", "Already a GT family?"; eyebrow labels "Compare", "Proof", "Admissions", "Connect", "Families". **No specimen number** (departure, below) | Met but for the specimen number |
 | Conversion | Doors on the first screen at all nineteen rows; compare anchor under the doors and before the table (checker R19); comparison table with repeated values (DD-43); proof; steps; secondary CTAs; current families; footer | Met |
-| Acceptance: the grid is visible at every row and never crosses a glyph, clearance reported | **0 crossings at all nineteen rows. Smallest clearance 7.80px** (V13 and V19, "In person" against a column line); 15.00px at the other seventeen rows (a glyph to a margin rule). Visible lines per row: 16 below 768, 23 to 26 at 768 to 834, 66 to 71 from 1024 | Met, measured |
+| Acceptance: the grid is visible at every row and never crosses a glyph, clearance reported | **0 crossings at all nineteen rows, for every drawn line class and not the grid alone. Smallest clearance 7.80px** (V13 and V19, "In person" against a column line); 15.00px at the other seventeen rows (a glyph to a margin rule). Visible lines per row: 16 below 768, 23 to 24 at 768 to 834, 65 to 70 from 1024 | Met, measured |
 | Acceptance: annotations at or above 4.5:1 against their ground | Lowest measured **5.69:1** (`--color-text-muted` on `--color-surface`); 6.25:1 on `--color-bg`; 7.81:1 on `--color-navy` | Met, measured |
 | Acceptance: rationale names DD-38, DD-39, DD-47, DD-48 and D-039 | All five named, with DD-04, DD-06, DD-12, DD-14, DD-19, DD-21, DD-42, DD-43, DD-44, DD-46, MD-25, MN-16, RF-07, RF-25, RF-37, RF-53, RF-55, RF-58 | Met |
 | Acceptance: both critics at or above 4, Exclusivity and Composition expected at 5 | Pending the critics | Pending |
@@ -137,17 +144,18 @@ it is 93. Runner figures are from the run pasted in Self-check; **paste and runn
 
 | Row | Viewport, limit | Layout | Estimate, to the second CTA's bottom | Measured | Spare |
 |---|---|---|---|---|---|
-| **V2** | 375 by 629, **605** | Phone, short-height rhythm, doors stacked, lines below both CTAs | 93 + 8 + h1 7 lines 219 + 8 + provenance 18 + 8 + measure 13 + 8 + door 102 + 8 + door 102 = **587** | **587** | 18 |
-| **V5** | 414 by 715, **691** | Phone, standard rhythm, doors stacked | 57 + 24 + h1 6 lines 193 + 16 + 18 + 24 + 13 + 16 + door 107 + 16 + door 107 = **591** | **589** | 102 |
+| **V2** | 375 by 629, **605** | Phone, short-height rhythm, doors stacked, lines below both CTAs | 93 + 8 + h1 6 lines 188 + 8 + provenance 18 + 8 + measure 13 + 8 + door 102 + 8 + door 102 = **556** | **556** | 49 |
+| **V5** | 414 by 715, **691** | Phone, standard rhythm, doors stacked | 57 + 24 + h1 5 lines 161 + 16 + 18 + 24 + 13 + 16 + door 107 + 16 + door 107 = **559** | **557** | 134 |
 | **V14** | 1280 by 720, **696** | Laptop, doors six and six | 57 + 32 + h1 4 lines 199 + 16 + 19 + 24 + 13 + 16 + door 112 = **488** | **487** | 209 |
 | **V16** | 1440 by 900, **876** | Laptop, doors six and six | 57 + 32 + h1 4 lines 212 + 16 + 19 + 24 + 13 + 16 + door 113 = **502** | **501** | 375 |
-| V10 | 750 by 342, **318** | Landscape recipe: `--space-3` padding, h1 at `--text-xl`, doors side by side, names at `--text-md` | 57 + 8 + h1 3 lines 83 + 8 + 18 + 8 + 13 + 8 + door 99 = **302** | **301** | 17 |
+| V10 | 750 by 342, **318** | Landscape recipe: `--space-3` padding, h1 at `--text-xl`, doors side by side, names at `--text-md` | 57 + 8 + h1 2 lines 56 + 8 + 18 + 8 + 13 + 8 + door 99 = **275** | **274** | 44 |
 
-Every other fold row, measured (second CTA bottom against the limit): V1 649 of 716; V3 554 of 640;
-V4 554 of 635; V6 589 of 815; V7 524 of 657; V8 591 of 715; V11 442 of 1000; V12 447 of 1170;
-V13 509 of 744; V15 435 of 624; V17 501 of 936. V9 (emptiness) 618 of 844, page height 6102.
+Every other fold row, measured (second CTA bottom against the limit): V1 618 of 716; V3 522 of 640;
+V4 491 of 635; V6 557 of 815; V7 492 of 657; V8 559 of 715; V11 442 of 1000; V12 447 of 1170;
+V13 509 of 744; V15 435 of 624; V17 501 of 936. V9 (emptiness) 586 of 844, page height 6000.
 V18 (reflow) no horizontal scroll at 320. V19 (zoom) reported, scroll width 1024, nothing clipped.
-**Sixteen of sixteen fold rows pass, V10 included.**
+**Sixteen of sixteen fold rows pass, V10 included.** The phone rows gained 31 to 32px against the first
+build because the tracked sentence sets one line shorter; nothing else in the first screen moved.
 
 **What crosses the bottom edge, per row** (the runner's false-floor test, which counts text, images and
 painted hairlines and never a container's fill). On every phone row it is a door line or the compare
@@ -155,6 +163,14 @@ sentence cut by the edge; at V13 and V14 it is the first screen's cream closing 
 chapter, a surface change the runner samples; at V16 and V17 it is the compare sentence and the chapter
 rule. The full table is `qa/fold.md` "Next band evidence". V18 is the reflow row, where the fold rule
 does not apply (DD-44).
+
+**One row had to be re-earned.** With the sentence a line shorter, V6 (412 by 839) put the compare
+sentence 27px clear of the bottom edge with only section padding below it, and the runner called a
+false floor: the contract reserves the bottom 24px, and nothing reached into it. The first screen's
+bottom padding is now `--space-5` rather than `--space-6`, one step less than a chapter's own, so the
+hard edge onto the comparison chapter is never further below the last line than the reserved band. V6 now
+reports "content reaches 839 of 839 and more follows below": the chapter boundary rule lands on the
+bottom edge and the navy chapter runs on beneath it.
 
 ## The construction grid: how it is drawn and why it never crosses a glyph
 
@@ -177,8 +193,11 @@ row, and it must never cross a glyph. Three decisions make both true and measura
    canvas grid. Every text block carries its chapter's own ground colour plus a flat `0 0 0 0.2em`
    spread of the same colour. The spread is not decoration: Literata's font box stands proud of a 1.15
    line box by 0.17 to 0.18 em (measured: 8px at the 46px h1, 6px at the 34px h2, 5px at the 28px door
-   name), so without it a column line showed through an ascender. It scales with the type and costs no
-   layout.
+   name; CONTRACT.md section 3 now carries the figure for every direction), so without it a column line
+   showed through the type. What overflows is the **font box**, not the ascender: measured ink stops
+   about 10px inside the block at the top, and the ink that actually clears a block edge is the
+   descender on its last line. The first build's self-check said "ascender" and was wrong about which
+   end; the metric and the fix were right. The spread scales with the type and costs no layout.
 
 The harness measures the result rather than asserting it: for every visible line it takes each rendered
 text run's client rect, removes the runs the line is occluded behind at that x (occluders inflated by
@@ -189,22 +208,63 @@ their own measured shadow spread), and reports the crossings and the smallest ho
 | Crossings of a glyph by a visible construction line, all nineteen rows | **0** |
 | Smallest clearance, any row | **7.80px** (V13 and V19, the "In person" annotation against the column-three line) |
 | Clearance at the other seventeen rows | **15.00px**, a glyph to a margin rule |
-| Visible lines per row | 16 (below 768), 23 to 26 (768 to 834), 66 to 71 (1024 and above) |
-| Corner handle to the nearest glyph | 4px; to the nearest margin rule, 5px. The handle was moved 7px outside the frame after the V10 and V16 captures showed it striking the G of "GT School" and the T of "Texas" |
+| Visible lines per row | 16 (below 768), 23 to 24 (768 to 834), 65 to 70 (1024 and above) |
+| Corner handle to the nearest glyph | **2.13px** at V15, the bottom-left bracket against the descender of the h1's last line, measured against ink at all nineteen rows by the extended harness. The first build asserted 4px from a single row. To the nearest margin rule, 5px. The handle was moved 7px outside the frame after the V10 and V16 captures showed it striking the G of "GT School" and the T of "Texas" |
+
+**Every drawn line class, not the grid alone.** The first build's harness tested `.rule-left`,
+`.rule-right` and `.grid i`, so the page's other line classes were unmeasured — and the one that failed
+was one of them: the dashed drop started *inside* the measure label at the two short-desktop rows,
+because the height query pulled the doors up and left the drop's own offset behind. The harness now
+inventories every rectangle the stylesheet paints, rebuilding pseudo-element boxes from their resolved
+insets, and measures each against the **ink** rather than the font box, so Literata's 0.1675 em of
+overhang is not counted as type (CONTRACT.md section 3). Full table in `qa/measurements.md`.
+
+| Line class | Marks at the busiest row | Crossings, all 19 rows | Smallest clearance to ink | Where |
+|---|---|---|---|---|
+| margin rule | 16 | **0** | 15.00px | h1, V1 |
+| column line | 104 | **0** | 7.80px | "In person", V13 |
+| measure line (dashed) | 2 | **0** | 8.00px | "Two ways to attend", V1 |
+| measure drop (dashed) | 2 | **0** | 3.39px | "Two ways to attend", V10 |
+| corner handle | 12 | **0** | 2.13px | h1 last-line descender, V15 |
+| registration cross | 1 | **0** | 23.82px | "Contact admissions", V11 |
+| drawn rule | 51 | **0** | 6.67px | "In person", V2 |
+
+What it found, in order: (1) the dashed drop, which is fixed below and now starts **3.39px under the
+measure label's ink at every row that draws it**, the same figure at V10, V13, V15, V16 and V19,
+because one custom property drives both the gap above the doors and the drop's rise into it; (2) the
+corner handle's true floor, 2.13px against a descender rather than the 4px the first build asserted
+from one row; (3) two defects in the harness itself rather than the page — the L-shaped handle was
+being modelled as its bounding box, which overlaps the first line of the h1 at every row while none of
+its ink does, and the stacked table's clipped `thead` was being counted as visible type, which is 57
+crossings that no reader can see. Both are fixed in the runner, not papered over in the report.
 
 **The line inks, measured against their own grounds.** Construction lines are quieter than drawn
 structure by intent: a construction line is scaffolding, a rule is a statement.
 
-| Line | On `--color-bg` | On `--color-surface` | On `--color-navy` |
-|---|---|---|---|
-| Construction grid (`--color-border`; on navy `color-mix(--color-border 50%, --color-navy)`) | 1.56:1 | 1.42:1 | **3.27:1** |
-| Drawn rules: chapter boundaries, door rules, table, facts, steps, connect (`--color-border-strong`; on navy `color-mix(--color-text-muted-on-dark 55%, --color-navy)`) | 3.63:1 | 3.31:1 | 3.36:1 |
+| Line | On `--color-bg` | On `--color-surface` | On `--color-navy` | Target |
+|---|---|---|---|---|
+| Construction grid | **3.10:1** | **3.12:1** | **3.12:1** | 3.1:1 |
+| Drawn rules: chapter boundaries, door rules, table, facts, steps, connect | **3.63:1** | **3.58:1** | **3.58:1** | 3.6:1 |
 
-The brief sets a floor of 3:1 for the grid on navy only, and 3.27:1 meets it. On the light grounds the
-grid is deliberately below that: it is a hairline running the full height of the screen, which reads at
-a contrast a short mark would not, and the captures at every row confirm it (`qa/V2.jpg`, `qa/V13.jpg`,
-`qa/V16.jpg`). Raising it to `--color-border-strong` would make the scaffolding louder than the
-structure, which is the wrong hierarchy for a drawing.
+**Each class is specified as a ratio, not as a token.** The first build set the grid to `--color-border`
+on light grounds and a mix on navy, and the result was 1.56:1 on `--color-bg`, 1.42:1 on
+`--color-surface` and 3.27:1 on navy: the page's signature device was more than twice as present on
+navy as on cream, so the scaffolding changed weight chapter to chapter. It now reads at one weight on
+all three grounds, and so do the drawn rules, each mixed from the token that already carries its role:
+
+| Ground | Grid ink | Rule ink |
+|---|---|---|
+| `--color-bg` | `color-mix(--color-border-strong 90%, --color-bg)` | `--color-border-strong`, unchanged |
+| `--color-surface` | `color-mix(--color-border-strong 96%, --color-surface)` | `color-mix(--color-text 5%, --color-border-strong)` |
+| `--color-navy` | `color-mix(--color-border 48%, --color-navy)` | `color-mix(--color-text-muted-on-dark 58%, --color-navy)` |
+
+The uniform target is 3.1:1 rather than the 2.5:1 the critique suggested, because the **brief** sets a
+floor of 3:1 for the grid on navy and a uniform value has to clear the highest floor any ground imposes.
+The half-step between the two classes is kept: 3.1 against 3.6 on every ground, so a construction line
+is still quieter than a drawn rule, which is the hierarchy this direction argues for. The cost is that
+the grid on cream is now twice as present as it was at the first build; that is the intended direction
+of travel, since the brief asks for a grid that is *visible at every row* and the critique found the
+surface lines "at the edge of perception" (`qa/V16.jpg`, `qa/V14-full.jpg`).
 
 ## Annotation contrast, measured
 
@@ -230,7 +290,7 @@ fill at 14.58:1 on light ones.
 |---|---|
 | **DD-48** | The Design Library supplies the grammar, GT supplies the words: composition, rhythm and structural devices borrowed; palette and faces untouched; both the borrowings and the refusals tabulated above so a reviewer can see the omissions were decided |
 | **DD-38** (b), R5 | The fluid clamps `--text-xs` to `--text-3xl` and `--text-btn` carry every type size; `--h1-weight` exposes the 300-against-400 test as one edit |
-| **DD-39** (a), RF-07 | `--color-on-navy` text and button fill on navy; `--color-text-muted-on-dark` for annotations, provenance-class strings and sources on navy; `--color-border-strong` for drawn rules on light grounds; the accent as a shape only |
+| **DD-39** (a), RF-07 | `--color-on-navy` text and button fill on navy; `--color-text-muted-on-dark` for annotations, provenance-class strings and sources on navy; `--color-border-strong` as the base for both line inks on light grounds, each mixed to its measured ratio; the accent as a shape only |
 | **DD-46** | The contract's surface-dependent button fill: `--color-navy` with `--color-on-navy` on every light ground (14.58:1), `--color-on-navy` with `--color-text` on navy (18.57:1). The estate's orange footer button is not copied, because K12 F87 measures its label at 2.50:1 |
 | **DD-47** | A uniform `--radius-md` corner on all four sides of every button. The estate ships three different application-button constructions, and the one a parent clicks in its desktop header is the uniformly rounded one |
 | **D-039** | Escalated and undecided, so this mock ships its no-JavaScript state only: no observer, no reveal, no router, no `data-d039` declaration. One `<script>`, the JSON-LD block. Nothing here assumes the decision goes either way |
@@ -270,7 +330,7 @@ Every one is PROPOSED; the contract requires the row to be named.
 | `--measure-prose: 65ch` | **DD-38** (b), **RF-55** | Provenance, lede, sources, door lines, facts, steps, TEFA, footer facts |
 | `--color-on-navy` | **DD-39** (a), **RF-07** | Text on navy; the button fill on navy chapters; the outer band of the two-colour focus ring |
 | `--color-text-muted-on-dark` (#a3bfcb, a new tint) | **DD-39** (a), RF-07; **DD-19** departure | Annotations, sources and the table caption on navy; the navy rule ink is mixed from it |
-| `--color-border-strong` (#857f7b, a new tint) | **DD-39** (a), RF-07; **DD-19** departure | Every drawn rule on a light ground: chapter boundaries, door rules, table rules, fact and step rules, the measure lines, the corner brackets, the registration mark |
+| `--color-border-strong` (#857f7b, a new tint) | **DD-39** (a), RF-07; **DD-19** departure | Every drawn rule on a light ground (chapter boundaries, door rules, table rules, fact and step rules, the measure lines, the corner brackets, the registration mark), and the base the construction grid is mixed from on those grounds |
 | `--color-focus-on-dark` | **DD-39** (a), RF-07 | The outer band of the two-colour ring on navy and on the GT Anywhere mark plate |
 | `--duration-none` | **MN-16** (a), RF-53, R8 | The reduced-motion block |
 | Not used | | `--color-accent-text` (no accent text anywhere), `--color-on-accent` (no accent fill carries text), `--ease-standard`, `--ease-out`, `--ease-in` (nothing moves) |
@@ -312,10 +372,13 @@ on the permissions, and the mock Nari reviews is the mock that would ship.
 | **No new wayfinding word.** "Specimen" itself is not in `copy.md` | `copy.md` sections 0 to 9 are the only vocabulary a brief may use, and new words are recorded there before use. Every annotation on this page is a deck label or an allowed eyebrow: "In person", "Online", "Two ways to attend", "Compare", "Proof", "Admissions", "Connect", "Families", the two school names |
 | **The door line always follows both CTAs**, at every width, rather than switching form under 700px tall (`CONTRACT.md` section 2) | Stricter than the contract, not looser: it keeps both CTAs above the fold at every row and puts nothing between them anywhere. It is also the sheet's grammar — the caption sits under the part it describes |
 | **The compact door has no plate border**, only a top rule | A hairline to hang the part from, in the support language's no-fills grammar; it also buys 16px of fold at every row |
-| **`--color-border-strong` for drawn rules**, where the brief names `--color-border` for the grid | Two classes of line at two weights: construction at 1.56:1 (bg) and 1.42:1 (surface), structure at 3.63:1 and 3.31:1. A dashed measure line in `--color-border` measured 1.56:1 and was not perceptible as dashes; the grid, a full-height continuous hairline, is |
+| **Both line inks are mixed to a measured ratio**, where the brief names `--color-border` for the grid | Two classes of line at two weights, and each weight is now the same on all three grounds: construction **3.10 to 3.12:1**, drawn structure **3.58 to 3.63:1**, measured per chapter in `qa/measurements.md`. The brief's own token lands at 1.56:1 on `--color-bg` and 1.42:1 on `--color-surface`, where a dashed line is not perceptible as dashes and the critique found the surface lines "at the edge of perception", and at 3.27:1 on navy, so the same token drew the same device at two different strengths. The navy grid keeps `--color-border` as its base, as the brief says; the light grounds mix `--color-border-strong`, the token whose role is already "borders that must reach 3:1 on light surfaces" |
 | **A no-break space** between "from" and "anywhere." in the h1 | Changes no word; keeps the last phone line to two words |
+| **`letter-spacing: -0.045em` on the h1 below 768**, where `CONTRACT.md` section 3 sets no tracking for the h1 role | The round-one critique asked for the phone rag to be evened. Measured first, then decided: `text-wrap: pretty` is a **no-op** for this sentence at every phone row (identical per-line widths to the raw wrap, because Chrome's `pretty` only rescues a short last line and this last line is already 58 per cent of the measure); and **no binding of one or two phrases helps** — 211 binding sets (none, every single adjacent pair, every pair of pairs) were measured across ten phone rows, and the best moved the mean line-width deviation from 41.2 to 39.2px while leaving the worst interior line at 57 per cent. The lever that works is tracking, because it changes the line *count*: at `-0.045em` the sentence falls under Chrome's six-line ceiling for `text-wrap: balance` at 360, the narrowest phone row, so the browser balances the block instead of wrapping it greedily. 4.5 per cent is milder than the estate's own heading tracking, which is -1.6px, a 5.9 per cent negative track at this size (`shared/CONTINUITY.md`), so this moves **towards** the destination rather than away from it. Not applied from 768 up, where the sentence already sets four or five even lines |
+| **The door's format label is 10px**, below `CONTRACT.md` section 3's `--text-xs` floor for the label role | Named here because the first build did not name it, and it is the one departure the round-one critique did not accept. The **brief** sets the annotation size for this direction — "`--font-mono` at `--text-xs` or smaller, never below 10px" — and 10px is that floor. The label carries DD-04's primary distinguishing cue, so the size is a real trade: measured at 6.25:1 on `--color-bg` and 7.81:1 on navy, well above the 4.5:1 the brief's acceptance row sets, and paired with a drawn glyph and the full school name in Literata at 22 to 28px. If Nari or the contract would rather the label sat at `--text-xs`, it is one token |
+| **The first screen's bottom padding is `--space-5`**, one step less than a chapter's own `--space-6` | So the hard edge onto the comparison chapter is never further below the last line than the contract's reserved 24px band. With the sentence a line shorter at 412 by 839 the old `--space-6` left 27px of padding showing at the bottom edge and the runner called a false floor |
 | **Bare lengths that are geometry, not tokens** | The 1px hairline; the 6px corner handle, its 1px outline, its 14px arms and its 7px offset; the 12px registration mark; the 16px door glyph; the 2px and 4px focus bands and the 3px forced-colours outline; the 44px target floor; the 56px header row; the 28px and 32px mark heights K12 V2 fixes in pixels; the 22/39/39 per-cent table columns; the 0.2em knockout spread and the 0.08em annotation tracking; the breakpoints 359, 768, 1024 and the height queries 400 and 699. Rule 14 governs colour, type, space, radius, shadow and duration, all of which are tokens here |
-| **Three layer-3 values in `:root`**: `--sheet-max: 86rem`, `--anno: 0.625rem`, `--rail`/`--grid-gutter` aliases of `--space-4`/`--space-6` | `86rem` is the 1376px twelve-column sheet at the 1440 design width; `0.625rem` is the 10px annotation floor the brief sets, which is below `--text-xs` and therefore has no token. Both are named here as DD-19 departures |
+| **Three layer-3 values in `:root`**: `--sheet-max: 86rem`, `--anno: 0.625rem`, `--rail`/`--grid-gutter` aliases of `--space-4`/`--space-6` | `86rem` is 1376px, the **cap** on the twelve-column sheet, not its width at 1440: with `--sheet-margin` at `--space-7` from 1024 the sheet measures **1344px at 1440** and the cap only binds from 1472 up. (The first build's comment called 1376 "the sheet at the 1440 design width" and was wrong; the stylesheet's comment is corrected too.) `0.625rem` is the 10px annotation floor the brief sets, which is below `--text-xs` and therefore has no token. Both are named here as DD-19 departures |
 | **`overflow-wrap: anywhere`** on the strings that carry a host name | `break-word` wraps but does not shrink a grid item's min-content width, which overflowed the doubled-root test at V2 on "community.gt.school." M10 met the same defect |
 
 ## Flagged slots
@@ -359,18 +422,32 @@ on the permissions, and the mock Nari reviews is the mock that would ship.
 **unverified** and this section scores only the GT Anywhere handoff, on the rendered evidence in
 `0_plan/kb/exemplars/estate/`.
 
+**The rendered comparison, filed where the rubric asks for it.** The round-one critique asked for the
+pair rather than a property table, so the estate's own captures now sit beside this page's at both
+widths, in `qa/`:
+
+| File | What it puts side by side |
+|---|---|
+| `qa/estate-side-by-side-390.jpg` | `kb/exemplars/estate/anywhere-home-390-firstscreen.jpg` beside `qa/V9.jpg` |
+| `qa/estate-side-by-side-1440.jpg` | `kb/exemplars/estate/anywhere-home-1440-firstscreen.jpg` beside `qa/V16.jpg` |
+
+Composed from the captures that already existed; neither image is retouched, and both are labelled with
+their source and viewport. What the pair shows at a glance: the same cream, the same Literata headline,
+the same uppercase Inconsolata on the one control — and a photographed child on one side against a
+drawing on the other, which is the gap the Hero row names.
+
 | Property | The estate, measured | This mock | Decision |
 |---|---|---|---|
 | Page ground | `rgb(252, 244, 239)` | `--color-bg`, the same value, on the first screen and three of seven chapters | Matches |
 | Body text and face | `rgb(0, 17, 23)`, Inter Tight | The same | Matches |
 | Heading face | Literata | Literata | Matches |
 | Heading weight | **300** | 400 | Argued departure. M03 tested 300 against 400 on this sentence and shipped 400; `--h1-weight` is one edit if DD-38 goes the other way |
-| Heading tracking | **-1.6px** | normal | Departure. At 27px on a phone the estate's -1.6px is a 6 per cent negative track, which closes the 132-character sentence at exactly the width where it is hardest to read; the sheet's argument is legibility under measurement |
+| Heading tracking | **-1.6px** (a 5.9 per cent negative track at 27px) | **-0.045em (4.5 per cent) below 768**; normal from 768 | Closer than the first build, which was normal everywhere. The phone track was taken for the rag (Departures) and lands just inside the estate's own tracking, so the handoff at the width two thirds of sessions use is now a near match rather than a difference. From 768 up the sentence sets four or five even lines and needs no help, so it keeps the contract's normal tracking |
 | Application button | Navy fill on the first screen, orange in the footer; three different silhouettes | Navy fill on light grounds, near-white on navy (DD-46); one uniform `--radius-md` corner (DD-47) | Decided, not drifted. The estate's orange label measures 2.50:1 (K12 F87) and copying it would import a contrast failure onto the page's one control |
 | Button face and case | Inconsolata, uppercase | Inconsolata 600, uppercase | Matches. The estate's computed 500 is unavailable: `fonts.css` ships Inconsolata 400 and 600 only |
 | Button size | 16px | `--text-btn`, 17 to 18px | Declared difference, as for every mock in the programme |
 | Utility face | Uppercase Inconsolata in the estate's footer navigation | Uppercase Inconsolata for every annotation on the page | Matches, and this direction leans on it harder than any other |
-| Marks | Two-colour artwork, GT Anywhere white-on-navy | Both marks unmodified, on the panels `copy.md` section 8 names, 28px at 390 and 32px at 1440 | Matches |
+| Marks | Two-colour artwork, GT Anywhere white-on-navy | Both marks unmodified, on the panels `copy.md` section 8 names, 28px at 390 and 32px at 1440, all three eager, aspect skew 0% in the runner's table | Matches |
 | Surface texture | The estate's cream is **grained**, with wave linework behind the hero | Flat cream with a hairline construction grid | Difference, and the closest this programme has come: the estate's own first screen is cream with drawn line artwork over it, and so is this one. The grain itself is not reproduced |
 | Hero | A composited photographic cut-out of an identifiable child over line artwork | No photograph; the drawn sheet carries the screen | Decided (Imagery, above). It is the largest continuity gap in this direction and should be read as one |
 | Could the school sites inherit this shell? | | The header, the footer, the three grounds, the rule weights, the annotation role and the button treatment are a system a school site could take whole. The construction grid is the part that is this page's argument rather than the estate's, and a school site could adopt it as a layout grid without drawing it | |
@@ -390,29 +467,37 @@ Greps from the `BUILDER-BRIEF.md` rules table, run 2026-09-11 from the repositor
 | Raw hex in `styles.css` | **0** |
 | `transition` declarations | none (the word appears once, in the reduced-motion block's `transition-duration`) |
 | Logos | `gt-school-logo-h.svg` ×2, `gt-anywhere-logo-h.svg` ×1 |
-| Size | 19,176 + 23,416 = 42,592 bytes, 41 KB by the checker's formula |
-| 390 by 844 first screen (V9) | Header 57, h1 303, provenance 336, CTA Georgetown 495, CTA Anywhere 618 of 844; the header, the umbrella sentence, the provenance line and the measure line are the only things above the CTAs; the door lines and the compare sentence are cut at the fold (`qa/V9.jpg`) |
+| `loading="lazy"` | **0**. The brief asks for both marks eager and the first build left the two footer marks lazy, which also made the runner report the GT Anywhere mark's shape as "unknown" and its aspect skew as "n/a"; with the file loaded at measurement time the runner reports **horizontal, 0%** for all three |
+| Size | 19,072 + 27,521 = 46,593 bytes, 45 KB by the checker's formula |
+| Interactive targets under 44px | **None but inline sentence links**, which WCAG 2.5.8 exempts. The two utility links and the skip link were under 44 at the first build and are 44 now (`qa/fold.md`, "Interactive targets under 44px") |
+| 390 by 844 first screen (V9) | Header 57, h1 271, provenance 304, CTA Georgetown 463, CTA Anywhere 586 of 844; the header, the umbrella sentence, the provenance line and the measure line are the only things above the CTAs; the door lines and the compare sentence are cut at the fold (`qa/V9.jpg`) |
 
 ### Screenshots looked at with the Read tool
 
-`qa/V2.jpg`, `qa/V2-full.jpg`, `qa/V10.jpg`, `qa/V13.jpg`, `qa/V14-full.jpg`, `qa/V16.jpg`,
-`qa/V18.jpg`, `qa/forced-colors.jpg`, `qa/focus-cta.jpg`, `qa/focus-footer.jpg`. What the captures
-changed, in order:
+First build: `qa/V2.jpg`, `qa/V2-full.jpg`, `qa/V10.jpg`, `qa/V13.jpg`, `qa/V14-full.jpg`,
+`qa/V16.jpg`, `qa/V18.jpg`, `qa/forced-colors.jpg`, `qa/focus-cta.jpg`, `qa/focus-footer.jpg`.
+Iteration: `qa/V9.jpg`, `qa/V16.jpg`, `qa/V14-full.jpg`, `qa/V18.jpg`, `qa/forced-colors.jpg`, and
+crops of `qa/V2-full.jpg` (the caption), `qa/V15.jpg` (the corner handle against the descender, and the
+dashed drop under the measure label) and `qa/estate-side-by-side-390.jpg`. What the captures changed,
+in order:
 
 1. The header was inheriting the chapter's 64px block padding and stood **173px tall** from 768 up. It
    is 57px at every row now, which returned 116px of first screen to every desktop row.
 2. The construction grid was a background gradient and **did not repaint under forced colours** — the
    forced-colours capture showed the two margin rules and nothing else. It is real elements on a real
    CSS grid now, which also made it measurable.
-3. Literata's font box stands proud of its line box, so a column line **showed through the ascenders**
-   of the chapter titles: 251 crossings at the first measurement. The ground-coloured knockout spread
-   fixed it; the table caption, which is outside the cell grid, needed its own.
+3. Literata's font box stands proud of its line box, so a column line **showed through the type** of
+   the chapter titles: 251 crossings at the first measurement. The ground-coloured knockout spread
+   fixed it; the table caption, which is outside the cell grid, needed its own. (The first build wrote
+   "through the ascenders" and had the end wrong: what overflows is the font box, and the ink that
+   clears a block edge is the descender on its last line.)
 4. The corner handles were drawn **on** the frame's corners and struck the G of "GT School" at V10 and
    V16. They sit 7px outside it now.
 5. The registration mark was at the sheet's top left, clustering with the specimen's own top-left
    handle. It moved to the top right.
 6. The navy grid ink measured **2.22:1**, under the brief's 3:1 floor. The mix went from 34 to 50 per
-   cent: 3.27:1.
+   cent: 3.27:1. (Round two set all three grounds to one ratio instead; the navy mix is 48 per cent
+   and 3.12:1 now.)
 7. At V10 the door names were `--text-xl`, the same token as the stepped-down h1. They are `--text-md`
    on that row.
 8. `community.gt.school.` set a grid item's min-content width and **overflowed the doubled-root test**
@@ -452,21 +537,22 @@ check-claims: OK
 
 ### `node 0_plan/tools/shots.mjs 0_plan/mockups/M21-the-specimen`
 
-The run this rationale's figures are taken from (checker R37).
+The run this rationale's figures are taken from (checker R37). Full output, including the next-band
+evidence and the focus and forced-colour captures, in `qa/fold.md`.
 
 ```
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 93 | 334 | 368 | 527 | 649 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 93 | 320 | 346 | 477 | 587 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 57 | 287 | 312 | 443 | 554 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 57 | 287 | 312 | 443 | 554 | yes | PASS |
-| V5 | 414 by 715 | fold | 691 | 57 | 274 | 307 | 467 | 589 | yes | PASS |
-| V6 | 412 by 839 | fold | 815 | 57 | 274 | 307 | 466 | 589 | yes | PASS |
-| V7 | 402 by 681 | fold | 657 | 57 | 256 | 282 | 413 | 524 | yes | PASS |
-| V8 | 430 by 739 | fold | 715 | 57 | 276 | 309 | 469 | 591 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 57 | 303 | 336 | 495 | 618 | yes | report: page height 6102 |
-| V10 | 750 by 342 | fold | 318 | 57 | 148 | 174 | 301 | 301 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 93 | 303 | 337 | 496 | 618 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 93 | 289 | 315 | 445 | 556 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 57 | 255 | 280 | 411 | 522 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 57 | 224 | 249 | 380 | 491 | yes | PASS |
+| V5 | 414 by 715 | fold | 691 | 57 | 242 | 275 | 434 | 557 | yes | PASS |
+| V6 | 412 by 839 | fold | 815 | 57 | 242 | 275 | 434 | 557 | yes | PASS |
+| V7 | 402 by 681 | fold | 657 | 57 | 224 | 250 | 381 | 492 | yes | PASS |
+| V8 | 430 by 739 | fold | 715 | 57 | 243 | 277 | 436 | 559 | yes | PASS |
+| V9 | 390 by 844 | emptiness |  | 57 | 271 | 304 | 463 | 586 | yes | report: page height 6000 |
+| V10 | 750 by 342 | fold | 318 | 57 | 121 | 147 | 274 | 274 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 57 | 246 | 280 | 442 | 442 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 57 | 252 | 286 | 447 | 447 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 57 | 311 | 346 | 509 | 509 | yes | PASS |
@@ -474,7 +560,7 @@ The run this rationale's figures are taken from (checker R37).
 | V15 | 1366 by 648 | fold | 624 | 57 | 271 | 297 | 435 | 435 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 57 | 301 | 335 | 501 | 501 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 57 | 301 | 335 | 501 | 501 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 57 | 313 | 356 | 504 | 614 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 89 | 314 | 357 | 505 | 615 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 57 | 287 | 314 | 449 | 449 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -485,20 +571,62 @@ PASS: every computed transition and animation duration is 0s (elements and pseud
 
 PASS: no horizontal scroll at 375 with a 32px root.
 
+## Focus and forced colours
+
+Captures: focus-cta.jpg (first door CTA focused); focus-footer-plate.jpg (the footer mark on its plate); focus-plate.jpg (header lockup link focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
+
 ## Console
 
 PASS: no console errors.
 
+## Next band evidence
+
+What the runner saw continuing below the fold. Ink means text, a painted edge or an image: section padding and the empty leading of a line box do not count.
+
+| Row | Cut | Element and the ink that crosses the bottom edge |
+|---|---|---|
+| V1 | yes | content reaches 736 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 622 to 642 |
+| V3 | yes | text cut by the edge, 652 to 672 |
+| V4 | yes | text cut by the edge, 645 to 665 |
+| V5 | yes | text cut by the edge, 696 to 716 |
+| V6 | yes | content reaches 839 of 839 and more follows below |
+| V7 | yes | text cut by the edge, 670 to 690 |
+| V8 | yes | text cut by the edge, 722 to 742 |
+| V9 | yes | content reaches 841 of 844 and more follows below |
+| V10 | yes | text cut by the edge, 334 to 354 |
+| V11 | yes | content reaches 1004 of 1024 and more follows below |
+| V12 | yes | content reaches 1184 of 1194 and more follows below |
+| V13 | yes | surface changes from rgb(252, 244, 239) to rgb(0, 42, 58) between the last CTA and the bottom edge, and the page continues below |
+| V14 | yes | surface changes from rgb(252, 244, 239) to rgb(0, 42, 58) between the last CTA and the bottom edge, and the page continues below |
+| V15 | yes | content reaches 647 of 648 and more follows below |
+| V16 | yes | content reaches 895 of 900 and more follows below |
+| V17 | yes | text cut by the edge, 940 to 961 |
+| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V19 | yes | text cut by the edge, 560 to 581 |
+
+## Interactive targets under 44px
+
+BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met by size or by spacing. Everything under 44 is listed as evidence for the critics. Only a door CTA under 44 fails the run.
+
+| Viewport | Target | Height | Width | Kind | Result |
+|---|---|---|---|---|---|
+| 375 by 629 | Check eligibility on the GT An | 20px | 297px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Not sure which is right for yo | 21px | 436px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Check eligibility on the GT An | 21px | 334px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+
 ## Mark geometry (K12 V2)
+
+Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must hold within 1%. Measured, not read from CSS.
 
 | Viewport | File | Shape | Height | Width | Aspect skew | Result |
 |---|---|---|---|---|---|---|
 | 390 by 844 | `gt-school-logo-h.svg` | horizontal | 28px | 121.6px | 0% | ok |
 | 390 by 844 | `gt-school-logo-h.svg` | horizontal | 28px | 121.6px | 0% | ok |
-| 390 by 844 | `gt-anywhere-logo-h.svg` | unknown | 28px | 147px | n/a | ok |
+| 390 by 844 | `gt-anywhere-logo-h.svg` | horizontal | 28px | 147px | 0% | ok |
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
-| 1440 by 900 | `gt-anywhere-logo-h.svg` | unknown | 32px | 168px | n/a | ok |
+| 1440 by 900 | `gt-anywhere-logo-h.svg` | horizontal | 32px | 168px | 0% | ok |
 
 ## Result: all required rows pass
 ```
@@ -509,6 +637,53 @@ Full output in `qa/measurements.md`.
 
 ```
 **Crossings at every row: 0. Smallest clearance from a visible construction line to any glyph: 7.8px (V13).**
+**Drawn line classes: 7. Crossings of type by any drawn line, all nineteen rows: 0.**
+Smallest clearance to ink, per class: margin rule 15.00, column line 7.80, measure line 8.00,
+measure drop 3.39, corner handle 2.13, registration cross 23.82, drawn rule 6.67.
 Lowest annotation contrast anywhere on the page: 5.69:1 (--color-text-muted on --color-surface).
-Grid ink on navy: 3.27:1. Drawn-rule ink: 3.63:1 on --color-bg, 3.31:1 on --color-surface, 3.36:1 on navy.
+Grid ink: 3.10:1 on --color-bg, 3.12:1 on --color-surface, 3.12:1 on navy.
+Drawn-rule ink: 3.63:1 on --color-bg, 3.58:1 on --color-surface, 3.58:1 on navy.
 ```
+
+## Iteration, round one to round two (2026-09-11)
+
+Both critics scored **Iterate** with Craft at 3 and every other row at or above 4, five at 5
+(`0_plan/ensemble/critic-fable-M21.md`, `0_plan/ensemble/critic-astra-M21.md`). What changed, in the
+order the critiques ranked it, each with the measurement that says it is fixed:
+
+| # | Finding | What changed | Measured after |
+|---|---|---|---|
+| 1 | **The comparison caption collapsed** to 58 by 83px and six lines at every width below 768, against 1344 by one line at 1440: the stacked-table query turned `.compare, tbody, tr, th, td` into blocks and left `caption` at `display: table-caption`, so it shrink-to-fitted an anonymous table box | `caption` added to that selector list (`styles.css`, the `max-width: 767px` block). One word | Full column width, **one line, 20.5px tall**: 312 at V1, 327 at V2, 342 at V9, 366 at V5, 702 at V10. At V18 (320) it sets two lines in a 272px column, which is the column's own doing |
+| 2 | **The registration cross and the h1's top-right handle collided below 768** — overlapping at V2, V10 and V18, 5px apart at V1, V5 and V9 — because the specimen frame spans the whole column there, so its top-right handle lands in the sheet's top-right corner, which is where the cross was moved to escape the top-left handle | The cross moves to the sheet's **bottom** right wherever the frame reaches the column edge. Extended past the critique's "below 768" to **below 1024** after measuring the two rows it did not name: at 768 the marks stood **13px apart**, one mark's width, which is the same defect a size smaller. From 1024 the frame is eight of twelve columns and four columns clear of the sheet's right edge by construction, so the cross keeps the top right there | Cross to handle: **724.3px at V2, 785.9 at V1, 738.2 at V5, 790.8 at V9**, 329.9 at V10, 810.9 at V18, 530.0 at V11, 537.8 at V12. From 1024, 301 to 450px |
+| 3 | **The dashed drop started inside the measure label** at 1366 by 648 and 1024 by 576: drop top 309.8 against a label ink bottom of 316.3, and 326.17 against 332.7. The height query pulled the doors to a smaller step and the drop's pseudo-element kept its own offset | One custom property, `--doors-gap`, now drives both the gap above the doors and the distance the drop rises into it, so a height query cannot move one without the other | The drop starts **3.39px below the label's ink at every row that draws it** — V10, V13, V15, V16 and V19, the same figure at all five |
+| 3b | **The harness tested the grid and the margin rules only**, so the page's other line classes were unmeasured and this was the one that failed | `qa/M21-measure.mjs` now inventories **every rectangle the stylesheet paints** — margin rules, column lines, the dashed measure line, the dashed drop, the corner handles, the registration cross and every drawn rule — rebuilding pseudo-element boxes from their resolved insets, and measures each against the nearest glyph's **ink** rather than its font box | **Seven classes, 0 crossings at all nineteen rows.** Floors: margin rule 15.00, column line 7.80, measure line 8.00, measure drop 3.39, corner handle 2.13, registration cross 23.82, drawn rule 6.67px. It also found two faults in itself: the L-shaped handle modelled as its bounding box (37 phantom crossings) and the stacked table's clipped `thead` counted as visible type (20 more). Both fixed in the runner |
+| 4 | **The phone rag**: 297, 264, 264, 171, 249, 224, 208 at 375, so line four was 58 per cent of line one; at 414 line four jutted 50px past line one and line five pulled back 134px | One step of negative tracking below 768, `-0.045em`, chosen as the smallest value that brings the sentence under Chrome's six-line ceiling for `text-wrap: balance` at the narrowest phone row. See Departures for what was measured and rejected first | 375: **268, 239, 239, 315, 196, 271** in six lines. 414: **274, 349, 304, 333, 309** in five. Standard deviation of the line widths falls from 38.9 to 36.6px at 375 and from 41.1 to 25.7px at 414; the worst interior line rises from 58 to 62 per cent at 375 and from 62 to **79 per cent** at 414, and the block is one line shorter at 360 to 390 and at 402 to 430, two shorter at 393, and one shorter at V10 |
+| 5 | **Two utility links took 28px targets below 359px**, under the builder brief's 44px rule (Astra) | The `min-height: 28px` is gone; the header row grows instead, which is the right trade on the reflow row, where the fold rule does not apply. The skip link, 40px at the first build and listed by the same runner report, is 44 too | **44px** for both links and the skip link at every row. The runner's "Interactive targets under 44px" table now lists nothing but inline sentence links, which WCAG 2.5.8 exempts. V18's header is 89px rather than 57 |
+| 6 | **The grid had two weights**: 1.42:1 on `--color-surface` against 3.27:1 on navy, so the page's signature device changed strength chapter to chapter | Both line classes are now specified as a **ratio against the ground they are drawn on**, mixed from the token that already carries the role | Grid **3.10 / 3.12 / 3.12:1**; drawn rules **3.63 / 3.58 / 3.58:1**. One weight each, a half-step apart on every ground |
+| 7 | **The estate comparison was argued from a property table**, and three rationale figures were wrong | `qa/estate-side-by-side-390.jpg` and `qa/estate-side-by-side-1440.jpg` compose the estate's own captures beside V9 and V16. The visible-line ranges are corrected to 23 to 24 and 65 to 70; the ascender is corrected to the descender, in this file and in the stylesheet's own comment | The mark skew is corrected at the **cause** rather than in prose: the runner reported "unknown / n/a" for the GT Anywhere mark because the two footer marks carried `loading="lazy"`, which was also a silent departure from the brief's "both eager". With that removed the runner reports **horizontal, 0%** for all three files |
+
+**Also fixed, from Astra's card, not in the seven above.** The short-height query set `gap` on the
+doors and so tightened the 32px construction gutter as well as the row gap, which put door two 12px off
+the column-seven line at 1366 by 648 and 1024 by 576 and falsified this file's own alignment claim; it
+sets `row-gap` now, and door two's left edge measures 699 against a column line at 699 (V15), 528
+against 528 (V13 and V19), 736 against 736 (V16), with the drop dead centre of the gutter at each. The
+run-in label's colon was `visually-hidden`, so a sighted reader on the phone read "Georgetown Campus
+Two hours of mastery academics" as one run-on string; it is visible now, which adds punctuation and no
+word. The `86rem` sheet comment claimed 1376px was the sheet at 1440, where the sheet measures 1344 and
+the cap binds from 1472; `exeter-1440.jpg` is corrected to `exeter-1440-full.jpg`; the byte count is
+re-measured. One row had to be re-earned: with the sentence a line shorter, 412 by 839 left 27px of
+padding at the bottom edge and the runner called a false floor, so the first screen's bottom padding is
+one step less than a chapter's own.
+
+**What I judged wrong and did not do.**
+
+| Not done | Why |
+|---|---|
+| **`text-wrap: pretty` at the seven-line band**, the critique's first suggestion for the rag | Measured, and it is a **no-op** for this sentence: per-line widths identical to the raw wrap at every phone row, because Chrome's `pretty` only rescues a short last line and this one is already 58 per cent of the measure. Reported rather than applied, because a rule that does nothing is worse than no rule: it reads as a fix |
+| **"Bind one more phrase"**, the critique's second suggestion | Measured 211 binding sets — none, every single adjacent pair and every pair of those — across ten phone rows. The best moved the mean per-line deviation from 41.2 to 39.2px and left the worst interior line at 57 per cent, which is not a fix. No binding is in the page beyond the one that was already there |
+| **Hyphenation** | It reaches six lines at 375 with a better spread, and it breaks "person" as "pers-on". Rejected on the render |
+| **Evening the rag at 360 to 393 any further** | It cannot be done with this sentence at this measure. At 23 characters a line, "Georgetown," is 43 per cent of a line, and across 13 tracking steps from 0 to -0.06em, 147 combinations of tracking and binding, and a sweep of the measure from 76 to 100 per cent of the column, **nothing raises the worst interior line above 62 per cent** at those widths (narrowing the measure is worse: it reaches eight lines with an 84px line). The tracking takes 375 from seven lines to six and from 58 to 62 per cent; 414 to 430 gets the real win. Saying so is better than claiming a fix |
+| **Widening the corner handle's 7px offset** | The extended harness puts its true floor at 2.13px, against the descender of the h1's last line at 1366 by 648 — tight, and positive at every one of the nineteen rows, with the crop looked at. Moving it would also move the one device that reads as "selected on a canvas" further from the thing it selects. The asserted 4px is corrected to the measured 2.13px instead |
+| **Drawing the grid through the comparison table**, and four columns rather than two between 768 and 1023 (Fable, Composition) | Both are brief amendments, not defects: the brief fixes the column counts ("at 2 columns from 768 to 1023") and the table's cells knock the grid out the way every other part does. Raised here with the capture attached, as the critique itself asked, rather than changed silently |
+| **An Inconsolata footer navigation** (Astra, Continuity) | The estate's uppercase mono voice is already carried by every annotation on this page; putting it on the footer links too would make the footer a fifth register and would set navigation labels in a face this contract reserves for annotations, labels and buttons. A Nari decision, not a build one |
+| **The specimen number and the per-door fold position** | Both rulings stand and are unchanged: the wordless registration cross is the right shipping form for a mock-only device, and a fold position is a property of the viewport, so a no-JavaScript mock can hard-code only one and the annotation would be false at eighteen of nineteen rows. `qa/fold.md` carries both doors' positions at all nineteen rows |
