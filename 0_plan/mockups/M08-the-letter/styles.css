@@ -69,12 +69,20 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
   .door-cta { margin-top: var(--space-4); }
 }
 
-/* Short laptop rooms (from 768 wide, under 700 tall: V15, V19) keep the letter form with the vertical gaps at 8px. */
+/* Rooms under 800 tall from 768 wide (V13, V14): the letter closes sooner after the postscript so the comparison band's top edge
+   is cut by the viewport bottom and the first screen does not end on a false floor (compare hairline at 679 of 720 at V14). */
+@media (min-width: 768px) and (max-height: 799px) {
+  .letter { padding-bottom: var(--space-3); }
+  .postscript { margin-top: var(--space-4); }
+}
+/* Short laptop rooms (from 768 wide, under 700 tall: V15, V19) keep the letter form with the vertical gaps at 8px; the
+   comparison band then starts at 631 of 648 at V15. */
 @media (min-width: 768px) and (max-height: 699px) {
-  .letter { padding-top: var(--space-3); }
+  .letter { padding-top: var(--space-3); padding-bottom: 0; }
   .provenance { margin-top: var(--space-3); }
   .rule { margin: var(--space-3) 0; }
   .door + .door { margin-top: var(--space-3); }
+  .postscript { margin-top: var(--space-3); }
 }
 
 /* Compact door rule (CONTRACT section 2): phone rows under 700px tall, and also under 375px wide where the seven-line h1 and
@@ -94,6 +102,15 @@ h1 { font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 3
   .door-line { display: block; }
   .door-line-name { display: inline; margin-right: 0.5em; }
   .door-cta { margin-top: 0; margin-bottom: var(--space-4); }
+}
+
+/* Phone rows between 640 and 699 tall (V3 664, V4 659, V7 681): the two moved door lines sit closer to the second CTA and to
+   each other (16 and 12px), so the second paragraph starts inside the viewport and is cut by its bottom edge instead of the
+   first ending just above it (a false floor measured at 655 of 664 and 659). Only the last door's CTA margin changes (the gap
+   below the second CTA), so neither CTA moves. */
+@media (max-width: 767px) and (min-height: 640px) and (max-height: 699px) {
+  .door:last-child > .door-cta { margin-bottom: var(--space-2); }
+  .door > .door-line { margin-top: var(--space-2); }
 }
 
 /* Phone landscape (CONTRACT section 2 recipe, V10 750 by 342): the h1 steps down to --text-xl without the 35ch cap on this row

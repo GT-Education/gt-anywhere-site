@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Brief | `0_plan/kb/briefs/M08.md` under `0_plan/kb/briefs/CONTRACT.md` v2.1 |
-| Built | 2026-09-11, design engineer (Fable fork), one build pass with the runner in the loop (`0_plan/tools/shots.mjs`, Chromium 153 from the npx Playwright cache); iteration 1 the same day after both critics (`0_plan/ensemble/critic-fable-M08.md`, `critic-astra-M08.md`): V10 recipe, the h1's own measure, marks at K12 G4 sizes, roman caption, eager footer marks, the corrections listed under Self-check |
+| Built | 2026-09-11, design engineer (Fable fork), one build pass with the runner in the loop (`0_plan/tools/shots.mjs`, Chromium 153 from the npx Playwright cache); iteration 1 the same day after the first scorecards (`0_plan/ensemble/critic-fable-M08-iter0.md`, `critic-astra-M08-iter0.md`): V10 recipe, the h1's own measure, marks at K12 G4 sizes, roman caption, eager footer marks, the corrections listed under Self-check; iteration 2 after the second scorecards (`critic-fable-M08.md`, `critic-astra-M08.md`, every row at 4 or above): the comparison band cut at V14 and V15, and the corrections listed under Self-check |
 | Files | `index.html`, `styles.css` (tokens through `var()` from `../shared/tokens-v2.css`), this file, `qa/` (runner output: `fold.md`, one screenshot per matrix row, `V2-full.jpg`, `V14-full.jpg`, `V2-rootx2.jpg`, `focus-cta.jpg`, `focus-footer.jpg`, `forced-colors.jpg`) |
 | State | Default state: no photograph (DD-42 option a, RF-25). No JavaScript, no form, no input, no dependency |
 
@@ -30,7 +30,7 @@ The umbrella sentence, verbatim from `copy.md` section 1, is the `h1` (`data-fol
 | Imagery | Default state: none. The photographed state (after RF-25) is specified under Assets and not built | As briefed |
 | Motion | Still. V3 focus instant; V1 door hover instant; V10 native anchor scroll (`scroll-behavior: smooth` inside `prefers-reduced-motion: no-preference` only). Reduced motion: every computed duration 0 (runner, V14) | As briefed |
 | Copy | Sections 0 to 8 verbatim in the order h1, provenance, door 1 label, name, line, CTA, door 2 label, name, line, CTA; no section 9 words (no photograph, so no caption). Headings beyond the slots only from the allowed list: "Two ways to attend" (visually hidden), "Compare the two schools", "What is true of both schools", "How to apply", "Questions before you apply", "Already a GT family?", eyebrows Compare, Proof, Admissions, Connect, Families | As briefed |
-| Conversion | Doors as the two closing actions on the first screen; the postscript compare anchor on the first screen at V6, V9, V11 to V14, V16 and V17 and just below the fold on the other rows (V5: top 697 against 691; V15: 655 against 624; the compact phone rows put the two moved door lines before it), within the first two screens everywhere; table with repeated values (DD-43); four proof facts; steps with two application links; four secondary CTAs (R14 tour label); current families; footer | As briefed |
+| Conversion | Doors as the two closing actions on the first screen; the postscript compare anchor on the first screen at V6, V8 (top 699 of 715), V9 and V11 to V17 (V14 627 to 671 of 696; V15 587 to 631 of 624), just below the fold at V5 (top 697 against 691) and after the two moved door lines on the compact phone rows, within the first two screens everywhere; table with repeated values (DD-43); four proof facts; steps with two application links; four secondary CTAs (R14 tour label); current families; footer | As briefed |
 | Acceptance | Line length at every row from 768 measured in the browser (Self-check): door lines 64 to 65 characters per full line with the run-in opener counted, table cells 48 on average and 56 to 58 at most, facts 56 on average and 69 at most, leads 59 to 60, TEFA body 66, sources line 64 on average and 73 at most, footer facts 42 to 51 on average; h1 four lines of 31 to 35 characters from 768; no orphan in the h1 at V14 or V16 (last line "campus or online from anywhere."); `text-wrap: balance` used within the six-line limit (K2 F-22): it applies at V5 to V19 and is a no-op at the seven-line phone rows, where the no-break space carries the orphan. DD-38 and DD-39 named below | Iteration 1: every required matrix row passes, V10 included; both checkers OK |
 
 ## Fold estimate and measurement (the four rows, plus the rest of the matrix)
@@ -45,7 +45,7 @@ Method: CONTRACT section 2 with this letter's own layout, glyph advances read fr
 | V16 1440 by 900 | 876 | Letter, tall-room spacing | 56 + 48 + h1 4 lines at 46 = 212 + 16 + 22 + 34 + door 1 (3 lines at 20 and 1.5 = 90 + 16 + 44 = 150) + 24 + door 2 (60 + 16 + 44 = 120) = 682 | 682 | 194 |
 | V10 750 by 342 (contract recipe) | 318 | Compact, side by side | 56 + 8 + h1 3 lines at `--text-xl` 24.17 = 83 + 8 + 22 + rule 8 + 2 + 8 = 18 + opener 15 + 8 + CTA 44 = 262 | 262 (both CTAs) | 56 |
 
-The postscript follows at 643 to 687 at V14 (on the first screen; the compare hairline is the band cut) and 714 to 758 at V16. The contract's shared six-line estimate at V2 was one line optimistic for this copy: measured, the sentence is seven lines below 414px wide (M12 measured the same); on the 35ch measure it is four lines at every row from 768, as the contract estimates.
+Next band, measured (iteration 2): in rooms under 800px tall from 768 wide the letter closes 8px after the postscript and the postscript sits 16px under the second CTA (8 and 0 under 700 tall), so at V14 the postscript spans 627 to 671, the comparison band's hairline sits at 679 and the COMPARE eyebrow at 712 to 728, cut by the 720 edge; at V15 the postscript spans 587 to 631, the hairline sits at 631 and the band crosses 648; at V13 the hairline sits at 654 with the eyebrow and h2 visible above 768; at V16 (900 tall, the default spacing) the postscript spans 714 to 758 and the hairline 806, the band crossing 900. On the compact phone rows the band that crosses is a moved door paragraph: at V3 and V4 the first paragraph ended at 655, above both edges (664, 659), and the second began at 671, below them, a false floor the first iteration-2 table showed as "no" and this file wrongly summarised as yes; on phone rows 640 to 699px tall the gap below the second CTA is now 4px and the gap between the two paragraphs 12px (only the last door's CTA margin changes, so neither CTA moves), and measured the second paragraph spans 651 to 759 at V3 and 651 to 760 at V4, crossing both edges; V7 621 to 729 crossing 681; V1 693 to 801 crossing 740; V2 544 to 680 crossing 629. The runner's "Next band cut" column reads yes on V1 to V17 and V19; V18 (320 by 256, the reflow row) reads no by construction, because nothing that starts below the second CTA (599) can begin inside a 256px viewport, and DD-44 exempts that row from the fold rule. The contract's shared six-line estimate at V2 was one line optimistic for this copy: measured, the sentence is seven lines below 414px wide (M12 measured the same); on the 35ch measure it is four lines at every row from 768, as the contract estimates.
 
 Every other row, from `qa/fold.md` (header 56 on every row but V18, where the bar wraps to two rows at 320 and measures 92): V1 510 of 716 (compact by width); V3 515 of 640; V4 515 of 635; V6 665 of 815; V7 485 of 657 (compact); V8 667 of 715; V9 693, page height 6507 (emptiness row, not a fold test); V11 617 of 1000; V12 624 of 1170; V13 586 of 744; V15 579 of 624 (letter form with the short-room gaps); V17 682 of 936; V18 599, no horizontal scroll at 320; V19 546 of 552 (letter form, reported not required). "Next band cut" is yes on every row, so no row ends on a false floor.
 
@@ -129,13 +129,13 @@ Fonts: two preloads, Literata 400 and Inconsolata 600, the two faces that paint 
 | Apply links as filled navy buttons; door CTAs bordered | The brief sets bordered text buttons for the doors; the contract's primary CTA (navy fill, on-navy text) is kept for the two application links so the conversion point is the page's one filled element |
 | The accent rule at 2.38:1 against `--color-bg` | The brief asks for a short `--color-accent` rule; K3 section 5f allows it only as decoration with no meaning, so it is `aria-hidden` and carries none. The one accent event on the first screen |
 | New tints `--color-border-strong` and `--color-text-muted-on-dark` (DD-39 proposed) | Resting underline colours only; text colours stay in layer 1 |
-| Values outside the token set | Breakpoints 374, 699, 768, 800 and 900px; 1px hairlines; the 2px focus ring and 2px accent rule; 44px targets and 3.5rem rows; the 10rem margin column; `35ch`, `48ch`, `56ch` measures; letter-spacing 0.06 and 0.08em; inline margins 0.4em and 0.5em; underline offset 0.16em; `fit-content` |
+| Values outside the token set | Breakpoints 374, 400, 600, 640, 699, 767, 768, 799, 800 and 900px; 1px hairlines; the 2px focus ring and 2px accent rule; 44px targets and 3.5rem rows; the 10rem margin column; `35ch`, `48ch`, `56ch` measures; letter-spacing 0.06 and 0.08em; inline margins 0.4em and 0.5em; underline offset 0.16em; `fit-content` |
 | `display: contents` on the door list items in the compact form, with explicit `role="list"`/`role="listitem"` | The only CSS-only way to move both door lines after the second CTA while the DOM keeps opener, line, CTA per door; the roles guard list semantics where `display: contents` drops them |
 | Duplicated wayfinding words hidden from assistive technology: the door name at the head of each moved paragraph (`.door-line-name`, `aria-hidden`), the school name in each table cell (`.cell-school`, `aria-hidden`) | Both are the contract's own devices (a fixed slot reused as the run-in label; DD-06's stacked cells labelled by school). Screen readers already hear the name in the opener and the column header |
 | ARIA table roles on a real `<table>` | The table is displayed as blocks and grids; the roles keep row and column semantics where browsers drop them |
 | `overflow-wrap: break-word` on `body`; `minmax(0, 1fr)` grid tracks | The runner's doubled-root check at V2 found "Georgetown,", "conversation." and "community.gt.school." spilling past a 279px column at a 32px root; these stop the horizontal scroll (1.4.10) and change nothing at normal sizes |
 | V10 recipe: the h1 at `--text-xl` (24.17px) without the 35ch cap on that row only; gaps at `--space-3`; compact door blocks side by side | CONTRACT section 2's phone-landscape recipe. Measured 262 of 318 with both CTAs on one band. `--text-2xl` would also fit (estimated 274 to 306) but the contract names `--text-xl` |
-| Footer marks load eagerly (no `loading="lazy"`) | Measured: with the two SVG marks lazy, `img.decode()` never settled (6s timeout before and after the runner's scroll walk; `complete: false`), which stalled the runner's full-page capture and is why the first captures showed no GT Anywhere mark. Eager, every decode resolves in 1ms. `BUILDER-BRIEF.md` rule 13 asks for lazy loading below the first screen; `check-mocks.py` R13 exempts SVG logos, and the two files are 8 and 10 KB |
+| Footer marks load eagerly (no `loading="lazy"`) | Measured during iteration 1: with the two SVG marks lazy, `img.decode()` did not settle within 6s before or after a scroll walk (`complete: false`), which is why the first full-page captures showed no GT Anywhere mark; eager, every decode resolves in 1ms. The current `shots.mjs` sets every image eager and races each decode against a 3s timeout before its full-page captures, so the runner no longer depends on this; the marks stay eager so the two brand images are present in any capture and on first paint of the footer. `BUILDER-BRIEF.md` rule 13 asks for lazy loading below the first screen; `check-mocks.py` R13 exempts SVG logos, and the two files are 8 and 10 KB |
 | All multi-line prose below the letter in Literata 400: table cells, proof facts, steps, the two leads, the TEFA body | The brief names Literata for the door lines only and the contract's role for other multi-line prose is Inter Tight 400 unless the brief says so. One serif voice is the letter; K2 section 5b's own role table sets table cells in Literata 400 at 1.5. Inter Tight keeps the strings: openers, eyebrows, labels, provenance, caption, sources, footer facts |
 | Authored shell (K13 CT4) | The header and footer are authored for this mock, not the `1_spec/04` partials reused by marker. Cost for a third campus: the header is unchanged; the door list takes a third item with no CSS in the letter and compact forms; the phone-landscape recipe places two doors explicitly and needs a third placement rule; the footer nav takes a third pair of links |
 
@@ -153,7 +153,7 @@ Fonts: two preloads, Literata 400 and Inconsolata 600, the two faces that paint 
 | Steps numbering | CSS counters in Inconsolata 600 `tabular-nums`, muted; not text on the page |
 | Secondary CTAs | A hairlined list of four links in Inter Tight 500 with a trailing arrow in the same face; arrows removed from the buttons (Inconsolata's arrow glyph is heavy and the flex box swallowed its space) |
 | Footer link "Current families" | Carries `data-event="families_click"` like the header route |
-| Tall-room spacing | From 768 wide and 800 tall the letter gains air: 48px top padding, 24px between doors, 16px before each CTA (V11, V12, V16, V17) |
+| Room-dependent spacing | From 768 wide and 800 tall the letter gains air: 48px top padding, 24px between doors, 16px before each CTA (V11, V12, V16, V17). Under 800 tall the letter closes 8px after the postscript, which sits 16px under the second CTA, so the comparison band's top edge is cut by the viewport (V13, V14); under 700 tall those become 0 and 8px and the other gaps 8px (V15, V19). On compact phone rows 640 to 699px tall the moved door paragraphs sit 16px under the second CTA and 12px apart (last door's CTA margin 4px, paragraph margin 4px), so the second paragraph is the band the viewport cuts (V3, V4, V7) |
 | `text-wrap` | `balance` on the h1 and h2s, `pretty` on prose below the letter; none on the door lines so the fold sums stay faithful |
 | Sources line | Capped at `56ch` (about 71 characters a line in its own size) so the footnote respects the measure rule |
 
@@ -201,13 +201,15 @@ Rule greps from `BUILDER-BRIEF.md`: `<form` 0, `<input` 0, `<script` 1 (JSON-LD 
 
 390 by 844 (V9, emptiness row): header 56, h1 294, provenance 331, CTA Georgetown 517, CTA Anywhere 693; the two door lines and the postscript follow and the compare hairline is cut by the fold; page height 6507px.
 
-Corrections made in iteration 1 to this file after both critics: `--color-text` on `--color-bg` is 17.69 (K12 F92), not 18.67; K2 P9 is paraphrased, not quoted; one page-size figure; the postscript's position stated per row; Literata for all multi-line prose declared as a departure; the h1 line counts corrected (V7 is six lines, and compact); the header height stated per row (V18 is 92); the FAQ destination and the S5 flag corrected; `ASSETS.md` given its path; RF-07, RF-25, RF-55 and RF-58 live in `0_plan/kb/REGISTER-FOLLOWUPS.md`, not `ID-INDEX.md`.
+Corrections made in iteration 2 after the second scorecards: the first scorecards cited by their `-iter0` names; the runner note about `decode()` retired (the current `shots.mjs` sets eager and races the decode); the postscript placed per row from measurement (on the first screen at V8 and V15); the false-floor sentence at V14 replaced by the measured band positions above; breakpoints 400, 600 and 767 added to the out-of-token values. Then, after the coordinator's check of the pasted table: the V3 and V4 false floors (the first iteration-2 table read "no" on both rows and this file summarised the column as yes without reading them) fixed with the 640 to 699px phone-row spacing, the 640 breakpoint declared, and the "Next band cut" statement rewritten row by row, V18 included.
+
+Corrections made in iteration 1 to this file after the first scorecards: `--color-text` on `--color-bg` is 17.69 (K12 F92), not 18.67; K2 P9 is paraphrased, not quoted; one page-size figure; the postscript's position stated per row; Literata for all multi-line prose declared as a departure; the h1 line counts corrected (V7 is six lines, and compact); the header height stated per row (V18 is 92); the FAQ destination and the S5 flag corrected; `ASSETS.md` given its path; RF-07, RF-25, RF-55 and RF-58 live in `0_plan/kb/REGISTER-FOLLOWUPS.md`, not `ID-INDEX.md`.
 
 Alignment measured after the h1 took its own measure (viewport 900 tall): h1 and prose left edges 69 and 69 at 768, 188 and 188 at 1024, 307 and 307 at 1280, 381 and 381 at 1440; h1 widths 675, 784, 875, 932; four lines at each.
 
 Checker and runner output follow.
 
-### `python3 0_plan/tools/check-mocks.py 0_plan/mockups/M08-the-letter --all` (iteration 1)
+### `python3 0_plan/tools/check-mocks.py 0_plan/mockups/M08-the-letter --all` (iteration 2, final)
 
 ```
 ## M08-the-letter: 36 pass, 0 fail
@@ -245,13 +247,13 @@ Checker and runner output follow.
   PASS R18 provenance line once — 1 occurrences
   PASS R19 compare anchor before the table
   PASS R16 real logos in header and footer — GT School and GT Anywhere logo SVGs required
-  PASS R14 size under 1 MB — 30 KB
+  PASS R14 size under 1 MB — 31 KB
   PASS R15 rationale sections
 
 check-mocks: OK
 ```
 
-### `python3 1_spec/tools/check-claims.py 0_plan/mockups/M08-the-letter/index.html` (iteration 1)
+### `python3 1_spec/tools/check-claims.py 0_plan/mockups/M08-the-letter/index.html` (iteration 2, final)
 
 ```
 ## 0_plan/mockups/M08-the-letter/index.html
@@ -268,9 +270,9 @@ check-mocks: OK
 check-claims: OK
 ```
 
-### `node 0_plan/tools/shots.mjs 0_plan/mockups/M08-the-letter --all` (`qa/fold.md`, verbatim, iteration 1)
+### `node 0_plan/tools/shots.mjs 0_plan/mockups/M08-the-letter --all` (`qa/fold.md`, verbatim, iteration 2, final)
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`; 2026-09-11T09:18:47.250Z; page `/0_plan/mockups/M08-the-letter/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9833c18b2d85bc59/node_modules/playwright`; 2026-09-11T10:25:47.706Z; page `/0_plan/mockups/M08-the-letter/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -291,7 +293,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/9
 | V15 | 1366 by 648 | fold | 624 | 56 | 270 | 300 | 459 | 579 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 316 | 354 | 538 | 682 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 316 | 354 | 538 | 682 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 508 | 599 | yes | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 92 | 356 | 414 | 508 | 599 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 242 | 272 | 428 | 546 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -304,7 +306,7 @@ PASS: no horizontal scroll at 375 with a 32px root.
 
 ## Focus and forced colours
 
-Captures: focus-cta.jpg (first door CTA focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
+Captures: focus-cta.jpg (first door CTA focused); focus-plate.jpg (header lockup link focused); focus-footer.jpg (GT Anywhere footer link focused); forced-colors.jpg (forced-colors: active at V14). The critics judge these by eye.
 
 ## Console
 
@@ -312,7 +314,7 @@ PASS: no console errors.
 
 ## Result: all required rows pass
 
-Every required row passes. Captures for every row are in `qa/`; `focus-cta.jpg` shows the 2px `--color-focus` ring at 2px offset on the first door CTA, `focus-footer.jpg` the two-colour ring on the GT Anywhere footer link (the on-navy inner band visible against navy) with both marks at 32px beside it, `forced-colors.jpg` the page under `forced-colors: active` (system-colour outlines on the buttons, the accent rule gone, both text and links legible). Runner note for the director: `shots.mjs` awaits `img.decode()` on every image before the V2 and V14 full-page captures; a `loading="lazy"` image that has not started loading returns a promise that never settles, so the runner stalled on this mock until the footer marks were made eager. Any mock with lazy photographs below the fold will stall the same way unless the runner sets `loading` to `eager` or races the decode against a timeout.
+Result line: all required rows pass. "Next band cut" reads yes on V1 to V17 and V19, and no on V18 (320 by 256: the reflow row, exempt from the fold rule under DD-44; the runner's band test needs an element that starts below the second CTA at 599 and begins inside a 256px viewport, which cannot exist). Captures for every row are in `qa/`; `focus-cta.jpg` shows the 2px `--color-focus` ring at 2px offset on the first door CTA, `focus-footer.jpg` the two-colour ring on the GT Anywhere footer link (the on-navy inner band visible against navy) with both marks at 32px beside it, `forced-colors.jpg` the page under `forced-colors: active` (system-colour outlines on the buttons, the accent rule gone, both text and links legible).
 
 ### Line length, measured in the browser (characters per rendered line, last line of each element excluded)
 
