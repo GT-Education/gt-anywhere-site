@@ -1,0 +1,228 @@
+/* M24 One at a Time. Design engineer build, 2026-09-11 (Fable fork; the runner, not a browser tool, drives).
+   Brief: 0_plan/kb/briefs/M24.md under CONTRACT.md v2.1, borrowing rule DD-48. Tokens: ../shared/tokens-v2.css
+   (layer-2 tokens named in RATIONALE.md under DD-38, DD-39, MN-16). Every colour, face, size, space, radius and
+   duration is a var(); no raw hex anywhere. The values outside the token set (1px and 1.5px rules, 2px focus
+   bands, the 44px target floor, letter-spacing, ch measures, SVG geometry, the breakpoints and height queries,
+   --header-h, --fold-tail, --obj-size) are listed in RATIONALE.md, Departures.
+   Nothing animates: no transition, no keyframe rule at all (V1 and V3 instant; V6 absent while D-039 is undecided).
+   The forced-colours block is last in the file, deliberately (M07's lesson). */
+
+:root {
+  --h1-weight: 400;        /* DD-38 test: set 300 to compare Literata Light against Regular on the fixed copy */
+  --header-h: 3.5rem;      /* the measured header height, 56px; the first screen subtracts it from the viewport */
+  --fold-tail: 1rem;       /* the first screen stops 16px short of the bottom edge so the beats' opening rule shows */
+  --obj-size: min(20rem, 72vw); /* one drawn object per beat, at most 320px square (brief); vw-bounded so a doubled root font cannot overflow 375 */
+  --beat-air: var(--space-8);   /* 64px of clear space above and below the object on phones */
+}
+@media (max-width: 429px) { :root { --header-h: 5.75rem; } } /* measured: the lockup holds K12 V2's 27px floor and the two utility links do not fit beside it, so the header takes two rows (92px) up to 429 */
+@media (min-width: 1024px) { :root { --beat-air: var(--space-10); } } /* 96px at 1024 and above (brief) */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } } /* V10 anchor scroll, native */
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-prose); overflow-wrap: break-word; }
+img { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+p, h1, h2, h3 { margin: 0; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+a { color: inherit; }
+em { font-family: var(--font-serif); font-style: italic; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.wrap { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--space-5); }
+@media (min-width: 768px) { .wrap { padding-inline: var(--space-6); } }
+.arrow { flex: none; }
+
+/* ---------- Surfaces and focus (K3 sections 5c and 5d; DD-39 proposed roles) ---------- */
+.on-navy { background: var(--color-navy); color: var(--color-on-navy); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+/* Over navy and on anything straddling it (the footer's GT School plate): CONTRACT.md section 4's two-colour ring,
+   a 2px --color-navy inner band and a 2px --color-on-navy outer band; 14.58 between the bands, so one band clears
+   3:1 on any ground (K3 F10). The navy door CTAs sit ON a light ground, so they keep the light-surface ring above:
+   the two-colour ring was tried on them and is invisible there, its near-white outer band measuring 1.02:1 on cream. */
+.on-navy :focus-visible, .plate:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 0; box-shadow: 0 0 0 4px var(--color-on-navy); }
+
+/* ---------- Skip link and header ---------- */
+.skip-link { position: absolute; top: -999px; left: var(--space-4); z-index: 10; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); border: 2px solid var(--color-focus); font-weight: 500; }
+.skip-link:focus { top: var(--space-4); }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); min-height: var(--header-h); }
+@media (max-width: 429px) { .header-inner { min-height: 0; } }
+.lockup { display: inline-flex; align-items: center; min-height: 44px; }
+.lockup img { height: 27px; width: auto; } /* K12 V2: at least 27px at 390 */
+@media (min-width: 768px) { .lockup img { height: 32px; } } /* K12 V2: 32px at 1440 */
+.utility-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-3); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; color: var(--color-text-muted); }
+.utility-nav a:hover, .utility-nav a:focus-visible { color: var(--color-text); text-decoration: underline; text-underline-offset: 0.25em; }
+@media (min-width: 768px) { .utility-nav { gap: var(--space-5); } }
+
+/* ---------- First screen ----------
+   One ground, one axis. The fixed sentence at the top, the choice as the screen's object, the compare line
+   resting on the foot. The screen is sized to stop --fold-tail short of the bottom edge so the beats' opening
+   rule is always visible there; space-between puts the slack into two fields rather than one hole. */
+.first-screen { display: flex; flex-direction: column; padding-block: var(--space-4) 0; min-height: 30rem; }
+@supports (height: 100svh) { .first-screen { min-height: calc(100svh - var(--header-h) - var(--fold-tail)); } }
+@media (min-width: 768px) { .first-screen { padding-top: var(--space-5); } }
+@media (min-width: 1440px) { .first-screen { padding-top: var(--space-6); } }
+/* width 100% and min-width 0 keep this flex item stretched rather than shrink-to-fit: without them the h1's one
+   no-break space ("from anywhere.") sets the item's min-content and the page scrolls sideways at a doubled root font. */
+.first-inner { flex: 1 0 auto; width: 100%; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-5); text-align: center; }
+@media (min-width: 768px) { .first-inner { gap: var(--space-6); } }
+@media (max-width: 767px) and (max-height: 679px) { .first-screen { padding-top: var(--space-3); } .first-inner { gap: var(--space-4); } }
+
+h1 { font-weight: var(--h1-weight); font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 35ch; margin-inline: auto; text-wrap: balance; }
+/* From 768 the h1 is held to eight of twelve columns with 32px gutters, the brief's width: the calc is that grid
+   (8 columns plus 7 gutters of a 12-column content width), and the contract's 35ch cap still binds where it is
+   narrower. Measured: 800px at 1280, 907px at 1440, which are the contract's own 8-column figures. */
+@media (min-width: 768px) { h1 { max-width: min(35ch, calc((100% - 352px) / 12 * 8 + 224px)); } }
+.provenance { margin-top: var(--space-4); font-family: var(--font-serif); font-style: italic; font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
+
+/* Doors: a list that takes three to five entries by adding items (DD-21). Compact blocks on phones per
+   CONTRACT.md section 2; side by side from 768. Label, name, CTA; the lines follow the second CTA on phones. */
+.choice { width: 100%; max-width: 52rem; margin-inline: auto; } /* the choice block holds the h1's own measure, so the screen reads on one axis */
+.doors { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.door { width: 100%; max-width: 22rem; margin-inline: auto; }
+@media (min-width: 768px) { .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); } }
+.door-label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+.door-name { margin-top: var(--space-2); font-size: var(--text-xl); }
+.door-cta { overflow-wrap: anywhere; display: flex; align-items: center; justify-content: center; gap: var(--space-3); min-height: 44px; margin-top: var(--space-3); padding: var(--space-2) var(--space-4); background: var(--color-navy); color: var(--color-on-navy); border-radius: var(--radius-md); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-decoration: none; }
+@media (min-width: 768px) { .door-cta { margin-top: var(--space-4); padding-inline: var(--space-5); } }
+.door-cta:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+
+.door-lines { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); margin-top: var(--space-4); font-size: var(--text-base); line-height: var(--leading-prose); color: var(--color-text-muted); }
+.door-lines li { max-width: var(--measure-prose); margin-inline: auto; }
+.door-run-in { font-weight: 500; color: var(--color-text); margin-right: 0.35em; }
+@media (min-width: 768px) {
+  .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); margin-top: var(--space-5); }
+  .door-run-in { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+}
+
+.compare-lead { font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-tight); }
+.compare-lead a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+.compare-lead a:hover { text-decoration-thickness: 2px; }
+
+/* Short laptops and the 125 percent zoom row (V19, 1024 by 576): the first screen gives back two steps of its
+   gaps so it still stops --fold-tail short of the edge and the beats' opening rule shows rather than 40px of air. */
+@media (min-width: 768px) and (max-height: 620px) {
+  .first-screen { padding-top: var(--space-3); }
+  .first-inner { gap: var(--space-4); }
+  .door-lines { margin-top: var(--space-4); }
+}
+
+/* Phone landscape (V10, 750 by 342): CONTRACT.md section 2's recipe. Tight section padding, the h1 one token
+   smaller across the full content width, the doors side by side; the lines and the compare line follow below
+   the fold. Declared as a departure in RATIONALE.md. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .first-screen { padding-top: var(--space-3); }
+  .first-inner { gap: var(--space-3); }
+  h1 { font-size: var(--text-xl); max-width: none; }
+  .provenance { margin-top: var(--space-3); }
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+  .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); margin-top: var(--space-4); }
+  .door-run-in { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+}
+
+/* ---------- The beats ----------
+   One hairline opens the sequence: the boundary between the choice and the argument, and the ink a reader sees
+   crossing the bottom edge on the rows where the first screen fits. After it, no rules: each beat is one drawn
+   object centred in air, one label and one sentence. The ground never changes until the footer. */
+/* --color-border-strong, not --color-border: this one rule is the ink a reader sees at the bottom edge on the rows
+   where the first screen fits, so it has to clear 3:1 (3.63:1 computed against --color-bg; --color-border is 1.56:1). */
+.beats { border-top: 1px solid var(--color-border-strong); }
+.beat-inner { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: var(--beat-air); }
+.obj { display: block; width: var(--obj-size); height: var(--obj-size); margin-bottom: var(--beat-air); }
+.o-line { fill: none; stroke: var(--color-navy); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.o-fill { fill: var(--color-navy); stroke: none; }
+/* the accent shapes carry a navy hairline of their own, so the shape's boundary is 17.69:1 against the ground
+   even though the fill measures 2.38:1 (K12 F88): the orange emphasises, the outline delimits. */
+.o-accent { fill: var(--color-accent); stroke: var(--color-navy); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.o-mark { fill: none; stroke: var(--color-navy); stroke-width: 8; stroke-linecap: round; }
+.beat-label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); }
+/* the sentence takes the object's own width, so the beat reads as one column and no line runs past 45 characters (measured) */
+.beat-line { margin-top: var(--space-4); font-family: var(--font-serif); font-size: var(--text-base); line-height: var(--leading-prose); max-width: var(--obj-size); text-wrap: balance; }
+
+/* ---------- Second half: the table, the proof, the steps, the connect list, the families bar ---------- */
+.band { padding-block: var(--space-8); }
+@media (min-width: 768px) { .band { padding-block: var(--space-9); } }
+.comparison { border-top: 1px solid var(--color-border-strong); }
+.connect { padding-top: 0; } /* steps and connect share one section gap on the same ground */
+h2 { font-size: var(--text-2xl); max-width: 30ch; }
+h3 { font-size: var(--text-md); }
+
+.compare-table { width: 100%; border-collapse: collapse; margin-top: var(--space-6); }
+caption { text-align: left; font-family: var(--font-serif); font-style: italic; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+thead th { text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: 0 var(--space-4) var(--space-3) 0; border-bottom: 1px solid var(--color-text); }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-4) var(--space-4) var(--space-4) 0; border-bottom: 1px solid var(--color-border); }
+tbody th { width: 20%; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); padding-top: calc(var(--space-4) + 0.4em); }
+tbody td { font-size: var(--text-base); line-height: var(--leading-prose); }
+@media (max-width: 767px) {
+  .compare-table, .compare-table caption, .compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; width: 100%; }
+  .compare-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  tbody tr { padding-block: var(--space-4); border-bottom: 1px solid var(--color-border); }
+  tbody th, tbody td { border: 0; padding: 0; }
+  tbody th { margin-bottom: var(--space-3); font-family: var(--font-serif); font-size: var(--text-md); font-weight: 400; letter-spacing: 0; text-transform: none; line-height: var(--leading-tight); color: var(--color-text); }
+  tbody td + td { margin-top: var(--space-3); }
+  tbody td::before { content: attr(data-label); display: block; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-1); }
+}
+.sources { margin-top: var(--space-5); font-size: var(--text-xs); line-height: var(--leading-prose); color: var(--color-text-muted); max-width: var(--measure-prose); }
+
+.btn { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: var(--space-2) var(--space-5); border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-on-navy); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-decoration: none; overflow-wrap: anywhere; }
+.btn:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+.doors-repeat, .apply { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+.link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; text-decoration: underline; text-underline-offset: 0.2em; }
+
+.tefa { margin-top: var(--space-7); padding: var(--space-5); background: var(--color-anywhere-tint); border-radius: var(--radius-md); max-width: var(--measure-prose); }
+.tefa p { margin-top: var(--space-3); }
+.tefa .link { margin-top: var(--space-2); }
+
+.proof { background: var(--color-surface); }
+.facts { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: var(--space-6); }
+@media (min-width: 768px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-7); } }
+.facts li { padding-block: var(--space-5); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
+
+.steps-intro { margin-top: var(--space-4); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); max-width: var(--measure-prose); }
+.steps-list { counter-reset: step; margin-top: var(--space-6); max-width: var(--measure-prose); }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-8) minmax(0, 1fr); align-items: baseline; padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+
+.connect-list { margin-top: var(--space-6); max-width: var(--measure-prose); }
+.connect-list a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-weight: 500; text-decoration: none; }
+.connect-list li:last-child a { border-bottom: 1px solid var(--color-border); }
+.connect-list a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+
+.families { border-top: 1px solid var(--color-border); }
+.families-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-5); }
+.families h2 { font-size: var(--text-xl); }
+.families p { margin-top: var(--space-2); color: var(--color-text-muted); }
+
+/* ---------- Footer: the page's one change of ground ---------- */
+.site-footer { padding-block: var(--space-8) var(--space-7); }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+@media (min-width: 900px) { .footer-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-8); } }
+.footer-facts { font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted-on-dark); max-width: 48ch; }
+.footer-contact { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; font-size: var(--text-sm); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+.footer-logos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+.footer-logo { display: inline-flex; align-items: center; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); }
+.footer-logo.plate { background: var(--color-bg); margin-left: calc(-1 * var(--space-4)); }
+.footer-logo img { height: 32px; width: auto; } /* K12 V2: 32px at 1440, at least 27px at 390; both marks stand equal at every width */
+.footer-logo--anywhere { padding-inline: 0; }
+
+/* ---------- Reduced motion (MN-16, R8): every duration is --duration-none, elements and pseudo-elements ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Forced colours, last in the file (M07's lesson) ----------
+   Fills and strokes are both forced by the UA, so the drawn objects are re-declared here rather than left to the
+   mapping: one outline per band, filled shapes solid, hairlines hairline. The distinction a reader needs — which
+   segment of the arc is filled, which tiles are filled — is carried by fill against stroke, and survives. */
+@media (forced-colors: active) {
+  :focus-visible, .on-navy :focus-visible, .plate:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+  .o-line { fill: none; stroke: CanvasText; }
+  .o-fill, .o-accent { fill: CanvasText; stroke: none; }
+  .o-mark { fill: none; stroke: CanvasText; }
+  .door-cta, .btn { border: 1px solid ButtonText; }
+  .footer-logo.plate { border: 1px solid CanvasText; }
+}
