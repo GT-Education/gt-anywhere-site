@@ -3,10 +3,10 @@
 | Field | Value |
 |---|---|
 | Cluster | K2 of `18-knowledge-base-plan.md` section 1 |
-| Written | 2026-09-10 |
-| Method | 51 web sources fetched by the agent (text fetch only, no browser, no GT or Alpha page loaded); plus 9 direct measurements of the repository's own font binaries and the macOS system fallback fonts, taken with a purpose-written pure-stdlib TrueType parser (no dependency added) |
+| Written | 2026-09-10; reworked 2026-09-11 after Astra's E4 (see the Rework log, section 8) |
+| Method | 51 web sources fetched by the agent (text fetch only, no browser, no GT or Alpha page loaded), **one partially** — CSS Fonts 4 §5 did not render in the fetched document, so F-52 cites MDN's statement of the same rule instead (OQ-5); plus 10 direct measurements of the repository's own font binaries and the macOS system fallback fonts (M-01 to M-10, M-10 added in the rework). The original scratchpad scripts no longer exist; they were recreated 2026-09-11 with Pillow's `ImageFont` (`fontTools` is not installed in this environment — checked with `python3 -c "import fontTools"`, which raises `ModuleNotFoundError`). Script, inputs and full output table: `0_plan/kb/measurements/K2/` (`measure.py`, `inputs.md`, `output.md`) |
 | Feeds | `mockups/shared/tokens.css` type block; `0_plan/04` section 2; `1_spec/04` section 2; rubric row **Typography** in `17` section 6; QA tests in `1_spec/13` |
-| Status | Draft, Astra E4 pending |
+| Status | Reworked after Astra's E4; scale, weight, role and leading choices are proposals for DD-01/DD-19/DD-36 pending a fixed-copy test (R4), not settled rules |
 
 Two kinds of evidence appear below and are never mixed. **F-numbers** are findings from a fetched
 source and carry a URL, an author and a date. **M-numbers** are values the agent measured directly
@@ -35,7 +35,7 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 | F-04 | Baymard's practitioner range is 50–60 characters after Emil Ruder, "up to 75" acceptable, 80 as the WCAG ceiling; too-short lines are named as a failure in their own right — "if a line is too short the eye will have to travel back too often, breaking the reader's rhythm." Their CSS advice is a `max-width` of "around `70ch` or `34em`" | Edward Scott (Research Lead), Baymard Institute, 2022-05-10, https://baymard.com/blog/line-length-readability |
 | F-05 | Franz widens the web band to "45 to 85 characters (including spaces and punctuation)" and makes the tradeoff explicit: when measure and size fight, "retaining a comfortable font size as much as possible and simply narrowing the column's width instead are better" | Laura Franz, Smashing Magazine, 2014-09-29, https://www.smashingmagazine.com/2014/09/balancing-line-length-font-size-responsive-web-design/ |
 | F-06 | `1ch` is **not one character**: MDN defines it as "the width or, more precisely, the advance measure of the glyph `0` (zero, the Unicode character U+0030) in the element's font", falling back to `0.5em` when unmeasurable. `1ex` is the x-height; `1cap` is the cap height | MDN, *CSS length*, last modified 2026-07-08, https://developer.mozilla.org/en-US/docs/Web/CSS/length |
-| M-01 | Measured advance of `0` versus the mean advance over a 177-character sample of this project's own landing copy: **Literata Regular** `0` = 0.5790 em, mean advance 0.54503 em (ratio 0.941). **Inter Tight Regular** `0` = 0.5781 em, mean 0.49034 em (ratio 0.848). **Inconsolata Regular** 0.5000/0.5000 (ratio 1.000). So `66ch` sets ≈ **70** characters in Literata, ≈ **78** in Inter Tight, exactly 66 in Inconsolata | Measured from `assets/…/697d45ef94e91c0acce00654/*.ttf` (`cmap` + `hmtx` parse). Sample string = the umbrella sentence, both door lines and the full alphabet |
+| M-01 | Re-measured 2026-09-11 (original scratchpad script lost; see Method). Advance of `0` versus the mean advance over a 410-character sample (the umbrella sentence + both door lines + one full upper/lower alphabet, current copy deck — the original's stated 177-character sample is not recoverable at that length; see `measurements/K2/inputs.md`): **Literata Regular** `0` = 0.5790 em, mean advance 0.51186 em (ratio 0.884). **Inter Tight Regular** `0` = 0.5780 em, mean 0.45822 em (ratio 0.793). **Inconsolata Regular** 0.5000/0.5000 (ratio 1.000, unaffected by sample choice — monospace). So `66ch` sets ≈ **75** characters in Literata, ≈ **83** in Inter Tight, exactly 66 in Inconsolata | Pillow `ImageFont.getlength()` at size 1000 on the repo's TTFs (`fontTools` not installed). Script, sample and full output: `0_plan/kb/measurements/K2/measure.py`, `output.md` |
 
 ### 2b. Leading (line spacing)
 
@@ -46,8 +46,8 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 | F-09 | WCAG 2.2 SC 1.4.12 Text Spacing (Level **AA** — mandatory for this project) requires no loss of content or function when the user sets "Line height (line spacing) to at least 1.5 times the font size; Spacing following paragraphs to at least 2 times the font size; Letter spacing (tracking) to at least 0.12 times the font size; Word spacing to at least 0.16 times the font size" | W3C WAI, *Understanding SC 1.4.12*, https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html |
 | F-10 | Franz's rule of thumb for the web: "A good rule of thumb is to set it at approximately 150% of the font size", with more leading for smaller type | Smashing Magazine, 2014-09-29 |
 | F-11 | Capsize's premise: `font-size` does not describe what the reader sees, because the visible cap height is a fraction of the em that differs per face; it computes line-height from `capHeight`, `ascent`, `descent`, `lineGap` and `unitsPerEm` so that spacing is tied to the typeface's real dimensions "rather than arbitrary multipliers" | SEEK, *Capsize*, https://seek-oss.github.io/capsize/ |
-| M-02 | Default (`line-height: normal`) line box, measured as `(hhea.ascender − hhea.descender + lineGap) / unitsPerEm`: **Literata 1.485 em**, **Inter Tight 1.210 em**, **Inconsolata 1.049 em**, Georgia 1.136 em, Arial 1.150 em. The three GT faces disagree with each other by up to 0.44 em at the same `font-size` | Measured from `head` + `hhea` tables of the repo's TTFs and `/System/Library/Fonts/Supplemental/{Georgia,Arial}.ttf` |
-| M-03 | x-height and cap height as a fraction of the em: **Literata** x 0.507, cap 0.701. **Inter Tight** x 0.546, cap 0.728. **Inconsolata** x 0.457, cap 0.623. Consequences: set at the same `font-size`, Inter Tight's lowercase looks **7.7% larger** than Literata's (Inter Tight needs 92.9% of Literata's size to match x-height), and Inconsolata's capitals look **14% smaller** than Inter Tight's (Inconsolata needs **116.8%** of Inter Tight's size to match cap height) | Measured from the `OS/2` table (`sxHeight`, `sCapHeight`) of the repo's TTFs |
+| M-02 | Re-verified 2026-09-11, unchanged. Default (`line-height: normal`) line box: **Literata 1.485 em**, **Inter Tight 1.210 em**, **Inconsolata 1.049 em**, Georgia 1.136 em, Arial 1.150 em. The three GT faces disagree with each other by up to 0.44 em at the same `font-size` | Pillow has no direct `hhea.lineGap` accessor; `ImageFont.FreeTypeFont.font.height` at size 1000 was checked against these five faces and reproduces the original figures to 4 decimal places, including Arial's nonzero lineGap (`ascent+descent` alone omits it — confirmed by comparing the two on Arial, where they differ by 0.032 em). `measurements/K2/measure.py`, `output.md` |
+| M-03 | Re-verified 2026-09-11, unchanged. x-height and cap height as a fraction of the em: **Literata** x 0.507, cap 0.701. **Inter Tight** x 0.546, cap 0.728. **Inconsolata** x 0.457, cap 0.623. Consequences: set at the same `font-size`, Inter Tight's lowercase looks **7.7% larger** than Literata's (Inter Tight needs 92.9% of Literata's size to match x-height), and Inconsolata's capitals look **14% smaller** than Inter Tight's (Inconsolata needs **116.8%** of Inter Tight's size to match cap height) | Pillow has no direct `OS/2.sxHeight`/`sCapHeight` accessor; approximated as `(ascent − getbbox("x" or "H")[top]) / size`, i.e. how far the glyph's ink extends below the ascender line. Reproduced the original figures exactly on first run. `measurements/K2/measure.py`, `output.md` |
 
 ### 2c. Fluid type scales
 
@@ -76,9 +76,9 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 | F-27 | Literata's variable axes as shipped by Google Fonts: **`opsz` 7–72** and **`wght` 200–900** | `google/fonts` `ofl/literata/METADATA.pb`, https://raw.githubusercontent.com/google/fonts/main/ofl/literata/METADATA.pb |
 | F-28 | Documented Literata uses in the wild are editorial and institutional, not marketing: *SIDELINED: A Space to Rethink Togetherness* (2025, Dutch pavilion, Venice Biennale, Gabriel Fontana); *Network Imaginaries* (2021, Hackers and Designers); *RuT – Rad und Tat Berlin* (2023, studiokwi, listed as accessible/barrier-free design); *Posterwomxn* (2021, online magazine); *Tribute to Vietnam's Great Prime Ministers* (2024) | Fonts In Use, https://fontsinuse.com/typefaces/168709/literata |
 | F-29 | Inter's brief: "a typeface carefully crafted & designed for computer screens. Inter features a tall x-height to aid in readability of mixed-case and lower-case text." Text cuts add "ink traps and bridges"; display cuts have "clean lines, smooth curves and delicate details for excellent rhythm of large text" | Rasmus Andersson, https://rsms.me/inter/ and https://github.com/rsms/inter |
-| F-30 | **Inter Tight is the tight-spaced cut, not a body face**: it was "specifically designed for Google Workspace and other applications that do not support control over letter spacing" and shares "the same glyph shapes as Inter" with tighter spacing. Inter itself was released 2017-08-22 "to improve on-screen readability for user interface text, especially at small sizes" and carries an optical-size axis; **Inter Tight does not** | Wikipedia, *Inter (typeface)*, last edited 2026-07-04, https://en.wikipedia.org/wiki/Inter_(typeface); confirmed by `google/fonts` `ofl/intertight/METADATA.pb` (single axis `wght` 100–900, category *Display, Sans Serif*, designer Rasmus Andersson, added 2022-07-22), https://raw.githubusercontent.com/google/fonts/main/ofl/intertight/METADATA.pb |
+| F-30 | **Inter Tight is the tight-spaced cut of Inter**: it was "specifically designed for Google Workspace and other applications that do not support control over letter spacing" and shares "the same glyph shapes as Inter" with tighter spacing. Inter itself was released 2017-08-22 "to improve on-screen readability for user interface text, especially at small sizes" and carries an optical-size axis; **Inter Tight does not**. Google Fonts' own metadata files it under category *Display, Sans Serif*, not *Text*. **Judgment, not established by this citation:** the source describes an origin (a letter-spacing-constrained environment) and a metadata category — it does not state that Inter Tight is unusable for body prose. Whether it reads well at body sizes is a design call this file makes, to be tested on the fixed copy, not a prohibition the source establishes | Wikipedia, *Inter (typeface)*, last edited 2026-07-04, https://en.wikipedia.org/wiki/Inter_(typeface); confirmed by `google/fonts` `ofl/intertight/METADATA.pb` (single axis `wght` 100–900, category *Display, Sans Serif*, designer Rasmus Andersson, added 2022-07-22), https://raw.githubusercontent.com/google/fonts/main/ofl/intertight/METADATA.pb |
 | F-31 | Inter in the wild is overwhelmingly product and UI: Figma, Notion, GitLab, Mozilla, NASA, GNOME, elementary OS; 414 billion Google Fonts accesses in the twelve months to May 2025. Typewolf's independent gallery shows the same pattern — startups, platforms, portfolios — and its one house pairing recommendation for Inter is a serif (Bluu) | Wikipedia, *Inter (typeface)*; Typewolf, https://www.typewolf.com/inter |
-| M-04 | Mean advance over the same 177-character sample: **Literata 0.545 em, Inter Tight 0.490 em** — Inter Tight sets the same sentence **10% narrower** than Literata at the same size, which corroborates F-30's "tighter spacing" claim with a number | Measured, method as M-01 |
+| M-04 | Re-measured 2026-09-11 on the 410-character sample (see M-01): **Literata 0.512 em, Inter Tight 0.458 em** — Inter Tight sets the same sample **≈10% narrower** than Literata at the same size (10.5% on this sample; 10.0% on a prose-only sensitivity check with no alphabet, so the comparison is stable across sample choice even though the absolute means moved from the original 0.545/0.490), which corroborates F-30's "tighter spacing" claim with a number | Pillow `ImageFont.getlength()`, method as M-01 |
 
 ### 2e. Variable fonts
 
@@ -115,15 +115,22 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 
 | # | Measurement | Method |
 |---|---|---|
-| M-05 | The mirror self-hosts **18 raw TTF files totalling 4,506,720 bytes (4.30 MB)**: 8 Literata (248–261 KB each), 7 Inter Tight (305–317 KB each), 3 Inconsolata (~102 KB each). **Zero WOFF2.** gzip at level 9 halves them to 2,193,883 bytes (48.7%) — a conservative proxy, since WOFF2's Brotli plus glyph-aware preprocessing beats generic gzip (F-37) | `find assets -name '*.ttf'`, `os.path.getsize`, `gzip.compress(level=9)` |
-| M-06 | **None of the 18 files is a variable font** — no `fvar` table in any of them; all are `glyf`-flavoured statics | TrueType table-directory parse |
-| M-07 | All 19 `@font-face` blocks in `gt-anywhere.webflow.shared.b79022343.min.css` declare `font-display: swap`; `index.html` contains **zero** `rel="preload"` links | `grep -c` on the mirror |
-| M-08 | Declared weights: Literata 300/400/500/**700** (roman + italic), Inter Tight 300/400/500/**700** (roman + italic, 300-italic missing), Inconsolata 300/400/**600** (roman only). **Neither Literata nor Inter Tight has a 600 face on Anywhere.** The five current mockups write `font-weight: 600` **58 times**; by F-52 those all render at **700**. The live sites' CTA rule asks for Inconsolata 500, which by the same rule falls **down** to 400, not up to 600 | Regex over the shared stylesheet's `@font-face` blocks; `grep -rhoE 'font-weight: ?[0-9]{3}' 0_plan/mockups/M*/` |
-| M-09 | Metric-override sets computed from real metrics (mean-advance ratio for `size-adjust`; the web font's own typo metrics divided by that ratio for the overrides): **Literata over Georgia** — `size-adjust: 107.67%`, `ascent-override: 109.32%`, `descent-override: 28.61%`, `line-gap-override: 0%`. **Inter Tight over Arial** — `95.86% / 101.06% / 25.16% / 0%`. **Inconsolata over Courier New** — `83.32% / 103.10% / 22.80% / 0%`. Each set reproduces the web font's own default line box exactly (1.485 em, 1.210 em, 1.049 em) | Measured, method as M-01 and M-02; formula per F-46 |
+| M-05 | Re-verified 2026-09-11, unchanged. The mirror self-hosts **18 raw TTF files totalling 4,506,720 bytes (4.30 MB)**: 8 Literata (248–261 KB each), 7 Inter Tight (305–317 KB each), 3 Inconsolata (~102 KB each). **Zero WOFF2.** gzip at level 9 halves them to 2,193,883 bytes (48.7%) — a conservative proxy, since WOFF2's Brotli plus glyph-aware preprocessing beats generic gzip (F-37) | Standard library only, no font-parsing tool needed: `os.walk` + `os.path.getsize` + `gzip.compress(level=9)`. `measurements/K2/measure.py`, `output.md` |
+| M-06 | Re-verified 2026-09-11, unchanged. **None of the 18 files is a variable font** — all are static | Pillow raises `OSError` from `get_variation_axes()` on every one of the 18 (a variable font would return axis data instead); no direct `fvar`-presence accessor exists in Pillow, so this exception is the static/variable test. `measurements/K2/measure.py`, `output.md` |
+| M-07 | Corrected 2026-09-11: **18 of the 19** `@font-face` blocks in `gt-anywhere.webflow.shared.b79022343.min.css` declare `font-display: swap`, not all 19 — the 19th is the inline base64 `webflow-icons` glyph font (not one of the three text faces), which sets no `font-display` at all (defaults to `auto`). `index.html` still contains **zero** `rel="preload"` links | Parsed each `@font-face{...}` block with a regex over the CSS text and checked each for `font-display:swap`, rather than a line-count `grep -c` (which undercounts a minified, mostly-one-line file). `measurements/K2/measure.py`, `output.md` |
+| M-08 | Re-verified 2026-09-11, unchanged. Declared weights: Literata 300/400/500/**700** (roman + italic), Inter Tight 300/400/500/**700** (roman + italic, 300-italic missing), Inconsolata 300/400/**600** (roman only). **Neither Literata nor Inter Tight has a 600 face on Anywhere.** The five current mockups write `font-weight: 600` **58 times**; by F-52 those all render at **700**. The live sites' CTA rule asks for Inconsolata 500 (R1-design-tokens.md line 263, the shared `.button`/`.button-2`/`.menu_button` rule), which by the same rule falls **down** to 400, not up to 600 | Regex over the shared stylesheet's `@font-face` blocks; regex `font-weight:\s?[0-9]{3}` over every file under `0_plan/mockups/M*/`. `measurements/K2/measure.py`, `output.md` |
+| M-09 | Re-measured 2026-09-11 with the M-01/M-04 sample (size-adjust changed; ascent/descent/line-gap-override recomputed from the unchanged M-02 figures divided by the new size-adjust, so they moved only slightly): **Literata over Georgia** — `size-adjust: 108.40%`, `ascent-override: 108.58%`, `descent-override: 28.41%`, `line-gap-override: 0%`. **Inter Tight over Arial** — `96.28% / 100.64% / 25.13% / 0%` (the raw output shows −0.10%, which is a single-unit Pillow rounding artifact at size 1000 on a face whose real lineGap is 0, not a measured negative gap). **Inconsolata over Courier New** — `83.33% / 103.08% / 22.80% / 0%`. Each set still reproduces the web font's own default line box (1.485 em, 1.210 em, 1.049 em) | `size-adjust = webfont_mean_advance / fallback_mean_advance` (same sample as M-01/M-04); `ascent-override = webfont_ascent_em / size-adjust`, and likewise for descent and line-gap (Stefanov 2024-12-31, F-46). Confirmed by re-deriving the *original* Literata-over-Georgia figures from this formula before trusting it on new inputs. `measurements/K2/measure.py`, `output.md` |
+| M-10 (new, added in the rework) | Literata Bold (700) sets the same sample **≈6.4% wider** than Literata Regular (0.544 em vs 0.512 em mean advance), not the 5% the file previously cited from a mislabeled M-04 (M-04 is a Literata-vs-Inter-Tight comparison, not a weight comparison — Astra's E4 finding). Used in 5b to justify Literata 400 over 700 for the h1 | Pillow `ImageFont.getlength()` on Literata Regular and Literata Bold, same sample as M-01. `measurements/K2/measure.py`, `output.md` |
 
 ---
 
 ## 3. Principles the studio adopts
+
+Read as reasoning the sources and measurements below support, not as a settled rule set. Where
+a principle assigns a specific role to a specific face (P7 in particular) or a specific number
+(P2, P3, P9), it is a proposal for DD-01/DD-19/DD-36, to be confirmed by testing the fixed copy
+at the QA matrix widths (R4, `KB-RESOLUTIONS.md`) before it becomes a shared rule; briefs may
+choose differently within DD-01's three retained families until that test runs.
 
 | # | Principle | Traces to |
 |---|---|---|
@@ -145,7 +152,7 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 | # | Anti-pattern | Why it is one | Where it already bites GT |
 |---|---|---|---|
 | A1 | Sizing type from `vw` with no `rem` floor, or clamping the maximum below 2× the base | Users cannot reach 200% text — a WCAG 1.4.4 failure (F-16) | Not yet present; the proposed scale is built to avoid it |
-| A2 | Treating `ch` as "characters" | `1ch` is the advance of `0`, which is 6% wider than Literata's mean character and 18% wider than Inter Tight's. A `66ch` column sets 70 and 78 characters respectively — the second is close to the WCAG 80 ceiling (F-03, F-06, M-01) | Any `max-width: 66ch` written from habit |
+| A2 | Treating `ch` as "characters" | `1ch` is the advance of `0`, which is 13% wider than Literata's mean character and 26% wider than Inter Tight's (re-measured 2026-09-11, M-01). A `66ch` column sets 75 and 83 characters respectively — the second **exceeds** the WCAG 80 ceiling, not merely approaches it (F-03, F-06, M-01) | Any `max-width: 66ch` written from habit |
 | A3 | One `line-height` for all three faces | The faces' own line boxes differ by 0.44 em (M-02). The current single `--leading-body: 1.25` under-leads Literata badly | `tokens.css` today |
 | A4 | Body leading below 1.5 | Butterick's 120–145% is a print rule for a controlled measure; on the web F-08 asks 1.5 within paragraphs and F-10 calls 150% the rule of thumb. 1.25 also leaves no headroom for the SC 1.4.12 (AA) 1.5× user override | `--leading-body: 1.25` in `tokens.css` |
 | A5 | Shipping raw TTF | 4.30 MB across 18 files, when the field median font file is 39 KB (F-51) and WOFF2 plus subsetting routinely cuts a Latin face to ~29 KB (F-42) | M-05 — the live Anywhere site today |
@@ -158,6 +165,13 @@ fonts — woff2 subsetting, preload, `font-display`, fallback metric tuning.
 ---
 
 ## 5. How it applies to GT
+
+**Status per R4 (`KB-RESOLUTIONS.md`):** the specific scale steps, display weight, body/UI role
+split and leading below are a proposal for DD-01/DD-19/DD-36, not a necessity this file's
+measurements establish on their own. DD-01's three families stand; the display weight (Literata
+300 or 400), which face carries body prose, and the specific leading values are to be tested by
+rendering the fixed copy at the QA matrix widths before any of them becomes a shared rule. Until
+that test runs, a brief may choose differently within the three families.
 
 ### 5a. The fluid type scale
 
@@ -208,30 +222,37 @@ parser that chokes on `clamp()` still gets a readable page.
 
 All character counts are the real copy from `mockups/shared/copy.md`: the umbrella sentence is
 **132 characters**, door line 1 is **115**, door line 2 is **108**, the longest table cell is
-**155**. `ch` values below already carry the correction factor from M-01 (Literata ×0.941,
-Inter Tight ×0.848, Inconsolata ×1.000), so a stated character target is the number the reader
-actually sees.
+**155**. `ch` values below already carry the correction factor re-measured for M-01 (Literata
+×0.884, Inter Tight ×0.793, Inconsolata ×1.000 — see M-01 for the sample and why these replace
+the original 0.941/0.848), so a stated character target is the number the reader actually sees.
 
 | Element | Face / weight | Size | `max-width` | Leading | Modelled result |
 |---|---|---|---|---|---|
-| **Umbrella sentence (h1)** | Literata 400 (not 700 — M-04 shows bold sets 5% wider and costs a line) | `--text-3xl` | `35ch` (≈ 37 characters) | `1.15` | 6 lines / 186px at 360; 6 / 190 at 390; 4 / 157 at 768; 4 / 212 at 1440 and 1920. `text-wrap: balance` as an enhancement only (A10) |
-| **Provenance line** | Inter Tight 400 | `--text-sm` | `56ch` (≈ 66 chars) | `1.4` | 46 characters — one line at every width |
+| **Umbrella sentence (h1)** | Literata 400 (not 700 — M-10 shows bold sets ≈6.4% wider and costs a line) | `--text-3xl` | `35ch` (≈ 40 characters) | `1.15` | 6 lines / 186px at 360; 6 / 190 at 390; 4 / 157 at 768; 4 / 212 at 1440 and 1920 — not re-simulated in this pass (word-wrap depends on per-word widths, not the mean-character ratio corrected here); treat as a rendered-test item, not a fact this file re-establishes. `text-wrap: balance` as an enhancement only (A10) |
+| **Provenance line** | Inter Tight 400 | `--text-sm` | `56ch` (≈ 71 chars) | `1.4` | 46 characters — one line at every width |
 | **Door name** | Inter Tight 500 | `--text-xl` | none (short) | `1.2` | one line at every width |
-| **Door line** | Literata 400 | `--text-md` | `62ch` (≈ 66 chars) | `1.5` | 4 lines at 360–768, 3 at 1024, 2 at 1440. The cap never binds inside a half-width panel; it exists so a full-width panel cannot exceed the band |
-| **Table cell** | Literata 400 | `--text-base` | cell width | `1.5` | 41 chars/line at 390 (stacked); **25 chars/line at 768 and 37 at 1024 in the two-column layout — both below the 45 floor (F-01, F-05)** |
+| **Door line** | Literata 400 | `--text-md` | `62ch` (≈ 70 chars) | `1.5` | 4 lines at 360–768, 3 at 1024, 2 at 1440 — not re-simulated (see the h1 row's note). The cap never binds inside a half-width panel; it exists so a full-width panel cannot exceed the band |
+| **Table cell** | Literata 400 | `--text-base` | cell width | `1.5` | Recomputed with the new ratio, same modelled column widths as before (390/768/1024 px, held constant): **44 chars/line at 390 (stacked); 27 chars/line at 768 and 39 at 1024 in the two-column layout — all three still below the 45 floor (F-01, F-05)** |
 | **Table row label** | Inconsolata 400, uppercase | `--text-sm`, `letter-spacing: .04em` | — | `1.3` | — |
 | **Button label** | Inconsolata 400 uppercase (**not 500** — M-08) | `--text-btn` | — | `1.15`, `min-height: 44px` | "Explore the Georgetown campus" = 246px of glyphs at 360px; 311px with 20px padding each side and 0.04em tracking. Fits a 328px column with 17px to spare |
 
-Two consequences that are corrections, not preferences:
+Two consequences, recomputed with the new ratio; per R6 (`KB-RESOLUTIONS.md`) neither is a fixed
+rule this file can set on its own — the actual switch point is measured against the fixed copy
+and the available width in the runner, not asserted here as a universal number:
 
-1. **The comparison table must stay stacked to 1199px, not 767px.** The copy deck's current
-   breakpoint puts a 155-character cell into a 232px column at 768px — 25 characters a line, seven
-   lines deep. The two-column layout only clears the 45-character floor at about 1280px. Raise the
-   switch to `min-width: 1200px` or accept a measure no source in this file defends.
+1. **The comparison table's two-column layout clears the 45-character floor later than 768px,
+   and not before roughly the low 1100s px.** The copy deck's current breakpoint puts a
+   155-character cell into a modelled 232px column at 768px — now 27 characters a line (was 25),
+   six lines deep (was seven). Extrapolating the same modelled column-width growth used above, the
+   45-character floor is crossed around **1150px**, not the previously stated 1280px — but per R6
+   this is still this file's model, not a measurement; DD-06's readable stacked-block layout stays
+   the fallback until the actual breakpoint is measured in the runner against the real CSS grid.
 2. **`--leading-body` moves from 1.25 to 1.5 for prose and table cells**, keeping 1.25 only for
    compact UI strings that are never more than two lines. Literata's own default line box is 1.485
-   em (M-02); 1.25 fights the face, and SC 1.4.12 (AA) means the layout must survive the user
-   forcing 1.5 anyway (F-09). Add `--leading-ui: 1.25` rather than overloading one token (A3).
+   em (M-02, unchanged by this rework); 1.25 fights the face, and SC 1.4.12 (AA) means the layout
+   must survive the user forcing 1.5 anyway (F-09). Add `--leading-ui: 1.25` rather than
+   overloading one token (A3). Per R4/DD-36, this leading choice is a proposal to confirm on the
+   fixed copy, not a shared rule yet.
 
 ### 5c. The font-loading plan
 
@@ -284,16 +305,22 @@ nothing (F-38, F-39). Note the field context: `optional` is used by 0.4–0.5% o
 this is a deliberate minority choice, not a default — it is defensible here only because the
 fallback is metric-matched below.
 
-**Fallback stacks with metric overrides.** Measured, not brute-forced (M-09). Each block
-reproduces the web font's own default line box exactly, so the swap moves nothing vertically:
+**Fallback stacks with metric overrides.** Measured, not brute-forced (M-09, re-measured
+2026-09-11). Each block's ascent/descent/line-gap overrides reproduce the web font's own default
+line box, so the swap should not shift the line vertically — that is an overridden-metrics claim,
+not a claim about every glyph. `size-adjust` matches the fallback's *average* advance to the web
+font's; it does not match every individual glyph, so the fallback can still wrap a paragraph
+differently (a different word may fall at the end of a line) even with the vertical metrics
+aligned. Overstating this as "moves nothing" was Astra's E4 finding; the corrected claim is
+vertical-only, and reflow still needs the same rendered check T-K2-7 already asks for:
 
 ```css
 @font-face { font-family: "Literata Fallback"; src: local("Georgia"), local("Times New Roman");
-  size-adjust: 107.67%; ascent-override: 109.32%; descent-override: 28.61%; line-gap-override: 0%; }
+  size-adjust: 108.40%; ascent-override: 108.58%; descent-override: 28.41%; line-gap-override: 0%; }
 @font-face { font-family: "Inter Tight Fallback"; src: local("Arial"), local("Helvetica");
-  size-adjust: 95.86%; ascent-override: 101.06%; descent-override: 25.16%; line-gap-override: 0%; }
+  size-adjust: 96.28%; ascent-override: 100.64%; descent-override: 25.13%; line-gap-override: 0%; }
 @font-face { font-family: "Inconsolata Fallback"; src: local("Courier New");
-  size-adjust: 83.32%; ascent-override: 103.10%; descent-override: 22.80%; line-gap-override: 0%; }
+  size-adjust: 83.33%; ascent-override: 103.08%; descent-override: 22.80%; line-gap-override: 0%; }
 
 --font-serif: Literata, "Literata Fallback", Georgia, "Times New Roman", serif;
 --font-sans:  "Inter Tight", "Inter Tight Fallback", Arial, Helvetica, sans-serif;
@@ -336,8 +363,8 @@ the user's own text settings.
 
 | Test | Assertion |
 |---|---|
-| T-K2-1 | At every matrix width, no text block exceeds its face's 80-character cap (`75ch` Literata, `68ch` Inter Tight, `80ch` Inconsolata) — F-03, M-01 |
-| T-K2-2 | At 390×844 with the root font size doubled, `--text-base` computes to ≥195% of its 100% value; flag anything under 200% for the escalation table — F-16, and the measured 195.5% shortfall in 5f |
+| T-K2-1 | At every matrix width, no text block exceeds its face's 80-character cap (`71ch` Literata, `63ch` Inter Tight, `80ch` Inconsolata — recomputed 2026-09-11 from the re-measured M-01 ratio) — F-03, M-01 |
+| T-K2-2 | At 390 width with the root font size doubled (a stand-in for a user's larger-text setting, not real page zoom — see 5f), every fluid step should clamp to its `rem`-only minimum bound and land at 196–200% of its 100% value; flag anything under 196% for the escalation table — F-16, and the corrected 199.3% figure for `--text-base` in 5f |
 | T-K2-3 | The umbrella sentence renders 4–6 lines at every matrix width, with no final line shorter than two words |
 | T-K2-4 | Exactly two `<link rel="preload" as="font">` elements; both `crossorigin`; both WOFF2 — F-40, F-41 |
 | T-K2-5 | No `@font-face` references a `.ttf`; no page requests a font from a third-party host — F-37, A8 |
@@ -348,7 +375,7 @@ the user's own text settings.
 
 | Item | Cost | Position |
 |---|---|---|
-| `--text-base` reaches only **195.5%** of its original rendered size at 200% zoom on a 390px device (computed: 15.33 + 0.1852×1.95 = 15.69 CSS px against 16.05 at 100%) | A 4.5% shortfall against SC 1.4.4 | Measure it in the browser (T-K2-2). If it fails, the fix is a one-line change: make `--text-xs`, `--text-sm` and `--text-base` fixed `rem` and keep fluidity for `--text-md` and above, which is what F-18 recommends anyway. That conservative variant is the fallback, not a redesign |
+| Corrected 2026-09-11 (Astra's E4 finding: the original 195.5% omitted the clamp minimum). Full working for `--text-base` at 390px, root font size doubled (T-K2-2's model — a stand-in for a larger-text accessibility setting, which changes the root font size but not the viewport width; real browser page zoom is a different mechanism and still needs its own rendered test): at 100%, preferred = 0.9583rem × 16px + 0.1852vw × 3.90px/vw = 15.3328 + 0.7223 = **16.055px**. Doubling the root font size doubles every `rem`-anchored value in the clamp — the min bound (1.0000rem → 32px), the max bound (1.1250rem → 36px), *and* the rem term of the preferred value (0.9583rem → 30.666px) — but leaves the `vw` term unchanged, since the viewport width itself did not move: preferred(200%) = 30.666 + 0.7223 = **31.388px**. Because 31.388px is *below* the doubled min bound of 32px, `clamp()` floors the result at the minimum: the rendered size is **32px**, not 31.388px — the step Astra's item says the original calculation skipped. Ratio = 32 / 16.055 = **199.3%**, not 195.5%. Every other fluid step behaves the same way at 390px (each clamps to its doubled minimum) and lands between 196.2% (`--text-3xl`) and 199.7% (`--text-btn`) — see `0_plan/kb/measurements/K2/output.md` for the per-token table | Effectively no shortfall against SC 1.4.4 at this model (≥196% throughout, not the ≤195.5% originally reported) | This is a CSS-clamp arithmetic model, not a rendered measurement, and it tests a root-font-size change, not real browser page zoom, which shrinks the effective viewport width in CSS px as it zooms and behaves differently again. T-K2-2 still needs to run in an actual browser before this is treated as settled |
 | `--text-3xl` maximum (46px) is below the live sites' 52px h1 | A visible reduction on desktop | Defended: at 52px the umbrella sentence takes 5 lines and 299px in a 768px column (modelled). This is a DD-19 departure and needs a flag, not a silent change |
 | Dropping italics and 300-weights | Removes options | Reversible; re-add a face the moment a mock needs it. Nothing in the copy deck uses italic today |
 | `font-display: optional` on Inconsolata | 0.4–0.5% of the web does this (F-51) | Deliberate minority choice, defensible only with the matched fallback; drop to `swap` if button labels visibly fail to upgrade in testing |
@@ -371,8 +398,10 @@ the user's own text settings.
 
 ## 7. Sources fetched
 
-Fifty-one URLs were fetched for this file. Every finding above names its own; this list exists so
-Astra's E4 pass can check the set rather than re-read the tables.
+Fifty-one URLs were fetched for this file, **one of them partial**: CSS Fonts 4 was reached, but
+its §5 (the section F-52 needed) did not render in the fetched document, so F-52 cites MDN's
+statement of the same normative rule instead (OQ-5). Every finding above names its own source;
+this list exists so Astra's E4 pass can check the set rather than re-read the tables.
 
 Utopia (Gilyead/Mudford): `/blog/designing-with-fluid-type-scales/`, `/type/calculator/`,
 `/blog/clamp-calculator/`, `/blog/css-modular-scales/` · Smashing Magazine: Gilyead & Mudford
@@ -391,14 +420,47 @@ Calendar 2024-12-31 · DebugBear: Hansa 2024-06-06/2025-11-30 · fontTools subse
 CSS API v2 docs, `ofl/literata/METADATA.pb`, `ofl/intertight/METADATA.pb` · rsms.me/inter ·
 github.com/rsms/inter · Typewolf: Inter · Fonts In Use: Literata · Typekit Blog 2016-04-29 (Brown).
 
-**Not fetched, and nothing above rests on them:** `fonts.google.com/specimen/Literata/about` and
-`/Inter+Tight/about` (JavaScript-rendered, returned title only); `fonts.google.com/knowledge/
+**Not fetched at all, and nothing above rests on them:** `fonts.google.com/specimen/Literata/about`
+and `/Inter+Tight/about` (JavaScript-rendered, returned title only); `fonts.google.com/knowledge/
 choosing_type/pairing_typefaces` (same); Tim Brown's *Combining Typefaces* PDF (exceeded the fetch
 size limit); `industrialempathy.com/posts/high-performance-web-fonts` (404); the `googlefonts/
 literata` `DESCRIPTION.en_us.html` (404); `fontsinuse.com/typefaces/119452/literata` (404 — the
-live entry is 168709, which was fetched); CSS Fonts 4 §5 (section did not render).
+live entry is 168709, which was fetched). CSS Fonts 4 itself is not in this list — it is the one
+partial fetch counted in the 51 above, not an unfetched source; only its §5 failed to render.
 
-**Measurement scripts** used for M-01 to M-09 live in this session's scratchpad
-(`ttfmetrics.py`, `avgwidth.py`) and add no dependency to the repository; they parse `head`,
-`hhea`, `OS/2`, `cmap` and `hmtx` with the standard library alone. Re-run them against any rebuilt
-font set before trusting the override values in 5c.
+**Measurement scripts** for M-01 to M-10 no longer live in a session scratchpad. The original
+scripts (`ttfmetrics.py`, `avgwidth.py`) were lost with the authoring session; this rework
+recreated them at `0_plan/kb/measurements/K2/measure.py`, with inputs documented in `inputs.md`
+and the full re-run captured in `output.md`. `fontTools` is not installed in this environment
+(`python3 -c "import fontTools"` raises `ModuleNotFoundError`); Pillow's `ImageFont` is used
+throughout instead, which is already part of this environment, not a dependency newly added to
+the repository. M-02 and M-03's original "parse `head`/`hhea`/`OS/2` directly" method could not
+be reproduced exactly as stated — Pillow has no raw-table accessor for those — but every figure
+either reproduced exactly (M-02, M-03, M-05, M-06, M-08) or was recomputed and updated in place
+(M-01, M-04, M-09, and the new M-10) using the substitute method each row now documents. Re-run
+`measure.py` against any rebuilt font set or copy-deck change before trusting the numbers in 5b,
+5c or 5f.
+
+---
+
+## 8. Rework log (E4)
+
+Every item in Astra's E4 row for K2 (`0_plan/ensemble/E4-knowledge-base.md` section A) and this
+cluster's entry in the rework pack, addressed in order. All of Astra's items checked out against
+the file as described — none is recorded as a disagreement.
+
+| E4 item | What changed | Where |
+|---|---|---|
+| F-30 "Inter Tight is...not a body face" overstates what the citation establishes | Reworded to state the source's facts (origin, metadata category) and labelled the "not a body face" conclusion **Judgment**, to be tested at body sizes rather than treated as established | F-30 (section 2d) |
+| 5b "M-04 shows bold sets 5% wider" cites the wrong measurement (M-04 compares Literata to Inter Tight, not weights) | Added **M-10** (new): Literata Regular vs Bold, measured on the same sample — bold sets the text ≈6.4% wider, not 5%. The h1 row in 5b now cites M-10 | M-04 (section 2d), new M-10 (section 2g), 5b h1 row |
+| 5f zoom figure (195.5%) omits the clamp minimum | Recomputed in full: doubling the root font size doubles every `rem`-anchored clamp bound *and* the preferred value's rem term, but not its `vw` term; the preferred value then falls below the doubled minimum, so `clamp()` floors it there. Corrected result **199.3%**, with the full working shown; noted this is a CSS model, not a rendered browser test. T-K2-2 updated to match and to describe the mechanism (clamps to the minimum, 196–200% across all steps) rather than a single threshold tied to the old figure | 5f, T-K2-2 (5e) |
+| Fallback stacks "reproduce...exactly, so the swap moves nothing vertically" overstates the guarantee | Reworded: the metric overrides guarantee the *vertical* line box only; `size-adjust` matches average advance, not every glyph, so wrapping can still differ. Pointed at T-K2-7 (already existed) for the rendered check | 5c, "Fallback stacks with metric overrides" |
+| Font roles, display weight, leading and fluid scale presented as necessities rather than proposals pending a fixed-copy test (R4) | Added a status note atop section 3 (principles) and a longer one atop section 5 ("How it applies to GT"), naming DD-01/DD-19/DD-36 and R4 explicitly; the header Status field now carries the same framing | Top of section 3, top of section 5, header table |
+| Source count (51, including a partially fetched CSS Fonts 4) needed the partial labelled, not just footnoted | Header Method field and section 7's opening sentence now both state the partial explicitly; removed the confusing duplicate listing of CSS Fonts 4 under "not fetched" (it is the one *partial* fetch inside the 51, not an unfetched source) | Header table, section 7 |
+| Reproducibility: recreate M-01 to M-09's scripts, re-run, make the file's numbers match the output | Recreated under `0_plan/kb/measurements/K2/` (`measure.py`, `inputs.md`, `output.md`), using Pillow (`fontTools` not installed — checked with `python3 -c "import fontTools"`). M-02, M-03, M-05, M-06, M-08 reproduced exactly or matched on the same conclusion; M-01, M-04, M-09 recomputed on a re-derived sample (the original 177-character sample is not recoverable — see M-01 and `inputs.md`) and their new values propagated through every place the file cites them: A2's percentages and character counts; T-K2-1's ch caps; 5b's correction factor, the h1/provenance/door-line character annotations, and the table-cell chars-per-line figures (recomputed holding the same modelled column widths); 5b's point-1 breakpoint discussion (reworded to point to R6 rather than assert a fixed px value); and 5c's fallback-override CSS block. Added M-10 (see above). No number in this file was left citing an M-row that no longer supports it | Throughout; primarily 2a, 2d, 2g, A2, 5b, 5c, 5e |
+
+### Proposed register follow-ups
+
+| Register row | Proposal | Evidence | Recommended by |
+|---|---|---|---|
+| RF-03 | Update the cited advance-correction factors from "Literata 0.941, Inter Tight 0.848" to "Literata 0.884, Inter Tight 0.793" (the figures RF-03 quotes come directly from K2 2a/M-01, re-measured in this rework) | `0_plan/kb/K2-typography.md` section 2a (M-01); `0_plan/kb/measurements/K2/output.md` | Fable |
