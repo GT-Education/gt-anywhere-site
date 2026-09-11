@@ -146,7 +146,7 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
     r('R8 description', bool(re.search(r'<meta[^>]+name="description"', doc, re.I)))
     r('R8 open graph', 'property="og:title"' in doc)
     ld = re.search(r'<script[^>]*ld\+json[^>]*>(.*?)</script>', doc, re.S|re.I)
-    ldt = ld.group(1) if ld else ''
+    ldt = next((b for t, b in blocks if 'ld+json' in (attr(t, 'type') or '')), '')  # the JSON-LD body, read from the script walk
     r('R8 JSON-LD organization', 'EducationalOrganization' in ldt and 'subOrganization' in ldt, '')
     r('R8 JSON-LD no claims', not re.search(r'accredit|faster|SAT|percent', ldt, re.I))
     r('R9 lang', bool(re.search(r'<html[^>]+lang="en"', doc, re.I)))
