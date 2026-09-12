@@ -9,7 +9,7 @@
 
 ## Direction
 
-The reader steps the sequence instead of watching it. Three dot controls move the lockup suffix; nothing is on a timer, so there is no film to sit through and no pause control to need. Built as M31; renumbered to M35 after a concurrent session claimed M31 to M34 the same afternoon.
+The reader steps the sequence instead of watching it. Three dot controls move the lockup suffix; nothing is on a timer, so there is no film to sit through and no pause control to need. Built as M31 and renumbered after a concurrent session claimed M31 to M34 the same afternoon.
 
 ## h1
 
@@ -19,44 +19,69 @@ The h1 is the umbrella sentence from `copy.md` section 1, verbatim and unanimate
 
 | id | How it is applied |
 |---|---|
-| DD-21 | The doors are a `<ul>`; the bracket is built from per-door halves, so a third campus adds a list item and an arm without touching the geometry |
-| CONTRACT v2.1 section 3, "Nesting is hierarchy" | The two schools are **mirrored equal arms with identical terminals**, never concentric rings. Measured at 1440: door centres 360 and 1080, both arms 360px, both drops 32px |
-| CONTRACT v2.1 section 3, 3:1 rule | Every drawn line is `--color-border-strong` (#857f7b). `--color-border` (1.56) and the accent (2.38) are never asked to carry the drawing |
-| MN-10, MN-16 | Transform and opacity only; 100/200/300ms; zero layout shift — the suffix box reserves the widest word so a swap cannot move the page |
-| MN-11 | `prefers-reduced-motion` sets every duration to `--duration-none` and every state stays reachable |
-| MN-12 | The swap is driven by keyboard focus at every width, not by hover alone |
-| REQ-022 | No figure appears outside `copy.md`. The only numbers are 90th percentile, $10,400, four weekends, 9 to noon, two to three hours, weekly |
+| MN-18 | **V11 (lockup suffix swap) is adopted with a condition**: it is provisional until a board is promoted to a full page and passes a full run. **V12 (mark assembly) is refused**, so no board in this wave rotates the mark and M26's timed variant was retired rather than shipped |
+| DD-21 | The doors are a `<ul>`. Honest limit: the bracket arms and the mobile order are written with school-specific selectors, so a third school needs new rules — see Departures |
+| CONTRACT v2.1 §3, "Nesting is hierarchy" | The two schools are symmetric and unnested. Bracket: 360px arms, 32px drops, centres 360 and 1080, mirrored (measured) |
+| CONTRACT v2.1 §3, 3:1 rule | Every drawn line is `--color-border-strong` (#857f7b) at **full opacity**. `--color-border` (1.56) and the accent (2.38) never carry the drawing |
+| MN-10, MN-16 | Transform and opacity only; zero layout shift — the suffix box reserves the widest word, so a swap cannot move the page |
+| MN-11 | `prefers-reduced-motion` sets every duration to `--duration-none`; every state stays reachable |
+| MN-12 | The swap is reachable by keyboard at every width, never hover-only |
+| REQ-022 | No figure outside `copy.md`: 90th percentile, $10,400, four weekends, 9 to noon, two to three hours, weekly |
 
 ## Motion spec
 
-`:target` only, no script (rule 2). A dot control swaps the suffix (200ms) and marks the active step with colour AND a 1.4 scale, so state is never colour-only. Keyboard focus on a door CTA swaps it too, so the stepper is not the only route. The stepper is an enhancement: it is hidden under 760px tall so it can never push a CTA over the fold.
+`:target` only, no script. A dot control swaps the suffix and scales the active dot; keyboard focus on a door CTA also swaps it, so the stepper is not the only route. **There is deliberately no hover swap** — adding one would duplicate M26 and blur the comparison this board exists to make.
 
 | Beat | Trigger | Property | Duration | Easing | Reduced motion |
 |---|---|---|---|---|---|
-| Suffix swap | hover or `:focus-visible` on a door CTA | `opacity`, `translateY(4px)` | `--duration-base` 200ms | `--ease-out` | `--duration-none`, state still changes |
-| Terminal emphasis | same | `transform: scaleY(1.25)` | `--duration-base` | `--ease-out` | `--duration-none` |
+| Suffix swap | `:target` (a dot control) or `:focus-visible` on a door CTA | `opacity`, `translateY(4px)` | `--duration-base` 200ms | `--ease-out` | `--duration-none`, state still changes |
+| Active step | `:target` | `transform: scale(1.4)` plus a navy fill, so state is never colour-only | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
 
-**This move is not in CONTRACT v2.1 section 6.** It is filed as D-031 move V11, "lockup suffix swap" (the timed variant adds V12, "mark assembly"), and **Johnny confirmed D-031 on 2026-09-11** — runbook section 7 names him as the decider. D-039 (scripts) is not engaged: this board is CSS-only.
+Terminals: none. Corona: no.
+
+**Resolution order.** Hover clears every suffix word before showing its own, so a pointer over one door
+while the other holds keyboard focus cannot render two words stacked in the same grid cell. That defect
+was live until Astra and a browser check found it together.
 
 ## Assets
 
-`../shared/img/gt-school-logo-h.svg` (header, real mark, never redrawn) and `../shared/img/gt-icon.svg` (stage, `alt=""` and `aria-hidden` because the header already names the brand). No photographs: DD-42/RF-25 hold every image behind Nari's written permission.
+`../shared/img/gt-school-logo-h.svg` (header, real mark, never redrawn) and `../shared/img/gt-icon.svg`
+(stage, `alt=""` and `aria-hidden` because the header already names the brand). No photographs:
+DD-42/RF-25 hold every image behind Nari's written permission.
 
 ## Departures
 
-**The stage lockup is typographic, not an SVG (DD-19).** No `GTgeorgetown` lockup file exists, and none is
-needed: a word inside a flat SVG cannot be swapped, so the suffix must be live text. It is set in the brand's
-own system — mark, `GT` in navy at 700, suffix in `--color-accent-text` at 400, lowercase — and the header
-keeps the real `gt-school-logo-h.svg`, so rule 16 ("no text wordmark in place of the logo") holds.
-
-`:target` writes a URL fragment. No JavaScript is used.
-
-The board stops after the comparison band rather than carrying sections 4 to 8. That is the R1 stage, declared, not an omission.
+| Departure | Reason |
+|---|---|
+| The stage lockup is typographic, not an SVG (DD-19) | The suffix must change, and a word inside a flat SVG cannot be. It is set in the brand's own system — mark, `GT` navy 700, suffix `--color-accent-text` 400, lowercase — and the header keeps the real `gt-school-logo-h.svg`, so rule 16 holds. **Honest correction:** stacking and crossfading SVG variants would also work, so live text is a design choice, not a technical necessity |
+| **"GTgeorgetown" is not an approved school identity** | The deck names the school "Georgetown Campus", and only a GT Anywhere lockup exists as an asset. The suffix cycle is Johnny's explicit brief. **Flagged for Nari and Holly before any board is promoted** |
+| Values outside the token set | Lockup `line-height: 1.1` and its tracking; bespoke mark sizes (44/56/88/104px); M35's 9px dot and 1.4 scale; the corona/bracket hairline at 1.5px. None is in `tokens-v2.css`; each is geometry rather than a design token, and none introduces a colour |
+| Compact landscape (V10) | The name and supporting line are hidden rather than moved below the CTAs as CONTRACT §2 recipes, and the h1 steps down one token. Both are needed to clear 318px |
+| R1 scope | The board ends after the comparison band: no proof strip, application steps, secondary CTAs, current-families block or footer. Declared, not accidental |
 
 ## Flagged slots
 
-Q-007 application steps, Q-011 tuition, Q-013 after 8th grade, Q-019 outcome figure and Q-033 accreditation are all absent from the page by decision. CR-011, CR-021, CR-022 and CR-032 to CR-035 are "Unverified, public".
+Q-007 application steps and Q-017 logistics are absent because their sections are outside R1 scope.
+**Q-011 (tuition) and Q-013 (after 8th grade) are present**, carrying the deck's agreed wording in the
+comparison band. Q-019 outcome figure and Q-033 accreditation appear nowhere, by decision.
+CR-011, CR-021, CR-022 and CR-032 to CR-035 are all "Unverified, public".
+
+## Parent questions
+
+| # | Parent question | This board |
+|---|---|---|
+| 1 | What is GT School? | Answered: the umbrella sentence |
+| 2 | Who is it for? | Answered: "selective ... gifted and talented" in the sentence; the 90th percentile bar in the comparison band |
+| 3 | In person or online, and where? | Answered: the two doors with place and format |
+| 4 | What is the same and what differs? | Answered: the nine comparison rows |
+| 5 | What does it cost? | Answered: the "Tuition and access" row |
+| 6 | How do I apply? | **Deferred** — the application-steps section is outside R1 scope; each door CTA is one click to its school site |
+| 7 | Accredited, and the outcomes? | **Deferred** — the proof strip is outside R1 scope, and no outcome figure exists to show (Q-019, Q-033) |
+| 8 | How do I reach a human? | Answered in one click: "Contact admissions" in the header |
 
 ## Self-check
 
-`grep -c "<form"` = 0. `grep -c "<script"` = 1 (JSON-LD only). No external requests beyond `../shared/*`. Copy verbatim from `copy.md`. Both door CTAs above the fold at every runner row except where noted in the Runner line above.
+`grep -c "<form"` = 0. `grep -c "<script"` = 1 (JSON-LD only). No external requests beyond
+`../shared/*`. Copy verbatim from `copy.md`, including "Skip to main content" and the deck's row order.
+Skip and compare controls now meet the 44px target the runner does not police. Both door CTAs sit above
+the fold at every runner row.

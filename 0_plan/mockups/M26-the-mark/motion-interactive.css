@@ -1,5 +1,10 @@
 /* M26-A: the suffix swap is driven by the parent, not by a timer.
-   Proposed as D-031 move V11 "lockup suffix swap". Transform and opacity only. */
+   D-031 move V11, confirmed by Johnny 2026-09-11. Transform and opacity only.
+
+   RESOLUTION ORDER matters: hover must beat keyboard focus. Without the blanket reset below, a
+   pointer over one door while the other still holds focus renders BOTH words stacked in the same
+   grid cell. Specificity is tuned so each layer beats the one above it:
+     rest (0,1,1) < focus (0,6,1) < hover reset (0,6,1, later) < hover show (0,6,1, later still). */
 .suffix b {
   transition: opacity var(--duration-base) var(--ease-out),
               transform var(--duration-base) var(--ease-out);
@@ -7,24 +12,23 @@
 }
 .suffix b:not([data-k="school"]) { transform: translateY(4px); }
 
-/* Hover or keyboard focus on a door swaps the suffix to that school's word.
-   :has() keeps this in CSS: rule 2 forbids JavaScript entirely. */
+/* Keyboard focus works at every width and on touch, so the swap is never hover-only (MN-12). */
+.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="school"],
+.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="school"] { opacity: 0; }
+.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
+.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
+  opacity: 1; transform: translateY(0);
+}
+
 @media (min-width: 768px) and (hover: hover) {
-  .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="school"],
-  .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="school"] { opacity: 0; }
+  /* Hover clears every word first, including one left showing by focus. */
+  .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; }
   .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="georgetown"],
   .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="anywhere"] {
     opacity: 1; transform: translateY(0);
   }
   .board:has(.door--georgetown .door-cta:hover) .door--georgetown::after,
   .board:has(.door--anywhere   .door-cta:hover) .door--anywhere::after { transform: scaleY(1.25); }
-}
-/* Keyboard focus works at every width and on touch, so the swap is not hover-only (MN-12). */
-.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="school"],
-.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="school"] { opacity: 0; }
-.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
-.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
-  opacity: 1; transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

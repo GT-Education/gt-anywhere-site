@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:42:57.929Z; page `/0_plan/mockups/M29-the-hub/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:30:58.090Z; page `/0_plan/mockups/M29-the-hub/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V6 | 412 by 839 | fold | 815 | 88 | 417 | 454 | 565 | 676 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 88 | 314 | 343 | 438 | 549 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 285 | 314 | 409 | 520 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 88 | 414 | 451 | 562 | 673 | yes | report: page height 3521 |
+| V9 | 390 by 844 | emptiness |  | 88 | 414 | 451 | 562 | 673 | yes | report: page height 3496 |
 | V10 | 750 by 342 | fold | 318 | 56 | 185 | 210 | 287 | 303 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 360 | 397 | 604 | 580 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 366 | 403 | 587 | 587 | yes | PASS |
@@ -55,16 +55,16 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V7 | yes | text cut by the edge, 664 to 684 |
 | V8 | yes | text cut by the edge, 711 to 741 |
 | V9 | yes | content reaches 833 of 844 and more follows below |
-| V10 | yes | content reaches 342 of 342 and more follows below |
-| V11 | yes | text cut by the edge, 1007 to 1024 |
+| V10 | yes | text cut by the edge, 327 to 347 |
+| V11 | yes | text cut by the edge, 1007 to 1027 |
 | V12 | yes | text cut by the edge, 1177 to 1197 |
-| V13 | yes | content reaches 762 of 768 and more follows below |
-| V14 | yes | content reaches 698 of 720 and more follows below |
-| V15 | yes | content reaches 635 of 648 and more follows below |
-| V16 | yes | text cut by the edge, 851 to 901 |
-| V17 | yes | content reaches 958 of 960 and more follows below |
+| V13 | yes | content reaches 764 of 768 and more follows below |
+| V14 | yes | content reaches 720 of 720 and more follows below |
+| V15 | yes | content reaches 636 of 648 and more follows below |
+| V16 | yes | content reaches 894 of 900 and more follows below |
+| V17 | yes | text cut by the edge, 947 to 982 |
 | V18 | no | not applicable: the last CTA is at 649, past the 256px edge, so there is no gap between it and the fold to judge |
-| V19 | yes | text cut by the edge, 558 to 579 |
+| V19 | yes | text cut by the edge, 559 to 580 |
 
 ## The GT marks under forced colours
 
@@ -83,12 +83,7 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
-| 320 by 256 | Skip to content | 40px | 152px | short control | under 44, above the 24px floor |
-| 320 by 256 | Compare the two. | 20px | 123px | short control | under 24px: check WCAG 2.5.8 spacing |
-| 375 by 629 | Skip to content | 40px | 152px | short control | under 44, above the 24px floor |
-| 375 by 629 | Compare the two. | 20px | 123px | short control | under 24px: check WCAG 2.5.8 spacing |
-| 1440 by 900 | Skip to content | 43px | 167px | short control | under 44, above the 24px floor |
-| 1440 by 900 | Compare the two. | 21px | 139px | short control | under 24px: check WCAG 2.5.8 spacing |
+| all three rows | every interactive target is at least 44px tall | | | | ok |
 
 ## Mark geometry (K12 V2)
 

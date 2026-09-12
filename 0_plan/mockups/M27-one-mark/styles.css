@@ -213,15 +213,6 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
 
 @media (max-height: 400px) and (min-width: 600px) { .stage { display: none; } }
 
-/* At the widest rows the airy direction leaves the band short; taller rows put real ink in the
-   reserved 24px strip instead of ending high. */
-@media (min-width: 1440px) {
-  .cmp th, .cmp td { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-  /* At 1920 by 960 the door lines end at 934 and the anchor fell to 961, just past the edge, leaving
-     the reserved 24px strip empty. Pulling the anchor up puts real text in it and cuts it at the edge. */
-  .compare-anchor { margin-top: var(--space-3); margin-bottom: var(--space-3); }
-  .sources { margin-top: var(--space-6); }
-}
 
 
 /* Correction, 2026-09-11, and it reverses an earlier one of mine. The per-plate focus rules above
@@ -240,4 +231,37 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
    rules above, which are left in place as the record of what was tried. */
 @media (forced-colors: active) {
   :focus-visible { outline-color: CanvasText; }
+}
+
+/* Rule 11 target size: the runner only fails undersized DOOR CTAs, so these two controls passed a
+   green run while sitting at 40-43px and 20-21px (Astra E-wave, rule 11). */
+.skip { min-height: 44px; display: inline-flex; align-items: center; }
+.compare-anchor a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* One rhythm for the band opening, replacing four rounds of per-board nudging. The runner needs ink
+   inside the bottom 24px AND something crossing the edge; a loose gap between the anchor and the
+   heading leaves that strip empty at whatever viewport height happens to land there. Packing
+   border -> heading -> caption -> first row into ~120px puts ink at many positions, so the rule holds
+   across rows instead of at the one row that was last tuned. The band opening is packed. */
+.compare-anchor { margin: var(--space-4) 0 var(--space-3); }
+.next-band { padding-top: var(--space-4); }
+.next-band h2 { margin-bottom: var(--space-2); }
+.cmp { margin-top: var(--space-3); }
+.cmp caption { padding-bottom: var(--space-2); }
+
+/* V10 ink, not box: the compare control is now a 44px target, but its text is centred in that box, so
+   at 750x342 the box crossed the fold while the INK sat below it and the reserved strip read empty.
+   Pull it up so the text itself lands in the strip. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .compare-anchor { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+}
+
+/* M27 only: its airiness leaves the 1920x960 strip empty by a single pixel (ink ended at 934, the
+   strip starts at 935). Lifting the band heading puts real text in the strip. */
+@media (min-width: 1440px) {
+  .compare-anchor { margin-top: var(--space-3); margin-bottom: var(--space-2); }
+  .next-band { padding-top: var(--space-2); }
+  /* The 44px target centres its text, which put the anchor's INK below 960 while its box crossed the
+     edge. Top-aligning keeps the target size and lands the text inside the reserved strip. */
+  .compare-anchor a { align-items: flex-start; }
 }

@@ -242,9 +242,26 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
 @media (max-height: 760px) { .steps { display: none; } }
 @media (max-width: 400px) { .steps { margin-top: var(--space-3); } }
 
-/* At 1920 by 960 the band heading's BOX ended at 935 but its ink stopped ~15px higher: Literata stands
-   0.1675em proud of its line box (CONTRACT v2.1 section 3). Pushing the band down puts ink in the strip. */
-@media (min-width: 1440px) {
-  .compare-anchor { margin-bottom: var(--space-6); }
-  .next-band { padding-top: var(--space-6); }
+
+/* Rule 11 target size: the runner only fails undersized DOOR CTAs, so these two controls passed a
+   green run while sitting at 40-43px and 20-21px (Astra E-wave, rule 11). */
+.skip { min-height: 44px; display: inline-flex; align-items: center; }
+.compare-anchor a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* One rhythm for the band opening, replacing four rounds of per-board nudging. The runner needs ink
+   inside the bottom 24px AND something crossing the edge; a loose gap between the anchor and the
+   heading leaves that strip empty at whatever viewport height happens to land there. Packing
+   border -> heading -> caption -> first row into ~120px puts ink at many positions, so the rule holds
+   across rows instead of at the one row that was last tuned. The band opening is packed. */
+.compare-anchor { margin: var(--space-4) 0 var(--space-3); }
+.next-band { padding-top: var(--space-4); }
+.next-band h2 { margin-bottom: var(--space-2); }
+.cmp { margin-top: var(--space-3); }
+.cmp caption { padding-bottom: var(--space-2); }
+
+/* V10 ink, not box: the compare control is now a 44px target, but its text is centred in that box, so
+   at 750x342 the box crossed the fold while the INK sat below it and the reserved strip read empty.
+   Pull it up so the text itself lands in the strip. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .compare-anchor { margin-top: var(--space-2); margin-bottom: var(--space-2); }
 }

@@ -21,12 +21,21 @@ appear below with links to `gt.school` and `anywhere.gt.school`.
 | Georgetown lower-left, Anywhere lower-right | Two mirrored equal arms | DD-21 requires N campuses. CONTRACT section 3 "Nesting is hierarchy" forbids drawing the two schools as rings or nested shapes |
 | — | Every drawn line at `--color-border-strong` | CONTRACT section 3: a line carrying the argument needs 3:1. The accent measures 2.38 on cream and already failed in M24 |
 
-## Gate: D-031, confirmed
+## Gate: what is actually approved
 
-Both moves are outside CONTRACT section 6's table, which says a new move is a **D-031 proposal first**.
-This wave is that proposal, and **Johnny confirmed it on 2026-09-11** (runbook section 7 names him as the
-decider; he directed this build and chose the motion model). V11 and V12 below are therefore live for this
-wave. D-039 (scripts) stays escalated and is not needed: every board here is CSS-only.
+D-031 reopened motion in general, and Johnny delegated the specific call on 2026-09-11. **MN-18
+(`0_plan/07-design-decisions.md`) records the outcome, and it is narrower than an earlier draft of this
+brief claimed:**
+
+- **V11 lockup suffix swap — adopted with a condition.** It is provisional until one of these boards is
+  promoted to a full page and passes a full checker run. R1 concept boards fail several checker rules by
+  construction, because they are deliberately partial pages.
+- **V12 mark assembly — refused**, on motion policy. M26 shipped a timed variant implementing it; that
+  variant has been **retired** rather than carried, and the A/B comparison it was to enable cannot run
+  until MN-18 is reopened.
+
+D-039 (scripts) stays escalated and is not needed: every board is CSS-only.
+
 
 | Move | Definition | Trigger | Budget | Reduced motion |
 |---|---|---|---|---|
@@ -39,12 +48,12 @@ D-039 (scripts) stays escalated: every board here is CSS-only, so none of them d
 
 | ID | Name | Library language | The structural question it answers |
 |---|---|---|---|
-| M26 | The Mark | `insp-tsai2020` + the estate's atom | Does the mark plus a symmetric bracket read as one school with two ways in, and scale to a third? **Ships as an A/B pair** (`index.html` interactive, `index-timed.html` timed) so the motion model is tested with everything else held constant |
+| M26 | The Mark | `insp-tsai2020` + the estate's atom | Does the mark plus a symmetric bracket read as one school with two ways in, and scale to a third? Shipped as a single interactive board; the timed A/B partner was retired when MN-18 refused V12 |
 | M27 | One Mark | `insp-palebeat` | Does maximum restraint still route a parent in ten seconds? |
 | M28 | The Weave | `insp-lineweave` | Does "wirey" survive as a hairline weave rather than a brain? |
 | M29 | The Hub | `insp-onepersonteam` | Does making the architecture explicit beat making it beautiful? |
 | M30 | Constant GT | `insp-outship` | Can the lockup alone carry it, with no drawn stage? |
-| M34 | The Tour | `insp-cloudstudio` | Does reader-stepped sequencing beat a timeline? |
+| M35 | The Stepper | `insp-cloudstudio` | Does reader-stepped sequencing beat a timeline? Built as M31, renumbered after a concurrent session claimed M31 to M34 the same afternoon |
 
 ## Stage and scope
 
@@ -53,11 +62,45 @@ Sections 4 to 8 are out of scope until a direction is chosen and promoted to a f
 
 ## The Georgetown lockup
 
-No `GTgeorgetown` SVG exists in `shared/img/`, and none is needed. The brand system is legible from the
-real files — mark, `GT` in navy, suffix in orange, lowercase — and the suffix swap requires **live text**
-regardless, because a word inside a flat SVG cannot be swapped. The header keeps the real
-`gt-school-logo-h.svg`, so rule 16 holds. The stage lockup is therefore typographic, declared as a DD-19
-departure in every rationale. If Holly later supplies a Georgetown lockup it changes nothing here.
+No `GTgeorgetown` SVG exists in `shared/img/`. The stage lockup is therefore live text, set in the
+brand's own system — mark, `GT` in navy, suffix in orange, lowercase — with the header keeping the real
+`gt-school-logo-h.svg` so rule 16 holds. Declared as a DD-19 departure in every rationale.
+
+**Two corrections to an earlier draft of this section.** It claimed live text was a technical necessity
+because a word inside a flat SVG cannot be swapped. That is too strong: stacked SVG variants with
+crossfaded wrappers, or inline SVG groups, would also work inside the same reserved grid. Live text is a
+design choice. It also claimed the icon's four paths "require a JS library to morph"; path count is not
+the reason. The real objection is that morphing is outside the transform-and-opacity-only contract.
+
+A second question sits on top of this one: **"GTgeorgetown" is not an approved school identity.** The
+deck calls the school "Georgetown Campus", and only a GT Anywhere lockup exists as an asset. The suffix
+cycle is Johnny's explicit brief, so it is built and flagged for Nari and Holly, not quietly dropped.
+
+## The director's recommendation (Fable, 2026-09-11)
+
+G1 is Nari's gate: she picks the direction in writing. This is the recommendation she picks against,
+not a substitute for it.
+
+**Take M26 forward, in its interactive form.** Three reasons, in order:
+
+1. It is the only board where the real mark is the hero, so the brand does the work rather than a
+   drawn device standing in for it. The mark already being an atom of crossing orbits is the whole
+   idea; nothing had to be invented.
+2. Its interaction is the one MN-18 actually adopted. The A/B pair that would have tested the timed
+   model against it was retired when MN-18 refused V12; if Johnny wants that comparison, MN-18 is the
+   row to reopen, and the retired variant is recoverable from git history.
+3. Its bracket is the cleanest answer to DD-21 that survives the nesting rule: two mirrored equal arms
+   that a third campus joins by adding a list item, with no geometry to redraw.
+
+**If M26's stage reads as too much, M30 is the fallback.** No drawn stage at all: the lockup line is
+the hero and the type carries the brand architecture alone. It is the least likely of the six to date.
+
+**M28 is the one to retire first.** The corona is handsome but decorative: it serves neither
+orientation nor choice, which is the test runbook section 7 sets for motion, and it is the only board
+whose hero device would have to justify itself again at every later review.
+
+What would change this recommendation: if the timed variant measurably beats the interactive one with
+parents, the ordering flips and M26-timed leads with MN-02 formally amended rather than departed from.
 
 ## Acceptance
 
