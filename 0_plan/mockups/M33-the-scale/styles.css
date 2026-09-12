@@ -153,9 +153,11 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
 .story-grid { display: block; }
 
 /* ---------- The scale ----------
-   104 tick positions in two runs of 52, a major on every second position (50 majors), drawn from the
-   measured source geometry: tick 30% of the rail, major 45%, aligned to the rail's spine, and a 1px
-   full-length line at that spine. Ink is --color-border-strong throughout (3.63:1 on --color-bg).
+   104 tick positions in two runs of 52, a major on every second position. The source's counted totals
+   are 104 ticks and 49 `is-bigger` plus two `is-hour`; this page does not reproduce the hour marks and
+   therefore draws **50** majors, which is its own number, not the source's — RATIONALE.md, "The scale".
+   The geometry IS the source's, read from its stylesheet: tick 30% of the rail, major 45%, aligned to
+   the rail's spine, and a 1px full-length line at that spine. Ink is --color-border-strong throughout (3.63:1 on --color-bg).
 
    --p is the pitch, one tick step. It is written once as a percentage of the axis the scale runs on,
    so the same declaration resolves against the rail's height when the scale is vertical and against
@@ -188,9 +190,13 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
    taller than the viewport. */
 @media (min-width: 1024px) and (min-height: 700px) {
   .story-grid { display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--space-7); align-items: start; }
+  /* The source pins its stage 6rem down because a sticky site header sits in that band. This page's
+     header is not sticky, so a 6rem inset would leave 96px at the top of the viewport with no spine in
+     it — and a plate whose tie rule lands in that band points at nothing. The rail therefore fills the
+     viewport. The inset was the source's reason, not its rule; the declared departure is here. */
   .scale {
-    position: sticky; top: 6rem; z-index: 0; padding-bottom: 0; margin-bottom: 0;
-    inline-size: 4rem; block-size: calc(100vh - 6rem); block-size: calc(100svh - 6rem);
+    position: sticky; top: 0; z-index: 0; padding-bottom: 0; margin-bottom: 0;
+    inline-size: 4rem; block-size: 100vh; block-size: 100svh;
     border-bottom: 0; border-right: 1px solid var(--color-border-strong);
   }
   .scale-fine { background-image: repeating-linear-gradient(to bottom, var(--color-border-strong) 0 1px, transparent 1px var(--p)); background-size: 30% 100%; background-position: 100% 0; }
@@ -198,11 +204,10 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
   .scale-major i { inline-size: 45%; block-size: 1px; border-left: 0; border-top: 1px solid var(--color-border-strong); }
   .scale-run-a { inset-inline-start: 0; inset-block-start: calc(2 * var(--p)); }
   .scale-run-b { inset-inline-start: 0; inset-block-start: calc(54 * var(--p)); }
-  /* Beside a rail that stands the height of the viewport, each movement is given about a screen of
-     its own and its content centred in it. This is pacing, not sequencing: every movement is painted,
-     readable and reachable at rest — the page simply gives the reader one at a time to look at, the
-     way the source's own stage does, and it is what gives the position marker something to measure. */
-  .mv { min-block-size: calc(100vh - 14rem); min-block-size: calc(100svh - 14rem); align-content: center; }
+  /* Pacing, not sequencing: every movement is painted, readable and reachable at rest; the page just
+     gives the reader one plate at a time to look at. Sizing for that is below, after .frame, where the
+     cascade order lets it win. */
+
   .scale-progress { inset-block: 0; inset-block-end: auto; inset-inline-start: auto; inset-inline-end: 0; inline-size: 4px; block-size: 100%; border-bottom: 0; border-right: 4px solid var(--color-border-strong); transform-origin: center top; }
 }
 
@@ -223,6 +228,21 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
 .frame-mark { inline-size: min(100%, 15rem); block-size: auto; }
 .frame-mark--icon { inline-size: 3.5rem; block-size: 3.5rem; } /* the icon at 56px (K12 V2) */
 .frame-head { font-size: var(--text-xl); text-wrap: balance; }
+
+/* Beside the vertical rail, the plate carries the screen. The first build gave each movement a whole
+   screen (100svh - 14rem) against a 267px plate, so 60% of every movement screen at 1440 by 900 and
+   64% at 1920 by 960 was empty cream, and the composition arranged rather than argued (M33 critic,
+   Composition). Half a screen against a plate widened from 20rem to 24rem closes it.
+
+   And if the rail is the page's spine, something has to meet it: each plate carries a short rule from
+   its own top edge across the column gap to the spine, so the three movements read as three points ON
+   the scale rather than three cards beside it. It is the source's own short-rule device (2.75rem
+   there, one column gap here), drawn as a real border so forced colours keeps it. */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .mv { min-block-size: calc((100vh - 14rem) / 2); min-block-size: calc((100svh - 14rem) / 2); align-content: center; grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); }
+  .frame { max-inline-size: 24rem; position: relative; }
+  .frame::before { content: ""; position: absolute; inset-block-start: 0; inset-inline-end: 100%; inline-size: var(--space-7); border-block-start: 1px solid var(--color-border-strong); }
+}
 
 .mv-text p { font-size: var(--text-base); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
 .mv-text p + p { margin-top: var(--space-5); }
@@ -341,7 +361,10 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
    rule left a different instance unprotected in fifteen of them. The GT School mark is navy
    lettering and needs a light ground; the GT Anywhere mark is part near-white and needs the navy
    one — including the story frame, which is why the third frame is a navy plate. The square icon is
-   left alone on purpose: it is single-colour artwork, so a forced palette recolours it whole. */
+   left alone because nothing is lost if it is: it is decorative and aria-hidden, and the frame's own
+   mono label names the school in text. Forced colours does NOT recolour it — measured unchanged in its
+   own orange in both palettes (M33 critic, Imagery), which an earlier version of this comment had
+   backwards. It carries no meaning, so the measurement changes nothing. */
 @media (forced-colors: active) {
   img[src$="gt-school-logo-h.svg"] { forced-color-adjust: none; background: var(--color-bg); }
   img[src$="gt-anywhere-logo-h.svg"] { forced-color-adjust: none; background: var(--color-navy); }

@@ -1,9 +1,11 @@
 /* M33 "The Scale" — the page's one move, kept in its own file so it can be read, reviewed and
    deleted on its own (the pattern M34 established). index.html loads it after styles.css.
 
-   THE MOVE IS PROPOSED, NOT APPROVED. It is V13 under MN-17 in 0_plan/07-design-decisions.md, raised
-   on 2026-09-11, verdict Open: Astra has not reviewed it and Johnny has not ruled. Nothing here may
-   ship before MN-17 closes.
+   THE MOVE IS ADOPTED PROVISIONALLY. It is V13 under MN-17 in 0_plan/07-design-decisions.md, proposed
+   on 2026-09-11 and adopted the same day, provisionally and narrowly, under delegation from Johnny.
+   Provisional means it is in the vocabulary for this direction now and is reviewed again the first
+   time a second direction wants it — so this file is the thing that gets re-read then, which is why
+   it is one file with one move in it.
 
    WHAT MOVES: the position marker on the scale, and nothing else. Every one of the 104 ticks is
    painted at all times, in every state and in every browser. No content reveals on scroll; no

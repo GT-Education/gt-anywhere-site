@@ -3,10 +3,11 @@
 | Field | Value |
 |---|---|
 | Mock | `0_plan/mockups/M33-the-scale/` — a full sections 0 to 8 landing mock: `index.html`, `styles.css`, `motion.css`, this file |
-| Brief | `0_plan/kb/briefs/M33.md` **revision 2**, under `0_plan/kb/briefs/CONTRACT.md` v2.1 |
+| Brief | `0_plan/kb/briefs/M33.md` **revision 3**, under `0_plan/kb/briefs/CONTRACT.md` v2.1. (The file on disk said revision 2 while carrying revision 3's figures — a dropped header, since fixed. The M33 critic caught it and scored against revision 2; the figures it scored are revision 3's, so nothing it measured changes) |
 | Source it recreates | The `story_wrap` section of `https://www.gt.school/about-us`, read only as the dated text extract at `0_plan/kb/exemplars/gt-story/` (`SOURCE.md`, `story-segment.html`, `story-rules.css`, `count.py`). **The live page was never loaded**, here or anywhere in this build |
-| Runner | `node 0_plan/tools/shots.mjs 0_plan/mockups/M33-the-scale` — **exit 0, all required rows pass**. Figures below are pasted from that run (`qa/fold.md`, 2026-09-12T00:14Z) |
-| Checkers | `check-mocks.py` 37 pass 0 fail; `check-claims.py` OK; `check-links.py` OK |
+| Runner | `node 0_plan/tools/shots.mjs 0_plan/mockups/M33-the-scale` — **exit 0, all required rows pass**. Figures below are pasted from that run (`qa/fold.md`, 2026-09-12T01:11Z) |
+| Checkers | `check-mocks.py` **38 pass 0 fail** (R10 now scans `motion*.css`, so this mock's keyframes and its reduced-motion guard are gated rather than invisible); `check-claims.py` OK; `check-links.py` OK |
+| Review | Studio critic round 1 scored 4/3/4/4/5/5/4/3/4, ITERATE, `0_plan/ensemble/critic-fable-M33.md`. Composition 3 and Craft 3 are answered below, each under its own heading |
 | Two things this file does **not** assert | That this is the estate's only animated storytelling device, and that the source's ticks are scroll-triggered. Neither can be shown from what we hold |
 
 ## Direction
@@ -74,6 +75,17 @@ Two figures inside that quoted prose are withheld, each shown as `[…]`:
 | CR-037 | "students achieving multiple grade levels of acceleration" | Unverified, Nari | **Present, verbatim**, inside the Georgetown movement |
 | CR-036 | "This K-8 virtual academy attracted hundreds of students in its first months" | Unverified, Nari | **Present, verbatim**, inside the GT Anywhere movement |
 
+**One adjacency that belongs in the register, not in silence.** The one thing that moves on this page
+is a bar filling a measuring scale, and on the Georgetown movement it fills directly beside the
+sentence "students achieving multiple grade levels of acceleration" (**CR-037, Unverified, owner
+Nari**). The CONTRACT rule is satisfied — the scale is a count with no denominator and states no
+proportion — but a filling measure drawn next to an unverified acceleration claim invites a reader to
+connect them, and that is a claims question rather than a drawing question. **This sentence is the
+record; it should be carried into `0_plan/12-claims-register.md` against CR-037 by whoever owns that
+file** — an engineer does not edit the register from inside a build. The cheap mitigations, if Nari
+wants one: fill the marker beside a movement that carries no figure, or drop CR-037's sentence from
+the quoted prose. Both are her decisions, not mine.
+
 **An honest limit of the mechanical gate.** `check-claims.py` finds figures by digit pattern. CR-036 and CR-037
 are stated in words ("hundreds", "multiple grade levels"), so they carry no digits and the checker does not see
 them; it returns OK. Two Unverified claims therefore ride on this page and this table is the only place that
@@ -87,7 +99,7 @@ weekends), CR-033 (9 to noon, about two hours), CR-034 (two to three hours) and 
 
 | id | How it is applied |
 |---|---|
-| **MN-17 / V13** | The scroll-driven position marker is **V13 under MN-17**, raised 2026-09-11, verdict **Open**. Astra has not reviewed it and Johnny has not ruled. **It is a proposal, not part of the approved vocabulary, and nothing here may ship before MN-17 closes.** V11 and V12 belong to the animated-lockup wave and are not touched. The move is not renumbered |
+| **MN-17 / V13** | The scroll-driven position marker is **V13 under MN-17**, proposed 2026-09-11 and **adopted the same day, provisionally and narrowly**, under delegation from Johnny. Provisional means it is reviewed again the first time a second direction wants it. V11 and V12 belong to the animated-lockup wave and are not touched. The move is not renumbered |
 | D-039 | Escalated to Johnny and unresolved. The page therefore carries **no JavaScript of any kind**: no `<script>` but the JSON-LD block, no inline handlers, no observer. The scroll device is CSS `animation-timeline` only, so D-039 does not gate it |
 | DD-38 (option b, proposed) | Type roles as the contract states them: Literata 400 for the h1, door names and movement headings; Inter Tight 400 for prose at `--leading-prose` 1.5; Inconsolata 600 uppercase for labels, buttons and footer navigation. The layer-2 fluid clamp carries every size |
 | DD-39 (option a, proposed) | The colour roles: `--color-border-strong` for every line that carries the argument, `--color-text-muted-on-dark` on the navy frame, `--color-on-navy` and `--color-focus-on-dark` on navy, `--color-focus` on light. `--color-accent-text` was measured and **not used** (see Colour). Gold never carries text or a line |
@@ -137,8 +149,26 @@ which forced colours maps to system colours and keeps. Measured there: major bor
 palette and `rgb(255,255,255)/1px` in the dark; spine the same; marker 4px in both; 50 majors present. The fine
 texture is lost and the measure survives — a legible 50-mark scale with a position marker on it.
 
-The runner's own forced-colours capture is taken at the initial viewport and cannot see a third-screen failure.
-This check was run separately with a scripted scroll into the stage and a screenshot of the rail in each palette.
+The runner's own forced-colours capture is taken at the initial viewport and cannot see a third-screen
+failure. **Round 1 ran this check, reported it accurately and threw the images away, which was the Craft
+deduction and was fair.** The captures now ship, with the script that makes them:
+
+| File in `qa/` | What it shows |
+|---|---|
+| `stage-normal-top.jpg` | 1440 by 900, stage top, normal palette, marker at 0 |
+| `stage-normal-mid.jpg` | the same at mid-range, marker at 0.50 |
+| `stage-forced-light.jpg` | forced colours, light palette, at the stage |
+| `stage-forced-dark.jpg` | forced colours, dark palette, at the stage |
+| `stage-reduced-motion.jpg` | reduced motion, marker at rest, `document.getAnimations()` empty |
+| `stage-phone-normal.jpg`, `stage-phone-forced-light.jpg` | the horizontal rail, 390 by 844 |
+| `rail-normal.png`, `rail-forced-light.png`, `rail-forced-dark.png` | 420px of the rail at 3x device scale, so the ticks can be counted by eye |
+| `stage.md` | what each capture measured: orientation, major count, whether the fine gradient painted, the major ink, the marker width and transform, and `document.getAnimations().length` |
+| `stage-captures.mjs` | the script. `node 0_plan/mockups/M33-the-scale/qa/stage-captures.mjs`. Machine-local like `shots.mjs`: Playwright from the npx cache, the repository served from 127.0.0.1, no dependency added and no production host contacted. **Re-run it whenever `styles.css` or `motion.css` changes**, or the images go stale |
+
+`stage.md` records 50 majors in every mode, the fine gradient `painted` normally and `none (suppressed)`
+under forced colours, the major ink `1px rgb(133, 127, 123)` normally against `1px rgb(0, 0, 0)` and
+`1px rgb(255, 255, 255)` in the two forced palettes, the marker at 4px throughout, and one animation
+normally against zero under reduced motion.
 
 ## Colour, measured
 
@@ -170,7 +200,12 @@ Refused, with the measurement that refused them:
 
 ## Motion spec
 
-**This move is not in CONTRACT v2.1 section 6.** It is V13 under MN-17, proposed 2026-09-11, verdict **Open**.
+**This move is not in CONTRACT v2.1 section 6.** It is V13 under MN-17, proposed 2026-09-11 and
+**adopted the same day, provisionally and narrowly**, under delegation from Johnny. *Provisional*
+means: the move is in the vocabulary for this direction now, and it is **reviewed again the first
+time a second direction wants it** — so the next mock that reaches for a scroll timeline reopens
+MN-17 rather than citing this page as precedent. V11 was adopted with a condition and V12 refused;
+neither touches this page.
 
 | Beat | Trigger | Property | Range | Easing | Reduced motion |
 |---|---|---|---|---|---|
@@ -181,8 +216,8 @@ for a reader to sit through and no pause control to need. Transform only; no opa
 
 **Nothing reveals.** All 104 ticks are painted in every state and every browser. Every one of the three movements
 is present, readable and reachable at rest, at every matrix row: the stage is never pinned and never decides what
-is visible. The only sticky object on the page is the scale strip itself, which is at most `calc(100svh − 6rem)`
-and therefore always shorter than the viewport.
+is visible. The only sticky object on the page is the scale strip itself, which is at most one viewport tall and
+therefore can never push a movement out of view.
 
 Measured at 1440 by 900 (scripted scroll, computed transform read at each stop):
 
@@ -210,13 +245,25 @@ inherited and is not described as such.
 inert: the scale complete, the marker drawn full length, the story entire. That is the same no-JavaScript state
 every other mock ships.
 
+**The resting picture is not one picture, and that is deliberate — round 1 said "the complete scale" in two
+places without reconciling them, which the critic caught.** The *scale* — spine, 104 ticks, 50 majors — is
+identical in every state. The *marker* is not:
+
+| State | The marker at rest | Why |
+|---|---|---|
+| Scroll-driven animation available | `scaleY(0)`, invisible until the reader enters the stage | It is a position indicator, and at the top of the document the reader has no position on the stage yet |
+| Reduced motion, or any engine without `animation-timeline` | full length | There is no scroll progress to report, so the element stops being a marker and becomes what it is drawn as: the spine at 4px instead of 1px. It asserts no position, because a 4px line that never changes is a rule, not a reading |
+
+Neither state hides anything a reader needs. `qa/stage-reduced-motion.jpg` is the second row; `qa/stage-normal-top.jpg`
+is the first.
+
 ## Composition and the sticky guard
 
 | Range | Scale | Stage |
 |---|---|---|
 | Under 768 | horizontal, full width, above the stage; sticky at `top: 0` from 560px of height, ordinary flow below that | one column: frame, then prose |
 | **768 to 1023** (revision 1 left this undefined) | horizontal, as above | two columns: frame `minmax(0, 20rem)`, prose beside it |
-| 1024 and above **with at least 700px of height** | vertical, down the left, `position: sticky; top: 6rem`, `block-size: calc(100svh − 6rem)` | two columns; each movement is given about a screen (`min-block-size: calc(100svh − 14rem)`) with its content centred in it |
+| 1024 and above **with at least 700px of height** | vertical, down the left, `position: sticky; top: 0`, `block-size: 100svh` | two columns, a 24rem plate and the prose beside it; each movement is **half a screen** (`min-block-size: calc((100svh − 14rem) / 2)`) with its content centred, and each plate carries a rule from its own top edge across the column gap to the spine |
 | 1024 and above **under 700px of height** (V15 1366 by 648, V19 1024 by 576) | horizontal — a 155-tick-dense rail in a 480px column is a hairline nobody reads | two columns |
 
 Sizing is `svh`, never `vh`, with a `vh` line first as the fallback for engines without `svh`. The guard is not a
@@ -228,6 +275,67 @@ anchor's closing rule lands about 12px above the fold wherever the content is sh
 that, four wide rows reported a false floor: the screen read as finished with a band of dead cream below the
 door lines. Where the content is taller than the screen — every phone row — the min-height never binds and the
 anchor simply follows the two door lines.
+
+## Composition: what round 1 got wrong, and what changed
+
+The critic measured it rather than describing it, and the measurement was right. Each movement box
+was a whole screen (`calc(100svh − 14rem)`, 676px at 1440 by 900) against a 267px plate, so **409px —
+60% — of every movement screen was empty cream**, and 64% at 1920 by 960. The rail was 64px of a
+1216px wrap with nothing aligned to it. A page whose thesis is "the scale is the page's spine" was
+arranging three small plates beside an artefact in the margin.
+
+Three changes, all inside the `1024 / 700px` branch:
+
+| Change | Before | After |
+|---|---|---|
+| Movement box | a whole screen, `calc(100svh − 14rem)` | **half a screen**, `calc((100svh − 14rem) / 2)` |
+| Plate | `minmax(0, 20rem)` column, `max-inline-size: 22rem` → 320 by 267 | `minmax(0, 24rem)` column, `max-inline-size: 24rem` → **384 by 320** |
+| Alignment to the rail | none | each plate draws a 1px rule from **its own top edge** across the column gap to the spine, so the three movements are three points **on** the scale |
+
+Measured after, with the same method (box height against the tallest thing in it):
+
+| Row | Movement box | Tallest content | Slack | Was |
+|---|---|---|---|---|
+| 1440 by 900 | 338 | 320 | **5.3%** | 60% |
+| 1920 by 960 | 368 | 320 | **13.0%** | 64% |
+| 1280 by 720 | 320 | 320 | **0%** | — |
+| 768 by 1024 | 267 / 267 / 348 | same | **0%** | 0% (the row the critic held up as proof the content was not the cause) |
+
+One more change the critic did not ask for, and the reason. The rail was pinned at the source's
+`top: 6rem`, which in the source is the band a sticky site header occupies. **This page's header is
+not sticky**, so that inset left 96px at the top of the viewport with no spine in it — and with the
+new tie rules, a plate whose rule landed in that band pointed at nothing. The rail now fills the
+viewport (`top: 0`, `block-size: 100svh`). The 6rem was the source's *reason*, not its rule.
+
+### Does the motion force the composition? Partly, and here is the number
+
+The critic's sharpest point, and it deserves a straight answer: the long stage existed because the
+marker needed distance. **Fixing the composition shortened the travel, and I did not put any of it
+back.**
+
+| Row | Marker travel, before | after | Stage height, after |
+|---|---|---|---|
+| 1440 by 900 | 1320px | **306px** | 1206 |
+| 1920 by 960 | 1416px | **336px** | 1296 |
+| 1280 by 720 | 1056px | **432px** | 1152 |
+| 768 by 1024 | 111px | **111px** (unchanged; this row never had the min-height) | 1135 |
+| 375 by 629 | 1099px | **1099px** (unchanged; the phone stacks and is naturally tall) | 1728 |
+
+So both halves are true, and both belong on the record beside the adoption of V13:
+
+1. **The composition was downstream of the motion, and that was a fault.** A layout should not be
+   stretched to give an indicator room to move. It has been un-stretched.
+2. **The scale is not wrong at 306px, but the device is thinner on desktop.** The marker remains an
+   exact proportion of the stage — that is what `contain 0% → contain 100%` means — so it never
+   misreports where the reader is. What it loses is dwell: at 1440 by 900 the whole sweep now happens
+   inside a third of a screen of scrolling, and at 768 by 1024 inside 111px, which is close to
+   instantaneous. **On the phone, where two thirds of GT's sessions are and where the stage is
+   naturally 1728px tall, the travel is unchanged at 1099px and the device is at its best.**
+
+The honest reading is that **V13 earns its place on the phone and is marginal on a wide desktop**,
+and that a reviewer who wants it to feel substantial at 1440 is asking for exactly the stretched
+layout this iteration removed. That is the strongest argument against the move, it is now measured,
+and it sits here next to the decision to adopt it provisionally.
 
 ## Fold: the measured run
 
@@ -277,7 +385,7 @@ the header and footer marks, with the three frame marks larger.
 |---|---|---|
 | `../shared/img/gt-school-logo-h.svg` | header lockup, footer plate, story frame 2 | The shipped mark, unmodified. `alt="GT School"` on the header and footer links; `alt=""` and `aria-hidden` in the frame, because the frame's own mono label already says "Georgetown Campus" in text and a second accessible name would double it |
 | `../shared/img/gt-anywhere-logo-h.svg` | footer plate, story frame 3 | **Every instance on a `--color-navy` plate**, including the frame: the wordmark is part near-white and disappears on `--color-surface`. Same alt treatment |
-| `../shared/img/gt-icon.svg` | story frame 1 | The square icon at 56px (K12 V2). Single-colour artwork, so forced colours recolours it whole and it needs no plate |
+| `../shared/img/gt-icon.svg` | story frame 1 | The square icon at 56px (K12 V2). It gets no plate because nothing is lost if it has none: it is decorative, `aria-hidden`, and the frame's own label names the school in text. **Round 1's stated reason — "single-colour artwork, so forced colours recolours it whole" — was wrong**, and the critic measured it: forced colours leaves an `<img>` alone, so the icon stays in its own orange in both palettes (2.24:1 on a forced white ground). It carries no meaning, so the measurement changes nothing, but the reason given was false and is corrected here |
 | Photographs | none | **No photograph anywhere.** Every file in `shared/ASSETS.md` shows identifiable children, re-checked 2026-09-11, and AD-11 covers child imagery whether or not a face is visible (DD-42 option a, RF-25) |
 
 **Which mark stands for what, stated plainly.** Georgetown Campus has no mark of its own: gt.school's mark *is*
@@ -314,14 +422,16 @@ a `var(--…)` or a forced-colours system keyword.
 | `--p: calc((100% - 1px) / 103)` and the multipliers 2, 48, 54, 102 | the scale | The source's own count arithmetic: 104 positions, majors on every second one, two runs of 52 |
 | tick widths 30% and 45% of the rail | the scale | The source's declared `.timeline_small-line` and `.is-bigger` widths, read from `story-rules.css` |
 | `aspect-ratio: 6 / 5` | story frames | The source's declared frame ratio |
-| `--fs-tail` 4.3125rem; `.overture` `calc(100svh + 1rem)`; `.mv` `calc(100svh - 14rem)` | first screen, overture, movements | Fold arithmetic: the anchor rule 12px above the fold, the scale on the third screen, a movement given about a screen |
+| `--fs-tail` 4.3125rem; `.overture` `calc(100svh + 1rem)` | first screen, overture | Fold arithmetic: the anchor rule 12px above the fold, and the scale on the third screen |
 | thresholds 560px, 700px, 768px, 1024px, 1440px, and `max-height: 479px`/`min-width: 700px` | media queries | The measured breakpoints of this layout and the contract's landscape recipe |
 | `.story .wrap { max-width: 76rem }` | story band | The container token is 90rem; a story read as one column needs a narrower measure |
 | `.overture-line` at `--text-lg` and `46ch` | overture | The story's opening is set one step above body prose as a lead. Still Inter Tight 400 at `--leading-prose`. The rest of the story prose is `--text-base` exactly as the brief states |
 | `35ch` h1 cap, `22ch` h2 cap, `65ch` prose | throughout | Contract and RF-55 |
 | `min(100%, 15rem)` on frame marks; `3.5rem` icon | story frames | Width-driven sizing keeps the aspect exact at every width (measured 0% skew); 56px is K12 V2's icon size |
 | `--space-7` short rule, `--space-9` tail hairline, `--space-8` stage gap | story | The source's 2.75rem, 5rem and 4.5rem taken to the nearest token rather than reproduced literally, because the token ladder is the contract |
-| **`motion.css` as a second stylesheet** | page head | The pattern M34 established, and what the brief asks for. **Stated plainly: `check-mocks.py` R10 ("no keyframe animation") scans `styles.css` only, so this file's one `@keyframes` pair is not mechanically gated.** That is a property of the rule as written, not a way round it; the move is declared above, named in the page head, and the file carries the proposal notice at the top. I have not touched the rule |
+| **`motion.css` as a second stylesheet** | page head | The pattern M34 established, and what the brief asks for. Round 1 disclosed that R10 scanned `styles.css` only, so this file's keyframes were not mechanically gated, and declined to edit the shared rule. **R10 now reads every `motion*.css` in the folder**, and a new rule requires a scroll timeline to be disabled *by name* under reduced motion, because zeroing a duration does nothing to a scroll-driven animation. Both pass; 38 of 38. No longer a departure, kept here as the record of why the file is separate |
+| `.mv { min-block-size: calc((100svh − 14rem) / 2) }`, the 24rem plate column, `.frame::before` tie rule | the desktop stage | The Composition fix. Measured before and after in "Composition: what round 1 got wrong" |
+| `.scale { top: 0; block-size: 100svh }` instead of the source's `top: 6rem` | the vertical rail | The source's inset is the band its sticky site header occupies; this page's header is not sticky, so the inset left 96px of viewport with no spine in it and the plates' tie rules pointed at nothing. Same section |
 
 ## Flagged slots
 
@@ -366,18 +476,21 @@ a `var(--…)` or a forced-colours system keyword.
 | Copy | `copy.md` verbatim for every fixed slot; the story band quoted and flagged above |
 | Numbers on the page | Only the deck's, plus "8th grade", the phone number and the sources date. The scale carries none |
 | `node 0_plan/tools/shots.mjs 0_plan/mockups/M33-the-scale` | **exit 0**, all required rows pass |
-| `python3 0_plan/tools/check-mocks.py 0_plan/mockups/M33-the-scale` | **37 pass, 0 fail** |
+| `python3 0_plan/tools/check-mocks.py 0_plan/mockups/M33-the-scale` | **38 pass, 0 fail** — including the two new motion rules: keyframes only under a named MN row, and a scroll timeline disabled by name under reduced motion |
 | `python3 1_spec/tools/check-claims.py 0_plan/mockups/M33-the-scale/index.html` | **OK** (with the digit-pattern limit stated above) |
 | `python3 0_plan/tools/check-links.py` | **OK** |
 | 390 by 844 first screen | Header, h1, provenance line and both door CTAs above the fold, with the second CTA at 557 of 820 and the door lines cut by the edge |
 | The scale complete at rest | Captured at scroll position zero and at the stage without scrolling further: 104 ticks and 50 majors drawn, marker at zero. Verified again under forced colours in both palettes at the stage's own scroll position |
-| How the stage checks were reproduced | A local Playwright script against the same repo-served page: set the viewport, `window.scrollTo(0, .story-grid top + n)`, then read `getComputedStyle` on `.scale-fine`, `.scale-major i`, `.scale-progress` and screenshot the rail. Run once normally, once with `forcedColors: 'active'` in each `colorScheme`, once with `reducedMotion: 'reduce'`. Nothing was added to the repository, and no page but this one was loaded |
+| The stage captures | `node 0_plan/mockups/M33-the-scale/qa/stage-captures.mjs` — checked in, with its output: seven stage frames, three magnified rail crops and `qa/stage.md`. Round 1 ran these checks and kept nothing; they now ship |
 
 ## What is unresolved
 
 | Item | State |
 |---|---|
-| **MN-17 / V13** | **Open.** The move is proposed. Neither Astra nor Johnny has reviewed it. Nothing here ships until it closes |
+| **MN-17 / V13** | **Adopted provisionally and narrowly**, under delegation from Johnny; reviewed again the first time a second direction wants it. The measured argument against it on wide desktops is in "Does the motion force the composition?" and should be read beside the adoption |
+| The marker's dwell at 768 by 1024 | 111px of travel: the stage there is 1135 against a 1024 viewport, so the sweep is close to instantaneous. Pre-existing, not introduced by this iteration, and not fixable without stretching the tablet layout the way the desktop one was stretched |
+| The two `[…]` gaps | **Kept, deliberately, against the critic's suggestion.** The brief allows "leave it out **or** leave a gap"; deleting "in 2026" would make a quoted sentence read as if the source never named a year, with no mark that anything was removed. A visible `[…]` is the honest form of a withheld figure and matches how the speed clause is withheld two movements earlier. It does read as an interruption at 375, which is the cost. The story band is Nari's, so the call is hers |
+| The runner's V18 next-band line | `qa/fold.md` says "no content is visible below the last CTA at all" for 320 by 256, and `qa/V18.jpg` shows the headline cut by the edge. V18 is a reflow row where the fold rule does not bind, so nothing turns on it, but the sentence is wrong. It is generated by `0_plan/tools/shots.mjs`, a shared tool, so it is **reported rather than fixed here** |
 | D-039 | Escalated. Irrelevant to this page, which carries no script — but the page's no-JavaScript state is the only state it has |
 | The story copy | Nari's. Quoted verbatim from a live page, not from the deck |
 | The 2026 launch year | No register row. Withheld, not filled |

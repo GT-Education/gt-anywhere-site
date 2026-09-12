@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:32:26.279Z; page `/0_plan/mockups/M33-the-scale/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:14:58.398Z; page `/0_plan/mockups/M33-the-scale/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -63,7 +63,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V15 | yes | content reaches 636 of 648 and more follows below |
 | V16 | yes | content reaches 888 of 900 and more follows below |
 | V17 | yes | content reaches 948 of 960 and more follows below |
-| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V18 | no | not applicable: the last CTA is at 607, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | content reaches 557 of 576 and more follows below |
 
 ## The GT marks under forced colours

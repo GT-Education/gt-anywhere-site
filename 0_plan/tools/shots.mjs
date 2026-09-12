@@ -154,7 +154,13 @@ const FOLD_JS = `(() => {
     cutBy = (deepest && deepest.bottom > vh ? deepest.what + ' cut by the edge, ' + Math.round(deepest.top) + ' to ' + Math.round(deepest.bottom)
       : 'content reaches ' + Math.round(lastVisible) + ' of ' + vh + ' and more follows below');
   } else if (below) {
-    cutBy = lastVisible === -Infinity
+    // The whole test asks what sits between the last CTA and the edge, so it cannot be answered when the
+    // last CTA is itself past the edge: every piece of ink is skipped by the guard above and lastVisible
+    // never moves. Saying 'no content is visible' there reads as a finding about the screen when it is only
+    // a fact about the measurement, and it contradicted the row's own capture on the 320 by 256 reflow row.
+    cutBy = lastCta >= vh
+      ? 'not applicable: the last CTA is at ' + Math.round(lastCta) + ', past the ' + vh + 'px edge, so there is no gap between it and the fold to judge'
+      : lastVisible === -Infinity
       ? 'no content is visible below the last CTA at all, so nothing signals that the page continues'
       : 'FALSE FLOOR: the last visible content ends at ' + Math.round(lastVisible) + ', ' + Math.round(vh - lastVisible) + 'px clear of the ' + vh + 'px edge, so the screen reads as finished';
   }
