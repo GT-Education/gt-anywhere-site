@@ -10,11 +10,11 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | CON (Constraints) | 6 |
 | DEL (Deliverables) | 26 |
 | D (Project and operating decisions) | 39 |
-| Q (Open questions) | 35 |
+| Q (Open questions) | 37 |
 | MO (Marketing objectives) | 1 |
 | DD (Design decisions) | 48 |
-| MD (Marketing decisions) | 26 |
-| MN (Motion decisions) | 17 |
+| MD (Marketing decisions) | 27 |
+| MN (Motion decisions) | 18 |
 | AN (Analytics and GA4 decisions) | 19 |
 | AD (Advertising channel decisions) | 15 |
 | CB (Chatbot platform decisions) | 8 |
@@ -226,6 +226,8 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | Q-033 | Which accreditation statement is true today: "fully accredited by Cognia", "Candidate for Accreditation", or " | `0_plan/03-decisions-and-open-questions.md:85` | `00-context.md`, `02-requirements-and-deliverables.md`, `06-mockup-rationale.md`, `07-design-decisions.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md` |
 | Q-034 | Are the five homepage testimonials on gt.school (attributed "2 Hour Learning Student") GT School students with | `0_plan/03-decisions-and-open-questions.md:86` | `07-design-decisions.md`, `15-positioning-brief.md`, `1_spec/03-landing-page-spec.md` |
 | Q-035 | Guides or Advisors: which title do the adults carry across both sites and the landing? gt.school says "guide(s | `0_plan/03-decisions-and-open-questions.md:87` | `00-context.md`, `02-requirements-and-deliverables.md`, `06-mockup-rationale.md`, `07-design-decisions.md`, `12-claims-register.md`, `15-positioning-brief.md`, `16-g05-decision-record.md` |
+| Q-036 | Does the umbrella first screen spend its one accent use, or none? M32 ships zero and argues that inside a fram | `0_plan/03-decisions-and-open-questions.md:88` |  |
+| Q-037 | Is a navy-bounded plate beside a navy-filled plate acceptable parity? In M32 the navy objects are 2 to 2 and t | `0_plan/03-decisions-and-open-questions.md:89` |  |
 
 ## MO: Marketing objectives
 
@@ -282,7 +284,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | DD-43 | Comparison table cells repeat the value; no "Same" cells (from K6) | `0_plan/07-design-decisions.md:61` |  |
 | DD-44 | Fold and viewport contract: svh, the 19-row matrix, runner tests (from K10, K6, K5) | `0_plan/07-design-decisions.md:62` | `17-design-studio-runbook.md` |
 | DD-45 | Inherit gt.school's two-door component and Locations list for N campuses (from K12) | `0_plan/07-design-decisions.md:63` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
-| DD-46 | Door button fill on the umbrella page, against the measured estate (`0_plan/mockups/shared/CONTINUITY.md`) | `0_plan/07-design-decisions.md:64` |  |
+| DD-46 | Door button fill on the umbrella page, against the measured estate (`0_plan/mockups/shared/CONTINUITY.md`) | `0_plan/07-design-decisions.md:64` | `03-decisions-and-open-questions.md` |
 | DD-47 | The action button's silhouette across the estate, after Astra found there is no single one (from the measured  | `0_plan/07-design-decisions.md:65` |  |
 | DD-48 | Borrowing from the Design Library (`~/projects/libraries/design`, nine reverse-designed languages with measure | `0_plan/07-design-decisions.md:66` |  |
 
@@ -316,104 +318,106 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | MD-24 | Answer-engine readiness | `0_plan/07-design-decisions.md:95` | `03-decisions-and-open-questions.md`, `08-effectiveness-and-expanded-considerations.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/07-seo-aeo-spec.md` |
 | MD-25 | Access messaging against exclusivity | `0_plan/07-design-decisions.md:96` | `00-context.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `18-knowledge-base-plan.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `CLAUDE.md`, `truth-proposals.md` |
 | MD-26 | The TEFA module | `0_plan/07-design-decisions.md:97` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-register-loop.md`, `13-journey-map.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md`, `truth-proposals.md` |
+| MD-27 | Whether to reopen G0.5 decision 2 so the estate's velocity multiplier can appear on the umbrella landing, rais | `0_plan/07-design-decisions.md:98` | `03-decisions-and-open-questions.md` |
 
 ## MN: Motion decisions
 
 | ID | Title | Defined in | Referenced in |
 |---|---|---|---|
-| MN-01 | The job of motion | `0_plan/07-design-decisions.md:103` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `17-design-studio-runbook.md`, `1_spec/03-landing-page-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| MN-02 | Hero entrance | `0_plan/07-design-decisions.md:104` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `1_spec/03-landing-page-spec.md` |
-| MN-03 | Door hover, focus and expand | `0_plan/07-design-decisions.md:105` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-04 | Scroll-driven reveals | `0_plan/07-design-decisions.md:106` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-05 | State transitions (comparison toggle, switcher, helper) | `0_plan/07-design-decisions.md:107` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-06 | Video in the hero | `0_plan/07-design-decisions.md:108` | `06-mockup-rationale.md`, `1_spec/03-landing-page-spec.md` |
-| MN-07 | CTA micro-interactions | `0_plan/07-design-decisions.md:109` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-08 | Signature motion per lens | `0_plan/07-design-decisions.md:110` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| MN-09 | Implementation stack | `0_plan/07-design-decisions.md:111` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-10 | Performance budget | `0_plan/07-design-decisions.md:112` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-11 | Accessibility and reduced motion | `0_plan/07-design-decisions.md:113` | `06-mockup-rationale.md`, `13-journey-map.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| MN-12 | Mobile motion policy | `0_plan/07-design-decisions.md:114` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-13 | Motion tokens | `0_plan/07-design-decisions.md:115` | `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-14 | Continuity across the hop to a school site | `0_plan/07-design-decisions.md:116` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
-| MN-15 | Motion in in-app browsers | `0_plan/07-design-decisions.md:117` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-register-loop.md`, `13-journey-map.md`, `17-design-studio-runbook.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| MN-16 | Motion vocabulary and the property contract under D-031 (from K4) | `0_plan/07-design-decisions.md:118` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
-| MN-17 | Widen the motion vocabulary with V13, scroll-driven progress along a measured scale, for M33 (from Johnny's re | `0_plan/07-design-decisions.md:119` |  |
+| MN-01 | The job of motion | `0_plan/07-design-decisions.md:104` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `17-design-studio-runbook.md`, `1_spec/03-landing-page-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| MN-02 | Hero entrance | `0_plan/07-design-decisions.md:105` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `1_spec/03-landing-page-spec.md` |
+| MN-03 | Door hover, focus and expand | `0_plan/07-design-decisions.md:106` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-04 | Scroll-driven reveals | `0_plan/07-design-decisions.md:107` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-05 | State transitions (comparison toggle, switcher, helper) | `0_plan/07-design-decisions.md:108` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-06 | Video in the hero | `0_plan/07-design-decisions.md:109` | `06-mockup-rationale.md`, `1_spec/03-landing-page-spec.md` |
+| MN-07 | CTA micro-interactions | `0_plan/07-design-decisions.md:110` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-08 | Signature motion per lens | `0_plan/07-design-decisions.md:111` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| MN-09 | Implementation stack | `0_plan/07-design-decisions.md:112` | `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-10 | Performance budget | `0_plan/07-design-decisions.md:113` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-11 | Accessibility and reduced motion | `0_plan/07-design-decisions.md:114` | `06-mockup-rationale.md`, `13-journey-map.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| MN-12 | Mobile motion policy | `0_plan/07-design-decisions.md:115` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `12-register-loop.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-13 | Motion tokens | `0_plan/07-design-decisions.md:116` | `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-14 | Continuity across the hop to a school site | `0_plan/07-design-decisions.md:117` | `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md` |
+| MN-15 | Motion in in-app browsers | `0_plan/07-design-decisions.md:118` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-register-loop.md`, `13-journey-map.md`, `17-design-studio-runbook.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
+| MN-16 | Motion vocabulary and the property contract under D-031 (from K4) | `0_plan/07-design-decisions.md:119` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
+| MN-17 | Widen the motion vocabulary with V13, scroll-driven progress along a measured scale, for M33 (from Johnny's re | `0_plan/07-design-decisions.md:120` |  |
+| MN-18 | The animated-lockup wave's two proposed moves, V11 lockup suffix swap and V12 mark assembly, decided with V13  | `0_plan/07-design-decisions.md:121` |  |
 
 ## AN: Analytics and GA4 decisions
 
 | ID | Title | Defined in | Referenced in |
 |---|---|---|---|
-| AN-01 | Property and stream structure | `0_plan/07-design-decisions.md:127` | `00-context.md`, `02-requirements-and-deliverables.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-02 | Ownership and access | `0_plan/07-design-decisions.md:128` | `09-operating-model.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-03 | Tag deployment | `0_plan/07-design-decisions.md:129` | `00-context.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/11-verification-spec.md` |
-| AN-04 | Event taxonomy | `0_plan/07-design-decisions.md:130` | `02-requirements-and-deliverables.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-05 | Key events (conversions) cleanup | `0_plan/07-design-decisions.md:131` | `00-context.md`, `02-requirements-and-deliverables.md`, `03-decisions-and-open-questions.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/11-verification-spec.md` |
-| AN-06 | Cross-domain measurement and in-app browsers | `0_plan/07-design-decisions.md:132` | `02-requirements-and-deliverables.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AN-07 | Source of truth for conversions and the wrong-school metric | `0_plan/07-design-decisions.md:133` | `03-decisions-and-open-questions.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md`, `SOURCES.md` |
-| AN-08 | UTM governance | `0_plan/07-design-decisions.md:134` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| AN-09 | Ad platform conversion tags | `0_plan/07-design-decisions.md:135` | `12-register-loop.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
-| AN-10 | Consent mode | `0_plan/07-design-decisions.md:136` | `03-decisions-and-open-questions.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AN-11 | PII and children's data | `0_plan/07-design-decisions.md:137` | `10-analytics-current-state.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-12 | Server-side tagging | `0_plan/07-design-decisions.md:138` | `1_spec/06-analytics-tracking-spec.md` |
-| AN-13 | Product analytics alongside GA4 | `0_plan/07-design-decisions.md:139` | `12-register-loop.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-14 | Reporting | `0_plan/07-design-decisions.md:140` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| AN-15 | Internal and development traffic | `0_plan/07-design-decisions.md:141` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md`, `CLAUDE.md` |
-| AN-16 | Search and answer-engine visibility | `0_plan/07-design-decisions.md:142` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
-| AN-17 | HubSpot tracking | `0_plan/07-design-decisions.md:143` | `10-analytics-current-state.md`, `1_spec/06-analytics-tracking-spec.md` |
-| AN-18 | Retention, QA and documentation | `0_plan/07-design-decisions.md:144` | `05-landing-mockups-plan.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AN-19 | Consent-first tag loading, byte budgets and absolute vitals targets (from K11, K8) | `0_plan/07-design-decisions.md:145` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
+| AN-01 | Property and stream structure | `0_plan/07-design-decisions.md:129` | `00-context.md`, `02-requirements-and-deliverables.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-02 | Ownership and access | `0_plan/07-design-decisions.md:130` | `09-operating-model.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-03 | Tag deployment | `0_plan/07-design-decisions.md:131` | `00-context.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/11-verification-spec.md` |
+| AN-04 | Event taxonomy | `0_plan/07-design-decisions.md:132` | `02-requirements-and-deliverables.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-05 | Key events (conversions) cleanup | `0_plan/07-design-decisions.md:133` | `00-context.md`, `02-requirements-and-deliverables.md`, `03-decisions-and-open-questions.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/11-verification-spec.md` |
+| AN-06 | Cross-domain measurement and in-app browsers | `0_plan/07-design-decisions.md:134` | `02-requirements-and-deliverables.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| AN-07 | Source of truth for conversions and the wrong-school metric | `0_plan/07-design-decisions.md:135` | `03-decisions-and-open-questions.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md`, `SOURCES.md` |
+| AN-08 | UTM governance | `0_plan/07-design-decisions.md:136` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
+| AN-09 | Ad platform conversion tags | `0_plan/07-design-decisions.md:137` | `12-register-loop.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
+| AN-10 | Consent mode | `0_plan/07-design-decisions.md:138` | `03-decisions-and-open-questions.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| AN-11 | PII and children's data | `0_plan/07-design-decisions.md:139` | `10-analytics-current-state.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-12 | Server-side tagging | `0_plan/07-design-decisions.md:140` | `1_spec/06-analytics-tracking-spec.md` |
+| AN-13 | Product analytics alongside GA4 | `0_plan/07-design-decisions.md:141` | `12-register-loop.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-14 | Reporting | `0_plan/07-design-decisions.md:142` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
+| AN-15 | Internal and development traffic | `0_plan/07-design-decisions.md:143` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md`, `CLAUDE.md` |
+| AN-16 | Search and answer-engine visibility | `0_plan/07-design-decisions.md:144` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
+| AN-17 | HubSpot tracking | `0_plan/07-design-decisions.md:145` | `10-analytics-current-state.md`, `1_spec/06-analytics-tracking-spec.md` |
+| AN-18 | Retention, QA and documentation | `0_plan/07-design-decisions.md:146` | `05-landing-mockups-plan.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| AN-19 | Consent-first tag loading, byte budgets and absolute vitals targets (from K11, K8) | `0_plan/07-design-decisions.md:147` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## AD: Advertising channel decisions
 
 | ID | Title | Defined in | Referenced in |
 |---|---|---|---|
-| AD-01 | Channel roles | `0_plan/07-design-decisions.md:153` | `00-context.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `1_spec/08-advertising-spec.md` |
-| AD-02 | Landing destination per channel | `0_plan/07-design-decisions.md:154` | `09-operating-model.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-03 | UTM conventions for ads and organic social | `0_plan/07-design-decisions.md:155` | `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-04 | Pixels and tags on the landing | `0_plan/07-design-decisions.md:156` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AD-05 | Optimization events per platform | `0_plan/07-design-decisions.md:157` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| AD-06 | Server-side conversion APIs | `0_plan/07-design-decisions.md:158` | `09-operating-model.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-07 | Audiences | `0_plan/07-design-decisions.md:159` | `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| AD-08 | Creative and message match | `0_plan/07-design-decisions.md:160` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-09 | Geographic alignment | `0_plan/07-design-decisions.md:161` | `1_spec/08-advertising-spec.md` |
-| AD-10 | Attribution and reporting | `0_plan/07-design-decisions.md:162` | `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-11 | Claims and imagery in ads | `0_plan/07-design-decisions.md:163` | `03-decisions-and-open-questions.md`, `06-mockup-rationale.md`, `1_spec/04-design-system-spec.md`, `1_spec/08-advertising-spec.md` |
-| AD-12 | Organic profile links | `0_plan/07-design-decisions.md:164` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/08-advertising-spec.md` |
-| AD-13 | Network cross-traffic | `0_plan/07-design-decisions.md:165` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
-| AD-14 | Ownership and budget governance | `0_plan/07-design-decisions.md:166` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
-| AD-15 | Click identifiers and source values on outbound door links (from K8) | `0_plan/07-design-decisions.md:167` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
+| AD-01 | Channel roles | `0_plan/07-design-decisions.md:155` | `00-context.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `1_spec/08-advertising-spec.md` |
+| AD-02 | Landing destination per channel | `0_plan/07-design-decisions.md:156` | `09-operating-model.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-03 | UTM conventions for ads and organic social | `0_plan/07-design-decisions.md:157` | `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-04 | Pixels and tags on the landing | `0_plan/07-design-decisions.md:158` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| AD-05 | Optimization events per platform | `0_plan/07-design-decisions.md:159` | `02-requirements-and-deliverables.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| AD-06 | Server-side conversion APIs | `0_plan/07-design-decisions.md:160` | `09-operating-model.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-07 | Audiences | `0_plan/07-design-decisions.md:161` | `13-journey-map.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
+| AD-08 | Creative and message match | `0_plan/07-design-decisions.md:162` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-09 | Geographic alignment | `0_plan/07-design-decisions.md:163` | `1_spec/08-advertising-spec.md` |
+| AD-10 | Attribution and reporting | `0_plan/07-design-decisions.md:164` | `1_spec/06-analytics-tracking-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-11 | Claims and imagery in ads | `0_plan/07-design-decisions.md:165` | `03-decisions-and-open-questions.md`, `06-mockup-rationale.md`, `1_spec/04-design-system-spec.md`, `1_spec/08-advertising-spec.md` |
+| AD-12 | Organic profile links | `0_plan/07-design-decisions.md:166` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/08-advertising-spec.md` |
+| AD-13 | Network cross-traffic | `0_plan/07-design-decisions.md:167` | `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
+| AD-14 | Ownership and budget governance | `0_plan/07-design-decisions.md:168` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `10-analytics-current-state.md`, `1_spec/08-advertising-spec.md` |
+| AD-15 | Click identifiers and source values on outbound door links (from K8) | `0_plan/07-design-decisions.md:169` | `05-landing-mockups-plan.md`, `12-register-loop.md` |
 
 ## CB: Chatbot platform decisions
 
 | ID | Title | Defined in | Referenced in |
 |---|---|---|---|
-| CB-01 | Hosting model on TrueFoundry | `0_plan/07-design-decisions.md:175` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `12-register-loop.md`, `1_spec/09-chatbot-platform-spec.md` |
-| CB-02 | Model access | `0_plan/07-design-decisions.md:176` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md` |
-| CB-03 | Knowledge base | `0_plan/07-design-decisions.md:177` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| CB-04 | Guardrails | `0_plan/07-design-decisions.md:178` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| CB-05 | Evaluation gate before launch | `0_plan/07-design-decisions.md:179` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| CB-06 | Observability and analytics | `0_plan/07-design-decisions.md:180` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
-| CB-07 | Cost controls | `0_plan/07-design-decisions.md:181` | `09-operating-model.md`, `1_spec/09-chatbot-platform-spec.md` |
-| CB-08 | Placement and timing | `0_plan/07-design-decisions.md:182` | `05-landing-mockups-plan.md`, `09-operating-model.md`, `1_spec/05-school-sites-spec.md`, `1_spec/09-chatbot-platform-spec.md` |
+| CB-01 | Hosting model on TrueFoundry | `0_plan/07-design-decisions.md:177` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `09-operating-model.md`, `12-register-loop.md`, `1_spec/09-chatbot-platform-spec.md` |
+| CB-02 | Model access | `0_plan/07-design-decisions.md:178` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md` |
+| CB-03 | Knowledge base | `0_plan/07-design-decisions.md:179` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| CB-04 | Guardrails | `0_plan/07-design-decisions.md:180` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| CB-05 | Evaluation gate before launch | `0_plan/07-design-decisions.md:181` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| CB-06 | Observability and analytics | `0_plan/07-design-decisions.md:182` | `09-operating-model.md`, `13-journey-map.md`, `1_spec/09-chatbot-platform-spec.md`, `1_spec/13-testing-suite-spec.md`, `1_spec/tests/MANUAL-AND-EXTERNAL.md` |
+| CB-07 | Cost controls | `0_plan/07-design-decisions.md:183` | `09-operating-model.md`, `1_spec/09-chatbot-platform-spec.md` |
+| CB-08 | Placement and timing | `0_plan/07-design-decisions.md:184` | `05-landing-mockups-plan.md`, `09-operating-model.md`, `1_spec/05-school-sites-spec.md`, `1_spec/09-chatbot-platform-spec.md` |
 
 ## SE: SEO and AEO decisions
 
 | ID | Title | Defined in | Referenced in |
 |---|---|---|---|
-| SE-01 | Domain architecture for search | `0_plan/07-design-decisions.md:190` | `05-landing-mockups-plan.md`, `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-02 | Redirects and canonicals at the root change | `0_plan/07-design-decisions.md:191` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-03 | Target queries by intent | `0_plan/07-design-decisions.md:192` | `11-seo-aeo-plan.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-04 | Page-to-query mapping | `0_plan/07-design-decisions.md:193` | `11-seo-aeo-plan.md`, `1_spec/05-school-sites-spec.md` |
-| SE-05 | Structured data | `0_plan/07-design-decisions.md:194` | `03-decisions-and-open-questions.md`, `11-seo-aeo-plan.md`, `13-journey-map.md`, `15-positioning-brief.md`, `1_spec/03-landing-page-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| SE-06 | Technical baseline | `0_plan/07-design-decisions.md:195` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| SE-07 | Organic content plan (Phase 2) | `0_plan/07-design-decisions.md:196` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md` |
-| SE-08 | Entity consistency for answer engines | `0_plan/07-design-decisions.md:197` | `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| SE-09 | Answer-shaped content | `0_plan/07-design-decisions.md:198` | `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-10 | AI crawler policy and llms.txt | `0_plan/07-design-decisions.md:199` | `03-decisions-and-open-questions.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
-| SE-11 | AEO measurement | `0_plan/07-design-decisions.md:200` | `11-seo-aeo-plan.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-12 | Local search for Georgetown | `0_plan/07-design-decisions.md:201` | `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
-| SE-13 | Preview and staging indexation | `0_plan/07-design-decisions.md:202` | `09-operating-model.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md`, `CLAUDE.md` |
-| SE-14 | Governance | `0_plan/07-design-decisions.md:203` | `05-landing-mockups-plan.md`, `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-01 | Domain architecture for search | `0_plan/07-design-decisions.md:192` | `05-landing-mockups-plan.md`, `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-02 | Redirects and canonicals at the root change | `0_plan/07-design-decisions.md:193` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-03 | Target queries by intent | `0_plan/07-design-decisions.md:194` | `11-seo-aeo-plan.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-04 | Page-to-query mapping | `0_plan/07-design-decisions.md:195` | `11-seo-aeo-plan.md`, `1_spec/05-school-sites-spec.md` |
+| SE-05 | Structured data | `0_plan/07-design-decisions.md:196` | `03-decisions-and-open-questions.md`, `11-seo-aeo-plan.md`, `13-journey-map.md`, `15-positioning-brief.md`, `1_spec/03-landing-page-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| SE-06 | Technical baseline | `0_plan/07-design-decisions.md:197` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| SE-07 | Organic content plan (Phase 2) | `0_plan/07-design-decisions.md:198` | `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md` |
+| SE-08 | Entity consistency for answer engines | `0_plan/07-design-decisions.md:199` | `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/04-design-system-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| SE-09 | Answer-shaped content | `0_plan/07-design-decisions.md:200` | `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-10 | AI crawler policy and llms.txt | `0_plan/07-design-decisions.md:201` | `03-decisions-and-open-questions.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/13-testing-suite-spec.md` |
+| SE-11 | AEO measurement | `0_plan/07-design-decisions.md:202` | `11-seo-aeo-plan.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-12 | Local search for Georgetown | `0_plan/07-design-decisions.md:203` | `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
+| SE-13 | Preview and staging indexation | `0_plan/07-design-decisions.md:204` | `09-operating-model.md`, `11-seo-aeo-plan.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `1_spec/13-testing-suite-spec.md`, `CLAUDE.md` |
+| SE-14 | Governance | `0_plan/07-design-decisions.md:205` | `05-landing-mockups-plan.md`, `11-seo-aeo-plan.md`, `13-journey-map.md`, `1_spec/07-seo-aeo-spec.md` |
 
 ## SRC: Sources of truth (SOURCES.md; designated in TRUTH.md)
 

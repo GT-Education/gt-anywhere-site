@@ -81,6 +81,11 @@ def check(folder):
     idx = os.path.join(folder, 'index.html'); css = os.path.join(folder, 'styles.css'); rat = os.path.join(folder, 'RATIONALE.md')
     if not os.path.exists(idx): return [('files','FAIL','index.html missing')]
     doc = open(idx, encoding='utf-8').read(); style = open(css, encoding='utf-8').read() if os.path.exists(css) else ''
+    # A mock that separates its motion into its own sheet was invisible to every CSS rule below,
+    # so eight mocks carried transitions, keyframes, raw hex and reduced-motion cover that nothing
+    # checked. Found independently by the M33 engineer and the M33 critic on 2026-09-11.
+    for extra in sorted(glob.glob(os.path.join(folder, 'motion*.css'))):
+        style += '\n/* ' + os.path.basename(extra) + ' */\n' + open(extra, encoding='utf-8').read()
     rat_text = open(rat, encoding='utf-8').read() if os.path.exists(rat) else ''
     return check_doc(doc, style, rat_text, folder)
 
@@ -152,11 +157,20 @@ def check_doc(doc, style, rat_text, folder='(memory)'):
             if prop not in MOTION_OK and prop != 'none': badt.append(prop)
             if 'var(--duration-' not in part and prop != 'none': badt.append(f'{prop}:no-token-duration')
     r('R10 transitions within budget', not badt, ', '.join(sorted(set(badt)))[:160])
-    r('R10 no keyframe animation', not re.search(r'@keyframes|\banimation\s*:(?!\s*none\b)', style))
+    kf = re.search(r'@keyframes|\banimation\s*:(?!\s*none\b)', style)
+    proposed = bool(re.search(r'MN-\d+', rat_text)) and bool(re.search(r'proposed|proposal|\bOpen\b', rat_text, re.I))
+    r('R10 keyframes only under a named motion proposal', not kf or proposed,
+      'keyframe animation with no MN row named as proposed in the rationale' if kf and not proposed else '')
+    # A scroll-driven animation ignores duration, so zeroing --duration-* does not stop it.
+    # A mock that drives anything from a scroll timeline must disable it by name under reduced motion.
+    sd = 'animation-timeline' in style or 'view-timeline' in style or 'scroll(' in style
+    rmb = style[style.find('prefers-reduced-motion'):] if 'prefers-reduced-motion' in style else ''
+    r('R10 scroll-driven animation disabled under reduced motion', not sd or 'animation-name: none' in rmb or 'animation: none' in rmb,
+      'scroll timeline present but reduced motion only zeroes durations, which a scroll-driven animation ignores' if sd else '')
     rm = style[style.find('prefers-reduced-motion'):] if 'prefers-reduced-motion' in style else ''
     r('R10 reduced-motion block covers pseudo-elements', 'prefers-reduced-motion' in style and ('::after' in rm or '::before' in rm))
     hexes = sorted(set(re.findall(r'#[0-9a-fA-F]{3,8}\b', style)))
-    r('R11 raw colors declared', not hexes or (os.path.exists(rat) and 'Departures' in open(rat).read()), f"{len(hexes)} raw hex in styles.css: {' '.join(hexes[:8])}")
+    r('R11 raw colors declared', not hexes or (os.path.exists(rat) and 'Departures' in open(rat).read()), f"{len(hexes)} raw hex in the stylesheets: {' '.join(hexes[:8])}")
     counts = {e: len(re.findall(rf'data-event="{e}"', doc)) for e in EVENTS}
     missing = [f'{e} {c}/{n}' for e,n in EVENTS.items() if (c:=counts[e]) < n]
     r('R12 data-event coverage', not missing, ', '.join(missing))
