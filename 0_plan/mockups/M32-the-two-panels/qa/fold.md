@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:03:53.204Z; page `/0_plan/mockups/M32-the-two-panels/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:23:36.077Z; page `/0_plan/mockups/M32-the-two-panels/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -72,17 +72,17 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| light | focus ring on `mark link` | 15.08:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 15.08:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | FAIL at 1.03:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| dark | focus ring on `mark link` | FAIL at 1.39:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | FAIL at 1.39:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 20.29:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
@@ -95,7 +95,9 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
-| all three rows | every interactive target is at least 44px tall | | | | ok |
+| 320 by 256 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
+| 375 by 629 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
+| 1440 by 900 | Terms | 44px | 38px | short control | under 44, above the 24px floor |
 
 ## Mark geometry (K12 V2)
 
@@ -114,4 +116,4 @@ Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must h
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
 | 1440 by 900 | `gt-anywhere-logo-h.svg` | horizontal | 32px | 168px | 0% | ok |
 
-## Result: all required rows pass
+## Result: 3 failure(s)

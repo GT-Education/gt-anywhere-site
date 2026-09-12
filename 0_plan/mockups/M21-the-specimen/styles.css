@@ -503,7 +503,7 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
    navy, which is no ring at all. Every mock in the programme had this the moment the mark was
    protected. The ring is therefore stated in near-white, which is what the plate's own ground needs. */
 @media (forced-colors: active) {
-  .mark-plate--navy:focus-visible { outline-color: var(--color-on-navy); }
+  .mark-plate--navy:focus-visible { outline-color: CanvasText; }
 }
 
 /* The header lockup keeps its own ground through forced colours too. The GT School mark is navy
@@ -511,7 +511,7 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
    the Anywhere mark could not see it (M22 critic). The ring matches the light ground it keeps. */
 @media (forced-colors: active) {
   .lockup { background: var(--color-bg); forced-color-adjust: none; }
-  .lockup:focus-visible { outline-color: var(--color-navy); }
+  .lockup:focus-visible { outline-color: CanvasText; }
 }
 
 /* Both wordmarks keep their own colours and their own ground through forced colours, keyed on the mark
@@ -522,4 +522,23 @@ main > .chapter + .chapter, .site-footer { border-top: 1px solid var(--rule-ink)
 @media (forced-colors: active) {
   img[src$="gt-school-logo-h.svg"] { forced-color-adjust: none; background: var(--color-bg); }
   img[src$="gt-anywhere-logo-h.svg"] { forced-color-adjust: none; background: var(--color-navy); }
+}
+
+
+/* Correction, 2026-09-11, and it reverses an earlier one of mine. The per-plate focus rules above
+   state each ring in the colour of the plate's own retained ground, on the reasoning that a plate
+   which keeps its colours through forced colours also keeps its ring. That reasoning was wrong.
+   Every ring in this programme sits at a positive `outline-offset`, so it is painted OUTSIDE the
+   plate, on Canvas, and the plate's ground is not the surface it has to be seen against. Measured
+   under forced colours in both palettes: a near-white ring on the light palette's white Canvas is
+   1.03 to 1, and a navy ring on the dark palette's black Canvas is 1.39 to 1. No ring at all, in
+   both directions, in all twenty-six mocks. The runner could not see it because it compared the
+   ring with the element's own fill rather than with the surface outside it, and because its
+   transparency test matched one literal string, so a fully transparent white read as opaque white.
+   Both are fixed in `0_plan/tools/shots.mjs`. CanvasText is the only value guaranteed to contrast
+   with the ground the ring is actually drawn on, in either palette, and system colour keywords
+   still resolve under `forced-color-adjust: none`. This rule is last so it wins over the per-plate
+   rules above, which are left in place as the record of what was tried. */
+@media (forced-colors: active) {
+  :focus-visible { outline-color: CanvasText; }
 }

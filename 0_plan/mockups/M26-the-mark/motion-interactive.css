@@ -1,0 +1,34 @@
+/* M26-A: the suffix swap is driven by the parent, not by a timer.
+   Proposed as D-031 move V11 "lockup suffix swap". Transform and opacity only. */
+.suffix b {
+  transition: opacity var(--duration-base) var(--ease-out),
+              transform var(--duration-base) var(--ease-out);
+  transform: translateY(0);
+}
+.suffix b:not([data-k="school"]) { transform: translateY(4px); }
+
+/* Hover or keyboard focus on a door swaps the suffix to that school's word.
+   :has() keeps this in CSS: rule 2 forbids JavaScript entirely. */
+@media (min-width: 768px) and (hover: hover) {
+  .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="school"],
+  .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="school"] { opacity: 0; }
+  .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="georgetown"],
+  .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="anywhere"] {
+    opacity: 1; transform: translateY(0);
+  }
+  .board:has(.door--georgetown .door-cta:hover) .door--georgetown::after,
+  .board:has(.door--anywhere   .door-cta:hover) .door--anywhere::after { transform: scaleY(1.25); }
+}
+/* Keyboard focus works at every width and on touch, so the swap is not hover-only (MN-12). */
+.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="school"],
+.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="school"] { opacity: 0; }
+.board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
+.board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
+  opacity: 1; transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suffix b { transition-duration: var(--duration-none); transform: none; }
+  .suffix b:not([data-k="school"]) { transform: none; }
+  .door::after { transition-duration: var(--duration-none); }
+}

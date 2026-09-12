@@ -1,0 +1,47 @@
+/* M33 "The Scale" — the page's one move, kept in its own file so it can be read, reviewed and
+   deleted on its own (the pattern M34 established). index.html loads it after styles.css.
+
+   THE MOVE IS PROPOSED, NOT APPROVED. It is V13 under MN-17 in 0_plan/07-design-decisions.md, raised
+   on 2026-09-11, verdict Open: Astra has not reviewed it and Johnny has not ruled. Nothing here may
+   ship before MN-17 closes.
+
+   WHAT MOVES: the position marker on the scale, and nothing else. Every one of the 104 ticks is
+   painted at all times, in every state and in every browser. No content reveals on scroll; no
+   movement of the story is ever hidden; the stage is never pinned. Removing this file leaves the
+   page complete, which is also what a browser without scroll-driven animation renders.
+
+   NO JAVASCRIPT. D-039 (scripts and inputs in mocks) is Escalated to Johnny and unresolved, so the
+   move is built entirely in CSS with animation-timeline and is not gated by it.
+
+   START AND END ARE SCROLL OFFSETS, NOT MILLISECONDS. The marker runs the `contain` range of a view
+   timeline named on the stage: progress 0 when the stage's top edge reaches the top of the viewport,
+   progress 1 when its bottom edge reaches the bottom. There is no duration in time anywhere in this
+   file, so there is nothing for a reader to wait out. */
+
+@keyframes scale-progress-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes scale-progress-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+@supports (animation-timeline: view()) {
+  .story-grid { view-timeline-name: --stage; view-timeline-axis: block; }
+
+  /* Horizontal scale (below 1024, and at any height under 700): the marker runs left to right. */
+  .scale-progress {
+    animation-name: scale-progress-x;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --stage;
+    animation-range: contain 0% contain 100%;
+  }
+
+  /* Vertical scale (1024 and above with 700px of height): the marker runs top to bottom. */
+  @media (min-width: 1024px) and (min-height: 700px) {
+    .scale-progress { animation-name: scale-progress-y; }
+  }
+}
+
+/* Reduced motion: the animation is disabled outright and the marker is left at its resting position,
+   which is the complete scale. Nothing on the page depends on scrolling, so nothing is lost. */
+@media (prefers-reduced-motion: reduce) {
+  .scale-progress { animation: none; }
+}

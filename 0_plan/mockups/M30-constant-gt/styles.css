@@ -1,0 +1,221 @@
+/* M30 "Constant GT" — Cream Hard-Cut (insp-outship): no drawn stage; the lockup line is the hero and the type carries it.
+   Tokens only, per CONTRACT v2.1 §1. Departures named in RATIONALE.md. */
+@import url("../shared/tokens-v2.css");
+@import url("../shared/fonts.css");
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--color-bg); color: var(--color-text);
+  font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-prose);
+}
+.skip {
+  position: absolute; left: -9999px; top: 0; background: var(--color-navy); color: var(--color-on-navy);
+  padding: var(--space-3) var(--space-4); z-index: 10; font-family: var(--font-mono);
+}
+.skip:focus { left: var(--space-4); top: var(--space-3); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+.wrap { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-5); }
+
+/* Header */
+.site-header { padding: var(--space-4) 0; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.site-header img { display: block; height: 28px; width: auto; }
+.site-nav { display: flex; gap: var(--space-5); }
+.site-nav a {
+  color: var(--color-text); text-decoration: none; font-size: var(--text-sm);
+  display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid transparent;
+}
+.site-nav a:hover, .site-nav a:focus-visible { border-bottom-color: var(--color-text); }
+
+/* Stage: the mark, then the lockup line */
+.stage { text-align: center; padding-top: var(--space-5); }
+.mark { display: block; margin: 0 auto; width: 56px; height: 56px; }
+.lockup {
+  margin: var(--space-4) 0 0; font-family: var(--font-sans); font-weight: 700;
+  font-size: var(--text-xl); letter-spacing: -0.02em; line-height: 1.1;
+  display: flex; justify-content: center; align-items: baseline; gap: 0.04em;
+}
+.lockup .gt { color: var(--color-navy); }
+/* All three suffixes occupy one grid cell: the box is as wide as the widest word,
+   so swapping one for another cannot shift layout (MN-10 zero layout shift). */
+.suffix { display: inline-grid; justify-items: start; }
+.suffix b { grid-area: 1 / 1; font-weight: 400; color: var(--color-accent-text); opacity: 0; }
+.suffix b[data-k="school"] { opacity: 1; }
+
+/* Headline block */
+.lede { text-align: center; padding: var(--space-5) 0 0; }
+h1 {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-3xl);
+  line-height: var(--leading-tight); letter-spacing: -0.01em;
+  max-width: 35ch; margin: 0 auto; text-wrap: balance;
+}
+.provenance { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-4) auto 0; }
+
+/* Doors: a list, so it can hold three to five (DD-21) */
+.doors-head { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.doors {
+  list-style: none; margin: var(--space-6) 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr; gap: var(--space-5);
+}
+.door { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.door-label {
+  font-size: var(--text-xs); font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--color-text-muted); line-height: var(--leading-body);
+}
+.door-name {
+  font-family: var(--font-serif); font-weight: 400; font-size: var(--text-xl);
+  line-height: var(--leading-body); margin-top: var(--space-2);
+}
+.door-line {
+  font-size: var(--text-base); line-height: var(--leading-prose); color: var(--color-text);
+  max-width: 34ch; margin: var(--space-3) auto 0; order: 3;
+}
+.door-cta {
+  order: 2; margin-top: var(--space-4);
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3);
+  min-height: 44px; padding: var(--space-3) var(--space-5);
+  background: var(--color-navy); color: var(--color-on-navy); text-decoration: none;
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
+  border-radius: var(--radius-md);
+}
+.door-cta:hover, .door-cta:focus-visible { text-decoration: underline; }
+
+/* Compare anchor */
+.compare-anchor { text-align: center; margin: var(--space-5) 0 var(--space-4); font-size: var(--text-base); }
+.compare-anchor a { color: var(--color-text); }
+
+/* Desktop: mirrored equal arms. Identical geometry, mirrored angles, identical terminals —
+   never one school nested inside the other (CONTRACT v2.1 §3, "Nesting is hierarchy"). */
+.stage { padding-top: var(--space-6); }
+.mark { display: none; }
+.lockup { font-size: var(--text-2xl); }
+.lede { padding-top: var(--space-5); }
+h1 { max-width: 30ch; }
+@media (min-width: 768px) {
+  .lockup { font-size: var(--text-3xl); }
+  .doors { grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-top: var(--space-7); }
+}
+@media (max-width: 767px) {
+  .door-line { order: 3; }
+  .stage { padding-top: var(--space-4); }
+}
+/* Short viewports: the stage yields so both CTAs stay above the fold (runbook §4, V2/V5/V10). */
+@media (max-height: 400px) and (min-width: 600px) {
+  .doors { grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  .mark { width: 36px; height: 36px; }
+}
+
+
+/* ---------- Conformance fixes (runner rows: mark geometry, forced colours, compact doors, V10) ---------- */
+.brand-plate { display: inline-flex; align-items: center; min-height: 44px; }
+.site-header img { height: clamp(1.6875rem, 1.5rem + 1vw, 2rem); } /* 27px at 360, 32px from 800 (K12 V2) */
+@media (forced-colors: active) {
+  .brand-plate { background: var(--color-bg); forced-color-adjust: none; }
+  .door-cta { border: 1px solid CanvasText; }
+  .door::before, .door::after { background: CanvasText; }
+}
+
+/* The next band is visibly cut below the first screen, so no row ends on a false floor. */
+.next-band { border-top: 1px solid var(--color-border-strong); padding: var(--space-5) 0 var(--space-9); }
+.next-band h2 { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-2xl); margin: 0 0 var(--space-3); }
+.next-band p { margin: 0; color: var(--color-text-muted); }
+
+/* Compact door rule (CONTRACT v2.1 §2): under 768px the label and CTA of BOTH doors come first,
+   then the name + line pairs, so neither line can push the second CTA below the fold. */
+@media (max-width: 767px) {
+  .doors { display: grid; grid-template-columns: 1fr; row-gap: var(--space-4); }
+  .door { display: contents; }
+  .door--georgetown .door-label { order: 1; }
+  .door--georgetown .door-cta   { order: 2; margin-top: var(--space-2); }
+  .door--anywhere   .door-label { order: 3; margin-top: var(--space-4); }
+  .door--anywhere   .door-cta   { order: 4; margin-top: var(--space-2); }
+  .door--georgetown .door-name  { order: 5; margin-top: var(--space-5); }
+  .door--georgetown .door-line  { order: 6; }
+  .door--anywhere   .door-name  { order: 7; margin-top: var(--space-4); }
+  .door--anywhere   .door-line  { order: 8; }
+  .door-cta { justify-self: center; }
+  .door-name { font-size: var(--text-lg); }
+}
+
+/* Phone landscape (V10) and any short row: the stage yields the mark; the lockup alone carries it. */
+@media (max-height: 760px) {
+  .mark { display: none; }
+  .stage { padding-top: var(--space-3); }
+  .lockup { font-size: var(--text-lg); margin-top: 0; }
+  .lede { padding-top: var(--space-4); }
+  .provenance { margin-top: var(--space-3); }
+  .doors { margin-top: var(--space-4); }
+  .next-band { padding-top: var(--space-5); }
+}
+/* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
+@media (max-height: 400px) and (min-width: 600px) {
+  h1 { font-size: var(--text-lg); }
+  .lockup { font-size: var(--text-base); }
+  .lede { padding-top: var(--space-3); }
+  .provenance { margin-top: var(--space-2); }
+  .doors { grid-template-columns: 1fr 1fr; column-gap: var(--space-5); margin-top: var(--space-2); }
+  .door { display: flex; }
+  .door-line, .door-name { display: none; }
+  .door-cta { margin-top: var(--space-2); }
+  .compare-anchor { margin-top: var(--space-3); }
+}
+
+/* A doubled root font must not overflow: the reserved swap box may wrap rather than push the page wide. */
+.lockup { max-width: 100%; flex-wrap: wrap; }
+.suffix { max-width: 100%; }
+h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
+
+/* The band must be visibly cut at every row, including the tall tablet rows. */
+.next-band { min-height: 26rem; }
+@supports (min-height: 100svh) { .next-band { min-height: 72svh; } }
+/* A doubled root font must wrap inside the column rather than widen the page. */
+.door-cta { white-space: normal; text-align: center; max-width: 100%; }
+.lockup, .suffix, .suffix b { min-width: 0; }
+/* At a large text setting the header must wrap rather than widen the page (runner: doubled root at V2). */
+/* Row gap 0 AND no block padding: a wrap below 390 then costs 88px, not 120 (the shape M25 proved). */
+.site-header { padding: 0; }
+.site-header .wrap { flex-wrap: wrap; align-items: center; gap: 0 var(--space-3); min-height: 3.5rem; }
+.site-nav { min-width: 0; flex-wrap: wrap; align-items: center; gap: 0 var(--space-3);
+            font-family: var(--font-mono); font-size: var(--text-xs); }
+.site-nav a { min-width: 0; }
+@media (min-width: 768px) { .site-nav { gap: var(--space-5); font-size: var(--text-sm); } }
+
+/* The band carries the first real comparison rows, so every row is visibly cut by genuine content. */
+.cmp { width: 100%; border-collapse: collapse; margin-top: var(--space-5); text-align: left; }
+.cmp caption { text-align: left; font-size: var(--text-sm); color: var(--color-text-muted); padding-bottom: var(--space-3); }
+.cmp th, .cmp td { border-top: 1px solid var(--color-border-strong); padding: var(--space-4) var(--space-4) var(--space-4) 0; vertical-align: top; font-size: var(--text-base); line-height: var(--leading-prose); }
+.cmp thead th { font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); }
+.cmp tbody th { font-weight: 500; font-size: var(--text-sm); color: var(--color-text-muted); width: 26%; }
+@media (max-width: 767px) { .cmp, .cmp tbody, .cmp tr, .cmp td, .cmp th { display: block; width: auto; } .cmp thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .cmp td::before { content: attr(data-school); display: block; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .07em; color: var(--color-text-muted); margin-bottom: var(--space-2); } .cmp td { border-top: 0; padding-top: 0; padding-bottom: var(--space-3); } .cmp tbody th { border-top: 1px solid var(--color-border-strong); padding-bottom: var(--space-3); } }
+
+.sources { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-5) 0 0; max-width: var(--measure-prose); }
+@media (max-height: 760px) {
+  .stage { padding-top: var(--space-2) !important; }
+  .lede { padding-top: var(--space-3) !important; }
+  .steps { margin-top: var(--space-2); }
+  .steps a { height: 32px; }
+  .door { padding: var(--space-3) var(--space-3) !important; }
+}
+
+.next-band .wrap { max-width: 72rem; }
+
+
+/* Correction, 2026-09-11, and it reverses an earlier one of mine. The per-plate focus rules above
+   state each ring in the colour of the plate's own retained ground, on the reasoning that a plate
+   which keeps its colours through forced colours also keeps its ring. That reasoning was wrong.
+   Every ring in this programme sits at a positive `outline-offset`, so it is painted OUTSIDE the
+   plate, on Canvas, and the plate's ground is not the surface it has to be seen against. Measured
+   under forced colours in both palettes: a near-white ring on the light palette's white Canvas is
+   1.03 to 1, and a navy ring on the dark palette's black Canvas is 1.39 to 1. No ring at all, in
+   both directions, in all twenty-six mocks. The runner could not see it because it compared the
+   ring with the element's own fill rather than with the surface outside it, and because its
+   transparency test matched one literal string, so a fully transparent white read as opaque white.
+   Both are fixed in `0_plan/tools/shots.mjs`. CanvasText is the only value guaranteed to contrast
+   with the ground the ring is actually drawn on, in either palette, and system colour keywords
+   still resolve under `forced-color-adjust: none`. This rule is last so it wins over the per-plate
+   rules above, which are left in place as the record of what was tried. */
+@media (forced-colors: active) {
+  :focus-visible { outline-color: CanvasText; }
+}

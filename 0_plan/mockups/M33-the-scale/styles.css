@@ -1,0 +1,373 @@
+/* M33 "The Scale" (G-D build wave, 2026-09-11). Lens order L3 mission, L4 exclusivity, L1 objective,
+   L2 continuity.
+
+   The direction: a school whose argument is measurement tells its story against a measure. The story
+   band between the first screen and the comparison runs beside a drawn scale of 104 ticks in two runs
+   of 52, with a major on every second position — the geometry measured from the gt.school story
+   section's own stylesheet, checked in at 0_plan/kb/exemplars/gt-story/ and reproducible with
+   count.py. No numbers are printed on the scale: a tick is a mark, and a numbered scale would state a
+   quantity no claims-register row holds.
+
+   Every colour, face, size, space, radius and duration is a var(--...) from ../shared/tokens-v2.css.
+   The non-token values (1px hairlines and the 4px position marker, the 2px focus bands, the 44px target floor, the tick
+   arithmetic, the container and height thresholds, the 6:5 frame ratio) are named in RATIONALE.md,
+   Departures.
+
+   MOTION LIVES IN motion.css, loaded after this file, so it can be reviewed and removed on its own.
+   Nothing in this file animates or transitions; this file alone is the page's complete resting state. */
+
+/* ---------- Reset and base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--color-bg); }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-base); line-height: var(--leading-body); overflow-wrap: break-word; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---------- Page margins and the wrap ---------- */
+:root { --page-margin: var(--space-4); }
+@media (min-width: 768px)  { :root { --page-margin: var(--space-6); } }
+@media (min-width: 1024px) { :root { --page-margin: var(--space-7); } }
+@media (min-width: 1440px) { :root { --page-margin: var(--space-8); } }
+.wrap { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--page-margin); }
+
+/* ---------- Type roles (CONTRACT section 3, DD-38 option b) ---------- */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: var(--leading-tight); }
+h2 { font-size: var(--text-2xl); text-wrap: balance; }
+.label { font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); }
+.sources { margin-top: var(--space-6); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text); max-inline-size: var(--measure-prose); }
+
+/* Links on light surfaces: underlined at rest (DD-10), the underline in the strong-border role. */
+.link { color: var(--color-text); text-decoration: underline; text-decoration-color: var(--color-border-strong); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.link:hover, .link:focus-visible { text-decoration-color: currentColor; }
+
+/* Buttons: the estate's face and case (K12 F41, G15, G17), a 44px floor, and DD-47's uniform
+   --radius-md corner on all four sides. Fill per DD-46 option (a): navy on light surfaces. */
+.btn { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 2.75rem; max-width: 100%; padding: var(--space-3); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn); line-height: var(--leading-body); text-transform: uppercase; text-decoration: none; border-radius: var(--radius-md); border: 1px solid transparent; }
+@media (min-width: 768px) { .btn { padding-inline: var(--space-4); } }
+.btn-navy { background: var(--color-navy); border-color: var(--color-navy); color: var(--color-on-navy); }
+.btn-navy:hover { background: var(--color-text); border-color: var(--color-text); }
+.btn-outline { border-color: var(--color-navy); color: var(--color-navy); }
+.btn-outline:hover { background: var(--color-navy); color: var(--color-on-navy); }
+
+/* ---------- Focus (K3 section 5d) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.frame--navy :focus-visible, .logo-navy:focus-visible { outline: 2px solid var(--color-focus-on-dark); outline-offset: 2px; box-shadow: 0 0 0 2px var(--color-navy); }
+
+/* ---------- Skip link ---------- */
+.skip-link { position: absolute; top: var(--space-2); left: var(--space-2); z-index: 3; display: inline-flex; align-items: center; min-height: 2.75rem; padding: var(--space-3) var(--space-4); background: var(--color-bg); color: var(--color-text); font-family: var(--font-mono); font-weight: 600; text-decoration: none; border-radius: var(--radius-sm); transform: translateY(-200%); }
+.skip-link:focus { transform: none; }
+
+/* ---------- Header: 56px, the mark, two utility links, a hairline beneath (DD-12) ---------- */
+.site-header { border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--space-3); min-height: 3.5rem; }
+.lockup { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.lockup img { height: clamp(1.6875rem, 1.5rem + 1vw, 2rem); width: auto; } /* 27.6px at 360, 32px from 800 (K12 V2) */
+.utility-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-3); font-family: var(--font-mono); font-size: var(--text-xs); }
+.utility-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+@media (min-width: 768px) { .utility-nav { gap: var(--space-5); font-size: var(--text-sm); } }
+
+/* ============================================================================
+   FIRST SCREEN. The contract's own form: h1, provenance, two doors of equal
+   weight with both CTAs above the limit at every matrix row, then the two door
+   lines. The scale is not here: the vocabulary's guard keeps it off the first
+   two screens, so the first screen is type and nothing else.
+   ============================================================================ */
+/* The first screen and the compare anchor are one block, sized to the viewport less the header, so
+   the anchor's closing rule lands 12px above the fold at every row where the content is shorter than
+   the screen. That rule is what a reader sees at the bottom edge: it closes the first screen and says
+   the page continues, instead of leaving a band of dead cream that reads as the end of the document.
+   Where the content is taller than the screen (the phone rows) the min-height never binds and the
+   anchor simply follows the two door lines. */
+.screen-one { display: flex; flex-direction: column; min-block-size: calc(100vh - 4.3125rem); min-block-size: calc(100svh - 4.3125rem); }
+.first-screen { --fs-top: var(--space-4); --fs-h1: var(--space-3); --fs-doors: var(--space-5); --fs-lines: var(--space-4); --fs-gap: var(--space-3);
+  padding-top: var(--fs-top); container: fs / inline-size; }
+@media (min-height: 760px) { .first-screen { --fs-top: var(--space-6); --fs-h1: var(--space-4); --fs-doors: var(--space-6); --fs-lines: var(--space-5); --fs-gap: var(--space-4); } }
+@media (min-height: 900px) { .first-screen { --fs-top: var(--space-7); --fs-doors: var(--space-7); } }
+
+h1 { font-size: var(--text-3xl); max-width: 35ch; }
+@media (min-width: 768px) { h1 { text-wrap: balance; } }
+/* The last h1 line is never one word — but the rule is released when the reader's own text setting
+   makes the column narrow in rem, which is how a doubled root font stops overflowing (M25's device). */
+@container fs (inline-size >= 20rem) { .nowrap { white-space: nowrap; } }
+.provenance { margin-top: var(--fs-h1); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); }
+
+/* The compact door rule (CONTRACT section 2): label 16, name, CTA 44, with the two lines following
+   the second CTA as run-in paragraphs so neither line sits between the two controls. The doors are a
+   <ul> so a third campus is one more <li> (DD-21). */
+/* "Two ways to attend" is carried as a visually hidden h2 (copy.md section 8 allows it): the two
+   mono door labels already say it on the page, and a third mono line above them read as a collision
+   rather than a heading. */
+.doors { margin-top: var(--fs-doors); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--fs-gap); }
+.door-label { margin-bottom: var(--space-2); }
+.door-name { font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); margin-bottom: var(--space-3); }
+.door .btn { width: 100%; max-width: 24rem; }
+.door-lines { margin-top: var(--fs-lines); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.door-lines li { font-size: var(--text-base); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.run-in { font-family: var(--font-serif); font-size: var(--text-md); padding-inline-end: var(--space-2); }
+@media (min-width: 768px) {
+  .doors, .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); }
+}
+
+/* Landscape phone (V10, 750 by 342): the contract's landscape recipe — compact padding, the doors
+   side by side, the two lines below the fold. */
+@media (max-height: 479px) and (min-width: 700px) {
+  .first-screen { --fs-top: var(--space-3); --fs-h1: var(--space-2); --fs-doors: var(--space-3); --fs-lines: var(--space-3); --fs-gap: var(--space-4); }
+  /* The fixed sentence does not reach the 318px limit at its clamp size on this row, so the h1 steps
+     down one token to --text-xl and drops its 35ch cap, across the full width. The contract allows
+     the step-down on this row only; RATIONALE.md declares it (M03 did the same). */
+  h1 { font-size: var(--text-xl); max-width: none; }
+  .doors, .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .door-name { font-size: var(--text-md); margin-bottom: var(--space-2); }
+}
+
+/* ---------- The compare anchor, closed by a rule ---------- */
+.anchor-band { margin-top: auto; padding-block: var(--space-4); border-bottom: 1px solid var(--color-border-strong); }
+@media (min-height: 900px) { .anchor-band { padding-block: var(--space-5); } }
+.anchor-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-inline-size: var(--measure-prose); text-wrap: balance; }
+
+/* ============================================================================
+   THE STORY. One continuous --color-bg surface so the narrative reads as one
+   thing. The prose here is quoted from the live gt.school about page and is NOT
+   in copy.md: see the notice at the top of index.html.
+   ============================================================================ */
+.story { background: var(--color-bg); padding-block: 0 clamp(var(--space-8), 3rem + 4vw, var(--space-10)); }
+.story .wrap { max-width: 76rem; }
+
+/* The overture holds the story's first two sentences on the plain ground, with no scale beside them.
+   It is one viewport tall, which is what puts the scale on the third screen: the first screen ends at
+   the fold, the compare-anchor rule closes it, and the overture is the whole of the second screen.
+   The vertical hairline at its foot is the source's own device, taken at the source's 5rem. */
+.overture { min-block-size: calc(100vh + 1rem); min-block-size: calc(100svh + 1rem); display: flex; flex-direction: column; justify-content: center; padding-block: var(--space-8); }
+.short-rule { display: block; inline-size: var(--space-7); block-size: 0; border-top: 1px solid var(--color-border-strong); margin-bottom: var(--space-5); } /* the source's short rule, 2.75rem, taken to the nearest token */
+.overture-body { margin-block-start: auto; }
+.overture-line { font-size: var(--text-lg); line-height: var(--leading-prose); max-inline-size: 46ch; } /* the story's opening is set one step up from body prose: a lead, declared in Departures */
+.overture-line + .overture-line { margin-top: var(--space-5); }
+.overture-tail { display: block; inline-size: 0; block-size: var(--space-9); border-left: 1px solid var(--color-border-strong); margin-block: var(--space-7) auto; } /* the source's 5rem hairline, dropping toward the scale below */
+
+/* Below 1024, and at any height under 700, the grid is ordinary block flow: the scale lies across the
+   top of the stage and the stage is never pinned. The stage never decides whether a movement is
+   visible — every movement is present and readable at rest, at every row. */
+.story-grid { display: block; }
+
+/* ---------- The scale ----------
+   104 tick positions in two runs of 52, a major on every second position (50 majors), drawn from the
+   measured source geometry: tick 30% of the rail, major 45%, aligned to the rail's spine, and a 1px
+   full-length line at that spine. Ink is --color-border-strong throughout (3.63:1 on --color-bg).
+
+   --p is the pitch, one tick step. It is written once as a percentage of the axis the scale runs on,
+   so the same declaration resolves against the rail's height when the scale is vertical and against
+   its width when the scale is horizontal: 103 gaps between 104 ticks, less the 1px the last tick
+   itself occupies, so neither end is clipped.
+
+   The fine ticks are a repeating gradient (hard stops, no elements). The 50 majors and the position
+   marker are real elements with borders, because forced colours suppresses non-url background
+   images and a gradient-only scale would erase the page's defining object for exactly the readers
+   who can least afford to lose it. */
+.scale { --p: calc((100% - 1px) / 103); position: relative; block-size: 2rem; margin-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-strong); }
+.scale-fine { position: absolute; inset: 0; background-image: repeating-linear-gradient(to right, var(--color-border-strong) 0 1px, transparent 1px var(--p)); background-size: 100% 30%; background-position: 0 100%; background-repeat: no-repeat; }
+.scale-major { position: absolute; inset-block: 0; display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; inline-size: calc(48 * var(--p) + 1px); }
+.scale-major i { flex: 0 0 auto; inline-size: 1px; block-size: 45%; border-left: 1px solid var(--color-border-strong); }
+.scale-run-a { inset-inline-start: calc(2 * var(--p)); }  /* run 1: ticks 2 to 50, every second */
+.scale-run-b { inset-inline-start: calc(54 * var(--p)); } /* run 2: ticks 54 to 102, every second */
+/* The position marker. It is the one thing the scroll timeline drives (motion.css). At rest, and in
+   any browser without scroll-driven animation, it is drawn complete. */
+.scale-progress { position: absolute; inset-block-end: 0; inset-inline-start: 0; inline-size: 100%; block-size: 4px; border-bottom: 4px solid var(--color-border-strong); transform-origin: left center; }
+
+/* Sticky is allowed only where there is room for it. The sticky object is the scale strip alone —
+   never the stage — so no movement can ever be pushed out of view by it. Under 560px tall the strip
+   is 2rem of a very short viewport, so it stays in ordinary flow (V10 at 342 and V18 at 256). */
+@media (min-height: 560px) {
+  .scale { position: sticky; top: 0; z-index: 2; background: var(--color-bg); padding-bottom: var(--space-2); }
+}
+
+/* 1024 and above, with 700px of height: the scale turns and runs down the left of the stage, sticky
+   at the source's own 6rem inset. Sized in svh, so a phone's retracting toolbar cannot make the rail
+   taller than the viewport. */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .story-grid { display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--space-7); align-items: start; }
+  .scale {
+    position: sticky; top: 6rem; z-index: 0; padding-bottom: 0; margin-bottom: 0;
+    inline-size: 4rem; block-size: calc(100vh - 6rem); block-size: calc(100svh - 6rem);
+    border-bottom: 0; border-right: 1px solid var(--color-border-strong);
+  }
+  .scale-fine { background-image: repeating-linear-gradient(to bottom, var(--color-border-strong) 0 1px, transparent 1px var(--p)); background-size: 30% 100%; background-position: 100% 0; }
+  .scale-major { inset-block: auto; inset-inline: 0; flex-direction: column; align-items: flex-end; block-size: calc(48 * var(--p) + 1px); inline-size: auto; }
+  .scale-major i { inline-size: 45%; block-size: 1px; border-left: 0; border-top: 1px solid var(--color-border-strong); }
+  .scale-run-a { inset-inline-start: 0; inset-block-start: calc(2 * var(--p)); }
+  .scale-run-b { inset-inline-start: 0; inset-block-start: calc(54 * var(--p)); }
+  /* Beside a rail that stands the height of the viewport, each movement is given about a screen of
+     its own and its content centred in it. This is pacing, not sequencing: every movement is painted,
+     readable and reachable at rest — the page simply gives the reader one at a time to look at, the
+     way the source's own stage does, and it is what gives the position marker something to measure. */
+  .mv { min-block-size: calc(100vh - 14rem); min-block-size: calc(100svh - 14rem); align-content: center; }
+  .scale-progress { inset-block: 0; inset-block-end: auto; inset-inline-start: auto; inset-inline-end: 0; inline-size: 4px; block-size: 100%; border-bottom: 0; border-right: 4px solid var(--color-border-strong); transform-origin: center top; }
+}
+
+/* ---------- The stage: three movements, each present and readable at rest ---------- */
+.stage { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(var(--space-8), 4rem + 4vw, var(--space-10)); } /* the source's 4.5rem text-column gap, taken to the token ladder */
+.mv { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+@media (min-width: 768px) { .mv { grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); column-gap: var(--space-7); } }
+.mv-text { min-inline-size: 0; }
+
+/* The frame. The source's 6:5 plate, its large radius and its light-gold tint — which is
+   --color-surface, the estate's own gold-lightest swatch. It carries the mark and the movement
+   heading; it carries no photograph, because every file in ASSETS.md shows identifiable children
+   (DD-42 option a, RF-25, AD-11). */
+.frame { aspect-ratio: 6 / 5; max-inline-size: 22rem; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4); padding: var(--space-5); border-radius: var(--radius-lg); }
+.frame--light { background: var(--color-surface); border: 1px solid var(--color-border); }
+.frame--navy { background: var(--color-navy); color: var(--color-on-navy); }
+.frame--navy .frame-label { color: var(--color-text-muted-on-dark); }
+.frame-mark { inline-size: min(100%, 15rem); block-size: auto; }
+.frame-mark--icon { inline-size: 3.5rem; block-size: 3.5rem; } /* the icon at 56px (K12 V2) */
+.frame-head { font-size: var(--text-xl); text-wrap: balance; }
+
+.mv-text p { font-size: var(--text-base); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.mv-text p + p { margin-top: var(--space-5); }
+
+/* ---------- Sections ---------- */
+.section { padding-block: var(--space-5) clamp(var(--space-8), 2rem + 4vw, var(--space-10)); }
+.section .eyebrow { margin-bottom: var(--space-3); }
+.section h2 { max-inline-size: 22ch; }
+.surface { background: var(--color-surface); padding-block: clamp(var(--space-8), 2rem + 4vw, var(--space-10)); }
+.compare { border-top: 1px solid var(--color-border-strong); padding-top: clamp(var(--space-7), 2rem + 4vw, var(--space-9)); }
+
+/* ---------- Comparison (DD-06, DD-43, R6): a real table from a 58rem container, stacked below ---------- */
+.compare-block { container: compare / inline-size; margin-top: var(--space-5); }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-family: var(--font-serif); font-size: var(--text-2xl); line-height: var(--leading-tight); text-wrap: balance; padding-bottom: var(--space-6); }
+thead th { text-align: left; font-family: var(--font-serif); font-weight: 400; font-size: var(--text-lg); line-height: var(--leading-tight); padding: 0 var(--space-5) var(--space-4) 0; border-bottom: 1px solid var(--color-text); }
+tbody th, tbody td { text-align: left; vertical-align: top; padding: var(--space-5) var(--space-5) var(--space-5) 0; border-bottom: 1px solid var(--color-border); }
+tbody th { width: 25%; font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs); line-height: var(--leading-body); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); padding-top: calc(var(--space-5) + var(--space-2)); }
+tbody td { width: 37.5%; line-height: var(--leading-prose); }
+tbody td:last-child, thead th:last-child { padding-right: 0; }
+@container compare (inline-size < 58rem) {
+  table, caption, tbody, tr, th, td { display: block; width: 100%; }
+  thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  tbody tr { padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
+  tbody th, tbody td { width: 100%; border: 0; padding: 0; }
+  tbody th { padding-bottom: var(--space-3); }
+  tbody td + td { margin-top: var(--space-4); }
+  tbody td::before { content: attr(data-label); display: block; font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-tight); margin-bottom: var(--space-2); }
+}
+
+.doors-again { margin-top: var(--space-7); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+@media (min-width: 768px) { .doors-again { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); } }
+.doors-again .label { margin-bottom: var(--space-2); }
+.doors-again .btn { width: 100%; max-width: 24rem; }
+.tefa { margin-top: var(--space-8); max-inline-size: var(--measure-prose); padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.tefa p { margin-top: var(--space-3); line-height: var(--leading-prose); }
+.tefa a { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: var(--space-2); }
+
+/* ---------- Proof strip: exactly the four facts of copy.md section 4 ---------- */
+.facts { margin-top: var(--space-6); display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--space-6); }
+@media (min-width: 768px)  { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.facts li { padding-block: var(--space-5); border-top: 1px solid var(--color-border-strong); font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-prose); }
+
+/* ---------- Application steps ---------- */
+.steps-line { margin-top: var(--space-5); font-size: var(--text-md); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.steps-list { margin-top: var(--space-6); counter-reset: step; }
+.steps-list li { counter-increment: step; display: grid; grid-template-columns: var(--space-6) minmax(0, 1fr); padding-block: var(--space-4); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); line-height: var(--leading-prose); }
+@media (min-width: 768px) { .steps-list li { grid-template-columns: var(--space-8) minmax(0, 1fr); } }
+.steps-list li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps-list li::before { content: counter(step); font-family: var(--font-mono); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
+.apply { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); }
+
+/* ---------- Secondary CTAs ---------- */
+.link-list { margin-top: var(--space-5); }
+.link-list li a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 3.5rem; padding-block: var(--space-2); border-top: 1px solid var(--color-border); font-family: var(--font-serif); font-size: var(--text-md); text-decoration: none; }
+.link-list li:last-child a { border-bottom: 1px solid var(--color-border); }
+.link-list li a::after { content: "\2192" / ""; font-family: var(--font-mono); }
+.link-list li a:hover, .link-list li a:focus-visible { text-decoration: underline; text-underline-offset: .18em; }
+
+/* ---------- Current families ---------- */
+.families-line { margin-top: var(--space-4); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
+.families .btn { margin-top: var(--space-5); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--color-surface); border-top: 1px solid var(--color-border-strong); padding-block: var(--space-8); }
+.footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7); }
+.footer-facts p { font-size: var(--text-sm); line-height: var(--leading-prose); max-inline-size: 48ch; }
+.footer-phone { margin-top: var(--space-4); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; font-family: var(--font-mono); font-size: var(--text-sm); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.footer-logos { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-4); }
+.logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); border-radius: var(--radius-md); }
+.logo-plate { background: var(--color-bg); border: 1px solid var(--color-border); }
+.logo-navy { background: var(--color-navy); }
+.footer-logos img { height: clamp(1.6875rem, 1.5rem + 1vw, 2rem); width: auto; }
+@media (min-width: 1024px) {
+  .footer-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); }
+  .footer-facts { grid-column: 1 / span 5; }
+  .footer-nav { grid-column: 7 / span 3; }
+  .footer-logos { grid-column: 10 / span 3; flex-direction: column; }
+}
+
+/* ---------- Forced colours (K3 F38). box-shadow is dropped there, so every ring becomes a real
+     outline and every bounded object gets a real border. The scale survives because its majors, its
+     spine and its position marker are real bordered elements: only the fine gradient layer goes,
+     because forced colours suppresses non-url background images. ---------- */
+@media (forced-colors: active) {
+  :focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+  .btn, .frame, .tefa { border: 1px solid CanvasText; }
+  .site-header, .site-footer, .anchor-band, .link-list li a, .steps-list li, .facts li, .compare { border-color: CanvasText; }
+  .scale { border-color: CanvasText; }
+  .scale-major i, .scale-progress { border-color: CanvasText; }
+  .logo-navy { forced-color-adjust: none; border: 1px solid CanvasText; }
+  .logo-navy:focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+}
+
+/* A plate that keeps its own colours through forced colours also keeps its own focus ring, and the
+   user agent's ring is CanvasText: black in the light palette, measured at 1.39 to 1 against the
+   retained navy, which is no ring at all. The ring is therefore stated in near-white, which is what
+   the plate's own ground needs. */
+@media (forced-colors: active) {
+  .logo-navy:focus-visible { outline-color: CanvasText; }
+}
+
+/* The header lockup keeps its own ground through forced colours too. The GT School mark is navy
+   lettering, which disappears on a forced black ground at 1.39 to 1, and a check that looked only at
+   the Anywhere mark could not see it (M22 critic). The ring matches the light ground it keeps. */
+@media (forced-colors: active) {
+  .lockup { background: var(--color-bg); forced-color-adjust: none; }
+  .lockup:focus-visible { outline-color: CanvasText; }
+}
+
+/* Both wordmarks keep their own colours and their own ground through forced colours, keyed on the
+   mark file rather than on a wrapper, because every mock wraps them differently and a per-wrapper
+   rule left a different instance unprotected in fifteen of them. The GT School mark is navy
+   lettering and needs a light ground; the GT Anywhere mark is part near-white and needs the navy
+   one — including the story frame, which is why the third frame is a navy plate. The square icon is
+   left alone on purpose: it is single-colour artwork, so a forced palette recolours it whole. */
+@media (forced-colors: active) {
+  img[src$="gt-school-logo-h.svg"] { forced-color-adjust: none; background: var(--color-bg); }
+  img[src$="gt-anywhere-logo-h.svg"] { forced-color-adjust: none; background: var(--color-navy); }
+}
+
+/* ---------- Reduced motion (R8): every duration zero, including pseudo-elements. Nothing in THIS
+     file moves; motion.css carries the page's one move and disables it here as well. ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: var(--duration-none) !important; animation-duration: var(--duration-none) !important; scroll-behavior: auto !important; }
+}
+
+
+/* Correction, 2026-09-11, and it reverses an earlier one of mine. The per-plate focus rules above
+   state each ring in the colour of the plate's own retained ground, on the reasoning that a plate
+   which keeps its colours through forced colours also keeps its ring. That reasoning was wrong.
+   Every ring in this programme sits at a positive `outline-offset`, so it is painted OUTSIDE the
+   plate, on Canvas, and the plate's ground is not the surface it has to be seen against. Measured
+   under forced colours in both palettes: a near-white ring on the light palette's white Canvas is
+   1.03 to 1, and a navy ring on the dark palette's black Canvas is 1.39 to 1. No ring at all, in
+   both directions, in all twenty-six mocks. The runner could not see it because it compared the
+   ring with the element's own fill rather than with the surface outside it, and because its
+   transparency test matched one literal string, so a fully transparent white read as opaque white.
+   Both are fixed in `0_plan/tools/shots.mjs`. CanvasText is the only value guaranteed to contrast
+   with the ground the ring is actually drawn on, in either palette, and system colour keywords
+   still resolve under `forced-color-adjust: none`. This rule is last so it wins over the per-plate
+   rules above, which are left in place as the record of what was tried. */
+@media (forced-colors: active) {
+  :focus-visible { outline-color: CanvasText; }
+}

@@ -184,10 +184,11 @@ const TARGETS_JS = `(() => {
     if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) continue;
     const r = el.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) continue;
-    if (r.height >= 43.5) continue;
+    if (r.height >= 43.5 && r.width >= 43.5) continue;  // short in either dimension is still short
     const words = (el.textContent || '').trim().split(/\\s+/).length;
     out.push({ text: (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 30),
       h: Math.round(r.height * 10) / 10, w: Math.round(r.width),
+      short: (r.height < 43.5 ? 'height' : '') + (r.height < 43.5 && r.width < 43.5 ? ' and ' : '') + (r.width < 43.5 ? 'width' : ''),
       door: !!el.closest('[data-fold^="cta-"]') || el.matches('[data-fold^="cta-"]'),
       sentence: words >= 5 });
   }
@@ -320,11 +321,17 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
           if (!opted) continue;
           el.focus();
           const cs = getComputedStyle(el);
-          let bg = 'rgb(255, 255, 255)', p = el;
-          while (p) { const c = getComputedStyle(p).backgroundColor; if (c && c.indexOf('rgba(0, 0, 0, 0)') !== 0) { bg = c; break; } p = p.parentElement; }
+          const off = parseFloat(cs.outlineOffset) || 0;
+          // A ring at a positive offset is painted outside the element's own box, so the surface it
+          // has to be seen against is whatever surrounds the element, never the element's own fill.
+          // Measuring against the fill reports the plate interior and passes rings that vanish.
+          const inset = off < 0;
+          let bg = 'rgb(255, 255, 255)', p = inset ? el : (el.parentElement || el);
+          const opaque = (c) => { if (!c) return false; const m = c.match(/[0-9.]+/g); if (!m) return false; return m.length < 4 || Number(m[3]) > 0; };
+          while (p) { const c = getComputedStyle(p).backgroundColor; if (opaque(c)) { bg = c; break; } p = p.parentElement; }
           const l1 = lum(cs.outlineColor), l2 = lum(bg);
           const r = Math.round(((Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)) * 100) / 100;
-          out.push({ text: (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 24) || 'mark link', ratio: r, on: bg });
+          out.push({ text: (el.textContent || '').trim().replace(/\\s+/g, ' ').slice(0, 24) || 'mark link', ratio: r, on: bg, inset: inset });
           el.blur();
         }
         return out;
@@ -332,7 +339,8 @@ const MOTION_JS = `(() => { const bad = []; for (const el of document.querySelec
       for (const r of ringReport) {
         const bad = r.ratio < 3;
         if (bad) fcFailures++;
-        fcRows.push(`| ${scheme} | focus ring on \`${r.text}\` | ${bad ? 'FAIL at ' + r.ratio + ':1 against its own retained ground' : r.ratio + ':1 against its own retained ground'} |`);
+        const where = r.inset ? 'against the fill it is inset into' : 'against the surface it is drawn on, outside the element';
+        fcRows.push(`| ${scheme} | focus ring on \`${r.text}\` | ${bad ? 'FAIL at ' + r.ratio + ':1 ' + where : r.ratio + ':1 ' + where} |`);
       }
       const marks = await fcp.evaluate(FC_MARKS_JS);
       if (!marks.length) fcRows.push(`| ${scheme} | no GT mark on the page | |`);
