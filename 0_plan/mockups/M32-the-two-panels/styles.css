@@ -104,7 +104,7 @@ h2 { font-size: var(--text-2xl); text-wrap: balance; }
    sets in four lines and the room is there, so V13, V14, V15 and V19 keep the full rhythm. */
 @media (max-height: 767px) and (max-width: 767px) {
   .first-screen { --fs-gap-top: var(--space-3); --fs-h1-gap: var(--space-2); --fs-prov-gap: var(--space-3);
-    --panel-head-gap: var(--space-2); --panel-line-gap: var(--space-3); --panel-cta-gap: var(--space-3);
+    --panel-head-gap: var(--space-3); --panel-line-gap: var(--space-3); --panel-cta-gap: var(--space-3);
     --lines-gap: var(--space-4); --panel-pad-y: var(--space-4); }
 }
 @media (max-height: 639px) and (max-width: 767px) { /* V2, V18 and the doubled-root-font run: the tightest band */
@@ -166,7 +166,10 @@ h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; co
   min-width: min(calc(var(--mark-h) * 5.25 + 2 * var(--mark-pad) + 2px), 100%);
   padding: var(--mark-pad);
   background: var(--color-bg);
-  border: 1px solid var(--color-border-strong);
+  /* Both plates are bounded in navy (12.63:1 on the Georgetown tint, 12.79:1 on the Anywhere tint), so the two
+     panels carry the same count of navy objects. --color-border-strong left the Georgetown plate at a 3.31:1
+     hairline around a 1.10:1 fill, which read as one navy chip against none. */
+  border: 1px solid var(--color-navy);
   border-radius: var(--radius-sm);
 }
 .panel-mark-navy { background: var(--color-navy); }
@@ -211,7 +214,7 @@ h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; co
    breakpoint, the gaps take their smallest tokens and the h1 steps down one token to --text-xl, floored at 1.5rem. */
 @media (max-height: 479px) and (min-width: 700px) {
   .first-screen { --fs-gap-top: var(--space-2); --fs-h1-gap: var(--space-2); --fs-prov-gap: var(--space-2);
-    --frame-pad: var(--space-2); --panel-pad-x: var(--space-3); --panel-pad-y: var(--space-3); --panel-head-gap: var(--space-2); --panel-cta-gap: var(--space-3); --lines-gap: var(--space-3); }
+    --frame-pad: var(--space-2); --panel-pad-x: var(--space-3); --panel-pad-y: var(--space-3); --panel-head-gap: var(--space-3); --panel-cta-gap: var(--space-2); --lines-gap: var(--space-3); }
   h1 { font-size: max(var(--text-xl), 1.5rem); max-width: none; }
   .panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .door-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: calc(var(--frame-pad) + 2 * var(--panel-pad-x)); }
@@ -250,7 +253,12 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
      learned. Identical panels again — same tints, same square corners, same navy gutter, same CTA fill — because
      an unequal pair here would be the ranking DD-26 (a) forbids, just lower down the page. ---------- */
 .reprise-heading { margin-top: var(--space-8); font-size: var(--text-xl); }
+/* The reprise takes the first screen's own width bands rather than one fixed pair of values. Hard-coded 24px
+   side padding left a 208px content box at the reflow row, where the longer CTA label wrapped in the left
+   panel and not in the right and the pair came out 34.3px unequal in height — found by extending the parity
+   harness to this pair, which is the one place `styles.css` claimed equality and nothing measured it. */
 .frame-reprise { margin-top: var(--space-5); --frame-pad: var(--space-4); --panel-pad-x: var(--space-5); --panel-pad-y: var(--space-5); --panel-cta-gap: var(--space-4); --panel-head-gap: var(--space-3); }
+@media (max-width: 767px) { .frame-reprise { --frame-pad: var(--space-3); --panel-pad-x: var(--space-4); --panel-pad-y: var(--space-4); } }
 .frame-reprise .panel-label { text-align: left; }
 .frame-reprise .panel-name { margin-top: var(--space-2); }
 
@@ -294,7 +302,8 @@ tbody td:last-child, thead th:last-child { padding-right: 0; }
 .footer-facts p { font-size: var(--text-sm); line-height: var(--leading-prose); max-inline-size: 48ch; }
 .footer-phone { margin-top: var(--space-4); font-family: var(--font-mono); font-weight: 600; font-size: var(--text-base); }
 .footer-links { display: flex; flex-direction: column; align-items: flex-start; font-family: var(--font-mono); font-size: var(--text-sm); }
-.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; min-inline-size: 2.75rem; }
+.utility-nav a { min-inline-size: 2.75rem; }
 .footer-logos { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-4); }
 .logo-plate, .logo-navy { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: var(--space-3); border-radius: var(--radius-sm); border: 1px solid var(--color-border-strong); }
 .logo-plate { background: var(--color-bg); }

@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| Mock | M32 "The Two Panels", G-D build wave, new direction, 2026-09-11, build pass 1 |
+| Mock | M32 "The Two Panels", G-D build wave, new direction, 2026-09-11, **build pass 2** (round-two iteration on both critics' cards; see Iteration at the end) |
 | Brief | `0_plan/kb/briefs/M32.md` under `0_plan/kb/briefs/CONTRACT.md` v2.1, including the four rows added to section 3 from this programme's own findings |
 | Lens order | L1 objective, L4 exclusivity, L2 continuity, L3 mission |
 | Source | The two-door panel on `https://www.gt.school/about-us`, from a screenshot Johnny took on 2026-09-11. The live site was **not** opened by this build; the source is worked from the capture's description in the brief and from the three claims rows the register already holds for it (CR-039, CR-040, CR-041) |
-| Files | `index.html`, `styles.css`, this file; `qa/` holds the runner's output (`fold.md`, 19 viewport captures, `V2-full.jpg`, `V14-full.jpg`, `V2-rootx2.jpg`, `focus-cta.jpg`, `focus-plate.jpg`, `focus-footer.jpg`, `focus-footer-plate.jpg`, `forced-colors.jpg`) and `M32-measure.mjs`, the parity and diagnostics probe written for this mock |
+| Files | `index.html`, `styles.css`, this file; `qa/` holds the runner's output (`fold.md`, 19 viewport captures, `V2-full.jpg`, `V14-full.jpg`, `V2-rootx2.jpg`, `focus-cta.jpg`, `focus-plate.jpg`, `focus-footer.jpg`, `focus-footer-plate.jpg`, `forced-colors.jpg`), the five build-pass-2 captures (`focus-logo-navy.jpg`, `forced-colors-light.jpg`, `forced-colors-dark.jpg`, `focus-logo-navy-fc-light.jpg`, `focus-logo-navy-fc-dark.jpg`), `M32-measure.mjs` (the parity, weight and ring probe written for this mock) and `M32-source-counts.py` (the one source figure this repository can reproduce) |
 | State | Default state: **no photograph** (DD-42 option a, RF-25 pending). No JavaScript: D-039 is undecided, so the complete static state ships and no `data-d039` declaration is made. Links `../shared/tokens-v2.css` |
 | Register rows this build depends on | DD-26 (equal weight), DD-38 (type scale, prose leading), DD-39 (colour roles), DD-42 (photographs), DD-43 (repeated comparison cells), DD-44 (fold contract), DD-46 (surface-dependent button fill), DD-47 (uniform button corner), MN-16 (motion contract), RF-25 (permissions), R6 (comparison breakpoint), R14 (tour label), D-039 (scripts: none shipped) |
 
@@ -62,24 +62,48 @@ The measurement that makes this work: the two tints are **1.01:1 against each ot
 
 The source does not do the overlay work: its marks and its paragraph sit directly over photographic detail. That is the second thing the photographed state would have to fix, not only the permission.
 
-**2. The source does not give the two doors equal weight.** Measured from the capture's description, counting only what the register can vouch for:
+**2. The source does not give the two doors equal weight — and how far that can be checked from this repository.**
 
-| What is below the mark | Left panel (Georgetown) | Right panel (GT Anywhere) | Ratio |
+The screenshot the brief describes **is not in this repository**, and `gt.school` has no mirror here. Build pass 1 printed object and line counts taken from the brief's prose description of that picture as though they were measurements; both critics refused them, correctly. The two build-pass-2 options were to check in a dated extract the way `0_plan/kb/exemplars/gt-story/` does, or to stop leaning on the counts. **A text fetch of the page was attempted and refused by this session's sandbox, so the extract could not be made and the second option is taken.** The counts are therefore split into what a reviewer can reproduce and what nobody here can:
+
+| What is below the mark | Left panel | Right panel | Ratio | Can a reviewer check it? |
+|---|---|---|---|---|
+| Characters of set text | 9 ("APPLY NOW") | **at least 222** — 212 characters of registered paragraph text (CR-039 75, CR-040 48, CR-041 89) plus "LEARN MORE" 10; the two-line headline has no register row and is excluded, so the true ratio is higher | **24.7 : 1** | **Yes**, for the 212 characters: `python3 0_plan/mockups/M32-the-two-panels/qa/M32-source-counts.py` prints them out of `0_plan/12-claims-register.md`. The two button labels come from the brief's description and are **not** checkable here |
+| Type objects | 1 | 3 | 3 : 1 | **No.** From the brief's description of a picture no reviewer can open. Stated as unverifiable |
+| Lines of set text | 1 | 7 | 7 : 1 | **No.** Same |
+| Saturated colour | none | one filled accent button | the component's one saturated fill sits on one door | **No.** Same |
+| Control treatment | "a small dark button" | a filled accent button with a diagonal arrow | — | **No.** Same |
+
+**What the correction rests on instead.** The two unverifiable ratios are not load-bearing and are not used as the warrant. The warrant is in the repository: **DD-26 option (a)** settles equal visual weight, **exemplar C01** (Tate's two identically weighted CTAs) is the slate's own rule, and the register's own CR-039, CR-040 and CR-041 record that the right panel of that component carries three unverified claims which the left panel has no counterpart for — which is a documented asymmetry of *content*, independent of any picture. Parity would be the right build for this page even if the source were perfectly balanced.
+
+**Measured on this page: every one of the eighteen geometric properties is equal to 0.0px at all nineteen matrix rows, for the first-screen pair and for the reprise pair** (tables below). And the count the rationale ran on the source is now run on this page as well, which build pass 1 never did (both critics' first finding). The residual differences are the ones no layout can remove without changing the fixed copy or recolouring a mark:
+
+#### The same count, run on this page
+
+`node 0_plan/mockups/M32-the-two-panels/qa/M32-measure.mjs --weight`. The harness reads computed colour, not only geometry, and counts painted navy area from the computed fill or border of each object.
+
+| Count, at V14 1280 by 720 | Georgetown | GT Anywhere | Ratio |
 |---|---|---|---|
-| Type objects | 1 (a button) | 3 (headline, paragraph, button) | 3 : 1 |
-| Lines of set text | 1 | 7 (2 headline + 4 paragraph + 1 button) | 7 : 1 |
-| Characters of set text | 9 ("APPLY NOW") | **at least 222** — the registered paragraph text is 212 characters (CR-039 75, CR-040 48, CR-041 89) plus "LEARN MORE" 10; the two-line headline is additional and its wording has no register row, so it is excluded from the count | **24.7 : 1** |
-| Saturated colour | none | one filled accent button | the component's only saturated fill sits on one of the two doors |
-| Control treatment | "a small dark button" | a filled accent button with a diagonal arrow | different fill, different size, different affordance |
+| Type objects below the mark | 4 | 4 | **1.00 : 1** |
+| Lines of set text | 8 | 7 | 1.14 : 1 (copy length; 7 : 7 at V16, 5 : 5 at V2) |
+| Characters of set text | 172 | 146 | **1.18 : 1**, against the source's 24.7 : 1 |
+| Saturated (accent) fills | 0 | 0 | — (0 on the whole first screen) |
+| **Navy objects** | **2** — mark plate (bounded), CTA (filled) | **2** — mark plate (filled), CTA (filled) | **1.00 : 1** |
+| Painted navy, mark plate only | 436 px² | 7476 px² | 1 : 17.1 |
+| Painted navy, whole panel | 17332 px² (10.4% of the panel) | 24372 px² (14.6%) | 1 : 1.41 |
 
-That is not a pair; it is a recommendation with a second option beside it. DD-26 option (a) settles equal visual weight and exemplar C01 (Tate's two identically weighted CTAs) is the slate's own rule, so M32 builds parity and reports it. **Measured: every one of the seventeen geometric properties is equal to 0.0px at all nineteen matrix rows** (table below). The residual differences are the ones no layout can remove without changing the fixed copy:
+**The navy-object count is the defect build pass 1 shipped and both critics found.** Build pass 1 gave the Georgetown plate a `--color-border-strong` hairline at 3.31:1 around a `--color-bg` fill at 1.10:1 on its own tint: nearly invisible, beside a solid navy chip. Counted the way the source was counted, that is **one navy object in the left panel against two in the right**, and the studio critic reported the eye landing on the right panel first at V13, V14, V15, V16 and V19. Build pass 2 takes the critic's own one-token remedy: the plate's border is `--color-navy` (12.63:1 on the Georgetown tint), so both plates are navy-bounded objects of the same box and the count is 2 : 2.
+
+What that does **not** fix, and is reported rather than argued away: the Anywhere plate is navy *filled* and the Georgetown plate is navy *bounded*, so painted navy area inside the plate is still **1 : 17.1**, and **1 : 1.41** across the whole panel. It cannot go to 1 : 1 while each wordmark keeps the ground its own artwork needs, and recolouring a mark is forbidden (BUILDER-BRIEF rule 16). Nari should see the two plates side by side and say whether the bounded-against-filled reading is acceptable; it is listed under Escalations.
+
+#### The residuals that remain
 
 | Residual | Georgetown | GT Anywhere | Why it stays |
 |---|---|---|---|
-| Characters of set text in the panel | 170 (label 9 + name 17 + line 115 + CTA 29) | 144 (6 + 11 + 108 + 19) | **1.18 : 1**, against the source's 24.7 : 1. It is `copy.md`'s own word count, fixed slots, not a layout decision |
-| Mark width | 120.5px at V2, 139px at V16 | 145.7px at V2, 168px at V16 | The two artworks have different aspect ratios (139/32 and 252/48). K12 V2 sizes marks **by height**, and the runner fails an aspect skew over 1%, so equal widths would mean a distorted mark. Heights are equal to 0.0px at every row and skew is 0% at both measured widths |
-| The mark plate's ground | `--color-bg` (1.10:1 against its panel, so the plate reads as the panel) | `--color-navy` (12.79:1 against its panel, so the plate reads as a navy block) | The GT School wordmark is navy lettering and the GT Anywhere wordmark is white lettering (`copy.md` section 8, CONTRACT section 1, checker R16). Ground is the artwork's requirement. **The box is the page's parity**: both plates are one width (set from the wider mark's own 252/48 aspect), one height, one padding, one `--radius-sm` corner, one `--color-border-strong` hairline, one position — measured equal to 0.0px at all nineteen rows |
-| Line count inside the panel at some rows | 3 lines at V14 | 2 lines at V14 | Copy length again. The CTA is bottom-aligned with `margin-top: auto`, so the slack falls above the control and the two CTA boxes still share a top and a bottom edge to 0.0px |
+| Characters of set text in the panel | 172 | 146 | **1.18 : 1**. `copy.md`'s own word count, fixed slots, not a layout decision |
+| Mark width | 120.5px at V2, 139px at V16 | 145.7px at V2, 168px at V16 | The two artworks have different aspect ratios (139/32 and 252/48). K12 V2 sizes marks **by height**, and the runner fails an aspect skew over 1%, so equal widths would mean a distorted mark. **The harness now prints `markW` in its own column** instead of collecting it and dropping it from the verdict, which is what build pass 1 did (studio critic) |
+| The mark plate's interior | `--color-bg` fill (1.10:1 on its panel) inside a `--color-navy` border (12.63:1) | `--color-navy` fill (12.79:1 on its panel) inside the same border | Ground is the artwork's requirement (`copy.md` section 8, CONTRACT section 1, checker R16). **The box and its boundary are the page's parity**: one width (from the wider mark's own 252/48 aspect), one height, one padding, one `--radius-sm` corner, one 1px navy border, one position — 0.0px at all nineteen rows. The painted-area residual is measured above |
+| Line count inside the panel at two rows | 3 lines at V14, 4 at V12 | 2 at V14, 3 at V12 | Copy length. The CTA is bottom-aligned with `margin-top: auto`, so the slack falls above the control: the void above the CTA is 16px against 42.5px at V14 and 24px against 49.3px at V12, and the two CTA boxes still share a top and a bottom edge to 0.0px. Equal at every other side-by-side row. **Measured by the harness's new `--lines` mode**, which build pass 1 had no row for (studio critic) |
 
 **3. The source's paragraph carries three unverified claims in one sentence, and it is not in `copy.md`, so it is not on this page.** Quoted here only, as the thing this direction is converting, each fragment cited to its row:
 
@@ -106,12 +130,12 @@ CR-039 repeats the unqualified accreditation of **CR-001** ("Yes. We are fully a
 | Thesis | One frame, two real choices, nothing ranked |
 | Composition | Header 56 on `--color-bg`; h1 and provenance above the frame on cream; the frame inset from the page grid with a visible cream margin on all four sides, holding two panels 6 and 6 with a gutter from 768 and stacked below it, each square-cornered inside the frame's own radius; each panel carrying mark, label, name, line and CTA in that order; compare anchor beneath; then the table with repeated values, the reprise frame, TEFA, proof, steps, secondary CTAs, current families, footer |
 | The panels without photographs | Georgetown on `--color-georgetown-tint`, GT Anywhere on `--color-anywhere-tint`, inside the navy frame. Photographed state specified above with file, crop, ceiling and the AA treatment the source omits |
-| Typography | Contract roles. Literata italic on the h1's second clause, no colour taken with it |
+| Typography | Contract roles. Literata italic on the h1's second clause, no colour taken with it. CONTRACT section 3's Literata overhang discharged with a number at the tightest band: `.panel-name` stands 3.70px proud of its line box at V2 under a bordered plate 8px above it |
 | Colour and surface | Page `--color-bg`, frame `--color-navy`, panels on the two school tints. CTAs navy with near-white labels per DD-46, both identical. The estate's orange button is not copied. Every on-navy and on-tint pairing at or above 4.5:1, each ratio stated below. Focus per contract; the two-band ring where a mark keeps a navy plate |
 | Motion | Still; the page is complete at rest. V6 specified on the steps and secondary CTAs and **not shipped** (it needs the D-039 script). Reduced motion `--duration-none`, verified by the runner at V14 |
 | Copy | `copy.md` sections 0 to 8 verbatim; 61 fixed slots string-matched (Self-check). The source's paragraph appears only in this file |
-| Acceptance | Panel parity measured and reported at all nineteen rows, seventeen properties, worst delta **0.0px**. Matrix as the contract: the runner's Result line reads "all required rows pass". Both wordmarks and both mark-plate focus rings pass under forced colours in both palettes. This file names DD-26, DD-42, DD-46, DD-47, RF-25 and the seven claims rows |
-| One accent use on the first screen | **Departure, stated.** Zero accent uses as a page colour; see Departures. The only orange on the first screen is the leaf inside each of the two marks, which appears once in each panel |
+| Acceptance | Panel parity measured and reported at all nineteen rows, **eighteen properties**, worst delta **0.0px**, for the first-screen pair **and** the reprise pair, with `markW` printed beside the verdict and colour, painted area and `.panel-line` measured alongside the geometry. Matrix as the contract: the runner's Result line reads "all required rows pass". Both wordmarks and every focus ring pass under forced colours in **both** palettes, measured against the surface the ring is actually drawn on and captured in both (`qa/forced-colors-light.jpg`, `qa/forced-colors-dark.jpg`, `qa/focus-logo-navy-fc-light.jpg`, `qa/focus-logo-navy-fc-dark.jpg`). This file names DD-26, DD-42, DD-46, DD-47, RF-25 and every claims row the page depends on |
+| One accent use on the first screen | **Not resolved in this file: escalated.** Zero accent uses as a page colour (measured: 0 accent-painted elements on the first screen). Both critics read the brief's imperative and K3 section 5f's budget as genuinely contestable and said this belongs to Nari, not to a Departures cell. The proposed `Q` row, with both readings and both recommendations, is under **Escalations**. The only orange on the first screen is the leaf inside each of the two marks, once per panel |
 
 ## Fold: designed to, then measured
 
@@ -119,26 +143,26 @@ Method: the four contract rows are budgeted from the space tokens the height ban
 
 | Row | Viewport | Limit | Designed-to sum (header, cream, h1, provenance, frame padding, two panels, gutter) | Estimated CTA 2 bottom | Measured CTA 2 bottom | Spare |
 |---|---|---|---|---|---|---|
-| V2 | 375 by 629 | 605 | 57 + 4 + h1 6 lines 188.1 + 4 + prov 17.6 + 4 + frame 4 + panel 135.1 + gutter 4 + (panel 135.1 − pad 8) | 545.2 (576.6 had the h1 set in 7 lines) | **545** | 60 |
-| V5 | 414 by 715 | 691 | 57 + 8 + h1 6 lines 192.8 + 4 + prov 17.6 + 8 + frame 8 + panel 151.8 + gutter 8 + (panel 151.8 − pad 16) | 590.6 | **591** | 100 |
+| V2 | 375 by 629 | 605 | 57 + 4 + h1 6 lines 188.1 + 4 + prov 17.6 + 4 + frame 4 + panel 139.1 + gutter 4 + (panel 139.1 − pad 8) | 553.2 | **553** | 52 |
+| V5 | 414 by 715 | 691 | 57 + 8 + h1 6 lines 192.8 + 4 + prov 17.6 + 8 + frame 8 + panel 155.8 + gutter 8 + (panel 155.8 − pad 16) | 598.6 | **599** | 92 |
 | V14 | 1280 by 720 | 696 | 57 + 24 + h1 4 lines 198.6 + 8 + prov 18.6 + 24 + frame 24 + (panel 300.8 − pad 32), the two panels side by side | 622.8 | **623** | 73 |
 | V16 | 1440 by 900 | 876 | 57 + 48 + h1 4 lines 211.6 + 16 + prov 18.8 + 48 + frame 24 + (panel 300.2 − pad 32), side by side | 691.2 | **692** | 184 |
 
-The four design-to sums land within one pixel of the measurements. At V14 and V16 the two CTAs sit side by side, so one row serves both and the two measured bottoms are equal.
+The four design-to sums land within one pixel of the measurements. V2 and V5 gained 8px in build pass 2: `--panel-head-gap` went from one space token to two at the phone bands, to buy the door name real clearance under the mark plate (Typography, below). At V14 and V16 the two CTAs sit side by side, so one row serves both and the two measured bottoms are equal.
 
-**The runner's own table, pasted from the current run** (`qa/fold.md`, 2026-09-11T23:55:03.933Z):
+**The runner's own table, pasted from the current run** (`qa/fold.md`, 2026-09-12T00:53:16.118Z):
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 89 | 283 | 305 | 456 | 615 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 57 | 249 | 271 | 406 | 545 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 57 | 255 | 276 | 428 | 587 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 57 | 255 | 277 | 428 | 588 | yes | PASS |
-| V5 | 414 by 715 | fold | 691 | 57 | 258 | 279 | 431 | 591 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 89 | 283 | 305 | 460 | 623 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 57 | 249 | 271 | 410 | 553 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 57 | 255 | 276 | 432 | 595 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 57 | 255 | 277 | 432 | 596 | yes | PASS |
+| V5 | 414 by 715 | fold | 691 | 57 | 258 | 279 | 435 | 599 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 57 | 274 | 299 | 479 | 651 | yes | PASS |
-| V7 | 402 by 681 | fold | 657 | 57 | 256 | 278 | 429 | 589 | yes | PASS |
-| V8 | 430 by 739 | fold | 715 | 57 | 227 | 249 | 401 | 561 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 57 | 271 | 296 | 476 | 647 | yes | report: page height 6931 |
+| V7 | 402 by 681 | fold | 657 | 57 | 256 | 278 | 433 | 597 | yes | PASS |
+| V8 | 430 by 739 | fold | 715 | 57 | 227 | 249 | 405 | 569 | yes | PASS |
+| V9 | 390 by 844 | emptiness |  | 57 | 271 | 296 | 476 | 647 | yes | report: page height 6875 |
 | V10 | 750 by 342 | fold | 318 | 57 | 144 | 166 | 308 | 308 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 57 | 262 | 296 | 670 | 670 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 57 | 268 | 302 | 677 | 677 | yes | PASS |
@@ -147,7 +171,7 @@ The four design-to sums land within one pixel of the measurements. At V14 and V1
 | V15 | 1366 by 648 | fold | 624 | 57 | 287 | 313 | 535 | 535 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 57 | 317 | 351 | 692 | 692 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 57 | 317 | 351 | 692 | 692 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 89 | 310 | 332 | 466 | 605 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 89 | 310 | 332 | 470 | 613 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 57 | 259 | 285 | 489 | 489 | yes | report: scrollWidth 1024 |
 
 The header measures 89 rather than 57 at V1 and V18 only: at 360 and 320 the mark plus the two Inconsolata utility links exceed the content width and the row wraps to two 44px rows with a zero row gap. The wrap costs 32px at V1 and the row still passes with 101px of spare.
@@ -177,18 +201,18 @@ This is the one place the page carries the same sentence twice in the markup, ex
 
 ### What crosses the bottom edge, row by row
 
-The runner's own reading, pasted from `qa/fold.md`. "Ink" means text, a painted edge or an image: section padding and the empty leading of a line box do not count.
+**Pasted verbatim from `qa/fold.md`, every cell, including the one that says the page gives no signal.** Build pass 1 introduced this table as the runner's own reading and then replaced the single negative cell in the whole run, V18, with a rebuttal. Both critics caught it and both were right to: a rationale that edits the evidence it claims to quote is worth less than no rationale. The runner's words stand; the answer follows underneath.
 
-| Row | Cut | What a reader sees at the bottom edge |
+| Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | text cut by the edge, 732 to 752 |
-| V2 | yes | content reaches 622 of 629 and more follows below |
-| V3 | yes | text cut by the edge, 656 to 676 |
-| V4 | yes | content reaches 655 of 659 and more follows below |
-| V5 | yes | text cut by the edge, 708 to 728 |
+| V1 | yes | content reaches 736 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 610 to 630 |
+| V3 | yes | content reaches 662 of 664 and more follows below |
+| V4 | yes | text cut by the edge, 636 to 663 |
+| V5 | yes | content reaches 712 of 715 and more follows below |
 | V6 | yes | text cut by the edge, 814 to 841 |
-| V7 | yes | content reaches 678 of 681 and more follows below |
-| V8 | yes | text cut by the edge, 717 to 744 |
+| V7 | yes | text cut by the edge, 666 to 686 |
+| V8 | yes | text cut by the edge, 725 to 752 |
 | V9 | yes | text cut by the edge, 840 to 860 |
 | V10 | yes | text cut by the edge, 328 to 356 |
 | V11 | yes | text cut by the edge, 1015 to 1035 |
@@ -198,8 +222,12 @@ The runner's own reading, pasted from `qa/fold.md`. "Ink" means text, a painted 
 | V15 | yes | content reaches 644 of 648 and more follows below |
 | V16 | yes | text cut by the edge, 875 to 925 |
 | V17 | yes | text cut by the edge, 948 to 983 |
-| V18 | no | the reflow row is 256px tall; the header and the seven-line h1 alone reach 310, and DD-44 does not apply the fold rule here |
+| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
 | V19 | yes | text cut by the edge, 552 to 581 |
+
+| The one negative cell | The answer, which is not part of the quotation above |
+|---|---|
+| V18, 320 by 256: "no content is visible below the last CTA at all, so nothing signals that the page continues" | True as measured, and **DD-44 does not apply the fold rule at V18**: it is the WCAG 1.4.10 reflow row, 320 by 256, where the header and the seven-line h1 alone reach 310px. The runner agrees — its own Result cell for V18 reads "PASS no horizontal scroll", because reflow is the only rule that row is tested against. No other row on the page reads as finished |
 
 On the phone rows and at V10 and V15 the ink is a **door line** — a sentence a parent would read — cut mid-sentence. On the laptop and tablet rows it is the compare anchor sentence or the comparison table's caption. Every row but V18 therefore ends on words, not on a rule and not on empty padding.
 
@@ -235,40 +263,112 @@ The contract's estimates (6 at V2 and V5, 4 at V14 and V16) are **exactly right 
 
 ## Panel parity, measured at all nineteen rows
 
-`node 0_plan/mockups/M32-the-two-panels/qa/M32-measure.mjs`, seventeen properties per panel, the Georgetown panel against the GT Anywhere panel. Every delta is the absolute difference between the two panels at that row.
+`node 0_plan/mockups/M32-the-two-panels/qa/M32-measure.mjs`. Build pass 2 answers what both critics said the
+harness could not see: it reads computed **colour** as well as geometry (the count above), it measures
+**`.panel-line`**, it runs on the **reprise pair** as well as the first-screen pair, and it **prints `markW`**
+beside the verdict instead of collecting it and dropping it from the printed keys. The bar is equal within 2px;
+the observed value is stated separately, because 0.0 is what was measured and 2 is what is enforced.
 
-| Row | Viewport | w | h | padT | padR | padB | padL | plateW | plateH | markH | labelX | labelY | nameX | nameY | ctaW | ctaH | ctaX | ctaY | Worst |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V2 | 375 by 629 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V3 | 390 by 664 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V4 | 393 by 659 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V5 | 414 by 715 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V6 | 412 by 839 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V7 | 402 by 681 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V8 | 430 by 739 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V9 | 390 by 844 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V10 | 750 by 342 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V11 | 768 by 1024 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V12 | 834 by 1194 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V13 | 1024 by 768 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V14 | 1280 by 720 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V15 | 1366 by 648 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V16 | 1440 by 900 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V17 | 1920 by 960 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V18 | 320 by 256 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
-| V19 | 1024 by 576 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
+### The first-screen pair
 
-**Worst delta across all nineteen rows: 0.0px.** The acceptance row asks for equality within 2px on panel width, height, inner padding, mark size, CTA box and label position; all six are 0.0, and eleven further properties are reported with them. Absolute values at the four contract rows, so the numbers are checkable rather than only equal:
+| Row | Viewport | w Δ | h Δ | padT Δ | padR Δ | padB Δ | padL Δ | plateW Δ | plateH Δ | plateBorderW Δ | markH Δ | labelX Δ | labelY Δ | nameX Δ | nameY Δ | ctaW Δ | ctaH Δ | ctaX Δ | ctaY Δ | Worst Δ | markW G / A (excluded) | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| V1 | 360 by 740 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 119.9 / 144.9 | equal within 2px (observed 0) |
+| V2 | 375 by 629 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 120.5 / 145.7 | equal within 2px (observed 0) |
+| V3 | 390 by 664 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 121.1 / 146.4 | equal within 2px (observed 0) |
+| V4 | 393 by 659 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 121.3 / 146.6 | equal within 2px (observed 0) |
+| V5 | 414 by 715 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 122.2 / 147.7 | equal within 2px (observed 0) |
+| V6 | 412 by 839 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 122.1 / 147.6 | equal within 2px (observed 0) |
+| V7 | 402 by 681 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 121.7 / 147.1 | equal within 2px (observed 0) |
+| V8 | 430 by 739 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 122.9 / 148.5 | equal within 2px (observed 0) |
+| V9 | 390 by 844 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 121.1 / 146.4 | equal within 2px (observed 0) |
+| V10 | 750 by 342 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 136.8 / 165.4 | equal within 2px (observed 0) |
+| V11 | 768 by 1024 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 137.6 / 166.3 | equal within 2px (observed 0) |
+| V12 | 834 by 1194 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V13 | 1024 by 768 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V14 | 1280 by 720 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V15 | 1366 by 648 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V16 | 1440 by 900 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V17 | 1920 by 960 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
+| V18 | 320 by 256 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 118.1 / 142.7 | equal within 2px (observed 0) |
+| V19 | 1024 by 576 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 139 / 168 | equal within 2px (observed 0) |
 
-| Row | Panel w × h | Padding T R B L | Plate w × h | Mark height | Label x, y | Name x, y | CTA w × h | CTA x, and its gap to the panel floor |
-|---|---|---|---|---|---|---|---|---|
-| V2 | 335 × 135.1 | 8, 16, 8, 16 | 155.7 × 37.8 | 27.8 | 179.7, 19.4 | 16, 49.8 | 303 × 44 | 16, 8 |
-| V5 | 366 × 151.8 | 16, 16, 16, 16 | 157.7 × 38.1 | 28.1 | 181.7, 27.5 | 16, 58.1 | 334 × 44 | 16, 16 |
-| V14 | 556 × 300.8 | 32, 32, 32, 32 | 178 × 42 | 32 | 218, 45 | 32, 82 | 384 × 44 | 32, 32 |
-| V16 | 620 × 300.2 | 32, 32, 32, 32 | 178 × 42 | 32 | 218, 44.9 | 32, 90 | 384 × 44 | 32, 32 |
+### The reprise pair, after the comparison table
 
-Both panels return the same figure in every cell above; the only property in the probe that differs is the mark's own width (120.5 against 145.7 at V2, 139 against 168 at V16), for the reason given under Corrected.
+`styles.css` claimed this pair was equal and nothing measured it (studio critic). Measured now — **and it was not
+equal.** At the 320 by 256 reflow row the reprise's hard-coded 24px side padding left a 208px content box, the
+longer CTA label wrapped in the left panel and not in the right, and the pair came out **34.3px unequal in height,
+9px in CTA width**. Build pass 2 gives the reprise the first screen's own width bands. After the fix:
+
+| Row | Viewport | w Δ | h Δ | padT Δ | padR Δ | padB Δ | padL Δ | plateW Δ | plateH Δ | plateBorderW Δ | markH Δ | labelX Δ | labelY Δ | nameX Δ | nameY Δ | ctaW Δ | ctaH Δ | ctaX Δ | ctaY Δ | Worst Δ | markW G / A (excluded) | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| V1 | 360 by 740 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V2 | 375 by 629 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V3 | 390 by 664 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V4 | 393 by 659 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V5 | 414 by 715 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V6 | 412 by 839 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V7 | 402 by 681 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V8 | 430 by 739 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V9 | 390 by 844 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V10 | 750 by 342 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V11 | 768 by 1024 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V12 | 834 by 1194 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V13 | 1024 by 768 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V14 | 1280 by 720 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V15 | 1366 by 648 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V16 | 1440 by 900 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V17 | 1920 by 960 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V18 | 320 by 256 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+| V19 | 1024 by 576 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 / 0 | equal within 2px (observed 0) |
+
+### `.panel-line`, and the void above each CTA
+
+The element whose text length actually differs had no row in the build-pass-1 harness. It has one now. "Stacked"
+marks the rows where the two panels sit one above the other, so a CTA-top comparison is meaningless there.
+
+| Row | Viewport | Line shown | G line box | G lines | G void above CTA | A line box | A lines | A void above CTA | CTA tops equal | CTA bottoms equal |
+|---|---|---|---|---|---|---|---|---|---|---|
+| V1 | 360 by 740 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V2 | 375 by 629 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V3 | 390 by 664 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V4 | 393 by 659 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V5 | 414 by 715 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V6 | 412 by 839 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V7 | 402 by 681 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V8 | 430 by 739 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V9 | 390 by 844 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V10 | 750 by 342 | below the frame | — | — | — | — | — | — | yes | yes |
+| V11 | 768 by 1024 | inside the panel | 100.5 | 4 | 24 | 100.5 | 4 | 24 | yes | yes |
+| V12 | 834 by 1194 | inside the panel | 101.3 | 4 | 24 | 75.9 | 3 | 49.3 | yes | yes |
+| V13 | 1024 by 768 | inside the panel | 77.5 | 3 | 16 | 77.5 | 3 | 16 | yes | yes |
+| V14 | 1280 by 720 | inside the panel | 79.6 | 3 | 16 | 53.1 | 2 | 42.5 | yes | yes |
+| V15 | 1366 by 648 | below the frame | — | — | — | — | — | — | yes | yes |
+| V16 | 1440 by 900 | inside the panel | 54 | 2 | 24 | 54 | 2 | 24 | yes | yes |
+| V17 | 1920 by 960 | inside the panel | 54 | 2 | 24 | 54 | 2 | 24 | yes | yes |
+| V18 | 320 by 256 | below the frame | — | — | — | — | — | — | n/a (stacked) | n/a (stacked) |
+| V19 | 1024 by 576 | below the frame | — | — | — | — | — | — | yes | yes |
+
+The two CTA boxes share a top and a bottom edge at every side-by-side row. Where the lines set to different line
+counts — V12 and V14 — the slack falls above the control, which is what `margin-top: auto` is for: 24px against
+49.3px at V12, 16px against 42.5px at V14. That is the one asymmetry a reader can see inside the panels, it is
+copy length rather than layout, and it is now measured rather than only disclosed in prose.
+
+### Absolute values, the four contract rows
+
+So the numbers are checkable rather than only equal. Both panels return the same figure in every key below; the
+only property that differs is `markW`, for the reason in the residual table.
+
+```
+  V2 georgetown {"w":335,"h":139.1,"padT":8,"padR":16,"padB":8,"padL":16,"plateW":155.7,"plateH":37.8,"markH":27.8,"markW":120.5,"labelX":179.7,"labelY":19.4,"nameX":16,"nameY":53.8,"ctaW":303,"ctaH":44,"ctaX":16,"ctaY":8,"plateBorderW":1}
+  V2 anywhere   {"w":335,"h":139.1,"padT":8,"padR":16,"padB":8,"padL":16,"plateW":155.7,"plateH":37.8,"markH":27.8,"markW":145.7,"labelX":179.7,"labelY":19.4,"nameX":16,"nameY":53.8,"ctaW":303,"ctaH":44,"ctaX":16,"ctaY":8,"plateBorderW":1}
+  V5 georgetown {"w":366,"h":155.8,"padT":16,"padR":16,"padB":16,"padL":16,"plateW":157.7,"plateH":38.1,"markH":28.1,"markW":122.2,"labelX":181.7,"labelY":27.5,"nameX":16,"nameY":62.1,"ctaW":334,"ctaH":44,"ctaX":16,"ctaY":16,"plateBorderW":1}
+  V5 anywhere   {"w":366,"h":155.8,"padT":16,"padR":16,"padB":16,"padL":16,"plateW":157.7,"plateH":38.1,"markH":28.1,"markW":147.7,"labelX":181.7,"labelY":27.5,"nameX":16,"nameY":62.1,"ctaW":334,"ctaH":44,"ctaX":16,"ctaY":16,"plateBorderW":1}
+  V14 georgetown {"w":556,"h":300.8,"padT":32,"padR":32,"padB":32,"padL":32,"plateW":178,"plateH":42,"markH":32,"markW":139,"labelX":218,"labelY":45,"nameX":32,"nameY":82,"ctaW":384,"ctaH":44,"ctaX":32,"ctaY":32,"plateBorderW":1}
+  V14 anywhere   {"w":556,"h":300.8,"padT":32,"padR":32,"padB":32,"padL":32,"plateW":178,"plateH":42,"markH":32,"markW":168,"labelX":218,"labelY":45,"nameX":32,"nameY":82,"ctaW":384,"ctaH":44,"ctaX":32,"ctaY":32,"plateBorderW":1}
+  V16 georgetown {"w":620,"h":300.2,"padT":32,"padR":32,"padB":32,"padL":32,"plateW":178,"plateH":42,"markH":32,"markW":139,"labelX":218,"labelY":44.9,"nameX":32,"nameY":90,"ctaW":384,"ctaH":44,"ctaX":32,"ctaY":32,"plateBorderW":1}
+  V16 anywhere   {"w":620,"h":300.2,"padT":32,"padR":32,"padB":32,"padL":32,"plateW":178,"plateH":42,"markH":32,"markW":168,"labelX":218,"labelY":44.9,"nameX":32,"nameY":90,"ctaW":384,"ctaH":44,"ctaX":32,"ctaY":32,"plateBorderW":1}
+```
 
 ## Decisions applied
 
@@ -347,9 +447,18 @@ There is no `transition:` property anywhere in `styles.css`, no `@keyframes` and
 
 | File | Used for | Alt text | Source and consent | Fallback |
 |---|---|---|---|---|
-| `gt-school-logo-h.svg` (139 by 32) | Header lockup on `--color-bg`; the Georgetown panel's mark on a `--color-bg` plate; the footer link to www.gt.school on a `--color-bg` plate. Height `clamp(1.6875rem, 1.5rem + 1vw, 2rem)`: 27.9px at 390, 32px from 800 (K12 V2). Eager | "GT School" | The real mark from the mirror; its navy lettering needs a light ground | None needed |
-| `gt-anywhere-logo-h.svg` (252 by 48) | The GT Anywhere panel's mark on a `--color-navy` plate; the footer link to anywhere.gt.school on a `--color-navy` plate. Same height clamp. Eager | "GT Anywhere" | The real mark from the mirror; its white lettering needs the navy ground | None needed |
+| `gt-school-logo-h.svg` (139 by 32) | Header lockup on `--color-bg`; the Georgetown panel's mark on a `--color-bg` plate inside a navy border; the footer link to www.gt.school on a `--color-bg` plate. Height `clamp(1.6875rem, 1.5rem + 1vw, 2rem)`: 27.9px at 390, 32px from 800 (K12 V2). Eager | "GT School" in the header and the footer, where the mark **is** the link. **`alt=""` in the panel**, with `aria-hidden` on its plate | The real mark from the mirror; its navy lettering needs a light ground | None needed |
+| `gt-anywhere-logo-h.svg` (252 by 48) | The GT Anywhere panel's mark on a `--color-navy` plate; the footer link to anywhere.gt.school on a `--color-navy` plate. Same height clamp. Eager | "GT Anywhere" in the footer. **`alt=""` in the panel** | The real mark from the mirror; its white lettering needs the navy ground | None needed |
 | Photographs | **None in the default state** (DD-42 option a, RF-25, AD-11). Every file in `ASSETS.md` shows identifiable children, re-checked 2026-09-11 | | Published by GT on its own sites; consent to be confirmed by Nari (AD-11) | The default state is the state that ships. The photographed state is specified under "Corrected" with its files, crops, DPR ceiling and the AA treatment the source omits; it needs Nari's written permission **and** a GT Anywhere photograph that `shared/img/` does not contain, because DD-42's photographed state requires parity and one photographed door is not an option (DD-31) |
+
+**Why the two panel marks are `alt=""`.** The studio critic extracted the rendered text of both panels and found the
+accessible names unequal in the same way the plates were unequal on screen: the Anywhere panel announced its own
+name **three times** (mark, name, CTA) while the Georgetown panel was introduced by a *different brand*, "GT School",
+immediately before "Georgetown Campus" — which a screen-reader user can reasonably take as the door's title. In this
+position both marks are decorative: the school's name follows as visible text in both panels. `alt=""` on both
+images, with `aria-hidden` on the plate that wraps them, removes the misdirection and makes the two panels equal in
+the accessibility tree as well as on the page. The same two files keep their real alt text in the header and the
+footer, where the mark **is** the link and nothing else names it.
 
 Open Graph carries title and description only; no share image while the default state holds (`copy.md` Head).
 
@@ -367,9 +476,8 @@ Open Graph carries title and description only; no share image while the default 
 | `--color-navy` on `--color-georgetown-tint` / `--color-anywhere-tint` | the two CTA fills against their panels | **12.63 / 12.79** | 3 graphical |
 | `--color-georgetown-tint` / `--color-anywhere-tint` on `--color-navy` | the two panels against the frame | **12.63 / 12.79** | 3 graphical |
 | `--color-georgetown-tint` against `--color-anywhere-tint` | the two panels against each other | **1.01** | none required; stated because it is the point — the two panels differ in hue, not in weight, so neither is the darker door |
-| `--color-border-strong` on `--color-georgetown-tint` / `--color-anywhere-tint` | the two mark plates' hairlines | **3.31 / 3.35** | 3 graphical |
-| `--color-border-strong` on `--color-navy` | the navy plate's hairline where it meets the plate | **3.82** | 3 graphical |
-| `--color-bg` on `--color-georgetown-tint` | the GT School plate's ground against its panel | **1.10** | none; stated as the residual asymmetry under Corrected. The plate is read by its hairline, not by its fill |
+| `--color-navy` on `--color-georgetown-tint` / `--color-anywhere-tint` | **the two mark plates' 1px borders**, one value on both (build pass 2) | **12.63 / 12.79** | 3 graphical. Build pass 1 used `--color-border-strong` here, 3.31:1 — above the floor and far below the navy chip opposite it, which is the imbalance both critics measured |
+| `--color-bg` on `--color-georgetown-tint` | the GT School plate's ground against its panel | **1.10** | none; stated as the residual asymmetry under Corrected. The plate is read by its navy border, not by its fill |
 | `--color-navy` on `--color-anywhere-tint` | the GT Anywhere plate's ground against its panel | **12.79** | 3 graphical |
 | `--color-focus` on `--color-georgetown-tint` / `--color-anywhere-tint` | the ring on both door CTAs | **7.46 / 7.56** | 3 |
 
@@ -384,10 +492,10 @@ Nothing inside the frame is below 3.00, and nothing used as text inside the fram
 | `--color-text-muted` on `--color-bg` / `--color-surface` | provenance, eyebrows, table row labels, step counters | 6.25 / 5.69 |
 | `--color-navy` on `--color-bg` | the frame's edge against the page; outlined buttons and their borders | 13.88 |
 | `--color-on-navy` on the `--color-navy` fill | application buttons, the reprise doors | 14.58 |
-| `--color-border-strong` on `--color-bg` / `--color-surface` | link underlines, the anchor rule, the proof rules, the footer's top rule and its plates | 3.63 / 3.31 |
+| `--color-border-strong` on `--color-bg` / `--color-surface` | link underlines, the anchor rule, the proof rules, the TEFA card, the footer's top rule and its two plates | 3.63 / 3.31 |
 | `--color-border` on `--color-bg` / `--color-surface` | the header hairline, the table rules, the step rules | 1.56 / 1.42 — decorative only; no rule carries meaning alone |
 | `--color-focus` on `--color-bg` / `--color-surface` | the ring everywhere else | 8.20 / 7.46 |
-| `--color-focus-on-dark` against `--color-navy`; `--color-navy` against `--color-surface` | the two bands of K3's ring on the footer's GT Anywhere plate, so one band passes on either ground (K3 F10) | 14.58 / 12.63 |
+| `--color-focus-on-dark` against `--color-navy`; `--color-navy` against `--color-surface` | the two bands of K3's ring on the footer's GT Anywhere plate. **Measured against the surface the ring is actually drawn on** (the footer's `--color-surface`, not the plate's own fill): the near-white outer band is 1.15:1 there and the navy inner band is **12.63:1**, which is K3 F10 working as designed — one band passes on whatever ground the ring lands on | 1.15 / **12.63** |
 
 **Palette usage map.** Navy is a **surface** on exactly two bounded objects, the frame and the reprise frame, plus the two navy mark plates inside them and in the footer; navy is also the **fill** of every control on the page, which is DD-46 (a)'s light-surface treatment rather than a third surface. The two school tints appear on the four panels and on the TEFA module. `--color-surface` is also the footer's ground. **The accent is spent zero times as a page colour** (see Departures); the only orange anywhere is the leaf inside the two mark artworks, which is a mark rather than an accent event, and which appears exactly once in each panel — the one place this page's symmetry is enforced by the brand files themselves.
 
@@ -395,7 +503,11 @@ Nothing inside the frame is below 3.00, and nothing used as text inside the fram
 
 | Departure | Value | Reason |
 |---|---|---|
-| **Zero accent uses on the first screen**, where the brief's Colour row says one | no `--color-accent` declaration anywhere in `styles.css` | K3 section 5f caps the accent at one per screen; it does not require one. This direction argues the cap down to zero and the argument is the direction's own: the source spends its single saturated colour on **one of the two doors**, which is a third of the imbalance measured above. Inside a frame whose whole claim is that the two doors are equal, any single accent either lands on one door — and re-creates the defect — or on the frame, where it is ornament on a lattice that already reads. The orange that does appear is the leaf inside each mark, once per panel, identical on both sides. Stated here rather than taken silently |
+| **Zero accent uses on the first screen**, where the brief's Colour row says one | no `--color-accent` declaration anywhere in `styles.css`; measured 0 accent-painted elements on the first screen | **Moved out of this table in build pass 2 and escalated** — see Escalations, row Q-A. Both critics judged the design argument sound and its textual warrant contestable: K3 section 5f reads as a budget, the brief's Colour row reads as an imperative, and the studio critic named a third placement the build-pass-1 argument never considered (an accent underline on the compare anchor, the one first-screen element that belongs to both doors equally, in `--color-accent-text` at 5.14:1). Nari decides; the page ships the zero state meanwhile and says so |
+| The Georgetown mark plate's border is `--color-navy`, not `--color-border-strong` | `.panel-mark { border: 1px solid var(--color-navy) }` | Build pass 2, on both critics' first finding and the studio critic's named remedy. 12.63:1 on the Georgetown tint against the 3.31:1 hairline it had, so the two plates are navy-bounded objects of the same box and the navy-object count is 2 : 2 rather than 1 : 2. Measured above, with the painted-area residual that remains |
+| `--panel-head-gap` is two space tokens at the phone bands, not one | `var(--space-3)` in the tight band and in the landscape recipe | Literata clearance, stated as a number: CONTRACT section 3 records Literata standing **0.1675 em proud of a 1.15 line box**, which for `.panel-name` at `--text-xl` is **3.70px at V2** (22.08px) and **4.05px at V10** (24.17px), and the plate's bordered edge sits directly above it. One token is 4px, so build pass 1 cleared V2 by 0.30px and missed V10 by 0.05px — met by accident rather than by calculation, which the studio critic held the Typography row at 4 for. Two tokens is 8px: **4.30px clear at V2 and 3.95px clear at V10**. At V10 the eight pixels are paid for out of `--panel-cta-gap`, so the landscape budget is unchanged |
+| The reprise frame takes the first screen's width bands | `@media (max-width: 767px) { .frame-reprise { … } }` | Build pass 2. Its hard-coded 24px side padding made the reprise pair **34.3px unequal in height at V18**, found the moment the parity harness was extended to that pair |
+| The footer and utility links carry a minimum inline size | `min-inline-size: 2.75rem` | The unpadded footer "Terms" link measured about 35px wide at V2 (Astra). The runner tested height only; it now tests both, and reports every target at or above 44px in each dimension |
 | The door line exists twice in the markup | `.panel-line` and `.door-lines`, exactly one displayed per viewport | The compact door rule needs both lines after both CTAs; the brief's panel needs the line inside. A single copy cannot be in two containers. `display: none` removes the hidden copy from the accessibility tree, so each line is announced once |
 | `--radius-lg` on the frame, `--radius-md` on buttons, `--radius-sm` on the mark plates, `0` on the panels | four radius values | DD-47 settles a **uniform** corner — the same value on all four sides of an object — not a single value for every object. Each object uses one value on four sides. The panels' square corner is the source's own construction; the graded radii follow object size, which is why an 8px corner is not put on a 38px plate (it would read as a pill, the shape DD-47 rules out) |
 | The landscape recipe's h1 steps down one token | `h1 { font-size: max(var(--text-xl), 1.5rem) }` at `(max-height: 479px) and (min-width: 700px)` | The contract's own landscape recipe. The `max()` floor holds the type at or above K3 section 5e's 24px licence at every width the recipe covers; measured 24.17px at V10 |
@@ -437,7 +549,7 @@ Nothing inside the frame is below 3.00, and nothing used as text inside the fram
 
 ## Claims register tags
 
-All six rows that reach the page are "Unverified, public" in `0_plan/12-claims-register.md`: usable in a mock (G0.5), blocked for production until Nari approves the wording (REQ-022). Counts are `check-claims.py`'s own; the door lines appear twice in the markup and once on screen, which is why CR-032 and CR-033 count higher than in a single-copy mock.
+The rows the page depends on are "Unverified, public" in `0_plan/12-claims-register.md`: usable in a mock (G0.5), blocked for production until Nari approves the wording (REQ-022). Counts are `check-claims.py`'s own; the door lines appear twice in the markup and once on screen, which is why CR-032 and CR-033 count higher than in a single-copy mock. **Build pass 1 listed six rows; that understated the dependency** (Astra), and the seventh is added below.
 
 | Figure on the page | Where | Row | Count | Status | Owner |
 |---|---|---|---|---|---|
@@ -447,6 +559,9 @@ All six rows that reach the page are "Unverified, public" in `0_plan/12-claims-r
 | 9 to noon, about two hours / Two hours of mastery academics | Both copies of the Georgetown door line, the table's "The day" Georgetown cell | CR-033 | 2 | Unverified, public | Nari |
 | Two to three hours | Table "The day", GT Anywhere cell | CR-034 | 1 | Unverified, public | Nari |
 | check-in every week / every week | Table "Guides" GT Anywhere cell, proof fact 3 | CR-035 | 2 | Unverified, public | Nari |
+| **the TEFA voucher covering "the full amount"** | Table "Tuition and access", GT Anywhere cell | **CR-022** | not counted by the checker | Unverified, public | Nari |
+
+**Why CR-022 is here and the checker does not see it.** `check-claims.py` maps the *figure* `$10,474`, which is not on the page. But the cell says the voucher "can apply … toward the full amount", and the register row that supports full coverage is CR-022 ("The $10,474 TEFA voucher fully covers the $10,400 GT Anywhere tuition."), which the register itself flags as conflicting with CR-021. So the page depends on CR-022's *claim* while carrying only CR-021's figure. Astra's finding; the row belongs in the inventory and the checker cannot be the whole inventory.
 
 Rows **kept off the page**, each of which the source's own two-door panel puts on it:
 
@@ -460,7 +575,25 @@ Rows **kept off the page**, each of which the source's own two-door panel puts o
 | "Delivering 3x faster learning" | CR-004 | Unverified | Nari | anywhere.gt.school |
 | "3X learning velocity" | CR-008 | Unverified | Nari | gt.school, nine pages |
 
-CR-022 ($10,474) is not on the page; the TEFA module carries no figure. `check-claims.py` lists no withheld claim and no figure without a row.
+The figure $10,474 is not on the page and the TEFA module carries no figure. `check-claims.py` lists no withheld claim and no figure without a row.
+
+### Assertions on the page with no claim-level register row
+
+Astra's finding, and it is a real limit on the sentence "no unregistered claim": `check-claims.py` gates **figures**,
+so a factual assertion that carries no number passes it untouched. Four such assertions are on this page. **None is
+M32's own copy** — every one is a fixed slot of `copy.md` sections 1, 3, 4 and 8, so they are on every mock in the
+slate. They are flagged here with their owner rather than registered, because a builder does not write register rows.
+
+| Assertion on the page | Where | Nearest existing row | Gap | Owner |
+|---|---|---|---|---|
+| "The gifted school in the Alpha School network." | The provenance line, `copy.md` section 1 | None | Network membership is a corporate-relationship claim with no row at all | Nari (MD-17 settled its prominence, not its truth) |
+| "From home, anywhere in the United States." | Table, "Where and how", GT Anywhere | None; the gt.school footer's "Anywhere in the States" is the source `copy.md` cites | Availability across all fifty states is a regulatory claim for an online school | Nari |
+| "Guides on campus in every session." | Table, "Guides", Georgetown | CR-035 covers the GT Anywhere **weekly** check-in only | Staffing coverage at the campus is unregistered | Nari / Crystal |
+| "Mastery-based: students advance on demonstrated mastery, measured with MAP assessments." | Proof fact 2, and the repeated "Same school, same academics" cells | CR-030 names MAP inside a refund condition | The broader progression claim for **both** schools is not what CR-030 registers | Nari |
+
+Recommended, not taken: four `CR-` rows proposed by whoever owns the deck, since these sit in `copy.md` and affect
+every mock. Until they exist, the honest form of the claim this mock makes is narrower: **every figure on the page
+maps to a register row, and no withheld figure appears**, which is what the checker establishes and all it does.
 
 ## Continuity, against the measured estate
 
@@ -474,16 +607,16 @@ CR-022 ($10,474) is not on the page; the TEFA module carries no figure. `check-c
 | Display face | Literata | Literata | Matches |
 | **The headline's italic** | The estate sets its first sentence upright near-black and its second in italic at weight 400 **in accent orange**, inside a 300-weight h1. K12 F88 measures that orange on cream at **2.38:1**, failing AA and 3:1. The source component on gt.school does the same thing at panel scale: a two-line serif headline whose second line is italic | The same device — a second voice inside one Literata h1 — with the **colour left behind**: the italic clause is `--color-text` at 17.69:1, and it is keyed to the clause rather than the line so it survives reflow from 4 lines to 7 | **The strongest continuity move on this page**, and the one correction inside it that costs the estate nothing: the slope is what carries the meaning, the colour was what failed |
 | Heading weight and tracking | 300, letter-spacing -1.6px | 400, no tracking | Declared difference. M03 tested 300 against 400 on the fixed sentence and shipped 400 with its reasoning; this mock inherits that and does not re-run the test |
-| The first screen's application action | Navy `rgb(0, 42, 58)` fill, near-white label, Inconsolata uppercase at 16px, computed weight 500 | Navy fill with a near-white label on every control on the page, Inconsolata uppercase at 17 to 18px, weight 600 | Same colour vocabulary, same face, same case. Size and weight differ: `shared/fonts.css` ships Inconsolata 400 and 600 only, so a 500 cannot be registered without adding a face, and the estate's 500 is a computed weight rather than proof of a 500 face |
+| The first screen's application action | Navy `rgb(0, 42, 58)` fill, near-white label, Inconsolata uppercase at 16px, computed weight 500 | Navy fill with a near-white label on every control on the page, Inconsolata uppercase at `--text-btn` 17 to 18px, weight 600 — **except inside a panel narrower than 28rem, where a container query steps the door CTA to `--text-sm`, 14 to 15px**, so the longer label never wraps and the two CTA boxes stay identical (Astra: build pass 1 stated 17 to 18px without the exception) | Same colour vocabulary, same face, same case. Size and weight differ: `shared/fonts.css` ships Inconsolata 400 and 600 only, so a 500 cannot be registered without adding a face, and the estate's 500 is a computed weight rather than proof of a 500 face |
 | The pre-footer application card, and the source component's "LEARN MORE" | Accent orange fill, near-white label at **2.50:1** (K12 F87) | Not copied (DD-46). No orange fill anywhere; no orange type anywhere | Deliberate: copying it would import a contrast failure onto the page's most important control, and in the source it is also the thing that makes one door louder than the other |
 | Button silhouette | Three constructions across the estate: a composed cut lower-right corner on two cards, a 14px clipped polygon in the footer, four rounded corners on the desktop header's application button | One uniform `--radius-md` corner on every control (DD-47), which is the shape of the estate's own desktop-header application control | Matches one of the estate's three, and the one on the control a parent clicks to apply |
-| **The two-door component itself** | The estate's own about page carries it: navy frame, two panels, a gutter, a mark per panel, square corners inside a rounded one | The same object, corrected | This is the continuity argument of the direction. A parent who has seen gt.school's about page meets a shape they recognise, minus the imbalance and minus the claims |
+| **The two-door component itself** | **Not measured, and not measurable from this repository.** The brief describes a screenshot of the component on `gt.school/about-us`; the screenshot is not checked in and `gt.school` has no mirror here | The same object as the brief describes it, corrected | **An inference from a described reference, not handoff evidence** — Astra's correction, and build pass 1 wrote it as though it were measured. What can be said: the direction is built to the brief's description of the estate's own routing component. What cannot: that a parent will recognise it, because nobody here can render the thing they would be recognising |
 | Footer navigation | Uppercase Inconsolata | Inconsolata at `--text-sm`, in the case `copy.md` writes | Face matches; case does not, because the deck's link labels are sentence case and `text-transform` would change how they read |
 | Mark handling | The GT Anywhere mark is white lettering with an orange leaf; the estate's hero carries an Alpha School lockup | The GT Anywhere mark only on navy (its panel plate and the footer plate); the GT School mark only on light (the header, its panel plate, the footer plate). 27.9px at 390 and 32px at 1440, aspect skew 0% at both, measured by the runner on all five instances | Matches, and the runner measures it every pass |
 | Grained cream, wave linework, the composited student cut-out | Present on the estate's hero | Absent. No photograph, no texture | Declared: DD-42 holds the photograph and a grain is a value on neither site's token list |
 | The phone's redistributed chrome | At 390 the estate's header holds the mark and MENU only | At 390 the header holds the mark and two text links, no menu (DD-12) | Different by decision, not by accident |
 
-Where a parent lands after pressing a door: the navy control with a near-white Inconsolata label is answered on anywhere.gt.school by a navy application card in the same face and case; the ground, the two display faces and the mark files are literally the same. What does not carry across is the estate's grain, its photographic hero and its 300-weight tracked headline — and, deliberately, its orange button and its orange italic.
+Where a parent lands after pressing the **GT Anywhere** door: the navy control with a near-white Inconsolata label is answered on anywhere.gt.school by a navy application card in the same face and case; the ground, the two display faces and the mark files are literally the same. What does not carry across is the estate's grain, its photographic hero and its 300-weight tracked headline — and, deliberately, its orange button and its orange italic. Where a parent lands after pressing the **Georgetown** door is **unverified**: `gt.school` has no mirror in this repository, this build did not open it, and no rendered comparison at either width exists. Astra's raise for this row — a rendered Georgetown destination comparison at phone and desktop widths — cannot be produced under the hard rules from inside this folder and is listed under Escalations.
 
 ## Parent questions (`0_plan/05-landing-mockups-plan.md` section 6c)
 
@@ -506,25 +639,66 @@ Where a parent lands after pressing a door: the navy control with a near-white I
 
 ## Self-check
 
-**Runner.** `node 0_plan/tools/shots.mjs 0_plan/mockups/M32-the-two-panels`, run of 2026-09-11T23:55:03.933Z: **Result: all required rows pass.** Reduced motion at V14: every computed transition and animation duration 0s, elements and pseudo-elements. Root font doubled at V2: no horizontal scroll at 375 with a 32px root. Console: no errors. Interactive targets: "every interactive target is at least 44px tall" at all three sampled rows, the 320px reflow row included. Mark geometry: five marks at each width — `gt-school-logo-h.svg` three times (header, Georgetown panel, footer plate) and `gt-anywhere-logo-h.svg` twice (GT Anywhere panel, footer plate) — 27.9px at 390 and 32px at 1440, aspect skew 0% on all ten measurements.
+**Runner.** `node 0_plan/tools/shots.mjs 0_plan/mockups/M32-the-two-panels`, run of **2026-09-12T00:53:16.118Z**, which is the timestamp `qa/fold.md` carries: **Result: all required rows pass.** Reduced motion at V14: every computed transition and animation duration 0s, elements and pseudo-elements. Root font doubled at V2: no horizontal scroll at 375 with a 32px root. Console: no errors. Interactive targets: "every interactive target is at least 44px tall" at all three sampled rows, the 320px reflow row included — and the runner now tests **width as well as height**, so that line means 44px in both dimensions. Mark geometry: five marks at each width — `gt-school-logo-h.svg` three times (header, Georgetown panel, footer plate) and `gt-anywhere-logo-h.svg` twice (GT Anywhere panel, footer plate) — 27.9px at 390 and 32px at 1440, aspect skew 0% on all ten measurements.
 
-**Forced colours, both palettes** (`qa/fold.md`, "The GT marks under forced colours"): every instance of both wordmarks reports "kept by the image itself", in the light and the dark palette, and the three ring measurements report 13.88:1, 13.88:1 and 14.58:1 against the ground each plate actually keeps. `qa/forced-colors.jpg` was read with the Read tool: the frame, both panels, both mark plates and both controls keep drawn borders when the two tints and the navy collapse to Canvas, so the lattice survives and both wordmarks stay whole.
+(Build pass 1 cited the run twice at a timestamp eight minutes older than the file on disk. Both critics caught it. Every figure in this file now comes from the run named above, and the three tables that quote the runner are spliced out of `qa/fold.md` by script rather than retyped.)
 
-**Fixed by looking at the captures, not by assertion:**
+### Focus rings, re-measured against the surface they are drawn on
+
+The programme-wide correction landed in `styles.css` and in `0_plan/tools/shots.mjs` while this mock was in review: every ring in every mock was stated in the colour of its own plate's retained ground, while the ring is painted **outside** the plate, on Canvas. M32's measured 1.03:1 in the light palette and 1.39:1 in the dark. The declarations now say `CanvasText`, the runner samples the surround rather than the fill, and both are verified here rather than assumed. `node …/qa/M32-measure.mjs --captures`:
+
+| Palette | Target | Ring | Against the surface outside it |
+|---|---|---|---|
+| normal | header lockup | 2px `--color-focus` at 2px offset | **8.20:1** on `--color-bg` |
+| normal | footer GT School plate | 2px `--color-focus` | **7.46:1** on `--color-surface` |
+| normal | footer GT Anywhere plate (the page's only two-band ring) | 2px `--color-focus-on-dark` outer, 2px `--color-navy` inner | outer 1.15:1, **inner 12.63:1** — K3 F10 working as designed, one band passing on whatever ground the ring lands on |
+| normal | first door CTA | 2px `--color-focus` | **7.46:1** on the Georgetown tint |
+| forced, light | all four | 2 to 3px `CanvasText` = `rgb(0,0,0)` | **21:1** on `Canvas` = `rgb(255,255,255)` |
+| forced, dark | all four | 2 to 3px `CanvasText` = `rgb(255,255,255)` | **21:1** on `Canvas` = `rgb(0,0,0)` |
+
+The runner's own forced-colours table agrees, in both schemes: "21:1 against the surface it is drawn on, outside the element", for every opted-out link. One observation, reported rather than changed: the GT Anywhere plate's forced ring is 2px where the others are 3px, because `.logo-navy:focus-visible` is a more specific selector than the block's `:focus-visible`. At 21:1 and 2px it is well clear of WCAG's minimum, and the programme-wide rule is not mine to re-cut.
+
+### Captures the acceptance row asks the critics to judge by eye
+
+Build pass 1 had neither of the two the brief names. Both exist now, and I read all five with the Read tool.
+
+| File | What it shows |
+|---|---|
+| `qa/forced-colors-light.jpg` | The page at V14 in the **light** forced palette: frame, both panels, both plates and both controls keep drawn borders when the tints and the navy collapse to Canvas; both wordmarks whole |
+| `qa/forced-colors-dark.jpg` | The same in the **dark** palette, which build pass 1 asserted from a script and never showed. Both wordmarks whole on their retained plates, the lattice intact, both CTAs outlined |
+| `qa/focus-logo-navy.jpg` | The page's one two-band ring, focused, in the normal palette: the navy inner band is plainly visible against the footer's cream, which is the band K3 F10 relies on there |
+| `qa/focus-logo-navy-fc-light.jpg`, `qa/focus-logo-navy-fc-dark.jpg` | The same control focused in **both** forced palettes: a black ring on white Canvas and a white ring on black Canvas, both unmistakable |
+
+### Fixed in build pass 1 by looking at the captures
 
 | What the capture showed | Fix |
 |---|---|
-| `qa/focus-cta.jpg` showed **no visible ring** on the first door CTA. The two-band ring had been applied to it on the assumption that a control inside a navy frame stands on navy; it does not — it stands on a light tint, where `--color-focus-on-dark` measures 1.14 and 1.15 | The door CTAs take `--color-focus` like every other control on the page (7.46 and 7.56 on the two tints). The two-band ring is kept only where a mark keeps a navy plate |
-| The runner's next-band evidence named the frame's navy-to-cream edge, not text, at V11, V12, V13 and V16 | The anchor band's padding, the sections' top padding and the table block's top margin each came down one token; all four rows now report real text cut by the edge |
+| `qa/focus-cta.jpg` showed **no visible ring** on the first door CTA. The two-band ring had been applied to it on the assumption that a control inside a navy frame stands on navy; it does not — it stands on a light tint, where `--color-focus-on-dark` measures 1.14 and 1.15 | The door CTAs take `--color-focus` like every other control on the page (7.46 and 7.56 on the two tints) |
+| The runner's next-band evidence named the frame's navy-to-cream edge, not text, at V11, V12, V13 and V16 | The anchor band's padding, the sections' top padding and the table block's top margin each came down one token; all four rows report real text cut by the edge |
 | `qa/fold.md` failed the doubled-root-font run at 375 (scrollWidth 499, then 418) | The mark plate's shared width is capped at `100%` and the head row wraps; the h1's nowrap span is released by a container query below 20rem |
 | At V1 (740) and V5 (715) the first screen finished exactly at the fold and nothing crossed the bottom edge | The tight height band was widened to 767px, but only below 768px wide, so the rows where the sentence is long take the squeeze and the wide-and-short rows keep the full rhythm |
 | At V14 and V15 the panels had 8px of side padding inside a 556px panel, because the height band was setting horizontal padding | The bands were split: width sets the lattice and the side padding, height sets the vertical rhythm only |
 
-**Grep checks** (from the repo root, 2026-09-11): `<form` 0; `<input` 0; `<script` 1 (JSON-LD); hosts in `index.html` and `styles.css`: gt.school, www.gt.school, anywhere.gt.school, apply.gt.school, community.gt.school, schema.org only; digits in visible text: 09, 10, 10,400, 2026, 270, 512, 8, 9, 90, 9481; "advis" in visible text: 0; "Georgetown Campus" 9 occurrences in visible text, "GT Anywhere" 15; provenance line once; sources line twice (under the table and under the facts); **61 fixed slots from `copy.md` sections 0 to 8 found verbatim** by string match against a whitespace-normalised page; words on the page outside `copy.md` sections 0 to 9: none; raw hex in `styles.css`: **0**; `transition:` declarations in `styles.css`: 0; `vh`, `svh`, `dvh` in `styles.css`: 0; `index.html` 15,524 bytes plus `styles.css` 27,612 bytes, 43,136 bytes in all.
+### Fixed in build pass 2, on the two critics' cards
 
-**Contrast.** Every pairing in the tables above computed from the token values with the WCAG 2.x formula. Inside the frame every string is at 5.69 or above and every drawn edge at 3.31 or above; on the light surfaces every running paragraph is `--color-text` at 16.10 or better.
+| Finding | Whose | Fix, and the evidence |
+|---|---|---|
+| The next-band table was introduced as pasted from the runner with its single negative cell replaced by a rebuttal, and the run was cited at a stale timestamp | Both | The table is spliced out of `qa/fold.md` by script, every cell; the rebuttal is a separate row beneath it; the timestamp is read from the file |
+| The parity harness measured geometry only — no colour, no `.panel-line` row, the reprise pair excluded, `markW` collected and dropped | Both | All four added. `--weight`, `--lines`, `--reprise`, and `markW` printed beside the verdict |
+| The count the rationale ran on the source was never run on this page; navy objects were 1 : 2 in the right panel's favour | Both | Run (`--weight`). The Georgetown plate's border is `--color-navy`, 12.63:1 on its tint: navy objects **2 : 2**. The painted-area residual, 1 : 17.1 inside the plate, is reported rather than argued away |
+| The reprise pair's equality was claimed in `styles.css` and measured by nothing | Studio | Measured, and it was **false at V18**: 34.3px of height and 9px of CTA width. The reprise now takes the first screen's width bands; 0.0px at all nineteen rows |
+| The Anywhere panel announced its name three times while the Georgetown panel was introduced by a different brand | Studio | `alt=""` on both panel marks, `aria-hidden` on their plates. Both are decorative beside a visible name |
+| The unpadded footer "Terms" link is about 35px wide at V2 | Astra | `min-inline-size: 2.75rem` on the footer and utility links. The runner, which now tests width, reports every target at or above 44px |
+| The claims inventory understated its dependencies (CR-022) and four inherited assertions have no claim-level row | Astra | CR-022 added to the inventory with the reason the checker cannot see it; the four assertions tabled with their owner and flagged as shared-deck gaps, not registered here |
+| The Literata overhang obligation was met to within a quarter-pixel by accident | Studio | Stated as a number and given real clearance: `--panel-head-gap` is two space tokens at the phone bands, 4.30px clear at V2 and 3.95px at V10 |
+| The zero-accent departure was resolved in a Departures cell on a contestable reading | Both | Moved to **Escalations** as a proposed `Q` row with both readings and both recommendations |
+| The source object and line counts cannot be checked by any reviewer | Both | A text fetch to build the dated extract was attempted and refused by this session's sandbox, so the counts are marked **unverifiable** and the correction no longer rests on them. `qa/M32-source-counts.py` reproduces the one figure that does survive, out of the register |
 
-**Checker output**, pasted from the run of 2026-09-11:
+**Grep checks** (from the repo root, 2026-09-12): `<form` 0; `<input` 0; `<script` 1 (JSON-LD); hosts in `index.html` and `styles.css`: gt.school, www.gt.school, anywhere.gt.school, apply.gt.school, community.gt.school, schema.org only; digits in visible text: 09, 10, 10,400, 2026, 270, 512, 8, 9, 90, 9481; "advis" in visible text: 0; "Georgetown Campus" 9 occurrences in visible text, "GT Anywhere" 15; provenance line once; sources line twice; **61 fixed slots from `copy.md` sections 0 to 8 found verbatim** by string match against a whitespace-normalised page; words on the page outside `copy.md` sections 0 to 9: none; raw hex in `styles.css`: **0**; `transition:` declarations in `styles.css`: 0; `vh`, `svh`, `dvh` in `styles.css`: 0; `index.html` 15,542 bytes plus `styles.css` 29,962 bytes, 45,504 bytes in all.
+
+**Contrast.** Every pairing in the tables above computed from the token values with the WCAG 2.x formula, and the plate and ring figures re-measured in the browser from computed colour. Inside the frame every string is at 5.69 or above and every drawn edge at 12.63 or above. **No APCA Lc figure is reported**, which K3 section 5g CS4 asks for: no mock in `0_plan/mockups/` reports one, the runner does not compute one, and the studio critic filed it as a programme-wide gap for Johnny rather than an M32 defect. It is listed under Escalations so it is not lost.
+
+### Checker output, verbatim, from the run of 2026-09-12
 
 ```
 $ python3 0_plan/tools/check-mocks.py 0_plan/mockups/M32-the-two-panels
@@ -557,4 +731,21 @@ $ node 0_plan/tools/shots.mjs 0_plan/mockups/M32-the-two-panels
 ## Result: all required rows pass
 ```
 
-**Screenshots read with the Read tool**, not assumed: `V2.jpg`, `V9.jpg`, `V10.jpg`, `V11.jpg`, `V14.jpg`, `V15.jpg`, `V16.jpg`, `V17.jpg`, `V18.jpg`, `V2-full.jpg`, `V14-full.jpg`, `focus-cta.jpg`, `focus-footer.jpg`, `focus-footer-plate.jpg`, `forced-colors.jpg`, and bottom-edge crops of `V12.jpg`, `V13.jpg`, `V16.jpg` and `V17.jpg`.
+**Screenshots read with the Read tool**: `V1.jpg`, `V2.jpg`, `V9.jpg`, `V10.jpg`, `V11.jpg`, `V14.jpg`, `V15.jpg`, `V16.jpg`, `V17.jpg`, `V18.jpg`, `V2-full.jpg`, `V14-full.jpg`, `V2-rootx2.jpg`, `focus-cta.jpg`, `focus-footer.jpg`, `focus-footer-plate.jpg`, `forced-colors.jpg`, bottom-edge crops of `V12.jpg`, `V13.jpg`, `V16.jpg`, `V17.jpg`, and the five build-pass-2 captures above.
+
+## Escalations
+
+Four things this build will not decide for Nari or for Johnny, each with what it would take to close.
+
+| id | Item | Both readings, or both routes | Who |
+|---|---|---|---|
+| **Q-A** (proposed; needs an id in `0_plan/07`) | **Does the first screen spend one accent use, or none?** | *Zero, as built:* the source spends its one saturated fill on one of the two doors, and inside a frame claiming parity a single accent either lands on a door and re-creates that, or on the frame as ornament. Orange still appears, once per panel, as the leaf inside each mark. *One, as the brief's Colour row says in the imperative:* K3 section 5f is a budget ("one accent event per screen … enforced by counting"), and there is a placement that ranks neither door — an underline on the compare anchor, the one first-screen element belonging to both, in `--color-accent-text` at 5.14:1 on cream, costing no layout height. **Fable recommends escalating rather than resolving; Astra recommends the shared element.** Measured today: 0 accent-painted elements on the first screen | Nari |
+| **Q-B** (proposed) | **Is a navy-*bounded* plate beside a navy-*filled* plate acceptable parity?** Navy objects are 2 : 2 and the boxes are identical to 0.0px, but painted navy inside the plate is 1 : 17.1 and cannot go to 1 : 1 while each wordmark keeps the ground its artwork needs (BUILDER-BRIEF rule 16 forbids recolouring a mark) | Accept, and the two plates read as one object type with different interiors; or commission a light-ground variant of the GT Anywhere wordmark, which is a brand decision, not a page decision | Nari, with Holly |
+| **E-1** | **The source screenshot is not in the repository** and `gt.school` has no mirror, so the object and line counts are unverifiable and the Georgetown handoff is unrendered. A text fetch to build a dated extract the way `0_plan/kb/exemplars/gt-story/` does was attempted here and refused by the sandbox | Either the screenshot is checked in with a `SOURCE.md` and a script, or the counts stay marked unverifiable — as they now are — and `SOURCES.md` records the component as an unverified source | Johnny / Nari |
+| **E-2** | **No mock in the programme reports an APCA Lc figure**, yet K3 section 5g CS4 makes it a condition of a 5 on Colour and surface | Either the runner starts reporting Lc and the per-node sweep, or section 5g is amended. Scoring M32 alone against it would single out a programme-wide gap | Johnny |
+
+One more, not an escalation but worth Nari seeing before G1: below 700px tall — which includes a 1366 by 768 laptop — the contract's compact door rule moves the two explaining sentences below the frame, so **13 of the 19 matrix rows do not show the brief's complete panel**. It is contract-compliant and honestly filed under the compact door rule above; `qa/V15.jpg` beside `qa/V14.jpg` is the comparison.
+
+## Iteration, build pass 1 to build pass 2 (2026-09-12)
+
+Scored 5/4/4/4/4/5/5/**3**/4 by the studio critic and 4/4/4/4/**3**/4/**3**/**3**/**3** by Astra; both returned ITERATE. Craft was the row both marked down, and both for the same reason: the evidence was presented more favourably than the evidence was. Everything either card asked for is in the table under **Fixed in build pass 2** above, with the measurement behind it, except the two things that cannot be done from inside this folder — the source extract, refused by the sandbox, and the rendered Georgetown comparison, which the hard rules forbid — and those are now escalations rather than silences. Three defects were found by the fixes themselves rather than by the cards: the reprise pair was unequal at V18, the door CTAs' name had 0.30px of Literata clearance at V2 and −0.05px at V10, and the footer links were 35px wide.

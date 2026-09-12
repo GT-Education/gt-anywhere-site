@@ -1,18 +1,18 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:23:36.077Z; page `/0_plan/mockups/M32-the-two-panels/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:53:16.118Z; page `/0_plan/mockups/M32-the-two-panels/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
-| V1 | 360 by 740 | fold | 716 | 89 | 283 | 305 | 456 | 615 | yes | PASS |
-| V2 | 375 by 629 | fold | 605 | 57 | 249 | 271 | 406 | 545 | yes | PASS |
-| V3 | 390 by 664 | fold | 640 | 57 | 255 | 276 | 428 | 587 | yes | PASS |
-| V4 | 393 by 659 | fold | 635 | 57 | 255 | 277 | 428 | 588 | yes | PASS |
-| V5 | 414 by 715 | fold | 691 | 57 | 258 | 279 | 431 | 591 | yes | PASS |
+| V1 | 360 by 740 | fold | 716 | 89 | 283 | 305 | 460 | 623 | yes | PASS |
+| V2 | 375 by 629 | fold | 605 | 57 | 249 | 271 | 410 | 553 | yes | PASS |
+| V3 | 390 by 664 | fold | 640 | 57 | 255 | 276 | 432 | 595 | yes | PASS |
+| V4 | 393 by 659 | fold | 635 | 57 | 255 | 277 | 432 | 596 | yes | PASS |
+| V5 | 414 by 715 | fold | 691 | 57 | 258 | 279 | 435 | 599 | yes | PASS |
 | V6 | 412 by 839 | fold | 815 | 57 | 274 | 299 | 479 | 651 | yes | PASS |
-| V7 | 402 by 681 | fold | 657 | 57 | 256 | 278 | 429 | 589 | yes | PASS |
-| V8 | 430 by 739 | fold | 715 | 57 | 227 | 249 | 401 | 561 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 57 | 271 | 296 | 476 | 647 | yes | report: page height 6931 |
+| V7 | 402 by 681 | fold | 657 | 57 | 256 | 278 | 433 | 597 | yes | PASS |
+| V8 | 430 by 739 | fold | 715 | 57 | 227 | 249 | 405 | 569 | yes | PASS |
+| V9 | 390 by 844 | emptiness |  | 57 | 271 | 296 | 476 | 647 | yes | report: page height 6875 |
 | V10 | 750 by 342 | fold | 318 | 57 | 144 | 166 | 308 | 308 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 57 | 262 | 296 | 670 | 670 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 57 | 268 | 302 | 677 | 677 | yes | PASS |
@@ -21,7 +21,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V15 | 1366 by 648 | fold | 624 | 57 | 287 | 313 | 535 | 535 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 57 | 317 | 351 | 692 | 692 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 57 | 317 | 351 | 692 | 692 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 89 | 310 | 332 | 466 | 605 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 89 | 310 | 332 | 470 | 613 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 57 | 259 | 285 | 489 | 489 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -46,14 +46,14 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 
 | Row | Cut | Element and the ink that crosses the bottom edge |
 |---|---|---|
-| V1 | yes | text cut by the edge, 732 to 752 |
-| V2 | yes | content reaches 622 of 629 and more follows below |
-| V3 | yes | text cut by the edge, 656 to 676 |
-| V4 | yes | content reaches 655 of 659 and more follows below |
-| V5 | yes | text cut by the edge, 708 to 728 |
+| V1 | yes | content reaches 736 of 740 and more follows below |
+| V2 | yes | text cut by the edge, 610 to 630 |
+| V3 | yes | content reaches 662 of 664 and more follows below |
+| V4 | yes | text cut by the edge, 636 to 663 |
+| V5 | yes | content reaches 712 of 715 and more follows below |
 | V6 | yes | text cut by the edge, 814 to 841 |
-| V7 | yes | content reaches 678 of 681 and more follows below |
-| V8 | yes | text cut by the edge, 717 to 744 |
+| V7 | yes | text cut by the edge, 666 to 686 |
+| V8 | yes | text cut by the edge, 725 to 752 |
 | V9 | yes | text cut by the edge, 840 to 860 |
 | V10 | yes | text cut by the edge, 328 to 356 |
 | V11 | yes | text cut by the edge, 1015 to 1035 |
@@ -72,17 +72,17 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 15.08:1 against the surface it is drawn on, outside the element |
-| light | focus ring on `mark link` | 15.08:1 against the surface it is drawn on, outside the element |
-| light | focus ring on `mark link` | FAIL at 1.03:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | FAIL at 1.39:1 against the surface it is drawn on, outside the element |
-| dark | focus ring on `mark link` | FAIL at 1.39:1 against the surface it is drawn on, outside the element |
-| dark | focus ring on `mark link` | 20.29:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
@@ -95,9 +95,7 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
-| 320 by 256 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
-| 375 by 629 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
-| 1440 by 900 | Terms | 44px | 38px | short control | under 44, above the 24px floor |
+| all three rows | every interactive target is at least 44px tall | | | | ok |
 
 ## Mark geometry (K12 V2)
 
@@ -116,4 +114,4 @@ Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must h
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
 | 1440 by 900 | `gt-anywhere-logo-h.svg` | horizontal | 32px | 168px | 0% | ok |
 
-## Result: 3 failure(s)
+## Result: all required rows pass
