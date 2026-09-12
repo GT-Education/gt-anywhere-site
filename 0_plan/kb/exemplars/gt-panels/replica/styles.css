@@ -93,15 +93,22 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
 .panel__logo img { height: 100%; width: auto; display: block; }
 
 /* .split-cta_hidden-wrap — max-width 28rem, height 0 -> 216, opacity 0 -> 1, overflow hidden */
+/* Animated as grid rows rather than to a fixed height. The measured 216px is what the desktop
+   panel's own content comes to, but a hard 216 clipped the prose on a narrow panel, where the
+   same words need far more room. 0fr to 1fr animates to whatever the content actually is, so it
+   is exact at desktop and correct at every other width. */
 .panel__reveal {
   position: relative; z-index: 2;
   max-width: 28rem;
-  overflow: hidden;
-  block-size: 0;
+  display: grid;
+  /* minmax(0, Nfr), not a bare Nfr: an fr track keeps an automatic minimum, so `0fr` alone still
+     floored at 64px here, which is the inner wrap's own vertical padding. */
+  grid-template-rows: minmax(0, 0fr);
   opacity: 0;
-  transition: block-size var(--reveal) var(--ease), opacity var(--reveal) var(--ease);
+  transition: grid-template-rows var(--reveal) var(--ease), opacity var(--reveal) var(--ease);
 }
-.panel:hover .panel__reveal, .panel:focus-within .panel__reveal { block-size: var(--reveal-h, 216px); opacity: 1; }
+.panel__reveal > * { min-block-size: 0; overflow: hidden; }
+.panel:hover .panel__reveal, .panel:focus-within .panel__reveal { grid-template-rows: minmax(0, 1fr); opacity: 1; }
 
 /* .split-cta_inner-wrap — padding 2rem 1.25rem, column, centred */
 .panel__inner { display: flex; flex-flow: column; align-items: center; gap: 24px; padding: 2rem 1.25rem; }
@@ -134,23 +141,43 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
 .panel:hover .panel__button, .panel:focus-within .panel__button { background: var(--accent); }
 .panel__button svg { inline-size: 16px; block-size: 16px; }
 
-/* The original has no keyboard affordance at all. This replica adds one. */
-.panel:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; }
+/* The two actions are real links to different destinations, so the panel is no longer one big
+   anchor: nesting anchors is invalid, and the original's single link could only ever go one place.
+   The original has no keyboard affordance at all; each action here is focusable and shows a ring. */
+.panel__button { text-decoration: none; }
+.panel__button:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   .panel, .panel__overlay, .panel__reveal, .panel__button { transition-duration: 0s; }
 }
 
-/* The original keeps both panels side by side at every width, measured 310 x 439 each at 390. */
+/* An earlier version of this file said the original keeps both panels side by side at every width.
+   That was wrong, and it is what clipped the prose on a phone: measured, the original switches to
+   `flex-direction: column` below desktop and gives each panel the full width, 640 at 768 and 310 at
+   390. It also stops hiding the prose there — the reveal measures 216px at 768 and 239px at 390 with
+   nothing hovered — because a touch screen has no hover and a collapsed panel would be a dead end. */
+/* The original stacks below desktop and opens its prose there, since a touch screen has no hover.
+   Johnny's call is to keep the two doors side by side at every width instead, so the panels stay in
+   a row and the prose stays collapsed on a phone. That is deliberate: at 390 each panel is about
+   160px wide, and the same paragraph that fits a 644px panel cannot be set in 160px without
+   clipping, which is exactly what an earlier version did. Side by side, a phone reads the pair the
+   way the desktop does: two doors, each with its lockup and its two actions. */
+@media (max-width: 991px) {
+  .split-cta { gap: 16px; padding: 16px; min-block-size: 0; }
+  .panel { min-block-size: 439px; }
+  .panel__inner h2 { font-size: 22px; line-height: 26px; }
+  .panel__inner { padding: 1.25rem .75rem; gap: 14px; }
+  .panel__inner p { font-size: 14px; line-height: 19px; }
+}
 @media (max-width: 767px) {
   .padding-global { padding: 0 16px; }
-  .split-cta { gap: 12px; padding: 12px; min-block-size: 0; }
-  .panel { padding: 0; gap: 8px; min-block-size: 439px; }
-  .panel__logo { height: 32px; }
-  .panel__inner h2 { font-size: 22px; line-height: 26px; }
-  .panel__inner { padding: 1rem .5rem; gap: 12px; }
-  .panel__inner p { font-size: 14px; line-height: 19px; }
-  .panel__button { block-size: 36px; padding: 0 10px; font-size: 13px; }
+  .split-cta { gap: 12px; padding: 12px; }
+  /* the lockup is sized by width here, not height: at 160px the panel is narrower than the mark's
+     own 5.45:1, so a fixed height pushed it past the panel edge and into the gutter */
+  .panel__logo { height: auto; inline-size: 86%; }
+  .panel__logo img { inline-size: 100%; height: auto; }
+  /* no prose at this width: it is collapsed and stays collapsed, rather than set in 160px */
+  .panel__reveal { display: none; }
 }
 
 /* --- the note above the replica, which is not part of the replicated component --- */

@@ -24,7 +24,7 @@
     <div class="container-large">
       <div class="split-cta">
 
-        <a class="panel panel--left" href="#" aria-label="GT School, Georgetown campus">
+        <div class="panel panel--left">
           <div class="panel__logo"><img src="img/gt-georgetown-lockup.png" alt="GT Georgetown"></div>
           <div class="panel__reveal">
             <div class="panel__inner">
@@ -34,15 +34,17 @@
             </div>
           </div>
           <span class="panel__actions">
-            <span class="panel__button panel__button--ghost">Learn more
+            <a class="panel__button panel__button--ghost" href="https://www.gt.school/"
+               data-event="door_click" data-school="georgetown" data-placement="panel">Learn more
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.58058 12.4194L12.4194 3.58055M12.4194 12.4194V3.58055L3.58058 3.58055" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="panel__button">Apply Now</span>
+            </a>
+            <a class="panel__button" href="https://apply.gt.school/?school=georgetown"
+               data-event="cta_apply_click" data-school="georgetown" data-placement="panel">Apply Now</a>
           </span>
           <span class="panel__overlay"></span>
-        </a>
+        </div>
 
-        <a class="panel panel--right" href="#" aria-label="GT Anywhere, online">
+        <div class="panel panel--right">
           <div class="panel__logo"><img src="img/gt-anywhere-lockup.png" alt="GT Anywhere"></div>
           <div class="panel__reveal">
             <div class="panel__inner">
@@ -53,13 +55,15 @@
             </div>
           </div>
           <span class="panel__actions">
-            <span class="panel__button panel__button--ghost">Learn more
+            <a class="panel__button panel__button--ghost" href="https://anywhere.gt.school/"
+               data-event="door_click" data-school="anywhere" data-placement="panel">Learn more
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.58058 12.4194L12.4194 3.58055M12.4194 12.4194V3.58055L3.58058 3.58055" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <span class="panel__button">Apply Now</span>
+            </a>
+            <a class="panel__button" href="https://apply.gt.school/?school=anywhere"
+               data-event="cta_apply_click" data-school="anywhere" data-placement="panel">Apply Now</a>
           </span>
           <span class="panel__overlay"></span>
-        </a>
+        </div>
 
       </div>
     </div>
