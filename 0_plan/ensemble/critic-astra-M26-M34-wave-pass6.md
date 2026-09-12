@@ -1,0 +1,7 @@
+**No. At HEAD `58f7b59`, two items are closed; one stale M26 sentence still blocks R1 closure.**
+
+1. **Reset specificity: closed in all six sheets.** `.board` contributes 1, `:has(...)` contributes 3, `.suffix` contributes 1, `[data-k]` contributes 1, and `b` contributes one element; `:where(...)` contributes zero: **(0,6,1)**. The subsequent show rule is also **(0,6,1)** and wins by source order. The selected Georgetown/Anywhere word reaches `translateY(0)`, the unselected word stays at `4px`, and resting `school` remains untranslated. The cascade agrees with your measurements.
+
+2. **M34 return rows: closed.** [RATIONALE.md:38](/Users/johnny/projects/gt-school/gt-anywhere-site-v2/0_plan/mockups/M34-the-tour/RATIONALE.md:38) explicitly covers `#s-school`; row 39 restricts the returning rise to targeted Georgetown or Anywhere.
+
+3. **M26 register/header: partially closed.** The malformed `index-timed.html` fragment is gone, and [the motion header:1](/Users/johnny/projects/gt-school/gt-anywhere-site-v2/0_plan/mockups/M26-the-mark/motion-interactive.css:1) says `M26`, not `M26-A`. But [DIRECTIONS.md:39](/Users/johnny/projects/gt-school/gt-anywhere-site-v2/0_plan/kb/DIRECTIONS.md:39) still says **“The A/B pair doubles the surface to review”**. That is the sole remaining closure defect.
