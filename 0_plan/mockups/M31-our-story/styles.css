@@ -1,0 +1,407 @@
+/* M31 "Our Story" — a school explains itself by telling how it came to exist.
+   Every colour, family, size, space, radius and duration resolves through var() from
+   ../shared/tokens-v2.css. Zero raw hex in this file. Layout-only locals (the page gutter, the
+   container cap, hairline weights, the 44px target floor, the mark height) are
+   declared as custom properties here and listed in RATIONALE.md "Departures". */
+
+:root {
+  --gutter: var(--space-5);          /* 24px page margin on phones */
+  --container: 72rem;                /* 1152px content cap */
+  --hair: 1px;
+  --rule-accent: 3px;                /* the brief's 3px accent rule */
+  --target: 2.75rem;                 /* 44px interactive floor */
+  --mark-h: 1.6875rem;               /* 27px, K12 V2 phone floor */
+  --glyph: 1rem;
+  --track: .07em;                    /* label tracking */
+  --track-btn: .04em;                /* button tracking: measured, 0.07em wraps the Georgetown CTA at 375 */
+  --header-h: 3.5rem;                /* the 56px header row */
+  /* The page's reading column. --measure-prose (65ch of Inter Tight) measures 82 characters of this
+     copy at every width from 768, above K1 CP7's 75 ceiling; 55ch measures 68 to 70. Declared as a
+     departure from RF-55: every multi-line prose block on the page takes it. --measure-prose is
+     left declared in tokens-v2.css and unused here. */
+  --measure-read: 55ch;
+
+  /* Band padding. One rule reads these, so a band sets its own rhythm by re-declaring them
+     rather than by out-specifying the shared rule. */
+  --pad-top: var(--space-8);
+  --pad-bot: var(--space-8);
+
+  --ground: var(--color-bg);
+  --ink: var(--color-text);
+  --muted: var(--color-text-muted);
+  --rule: var(--color-border-strong);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--leading-prose);
+  overflow-wrap: break-word;
+}
+
+img { max-width: 100%; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- Bands, grounds and the shared measure ---------- */
+.band { background: var(--ground); color: var(--ink); }
+.band--bg { --ground: var(--color-bg); --ink: var(--color-text); --muted: var(--color-text-muted); --rule: var(--color-border-strong); }
+.band--surface { --ground: var(--color-surface); --ink: var(--color-text); --muted: var(--color-text-muted); --rule: var(--color-border-strong); }
+.band--navy { --ground: var(--color-navy); --ink: var(--color-on-navy); --muted: var(--color-text-muted-on-dark); --rule: var(--color-text-muted-on-dark); }
+
+/* A hairline only where the ground actually changes between two light bands. The first screen and
+   the story share one cream surface with no rule between them, so the narrative reads continuous. */
+main > .band--bg + .band--surface,
+main > .band--surface + .band--bg { border-block-start: var(--hair) solid var(--rule); }
+
+.inner { width: min(100% - var(--gutter) * 2, var(--container)); margin-inline: auto; }
+main > .band > .inner { padding-block: var(--pad-top) var(--pad-bot); }
+.col { max-width: var(--measure-read); }
+
+/* ---------- Type roles (CONTRACT section 3) ---------- */
+h1 {
+  font-family: var(--font-serif); font-weight: 400;
+  font-size: var(--text-3xl); line-height: var(--leading-tight);
+  max-width: 35ch; text-wrap: balance;
+}
+.h1-b, .story-open { display: none; }
+
+/* Headline variant B — restore copy.md's fixed umbrella sentence as the h1 and move the story's
+   own first sentence to the head of the story. Uncomment the next line only. */
+/* .h1-a { display: none; } .h1-b, .story-open { display: block; } */
+
+.provenance { font-size: var(--text-sm); color: var(--muted); line-height: var(--leading-body); }
+
+.eyebrow, .door-label, .mv-num, .run-in {
+  font-family: var(--font-sans); font-weight: 500;
+  font-size: var(--text-xs); line-height: var(--leading-body);
+  text-transform: uppercase; letter-spacing: var(--track); color: var(--muted);
+}
+.mv-num { font-family: var(--font-mono); font-weight: 600; }
+
+.band-title {
+  font-family: var(--font-serif); font-size: var(--text-2xl);
+  line-height: var(--leading-tight); margin-block-start: var(--space-3); max-width: 24ch;
+}
+.lede { margin-block-start: var(--space-4); max-width: var(--measure-read); }
+
+.text-link { color: inherit; text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: .16em; }
+.text-link:hover { text-decoration-color: currentColor; }
+.arrow { font-family: var(--font-mono); }
+
+/* ---------- Buttons: DD-46 fill, DD-47 one uniform corner ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3); min-height: var(--target); max-width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: var(--hair) solid transparent; border-radius: var(--radius-md);
+  background: var(--color-navy); color: var(--color-on-navy);
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
+  line-height: var(--leading-body); text-transform: uppercase; letter-spacing: var(--track-btn);
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.btn:hover { text-decoration: underline; text-underline-offset: .2em; }
+.btn--on-navy { background: var(--color-on-navy); color: var(--color-navy); }
+
+/* ---------- Focus (K3 section 5d, CONTRACT section 4) ---------- */
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.band--navy :focus-visible, .mark-plate--navy:focus-visible {
+  outline: 2px solid var(--color-navy); outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--color-on-navy);
+}
+
+.skip-link {
+  position: absolute; top: -999px; left: var(--space-4); z-index: 10;
+  display: inline-flex; align-items: center; min-height: var(--target);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg); color: var(--color-text);
+  border: var(--hair) solid var(--color-navy); border-radius: var(--radius-md);
+  font-family: var(--font-mono); font-size: var(--text-btn); text-decoration: none;
+}
+.skip-link:focus { top: var(--space-3); }
+
+/* ---------- Header: a 56px row, its hairline drawn as a shadow so it adds no height ---------- */
+.site-header { box-shadow: 0 var(--hair) 0 var(--color-border-strong); position: relative; z-index: 1; }
+.header-body {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-2) var(--space-4); min-height: var(--header-h);
+}
+.lockup { display: inline-flex; align-items: center; min-height: var(--target); }
+.lockup img, .mark-plate img { height: var(--mark-h); width: auto; display: block; }
+.utility { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+.utility a {
+  display: inline-flex; align-items: center; min-height: var(--target);
+  font-size: var(--text-sm); color: var(--color-text); text-decoration: underline;
+  text-decoration-color: var(--color-border-strong); text-underline-offset: .16em;
+}
+.utility a:hover { text-decoration-color: currentColor; }
+/* Measured: below 412px the two utility links cannot sit beside a 27px mark, so the bar wraps to
+   two 44px rows and stands 92px. Recorded in the fold table rather than hidden. */
+
+/* ---------- First screen ----------
+   No stretched hero: the screen is exactly as tall as its content, and the story starts directly
+   under the accent rule. On a laptop that puts the first movement inside the first screen, which is
+   the argument of this direction rather than an accident of the fold rule. */
+.first { --pad-top: var(--space-5); --pad-bot: var(--space-5); }
+.first-body > .provenance { margin-block-start: var(--space-4); max-width: var(--measure-read); }
+.first-body > .doors { margin-block-start: var(--space-6); }
+.first-body > .seam { padding-block-start: var(--space-6); max-width: var(--measure-read); }
+
+.compare-lead { font-size: var(--text-sm); }
+.accent-rule { display: block; width: 100%; height: var(--rule-accent); background: var(--color-accent); margin-block-start: var(--space-4); }
+
+/* ---------- Doors ---------- */
+.doors { display: grid; gap: var(--space-6); }
+.door { display: flex; flex-direction: column; align-items: flex-start; }
+.door-label { display: flex; align-items: center; gap: var(--space-3); }
+.glyph { width: var(--glyph); height: var(--glyph); flex: none; }
+.door-name { font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); margin-block-start: var(--space-3); }
+.door-line { margin-block-start: var(--space-3); max-width: var(--measure-read); }
+.door-cta, .doors--repeat .btn { margin-block-start: var(--space-4); }
+.run-in { display: none; }
+.doors--repeat { margin-block-start: var(--space-7); }
+
+/* ---------- The story: five movements, one column, one ground ---------- */
+.story { --pad-top: var(--space-5); }
+/* The rhythm between movements is built from runs of at most one space step, because the fold test
+   asks for ink inside the bottom 24px of every row: a paragraph, then 24 to the rule, 24 to the
+   numeral, 8 to the heading. Three pieces of ink where a single 80px gap would read as the end. */
+.mv { --mv-pad: var(--space-5); position: relative; padding-block-start: var(--mv-pad); border-block-start: var(--hair) solid var(--color-border); }
+.mv:first-of-type { --mv-pad: 0; border-block-start: 0; }
+.mv + .mv { margin-block-start: var(--space-5); }
+.mv-head { font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); margin-block-start: var(--space-3); }
+.mv-head + p, .mv > p + p { margin-block-start: var(--space-4); }
+.mv > p { max-width: var(--measure-read); }
+.accent-mark { display: block; width: var(--space-7); height: var(--rule-accent); background: var(--color-accent); margin-block-end: var(--space-4); }
+.story-open {
+  font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-tight);
+  margin-block-end: var(--space-7); max-width: var(--measure-read);
+}
+
+/* ---------- Comparison ---------- */
+.ctable { width: 100%; max-width: var(--measure-read); border-collapse: collapse; margin-block-start: var(--space-6); text-align: left; }
+.ctable caption { text-align: left; font-size: var(--text-sm); color: var(--muted); padding-block-end: var(--space-4); }
+.ctable th, .ctable td { vertical-align: top; }
+.ctable thead th { font-family: var(--font-serif); font-size: var(--text-md); font-weight: 400; }
+.ctable tbody th { font-family: var(--font-sans); font-weight: 500; font-size: var(--text-sm); line-height: var(--leading-body); color: var(--ink); }
+.ctable td { font-size: var(--text-base); line-height: var(--leading-prose); }
+
+/* Below the measured breakpoint the table is stacked blocks, the school name labelling each cell */
+.ctable, .ctable thead, .ctable tbody, .ctable tr, .ctable th, .ctable td { display: block; }
+.ctable thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.ctable tbody tr { padding-block: var(--space-5); border-block-start: var(--hair) solid var(--color-border); }
+.ctable tbody tr:first-child { border-block-start: 0; }
+.ctable td { margin-block-start: var(--space-3); }
+.ctable td::before {
+  content: attr(data-label); display: block;
+  font-family: var(--font-sans); font-weight: 500; font-size: var(--text-xs);
+  text-transform: uppercase; letter-spacing: var(--track); color: var(--muted);
+  margin-block-end: var(--space-2);
+}
+
+.sources { margin-block-start: var(--space-5); font-size: var(--text-xs); color: var(--muted); line-height: var(--leading-prose); max-width: var(--measure-read); }
+.tefa { margin-block-start: var(--space-7); padding-block-start: var(--space-5); border-block-start: var(--hair) solid var(--rule); max-width: var(--measure-read); }
+.tefa h3 { font-family: var(--font-serif); font-size: var(--text-lg); }
+.tefa p { margin-block-start: var(--space-3); }
+
+/* ---------- Proof, steps, connect, families ---------- */
+.facts { margin-block-start: var(--space-6); display: grid; max-width: var(--measure-read); }
+.facts li { padding-block: var(--space-4); border-block-start: var(--hair) solid var(--color-border); }
+.facts li:first-child { border-block-start: 0; padding-block-start: 0; }
+
+.steps { margin-block-start: var(--space-6); counter-reset: step; max-width: var(--measure-read); }
+.steps li { counter-increment: step; display: flex; gap: var(--space-4); padding-block: var(--space-4); border-block-start: var(--hair) solid var(--rule); }
+.steps li:first-child { border-block-start: 0; padding-block-start: 0; }
+.steps li::before {
+  content: counter(step, upper-roman); flex: none; min-width: 3ch;
+  font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs);
+  line-height: var(--leading-prose); letter-spacing: var(--track); color: var(--muted);
+}
+.apply { margin-block-start: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.apply li { min-width: 0; max-width: 100%; }
+
+.connect { margin-block-start: var(--space-6); max-width: var(--measure-read); }
+.connect li { border-block-start: var(--hair) solid var(--rule); }
+.connect li:first-child { border-block-start: 0; }
+.connect a {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  min-height: var(--target); padding-block: var(--space-3); font-size: var(--text-md);
+  color: inherit; text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: .16em;
+}
+.connect a:hover { text-decoration-color: currentColor; }
+.families-body { display: grid; gap: var(--space-6); }
+
+/* ---------- Footer ---------- */
+.site-footer .inner { padding-block: var(--space-8); }
+.footer-body { display: grid; gap: var(--space-7); }
+.footer-facts { max-width: var(--measure-read); font-size: var(--text-sm); }
+.footer-contact { margin-block-start: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); color: var(--ink); }
+.footer-links { display: grid; }
+.footer-links a {
+  display: inline-flex; align-items: center; min-height: var(--target);
+  color: var(--color-on-navy); font-size: var(--text-sm); text-decoration: underline;
+  text-decoration-color: var(--color-text-muted-on-dark); text-underline-offset: .16em;
+}
+.footer-links a:hover { text-decoration-color: currentColor; }
+.footer-marks { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+.mark-plate { display: inline-flex; align-items: center; min-height: var(--target); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); }
+.mark-plate--light { background: var(--color-bg); }
+.mark-plate--navy { background: var(--color-navy); }
+
+/* ---------- Compact door rule (CONTRACT section 2), measured one step wider ----------
+   The contract sets it under 700px tall. Measured here at 414 by 715 and 430 by 739 the standard
+   form finishes within 21 to 40px of the bottom edge with only a decorative rule below it, so the
+   rule runs to 767px tall: both door lines follow the second CTA and a sentence is what the edge cuts. */
+@media (max-width: 767px) and (max-height: 767px) {
+  .first { --pad-top: var(--space-4); --pad-bot: var(--space-4); }
+  .doors { display: flex; flex-direction: column; gap: var(--space-4); }
+  .first-body > .doors { margin-block-start: var(--space-5); }
+  .door { display: contents; }
+  .door:nth-child(1) .door-label { order: 1; }
+  .door:nth-child(1) .door-name  { order: 2; }
+  .door:nth-child(1) .door-cta   { order: 3; }
+  .door:nth-child(2) .door-label { order: 4; }
+  .door:nth-child(2) .door-name  { order: 5; }
+  .door:nth-child(2) .door-cta   { order: 6; }
+  .door-line { order: 7; margin-block-start: var(--space-2); }
+  .door-name { margin-block-start: var(--space-2); }
+  .door-cta { margin-block-start: var(--space-3); }
+  .door:nth-child(1) .door-cta { margin-block-end: var(--space-4); }
+  .run-in { display: inline; }
+  .first-body > .seam { padding-block-start: var(--space-4); }
+}
+
+/* ---------- Phone landscape: the contract's V10 recipe ---------- */
+@media (max-height: 400px) and (min-width: 600px) {
+  .first { --pad-top: var(--space-3); --pad-bot: var(--space-3); }
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-6); }
+  .first-body > .doors { margin-block-start: var(--space-3); }
+  .door { display: contents; }
+  .door:nth-child(1) .door-label { grid-column: 1; grid-row: 1; order: 0; }
+  .door:nth-child(1) .door-name  { grid-column: 1; grid-row: 2; order: 0; }
+  .door:nth-child(1) .door-cta   { grid-column: 1; grid-row: 3; order: 0; margin: 0; }
+  .door:nth-child(1) .door-line  { grid-column: 1; grid-row: 4; order: 0; }
+  .door:nth-child(2) .door-label { grid-column: 2; grid-row: 1; order: 0; }
+  .door:nth-child(2) .door-name  { grid-column: 2; grid-row: 2; order: 0; }
+  .door:nth-child(2) .door-cta   { grid-column: 2; grid-row: 3; order: 0; margin: 0; }
+  .door:nth-child(2) .door-line  { grid-column: 2; grid-row: 4; order: 0; }
+  .door-name { margin-block-start: var(--space-2); font-size: var(--text-md); }
+  .door-line { margin-block-start: var(--space-2); }
+  .run-in { display: none; }
+  .first-body > .seam { padding-block-start: var(--space-3); }
+}
+
+/* ---------- 768 and up ---------- */
+@media (min-width: 768px) {
+  :root { --gutter: var(--space-6); --pad-top: var(--space-9); --pad-bot: var(--space-9); --mark-h: 2rem; }
+  .first { --pad-top: var(--space-6); --pad-bot: var(--space-6); }
+  .facts { grid-template-columns: 1fr 1fr; gap: 0 var(--space-7); max-width: none; }
+  .facts li:nth-child(2) { border-block-start: 0; padding-block-start: 0; }
+  .families-body { grid-template-columns: 1fr auto; align-items: end; gap: var(--space-7); }
+  .footer-body { grid-template-columns: 1.4fr 1fr; gap: var(--space-8) var(--space-7); }
+  .footer-marks { grid-column: 1 / -1; }
+}
+
+/* ---------- 940 and up: the two doors side by side ----------
+   Measured: at 768 and 834 the two columns are 302 and 327px and the Georgetown CTA (330px set)
+   wraps to two lines, so portrait tablets keep the stacked doors and the split starts at 940,
+   where the columns reach 347px. The two doors share one grid, so label, name, line and CTA sit on
+   common rows and the CTAs start on one line whatever the two lines' lengths. A third campus needs
+   a third column and one more nth-child rule (DD-21, cost stated in the rationale). */
+@media (min-width: 940px) {
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-7); }
+  .door { display: contents; }
+  .door:nth-child(1) > * { grid-column: 1; }
+  .door:nth-child(2) > * { grid-column: 2; }
+  .door-label { grid-row: 1; }
+  .door-name { grid-row: 2; }
+  .door-line { grid-row: 3; }
+  .door-cta { grid-row: 4; justify-self: start; align-self: start; }
+  .doors--repeat .door-label { grid-row: 1; }
+  .doors--repeat .btn { grid-row: 2; justify-self: start; }
+}
+
+/* ---------- 1024 and up: the table takes its two-column form (R6, measured) ---------- */
+@media (min-width: 1024px) {
+  :root { --gutter: var(--space-7); --pad-top: var(--space-10); --pad-bot: var(--space-10); }
+  .first { --pad-top: var(--space-7); --pad-bot: var(--space-7); }
+  .first-body > .doors { margin-block-start: var(--space-7); }
+  .ctable { display: table; width: 100%; max-width: none; }
+  .ctable tbody { display: table-row-group; }
+  .ctable thead { display: table-header-group; position: static; width: auto; height: auto; clip-path: none; }
+  .ctable tr { display: table-row; }
+  .ctable th, .ctable td { display: table-cell; padding: var(--space-5) var(--space-6) var(--space-5) 0; border-block-start: var(--hair) solid var(--color-border); }
+  .ctable thead th { border-block-start: 0; padding-block-start: 0; }
+  .ctable tbody tr { padding: 0; border: 0; }
+  .ctable tbody th { width: 22%; }
+  .ctable td { width: 39%; margin: 0; }
+  .ctable td::before { display: none; }
+  .doors--repeat { grid-template-columns: auto auto; justify-content: start; gap: var(--space-8); }
+  .footer-body { grid-template-columns: 1.3fr .8fr auto; align-items: start; }
+  .footer-marks { grid-column: auto; flex-direction: column; align-items: flex-start; }
+}
+
+/* Short laptop rooms (1366 by 648, and 1024 by 576, which is 1280 by 720 at 125 per cent). Measured:
+   with the roomy seam the first screen finishes 45px clear of the 576px edge and the screen reads as
+   finished, so the seam closes to one space step on both sides of the band boundary. */
+@media (min-width: 1024px) and (max-height: 700px) {
+  .first { --pad-bot: var(--space-3); }
+  .story { --pad-top: var(--space-3); }
+}
+
+/* ---------- Motion: nothing animates; every state is visible at rest (MN-16, R8) ---------- */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: var(--duration-none) !important;
+    animation-duration: var(--duration-none) !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Forced colours (K3 F38). Last in the file by intent ---------- */
+@media (forced-colors: active) {
+  body { background: Canvas; color: CanvasText; }
+  .band, .band--bg, .band--surface, .band--navy {
+    --ground: Canvas; --ink: CanvasText; --muted: CanvasText; --rule: CanvasText;
+    background: Canvas; color: CanvasText;
+  }
+  .site-header { box-shadow: 0 var(--hair) 0 CanvasText; }
+  .accent-rule, .accent-mark { background: CanvasText; }
+  .btn, .btn--on-navy { background: ButtonFace; color: ButtonText; border: var(--hair) solid ButtonText; }
+  .mv, .facts li, .steps li, .connect li, .tefa, .ctable th, .ctable td, .ctable tbody tr,
+  main > .band--bg + .band--surface, main > .band--surface + .band--bg { border-color: CanvasText; }
+  .provenance, .eyebrow, .door-label, .mv-num, .run-in, .sources, .footer-facts,
+  .footer-contact, .ctable caption, .ctable td::before, .steps li::before { color: CanvasText; }
+  .footer-links a, .connect a, .utility a, .text-link { text-decoration-color: CanvasText; }
+  :focus-visible, .band--navy :focus-visible { outline: 3px solid CanvasText; outline-offset: 2px; box-shadow: none; }
+}
+
+/* Both wordmarks are two-colour artwork, so each keeps its own colours and its own ground through
+   forced colours, keyed on the file rather than on a wrapper: the GT School mark is navy lettering
+   and disappears on a forced black ground, the GT Anywhere mark is part near-white and loses its
+   second word on a forced white one. A plate that keeps its ground also keeps its ring, and the
+   user agent's CanvasText ring measures 1.39:1 against retained navy, so each ring is restated
+   against the ground its plate actually keeps. */
+@media (forced-colors: active) {
+  img[src$="gt-school-logo-h.svg"] { forced-color-adjust: none; background: var(--color-bg); }
+  img[src$="gt-anywhere-logo-h.svg"] { forced-color-adjust: none; background: var(--color-navy); }
+  .lockup, .mark-plate--light { forced-color-adjust: none; background: var(--color-bg); border: var(--hair) solid var(--color-navy); }
+  .lockup:focus-visible, .mark-plate--light:focus-visible { outline-color: var(--color-navy); }
+  .mark-plate--navy { forced-color-adjust: none; background: var(--color-navy); border: var(--hair) solid var(--color-on-navy); }
+  .mark-plate--navy:focus-visible { outline-color: var(--color-on-navy); }
+}
