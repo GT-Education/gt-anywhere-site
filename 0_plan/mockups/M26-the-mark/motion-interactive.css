@@ -1,4 +1,4 @@
-/* M26-A: the suffix swap is driven by the parent, not by a timer.
+/* M26: the suffix swap is driven by the parent, not by a timer.
    D-031 move V11, confirmed by Johnny 2026-09-11. Transform and opacity only.
 
    RESOLUTION ORDER matters: hover must beat keyboard focus. Without the blanket reset below, a
@@ -26,8 +26,11 @@
      rule return by fading without the declared 4px rise (Astra pass 3). */
   .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; }
   /* The transform reset is restricted to the school words. Applying it to `school` as well made the
-     resting word RISE on return, contradicting its declared opacity-only fade (Astra pass 4). */
-  .board:has(.door .door-cta:hover) .suffix b[data-k]:not([data-k="school"]) { transform: translateY(4px); }
+     resting word RISE on return, contradicting its declared opacity-only fade (Astra pass 4).
+     :where() keeps the restriction at zero specificity, so this stays (0,6,1) and the show rule below
+     still wins for the selected word. A bare :not() raised it to (0,7,1) and left the chosen word
+     stuck 4px low (Astra pass 5). */
+  .board:has(.door .door-cta:hover) .suffix b[data-k]:where(:not([data-k="school"])) { transform: translateY(4px); }
   .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="georgetown"],
   .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="anywhere"] {
     opacity: 1; transform: translateY(0);

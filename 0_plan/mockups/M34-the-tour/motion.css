@@ -18,8 +18,9 @@
 /* Focus clears every word first, so it always wins over whichever step was left showing. */
 /* Reset transform as well as opacity, so a word held by :target cannot return by fading alone. */
 .board:has(.door .door-cta:focus-visible) .suffix b[data-k] { opacity: 0; }
-/* Restricted to the school words, so the resting word fades without moving. */
-.board:has(.door .door-cta:focus-visible) .suffix b[data-k]:not([data-k="school"]) { transform: translateY(4px); }
+/* Restricted to the school words so the resting word fades without moving; :where() keeps the
+   restriction at zero specificity so the show rule below still raises the selected word. */
+.board:has(.door .door-cta:focus-visible) .suffix b[data-k]:where(:not([data-k="school"])) { transform: translateY(4px); }
 .board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
 .board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
   opacity: 1; transform: translateY(0);

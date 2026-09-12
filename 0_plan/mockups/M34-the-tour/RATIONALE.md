@@ -35,8 +35,8 @@ The h1 is the umbrella sentence from `copy.md` section 1, verbatim and unanimate
 | Beat | Trigger | Property | Duration | Easing | Reduced motion |
 |---|---|---|---|---|---|
 | Suffix swap to a school | `:target` via a dot control, or `:focus-visible` on a door CTA, at any width | `opacity` 0 to 1 **and** `translateY(4px)` to 0 | `--duration-base` 200ms | `--ease-out` | `--duration-none`; the state still changes |
-| Suffix returning to `school` | focus ending with no step active | `opacity` only — the resting word carries no translation | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
-| Suffix returning to an active step | focus ending while a step is targeted | `opacity` **and** `translateY(4px)` to 0 — a targeted word rises like any school word | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
+| Suffix returning to `school` | focus ending with no step active, or with `#s-school` targeted | `opacity` only — the resting word carries no translation | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
+| Suffix returning to a targeted Georgetown or Anywhere |  focus ending while `#s-georgetown` or `#s-anywhere` is targeted | `opacity` **and** `translateY(4px)` to 0 — a targeted word rises like any school word | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
 | Active step dot | `:target` | `transform: scale(1.4)` over 200ms. The navy fill is a colour change and is **instant**, per the vocabulary | `--duration-base` 200ms (scale only) | `--ease-out` | `--duration-none` |
 
 This board has **no hover swap** by design: adding one would duplicate M26 and blur the comparison it exists to make. The dot controls are hidden at or below 760px tall, where keyboard focus remains the route.
