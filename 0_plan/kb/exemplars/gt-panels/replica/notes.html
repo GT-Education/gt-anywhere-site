@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>How the two-door panel was rebuilt</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--ground); }
+  .doc { max-width: 74ch; margin: 0 auto; padding: 120px 24px 80px;
+         font: 16px/1.65 "Inter Tight", Arial, sans-serif; color: rgb(0,17,23); }
+  .doc h1 { font-family: Literata, Georgia, serif; font-weight: 300; letter-spacing: -.02em;
+            font-size: 34px; line-height: 1.15; margin: 0 0 8px; }
+  .doc .lede { color: #5b5b5b; margin: 0 0 32px; }
+  .doc h2 { font-family: Literata, Georgia, serif; font-weight: 400; font-size: 21px;
+            margin: 40px 0 10px; }
+  .doc p { margin: 0 0 14px; }
+  .doc table { border-collapse: collapse; width: 100%; margin: 8px 0 20px; font-size: 15px; }
+  .doc th, .doc td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #cac6c4; vertical-align: top; }
+  .doc th { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #5b5b5b; font-weight: 600; }
+  .doc td.n { font-family: Inconsolata, ui-monospace, monospace; white-space: nowrap; }
+  .doc a { color: #a5501a; }
+  .doc .back { display: inline-block; margin-bottom: 28px; font-family: Inconsolata, ui-monospace, monospace;
+               font-size: 14px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="doc">
+  <a class="back" href="./">&larr; Back to the panel</a>
+  <h1>How the two-door panel was rebuilt</h1>
+  <p class="lede">A record of what was measured, what was copied, what was changed, and what is still
+  unresolved. The panel itself is on the previous page with nothing overlaid on it.</p>
+
+  <h2>Measured, not redrawn</h2>
+  <p>The component at the foot of gt.school/about-us was fetched as text, served from a local address
+  and probed in a browser. Production was never opened in a browser, so no analytics beacon fired.
+  Every figure below came from that probe and was checked back against the rebuild.</p>
+  <table>
+    <thead><tr><th>Object</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td>Navy frame</td><td class="n">1360 &times; 720, 12px radius, 24px padding, 24px gap</td></tr>
+      <tr><td>Panel at rest</td><td class="n">644 &times; 672, 8px radius, no padding of its own</td></tr>
+      <tr><td>Panel on hover</td><td class="n">773, against the sibling's 515</td></tr>
+      <tr><td>Prose reveal</td><td class="n">0 &rarr; 216px, reaching full height at 317ms</td></tr>
+      <tr><td>Blur overlay</td><td class="n">navy at 30 per cent, 5px backdrop blur, opacity 0 &rarr; 1</td></tr>
+      <tr><td>Button</td><td class="n">104 &times; 40, navy &rarr; accent orange</td></tr>
+      <tr><td>Headline</td><td class="n">Literata 32/36.8 at weight 300; second line italic at 400</td></tr>
+      <tr><td>Header bar</td><td class="n">1360 &times; 64 white, 12px radius; logo 137 &times; 32</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Three faults only measurement would have caught</h2>
+  <p>The font import did not resolve in this environment, so the monospace fell back to a wider face
+  and the button came out 119px against the original's 104. The faces are now served from the page's
+  own folder.</p>
+  <p>A flex item will not shrink below its own content width unless told to, which floored the
+  unhovered panel.</p>
+  <p>And 24 pixels of panel padding, which I invented, silently floored the layout, because a zero
+  flex basis still cannot go below a box's own padding. That alone was the difference between a
+  763/525 split and the correct 773/515, and it is why the left panel widened less than the right in
+  an earlier published version. The original panel carries no padding at all.</p>
+
+  <h2>What is copied from the live page, and is not a proposal</h2>
+  <p>The photographs show identifiable children. Our own mocks use none, pending written permissions.
+  The right-hand paragraph carries the learning-speed multiple, which our own decision keeps off any
+  landing surface because the figure is unverified. Both are what the live page says today.</p>
+
+  <h2>What was changed on purpose</h2>
+  <p>Each panel names its school, so the campus reads as GT Georgetown rather than only GT School.
+  Each panel carries both a <i>Learn more</i> and an <i>Apply now</i>, where the original gives one
+  action to each side. The estate has no precedent for two actions on a single panel, so the pairing
+  follows its own header: an outlined secondary beside a filled primary. On a photograph the outline
+  is white rather than the header's warm grey, and that is the only value on the page not taken from
+  the source.</p>
+  <p>Both panels keep an identical construction, because ranking the two doors is the one thing this
+  component must not do.</p>
+  <p>The original reveals on mouse hover only and cannot be reached from a keyboard. This responds to
+  focus as well, and holds still under reduced motion.</p>
+
+  <h2>Open</h2>
+  <p>The right panel's label repeats its own logo. I kept the repetition rather than label only the
+  left, on the view that an asymmetry between the two doors costs more than a repeated word. That is
+  a judgement, not a measurement, and it is the easiest thing here to reverse.</p>
+</div>
+</body>
+</html>
