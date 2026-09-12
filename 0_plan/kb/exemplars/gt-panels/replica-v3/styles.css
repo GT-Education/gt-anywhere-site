@@ -1,0 +1,447 @@
+/* A faithful replica of the split-CTA panel pair at the foot of https://www.gt.school/about-us
+   Every value below was measured from the live component, served locally and probed in a browser;
+   nothing here is estimated. Source of each figure: ../SOURCE.md and ../../../..
+   The original drives its reveal with Webflow's JavaScript interactions. This replica uses CSS
+   :hover and :focus-within instead, so it needs no script and works from the keyboard, which the
+   original does not. That is the one deliberate difference and it is noted on the page. */
+
+/* The faces are served from this folder, not from a font host. The first version imported them from
+   Google and the import did not resolve here, so Inconsolata fell back to a 0.6em monospace and the
+   button measured 119px against the original's 104. Inconsolata's own advance is 0.5em, which is
+   what makes "Apply Now" exactly 72px. Local files make the metrics deterministic. */
+@font-face { font-family: "Literata"; font-weight: 300; font-style: normal;  font-display: block; src: url("font/Literata-Light.ttf") format("truetype"); }
+@font-face { font-family: "Literata"; font-weight: 400; font-style: italic;  font-display: block; src: url("font/Literata-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Inter Tight"; font-weight: 400; font-style: normal; font-display: block; src: url("font/InterTight-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Inconsolata"; font-weight: 400; font-style: normal; font-display: block; src: url("font/Inconsolata-Regular.ttf") format("truetype"); }
+
+:root {
+  --navy: rgb(0, 42, 58);          /* the frame, and the button at rest */
+  --accent: rgb(228, 139, 83);     /* the button on hover */
+  --ground: rgb(248, 232, 222);    /* the page behind the frame */
+  --gold-light: rgb(245, 221, 205);/* the second headline line */
+  --white: rgb(255, 255, 255);
+  --reveal: 300ms;                 /* measured: the prose reaches full height at 317ms */
+  --ease: cubic-bezier(.25, .1, .25, 1);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, sans-serif; }
+
+.section { padding: 40px 0; }
+.padding-global { padding: 0 40px; }
+.container-large { max-width: 1360px; margin: 0 auto; }
+
+/* .split-cta — measured 1360 x 720, navy, 24px padding, 12px radius, flex, 24px gap */
+.split-cta {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--navy);
+  min-block-size: 720px;
+}
+
+/* .split-cta_left / _right — measured 644 x 672 at rest, 8px radius, flex column, 12px gap.
+   The photograph carries a flat 50% black wash in the original's own background-image. */
+.panel {
+  position: relative;
+  flex: 1 1 0;
+  /* A flex item will not shrink below its own content width unless told to. Without this the
+     unhovered panel floored at 525px and the split came out 763/525 instead of the measured
+     773/515, because the right panel's min-content is 525. */
+  min-inline-size: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  /* The original panel carries NO padding of its own; the inner wrap supplies all of it. Adding 24px
+     here also floored the flex basis, because a zero basis still cannot go below the box's padding,
+     which is what made the hover split 763/525 instead of the measured 773/515. */
+  padding: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  color: var(--white);
+  text-decoration: none;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: flex-grow var(--reveal) var(--ease);
+}
+.panel--left  { background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("img/cta-left.webp"); }
+.panel--right { background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("img/cta-right.webp"); }
+
+/* Measured: the hovered panel goes 644 -> 773 and its sibling 644 -> 515, which is exactly 1.5 : 1
+   of the 1288px available inside the frame. */
+.panel:hover, .panel:focus-visible, .panel:focus-within { flex-grow: 1.5; }
+
+/* .split-cta_bg-overlay — navy at 30% with a 5px backdrop blur, opacity 0 -> 1 */
+.panel__overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: rgba(0, 42, 58, .3);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--reveal) var(--ease);
+}
+.panel:hover .panel__overlay, .panel:focus-within .panel__overlay { opacity: 1; }
+
+/* .split-cta_logo-wrap — measured 208 x 48; the mark keeps its own artwork */
+.panel__logo { position: relative; z-index: 2; height: 48px; }
+.panel__logo img { height: 100%; width: auto; display: block; }
+
+/* .split-cta_hidden-wrap — max-width 28rem, height 0 -> 216, opacity 0 -> 1, overflow hidden */
+/* Animated as grid rows rather than to a fixed height. The measured 216px is what the desktop
+   panel's own content comes to, but a hard 216 clipped the prose on a narrow panel, where the
+   same words need far more room. 0fr to 1fr animates to whatever the content actually is, so it
+   is exact at desktop and correct at every other width. */
+.panel__reveal {
+  position: relative; z-index: 2;
+  max-width: 28rem;
+  display: grid;
+  /* minmax(0, Nfr), not a bare Nfr: an fr track keeps an automatic minimum, so `0fr` alone still
+     floored at 64px here, which is the inner wrap's own vertical padding. */
+  grid-template-rows: minmax(0, 0fr);
+  opacity: 0;
+  transition: grid-template-rows var(--reveal) var(--ease), opacity var(--reveal) var(--ease);
+}
+.panel__reveal > * { min-block-size: 0; overflow: hidden; }
+.panel:hover .panel__reveal, .panel:focus-within .panel__reveal { grid-template-rows: minmax(0, 1fr); opacity: 1; }
+
+/* .split-cta_inner-wrap — padding 2rem 1.25rem, column, centred */
+.panel__inner { display: flex; flex-flow: column; align-items: center; gap: 24px; padding: 2rem 1.25rem; }
+
+/* h2 .heading-style-h3 — Literata 32/36.8 weight 300 white; the second line is weight 400 italic
+   in the estate's light gold */
+.panel__inner h2 {
+  margin: 0;
+  font-family: Literata, Georgia, serif;
+  font-size: 32px; line-height: 36.8px; font-weight: 300;
+  color: var(--white);
+}
+.panel__inner h2 .gold { display: block; font-weight: 400; font-style: italic; color: var(--gold-light); }
+.panel__inner p { margin: 0; font-size: 16px; line-height: 20.8px; color: var(--white); max-width: 408px; }
+
+/* .button — measured 104 x 40, 8px radius, Inconsolata 16/20 weight 500, uppercase,
+   navy at rest and accent orange on hover */
+.panel__button {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px;
+  block-size: 40px; padding: 0 16px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 16px; line-height: 20px; font-weight: 500;
+  text-transform: uppercase; white-space: nowrap;
+  transition: background-color var(--reveal) var(--ease);
+}
+.panel:hover .panel__button, .panel:focus-within .panel__button { background: var(--accent); }
+.panel__button svg { inline-size: 16px; block-size: 16px; }
+
+/* The two actions are real links to different destinations, so the panel is no longer one big
+   anchor: nesting anchors is invalid, and the original's single link could only ever go one place.
+   The original has no keyboard affordance at all; each action here is focusable and shows a ring. */
+.panel__button { text-decoration: none; }
+.panel__button:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .panel__overlay, .panel__reveal, .panel__button { transition-duration: 0s; }
+}
+
+/* An earlier version of this file said the original keeps both panels side by side at every width.
+   That was wrong, and it is what clipped the prose on a phone: measured, the original switches to
+   `flex-direction: column` below desktop and gives each panel the full width, 640 at 768 and 310 at
+   390. It also stops hiding the prose there — the reveal measures 216px at 768 and 239px at 390 with
+   nothing hovered — because a touch screen has no hover and a collapsed panel would be a dead end. */
+/* The original stacks below desktop and opens its prose there, since a touch screen has no hover.
+   Johnny's call is to keep the two doors side by side at every width instead, so the panels stay in
+   a row and the prose stays collapsed on a phone. That is deliberate: at 390 each panel is about
+   160px wide, and the same paragraph that fits a 644px panel cannot be set in 160px without
+   clipping, which is exactly what an earlier version did. Side by side, a phone reads the pair the
+   way the desktop does: two doors, each with its lockup and its two actions. */
+@media (max-width: 991px) {
+  .split-cta { gap: 16px; padding: 16px; min-block-size: 0; }
+  .panel { min-block-size: 439px; }
+  .panel__inner h2 { font-size: 22px; line-height: 26px; }
+  .panel__inner { padding: 1.25rem .75rem; gap: 14px; }
+  .panel__inner p { font-size: 14px; line-height: 19px; }
+}
+@media (max-width: 767px) {
+  .padding-global { padding: 0 16px; }
+  .split-cta { gap: 12px; padding: 12px; }
+  /* the lockup is sized by width here, not height: at 160px the panel is narrower than the mark's
+     own 5.45:1, so a fixed height pushed it past the panel edge and into the gutter */
+  .panel__logo { height: auto; inline-size: 86%; }
+  .panel__logo img { inline-size: 100%; height: auto; }
+  /* no prose at this width: it is collapsed and stays collapsed, rather than set in 160px */
+  .panel__reveal { display: none; }
+}
+
+/* --- the note above the replica, which is not part of the replicated component --- */
+.note { max-width: 1360px; margin: 0 auto 20px; padding: 16px 20px; border: 1px solid rgba(0,42,58,.35);
+  border-radius: 8px; background: rgba(255,255,255,.55); color: var(--navy); font-size: 14px; line-height: 1.55; }
+.note h1 { margin: 0 0 8px; font-family: Literata, Georgia, serif; font-size: 20px; font-weight: 400; letter-spacing: -.01em; }
+.note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+.note b { font-weight: 600; }
+
+/* ---------------------------------------------------------------------------
+   The site header, measured from the same page.
+   .navbar_wrap 1440x80 fixed, 16px top padding, transparent
+   .navbar      1360x64, white, 12px radius, padding 12px 12px 12px 16px
+   logo         137x32
+   nav links    Inter Tight 14/18.2 weight 500; the sibling school in accent orange
+   Book a tour  122x40, 8px radius, 1px solid rgb(202,198,196), navy label, no fill
+   Apply now    104x40, 8px radius, navy fill, white label
+   Both buttons carry a duplicate label 21px below that slides up on hover, which is the
+   estate's own construction rather than an invention.
+   --------------------------------------------------------------------------- */
+.navbar_wrap { position: fixed; inset: 0 0 auto; z-index: 10; padding-block-start: 16px; }
+.navbar_inner { padding: 0 40px; }
+.navbar {
+  display: flex; align-items: center; gap: 24px;
+  max-width: 1360px; margin: 0 auto; block-size: 64px;
+  padding: 12px 12px 12px 16px;
+  border-radius: 12px;
+  background: var(--white);
+}
+.navbar__logo { display: inline-flex; }
+.navbar__logo img { height: 32px; width: auto; display: block; }
+.navbar__menu { display: flex; align-items: center; gap: 24px; margin-inline-start: auto; }
+.navbar__menu a {
+  font-family: "Inter Tight", Arial, sans-serif; font-size: 14px; line-height: 18.2px; font-weight: 500;
+  color: rgb(0, 17, 23); text-decoration: none; white-space: nowrap;
+}
+.navbar__menu a[aria-haspopup]::after { content: " ⌄"; color: rgb(34, 34, 34); }
+.navbar__menu a.is-sibling { color: var(--accent); }
+.navbar__menu a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.navbar__actions { display: flex; align-items: center; gap: 8px; }
+.navbar__btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  block-size: 40px; padding: 8px 16px; border-radius: 8px;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 16px; line-height: 20px; font-weight: 500;
+  text-transform: uppercase; white-space: nowrap; text-decoration: none;
+}
+.navbar__btn--ghost { border: 1px solid rgb(202, 198, 196); color: var(--navy); background: transparent; }
+.navbar__btn--solid { background: var(--navy); color: var(--white); }
+.navbar__btn .swap { position: relative; display: block; block-size: 20px; overflow: hidden; }
+.navbar__btn .swap span { display: block; transition: transform var(--reveal) var(--ease); }
+.navbar__btn:hover .swap span { transform: translateY(-20px); }
+.navbar__btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
+/* the fixed bar sits over the page, so the first section clears it */
+.section { padding-block-start: 104px; }
+
+@media (max-width: 991px) {
+  .navbar__menu { display: none; }
+}
+@media (max-width: 767px) {
+  .navbar_wrap { padding-block-start: 8px; }
+  .navbar_inner { padding: 0 20px; }
+  .navbar { block-size: 48px; padding: 8px 8px 8px 12px; gap: 12px; border-radius: 10px; }
+  .navbar__logo img { height: 24px; }
+  .navbar__actions { margin-inline-start: auto; }
+  .navbar__btn { block-size: 32px; padding: 6px 10px; font-size: 13px; }
+  .navbar__btn--ghost { display: none; }
+  .section { padding-block-start: 72px; }
+}
+
+/* ---------------------------------------------------------------------------
+   Johnny's changes on 2026-09-12, which take this past a pure replica:
+   each panel names its school, and each carries both a Learn more and an Apply action.
+   The estate has no precedent for two actions on one panel, so the pairing follows its
+   own header instead: an outlined secondary beside a filled primary. On a photograph the
+   outline is white rather than the header's warm grey, which is the one value here not
+   taken from the source.
+   Both panels keep the identical construction, because the two doors must not be ranked.
+   --------------------------------------------------------------------------- */
+.panel__school {
+  position: relative; z-index: 2; margin: 0;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 14px; line-height: 20px; font-weight: 400;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-light);
+}
+.panel__actions { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px; }
+.panel__button--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .7);
+  transition: background-color var(--reveal) var(--ease), border-color var(--reveal) var(--ease);
+}
+/* the solid button turns accent on hover, as the source does; the outlined one must not, or the
+   two actions would read as equally weighted calls to apply */
+.panel:hover .panel__button--ghost, .panel:focus-within .panel__button--ghost {
+  background: rgba(255, 255, 255, .12); border-color: var(--white);
+}
+@media (max-width: 767px) {
+  .panel__school { font-size: 11px; letter-spacing: .08em; }
+  .panel__actions { flex-flow: column; gap: 6px; }
+  .panel__button--ghost svg { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   v2: a map on each panel.
+   The artwork is M10 "The Map"'s own, already built and gated in this programme: a Texas outline,
+   a complete United States outline, and Texas positioned inside it. M10's key established the
+   language this reuses — a pin for the campus, the filled country for the school, because the ink
+   that stands for reach should be a place rather than an empty outline.
+
+   The estate's own map was tried first and rejected on two grounds, both recorded in notes.html:
+   it carries per-state student counts baked in as outlined paths, which are figures with no
+   claims-register row; and unclipping it showed it contains only the western two thirds of the
+   country, with no east coast at all, so it cannot carry a claim about the whole country.
+
+   Nothing here states a number. Georgetown shows one pin in one state. Anywhere shows the country
+   filled with Texas picked out inside it, which says available across the country without
+   asserting how many students are where.
+   --------------------------------------------------------------------------- */
+/* Sized by height, not width. Texas is nearly square and the country is close to twice as wide as
+   it is tall, so equal widths made the state loom over the country and unbalanced the two panels.
+   Equal heights let the country be the wider shape, which is both better balanced and true. */
+.panel__map { position: relative; z-index: 2; margin: 4px 0 0; max-inline-size: 88%; }
+.panel__map svg { display: block; overflow: visible; block-size: 156px; inline-size: auto; max-inline-size: 100%; }
+/* These sit over a photograph, so the fill has to carry them on its own rather than rely on the
+   panel's wash. The first version at 14 per cent white vanished into a busy picture. */
+.panel__map .land {
+  fill: rgba(255, 255, 255, .82);
+  stroke: rgba(255, 255, 255, .95);
+  stroke-width: 1.5; vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 2px 10px rgba(0, 25, 35, .55));
+}
+/* The Anywhere map fills the whole country evenly and picks nothing out inside it: this panel's
+   claim is that the school reaches everywhere, and highlighting one state argues the opposite. */
+.panel__map .land--reach { fill: rgba(255, 255, 255, .82); }
+.panel__map .pin { fill: var(--accent); stroke: rgba(255,255,255,.9); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.panel__map .pin-halo { fill: var(--accent); opacity: .45; }
+
+.panel__where {
+  position: relative; z-index: 2; margin: 0;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 13px; line-height: 18px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+@media (max-width: 991px) { .panel__map svg { block-size: 112px; } }
+@media (max-width: 767px) {
+  /* the map replaces the prose at this width: it is the one thing that still reads at 160px */
+  .panel__map { margin-block-start: 2px; }
+  .panel__map svg { block-size: 84px; }
+  .panel__where { font-size: 10px; letter-spacing: .06em; }
+}
+
+/* ---------------------------------------------------------------------------
+   v2 header and entrance.
+   The white bar is gone: anywhere.gt.school carries its mark on the page's own ground rather than
+   on a plate, and the plate was the loudest object on a page whose subject is two photographs.
+   The mark is centred, which is also where the estate's own load animation starts it.
+
+   The entrance follows the estate's: the mark begins in the middle of the screen and rises. Where
+   the estate's then vanishes, this one lands in the header and stays, and the page fades in under
+   it, which is what Johnny asked for. It is CSS only — no script — so it needs no exception to the
+   escalated script decision, and it is one animation, not a sequence.
+
+   Two notes against it, recorded rather than hidden: the studio's own motion rules forbid animating
+   the largest element on the first screen before first paint, and this is a replica of the estate's
+   behaviour rather than a proposal for a landing page. Under reduced motion nothing moves and
+   nothing fades; the mark is in the header and the page is present from the first frame.
+   --------------------------------------------------------------------------- */
+.navbar_wrap { padding-block-start: 24px; }
+.navbar {
+  background: none;          /* the plate is what read as distracting */
+  padding: 0;
+  block-size: auto;
+  justify-content: center;   /* the mark sits on the page's centre line */
+}
+.navbar__logo img { height: 43px; }   /* 36 plus a fifth */
+
+/* Timed from the real thing. Sampling anywhere.gt.school's own loader frame by frame gives:
+   the mark fades up from 48px below over about 500ms, holds still for about 170ms, then leaves
+   upward over about 370ms, accelerating. The entry timing is kept; the hold is longer; the exit
+   becomes an arrival.
+
+   The page now opens blank. A hairline draws itself across the centre, the mark unfolds out of that
+   line, the line withdraws, the mark travels up into the header, "This is" is written in beside it,
+   and only then does the page arrive. */
+@keyframes seam-draw   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes seam-close  { from { transform: scaleX(1); opacity: 1; } to { transform: scaleX(.06); opacity: 0; } }
+/* the mark opens out of the line: clipped to nothing at the centre line, then to its full box */
+@keyframes mark-unfold {
+  from { clip-path: inset(50% 0 50% 0); opacity: 0; }
+  20%  { opacity: 1; }
+  to   { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+@keyframes mark-travel { from { transform: translateY(calc(50vh - 104px)) scale(2.1); } to { transform: translateY(0) scale(1); } }
+/* handwriting: the ink is revealed left to right, the way a line is written */
+@keyframes ink-write   { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -2% 0 0); } }
+@keyframes page-in     { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+.navbar { gap: 12px; position: relative; }
+
+/* the line the mark comes out of */
+.navbar__seam {
+  position: absolute; left: 50%; top: 50%;
+  inline-size: 232px; block-size: 1.5px; margin-inline-start: -116px;
+  background: var(--navy);
+  transform-origin: 50% 50%;
+  translate: 0 calc(50vh - 104px);
+  animation:
+    seam-draw  420ms cubic-bezier(.2, .75, .3, 1) both,
+    /* retreats as the mark opens, not after it: held to 900ms the line sat across the finished
+       wordmark and read as a strike through it */
+    seam-close 260ms cubic-bezier(.7, 0, .3, 1) 430ms both;
+}
+.navbar__logo {
+  transform-origin: 50% 50%;
+  will-change: transform, clip-path;
+  animation:
+    mark-unfold 480ms cubic-bezier(.2, .75, .3, 1) 420ms both,   /* opens after the line is drawn */
+    mark-travel 600ms cubic-bezier(.66, 0, .24, 1) 1600ms both;  /* 420 line + 480 open + 700 hold */
+}
+
+/* The italic already on this page: Literata italic, the same face and slope the two panel headlines
+   use for their second line. A cursive face was tried and dropped, being a fifth typeface on a page
+   that already carries three, where the page's own italic makes the same gesture. */
+.navbar__lede {
+  margin: 0; font-family: Literata, Georgia, serif;
+  font-size: 38px; line-height: 43px; font-weight: 400; font-style: italic; letter-spacing: -.01em;
+  color: var(--navy);
+}
+.lede__ink {
+  display: inline-block;
+  animation: ink-write 900ms cubic-bezier(.35, .5, .5, 1) 2250ms both;   /* written after the mark lands */
+}
+
+.page-in { animation: page-in 700ms var(--ease) 3050ms both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__logo, .page-in, .lede__ink, .navbar__seam { animation: none; }
+  .navbar__seam { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Map palette and markers, taken from the community map at apply.gt.school.
+   That map is a live Mapbox map, so its artwork cannot be lifted, but its stylesheet was read and
+   its palette is the brand's: accent orange #e48b53 is its most-used colour, with light gold
+   #ebba9b, navy #002a3a and a deeper navy #0A1E3C behind them. The land here takes the light gold
+   that both that map and the estate's own static map use, and the circles become the GT mark.
+   --------------------------------------------------------------------------- */
+.panel__map .land,
+.panel__map .land--reach {
+  fill: #ebba9b;
+  stroke: #ffffff;
+  stroke-width: 1.25; vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  /* the shadow stays on the land, which is large enough to carry a filter without softening;
+     it is the markers that could not, being a few pixels across */
+  filter: drop-shadow(0 2px 9px rgba(0, 25, 35, .45));
+}
+
+/* No disc and no filter. A drop-shadow rasterises the mark at its own tiny size, which is what made
+   the markers look blurry; removing it leaves clean vector edges. The mark is navy rather than the
+   brand orange for one measured reason: orange on this light-gold land is 1.48 to 1 and unreadable
+   at 8px, where navy is 8.64 to 1 and holds its shape. */
+.panel__map .marker { color: #002a3a; }       /* the community map's deep navy, so the mark reads on gold */

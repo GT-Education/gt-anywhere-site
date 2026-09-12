@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Two doors, two maps — v3 notes</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--ground); }
+  .doc { max-width: 74ch; margin: 0 auto; padding: 120px 24px 80px;
+         font: 16px/1.65 "Inter Tight", Arial, sans-serif; color: rgb(0,17,23); }
+  .doc h1 { font-family: Literata, Georgia, serif; font-weight: 300; letter-spacing: -.02em;
+            font-size: 34px; line-height: 1.15; margin: 0 0 8px; }
+  .doc .lede { color: #5b5b5b; margin: 0 0 32px; }
+  .doc h2 { font-family: Literata, Georgia, serif; font-weight: 400; font-size: 21px;
+            margin: 40px 0 10px; }
+  .doc p { margin: 0 0 14px; }
+  .doc table { border-collapse: collapse; width: 100%; margin: 8px 0 20px; font-size: 15px; }
+  .doc th, .doc td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #cac6c4; vertical-align: top; }
+  .doc th { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #5b5b5b; font-weight: 600; }
+  .doc td.n { font-family: Inconsolata, ui-monospace, monospace; white-space: nowrap; }
+  .doc a { color: #a5501a; }
+  .doc .back { display: inline-block; margin-bottom: 28px; font-family: Inconsolata, ui-monospace, monospace;
+               font-size: 14px; text-transform: uppercase; letter-spacing: .06em; text-decoration: none; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="doc">
+  <a class="back" href="./">&larr; Back to the panel</a>
+  <h1>Two doors, two maps &mdash; v3</h1>
+  <p class="lede">v3 of the two-door panel, forked from v2 on 2026-09-12 so v2 stays as it was. Same component, same measurements, with a map on each side:
+  one pin in one state for the campus, the whole country filled for the online school.</p>
+  <h2>The header, and the entrance</h2>
+  <p>The white bar is gone. anywhere.gt.school carries its mark on the page's own ground rather than
+  on a plate, and on a page whose subject is two photographs the plate was the loudest object. The
+  mark is centred, which is also where the estate's own loader starts it, and it is set a fifth
+  larger than the header it replaced.</p>
+  <p><b>The timing is measured, not invented.</b> Sampling the estate's own loader frame by frame
+  gives three movements: the mark fades up from 48px below over about 500ms, holds still for about
+  170ms, then leaves upward over about 370ms, accelerating.</p>
+  <table>
+    <thead><tr><th>Movement</th><th>anywhere.gt.school</th><th>Here</th></tr></thead>
+    <tbody>
+      <tr><td>Page opens</td><td class="n">mark already present</td><td class="n">blank</td></tr>
+      <tr><td>A hairline draws across the centre</td><td class="n">&mdash;</td><td class="n">420ms</td></tr>
+      <tr><td>The mark unfolds out of that line</td><td class="n">fades up 48px, ~500ms</td><td class="n">480ms, opening from the line</td></tr>
+      <tr><td>Hold at centre</td><td class="n">~170ms</td><td class="n">700ms, lengthened</td></tr>
+      <tr><td>Leaves the screen</td><td class="n">~370ms, accelerating</td><td class="n">replaced</td></tr>
+      <tr><td>Travels into the header</td><td class="n">&mdash;</td><td class="n">600ms</td></tr>
+      <tr><td>&ldquo;This is&rdquo; is written in</td><td class="n">&mdash;</td><td class="n">900ms, left to right</td></tr>
+      <tr><td>Page fades in</td><td class="n">&mdash;</td><td class="n">from 3050ms</td></tr>
+    </tbody>
+  </table>
+  <p>The page now opens blank. A hairline draws itself across the centre, the mark unfolds out of
+  that line, the line withdraws, and the mark holds before travelling up into the header. The
+  estate's entry timing is kept where it still applies; its exit becomes an arrival.</p>
+  <p>&ldquo;This is&rdquo; is then written in beside it. The effect is a left-to-right reveal of a
+  cursive face rather than a letter-by-letter pop, because that is how a hand actually lays ink
+  down: continuously, along the line. The face is Caveat, served from this folder rather than from a
+  font host, since a network import did not resolve reliably here and a fallback to a system script
+  face would have changed the letterforms.</p>
+  <p>It is CSS only, so no script is involved. Two notes against it, recorded rather than hidden:
+  the studio's motion rules forbid animating the largest element on the first screen before first
+  paint, and this is a replica of the estate's behaviour rather than a proposal for a landing page.
+  Under reduced motion nothing moves, nothing writes and nothing fades, verified as no transform,
+  full opacity and zero running animations.</p>
+
+  <h2>The markers</h2>
+  <p>The circles become the GT mark, and the palette comes from the community map at apply.gt.school.
+  That map is a live Mapbox map, so its artwork cannot be lifted, but its stylesheet was read: its
+  most-used colour is the accent orange, with light gold, navy and a deeper navy behind them. The
+  land here takes the light gold that both that map and the estate's static map use, and each marker is the GT mark alone, with no disc and no filter behind it. A drop-shadow was
+  tried and removed: it rasterises a mark that is only a few pixels across, which is what made the
+  markers look blurry. The land keeps its shadow, being large enough to carry one, and now takes a
+  thin white border.</p>
+  <p><b>The marks are navy, not orange, and that was a measurement rather than a preference.</b>
+  The brand orange on this light-gold land is <b>1.48 to 1</b>, which at eight pixels across is not
+  a logo but a smudge. Navy on the same land is <b>8.64 to 1</b> and holds the mark's shape.</p>
+  <p><b>The marker positions are illustrative, not data.</b> They are spread coast to coast to show
+  reach. The estate's own static map does carry real per-state figures, but it was rejected for the
+  reasons above and its geography stops before the east coast, so nothing here is derived from it.
+  If these should sit on real locations, the community map holds them and someone with access should
+  supply the list.</p>
+
+  <h2>Why these maps, and not the estate's own</h2>
+  <p>The estate has a map on anywhere.gt.school and it was tried first. It was rejected on two
+  grounds, both found by looking rather than assuming.</p>
+  <p>It carries per-state student counts baked in as outlined paths, eleven of them, reading 732,
+  438, 121, 87, 66, 52, 42, 33, 25, 12 and 8. Those are figures, and this programme allows no figure
+  on a new surface without a claims-register row. None of them has one, and their total sits oddly
+  beside the register's own wording about the school's size.</p>
+  <p>And unclipping it showed why it could not carry this claim anyway: the artwork contains only
+  the western two thirds of the country. There is no east coast in it at all. A map that stops at
+  Michigan cannot be the picture for <i>across the country</i>.</p>
+  <p>The maps used instead are this programme's own, already built and reviewed in the direction
+  called The Map: a Texas outline, a complete United States outline, and a pin placed at Georgetown.
+  That direction also set the language this reuses, a pin for the campus and the filled country for
+  the school, on the reasoning that the ink standing for reach should be a place rather than an
+  empty outline.</p>
+  <p><b>Nothing here states a number.</b> Georgetown shows one pin in one state. Anywhere shows the
+  country filled and picks nothing out inside it, because highlighting one state on the panel whose
+  whole claim is <i>everywhere</i> would argue the opposite.</p>
+
+  <h2>Measured, not redrawn</h2>
+  <p>The component at the foot of gt.school/about-us was fetched as text, served from a local address
+  and probed in a browser. Production was never opened in a browser, so no analytics beacon fired.
+  Every figure below came from that probe and was checked back against the rebuild.</p>
+  <table>
+    <thead><tr><th>Object</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td>Navy frame</td><td class="n">1360 &times; 720, 12px radius, 24px padding, 24px gap</td></tr>
+      <tr><td>Panel at rest</td><td class="n">644 &times; 672, 8px radius, no padding of its own</td></tr>
+      <tr><td>Panel on hover</td><td class="n">773, against the sibling's 515</td></tr>
+      <tr><td>Prose reveal</td><td class="n">0 &rarr; 216px, reaching full height at 317ms</td></tr>
+      <tr><td>Blur overlay</td><td class="n">navy at 30 per cent, 5px backdrop blur, opacity 0 &rarr; 1</td></tr>
+      <tr><td>Button</td><td class="n">104 &times; 40, navy &rarr; accent orange</td></tr>
+      <tr><td>Headline</td><td class="n">Literata 32/36.8 at weight 300; second line italic at 400</td></tr>
+      <tr><td>Header bar</td><td class="n">1360 &times; 64 white, 12px radius; logo 137 &times; 32</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Three faults only measurement would have caught</h2>
+  <p>The font import did not resolve in this environment, so the monospace fell back to a wider face
+  and the button came out 119px against the original's 104. The faces are now served from the page's
+  own folder.</p>
+  <p>A flex item will not shrink below its own content width unless told to, which floored the
+  unhovered panel.</p>
+  <p>And 24 pixels of panel padding, which I invented, silently floored the layout, because a zero
+  flex basis still cannot go below a box's own padding. That alone was the difference between a
+  763/525 split and the correct 773/515, and it is why the left panel widened less than the right in
+  an earlier published version. The original panel carries no padding at all.</p>
+
+  <h2>What is copied from the live page, and is not a proposal</h2>
+  <p>The photographs show identifiable children. Our own mocks use none, pending written permissions.
+  The right-hand paragraph carries the learning-speed multiple, which our own decision keeps off any
+  landing surface because the figure is unverified. Both are what the live page says today.</p>
+
+  <h2>What was changed on purpose</h2>
+  <p>Each panel carries its own school lockup, GT Georgetown on the left and GT Anywhere on the right,
+  so the campus reads as GT Georgetown rather than only GT School.
+  Each panel carries both a <i>Learn more</i> and an <i>Apply now</i>, where the original gives one
+  action to each side. The estate has no precedent for two actions on a single panel, so the pairing
+  follows its own header: an outlined secondary beside a filled primary. On a photograph the outline
+  is white rather than the header's warm grey, and that is the only value on the page not taken from
+  the source.</p>
+  <p>Both panels keep an identical construction, because ranking the two doors is the one thing this
+  component must not do.</p>
+  <p>The original reveals on mouse hover only and cannot be reached from a keyboard. This responds to
+  focus as well, and holds still under reduced motion.</p>
+
+  <h2>The lockups, and where they came from</h2>
+  <p>An earlier version set the school names as plain type under the GT School and GT Anywhere marks,
+  which left the right panel repeating its own logo. Johnny supplied the brand sheet carrying the two
+  sub-lockups, and they replace that type entirely, so the two doors are now exactly parallel.</p>
+  <p>Neither sub-lockup exists as an asset in this repository or on the live site, and both are drawn
+  as outlined paths rather than editable type, so neither could be retyped. They were lifted from the
+  brand sheet at full resolution and the flat navy dropped to transparency. The first attempt
+  un-composited the colour as well and over-brightened the orange to 255,151,87, because the brand
+  orange is not maximally distant from navy and dividing by that distance inflates it. The second
+  keeps every colour as painted and derives transparency from distance alone: the ink now measures
+  229,140,84, within one of the brand value.</p>
+  <p><b>Still open:</b> these are raster crops of a brand sheet, not vector artwork. They are sharp at
+  the size used here, but a production build should take the real vector files from whoever holds the
+  brand originals.</p>
+</div>
+</body>
+</html>

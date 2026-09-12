@@ -366,11 +366,6 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
    The page now opens blank. A hairline draws itself across the centre, the mark unfolds out of that
    line, the line withdraws, the mark travels up into the header, "This is" is written in beside it,
    and only then does the page arrive. */
-@font-face {
-  font-family: "Caveat"; font-style: normal; font-weight: 400; font-display: block;
-  src: url("font/Caveat.woff2") format("woff2");
-}
-
 @keyframes seam-draw   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes seam-close  { from { transform: scaleX(1); opacity: 1; } to { transform: scaleX(.06); opacity: 0; } }
 /* the mark opens out of the line: clipped to nothing at the centre line, then to its full box */
@@ -395,7 +390,9 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
   translate: 0 calc(50vh - 104px);
   animation:
     seam-draw  420ms cubic-bezier(.2, .75, .3, 1) both,
-    seam-close 360ms cubic-bezier(.7, 0, .3, 1) 900ms both;
+    /* retreats as the mark opens, not after it: held to 900ms the line sat across the finished
+       wordmark and read as a strike through it */
+    seam-close 260ms cubic-bezier(.7, 0, .3, 1) 430ms both;
 }
 .navbar__logo {
   transform-origin: 50% 50%;
@@ -405,9 +402,12 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
     mark-travel 600ms cubic-bezier(.66, 0, .24, 1) 1600ms both;  /* 420 line + 480 open + 700 hold */
 }
 
+/* The italic already on this page: Literata italic, the same face and slope the two panel headlines
+   use for their second line. A cursive face was tried and dropped, being a fifth typeface on a page
+   that already carries three, where the page's own italic makes the same gesture. */
 .navbar__lede {
-  margin: 0; font-family: Caveat, "Segoe Script", cursive;
-  font-size: 46px; line-height: 43px; font-weight: 400; letter-spacing: .01em;
+  margin: 0; font-family: Literata, Georgia, serif;
+  font-size: 38px; line-height: 43px; font-weight: 400; font-style: italic; letter-spacing: -.01em;
   color: var(--navy);
 }
 .lede__ink {
