@@ -32,7 +32,9 @@ def card(mid, name, thesis, folder, state, run, crit):
     return f'''<li class="card"><p class="eyebrow">{mid}</p><h3>{html.escape(name)}</h3><p class="thesis">{html.escape(thesis)}</p><p class="state"><b>{html.escape(state)}</b> {html.escape(run)}<br>{html.escape(crit)}</p><p class="links">{links}</p></li>'''
 def main():
     sl = slate(); cards = []
-    for mid in [f'M{i:02d}' for i in range(1, 26)]:  # M01 to M20 from the research slate, M21 to M25 from the Design Library (DD-48)
+    # M01 to M20 from the research slate, M21 to M25 from the Design Library (DD-48), M26 to M30 and M34
+    # the animated-lockup concept boards, M31 to M33 the directions taken from the estate's own pages.
+    for mid in [f'M{i:02d}' for i in range(1, 35)]:
         folders = glob.glob(os.path.join(MOCKS, mid + '-*'))
         name, thesis = sl.get(mid, (mid, ''))
         if folders:
