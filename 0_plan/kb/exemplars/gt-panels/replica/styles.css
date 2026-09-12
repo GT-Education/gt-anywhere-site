@@ -159,3 +159,99 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
 .note h1 { margin: 0 0 8px; font-family: Literata, Georgia, serif; font-size: 20px; font-weight: 400; letter-spacing: -.01em; }
 .note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
 .note b { font-weight: 600; }
+
+/* ---------------------------------------------------------------------------
+   The site header, measured from the same page.
+   .navbar_wrap 1440x80 fixed, 16px top padding, transparent
+   .navbar      1360x64, white, 12px radius, padding 12px 12px 12px 16px
+   logo         137x32
+   nav links    Inter Tight 14/18.2 weight 500; the sibling school in accent orange
+   Book a tour  122x40, 8px radius, 1px solid rgb(202,198,196), navy label, no fill
+   Apply now    104x40, 8px radius, navy fill, white label
+   Both buttons carry a duplicate label 21px below that slides up on hover, which is the
+   estate's own construction rather than an invention.
+   --------------------------------------------------------------------------- */
+.navbar_wrap { position: fixed; inset: 0 0 auto; z-index: 10; padding-block-start: 16px; }
+.navbar_inner { padding: 0 40px; }
+.navbar {
+  display: flex; align-items: center; gap: 24px;
+  max-width: 1360px; margin: 0 auto; block-size: 64px;
+  padding: 12px 12px 12px 16px;
+  border-radius: 12px;
+  background: var(--white);
+}
+.navbar__logo { display: inline-flex; }
+.navbar__logo img { height: 32px; width: auto; display: block; }
+.navbar__menu { display: flex; align-items: center; gap: 24px; margin-inline-start: auto; }
+.navbar__menu a {
+  font-family: "Inter Tight", Arial, sans-serif; font-size: 14px; line-height: 18.2px; font-weight: 500;
+  color: rgb(0, 17, 23); text-decoration: none; white-space: nowrap;
+}
+.navbar__menu a[aria-haspopup]::after { content: " ⌄"; color: rgb(34, 34, 34); }
+.navbar__menu a.is-sibling { color: var(--accent); }
+.navbar__menu a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.navbar__actions { display: flex; align-items: center; gap: 8px; }
+.navbar__btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  block-size: 40px; padding: 8px 16px; border-radius: 8px;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 16px; line-height: 20px; font-weight: 500;
+  text-transform: uppercase; white-space: nowrap; text-decoration: none;
+}
+.navbar__btn--ghost { border: 1px solid rgb(202, 198, 196); color: var(--navy); background: transparent; }
+.navbar__btn--solid { background: var(--navy); color: var(--white); }
+.navbar__btn .swap { position: relative; display: block; block-size: 20px; overflow: hidden; }
+.navbar__btn .swap span { display: block; transition: transform var(--reveal) var(--ease); }
+.navbar__btn:hover .swap span { transform: translateY(-20px); }
+.navbar__btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
+/* the fixed bar sits over the page, so the first section clears it */
+.section { padding-block-start: 104px; }
+
+@media (max-width: 991px) {
+  .navbar__menu { display: none; }
+}
+@media (max-width: 767px) {
+  .navbar_wrap { padding-block-start: 8px; }
+  .navbar_inner { padding: 0 20px; }
+  .navbar { block-size: 48px; padding: 8px 8px 8px 12px; gap: 12px; border-radius: 10px; }
+  .navbar__logo img { height: 24px; }
+  .navbar__actions { margin-inline-start: auto; }
+  .navbar__btn { block-size: 32px; padding: 6px 10px; font-size: 13px; }
+  .navbar__btn--ghost { display: none; }
+  .section { padding-block-start: 72px; }
+}
+
+/* ---------------------------------------------------------------------------
+   Johnny's changes on 2026-09-12, which take this past a pure replica:
+   each panel names its school, and each carries both a Learn more and an Apply action.
+   The estate has no precedent for two actions on one panel, so the pairing follows its
+   own header instead: an outlined secondary beside a filled primary. On a photograph the
+   outline is white rather than the header's warm grey, which is the one value here not
+   taken from the source.
+   Both panels keep the identical construction, because the two doors must not be ranked.
+   --------------------------------------------------------------------------- */
+.panel__school {
+  position: relative; z-index: 2; margin: 0;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 14px; line-height: 20px; font-weight: 400;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-light);
+}
+.panel__actions { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 8px; }
+.panel__button--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .7);
+  transition: background-color var(--reveal) var(--ease), border-color var(--reveal) var(--ease);
+}
+/* the solid button turns accent on hover, as the source does; the outlined one must not, or the
+   two actions would read as equally weighted calls to apply */
+.panel:hover .panel__button--ghost, .panel:focus-within .panel__button--ghost {
+  background: rgba(255, 255, 255, .12); border-color: var(--white);
+}
+@media (max-width: 767px) {
+  .panel__school { font-size: 11px; letter-spacing: .08em; }
+  .panel__actions { flex-flow: column; gap: 6px; }
+  .panel__button--ghost svg { display: none; }
+}
