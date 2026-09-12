@@ -124,6 +124,27 @@ words at once and nearly triggered a "fix" to working code; the rules were corre
 early. Both were caught by measuring the rules rather than trusting the first reading.
 
 
+## Ensemble record
+
+| Pass | File | Outcome |
+|---|---|---|
+| Fable draft | this brief and the six boards | Six R1 concept boards, runner green |
+| Astra pass 1 | `0_plan/ensemble/critic-astra-M26-M35-wave.md` | **26 failures, 3 blocking.** The brief authorised V12, which MN-18 refuses; M34's `:target` anchors sat in `<header>` so its defining interaction could never match; M28's corona used the right token at .38 opacity, composited ≈1.53:1. All three real, all three fixed |
+| Astra pass 2 | `0_plan/ensemble/critic-astra-M26-M35-wave-pass2.md` | **19 failures, all three P1s closed.** Found a fourth P1 I had missed: drawings crossing first-screen copy — M28's corona between 700 and 760px height and at desktop, M26/M29/M34's bracket through the provenance line at 1280x720. Fixed, plus the V10 h1 token and a blunt `!important` of mine that was silently overriding every row-specific value in M27 |
+| Astra pass 3 | `0_plan/ensemble/critic-astra-M26-M34-wave-pass3.md` | Verifies the pass-2 fixes and the M34/M35 reconciliation |
+
+**What the review caught that the runner never could.** The runner measures geometry and reports green
+on a board whose interaction is entirely dead: M34 passed every fold row while its stepper could not
+change a single word. It also passed M28 in every state of a drawing that ran through the headline, and
+passed skip and compare controls at 20 to 43px because it only fails undersized *door* CTAs. Geometry
+measurement and design review are not substitutes for each other.
+
+**A duplicate the process created.** The board was built as M31, lost to a concurrent session's id
+claim, rebuilt by me as M35, and had meanwhile been adopted and registered by that session as M34. For
+a while the wave carried two copies of one direction, one of them broken. M34 is canonical; the
+corrected content was ported onto it and M35 removed.
+
+
 ## Acceptance
 
 `node 0_plan/tools/shots.mjs 0_plan/mockups/<folder>` must report "all required rows pass", and each
