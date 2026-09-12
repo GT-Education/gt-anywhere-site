@@ -356,25 +356,57 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
   block-size: auto;
   justify-content: center;   /* the mark sits on the page's centre line */
 }
-.navbar__logo img { height: 36px; }
+.navbar__logo img { height: 43px; }   /* 36 plus a fifth */
 
-@keyframes mark-settle {
+/* Timed from the real thing. Sampling anywhere.gt.school's own loader frame by frame gives:
+   the mark fades up from 48px below over about 500ms, settles, holds still for about 170ms, then
+   leaves upward over about 370ms, accelerating. This keeps the entry and the shape of the exit and
+   changes two things Johnny asked for: the hold is longer, and the mark lands in the header instead
+   of leaving the screen. Once it lands, "This is" writes itself in ahead of it, a letter at a time
+   from below the line, and only then does the page fade in. */
+@keyframes mark-rise {           /* the estate's own entry: 48px up, fading in */
+  from { opacity: 0; transform: translateY(calc(50vh - 96px + 48px)) scale(2.1); }
+  to   { opacity: 1; transform: translateY(calc(50vh - 96px)) scale(2.1); }
+}
+@keyframes mark-travel {         /* the change: it lands in the header rather than exiting */
   from { transform: translateY(calc(50vh - 96px)) scale(2.1); }
   to   { transform: translateY(0) scale(1); }
+}
+@keyframes ch-in {
+  from { opacity: 0; transform: translateY(0.9em); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes page-in {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.navbar { gap: 10px; }
 .navbar__logo {
-  animation: mark-settle 1100ms cubic-bezier(.66, 0, .24, 1) both;
   transform-origin: 50% 50%;
   will-change: transform;
+  animation:
+    mark-rise   500ms cubic-bezier(.16, .84, .44, 1) both,
+    mark-travel 600ms cubic-bezier(.66, 0, .24, 1) 1200ms both;   /* 500 entry + 700 hold */
 }
-.page-in { animation: page-in 700ms var(--ease) 700ms both; }
+
+/* "This is", set in the brand sans at the weight the lockup's own second word uses */
+.navbar__lede {
+  margin: 0; display: flex; overflow: hidden;
+  font-family: "Inter Tight", Arial, sans-serif;
+  font-size: 32px; line-height: 43px; font-weight: 400; letter-spacing: -.01em;
+  color: var(--navy);
+}
+.lede__ch {
+  display: inline-block; white-space: pre;
+  animation: ch-in 320ms cubic-bezier(.2, .7, .3, 1) both;
+  animation-delay: calc(1800ms + var(--i) * 55ms);   /* after the mark has landed */
+}
+
+.page-in { animation: page-in 700ms var(--ease) 2350ms both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .navbar__logo, .page-in { animation: none; }
+  .navbar__logo, .page-in, .lede__ch { animation: none; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -387,12 +419,16 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
 .panel__map .land,
 .panel__map .land--reach {
   fill: #ebba9b;
-  stroke: rgba(0, 42, 58, .35);
-  stroke-width: 1; vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 2px 10px rgba(0, 25, 35, .5));
+  stroke: #ffffff;
+  stroke-width: 1.25; vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  /* the shadow stays on the land, which is large enough to carry a filter without softening;
+     it is the markers that could not, being a few pixels across */
+  filter: drop-shadow(0 2px 9px rgba(0, 25, 35, .45));
 }
-.panel__map .marker { color: #e48b53; }            /* the mark itself, via currentColor */
-/* No disc behind the mark. The brand orange on the light-gold land measures about 1.5 to 1, so the
-   mark is separated by a shadow rather than by a plate, which is what keeps it legible without
-   putting a black dot on the map. */
-.panel__map .marker { filter: drop-shadow(0 1px 1.5px rgba(0, 25, 35, .85)); }       /* the community map's deep navy, so the mark reads on gold */
+
+/* No disc and no filter. A drop-shadow rasterises the mark at its own tiny size, which is what made
+   the markers look blurry; removing it leaves clean vector edges. The mark is navy rather than the
+   brand orange for one measured reason: orange on this light-gold land is 1.48 to 1 and unreadable
+   at 8px, where navy is 8.64 to 1 and holds its shape. */
+.panel__map .marker { color: #002a3a; }       /* the community map's deep navy, so the mark reads on gold */

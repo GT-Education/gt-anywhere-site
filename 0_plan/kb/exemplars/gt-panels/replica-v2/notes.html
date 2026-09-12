@@ -33,25 +33,44 @@
   one pin in one state for the campus, the whole country filled for the online school.</p>
   <h2>The header, and the entrance</h2>
   <p>The white bar is gone. anywhere.gt.school carries its mark on the page's own ground rather than
-  on a plate, and on a page whose subject is two photographs the plate was the loudest object.
-  The mark is centred, which is also where the estate's own load animation starts it.</p>
-  <p>The entrance follows that animation: the mark begins in the middle of the screen and rises.
-  Where the estate's then vanishes, this one lands in the header and stays, and the page fades in
-  under it. It is CSS only, so no script is involved. Two notes against it, recorded rather than
-  hidden: the studio's motion rules forbid animating the largest element on the first screen before
-  first paint, and this is a replica of the estate's behaviour rather than a proposal for a landing
-  page. Under reduced motion nothing moves and nothing fades, verified: no transform, full opacity,
-  and zero running animations.</p>
+  on a plate, and on a page whose subject is two photographs the plate was the loudest object. The
+  mark is centred, which is also where the estate's own loader starts it, and it is set a fifth
+  larger than the header it replaced.</p>
+  <p><b>The timing is measured, not invented.</b> Sampling the estate's own loader frame by frame
+  gives three movements: the mark fades up from 48px below over about 500ms, holds still for about
+  170ms, then leaves upward over about 370ms, accelerating.</p>
+  <table>
+    <thead><tr><th>Movement</th><th>anywhere.gt.school</th><th>Here</th></tr></thead>
+    <tbody>
+      <tr><td>Fade and rise</td><td class="n">~500ms</td><td class="n">500ms, kept</td></tr>
+      <tr><td>Hold at centre</td><td class="n">~170ms</td><td class="n">700ms, lengthened</td></tr>
+      <tr><td>Leaves the screen</td><td class="n">~370ms, accelerating</td><td class="n">replaced</td></tr>
+      <tr><td>Travels into the header</td><td class="n">&mdash;</td><td class="n">600ms</td></tr>
+      <tr><td>&ldquo;This is&rdquo; writes in</td><td class="n">&mdash;</td><td class="n">from 1800ms, 55ms a letter</td></tr>
+      <tr><td>Page fades in</td><td class="n">&mdash;</td><td class="n">from 2350ms</td></tr>
+    </tbody>
+  </table>
+  <p>So the entry is the estate's, the hold is longer as asked, and the exit becomes an arrival: the
+  mark lands in the header instead of leaving. Then &ldquo;This is&rdquo; writes itself in ahead of
+  it, a letter at a time rising from below the line, in the brand sans at the weight the lockup's
+  own second word uses. Only then does the page fade in.</p>
+  <p>It is CSS only, so no script is involved. Two notes against it, recorded rather than hidden:
+  the studio's motion rules forbid animating the largest element on the first screen before first
+  paint, and this is a replica of the estate's behaviour rather than a proposal for a landing page.
+  Under reduced motion nothing moves, nothing writes and nothing fades, verified as no transform,
+  full opacity and zero running animations.</p>
 
   <h2>The markers</h2>
   <p>The circles become the GT mark, and the palette comes from the community map at apply.gt.school.
   That map is a live Mapbox map, so its artwork cannot be lifted, but its stylesheet was read: its
   most-used colour is the accent orange, with light gold, navy and a deeper navy behind them. The
-  land here takes the light gold that both that map and the estate's static map use, and each marker is the GT mark alone, with no disc behind it.</p>
-  <p><b>One figure to weigh.</b> The brand orange on the light-gold land measures <b>1.48 to 1</b>.
-  The marks are separated by a shadow rather than a plate, which is what keeps them visible at all,
-  but they are deliberately faint. If they should read harder, the single change is the land: the
-  same palette's navy would put the orange mark at 5.83 to 1 without touching anything else.</p>
+  land here takes the light gold that both that map and the estate's static map use, and each marker is the GT mark alone, with no disc and no filter behind it. A drop-shadow was
+  tried and removed: it rasterises a mark that is only a few pixels across, which is what made the
+  markers look blurry. The land keeps its shadow, being large enough to carry one, and now takes a
+  thin white border.</p>
+  <p><b>The marks are navy, not orange, and that was a measurement rather than a preference.</b>
+  The brand orange on this light-gold land is <b>1.48 to 1</b>, which at eight pixels across is not
+  a logo but a smudge. Navy on the same land is <b>8.64 to 1</b> and holds the mark's shape.</p>
   <p><b>The marker positions are illustrative, not data.</b> They are spread coast to coast to show
   reach. The estate's own static map does carry real per-state figures, but it was rejected for the
   reasons above and its geography stops before the east coast, so nothing here is derived from it.
