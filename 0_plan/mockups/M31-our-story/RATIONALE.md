@@ -619,7 +619,7 @@ Run over every mock in `0_plan/mockups/`, the last line is the same: `check-clai
 ```
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:39:27.979Z; page `/0_plan/mockups/M31-our-story/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:15:47.662Z; page `/0_plan/mockups/M31-our-story/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -682,7 +682,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V15 | yes | text cut by the edge, 630 to 651 |
 | V16 | yes | text cut by the edge, 894 to 915 |
 | V17 | yes | content reaches 943 of 960 and more follows below |
-| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V18 | no | not applicable: the last CTA is at 583, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 564 to 577 |
 
 ## The GT marks under forced colours

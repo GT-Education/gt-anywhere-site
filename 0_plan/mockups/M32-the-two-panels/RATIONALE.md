@@ -178,7 +178,7 @@ Method: the four contract rows are budgeted from the space tokens the height ban
 
 The four design-to sums land within one pixel of the measurements. V2 and V5 gained 8px in build pass 2: `--panel-head-gap` went from one space token to two at the phone bands, to buy the door name real clearance under the mark plate (Typography, below). At V14 and V16 the two CTAs sit side by side, so one row serves both and the two measured bottoms are equal.
 
-**The runner's own table, pasted from the current run** (`qa/fold.md`, 2026-09-12T01:04:09.715Z):
+**The runner's own table, pasted from the current run** (`qa/fold.md`, 2026-09-12T01:16:15.056Z):
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -250,12 +250,12 @@ This is the one place the page carries the same sentence twice in the markup, ex
 | V15 | yes | content reaches 644 of 648 and more follows below |
 | V16 | yes | text cut by the edge, 875 to 925 |
 | V17 | yes | text cut by the edge, 948 to 983 |
-| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V18 | no | not applicable: the last CTA is at 613, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 552 to 581 |
 
 | The one negative cell | The answer, which is not part of the quotation above |
 |---|---|
-| V18, 320 by 256: "no content is visible below the last CTA at all, so nothing signals that the page continues" | True as measured, and **DD-44 does not apply the fold rule at V18**: it is the WCAG 1.4.10 reflow row, 320 by 256, where the header and the seven-line h1 alone reach 310px. The runner agrees — its own Result cell for V18 reads "PASS no horizontal scroll", because reflow is the only rule that row is tested against. No other row on the page reads as finished |
+| V18, 320 by 256: "not applicable: the last CTA is at 613, past the 256px edge, so there is no gap between it and the fold to judge" | True as measured, and **DD-44 does not apply the fold rule at V18**: it is the WCAG 1.4.10 reflow row, 320 by 256, where the header and the seven-line h1 alone reach 310px. The runner agrees — its own Result cell for V18 reads "PASS no horizontal scroll", because reflow is the only rule that row is tested against. No other row on the page reads as finished |
 
 On the phone rows and at V10 and V15 the ink is a **door line** — a sentence a parent would read — cut mid-sentence. On the laptop and tablet rows it is the compare anchor sentence or the comparison table's caption. Every row but V18 therefore ends on words, not on a rule and not on empty padding.
 
@@ -667,7 +667,7 @@ Where a parent lands after pressing the **GT Anywhere** door: the navy control w
 
 ## Self-check
 
-**Runner.** `node 0_plan/tools/shots.mjs 0_plan/mockups/M32-the-two-panels`, run of **2026-09-12T01:04:09.715Z**, which is the timestamp `qa/fold.md` carries: **Result: all required rows pass.** Reduced motion at V14: every computed transition and animation duration 0s, elements and pseudo-elements. Root font doubled at V2: no horizontal scroll at 375 with a 32px root. Console: no errors. Interactive targets: "every interactive target is at least 44px tall" at all three sampled rows, the 320px reflow row included — and the runner now tests **width as well as height**, so that line means 44px in both dimensions. Mark geometry: five marks at each width — `gt-school-logo-h.svg` three times (header, Georgetown panel, footer plate) and `gt-anywhere-logo-h.svg` twice (GT Anywhere panel, footer plate) — 27.9px at 390 and 32px at 1440, aspect skew 0% on all ten measurements.
+**Runner.** `node 0_plan/tools/shots.mjs 0_plan/mockups/M32-the-two-panels`, run of **2026-09-12T01:16:15.056Z**, which is the timestamp `qa/fold.md` carries: **Result: all required rows pass.** Reduced motion at V14: every computed transition and animation duration 0s, elements and pseudo-elements. Root font doubled at V2: no horizontal scroll at 375 with a 32px root. Console: no errors. Interactive targets: "every interactive target is at least 44px tall" at all three sampled rows, the 320px reflow row included — and the runner now tests **width as well as height**, so that line means 44px in both dimensions. Mark geometry: five marks at each width — `gt-school-logo-h.svg` three times (header, Georgetown panel, footer plate) and `gt-anywhere-logo-h.svg` twice (GT Anywhere panel, footer plate) — 27.9px at 390 and 32px at 1440, aspect skew 0% on all ten measurements.
 
 (Build pass 1 cited the run twice at a timestamp eight minutes older than the file on disk. Both critics caught it. Every figure in this file now comes from the run named above, and the three tables that quote the runner are spliced out of `qa/fold.md` by script rather than retyped.)
 
