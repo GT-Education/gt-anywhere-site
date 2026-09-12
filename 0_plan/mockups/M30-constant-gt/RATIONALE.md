@@ -36,13 +36,18 @@ Suffix swap on hover and focus only (200ms), at display size. It is the entire d
 | Suffix swap | hover or `:focus-visible` on a door CTA | `opacity`, `translateY(4px)` | `--duration-base` 200ms | `--ease-out` | `--duration-none`, state still changes |
 | Terminal emphasis | same | `transform: scaleY(1.25)` | `--duration-base` | `--ease-out` | `--duration-none` |
 
-**This move is not in CONTRACT v2.1 section 6.** It is filed as a D-031 proposal (move V11, "lockup suffix swap"); the timed variant adds V12, "mark assembly". Neither may ship before D-031 is confirmed.
+**This move is not in CONTRACT v2.1 section 6.** It is filed as D-031 move V11, "lockup suffix swap" (the timed variant adds V12, "mark assembly"), and **Johnny confirmed D-031 on 2026-09-11** — runbook section 7 names him as the decider. D-039 (scripts) is not engaged: this board is CSS-only.
 
 ## Assets
 
 `../shared/img/gt-school-logo-h.svg` (header, real mark, never redrawn) and `../shared/img/gt-icon.svg` (stage, `alt=""` and `aria-hidden` because the header already names the brand). No photographs: DD-42/RF-25 hold every image behind Nari's written permission.
 
 ## Departures
+
+**The stage lockup is typographic, not an SVG (DD-19).** No `GTgeorgetown` lockup file exists, and none is
+needed: a word inside a flat SVG cannot be swapped, so the suffix must be live text. It is set in the brand's
+own system — mark, `GT` in navy at 700, suffix in `--color-accent-text` at 400, lowercase — and the header
+keeps the real `gt-school-logo-h.svg`, so rule 16 ("no text wordmark in place of the logo") holds.
 
 The mark is hidden in the stage; the header lockup still carries the real logo, so rule 16 holds.
 

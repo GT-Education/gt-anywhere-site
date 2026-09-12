@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T22:51:02.850Z; page `/0_plan/mockups/M27-one-mark/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:42:04.415Z; page `/0_plan/mockups/M27-one-mark/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -20,7 +20,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V14 | 1280 by 720 | fold | 696 | 56 | 342 | 372 | 510 | 510 | yes | PASS |
 | V15 | 1366 by 648 | fold | 624 | 56 | 351 | 382 | 520 | 520 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 630 | 668 | 848 | 848 | yes | PASS |
-| V17 | 1920 by 960 | fold | 936 | 56 | 630 | 668 | 848 | 848 | no | FAIL false floor: nothing visible continues past the bottom edge |
+| V17 | 1920 by 960 | fold | 936 | 56 | 630 | 668 | 848 | 848 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 88 | 370 | 420 | 538 | 649 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 315 | 345 | 481 | 481 | yes | report: scrollWidth 1024 |
 
@@ -62,8 +62,8 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V14 | yes | text cut by the edge, 697 to 745 |
 | V15 | yes | text cut by the edge, 643 to 664 |
 | V16 | yes | text cut by the edge, 886 to 907 |
-| V17 | no | FALSE FLOOR: the last visible content ends at 934, 26px clear of the 960px edge, so the screen reads as finished |
-| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V17 | yes | text cut by the edge, 948 to 969 |
+| V18 | no | not applicable: the last CTA is at 649, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | content reaches 564 of 576 and more follows below |
 
 ## The GT marks under forced colours
@@ -72,9 +72,9 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 8.2:1 against its own retained ground |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 8.2:1 against its own retained ground |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px
@@ -101,4 +101,4 @@ Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must h
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
 | 1440 by 900 | `gt-icon.svg` | icon | 104px | 104px | 0% | ok |
 
-## Result: 1 failure(s)
+## Result: all required rows pass

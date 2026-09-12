@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-11T22:47:46.469Z; page `/0_plan/mockups/M26-the-mark/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:41:37.469Z; page `/0_plan/mockups/M26-the-mark/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -63,7 +63,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V15 | yes | content reaches 633 of 648 and more follows below |
 | V16 | yes | content reaches 890 of 900 and more follows below |
 | V17 | yes | content reaches 947 of 960 and more follows below |
-| V18 | no | no content is visible below the last CTA at all, so nothing signals that the page continues |
+| V18 | no | not applicable: the last CTA is at 649, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 556 to 577 |
 
 ## The GT marks under forced colours
@@ -72,9 +72,9 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 8.2:1 against its own retained ground |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 8.2:1 against its own retained ground |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 
 ## Interactive targets under 44px

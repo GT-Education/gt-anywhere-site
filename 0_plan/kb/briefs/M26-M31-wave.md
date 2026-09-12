@@ -21,10 +21,12 @@ appear below with links to `gt.school` and `anywhere.gt.school`.
 | Georgetown lower-left, Anywhere lower-right | Two mirrored equal arms | DD-21 requires N campuses. CONTRACT section 3 "Nesting is hierarchy" forbids drawing the two schools as rings or nested shapes |
 | — | Every drawn line at `--color-border-strong` | CONTRACT section 3: a line carrying the argument needs 3:1. The accent measures 2.38 on cream and already failed in M24 |
 
-## Gate
+## Gate: D-031, confirmed
 
 Both moves are outside CONTRACT section 6's table, which says a new move is a **D-031 proposal first**.
-This wave is that proposal:
+This wave is that proposal, and **Johnny confirmed it on 2026-09-11** (runbook section 7 names him as the
+decider; he directed this build and chose the motion model). V11 and V12 below are therefore live for this
+wave. D-039 (scripts) stays escalated and is not needed: every board here is CSS-only.
 
 | Move | Definition | Trigger | Budget | Reduced motion |
 |---|---|---|---|---|
@@ -48,6 +50,14 @@ D-039 (scripts) stays escalated: every board here is CSS-only, so none of them d
 
 Stage R1 concept boards: header, h1, provenance, doors, compare anchor, then the comparison band.
 Sections 4 to 8 are out of scope until a direction is chosen and promoted to a full R2 mock.
+
+## The Georgetown lockup
+
+No `GTgeorgetown` SVG exists in `shared/img/`, and none is needed. The brand system is legible from the
+real files — mark, `GT` in navy, suffix in orange, lowercase — and the suffix swap requires **live text**
+regardless, because a word inside a flat SVG cannot be swapped. The header keeps the real
+`gt-school-logo-h.svg`, so rule 16 holds. The stage lockup is therefore typographic, declared as a DD-19
+departure in every rationale. If Holly later supplies a Georgetown lockup it changes nothing here.
 
 ## Acceptance
 

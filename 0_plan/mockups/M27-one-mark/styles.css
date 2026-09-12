@@ -216,8 +216,11 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
 /* At the widest rows the airy direction leaves the band short; taller rows put real ink in the
    reserved 24px strip instead of ending high. */
 @media (min-width: 1440px) {
-  .cmp th, .cmp td { padding-top: var(--space-5); padding-bottom: var(--space-5); }
-  .compare-anchor { margin-bottom: var(--space-3); }
+  .cmp th, .cmp td { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+  /* At 1920 by 960 the door lines end at 934 and the anchor fell to 961, just past the edge, leaving
+     the reserved 24px strip empty. Pulling the anchor up puts real text in it and cuts it at the edge. */
+  .compare-anchor { margin-top: var(--space-3); margin-bottom: var(--space-3); }
+  .sources { margin-top: var(--space-6); }
 }
 
 
