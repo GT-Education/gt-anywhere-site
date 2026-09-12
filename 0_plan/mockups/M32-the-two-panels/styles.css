@@ -1,8 +1,12 @@
 /* M32 The Two Panels (G-D build wave, 2026-09-11). Lens order L1 objective, L4 exclusivity, L2 continuity, L3 mission.
-   Source: the two-door panel on the live gt.school about page, captured by Johnny on 2026-09-11. The shape is taken —
-   a rounded navy frame inset from the page, holding two equal square-cornered panels with a gutter — and three things
-   in it are corrected: the photographs of identifiable children (DD-42, RF-25), the imbalance between the two doors
-   (DD-26 option a), and the claims paragraph (CR-039, CR-040, CR-041). Details in RATIONALE.md.
+   Source: the `split-cta` two-door panel on the gt.school about page, read from the dated text extract at
+   0_plan/kb/exemplars/gt-panels/ rather than from the live site. Measured from it, that component ALREADY treats its
+   two schools as equals: one mark, one heading, one paragraph and one button each, and the two panels' rules identical
+   but for `background-image`. The shape is taken — a rounded navy frame inset from the page, holding two equal panels
+   with a gutter — and the symmetry is held rather than restored. Two things change: the photographs of identifiable
+   children become the two school tints (DD-42, RF-25), and the right panel's claims paragraph comes off the page
+   (CR-039, CR-040, CR-041). An earlier revision of this file named a third change, "the imbalance between the two
+   doors"; the source has no imbalance and that claim is withdrawn. Details in RATIONALE.md, section "Correction".
    Every colour, face, size, space, radius and duration is a var(--...) from ../shared/tokens-v2.css; the non-token
    values (1px hairlines, 2px ring bands, the 44px target floor, the mark-plate width arithmetic, the container and
    height thresholds) are named in RATIONALE.md, Departures.
@@ -122,7 +126,14 @@ h2 { font-size: var(--text-2xl); text-wrap: balance; }
    takes colour with its own italic and K12 F88 measures that accent on cream at 2.38:1. */
 h1 { font-size: var(--text-3xl); max-width: 35ch; color: var(--color-text); }
 h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: inherit; }
-@media (min-width: 768px) { h1 { text-wrap: balance; } }
+/* Unconditional, and the threshold it replaces was measured rather than argued. `node qa/M32-measure.mjs --balance`
+   forces balancing on and diffs the h1's visual line boxes against the shipped state at all nineteen rows: from 768
+   up it changes NOTHING (the four-line setting is identical with and without it), while at 390 to 430 and at the
+   landscape row it changes the setting and fills the tail — at 414 the last two lines go from 214 and 200px in a
+   382px column to 208 and 283. A 768 gate therefore declared balancing exactly where it had no effect and withheld
+   it exactly where it did, on the rows where two thirds of sessions are (DD-14, MD-23). Line counts are unchanged
+   at every row, so the fold budget is untouched. */
+h1 { text-wrap: balance; }
 /* The last h1 line is never one word. Released by a container query when the column can no longer hold the phrase,
    which only happens with a doubled root font (20rem is 640px at a 32px root and 320px at 16px). */
 .first-screen .wrap { container: hero / inline-size; }
@@ -223,7 +234,13 @@ h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; co
 /* ---------- The compare anchor, directly under the frame, closed by a rule so the ladder of ink below the first
      screen never leaves a gap wider than the fold contract's reserved 24px band ---------- */
 .anchor-band { padding-block: var(--space-4); border-bottom: 1px solid var(--color-border-strong); }
-.anchor-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-inline-size: var(--measure-prose); text-wrap: balance; }
+/* The page's one accent use (K3 section 5f), and the only element on the first screen that belongs to BOTH doors:
+   the sentence that offers the comparison. --color-accent-text #a5501a measures 5.14:1 on --color-bg, so it passes
+   AA as text and clears the 3:1 graphical floor as a rule; --color-accent itself would be 2.38:1 here and is not
+   used anywhere on this page. Two pixels rather than the --color-border-strong hairline every other link wears, so
+   the one accent event is legible as one. Nari decides whether it is spent at all: Q-036, both states captured in
+   qa/accent-shipped-*.jpg and qa/accent-zero-*.jpg. */
+.anchor-link { display: inline-flex; align-items: center; min-height: 2.75rem; font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); max-inline-size: var(--measure-prose); text-wrap: balance; text-decoration-color: var(--color-accent-text); text-decoration-thickness: 2px; }
 
 /* ---------- Sections on the cream ground ---------- */
 .section { padding-block: var(--space-4) clamp(var(--space-7), 1.5rem + 4vw, var(--space-9)); }

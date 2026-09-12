@@ -125,13 +125,20 @@ const WEIGHT_JS = `(() => {${HELPERS}
       panelArea: Math.round(box.width * box.height),
     };
   }
-  // The accent, counted the way the rationale counts the source's: any element painting --color-accent.
-  let accentFills = 0;
-  for (const el of document.querySelectorAll('.first-screen *')) {
+  // Every accent event a reader can see above the fold: --color-accent as fill or type, --color-accent-text as
+  // type or as a text decoration, on the first screen AND the compare anchor band, which is above the fold at
+  // every row. K3 section 5f counts events, so a decoration counts.
+  const ACCENT = 'rgb(228, 139, 83)', ACCENT_TEXT = 'rgb(165, 80, 26)';
+  const events = [];
+  for (const el of document.querySelectorAll('.first-screen *, .anchor-band *')) {
     const cs = getComputedStyle(el);
-    if (cs.backgroundColor === 'rgb(228, 139, 83)' || cs.color === 'rgb(228, 139, 83)') accentFills++;
+    const label = el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/)[0] : '');
+    if (cs.backgroundColor === ACCENT || cs.backgroundColor === ACCENT_TEXT) events.push(label + ' fill');
+    if (cs.color === ACCENT || cs.color === ACCENT_TEXT) events.push(label + ' type');
+    if (cs.textDecorationLine !== 'none' && (cs.textDecorationColor === ACCENT || cs.textDecorationColor === ACCENT_TEXT)) events.push(label + ' underline ' + cs.textDecorationColor);
   }
-  out._accentFillsOnFirstScreen = accentFills;
+  out._accentEvents = events;
+  out._accentEventCount = events.length;
   return out;
 })()`;
 const LINES_JS = `(() => {${HELPERS}
@@ -210,6 +217,69 @@ const OVERFLOW_JS = `(() => {
     return done();
   }
 
+  if (process.argv.includes('--accent-states')) {
+    const qa = join(REPO, rel.slice(1), 'qa');
+    // Q-036 is Nari's. Both states are captured so she judges a first-screen colour decision from a picture.
+    for (const [label, w, h] of [['375', 375, 629], ['1440', 1440, 900]]) {
+      for (const state of ['shipped', 'zero']) {
+        await goto(w, h);
+        if (state === 'zero') await page.evaluate(() => { const st = document.createElement('style'); st.textContent = '.anchor-link{text-decoration-color:var(--color-border-strong) !important;text-decoration-thickness:1px !important}'; document.head.appendChild(st); });
+        await page.waitForTimeout(120);
+        await page.screenshot({ path: join(qa, `accent-${state}-${label}.jpg`), type: 'jpeg', quality: w >= 1024 ? 62 : 72 });
+      }
+    }
+    await goto(1440, 900);
+    const m = await page.evaluate(`(() => {${HELPERS}
+      const a = document.querySelector('.anchor-link'); const cs = getComputedStyle(a);
+      const ground = groundBehind(a);
+      return { decoration: cs.textDecorationColor, thickness: cs.textDecorationThickness, type: cs.color,
+               ground, decorationVsGround: ratio(cs.textDecorationColor, ground), typeVsGround: ratio(cs.color, ground) };
+    })()`);
+    console.log('## Q-036, both states captured\n');
+    console.log('| File | State |');
+    console.log('|---|---|');
+    console.log('| `qa/accent-shipped-375.jpg`, `qa/accent-shipped-1440.jpg` | **As shipped**: one accent event, the compare anchor underlined in `--color-accent-text` at 2px |');
+    console.log('| `qa/accent-zero-375.jpg`, `qa/accent-zero-1440.jpg` | The zero state passes 1 to 3 shipped: the same sentence in the `--color-border-strong` hairline every other link wears |');
+    console.log(`\nMeasured on the shipped state: underline ${m.decoration} at ${m.thickness} on ${m.ground} = **${m.decorationVsGround}:1**; the sentence itself ${m.type} = ${m.typeVsGround}:1.`);
+    return done();
+  }
+
+  if (process.argv.includes('--balance')) {
+    // Does `text-wrap: balance` change the h1's setting at the phone rows? Measured by forcing it on and
+    // comparing the line rects against the shipped state, rather than reasoning about Chromium's line cap.
+    console.log('| Row | Viewport | Lines | Line widths, shipped | SD | Line widths, balance forced | SD | Verdict |');
+    console.log('|---|---|---|---|---|---|---|---|');
+    for (const [row, w, h] of ROWS) {
+      const read = async (force) => {
+        await goto(w, h);
+        if (force) await page.evaluate(() => { const st = document.createElement('style'); st.textContent = 'h1{text-wrap:balance !important}'; document.head.appendChild(st); });
+        await page.waitForTimeout(120);
+        return page.evaluate(`(() => {
+          // The h1 holds an <em> and a nowrap <span>, so a Range yields one rect per fragment per line.
+          // Group rects into VISUAL lines by their top coordinate before measuring anything.
+          const el = document.querySelector('h1'); const rg = document.createRange(); rg.selectNodeContents(el);
+          const rects = [...rg.getClientRects()].filter(r => r.height > 1);
+          const rows = new Map();
+          for (const r of rects) { const k = Math.round(r.top); const cur = rows.get(k) || { l: Infinity, r: -Infinity }; cur.l = Math.min(cur.l, r.left); cur.r = Math.max(cur.r, r.right); rows.set(k, cur); }
+          const keys = [...rows.keys()].sort((a, b) => a - b);
+          const widths = keys.map(k => Math.round(rows.get(k).r - rows.get(k).l));
+          const box = Math.round(el.getBoundingClientRect().width);
+          const cs = getComputedStyle(el);
+          return { lines: Math.round(el.getBoundingClientRect().height / parseFloat(cs.lineHeight)), fragLines: keys.length,
+                   last: widths[widths.length - 1] || 0, penult: widths[widths.length - 2] || 0,
+                   widest: Math.max(...widths), box, widths };
+        })()`);
+      };
+      const a = await read(false), b = await read(true);
+      const same = JSON.stringify(a.widths) === JSON.stringify(b.widths);
+      // Report EVERY line, and the spread, rather than the tail alone: a fuller last line can be bought
+      // by hollowing out the middle, and the penult/last pair cannot see that.
+      const sd = (ws) => { const m = ws.reduce((x, y) => x + y, 0) / ws.length; return Math.round(Math.sqrt(ws.reduce((x, y) => x + (y - m) ** 2, 0) / ws.length)); };
+      console.log(`| ${row} | ${w} by ${h} | ${a.lines} | ${a.widths.join(' ')} | ${sd(a.widths)} | ${b.widths.join(' ')} | ${sd(b.widths)} | ${same ? 'no change' : (sd(b.widths) < sd(a.widths) ? '**more even**' : '**less even**')} |`);
+    }
+    return done();
+  }
+
   if (process.argv.includes('--h1')) {
     console.log('| Row | Viewport | h1 size | h1 column | Line box | h1 height | Lines |');
     console.log('|---|---|---|---|---|---|---|');
@@ -239,7 +309,7 @@ const OVERFLOW_JS = `(() => {
       console.log(`| Lines of set text | ${g.textLines} | ${a.textLines} | ${(g.textLines / a.textLines).toFixed(2)} : 1 |`);
       console.log(`| Characters of set text | ${g.chars} | ${a.chars} | ${(g.chars / a.chars).toFixed(2)} : 1 |`);
       console.log(`| Saturated (accent) fills | ${g.saturatedFills} | ${a.saturatedFills} | — |`);
-      console.log(`| Accent-painted elements on the whole first screen | ${m._accentFillsOnFirstScreen} | | |`);
+      console.log(`| Accent events on the first screen and the compare band (K3 5f budget: 1) | ${m._accentEventCount} — ${m._accentEvents.join(', ') || 'none'} | | |`);
     }
     return done();
   }
