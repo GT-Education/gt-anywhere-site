@@ -1,4 +1,4 @@
-/* M34 "The Tour" — Pastel Hard-Cut (insp-cloudstudio): the sequence is stepped by the reader, never by a timer. :target only, no script.
+/* M35 "The Stepper" — the reader steps the sequence; nothing runs on a timer.
    Tokens only, per CONTRACT v2.1 §1. Departures named in RATIONALE.md. */
 @import url("../shared/tokens-v2.css");
 @import url("../shared/fonts.css");
@@ -83,25 +83,32 @@ h1 {
 .door-cta:hover, .door-cta:focus-visible { text-decoration: underline; }
 
 /* Compare anchor */
-.compare-anchor { text-align: center; margin: var(--space-5) 0 var(--space-4); font-size: var(--text-base); }
+/* The stepper costs a row, so the anchor sits tighter: it keeps real text in the reserved strip. */
+.compare-anchor { text-align: center; margin: var(--space-3) 0 var(--space-4); font-size: var(--text-base); }
 .compare-anchor a { color: var(--color-text); }
 
 /* Desktop: mirrored equal arms. Identical geometry, mirrored angles, identical terminals —
    never one school nested inside the other (CONTRACT v2.1 §3, "Nesting is hierarchy"). */
-.stage { padding-top: var(--space-5); }
-.steps { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-4); }
-.steps a {
-  width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
-  text-decoration: none; color: var(--color-text-muted); font-family: var(--font-mono); font-size: var(--text-xs);
-}
-.steps a span { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong); display: block; }
-.steps a:hover span, .steps a:focus-visible span { background: var(--color-navy); }
-#s-georgetown:target ~ .lede .suffix b[data-k="school"],
-#s-anywhere:target ~ .lede .suffix b[data-k="school"] { opacity: 0; }
 @media (min-width: 768px) {
   .mark { width: 88px; height: 88px; }
   .lockup { font-size: var(--text-2xl); }
-  .doors { grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-top: var(--space-7); }
+  .doors { grid-template-columns: 1fr 1fr; gap: var(--space-7); position: relative; margin-top: var(--space-7); }
+  .door { position: relative; }
+  /* A symmetric bracket: equal arms, mirrored angles, identical terminals. Each door owns half the
+     span plus its own drop, so the two halves always meet exactly at the centre whatever the gap.
+     Never one school nested inside the other (CONTRACT v2.1 §3). */
+  .door::before {
+    content: ""; position: absolute; top: calc(var(--space-6) * -1); height: 1.5px;
+    background: var(--color-border-strong);
+  }
+  .door--georgetown::before { left: 50%; right: calc(var(--space-7) / -2); }
+  .door--anywhere::before   { right: 50%; left: calc(var(--space-7) / -2); }
+  .door::after {
+    content: ""; position: absolute; top: calc(var(--space-6) * -1); left: 50%; margin-left: -0.75px;
+    width: 1.5px; height: var(--space-6); background: var(--color-border-strong);
+    transform-origin: top center;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
 }
 @media (max-width: 767px) {
   .door-line { order: 3; }
@@ -157,7 +164,7 @@ h1 {
 }
 /* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
 @media (max-height: 400px) and (min-width: 600px) {
-  h1 { font-size: var(--text-lg); }
+  h1 { font-size: var(--text-xl); } /* CONTRACT §2 permits --text-xl on V10, not a two-step drop */
   .lockup { font-size: var(--text-base); }
   .lede { padding-top: var(--space-3); }
   .provenance { margin-top: var(--space-2); }
@@ -205,10 +212,6 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
   .door { padding: var(--space-3) var(--space-3) !important; }
 }
 
-/* The stepper is an enhancement: on short rows it yields so both CTAs stay above the fold. */
-@media (max-height: 700px) { .steps { display: none; } }
-@media (max-width: 400px) { .steps { margin-top: var(--space-2); } .steps a { width: 36px; height: 36px; } }
-
 .next-band .wrap { max-width: 72rem; }
 
 
@@ -228,4 +231,45 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
    rules above, which are left in place as the record of what was tried. */
 @media (forced-colors: active) {
   :focus-visible { outline-color: CanvasText; }
+}
+
+/* ---------- The stepper (insp-cloudstudio): reader-driven sequencing, :target only ---------- */
+.steps { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-4); }
+.steps a { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-border-strong); display: block; }
+.steps a:hover .dot, .steps a:focus-visible .dot { background: var(--color-navy); }
+/* The stepper is an enhancement: on short rows it yields so both CTAs stay above the fold. */
+@media (max-height: 760px) { .steps { display: none; } }
+@media (max-width: 400px) { .steps { margin-top: var(--space-3); } }
+
+
+/* Rule 11 target size: the runner only fails undersized DOOR CTAs, so these two controls passed a
+   green run while sitting at 40-43px and 20-21px (Astra E-wave, rule 11). */
+.skip { min-height: 44px; display: inline-flex; align-items: center; }
+.compare-anchor a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* One rhythm for the band opening, replacing four rounds of per-board nudging. The runner needs ink
+   inside the bottom 24px AND something crossing the edge; a loose gap between the anchor and the
+   heading leaves that strip empty at whatever viewport height happens to land there. Packing
+   border -> heading -> caption -> first row into ~120px puts ink at many positions, so the rule holds
+   across rows instead of at the one row that was last tuned. The band opening is packed. */
+.compare-anchor { margin: var(--space-4) 0 var(--space-3); }
+.next-band { padding-top: var(--space-4); }
+.next-band h2 { margin-bottom: var(--space-2); }
+.cmp { margin-top: var(--space-3); }
+.cmp caption { padding-bottom: var(--space-2); }
+
+/* V10 ink, not box: the compare control is now a 44px target, but its text is centred in that box, so
+   at 750x342 the box crossed the fold while the INK sat below it and the reserved strip read empty.
+   Pull it up so the text itself lands in the strip. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .compare-anchor { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+}
+
+/* The bracket needs room it does not have on short rows: the compact rule pulls the doors up to a
+   16px margin while the arms are positioned 32px above them, so at 1280x720 the horizontal struck
+   through the provenance sentence (Astra pass 2, P1). The bracket is structure, not content, and it
+   yields on the same rows the mark does. */
+@media (max-height: 760px) {
+  .door::before, .door::after { display: none; }
 }

@@ -151,7 +151,7 @@ h1 { max-width: 30ch; }
 }
 /* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
 @media (max-height: 400px) and (min-width: 600px) {
-  h1 { font-size: var(--text-lg); }
+  h1 { font-size: var(--text-xl); } /* CONTRACT §2 permits --text-xl on V10, not a two-step drop */
   .lockup { font-size: var(--text-base); }
   .lede { padding-top: var(--space-3); }
   .provenance { margin-top: var(--space-2); }

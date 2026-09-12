@@ -161,7 +161,7 @@ h1 {
 }
 /* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
 @media (max-height: 400px) and (min-width: 600px) {
-  h1 { font-size: var(--text-lg); }
+  h1 { font-size: var(--text-xl); } /* CONTRACT §2 permits --text-xl on V10, not a two-step drop */
   .lockup { font-size: var(--text-base); }
   .lede { padding-top: var(--space-3); }
   .provenance { margin-top: var(--space-2); }
@@ -256,4 +256,12 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
    Pull it up so the text itself lands in the strip. */
 @media (max-height: 400px) and (min-width: 600px) {
   .compare-anchor { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+}
+
+/* The bracket needs room it does not have on short rows: the compact rule pulls the doors up to a
+   16px margin while the arms are positioned 32px above them, so at 1280x720 the horizontal struck
+   through the provenance sentence (Astra pass 2, P1). The bracket is structure, not content, and it
+   yields on the same rows the mark does. */
+@media (max-height: 760px) {
+  .door::before, .door::after { display: none; }
 }

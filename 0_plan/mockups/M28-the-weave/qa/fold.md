@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:30:30.958Z; page `/0_plan/mockups/M28-the-weave/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:57:33.587Z; page `/0_plan/mockups/M28-the-weave/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -9,18 +9,18 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V3 | 390 by 664 | fold | 640 | 88 | 312 | 341 | 436 | 547 | yes | PASS |
 | V4 | 393 by 659 | fold | 635 | 88 | 312 | 341 | 436 | 547 | yes | PASS |
 | V5 | 414 by 715 | fold | 691 | 88 | 315 | 344 | 439 | 550 | yes | PASS |
-| V6 | 412 by 839 | fold | 815 | 88 | 417 | 454 | 565 | 676 | yes | PASS |
+| V6 | 412 by 839 | fold | 815 | 88 | 449 | 486 | 597 | 708 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 88 | 314 | 343 | 438 | 549 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 285 | 314 | 409 | 520 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 88 | 414 | 451 | 562 | 673 | yes | report: page height 3496 |
-| V10 | 750 by 342 | fold | 318 | 56 | 185 | 210 | 286 | 302 | yes | PASS |
-| V11 | 768 by 1024 | fold | 1000 | 56 | 360 | 397 | 555 | 555 | yes | PASS |
-| V12 | 834 by 1194 | fold | 1170 | 56 | 366 | 403 | 562 | 562 | yes | PASS |
-| V13 | 1024 by 768 | fold | 744 | 56 | 382 | 420 | 580 | 580 | yes | PASS |
+| V9 | 390 by 844 | emptiness |  | 88 | 446 | 483 | 594 | 705 | yes | report: page height 3528 |
+| V10 | 750 by 342 | fold | 318 | 56 | 198 | 223 | 299 | 315 | yes | PASS |
+| V11 | 768 by 1024 | fold | 1000 | 56 | 424 | 461 | 619 | 619 | yes | PASS |
+| V12 | 834 by 1194 | fold | 1170 | 56 | 430 | 467 | 626 | 626 | yes | PASS |
+| V13 | 1024 by 768 | fold | 744 | 56 | 446 | 484 | 644 | 644 | yes | PASS |
 | V14 | 1280 by 720 | fold | 696 | 56 | 292 | 323 | 461 | 461 | yes | PASS |
 | V15 | 1366 by 648 | fold | 624 | 56 | 300 | 330 | 469 | 469 | yes | PASS |
-| V16 | 1440 by 900 | fold | 876 | 56 | 418 | 457 | 620 | 620 | yes | PASS |
-| V17 | 1920 by 960 | fold | 936 | 56 | 418 | 457 | 620 | 620 | yes | PASS |
+| V16 | 1440 by 900 | fold | 876 | 56 | 482 | 521 | 684 | 684 | yes | PASS |
+| V17 | 1920 by 960 | fold | 936 | 56 | 482 | 521 | 684 | 684 | yes | PASS |
 | V18 | 320 by 256 | reflow |  | 88 | 370 | 420 | 538 | 649 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 271 | 301 | 436 | 436 | yes | report: scrollWidth 1024 |
 
@@ -51,18 +51,18 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V3 | yes | content reaches 658 of 664 and more follows below |
 | V4 | yes | content reaches 659 of 659 and more follows below |
 | V5 | yes | content reaches 710 of 715 and more follows below |
-| V6 | yes | content reaches 836 of 839 and more follows below |
+| V6 | yes | text cut by the edge, 824 to 844 |
 | V7 | yes | text cut by the edge, 664 to 684 |
 | V8 | yes | text cut by the edge, 711 to 741 |
-| V9 | yes | content reaches 833 of 844 and more follows below |
-| V10 | yes | text cut by the edge, 325 to 345 |
-| V11 | yes | content reaches 1004 of 1024 and more follows below |
-| V12 | yes | text cut by the edge, 1185 to 1202 |
-| V13 | yes | text cut by the edge, 750 to 794 |
+| V9 | yes | content reaches 841 of 844 and more follows below |
+| V10 | yes | text cut by the edge, 338 to 358 |
+| V11 | yes | content reaches 1017 of 1024 and more follows below |
+| V12 | yes | content reaches 1186 of 1194 and more follows below |
+| V13 | yes | text cut by the edge, 757 to 778 |
 | V14 | yes | content reaches 718 of 720 and more follows below |
 | V15 | yes | content reaches 634 of 648 and more follows below |
-| V16 | yes | content reaches 881 of 900 and more follows below |
-| V17 | yes | content reaches 950 of 960 and more follows below |
+| V16 | yes | text cut by the edge, 858 to 908 |
+| V17 | yes | content reaches 945 of 960 and more follows below |
 | V18 | no | not applicable: the last CTA is at 649, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 557 to 578 |
 
@@ -94,6 +94,6 @@ Horizontal marks stand 32px tall at 1440 and at least 27px at 390; aspect must h
 | 390 by 844 | `gt-school-logo-h.svg` | horizontal | 27.9px | 121.1px | 0% | ok |
 | 390 by 844 | `gt-icon.svg` | icon | 56px | 56px | 0% | ok |
 | 1440 by 900 | `gt-school-logo-h.svg` | horizontal | 32px | 139px | 0% | ok |
-| 1440 by 900 | `gt-icon.svg` | icon | 56px | 56px | 0% | ok |
+| 1440 by 900 | `gt-icon.svg` | icon | 88px | 88px | 0% | ok |
 
 ## Result: all required rows pass

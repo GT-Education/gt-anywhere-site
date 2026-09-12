@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:30:03.727Z; page `/0_plan/mockups/M27-one-mark/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:57:06.129Z; page `/0_plan/mockups/M27-one-mark/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -13,7 +13,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V7 | 402 by 681 | fold | 657 | 88 | 314 | 343 | 438 | 549 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 285 | 314 | 409 | 520 | yes | PASS |
 | V9 | 390 by 844 | emptiness |  | 88 | 454 | 491 | 602 | 713 | yes | report: page height 3536 |
-| V10 | 750 by 342 | fold | 318 | 56 | 187 | 213 | 288 | 304 | yes | PASS |
+| V10 | 750 by 342 | fold | 318 | 56 | 197 | 221 | 294 | 310 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 555 | 593 | 766 | 766 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 562 | 600 | 774 | 774 | yes | PASS |
 | V13 | 1024 by 768 | fold | 744 | 56 | 536 | 573 | 717 | 717 | yes | PASS |
@@ -55,7 +55,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V7 | yes | text cut by the edge, 664 to 684 |
 | V8 | yes | text cut by the edge, 711 to 741 |
 | V9 | yes | text cut by the edge, 829 to 849 |
-| V10 | yes | text cut by the edge, 328 to 348 |
+| V10 | yes | content reaches 342 of 342 and more follows below |
 | V11 | yes | content reaches 1012 of 1024 and more follows below |
 | V12 | yes | text cut by the edge, 1180 to 1200 |
 | V13 | yes | text cut by the edge, 753 to 774 |

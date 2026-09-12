@@ -15,8 +15,8 @@ appear below with links to `gt.school` and `anywhere.gt.school`.
 
 | Asked | Kept | Changed, and the binding reason |
 |---|---|---|
-| Wirey brain morphs into the logo | The wire, and the transformation | The mark is **already an atom of crossing orbits**. The wire is the brand's own geometry, so nothing is morphed: a filled 4-path SVG cannot morph without a JS library, which rule 2 forbids. A brain also makes an implicit cognitive-gain claim next to three unverified speed claims (REQ-022) |
-| The logo animates on entry | One 300ms settle, in the timed variant only | MN-02 and runbook section 7: nothing animates the LCP element before first paint; the README already logs the hero entrance as a Core Web Vitals defect (REQ-073) |
+| Wirey brain morphs into the logo | The wire, and the transformation | The mark is **already an atom of crossing orbits**. The wire is the brand's own geometry, so nothing is morphed: morphing is outside the transform-and-opacity-only contract; a filled 4-path SVG cannot morph without a JS library, which rule 2 forbids. A brain also makes an implicit cognitive-gain claim next to three unverified speed claims (REQ-022) |
+| The logo animates on entry | **Nothing.** MN-18 refused V12 and the timed variant was retired | MN-02 and runbook section 7: nothing animates the LCP element before first paint; the README already logs the hero entrance as a Core Web Vitals defect (REQ-073) |
 | Wordmark spins through three names | The suffix swap, as the **choice mechanism** | MN-01 and MN-08 allow motion that serves orientation or choice and forbid signature moments. Driving the swap from the door the parent is considering converts a brand film into a wayfinding cue |
 | Georgetown lower-left, Anywhere lower-right | Two mirrored equal arms | DD-21 requires N campuses. CONTRACT section 3 "Nesting is hierarchy" forbids drawing the two schools as rings or nested shapes |
 | — | Every drawn line at `--color-border-strong` | CONTRACT section 3: a line carrying the argument needs 3:1. The accent measures 2.38 on cream and already failed in M24 |
@@ -53,7 +53,7 @@ D-039 (scripts) stays escalated: every board here is CSS-only, so none of them d
 | M28 | The Weave | `insp-lineweave` | Does "wirey" survive as a hairline weave rather than a brain? |
 | M29 | The Hub | `insp-onepersonteam` | Does making the architecture explicit beat making it beautiful? |
 | M30 | Constant GT | `insp-outship` | Can the lockup alone carry it, with no drawn stage? |
-| M35 | The Stepper | `insp-cloudstudio` | Does reader-stepped sequencing beat a timeline? Built as M31, renumbered after a concurrent session claimed M31 to M34 the same afternoon |
+| M34 | The Tour | `insp-cloudstudio` | Does reader-stepped sequencing beat a timeline? Built as M31; the id collision was resolved to M34 and registered in `kb/DIRECTIONS.md` |
 
 ## Stage and scope
 
@@ -89,8 +89,10 @@ not a substitute for it.
 2. Its interaction is the one MN-18 actually adopted. The A/B pair that would have tested the timed
    model against it was retired when MN-18 refused V12; if Johnny wants that comparison, MN-18 is the
    row to reopen, and the retired variant is recoverable from git history.
-3. Its bracket is the cleanest answer to DD-21 that survives the nesting rule: two mirrored equal arms
-   that a third campus joins by adding a list item, with no geometry to redraw.
+3. Its bracket is the cleanest answer to the nesting rule: two mirrored equal arms, symmetric and
+   unnested. **It is not yet an answer to DD-21** — the arms and the mobile ordering use
+   school-specific selectors, so a third campus needs new rules, not just another list item. That work
+   is real and belongs to whichever direction is promoted.
 
 **If M26's stage reads as too much, M30 is the fallback.** No drawn stage at all: the lockup line is
 the hero and the type carries the brand architecture alone. It is the least likely of the six to date.

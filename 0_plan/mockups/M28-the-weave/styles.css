@@ -92,10 +92,12 @@ h1 {
 /* The weave is a HALO centred on the mark, never a fan crossing the lockup or the headline:
    Literata stands 0.1675em proud of its line box, so nothing drawn may run through it
    (CONTRACT v2.1 §3). It sits behind the mark and stops well above the type. */
-/* A tight corona: each strand STARTS beyond the mark's edge (--gap) and runs outward, so the
-   weave never reaches the lockup below it or the viewport edge above it.
+/* A tight corona: each strand STARTS beyond the mark's edge (--gap) and runs outward. The lockup is
+   given extra air so the corona's outer edge clears it: measured at 1440, the strands end at 204 and
+   the lockup must therefore begin below that (Astra pass 2, P1).
    NO opacity on the strands: the drawing must reach 3:1, and --color-border-strong at .38 composites
    to about 1.53:1 on --color-bg, which defeats the token (Astra E-wave P1.3, CONTRACT v2.1 §3). */
+.lockup { margin-top: var(--space-7); }   /* corona clearance on phones: measured 192 vs 192 touching at 390 */
 .weave {
   position: absolute; left: 50%; top: var(--space-5); width: 0; height: 0;
   --gap: 34px; pointer-events: none; z-index: 0;
@@ -107,11 +109,16 @@ h1 {
 }
 .mark { position: relative; z-index: 1; }
 @media (min-width: 768px) {
+  /* The corona's offset is derived from the mark's radius: an 88px mark is 44px, plus 10px of air.
+     The desktop block previously left the mark at 56px while offsetting for 88px, so the strands
+     began 16px inside the type (Astra pass 2, P1). */
+  .mark { width: 88px; height: 88px; }
+  .lockup { margin-top: var(--space-7); } /* outer edge 204; lockup now starts at 216 */
   .weave { --gap: 54px; }
   .weave i { top: 44px; height: 26px; }
   .doors { grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-top: var(--space-7); }
 }
-@media (max-height: 700px) { .weave { display: none; } }
+@media (max-height: 760px) { .weave { display: none; } } /* matches the mark's own cutoff */
 @media (max-width: 767px) {
   .door-line { order: 3; }
   .stage { padding-top: var(--space-4); }
@@ -166,7 +173,7 @@ h1 {
 }
 /* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
 @media (max-height: 400px) and (min-width: 600px) {
-  h1 { font-size: var(--text-lg); }
+  h1 { font-size: var(--text-xl); } /* CONTRACT §2 permits --text-xl on V10, not a two-step drop */
   .lockup { font-size: var(--text-base); }
   .lede { padding-top: var(--space-3); }
   .provenance { margin-top: var(--space-2); }

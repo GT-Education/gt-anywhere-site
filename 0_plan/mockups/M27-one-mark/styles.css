@@ -159,15 +159,17 @@ h1 { max-width: 26ch; }
 }
 /* V10, 750 by 342: the h1 steps down one token on this row only, as M03 did (CONTRACT v2.1 §2). */
 @media (max-height: 400px) and (min-width: 600px) {
-  h1 { font-size: var(--text-lg); }
+  h1 { font-size: var(--text-xl); } /* CONTRACT §2 permits --text-xl on V10, not a two-step drop */
   .lockup { font-size: var(--text-base); }
-  .lede { padding-top: var(--space-3); }
+  .lede { padding-top: var(--space-2); }
   .provenance { margin-top: var(--space-2); }
   .doors { grid-template-columns: 1fr 1fr; column-gap: var(--space-5); margin-top: var(--space-2); }
   .door { display: flex; }
   .door-line, .door-name { display: none; }
   .door-cta { margin-top: var(--space-2); }
-  .compare-anchor { margin-top: var(--space-3); }
+  /* Top-align the anchor's text so its INK, not just its 44px box, lands in the reserved strip. */
+  .compare-anchor { margin-top: var(--space-1); }
+  .compare-anchor a { align-items: flex-start; }
 }
 
 /* A doubled root font must not overflow: the reserved swap box may wrap rather than push the page wide. */
@@ -200,11 +202,11 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
 
 .sources { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-5) 0 0; max-width: var(--measure-prose); }
 @media (max-height: 760px) {
-  .stage { padding-top: var(--space-2) !important; }
-  .lede { padding-top: var(--space-3) !important; }
+  .stage { padding-top: var(--space-2); }
+  .lede { padding-top: var(--space-3); }
   .steps { margin-top: var(--space-2); }
   .steps a { height: 32px; }
-  .door { padding: var(--space-3) var(--space-3) !important; }
+  .door { padding: var(--space-3) var(--space-3); }
 }
 
 @media (min-width: 1440px) and (min-height: 900px) { .next-band { min-height: 34rem; } }
@@ -263,5 +265,15 @@ h1, .door-line, .provenance, .next-band p { overflow-wrap: break-word; }
   .next-band { padding-top: var(--space-2); }
   /* The 44px target centres its text, which put the anchor's INK below 960 while its box crossed the
      edge. Top-aligning keeps the target size and lands the text inside the reserved strip. */
+  .compare-anchor a { align-items: flex-start; }
+}
+
+/* V10 last word. An earlier blunt `!important` in the 760px block was overriding the row-specific
+   values below it, so tightening V10 had no effect at all until the override came out. */
+@media (max-height: 400px) and (min-width: 600px) {
+  .lede { padding-top: var(--space-1); }
+  .provenance { margin-top: var(--space-1); }
+  .doors { margin-top: var(--space-1); }
+  .compare-anchor { margin-top: var(--space-1); }
   .compare-anchor a { align-items: flex-start; }
 }
