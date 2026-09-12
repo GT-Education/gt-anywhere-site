@@ -21,7 +21,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | SE (SEO and AEO decisions) | 14 |
 | SRC (Sources of truth (SOURCES.md; designated in TRUTH.md)) | 17 |
 | TR (Source-of-truth statements (attested in TRUTH.md, proposed in truth-proposals.md)) | 15 |
-| CR (Claims register rows (0_plan/12-claims-register.md)) | 41 |
+| CR (Claims register rows (0_plan/12-claims-register.md)) | 45 |
 | W (End-to-end workflows (0_plan/13)) | 12 |
 | TC (Test cases (1_spec/13)) | 62 |
 | C (Completion checklist) | 15 |
@@ -308,7 +308,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | MD-14 | Geographic personalization | `0_plan/07-design-decisions.md:85` | `03-decisions-and-open-questions.md`, `05-landing-mockups-plan.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md` |
 | MD-15 | Qualification friction | `0_plan/07-design-decisions.md:86` | `03-decisions-and-open-questions.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md` |
 | MD-16 | Claims governance | `0_plan/07-design-decisions.md:87` | `00-context.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md` |
-| MD-17 | Alpha affiliation prominence | `0_plan/07-design-decisions.md:88` | `00-context.md`, `02-requirements-and-deliverables.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `18-knowledge-base-plan.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `CLAUDE.md`, `truth-proposals.md` |
+| MD-17 | Alpha affiliation prominence | `0_plan/07-design-decisions.md:88` | `00-context.md`, `02-requirements-and-deliverables.md`, `06-mockup-rationale.md`, `08-effectiveness-and-expanded-considerations.md`, `12-claims-register.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `18-knowledge-base-plan.md`, `1_spec/03-landing-page-spec.md`, `1_spec/07-seo-aeo-spec.md`, `1_spec/11-verification-spec.md`, `CLAUDE.md`, `truth-proposals.md` |
 | MD-18 | Positioning against alternatives | `0_plan/07-design-decisions.md:89` | `08-effectiveness-and-expanded-considerations.md`, `11-seo-aeo-plan.md`, `15-positioning-brief.md`, `1_spec/01-users-and-journeys.md`, `1_spec/03-landing-page-spec.md`, `1_spec/05-school-sites-spec.md` |
 | MD-19 | Local search for Georgetown | `0_plan/07-design-decisions.md:90` | `03-decisions-and-open-questions.md`, `08-effectiveness-and-expanded-considerations.md`, `11-seo-aeo-plan.md`, `1_spec/02-sitemaps-and-ia.md`, `1_spec/05-school-sites-spec.md`, `1_spec/07-seo-aeo-spec.md` |
 | MD-20 | Consent and privacy posture | `0_plan/07-design-decisions.md:91` | `02-requirements-and-deliverables.md`, `03-decisions-and-open-questions.md`, `08-effectiveness-and-expanded-considerations.md`, `09-operating-model.md`, `12-register-loop.md`, `13-journey-map.md`, `1_spec/00-scope-and-traceability.md`, `1_spec/03-landing-page-spec.md`, `1_spec/06-analytics-tracking-spec.md`, `1_spec/09-chatbot-platform-spec.md` |
@@ -472,7 +472,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | CR-005 | "delivering 4x faster learning" (structured data) / "Adaptive platform proven to deliver 4X learning velocity" | `0_plan/12-claims-register.md:27` | `03-decisions-and-open-questions.md`, `07-design-decisions.md`, `15-positioning-brief.md`, `1_spec/07-seo-aeo-spec.md` |
 | CR-006 | "3-7x faster learning" | `0_plan/12-claims-register.md:28` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md` |
 | CR-007 | "Growth Factor target (3X for grades 3+, 2X for grades K-2)" | `0_plan/12-claims-register.md:29` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md`, `1_spec/03-landing-page-spec.md` |
-| CR-008 | "3X learning velocity" | `0_plan/12-claims-register.md:30` | `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md` |
+| CR-008 | "3X learning velocity" | `0_plan/12-claims-register.md:30` | `07-design-decisions.md`, `15-positioning-brief.md`, `16-g05-decision-record.md`, `1_spec/03-landing-page-spec.md` |
 | CR-009 | "1400+ SATs by 8th grade" | `0_plan/12-claims-register.md:31` | `15-positioning-brief.md` |
 | CR-010 | "score 1350+ on their SAT tests by eighth grade" | `0_plan/12-claims-register.md:32` | `15-positioning-brief.md` |
 | CR-011 | "designed for students in the 90th+ percentile" | `0_plan/12-claims-register.md:33` | `07-design-decisions.md`, `08-effectiveness-and-expanded-considerations.md`, `15-positioning-brief.md`, `truth-proposals.md` |
@@ -492,7 +492,7 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | CR-025 | "curated cohort... of 8-12 fellow intellectuals" | `0_plan/12-claims-register.md:47` | `15-positioning-brief.md` |
 | CR-026 | "12–15 student cohort" | `0_plan/12-claims-register.md:48` | `03-decisions-and-open-questions.md`, `15-positioning-brief.md` |
 | CR-027 | "Our first nine students proved the model." | `0_plan/12-claims-register.md:49` |  |
-| CR-028 | "GT Anywhere launched in 2026... attracted hundreds of students in its first months" | `0_plan/12-claims-register.md:50` |  |
+| CR-028 | "GT Anywhere launched in 2026" | `0_plan/12-claims-register.md:50` | `07-design-decisions.md` |
 | CR-029 | "The program launches in 2026 with $1 billion in funding." (TEFA, statewide) | `0_plan/12-claims-register.md:51` | `03-decisions-and-open-questions.md`, `07-design-decisions.md` |
 | CR-030 | "50% Monthly Tuition Credit... if [MAP] Growth Factor... is less than [target]... and... completed at least 80 | `0_plan/12-claims-register.md:52` |  |
 | CR-031 | "TimeBack · 140 XP / Day" | `0_plan/12-claims-register.md:53` | `05-landing-mockups-plan.md`, `07-design-decisions.md` |
@@ -502,10 +502,14 @@ Generated 2026-09-11 by `tools/build-index.py`. Do not hand-edit. `tools/check-l
 | CR-035 | Guides hold weekly one-to-one check-ins with each student ("Academic Advisors are responsible for weekly 1:1 c | `0_plan/12-claims-register.md:57` |  |
 | CR-036 | "This K-8 virtual academy attracted hundreds of students in its first months and continues to build momentum." | `0_plan/12-claims-register.md:58` |  |
 | CR-037 | "students achieving multiple grade levels of acceleration while deepening their academic interests" | `0_plan/12-claims-register.md:59` |  |
-| CR-038 | "a flagship K-8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable f | `0_plan/12-claims-register.md:60` |  |
+| CR-038 | "a flagship K-8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable f | `0_plan/12-claims-register.md:60` | `07-design-decisions.md` |
 | CR-039 | "Our Accredited K-8 Virtual School brings 3X learning velocity to your home." | `0_plan/12-claims-register.md:61` |  |
 | CR-040 | "accessible anywhere and eligible for ESA funding" | `0_plan/12-claims-register.md:62` |  |
 | CR-041 | "We provide the full GT academic crucible - AI adaptive blocks and a global tribe of peers" | `0_plan/12-claims-register.md:63` |  |
+| CR-042 | "The gifted school in the Alpha School network." | `0_plan/12-claims-register.md:64` |  |
+| CR-043 | "from wherever you live" and the nationwide framing of GT Anywhere | `0_plan/12-claims-register.md:65` |  |
+| CR-044 | "Guides on campus in every session." | `0_plan/12-claims-register.md:66` |  |
+| CR-045 | "students advance on demonstrated mastery, measured with MAP assessments" | `0_plan/12-claims-register.md:67` |  |
 
 ## W: End-to-end workflows (0_plan/13)
 

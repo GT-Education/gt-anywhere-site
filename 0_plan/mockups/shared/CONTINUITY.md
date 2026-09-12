@@ -15,10 +15,26 @@ than a block count. Captures are in `0_plan/kb/exemplars/estate/` at 390 by 844 
 `measurements.json` carries each figure with its box and the element that paints it. The selector
 field is a descriptive string, not a unique selector, so re-derive rather than re-query from it.
 
-**`gt.school` has no mirror in this repository and is unmeasured.** Anywhere cannot stand in for it.
-A critic can score the Anywhere handoff on rendered evidence and must say the Georgetown handoff is
-unverified. A text-only derivation of gt.school's CSS is acceptable as labelled source analysis and
-is not a substitute for the rendered comparison (Astra, `ensemble/E8-dd46-continuity.md`).
+**`gt.school` is now half measured.** On 2026-09-11 its home page was fetched as text, served from
+`127.0.0.1` and captured, by the same method that produced the Anywhere mirror; production was never
+loaded in a browser. The evidence and its limits are in `0_plan/kb/exemplars/estate-gt/SOURCE.md`.
+What it establishes: the header, the navigation, both action constructions, the display face and the
+body face. What it does not: the hero's media did not load, so the first screen is unreadable in
+those captures and **no ground colour may be cited for gt.school from them**. A critic may now score
+the Georgetown handoff's chrome and type on rendered evidence, and must still say its first screen is
+unverified (Astra, `ensemble/E8-dd46-continuity.md`).
+
+**The heading gap is against the whole estate, not one site.** gt.school sets its h1 in Literata
+**300** at **-1.6px**, the same weight and tracking as anywhere.gt.school. Every mock ships **400** at
+**normal**. The table below recorded this as a difference from one site; it is a difference from both.
+M03 argued its way to 400 deliberately and that stands; the rest inherited it.
+
+**gt.school pairs a filled navy primary with an outlined navy secondary**, both Inconsolata 16px at
+computed weight 500. With the Anywhere first screen's navy card, that is two sites agreeing that the
+estate's first-screen action is navy, and it is the orange footer card that is the exception. DD-46.
+
+**The estate already navigates between its own schools**: gt.school's header carries "GT Anywhere" as
+an accent-orange link. Cross-school handover is not something the umbrella page invents.
 
 ## Measured on the first screen
 

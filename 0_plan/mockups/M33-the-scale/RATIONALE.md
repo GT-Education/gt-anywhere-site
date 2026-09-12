@@ -7,7 +7,7 @@
 | Source it recreates | The `story_wrap` section of `https://www.gt.school/about-us`, read only as the dated text extract at `0_plan/kb/exemplars/gt-story/` (`SOURCE.md`, `story-segment.html`, `story-rules.css`, `count.py`). **The live page was never loaded**, here or anywhere in this build |
 | Runner | `node 0_plan/tools/shots.mjs 0_plan/mockups/M33-the-scale` — **exit 0, all required rows pass**. Figures below are pasted from that run (`qa/fold.md`, 2026-09-12T01:14:58.398Z) |
 | Checkers | `check-mocks.py` **38 pass 0 fail** (R10 now scans `motion*.css`, so this mock's keyframes and its reduced-motion guard are gated rather than invisible); `check-claims.py` OK; `check-links.py` OK |
-| Review | Studio critic round 1 scored 4/3/4/4/5/5/4/3/4, ITERATE, `0_plan/ensemble/critic-fable-M33.md`. Composition 3 and Craft 3 are answered below, each under its own heading |
+| Review | Round 1 scored 4/3/4/4/5/5/4/3/4 (Composition 3, Craft 3); round 2 scored 4/4/4/4/5/3/5/3/4 (Motion 3, Craft 3). Card: `0_plan/ensemble/critic-fable-M33.md`. Each failing row is answered below under its own heading. **Round 2 overturned a conclusion of mine that was too pessimistic about my own move** — see "Motion: the range was wrong, not the device" |
 | Two things this file does **not** assert | That this is the estate's only animated storytelling device, and that the source's ticks are scroll-triggered. Neither can be shown from what we hold |
 
 ## Direction
@@ -64,9 +64,9 @@ Two figures inside that quoted prose are withheld, each shown as `[…]`:
 | Withheld | Where | Why |
 |---|---|---|
 | The clause stating a speed multiple | "…where a flagship K–8 campus was launched […]." | CR-008 and CR-038, both **Unverified**, owner Nari. M31 withholds this clause; this page keeps that withholding |
-| The launch year | "GT Anywhere launched in […], bringing the full model…" | **No claims-register row holds it.** An engineer does not add a register row from inside a build, so the figure is withheld and the gap is named here. If Nari wants the year on the page, it needs a row first |
+| The launch year | "GT Anywhere launched in […], bringing the full model…" | **CR-028**, "GT Anywhere launched in 2026", **Unverified**, owner Nari. The withholding is ordinary: the row exists and is unverified, exactly like the speed clause two movements earlier |
 
-### The four claims rows the story touches
+### The five claims rows the story touches
 
 | Row | Statement | Status / owner | On this page |
 |---|---|---|---|
@@ -74,6 +74,29 @@ Two figures inside that quoted prose are withheld, each shown as `[…]`:
 | CR-038 | "a flagship K-8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable fact" | Unverified, Nari | **Withheld**, same clause. CR-038 is the accurate row for the stronger "measurable fact" framing; `check-claims.py` maps a bare `3X` token to CR-004, which is the Anywhere row and not this one |
 | CR-037 | "students achieving multiple grade levels of acceleration" | Unverified, Nari | **Present, verbatim**, inside the Georgetown movement |
 | CR-036 | "This K-8 virtual academy attracted hundreds of students in its first months" | Unverified, Nari | **Present, verbatim**, inside the GT Anywhere movement |
+| CR-028 | "GT Anywhere launched in 2026" | Unverified, Nari | **Withheld.** The year is replaced by `[…]` |
+
+**The reason is now on the page, not only in a comment.** Round 1 put the withholding notice in an
+HTML comment, so a reader met `[…]` and never met the reason — and the reader who most needs it is
+Nari. A one-sentence editorial note now sits under the story band, above the comparison:
+
+> Editorial note: two figures have been removed from the quoted passages above, a learning-speed
+> multiple and a launch year, because neither is verified. Nothing else in them has been changed.
+
+**That sentence is not in `copy.md`.** It is a new string and it is flagged exactly as the quoted story
+prose is: Nari owns whether it stays, in that wording or another. It states no fact, carries no figure
+and names no register id (the deck keeps CR ids off the page). It is set as apparatus — `--text-sm`,
+muted, under a rule — rather than as prose, because the story is the argument and this is the note on
+the argument.
+
+**A correction I owe, and it shipped in the HTML.** Round 1 of this page said in four places — twice in
+`index.html`, twice here — that **no** register row held the launch year. CR-028 holds it
+(`0_plan/12-claims-register.md`), it was narrowed to exactly that figure on 2026-09-11, and MN-17
+already carried the correction; the routing went to the M31 engineer and this page, which quotes the
+same sentence, never took it. The withholding was right for the whole time the reason was wrong. Both
+HTML statements and both tables here now cite CR-028. Related, and a register question rather than a
+mock one: **CR-028 and CR-036 were one row until that narrowing**, and both still describe statements
+from the same source sentence, which is worth the register owner's attention.
 
 **One adjacency that belongs in the register, not in silence.** The one thing that moves on this page
 is a bar filling a measuring scale, and on the Georgetown movement it fills directly beside the
@@ -127,7 +150,15 @@ Geometry taken from `story-rules.css` in the checked-in extract: tick 30% of the
 | | The source, counted | This page, measured in the browser |
 |---|---|---|
 | Tick positions | 104, in two runs of 52 | **104, in two runs of 52** |
-| Rhythm | a major every **second** position; 46 of the 48 gaps between majors are 2, and the two gaps of 4 are where the first run's hour marks displace a major | a major every second position. **50 majors**, 25 per run. One gap of 4, at the seam between the two runs, because each run opens with two non-major positions — the same structure, arrived at without hour marks |
+| Rhythm | a major every **second** position; 46 of the 48 gaps between majors are 2, and two are 4 | a major every second position. **50 majors**, 25 per run. One gap of 4, at the seam between the two runs, because each run opens with two non-major positions |
+
+**A KB error, noted in passing and not the mock's.** `SOURCE.md` and the brief both say the source's two
+gaps of 4 "are where the first run's hour marks displace a major". Running `count.py` on the checked-in
+extract shows **one** of them is an hour mark and the other is the run seam — the same seam this page
+draws. The critic found it independently. It belongs to whoever owns `0_plan/kb/exemplars/gt-story/`.
+Under forced colours, where the fine gradient is suppressed by design, that single 105px gap against
+the majors' 51–54px pitch is the one irregularity in the ruler and it is most exposed to exactly the
+readers the bordered elements exist for. It is faithful, and it is worth knowing.
 | `is-hour` marks | 2 | **Not reproduced.** They read as a clock, and this page makes no claim about hours |
 | `is-transparent` ticks | 2, one opening each run | Drawn as ordinary ticks. Nothing on this page is invisible at rest |
 | Tick widths | 30% and 45% of the rail | 30% and 45% of the rail |
@@ -209,7 +240,7 @@ neither touches this page.
 
 | Beat | Trigger | Property | Range | Easing | Reduced motion |
 |---|---|---|---|---|---|
-| Position marker | scroll position within the story stage | `transform: scaleY(0→1)` at 1024 and above with 700px of height; `scaleX(0→1)` otherwise | `animation-range: contain 0% contain 100%` on a `view-timeline` named on `.story-grid` — progress 0 when the stage's top edge reaches the top of the viewport, progress 1 when its bottom edge reaches the bottom | `linear` | `animation: none`; the marker rests at the complete scale |
+| Position marker | scroll position within the story stage | `transform: scaleY(0→1)` at 1024 and above with 700px of height; `scaleX(0→1)` otherwise | `animation-range: contain 0% exit 100%` on a `view-timeline` named on `.story-grid` — progress 0 when the stage's top edge reaches the top of the viewport, progress 1 when that same edge leaves it, which is the last moment any of the stage is on screen | `linear` | `animation: none`; the marker rests at the complete scale |
 
 There is **no duration in time anywhere in `motion.css`**: start and end are scroll offsets, so there is nothing
 for a reader to sit through and no pause control to need. Transform only; no opacity, no colour, no layout.
@@ -219,16 +250,22 @@ is present, readable and reachable at rest, at every matrix row: the stage is ne
 is visible. The only sticky object on the page is the scale strip itself, which is at most one viewport tall and
 therefore can never push a movement out of view.
 
-Measured at 1440 by 900 (scripted scroll, computed transform read at each stop):
+Measured by scrolling in 4px steps and settling each sample across two animation frames — a
+scroll-driven animation updates off the main thread, and reading computed style in the same task
+returns the previous frame, which shifts both endpoints:
 
-| Scroll | Computed transform |
-|---|---|
-| 0 (top of the document) | `matrix(1, 0, 0, 0, 0, 0)` — scaleY 0 |
-| stage top (1804) | scaleY 0 |
-| +25% of the range | scaleY 0.25 |
-| +50% | scaleY 0.50 |
-| +75% | scaleY 0.75 |
-| end of the range (3124) | scaleY 1 |
+| Row | Sweep starts | ends | Travel | Stage top |
+|---|---|---|---|---|
+| 1440 by 900 | 1808 | 3012 | **1204px** | 1804 (2.00 screens) |
+| 1920 by 960 | 1928 | 3220 | **1292px** | 1924 (2.00 screens) |
+| 1280 by 720 | 1448 | 2596 | **1148px** | 1444 (2.01 screens) |
+| 1024 by 768 | 1544 | 2692 | **1148px** | 1540 (2.01 screens) |
+| 768 by 1024 | 2056 | 3188 | **1132px** | 2052 (2.00 screens) |
+| 390 by 844 | 1696 | 3420 | **1724px** | 1692 (2.00 screens) |
+| 375 by 629 | 1485 | 3209 | **1724px** | 1481 (2.35 screens) |
+
+The sweep begins within 4px of the stage's top edge at every row — the scan's own step — so it still
+starts on the third screen and the vocabulary's guard is untouched.
 
 Under `prefers-reduced-motion: reduce`, the same five positions return `animation-name: none`,
 `animation-duration: 0s`, `transform: none` — the complete scale, checked **while scrolling**, not by reading
@@ -301,41 +338,95 @@ Measured after, with the same method (box height against the tallest thing in it
 | 1280 by 720 | 320 | 320 | **0%** | — |
 | 768 by 1024 | 267 / 267 / 348 | same | **0%** | 0% (the row the critic held up as proof the content was not the cause) |
 
-One more change the critic did not ask for, and the reason. The rail was pinned at the source's
-`top: 6rem`, which in the source is the band a sticky site header occupies. **This page's header is
-not sticky**, so that inset left 96px at the top of the viewport with no spine in it — and with the
-new tie rules, a plate whose rule landed in that band pointed at nothing. The rail now fills the
-viewport (`top: 0`, `block-size: 100svh`). The 6rem was the source's *reason*, not its rule.
+One more change round 1 made without being asked, and the reason — **with the inference labelled**.
+The rail was pinned at the source's `top: 6rem`. *Why* the source chose 6rem is **inference**: the
+checked-in extract holds the story section and 70 story rules and says nothing about the source's
+header, so "a sticky site header sits in that band" is a plausible reading and not a measured fact,
+and the brief itself says to label the rest inference. What **is** measured: this page's header is not
+sticky, so that inset left 96px at the top of the viewport with no spine in it, and with the new tie
+rules a plate whose rule landed in that band pointed at nothing. The rail now fills the viewport
+(`top: 0`, `block-size: 100svh`).
 
-### Does the motion force the composition? Partly, and here is the number
+### Round 2: the rail is now the page's spine, not the band's
 
-The critic's sharpest point, and it deserves a straight answer: the long stage existed because the
-marker needed distance. **Fixing the composition shortened the travel, and I did not put any of it
-back.**
+The critic measured what round 1's fix did not reach: at 1440 the rail sat at x=176 and its spine at
+x=240, while the h1, the doors, the compare eyebrow, the table, the proof heading and the footer all
+began at **x=64**. A spine on its own inset datum governs nothing, and the overture's lead-in hairline
+missed the spine by 64px. The thesis said "the page's spine"; the geometry said "the band's".
 
-| Row | Marker travel, before | after | Stage height, after |
+Two changes, and the thesis is now literal:
+
+| Change | Why |
+|---|---|
+| `.story .wrap { max-width: 76rem }` **removed** — the story band uses the page wrap like every other band | The narrower band was the whole cause of the offset. The story's measure is held where it belongs, by `--measure-prose` on the prose itself |
+| The vertical rail's spine moved from its **right** edge to its **left**, ticks growing rightward | With the band on the page wrap, the rail's left edge *is* the page's left datum. Putting the spine there makes the scale's one continuous line the same line the h1 starts on. The source's rail hugs the page edge so its spine faces the content; here the spine **is** the content's datum, so the ticks face the other way — a declared mirror, in Departures |
+
+Measured after, on three desktop rows:
+
+| Element | 1440 by 900 | 1920 by 960 | 1280 by 720 |
 |---|---|---|---|
-| 1440 by 900 | 1320px | **306px** | 1206 |
-| 1920 by 960 | 1416px | **336px** | 1296 |
-| 1280 by 720 | 1056px | **432px** | 1152 |
-| 768 by 1024 | 111px | **111px** (unchanged; this row never had the min-height) | 1135 |
-| 375 by 629 | 1099px | **1099px** (unchanged; the phone stacks and is naturally tall) | 1728 |
+| h1, doors, compare eyebrow, table, proof heading, footer | 64 | 304 | 48 |
+| Overture short rule, overture tail hairline, editorial note | 64 | 304 | 48 |
+| **Rail, and the rail's spine** | **64** | **304** | **48** |
+| First tick ink | 65 → 93 | 305 → 333 | 49 → 77 |
+| Plate, and the tie rule's far end | 176 | 416 | 160 |
 
-So both halves are true, and both belong on the record beside the adoption of V13:
+The tie rule is now 112px — the rail's 4rem plus the 48px column gap — so it starts at the plate's top
+edge and terminates on the spine, which is the page's own left line. One line runs the length of the
+story band and every other band on the page starts on it.
 
-1. **The composition was downstream of the motion, and that was a fault.** A layout should not be
-   stretched to give an indicator room to move. It has been un-stretched.
-2. **The scale is not wrong at 306px, but the device is thinner on desktop.** The marker remains an
-   exact proportion of the stage — that is what `contain 0% → contain 100%` means — so it never
-   misreports where the reader is. What it loses is dwell: at 1440 by 900 the whole sweep now happens
-   inside a third of a screen of scrolling, and at 768 by 1024 inside 111px, which is close to
-   instantaneous. **On the phone, where two thirds of GT's sessions are and where the stage is
-   naturally 1728px tall, the travel is unchanged at 1099px and the device is at its best.**
+### Motion: the range was wrong, not the device
 
-The honest reading is that **V13 earns its place on the phone and is marginal on a wide desktop**,
-and that a reviewer who wants it to feel substantial at 1440 is asking for exactly the stretched
-layout this iteration removed. That is the strongest argument against the move, it is now measured,
-and it sits here next to the decision to adopt it provisionally.
+**Round 1's conclusion here was mine, it was wrong, and the correction is the most useful thing in this
+iteration.** I wrote that halving the movement boxes cut the marker's sweep from 1320px to 306px at
+1440 by 900 and to 111px at 768 by 1024, that the device was therefore "marginal on a wide desktop",
+and — worse — that the tablet row was "not fixable without stretching the tablet layout the way the
+desktop one was stretched". I reported honestly against my own move and then stopped at the report.
+The critic did not stop: it overrode the range at runtime and measured a remedy.
+
+`animation-range: contain 0% contain 100%` ends the sweep when the stage's **bottom** edge reaches the
+bottom of the viewport. On a stage only a little taller than the viewport that is almost immediately,
+which is why the marker was blank through the approach, moved for about a seventh of the rail's time
+on screen, and sat saturated for the last two fifths. **That is not reporting position, which is the
+one thing V13 was adopted to do.**
+
+`animation-range: contain 0% exit 100%` ends it when the stage's **top** edge leaves the top of the
+viewport instead — the last moment any of the stage is on screen. One value in `motion.css`, no layout
+change, and the start is unchanged, so the never-in-the-first-two-screens guard still holds.
+
+| Row | `contain … contain` (round 1) | `contain … exit` (now) | Sweep start |
+|---|---|---|---|
+| 1440 by 900 | 306px | **1204px** | 1808, on the third screen |
+| 1920 by 960 | 336px | **1292px** | 1928 |
+| 1280 by 720 | 432px | **1148px** | 1448 |
+| 1024 by 768 | — | **1148px** | 1544 |
+| 768 by 1024 | 111px | **1132px** | 2056 |
+| 390 by 844 | — | **1724px** | 1696 |
+| 375 by 629 | 1099px | **1724px** | 1485 |
+
+The critic's independent numbers (1,200 / 1,130 / 1,720) agree with mine within the sampling step.
+`cover 0% cover 100%` gives more travel still and is **not** used: it starts inside the overture and
+would breach the third-screen guard.
+
+**What this settles, and what it withdraws.**
+
+| Withdrawn | Replaced by |
+|---|---|
+| "V13 earns its place on the phone and is marginal on a wide desktop" | The device works on every row. The composition was never the constraint |
+| "Not fixable without stretching the tablet layout" | Fixed with a property value, layout untouched: 111px → 1132px at 768 by 1024 |
+| "Fixing the composition shortened the travel and I did not put it back" | True of the layout, false as a conclusion. The travel was never the layout's to give |
+
+The part of round 1's answer that survives is the part about direction of travel: **a layout must not
+be stretched to give an indicator room to move.** The movement boxes are still half a screen and the
+stage is still 1206px at 1440; the sweep grew by 900px with nothing added to the page. The lesson I
+would write into MN-17 is narrower and sharper than the one I wrote: a conceded limitation reads as
+honesty and can hide a one-line remedy, so a concession is not finished until the remedy has been
+tested and failed.
+
+One surface the iteration still has not examined, and the critic is right to name it: **the overture
+spends a 916px screen on 157px of prose**, and its height is justified by the third-screen guard. That
+is the same "layout sized for the motion" shape in a place neither round looked at. It is not fixed
+here, and it is the first thing I would take to a third pass.
 
 ## Fold: the measured run
 
@@ -424,14 +515,17 @@ a `var(--…)` or a forced-colours system keyword.
 | `aspect-ratio: 6 / 5` | story frames | The source's declared frame ratio |
 | `--fs-tail` 4.3125rem; `.overture` `calc(100svh + 1rem)` | first screen, overture | Fold arithmetic: the anchor rule 12px above the fold, and the scale on the third screen |
 | thresholds 560px, 700px, 768px, 1024px, 1440px, and `max-height: 479px`/`min-width: 700px` | media queries | The measured breakpoints of this layout and the contract's landscape recipe |
-| `.story .wrap { max-width: 76rem }` | story band | The container token is 90rem; a story read as one column needs a narrower measure |
 | `.overture-line` at `--text-lg` and `46ch` | overture | The story's opening is set one step above body prose as a lead. Still Inter Tight 400 at `--leading-prose`. The rest of the story prose is `--text-base` exactly as the brief states |
 | `35ch` h1 cap, `22ch` h2 cap, `65ch` prose | throughout | Contract and RF-55 |
 | `min(100%, 15rem)` on frame marks; `3.5rem` icon | story frames | Width-driven sizing keeps the aspect exact at every width (measured 0% skew); 56px is K12 V2's icon size |
 | `--space-7` short rule, `--space-9` tail hairline, `--space-8` stage gap | story | The source's 2.75rem, 5rem and 4.5rem taken to the nearest token rather than reproduced literally, because the token ladder is the contract |
 | **`motion.css` as a second stylesheet** | page head | The pattern M34 established, and what the brief asks for. Round 1 disclosed that R10 scanned `styles.css` only, so this file's keyframes were not mechanically gated, and declined to edit the shared rule. **R10 now reads every `motion*.css` in the folder**, and a new rule requires a scroll timeline to be disabled *by name* under reduced motion, because zeroing a duration does nothing to a scroll-driven animation. Both pass; 38 of 38. No longer a departure, kept here as the record of why the file is separate |
 | `.mv { min-block-size: calc((100svh − 14rem) / 2) }`, the 24rem plate column, `.frame::before` tie rule | the desktop stage | The Composition fix. Measured before and after in "Composition: what round 1 got wrong" |
-| `.scale { top: 0; block-size: 100svh }` instead of the source's `top: 6rem` | the vertical rail | The source's inset is the band its sticky site header occupies; this page's header is not sticky, so the inset left 96px of viewport with no spine in it and the plates' tie rules pointed at nothing. Same section |
+| `.scale { top: 0; block-size: 100svh }` instead of the source's `top: 6rem` | the vertical rail | This page's header is not sticky (measured), so the inset left 96px of viewport with no spine in it and the plates' tie rules pointed at nothing. **Why the source chose 6rem is inference** and is labelled as such wherever it appears. Same section |
+| The vertical rail's spine on its **left** edge, ticks growing rightward — the mirror of the source's rail | the vertical rail | So the spine can sit on the page's own left datum, which is what the direction's thesis claims. Measured at 64 / 304 / 48 on the three desktop rows, level with the h1, the doors, the table, the proof and the footer |
+| `.story` uses the page wrap; the 76rem story wrap removed | the story band | The narrow band put the rail on its own inset datum. The prose keeps its measure from `--measure-prose` |
+| `.frame::before` 112px (`4rem + --space-7`) | the tie rule | The rail's width plus the column gap: it starts at the plate's top edge and terminates on the spine |
+| `.story-note` — a visible editorial note under the story | the story band | **New copy, not in `copy.md`.** See Flagged slots |
 
 ## Flagged slots
 
@@ -445,7 +539,8 @@ a `var(--…)` or a forced-colours system keyword.
 | Q-002 current families | community.gt.school, as the deck names it |
 | R14 / MD-02 tour label | "Ask about a tour of the Georgetown campus" |
 | DD-43 repeated cells, R14 tour label, section 9 vocabulary | All proposed, not agreed |
-| **The story band** | Quoted copy, not in `copy.md`, Nari's to approve — and the 2026 launch year is a gap, not an omission |
+| **The story band** | Quoted copy, not in `copy.md`, Nari's to approve. Both withheld figures are gaps, not omissions, and both are held by Unverified register rows: CR-008 / CR-038 for the speed clause, CR-028 for the launch year |
+| **The editorial note under the story** | "Editorial note: two figures have been removed from the quoted passages above, a learning-speed multiple and a launch year, because neither is verified. Nothing else in them has been changed." **New copy, not in `copy.md`**, carrying no fact and no figure. It exists because the reason for the `[…]` has to reach the reader who meets the page. Nari owns the wording, or whether it stays at all |
 
 ## Parent questions
 
@@ -481,19 +576,22 @@ a `var(--…)` or a forced-colours system keyword.
 | `python3 0_plan/tools/check-links.py` | **OK** |
 | 390 by 844 first screen | Header, h1, provenance line and both door CTAs above the fold, with the second CTA at 557 of 820 and the door lines cut by the edge |
 | The scale complete at rest | Captured at scroll position zero and at the stage without scrolling further: 104 ticks and 50 majors drawn, marker at zero. Verified again under forced colours in both palettes at the stage's own scroll position |
-| The stage captures | `node 0_plan/mockups/M33-the-scale/qa/stage-captures.mjs` — checked in, with its output: seven stage frames, three magnified rail crops and `qa/stage.md`. Round 1 ran these checks and kept nothing; they now ship |
+| The stage captures | `node 0_plan/mockups/M33-the-scale/qa/stage-captures.mjs` — checked in, with its output: seven stage frames, three magnified rail crops and `qa/stage.md`. Round 1 ran these checks and kept nothing; they now ship, and round 2 reproduced every claim in that table independently |
+| Left datum | Rail spine, h1, doors, compare eyebrow, table, proof heading, footer, overture rule, overture tail and the editorial note all measured on one line: 64 at 1440, 304 at 1920, 48 at 1280 |
+| Marker sweep | 1204px at 1440 by 900, 1132px at 768 by 1024, 1724px at 375 by 629, each starting within 4px of the stage's top edge (the scan's step), so still on the third screen |
 
 ## What is unresolved
 
 | Item | State |
 |---|---|
 | **MN-17 / V13** | **Adopted provisionally and narrowly**, under delegation from Johnny; reviewed again the first time a second direction wants it. The measured argument against it on wide desktops is in "Does the motion force the composition?" and should be read beside the adoption |
-| The marker's dwell at 768 by 1024 | 111px of travel: the stage there is 1135 against a 1024 viewport, so the sweep is close to instantaneous. Pre-existing, not introduced by this iteration, and not fixable without stretching the tablet layout the way the desktop one was stretched |
+| ~~The marker's dwell at 768 by 1024~~ | **Resolved, and the claim withdrawn.** Round 1 called 111px of travel unfixable without stretching the layout. It was fixable with one property value: `contain 0% exit 100%` takes it to **1132px** with the layout untouched. The finding was worth making; the impossibility was not mine to assert |
 | The two `[…]` gaps | **Kept, deliberately, against the critic's suggestion.** The brief allows "leave it out **or** leave a gap"; deleting "in 2026" would make a quoted sentence read as if the source never named a year, with no mark that anything was removed. A visible `[…]` is the honest form of a withheld figure and matches how the speed clause is withheld two movements earlier. It does read as an interruption at 375, which is the cost. The story band is Nari's, so the call is hers |
 | The runner's V18 next-band line | **Reported here, fixed in the tool, now resolved.** The runner used to tell every mock that nothing was visible below the last CTA on the 320 by 256 row, which that row's own capture contradicted. The cause was that the last CTA sits past the edge on a 256px viewport, so the measurement skipped every piece of ink and never moved; the sentence was literally true and said nothing about the screen. `0_plan/tools/shots.mjs` now reports that the test does not apply, and why. The row was reported rather than fixed from inside this mock because the runner is shared and another agent was in it |
 | D-039 | Escalated. Irrelevant to this page, which carries no script — but the page's no-JavaScript state is the only state it has |
 | The story copy | Nari's. Quoted verbatim from a live page, not from the deck |
-| The 2026 launch year | No register row. Withheld, not filled |
+| The launch year | **CR-028, Unverified, owner Nari.** Withheld, not filled. Round 1 said no row held it; that was false and is corrected in the page and here |
 | CR-036 and CR-037 | Unverified, on the page in words, invisible to the digit-based checker |
+| The overture's height | A 916px screen carrying 157px of prose at 1440 by 900, sized by the third-screen guard. The same "layout sized for the motion" shape the movement boxes had, in a surface neither review round has fixed. Named, not fixed |
 | The position marker's ink | `--color-border-strong` per the brief, distinguished by weight. `--color-accent-text` at 5.14:1 is the measured alternative if a reviewer finds it too quiet |
 | Continuity to gt.school | `CONTINUITY.md` measures the Anywhere handoff only. **The Georgetown handoff is unverified**: gt.school has no mirror in this repository, and the text extract in `kb/exemplars/gt-story/` is labelled source analysis, not a rendered comparison |

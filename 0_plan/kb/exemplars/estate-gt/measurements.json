@@ -1,0 +1,152 @@
+{
+  "fetched": "2026-09-11",
+  "rows": [
+    {
+      "viewport": "1440 by 900",
+      "ground": "rgb(255, 255, 255)",
+      "bodyFont": "Inter Tight",
+      "bodyColor": "rgb(0, 17, 23)",
+      "h1": {
+        "text": "School Reimagined. For gifted kids who love to learn",
+        "font": "Literata",
+        "size": 52,
+        "weight": "300",
+        "tracking": "-1.6px",
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "w": 647,
+        "h": 125
+      },
+      "h1children": [
+        {
+          "text": "School Reimagined. For gifted",
+          "font": "Literata",
+          "size": 52,
+          "weight": "300",
+          "tracking": "-1.6px",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 647,
+          "h": 65
+        },
+        {
+          "text": "kids who love to learn",
+          "font": "Literata",
+          "size": 52,
+          "weight": "300",
+          "tracking": "-1.6px",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 647,
+          "h": 65
+        }
+      ],
+      "actions": [
+        {
+          "text": "",
+          "font": "Inter Tight",
+          "size": 16,
+          "weight": "400",
+          "tracking": "normal",
+          "color": "rgb(0, 17, 23)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 138,
+          "h": 32
+        },
+        {
+          "text": "Book a tourBook a tour",
+          "font": "Inconsolata",
+          "size": 16,
+          "weight": "500",
+          "tracking": "normal",
+          "color": "rgb(0, 42, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 122,
+          "h": 40
+        },
+        {
+          "text": "APPLY NOWAPPLY NOW",
+          "font": "Inconsolata",
+          "size": 16,
+          "weight": "500",
+          "tracking": "normal",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(0, 42, 58)",
+          "w": 104,
+          "h": 40
+        }
+      ]
+    },
+    {
+      "viewport": "390 by 844",
+      "ground": "rgb(255, 255, 255)",
+      "bodyFont": "Inter Tight",
+      "bodyColor": "rgb(0, 17, 23)",
+      "h1": {
+        "text": "School Reimagined. For gifted kids who love to learn",
+        "font": "Literata",
+        "size": 44,
+        "weight": "300",
+        "tracking": "-1.6px",
+        "color": "rgb(255, 255, 255)",
+        "bg": "rgba(0, 0, 0, 0)",
+        "w": 350,
+        "h": 207
+      },
+      "h1children": [
+        {
+          "text": "School Reimagined. For",
+          "font": "Literata",
+          "size": 44,
+          "weight": "300",
+          "tracking": "-1.6px",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 350,
+          "h": 106
+        },
+        {
+          "text": "gifted kids who",
+          "font": "Literata",
+          "size": 44,
+          "weight": "300",
+          "tracking": "-1.6px",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 350,
+          "h": 55
+        },
+        {
+          "text": "love to learn",
+          "font": "Literata",
+          "size": 44,
+          "weight": "300",
+          "tracking": "-1.6px",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 350,
+          "h": 55
+        }
+      ],
+      "actions": [
+        {
+          "text": "",
+          "font": "Inter Tight",
+          "size": 16,
+          "weight": "400",
+          "tracking": "normal",
+          "color": "rgb(0, 17, 23)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "w": 124,
+          "h": 32
+        }
+      ]
+    }
+  ],
+  "blockedHosts": {
+    "cdn.jsdelivr.net": 6,
+    "ajax.googleapis.com": 2,
+    "js.hsforms.net": 2,
+    "assets.calendly.com": 2
+  }
+}

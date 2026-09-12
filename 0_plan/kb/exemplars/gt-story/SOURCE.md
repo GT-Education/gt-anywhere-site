@@ -38,9 +38,11 @@ without loading the live page, which the project's hard rules forbid.
 ## The rhythm
 
 Two runs of 52. Each opens with a transparent tick, then alternates plain and major. Majors fall on
-**every second position**: 46 of the 48 gaps between majors are 2, and the two gaps of 4 are where
-the first run's two hour marks displace a major. The two runs are not identical, because only the
-first carries hour marks.
+**every second position**: 46 of the 48 gaps between majors are 2. The two gaps of 4 have **different
+causes**, which an earlier version of this file got wrong by attributing both to hour marks: one is an
+hour mark displacing a major, and the other is the seam between the two runs, where each run's opening
+transparent tick falls. Found by the M33 critic and confirmed against `count.py`. The two runs are not
+identical, because only the first carries hour marks.
 
 ```
 _.B.B.B.B.B.B.B.B.B.BHB.B.B.B.B.H.B.B.B.B.B.B.B.B.B.

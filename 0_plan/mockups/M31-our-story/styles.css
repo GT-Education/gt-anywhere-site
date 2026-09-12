@@ -77,11 +77,20 @@ h1 {
   font-size: var(--text-3xl); line-height: var(--leading-tight);
   max-width: 35ch; text-wrap: balance;
 }
-.h1-b, .story-open { display: none; }
+ /* The headline variant that is not on show is VISUALLY suppressed and kept in the accessibility
+   tree, so a screen-reader user hears the fixed umbrella sentence's context — gifted and talented,
+   Georgetown, Texas, online from anywhere — which is otherwise only in the door lines, and on a
+   phone those sit below the fold. `display: none` would have taken it from them as well, which is
+   the defect Astra found: a parent using a screen reader got less than a parent who did not.
+   `.story-open` is different and stays `display: none`: in variant A it is an exact duplicate of
+   the visible h1, so exposing it would read the same sentence twice. Each variant therefore puts
+   exactly one copy of each sentence in the accessibility tree. */
+.h1-b { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.story-open { display: none; }
 
-/* Headline variant B — restore copy.md's fixed umbrella sentence as the h1 and move the story's
-   own first sentence to the head of the story. Uncomment the next line only. */
-/* .h1-a { display: none; } .h1-b, .story-open { display: block; } */
+/* Headline variant B — set copy.md's fixed umbrella sentence large and move the story's own first
+   sentence to the head of the story, where it stays in the accessibility tree. Uncomment the next line only. */
+/* .h1-b { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; clip-path: none; white-space: normal; } .h1-a { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; } .story-open { display: block; } */
 
 .provenance { font-size: var(--text-sm); color: var(--muted); line-height: var(--leading-body); }
 
@@ -176,15 +185,26 @@ h1 {
 
 /* ---------- The story: five movements, one column, one ground ---------- */
 .story { --pad-top: var(--space-5); }
-/* The rhythm between movements is built from runs of at most one space step, because the fold test
-   asks for ink inside the bottom 24px of every row: a paragraph, then 24 to the rule, 24 to the
-   numeral, 8 to the heading. Three pieces of ink where a single 80px gap would read as the end. */
+/* The five movements carry no headings. Four of the five the brief named were verbatim restatements
+   of the sentence beneath them ("It grew on every axis" over "Since then, GT School has grown on
+   every axis."), which is the scaffolding Astra found announcing what the next sentence repeats;
+   cutting them takes about 250px off the phone and 280px off the laptop without shortening the
+   story by one word. What gives the sequence its shape instead is weight: the question is set
+   large, the hinge carries the accent, and the last movement is held off as a coda.
+   The rhythm is still built from runs of at most one space step, because the fold test asks for ink
+   inside the bottom 24px of every row: a paragraph, 24 to the rule, 24 to the numeral, 16 to the
+   first line. Three pieces of ink where a single 80px gap would read as the end. */
 .mv { --mv-pad: var(--space-5); position: relative; padding-block-start: var(--mv-pad); border-block-start: var(--hair) solid var(--color-border); }
 .mv:first-of-type { --mv-pad: 0; border-block-start: 0; }
 .mv + .mv { margin-block-start: var(--space-5); }
-.mv-head { font-family: var(--font-serif); font-size: var(--text-xl); line-height: var(--leading-tight); margin-block-start: var(--space-3); }
-.mv-head + p, .mv > p + p { margin-block-start: var(--space-4); }
+.mv > p + p { margin-block-start: var(--space-4); }
 .mv > p { max-width: var(--measure-read); }
+/* II, the question the whole school answers: the story's one display line, set in the reading face
+   at --text-lg. It is the sentence in its own place, not a pull quote lifted out of the prose. */
+.ask { font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-body); }
+/* V, the coda: summer camps are a third programme the page does not otherwise offer, so the story
+   arrives at the two schools in IV and this is held off after them. */
+.mv--coda { margin-block-start: var(--space-8); }
 .accent-mark { display: block; width: var(--space-7); height: var(--rule-accent); background: var(--color-accent); margin-block-end: var(--space-4); }
 .story-open {
   font-family: var(--font-serif); font-size: var(--text-lg); line-height: var(--leading-tight);
@@ -267,19 +287,19 @@ h1 {
    rule runs to 767px tall: both door lines follow the second CTA and a sentence is what the edge cuts. */
 @media (max-width: 767px) and (max-height: 767px) {
   .first { --pad-top: var(--space-4); --pad-bot: var(--space-4); }
-  .doors { display: flex; flex-direction: column; gap: var(--space-4); }
+  .first-body .doors { display: flex; flex-direction: column; gap: var(--space-4); }
   .first-body > .doors { margin-block-start: var(--space-5); }
-  .door { display: contents; }
-  .door:nth-child(1) .door-label { order: 1; }
-  .door:nth-child(1) .door-name  { order: 2; }
-  .door:nth-child(1) .door-cta   { order: 3; }
-  .door:nth-child(2) .door-label { order: 4; }
-  .door:nth-child(2) .door-name  { order: 5; }
-  .door:nth-child(2) .door-cta   { order: 6; }
-  .door-line { order: 7; margin-block-start: var(--space-2); }
-  .door-name { margin-block-start: var(--space-2); }
-  .door-cta { margin-block-start: var(--space-3); }
-  .door:nth-child(1) .door-cta { margin-block-end: var(--space-4); }
+  .first-body .door { display: contents; }
+  .first-body .door:nth-child(1) .door-label { order: 1; }
+  .first-body .door:nth-child(1) .door-name  { order: 2; }
+  .first-body .door:nth-child(1) .door-cta   { order: 3; }
+  .first-body .door:nth-child(2) .door-label { order: 4; }
+  .first-body .door:nth-child(2) .door-name  { order: 5; }
+  .first-body .door:nth-child(2) .door-cta   { order: 6; }
+  .first-body .door-line { order: 7; margin-block-start: var(--space-2); }
+  .first-body .door-name { margin-block-start: var(--space-2); }
+  .first-body .door-cta { margin-block-start: var(--space-3); }
+  .first-body .door:nth-child(1) .door-cta { margin-block-end: var(--space-4); }
   .run-in { display: inline; }
   .first-body > .seam { padding-block-start: var(--space-4); }
 }
@@ -287,19 +307,19 @@ h1 {
 /* ---------- Phone landscape: the contract's V10 recipe ---------- */
 @media (max-height: 400px) and (min-width: 600px) {
   .first { --pad-top: var(--space-3); --pad-bot: var(--space-3); }
-  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-6); }
+  .first-body .doors { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-6); }
   .first-body > .doors { margin-block-start: var(--space-3); }
-  .door { display: contents; }
-  .door:nth-child(1) .door-label { grid-column: 1; grid-row: 1; order: 0; }
-  .door:nth-child(1) .door-name  { grid-column: 1; grid-row: 2; order: 0; }
-  .door:nth-child(1) .door-cta   { grid-column: 1; grid-row: 3; order: 0; margin: 0; }
-  .door:nth-child(1) .door-line  { grid-column: 1; grid-row: 4; order: 0; }
-  .door:nth-child(2) .door-label { grid-column: 2; grid-row: 1; order: 0; }
-  .door:nth-child(2) .door-name  { grid-column: 2; grid-row: 2; order: 0; }
-  .door:nth-child(2) .door-cta   { grid-column: 2; grid-row: 3; order: 0; margin: 0; }
-  .door:nth-child(2) .door-line  { grid-column: 2; grid-row: 4; order: 0; }
-  .door-name { margin-block-start: var(--space-2); font-size: var(--text-md); }
-  .door-line { margin-block-start: var(--space-2); }
+  .first-body .door { display: contents; }
+  .first-body .door:nth-child(1) .door-label { grid-column: 1; grid-row: 1; }
+  .first-body .door:nth-child(1) .door-name  { grid-column: 1; grid-row: 2; }
+  .first-body .door:nth-child(1) .door-cta   { grid-column: 1; grid-row: 3; margin: 0; }
+  .first-body .door:nth-child(1) .door-line  { grid-column: 1; grid-row: 4; }
+  .first-body .door:nth-child(2) .door-label { grid-column: 2; grid-row: 1; }
+  .first-body .door:nth-child(2) .door-name  { grid-column: 2; grid-row: 2; }
+  .first-body .door:nth-child(2) .door-cta   { grid-column: 2; grid-row: 3; margin: 0; }
+  .first-body .door:nth-child(2) .door-line  { grid-column: 2; grid-row: 4; }
+  .first-body .door-name { margin-block-start: var(--space-2); font-size: var(--text-md); }
+  .first-body .door-line { margin-block-start: var(--space-2); }
   .run-in { display: none; }
   .first-body > .seam { padding-block-start: var(--space-3); }
 }
@@ -322,16 +342,18 @@ h1 {
    common rows and the CTAs start on one line whatever the two lines' lengths. A third campus needs
    a third column and one more nth-child rule (DD-21, cost stated in the rationale). */
 @media (min-width: 940px) {
-  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-7); }
-  .door { display: contents; }
-  .door:nth-child(1) > * { grid-column: 1; }
-  .door:nth-child(2) > * { grid-column: 2; }
-  .door-label { grid-row: 1; }
-  .door-name { grid-row: 2; }
-  .door-line { grid-row: 3; }
-  .door-cta { grid-row: 4; justify-self: start; align-self: start; }
-  .doors--repeat .door-label { grid-row: 1; }
-  .doors--repeat .btn { grid-row: 2; justify-self: start; }
+  .first-body .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--space-7); }
+  .first-body .door { display: contents; }
+  .first-body .door:nth-child(1) > * { grid-column: 1; }
+  .first-body .door:nth-child(2) > * { grid-column: 2; }
+  .first-body .door-label { grid-row: 1; }
+  .first-body .door-name { grid-row: 2; }
+  .first-body .door-line { grid-row: 3; }
+  .first-body .door-cta { grid-row: 4; justify-self: start; align-self: start; }
+  /* The repeated pair never takes the shared-row grid: each door stays one block of label over
+     button (the base `.door` flex column), so the label can never separate from the button it
+     names. Scoping the rules above to `.first-body` is the fix for exactly that defect. */
+  .doors--repeat { grid-template-columns: auto auto; justify-content: start; gap: var(--space-8); }
 }
 
 /* ---------- 1024 and up: the table takes its two-column form (R6, measured) ---------- */
@@ -349,7 +371,6 @@ h1 {
   .ctable tbody th { width: 22%; }
   .ctable td { width: 39%; margin: 0; }
   .ctable td::before { display: none; }
-  .doors--repeat { grid-template-columns: auto auto; justify-content: start; gap: var(--space-8); }
   .footer-body { grid-template-columns: 1.3fr .8fr auto; align-items: start; }
   .footer-marks { grid-column: auto; flex-direction: column; align-items: flex-start; }
 }

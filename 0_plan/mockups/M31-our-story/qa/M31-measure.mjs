@@ -12,7 +12,30 @@ import os from 'node:os';
 
 const REPO = resolve(new URL('../../../..', import.meta.url).pathname);
 const REL = '/0_plan/mockups/M31-our-story/index.html';
-const VARIANT_B_CSS = '.h1-a { display: none; } .h1-b, .story-open { display: block; }';
+// exactly the commented-out "Headline variant B" line in styles.css
+const VH = 'position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;';
+const VARIANT_B_CSS =
+  '.h1-b { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; clip-path: none; white-space: normal; }'
+  + '.h1-a { ' + VH + ' }'
+  + '.story-open { display: block; }';
+// The compensation CONTRACT.md allows a first screen composed FOR the fixed sentence, and no more:
+// section 2's phone-landscape recipe permits the h1 one token down at V10, and section 2's own
+// compact door block is label 16 + 8 + name + 12 + CTA 44 = 110px, tighter than this page's, which
+// spends a 16px flex gap between every item because its own h1 leaves room for it.
+const COMPENSATION_CSS = `
+@media (max-width: 767px) and (max-height: 767px) and (min-height: 401px) {
+  .first-body .doors { gap: 0; }
+  .first-body .door-name { margin-block-start: 8px; }
+  .first-body .door-cta { margin-block-start: 12px; }
+  .first-body .door:nth-child(1) .door-cta { margin-block-end: 24px; }
+  .first-body .door-line { margin-block-start: 12px; }
+}
+@media (max-height: 400px) and (min-width: 600px) {
+  h1 { font-size: var(--text-xl); }
+  .first-body .doors { row-gap: 0; }
+  .first-body .door-name { margin-block-start: 8px; }
+  .first-body .door-cta { margin-block-start: 12px; }
+}`;
 
 const ALL_ROWS = {
   V1: [360, 740], V2: [375, 629], V3: [390, 664], V4: [393, 659], V5: [414, 715],
@@ -47,8 +70,11 @@ function findPlaywright() {
 
 const PROBE = `(() => {
   const box = (sel) => { const el = document.querySelector(sel); if (!el) return null; const r = el.getBoundingClientRect(); return { t: Math.round(r.top + scrollY), b: Math.round(r.bottom + scrollY), w: Math.round(r.width) }; };
-  const h1span = document.querySelector('.h1-a').offsetParent === null && getComputedStyle(document.querySelector('.h1-a')).display === 'none'
-    ? document.querySelector('.h1-b') : document.querySelector('.h1-a');
+  // the span on show is the one that is not visually suppressed: both suppression mechanisms in
+  // this page (display:none for the duplicate, the clipped 1px box for the variant) collapse the
+  // box to nothing, so width is the test that works for either
+  const h1span = [...document.querySelectorAll('.h1-a, .h1-b')]
+    .find(el => el.getBoundingClientRect().width > 2) || document.querySelector('.h1-a');
   const rg = document.createRange(); rg.selectNodeContents(h1span);
   const rects = [...rg.getClientRects()].filter(r => r.height > 1);
   const h1 = document.querySelector('h1'); const cs = getComputedStyle(h1);
@@ -102,19 +128,25 @@ const OVERFLOW = `(() => {
   const ctx = await browser.newContext({ deviceScaleFactor: 1 });
   const page = await ctx.newPage();
 
-  for (const variant of ['A', 'B']) {
-    console.log(`\n### Headline variant ${variant}${variant === 'B' ? ' (copy.md fixed umbrella sentence)' : ' (the story\'s first sentence)'}`);
-    console.log('| Row | h1 px | h1 lines | h1 box w | header | h1 bottom | provenance | CTA G | CTA A | compare | accent | first sec | story top | mv I num | mv I head | mv I para |');
-    console.log('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|');
+  const LABEL = {
+    A: "A (the story's first sentence, shipped)",
+    B: "B (copy.md's fixed umbrella sentence, in the layout composed for A)",
+    'B+': "B with the compensation CONTRACT.md allows: its own compact door block, and the h1 one token down at the landscape row",
+  };
+  for (const variant of ['A', 'B', 'B+']) {
+    console.log(`\n### Headline variant ${LABEL[variant]}`);
+    console.log('| Row | h1 px | h1 lines | h1 box w | header | h1 bottom | provenance | CTA G | CTA A | compare | accent | first sec | story top | mv I num | mv I first line |');
+    console.log('|---|---|---|---|---|---|---|---|---|---|---|---|---|---|');
     for (const [row, w, h] of rows) {
       await page.setViewportSize({ width: w, height: h });
       await page.goto(url, { waitUntil: 'load' });
-      if (variant === 'B') await page.addStyleTag({ content: VARIANT_B_CSS });
+      if (variant !== 'A') await page.addStyleTag({ content: VARIANT_B_CSS });
+      if (variant === 'B+') await page.addStyleTag({ content: COMPENSATION_CSS });
       await page.evaluate(() => document.fonts ? document.fonts.ready : null);
       await page.waitForTimeout(120);
       const m = await page.evaluate(PROBE);
       const c = (x) => (x ? x.b : '');
-      console.log(`| ${row} ${w}x${h} (limit ${h - 24}) | ${m.h1Size} | ${m.h1Lines} | ${m.h1Width} | ${c(m.header)} | ${c(m.h1Box)} | ${c(m.prov)} | ${c(m.ctaG)} | ${c(m.ctaA)} | ${c(m.compare)} | ${c(m.accent)} | ${c(m.firstSec)} | ${m.story ? m.story.t : ''} | ${c(m.mvNum)} | ${c(m.mvHead)} | ${c(m.mvP)} |`);
+      console.log(`| ${row} ${w}x${h} (limit ${h - 24}) | ${m.h1Size} | ${m.h1Lines} | ${m.h1Width} | ${c(m.header)} | ${c(m.h1Box)} | ${c(m.prov)} | ${c(m.ctaG)} | ${c(m.ctaA)} | ${c(m.compare)} | ${c(m.accent)} | ${c(m.firstSec)} | ${m.story ? m.story.t : ''} | ${c(m.mvNum)} | ${c(m.mvP)} |`);
     }
   }
 

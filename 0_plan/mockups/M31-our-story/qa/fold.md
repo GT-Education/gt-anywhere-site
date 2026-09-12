@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:15:47.662Z; page `/0_plan/mockups/M31-our-story/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T01:51:00.759Z; page `/0_plan/mockups/M31-our-story/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -12,7 +12,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V6 | 412 by 839 | fold | 815 | 56 | 176 | 210 | 432 | 654 | yes | PASS |
 | V7 | 402 by 681 | fold | 657 | 92 | 204 | 237 | 391 | 552 | yes | PASS |
 | V8 | 430 by 739 | fold | 715 | 56 | 169 | 203 | 357 | 518 | yes | PASS |
-| V9 | 390 by 844 | emptiness |  | 92 | 211 | 245 | 466 | 688 | yes | report: page height 7730 |
+| V9 | 390 by 844 | emptiness |  | 92 | 211 | 245 | 466 | 688 | yes | report: page height 7590 |
 | V10 | 750 by 342 | fold | 318 | 56 | 142 | 176 | 285 | 285 | yes | PASS |
 | V11 | 768 by 1024 | fold | 1000 | 56 | 167 | 201 | 403 | 605 | yes | PASS |
 | V12 | 834 by 1194 | fold | 1170 | 56 | 169 | 203 | 406 | 609 | yes | PASS |
@@ -51,18 +51,18 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V3 | yes | text cut by the edge, 646 to 666 |
 | V4 | yes | text cut by the edge, 646 to 666 |
 | V5 | yes | content reaches 700 of 715 and more follows below |
-| V6 | yes | content reaches 826 of 839 and more follows below |
+| V6 | yes | text cut by the edge, 831 to 851 |
 | V7 | yes | content reaches 667 of 681 and more follows below |
 | V8 | yes | content reaches 739 of 739 and more follows below |
-| V9 | yes | text cut by the edge, 827 to 860 |
+| V9 | yes | content reaches 821 of 844 and more follows below |
 | V10 | yes | text cut by the edge, 324 to 344 |
-| V11 | yes | content reaches 1015 of 1024 and more follows below |
-| V12 | yes | text cut by the edge, 1187 to 1207 |
-| V13 | yes | content reaches 765 of 768 and more follows below |
-| V14 | yes | text cut by the edge, 707 to 728 |
-| V15 | yes | text cut by the edge, 630 to 651 |
-| V16 | yes | text cut by the edge, 894 to 915 |
-| V17 | yes | content reaches 943 of 960 and more follows below |
+| V11 | yes | content reaches 1001 of 1024 and more follows below |
+| V12 | yes | text cut by the edge, 1176 to 1196 |
+| V13 | yes | content reaches 766 of 768 and more follows below |
+| V14 | yes | content reaches 718 of 720 and more follows below |
+| V15 | yes | content reaches 638 of 648 and more follows below |
+| V16 | yes | content reaches 899 of 900 and more follows below |
+| V17 | yes | content reaches 956 of 960 and more follows below |
 | V18 | no | not applicable: the last CTA is at 583, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 564 to 577 |
 

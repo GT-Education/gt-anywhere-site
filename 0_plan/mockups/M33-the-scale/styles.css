@@ -134,7 +134,11 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
    in copy.md: see the notice at the top of index.html.
    ============================================================================ */
 .story { background: var(--color-bg); padding-block: 0 clamp(var(--space-8), 3rem + 4vw, var(--space-10)); }
-.story .wrap { max-width: 76rem; }
+/* The story band uses the PAGE wrap, not a narrower one. The thesis is that the scale is the page's
+   spine, and a spine on its own inset datum governs nothing: at 1440 a 76rem wrap put the rail at
+   x=176 and its spine at x=240 while the h1, the doors, the table, the proof and the footer all began
+   at x=64 (M33 critic, second pass). The rail's spine now sits ON that line, and the story's measure is
+   held by --measure-prose on the prose itself rather than by narrowing the band. */
 
 /* The overture holds the story's first two sentences on the plain ground, with no scale beside them.
    It is one viewport tall, which is what puts the scale on the third screen: the first screen ends at
@@ -190,17 +194,22 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
    taller than the viewport. */
 @media (min-width: 1024px) and (min-height: 700px) {
   .story-grid { display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--space-7); align-items: start; }
-  /* The source pins its stage 6rem down because a sticky site header sits in that band. This page's
-     header is not sticky, so a 6rem inset would leave 96px at the top of the viewport with no spine in
-     it — and a plate whose tie rule lands in that band points at nothing. The rail therefore fills the
-     viewport. The inset was the source's reason, not its rule; the declared departure is here. */
+  /* The source pins its stage 6rem down. WHY is inference: the checked-in extract holds the story
+     section and 70 story rules and says nothing about the source's header, so a sticky site header in
+     that band is a plausible reading and not a measured fact. What IS measured here: this page's
+     header is not sticky (.site-header above), so a 6rem inset leaves 96px at the top of the viewport
+     with no spine in it, and a plate whose tie rule lands in that band points at nothing. The rail
+     therefore fills the viewport. Declared in Departures. */
   .scale {
     position: sticky; top: 0; z-index: 0; padding-bottom: 0; margin-bottom: 0;
     inline-size: 4rem; block-size: 100vh; block-size: 100svh;
-    border-bottom: 0; border-right: 1px solid var(--color-border-strong);
+    border-bottom: 0; border-left: 1px solid var(--color-border-strong);
   }
-  .scale-fine { background-image: repeating-linear-gradient(to bottom, var(--color-border-strong) 0 1px, transparent 1px var(--p)); background-size: 30% 100%; background-position: 100% 0; }
-  .scale-major { inset-block: auto; inset-inline: 0; flex-direction: column; align-items: flex-end; block-size: calc(48 * var(--p) + 1px); inline-size: auto; }
+  /* Ticks grow rightward off the spine, which is the mirror of the source's left rail. The source's
+     rail hugs the page edge so its spine faces the content; here the spine IS the content's own left
+     datum, so the ticks face the other way. Declared in Departures. */
+  .scale-fine { background-image: repeating-linear-gradient(to bottom, var(--color-border-strong) 0 1px, transparent 1px var(--p)); background-size: 30% 100%; background-position: 0 0; }
+  .scale-major { inset-block: auto; inset-inline: 0; flex-direction: column; align-items: flex-start; block-size: calc(48 * var(--p) + 1px); inline-size: auto; }
   .scale-major i { inline-size: 45%; block-size: 1px; border-left: 0; border-top: 1px solid var(--color-border-strong); }
   .scale-run-a { inset-inline-start: 0; inset-block-start: calc(2 * var(--p)); }
   .scale-run-b { inset-inline-start: 0; inset-block-start: calc(54 * var(--p)); }
@@ -208,7 +217,7 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
      gives the reader one plate at a time to look at. Sizing for that is below, after .frame, where the
      cascade order lets it win. */
 
-  .scale-progress { inset-block: 0; inset-block-end: auto; inset-inline-start: auto; inset-inline-end: 0; inline-size: 4px; block-size: 100%; border-bottom: 0; border-right: 4px solid var(--color-border-strong); transform-origin: center top; }
+  .scale-progress { inset-block: 0; inset-block-end: auto; inset-inline-start: 0; inset-inline-end: auto; inline-size: 4px; block-size: 100%; border-bottom: 0; border-left: 4px solid var(--color-border-strong); transform-origin: center top; }
 }
 
 /* ---------- The stage: three movements, each present and readable at rest ---------- */
@@ -241,11 +250,18 @@ h1 { font-size: var(--text-3xl); max-width: 35ch; }
 @media (min-width: 1024px) and (min-height: 700px) {
   .mv { min-block-size: calc((100vh - 14rem) / 2); min-block-size: calc((100svh - 14rem) / 2); align-content: center; grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); }
   .frame { max-inline-size: 24rem; position: relative; }
-  .frame::before { content: ""; position: absolute; inset-block-start: 0; inset-inline-end: 100%; inline-size: var(--space-7); border-block-start: 1px solid var(--color-border-strong); }
+  .frame::before { content: ""; position: absolute; inset-block-start: 0; inset-inline-end: 100%; inline-size: calc(4rem + var(--space-7)); border-block-start: 1px solid var(--color-border-strong); }
 }
 
 .mv-text p { font-size: var(--text-base); line-height: var(--leading-prose); max-inline-size: var(--measure-prose); }
 .mv-text p + p { margin-top: var(--space-5); }
+
+/* The visible withholding note. NOT copy.md — a new string, flagged in RATIONALE.md exactly as the
+   quoted story prose is. It exists because the explanation lived in an HTML comment, which the one
+   reader who needs it never meets. Set as a footnote, not as prose: the story is the argument, this
+   is the apparatus. */
+.story-note { margin-top: clamp(var(--space-7), 3rem + 2vw, var(--space-9)); }
+.story-note p { padding-top: var(--space-4); border-top: 1px solid var(--color-border-strong); font-size: var(--text-sm); line-height: var(--leading-prose); color: var(--color-text-muted); max-inline-size: var(--measure-prose); }
 
 /* ---------- Sections ---------- */
 .section { padding-block: var(--space-5) clamp(var(--space-8), 2rem + 4vw, var(--space-10)); }

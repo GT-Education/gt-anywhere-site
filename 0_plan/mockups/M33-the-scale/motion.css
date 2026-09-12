@@ -15,10 +15,10 @@
    NO JAVASCRIPT. D-039 (scripts and inputs in mocks) is Escalated to Johnny and unresolved, so the
    move is built entirely in CSS with animation-timeline and is not gated by it.
 
-   START AND END ARE SCROLL OFFSETS, NOT MILLISECONDS. The marker runs the `contain` range of a view
-   timeline named on the stage: progress 0 when the stage's top edge reaches the top of the viewport,
-   progress 1 when its bottom edge reaches the bottom. There is no duration in time anywhere in this
-   file, so there is nothing for a reader to wait out. */
+   START AND END ARE SCROLL OFFSETS, NOT MILLISECONDS. The marker runs from `contain 0%` — the stage's
+   top edge at the top of the viewport — to `exit 100%`, the stage's top edge leaving the top of the
+   viewport, which is the last moment any of the stage is still on screen. There is no duration in time
+   anywhere in this file, so there is nothing for a reader to wait out. */
 
 @keyframes scale-progress-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes scale-progress-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -26,14 +26,24 @@
 @supports (animation-timeline: view()) {
   .story-grid { view-timeline-name: --stage; view-timeline-axis: block; }
 
-  /* Horizontal scale (below 1024, and at any height under 700): the marker runs left to right. */
+  /* Horizontal scale (below 1024, and at any height under 700): the marker runs left to right.
+
+     THE RANGE IS THE WHOLE DEVICE. `contain 0% contain 100%` — the first build's value — ends the sweep
+     when the stage's BOTTOM edge reaches the bottom of the viewport, which on a stage only a little
+     taller than the viewport is almost immediately: 300px of travel at 1440 by 900 and 110px at 768 by
+     1024, leaving the marker blank for the approach and saturated for the last two fifths of the
+     reading. `exit 100%` ends it when the stage's TOP edge leaves the top of the viewport instead, so
+     the marker reports position for the whole time the stage is on screen: 1,200px and 1,130px on the
+     same two rows, with no layout change and the START unchanged, so the "nothing driven before the
+     third screen" guard is untouched. `cover 0% cover 100%` would give more travel still and is NOT
+     used: it starts inside the overture and would breach that guard. */
   .scale-progress {
     animation-name: scale-progress-x;
     animation-duration: auto;
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-timeline: --stage;
-    animation-range: contain 0% contain 100%;
+    animation-range: contain 0% exit 100%;
   }
 
   /* Vertical scale (1024 and above with 700px of height): the marker runs top to bottom. */

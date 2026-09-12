@@ -55,9 +55,10 @@ const PROBE = `(() => {
   const fine = document.querySelector('.scale-fine');
   const prog = document.querySelector('.scale-progress');
   const cs = getComputedStyle(s);
-  const vertical = cs.borderRightWidth !== '0px';
-  // Read the side that is actually drawn: the vertical rail draws its ticks with border-top and its
-  // marker with border-right; the horizontal rail draws them with border-left and border-bottom.
+  // The vertical rail's spine is its border-LEFT (it sits on the page's own left datum) and the
+  // horizontal rail's is its border-bottom; read the side that is actually drawn. Ticks: border-top
+  // when vertical, border-left when horizontal. Marker: border-left / border-bottom.
+  const vertical = cs.borderBottomWidth === '0px';
   const tick = getComputedStyle(document.querySelector('.scale-major i'));
   const mk = getComputedStyle(prog);
   return {
@@ -65,7 +66,7 @@ const PROBE = `(() => {
     majors: document.querySelectorAll('.scale-major i').length,
     fineBackgroundImage: getComputedStyle(fine).backgroundImage === 'none' ? 'none (suppressed)' : 'painted',
     majorBorder: (vertical ? tick.borderTopWidth + ' ' + tick.borderTopColor : tick.borderLeftWidth + ' ' + tick.borderLeftColor),
-    markerWidth: vertical ? mk.borderRightWidth : mk.borderBottomWidth,
+    markerWidth: vertical ? mk.borderLeftWidth : mk.borderBottomWidth,
     markerTransform: mk.transform,
     animations: document.getAnimations().length
   };
@@ -112,10 +113,12 @@ const PROBE = `(() => {
     const ctx = await ctxFor(j.mode, j.w, j.h, 2); const page = await ctx.newPage();
     await page.goto(url, { waitUntil: 'load' });
     await page.evaluate(() => document.fonts ? document.fonts.ready : null); await page.waitForTimeout(200);
+    // The marker's range is `contain 0% exit 100%`: it starts when the stage's top edge reaches the top
+    // of the viewport and ends when that edge leaves it, so the sweep spans the stage's own height.
     await page.evaluate((frac) => {
       const g = document.querySelector('.story-grid').getBoundingClientRect();
       const top = g.top + window.scrollY;
-      window.scrollTo(0, Math.round(top + frac * Math.max(0, g.height - window.innerHeight)));
+      window.scrollTo(0, Math.round(top + frac * g.height));
     }, j.off);
     await page.waitForTimeout(300);
     const p = await page.evaluate(PROBE);
