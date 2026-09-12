@@ -1,4 +1,4 @@
-/* M35: the reader steps the sequence; nothing is on a timer.
+/* M34: the reader steps the sequence; nothing is on a timer.
    :target only — rule 2 forbids JavaScript. D-031 move V11, confirmed 2026-09-11.
 
    The ID in #s-georgetown:target would outrank any class-based focus rule, so a stale step would
@@ -17,7 +17,9 @@
 
 /* Focus clears every word first, so it always wins over whichever step was left showing. */
 /* Reset transform as well as opacity, so a word held by :target cannot return by fading alone. */
-.board:has(.door .door-cta:focus-visible) .suffix b[data-k] { opacity: 0; transform: translateY(4px); }
+.board:has(.door .door-cta:focus-visible) .suffix b[data-k] { opacity: 0; }
+/* Restricted to the school words, so the resting word fades without moving. */
+.board:has(.door .door-cta:focus-visible) .suffix b[data-k]:not([data-k="school"]) { transform: translateY(4px); }
 .board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
 .board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
   opacity: 1; transform: translateY(0);

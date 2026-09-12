@@ -1,4 +1,4 @@
-/* M35 "The Stepper" — the reader steps the sequence; nothing runs on a timer.
+/* M34 "The Tour" — the reader steps the sequence; nothing runs on a timer.
    Tokens only, per CONTRACT v2.1 §1. Departures named in RATIONALE.md. */
 @import url("../shared/tokens-v2.css");
 @import url("../shared/fonts.css");

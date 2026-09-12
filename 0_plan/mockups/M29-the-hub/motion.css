@@ -24,7 +24,10 @@
   /* Hover clears every word first, including one left showing by focus. */
   /* Reset transform as well as opacity: clearing opacity alone let a word held by the focus
      rule return by fading without the declared 4px rise (Astra pass 3). */
-  .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; transform: translateY(4px); }
+  .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; }
+  /* The transform reset is restricted to the school words. Applying it to `school` as well made the
+     resting word RISE on return, contradicting its declared opacity-only fade (Astra pass 4). */
+  .board:has(.door .door-cta:hover) .suffix b[data-k]:not([data-k="school"]) { transform: translateY(4px); }
   .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="georgetown"],
   .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="anywhere"] {
     opacity: 1; transform: translateY(0);
