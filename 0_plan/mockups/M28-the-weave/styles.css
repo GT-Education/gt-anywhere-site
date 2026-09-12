@@ -137,6 +137,9 @@ h1 {
   .brand-plate { background: var(--color-bg); forced-color-adjust: none; }
   .door-cta { border: 1px solid CanvasText; }
   .door::before, .door::after { background: CanvasText; }
+  /* The corona is this board's whole drawing, and a token background is dropped in forced colours,
+     so without this the hero simply disappears. The inherited block only covered the bracket. */
+  .weave i { background: CanvasText; }
 }
 
 /* The next band is visibly cut below the first screen, so no row ends on a false floor. */
