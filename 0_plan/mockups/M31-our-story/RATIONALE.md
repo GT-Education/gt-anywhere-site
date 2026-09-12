@@ -36,7 +36,7 @@ build brief's strings on the other side):
 | 1 | "GT School is the gifted academy of the Alpha School family." | **Identical**, as the h1 (variant A) and, in variant B, as the story's opening line |
 | 2 | "Alpha proved that students can master core academics in a few focused hours a day and love school while doing it." | **Identical**, 113 characters |
 | 3 | "GT asked the next question: what happens when you apply that model to the students who are ready to go further and faster?" | **Identical**, 122 characters |
-| 4 | "We answered that question in Georgetown, Texas, where a flagship K–8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable fact." | **Identical for its first 89 characters, then a bracketed elision.** The page reads "We answered that question in Georgetown, Texas, where a flagship K–8 campus was launched […]." See the next subsection |
+| 4 | "We answered that question in Georgetown, Texas, where a flagship K–8 campus was launched to prove that 3X learning velocity isn't just a slogan, but a measurable fact." | **Identical for its first 88 characters, then stopped and closed with a full stop.** The page reads "We answered that question in Georgetown, Texas, where a flagship K–8 campus was launched." Nothing marks the stop. See the next subsection |
 | 5 | "The pilot answered emphatically, with students achieving multiple grade levels of acceleration while deepening their academic interests, and all while loving school." | **Identical**, 165 characters |
 | 6 | "Since then, GT School has grown on every axis." | **Identical**, 46 characters |
 | 7 | "GT Anywhere launched in 2026, bringing the full model to gifted families nationwide." | **Identical**, 84 characters |
@@ -62,19 +62,33 @@ conflict is three-way and all three sides are mechanical:
 | **`1_spec/tools/check-claims.py`** | Maps the token `3X` to **CR-004**, and CR-004 is in the script's `withheld` list, so the run prints `FAIL withheld claims present` | The claims checker fails, and the task requires it clean |
 | **`0_plan/tools/check-mocks.py` R5** | The visible-text number whitelist is `{90, 10,400, 9, 8, 512, 270, 9481, 2026, 09, 10, 844, 390, 1440}`. The `3` of "3X" is not on it | The mock checker fails too |
 
-So the sentence ships with its purpose clause withheld and the withholding **marked on the page** with
-a bracketed elision, rather than silently trimmed. The full sentence is printed above so a reviewer
-can see exactly what is missing. The elision takes the whole clause rather than the two characters
-"3X", because CR-038 is the row that records the *framing* — "stated as measurable" — and dropping
-only the digit would leave the page asserting that an unnamed velocity claim is a measured fact,
-which is the weaker of the two positions, not the safer one.
+So the sentence **stops at "was launched." with nothing marking the stop**, and the withholding is
+recorded here and in Flagged slots instead. The full sentence is printed above, so a reviewer can see
+exactly what is missing; the page is where it must not appear.
+
+The first build marked the stop with a bracketed elision. That was wrong on three counts, and the
+critic was right to say so. A bracketed elision is **quotation apparatus**, and nothing on this page
+frames the prose as quoted — there are no quotation marks, no attribution line, no source note; the
+school is speaking in its own first person, and a school does not elide itself. It was also
+**inconsistent with the rest of the page**, which withholds the accreditation status (G0.5 item 3)
+and the outcome figure (item 2) silently, with no mark at all; one visible elision among three silent
+withholdings tells a reader that this particular removal is the interesting one. And it read as
+**damage rather than editing**: the reader who notices it learns only that something is missing, which
+invites the question without answering it.
+
+The whole clause goes, not just the two characters "3X", because CR-038 is the row that records the
+*framing* — "stated as measurable" — and dropping only the digit would leave the page asserting that
+an unnamed velocity claim is a measured fact, which is the weaker position, not the safer one. What
+remains is a complete, true sentence in the school's own words: Georgetown, a flagship K–8 campus,
+launched.
 
 **This is the one brief row I could not satisfy in full.** It needs Johnny or Nari:
 
 - If the 3X figure is to appear, G0.5 decision 2 has to be reopened and CR-008/CR-038 moved to
   `Approved` with published data behind them; the two checkers then need CR-004 off the withheld list
   and `3` on the R5 whitelist.
-- If it is not, the elision (or dropping sentence 4's purpose clause on gt.school itself) stands.
+- If it is not, the shortened sentence stands here, and the same clause is worth revisiting on
+  gt.school itself, where it is live today.
 - A third option nobody has taken: rewrite the sentence. That is a copy change and belongs to Nari.
 
 ### The figures the story carries, with their register rows
@@ -85,10 +99,14 @@ which is the weaker of the two positions, not the safer one.
 | "hundreds of students in its first months" (sentence 8) | **CR-036** | **Unverified, owner Nari.** No enrolment figure is published anywhere else on either estate | Yes, in the source's own words. It is a quantity word, not a numeral, so it carries no digit and neither checker sees it; it is still an unverified claim and is listed here for Nari |
 | "multiple grade levels of acceleration" (sentence 5) | **CR-037** | **Unverified, owner Nari.** Overlaps CR-004 and CR-008 in substance while stating no multiple | Yes, in the source's own words. Same position as CR-036 |
 
-The rows the fixed deck relies on, all "Unverified, public", owner Nari: **CR-011** (90th percentile,
-4 occurrences), **CR-021** ($10,400, 1), **CR-032** (four weekends, 3), **CR-033** (9 to noon and
-about two hours, 2), **CR-034** (two to three hours, 1), **CR-035** (weekly check-in, 2). Counts are
-the checker's, pasted under Self-check. No register id or status appears on the page (REQ-022).
+The rows the fixed deck relies on, all "Unverified, public", **owners read off
+`0_plan/12-claims-register.md` row by row rather than assumed**: **CR-011** (90th percentile,
+4 occurrences) is owned by **Crystal**, not Nari — it is the admission bar and admissions owns it,
+so an approval request for this page routes to two people, not one. **CR-021** ($10,400, 1),
+**CR-032** (four weekends, 3), **CR-033** (9 to noon and about two hours, 2), **CR-034** (two to
+three hours, 1) and **CR-035** (weekly check-in, 2) are owned by **Nari**, as are the four story
+rows CR-008, CR-036, CR-037 and CR-038. Counts are the checker's, pasted under Self-check. No
+register id, status or owner appears on the page (REQ-022).
 
 ### The photographs, and why this is the direction that would change most
 
@@ -115,7 +133,7 @@ own account of what it is ("GT School is the gifted academy of the Alpha School 
 description of its services. L2 continuity comes second because that sentence is already published on
 gt.school and because the page's shell — mark, three faces, cream ground, navy action — is the
 estate's. L1 objective is third and is not compromised: both door CTAs sit above the fold at all
-seventeen fold rows, the two doors carry label, name, line and CTA at equal weight, and the compare
+sixteen fold rows, the two doors carry label, name, line and CTA at equal weight, and the compare
 anchor follows them. L4 exclusivity is last and arrives as selectivity in the table, the proof strip
 and the steps line, never as price (MD-25).
 
@@ -178,7 +196,7 @@ is the deeper of the two door CTAs' bottoms against the row's limit (viewport he
 | **1440 by 900** (V16) | 876 | 46.00 | **2** | **471** | 405 | **4** | **577** | 299 | **+106** |
 
 **The fold difference is 97 to 126px, and it decides three rows.** In this composition variant A
-passes all seventeen fold rows; variant B, measured the same way, **fails four**: V2 (676 against 605),
+passes all sixteen fold rows; variant B, measured the same way, **fails four**: V2 (676 against 605),
 V3 (678 against 640), V4 (678 against 635) and V10 (363 against 318). It passes V1 by 26px and V7 by
 9px. That is not an argument that the fixed sentence cannot fit a landing page — the contract's own
 compact recipe and the letter and specimen directions fit it — it is a measurement of what this
@@ -190,6 +208,35 @@ V2 and 4 at V14/V16** for the fixed sentence; measured here it is **7 at V2 and 
 line worse than the estimate at the phone rows, which matches what M08 and M12 measured independently.
 The story's sentence is **3 lines at every phone row and 2 from 750px up**.
 
+### The case against the variant that shipped
+
+The measurement favours variant A and the brief asks for it, but the strongest argument runs the other
+way and belongs in front of Nari with the rest.
+
+**The h1 and the provenance line are near-synonyms, so the first screen states the school's parentage
+twice before it states its offer once.** The h1 reads "GT School is the gifted academy of the Alpha
+School family."; 16px beneath it the provenance line reads "The gifted school in the Alpha School
+network." A parent meets *gifted*, *Alpha School* and a belonging-word twice in a row, and only then
+reaches "In person / Georgetown Campus" and "Online / GT Anywhere" — which is the first thing on the
+page that tells them what is on offer or asks them to do anything. Variant B does not have this
+problem: its h1 states the offer (selective, gifted and talented, in person in Georgetown or online)
+and the provenance line then adds the parentage once, which is exactly the division of labour G0.5
+item 6 designed when it put the affiliation in "one small line, once".
+
+Three things soften it but none of them dissolves it. The repetition is a **prominence** choice, not a
+disclosure one (MD-17, fact 1), and it is a choice Nari can take or refuse. The provenance line is the
+smallest type on the first screen at `--text-sm` and muted, so the two are not typographically equal.
+And a reader arriving from Instagram or from alpha.school meets on this page the same sentence the
+Anywhere homepage already shows them, which is the continuity argument this direction exists to test.
+
+But it is a real cost and the rationale should not have needed a critic to say so: **the direction
+that best serves L3 mission is the one that serves L1 objective worst on the first screen**, because
+it spends the page's largest type on where the school came from rather than on what a parent can do.
+The fold measurement still decides which variant ships — variant B fails four rows in this
+composition — but if Nari values the offer-first first screen, the answer is not to force variant B
+into this layout; it is to take the fixed sentence to a direction built for it (M08 and M21 both fit
+it), and to keep this one as the argument for the shorter headline.
+
 ---
 
 ## Brief compliance
@@ -199,7 +246,7 @@ The story's sentence is **3 lines at every phone row and 2 from 750px up**.
 | Mock id and name, lens order | M31 "Our Story", folder `M31-our-story`; L3 mission, L2 continuity, L1 objective, L4 exclusivity | Met (id collision with M31 "The Tour" raised above) |
 | Where it comes from | Johnny's reading of the gt.school about page, supplied as text; no browser load of any GT or Alpha host | Met |
 | Thesis | The story is the spine of the page; the doors are where it arrives. Five movements between the first screen and the comparison | Met |
-| The copy, and who owns it | Stated at the top of this file, in Flagged slots, and in an HTML comment on the page. Nothing rewritten, trimmed to fit, merged or given connective tissue — one clause withheld under G0.5 decision 2 and marked with an elision, escalated above | **Met but for sentence 4's purpose clause**, which is the escalation |
+| The copy, and who owns it | Stated at the top of this file, in Flagged slots, and in an HTML comment on the page. Nothing rewritten, trimmed to fit, merged or given connective tissue — one clause withheld under G0.5 decision 2, the sentence stopped at "was launched.", escalated above | **Met but for sentence 4's purpose clause**, which is the escalation |
 | The fixed frame stays | h1 aside, every fixed slot is `copy.md` v1.1 verbatim: provenance, both door labels, names, lines and CTAs, compare anchor, comparison table with repeated values (DD-43), proof facts, sources line twice, steps, four secondary CTAs, current families, footer facts | Met |
 | The headline | The story's first sentence as the h1; variant B behind one commented-out line; both measured at the four named rows and at all nineteen | Met |
 | Composition | Header 56; first screen h1, provenance, both doors, compare anchor; then five numbered movements on one ground at the reading measure, in the deck's own words ("Alpha proved it", "GT asked the next question", "Georgetown answered", "It grew on every axis", "The same philosophy extends"); then comparison, proof, steps, secondary CTAs, families, footer. One column at every width, no two-column prose | Met, with the measure narrowed from `--measure-prose` (departure below) |
@@ -208,9 +255,9 @@ The story's sentence is **3 lines at every phone row and 2 from 750px up**.
 | Imagery | Default state, no photograph. The four live photographs and what changes under permission are argued above | Met |
 | Figures | CR-008, CR-036, CR-037 and CR-038 cited above with their status; the `check-claims.py` CR-004 mapping explained; no figure added that the story does not carry | Met |
 | Motion | Still. Nothing animates. V6 is specified and **not built**, because it needs the D-039 script and D-039 is escalated; the page is complete at rest without it. Reduced motion zeroes every duration | Met |
-| Conversion | Doors on the first screen at every row; compare anchor beneath them; the story; the table with repeated values; proof; steps; secondary CTAs; families; footer | Met |
+| Conversion | Doors on the first screen at all sixteen fold rows; compare anchor beneath them; the story; the table with repeated values; proof; steps; secondary CTAs; families; footer | Met |
 | Acceptance: every quoted sentence identical, checked and stated | Checked by script, table above | Met for eight of nine; sentence 4 stated exactly |
-| Acceptance: both marks and both focus rings pass under forced colours in each palette | Runner, both schemes: both mark files "kept by the image itself", rings 13.88:1 and 14.58:1 against their own retained grounds | Met, measured |
+| Acceptance: both marks and both focus rings pass under forced colours in each palette | Runner, both schemes: both mark files "kept by the image itself"; every ring **21:1 against the surface it is drawn on, outside the element**. Corrected during review, programme-wide and not by me: each plate's ring had been stated in the plate's own retained colour, on the reasoning that a plate keeping its colours keeps its ring. Every ring in the programme sits at a positive `outline-offset`, so it is painted **outside** the plate on Canvas, and this mock's rings measured **1.03:1 in the light palette and 1.39:1 in the dark** — no ring at all, in both directions. The declarations now read `CanvasText`, the only value guaranteed to contrast with the ground the ring is actually drawn on in either palette. The per-plate rules are left in the stylesheet as the record of what was tried, with the last rule winning | Met, measured, after the correction |
 | Acceptance: rationale names DD-38, DD-39, DD-46, DD-47, DD-48 and the three claims rows | All named below; CR-036, CR-037, CR-038 (and CR-008) above | Met |
 | Acceptance: both critics at or above 4, Mission expected at 5 | Pending the critics | Pending |
 
@@ -242,8 +289,9 @@ rather than smoothed.
 
 **Every other fold row, measured** (deeper CTA against the limit): V1 566 of 716; V3 551 of 640;
 V4 552 of 635; V6 654 of 815; V7 552 of 657; V8 518 of 715; V11 605 of 1000; V12 609 of 1170;
-V13 474 of 744; V15 467 of 624; V17 471 of 936. **Seventeen of seventeen fold rows pass, V10
-included.** V9 (the emptiness row) 688, page height 7730. V18 (reflow, 320 by 256) no horizontal
+V13 474 of 744; V15 467 of 624; V17 471 of 936. **Sixteen of sixteen fold rows pass, V10
+included** — V1 to V8 and V10 to V17, which is every row the runner rules as `fold`. V9 is an
+emptiness test and not a fold row: 688, page height 7730. V18 (reflow, 320 by 256) no horizontal
 scroll. V19 (zoom, reported not required under DD-44) 474 of 552, scroll width 1024, nothing clipped.
 
 **What crosses the bottom edge, per row.** The requirement is that something a parent would read
@@ -271,21 +319,24 @@ Counted in the browser by binary-searching the break points of each text node.
 | Text | 1440 | 1280 | 1024 | 768 | 375 |
 |---|---|---|---|---|---|
 | Story prose, at `--measure-prose` (65ch) as first built | max 82, mean 79 | max 82, mean 79 | max 82, mean 79 | max 82, mean 79 | max 47, mean 43 |
-| **Story prose, at `--measure-read` (55ch) as shipped** | **max 75, mean 70** | max 75, mean 70 | max 75, mean 70 | max 75, mean 70 | max 47, mean 43 |
+| **Story prose, at `--measure-read` (55ch) as shipped** | **max 75, mean 67** | max 75, mean 67 | max 75, mean 67 | max 75, mean 67 | max 47, mean 41 |
 | Door lines, at `--measure-prose` as first built | max 67 | max 71 | max 54 | **max 77** | max 43 |
 | **Door lines, as shipped** | max 67, mean 65 | max 71, mean 67 | max 54, mean 52 | **max 71, mean 67** | max 43, mean 35 |
 | Table cells, uncapped in the stacked form | max 55 | max 56 | max 43 | **max 95** | max 47 |
-| **Table cells, as shipped** | max 55, mean 50 | max 56, mean 52 | max 43, mean 39 | **max 73, mean 66** (stacked, capped) | max 47, mean 42 |
+| **Table cells, as shipped** | max 55, mean 50 | max 56, mean 52 | max 43, mean 39 | **max 75** (73 over full lines, mean 66; stacked and capped) | max 47, mean 42 |
 
 `--measure-prose` is 65ch of Inter Tight, and `ch` is the advance of the digit zero, which is wider
 than this copy's mean advance: 65ch measured **82 characters** of these sentences at every width from
 768. For a direction whose whole claim is that the page is read rather than scanned, that is over
 K1 CP7's ceiling by seven characters on every line of the argument, so the reading column is
-`--measure-read: 55ch`, measured at **70 mean and 75 at most**, exactly on the ceiling. The departure
+`--measure-read: 55ch`, measured at **67 mean and 75 at most**, exactly on the ceiling. The departure
 is declared below. The same measure caps the door lines, which ran **77 characters** at 768 with the
 doors stacked, and the stacked comparison table, which ran **95 characters a cell** at 768 uncapped.
 Every measured line on the page is now inside K1 CP7's 45 to 75 band except the table's stacked cells
-at 768 (max 73, mean 66) and 375 (max 47), which are inside it too.
+at 768 and 834, where the longest rendered line is **75** — on the ceiling, not over it. The
+distinction matters and the first version of this table got it wrong: 73 is the longest *full* line,
+75 is the longest line a reader actually sees, because a cell's last line counts too. Every figure in
+this table is now the longest rendered line, last lines included.
 
 ---
 
@@ -384,21 +435,22 @@ swap` from `../shared/fonts.css`.
 |---|---|
 | **The h1 is not `copy.md`'s umbrella sentence** | The brief's instruction, argued under h1, with variant B built behind one commented-out line and measured beside it. It is the decision Nari is being asked to make |
 | **The body prose is not in `copy.md` at all** | The whole point of the direction. Stated at the top of this file, in Flagged slots and in an HTML comment on the page |
-| **Sentence 4's purpose clause is withheld and marked with a bracketed elision** | G0.5 decision 2, CR-008 and CR-038, and both checkers. Escalated above. The elision mark is a single `…` inside brackets, which is not placeholder text and not a rewrite: it says on the page that something was taken out |
+| **Sentence 4 stops at "was launched."** | G0.5 decision 2, CR-008 and CR-038, and both checkers. Escalated above. The first build marked the stop with a bracketed elision and that was reversed on the critic's finding: an elision is quotation apparatus on a page that never frames this prose as quoted, and it was the page's only visible withholding among three. The withholding now lives in Flagged slots, where the other two already are |
 | **The five movement headings and the Roman numerals are words and marks outside `copy.md` sections 0 to 9** | The brief names all five headings. They are the story's own words used as wayfinding, they state no fact and carry no figure. If Nari adopts the direction, they should be recorded in `copy.md` section 9 with the rest of the wayfinding vocabulary before any build |
 | **Movement numbers are Roman numerals (I to V), not digits** | `check-mocks.py` R5 whitelists the digits the fixed copy needs; "01" or "1" would fail it. A Roman numeral is a position marker, not a figure, and it is the conventional mark for movements. The same device numbers the application steps, through `counter(step, upper-roman)` |
-| **`--measure-read: 55ch` for the reading column instead of `--measure-prose` (RF-55, 65ch)** | Measured: 65ch of Inter Tight sets **82 characters** of this copy at every width from 768, over K1 CP7's 75 ceiling; 55ch sets 67 to 70. Applied to every multi-line prose block: the story, the door lines, the first screen's provenance and seam, the leads, the facts, the steps, the connect list, the sources lines, the TEFA block, the footer facts and the stacked comparison table. Measured after the change: story prose 70 mean and 75 at most, door lines 65 to 67 mean, stacked table cells 66 mean. A direction that argues a story is read cannot ship its argument at 82 characters a line |
+| **`--measure-read: 55ch` for the reading column instead of `--measure-prose` (RF-55, 65ch)** | Measured: 65ch of Inter Tight sets **82 characters** of this copy at every width from 768, over K1 CP7's 75 ceiling; 55ch sets 67 to 70. Applied to every multi-line prose block: the story, the door lines, the first screen's provenance and seam, the leads, the facts, the steps, the connect list, the sources lines, the TEFA block, the footer facts and the stacked comparison table. Measured after the change: story prose 67 mean and 75 at most, door lines 65 to 67 mean, stacked table cells 66 mean and 75 at most. A direction that argues a story is read cannot ship its argument at 82 characters a line |
 | **The comparison table takes its two-column form at 1024px, not 767** | R6 asks for the measured threshold. Measured: the two value columns are 39% of a container capped at 72rem, so they reach 43 to 45 characters at 1024, 55 to 56 at 1280 and 1440. Below 1024 the table is stacked blocks with the school name labelling each cell, capped to the reading measure (uncapped it ran 95 characters a cell at 768) |
 | **The two doors take their side-by-side form at 940px, not 768** | Measured: at 768 and 834 the two columns are 302 and 327px and the Georgetown CTA (330px set) wrapped to two lines. Portrait tablets keep the stacked doors; the split starts where the columns reach 347px |
 | **The compact door rule runs to 767px tall, not the contract's 699** | Measured: at 414 by 715 and 430 by 739 the standard form finished 21 to 40px clear of the bottom edge with only a decorative rule below it, which the runner reads as a false floor and a parent reads as the end of the page. With the compact rule the door lines follow the second CTA and a sentence is what the edge cuts. Both rows now pass with 174 and 197px of spare fold |
 | **Button tracking is 0.04em, not the 0.07em used on labels** | Measured: at 0.07em the "Explore the Georgetown campus" CTA is 329px set inside a 327px column at 375 and wrapped to two lines. At 0.04em it is 305px and holds one line from 360px up. It still wraps at 320 (V18), where the fold rule does not apply |
+| **A no-break space between "from" and "anywhere." in the variant-B h1 span** | The fixed sentence is seven lines at V2 and measured `text-wrap: balance` still left "anywhere." alone on the last line. The words are unchanged; one space character is non-breaking. Stated because the umbrella sentence is a fixed slot, and because it is the reason the span cannot be called byte-identical to `copy.md` |
 | **New tints `--color-border-strong` and `--color-text-muted-on-dark`** | DD-39 option (a) proposes both; used as rules and underlines and as muted text on navy, never as body text on light |
 | **The accent is used twice on the page, once per screen** | CONTRACT section 4 caps accent use at one per screen, not one per page. The 3px rule under the compare anchor closes the first screen; the short mark at movement III opens the Georgetown movement on a later screen. Measured at 1440: the rule spans 541 to 544 and the mark 967 to 970, **423px of page apart**, so no viewport shorter than 967px shows both; at the matrix's tallest row (1920 by 960) the mark begins 7px below the first screen's edge. On a window taller than that both would be in view, 423px apart, one a 3px full-measure rule and one a 48px stub — stated rather than smoothed, because the brief asks for both marks by name. Both are `aria-hidden` and carry no meaning the words beside them do not: the accent is 2.38:1 on cream, below 3:1, so it may not carry an argument |
 | **The first screen is not stretched to the viewport** | An earlier build used `min-height: calc(100svh - header - seam)` and opened a 270px hole at 1440 by 900. Content height only; the story starts under the accent rule. The `svh` construction is gone, so the page contains no `vh` at all |
 | **`display: contents` on the door list items in the compact, landscape and 940px forms, with explicit `role="list"` and `role="listitem"`** | The only CSS-only way to move both door lines after the second CTA, and to put the two doors on shared grid rows so their CTAs start on one line, while the DOM keeps label, name, line and CTA together per door. The roles guard list semantics where `display: contents` drops them |
 | **The run-in door name at the head of each moved door line is `aria-hidden`** | It is a fixed slot reused as a run-in label; a screen reader already hears the name in the door's own heading |
 | **The year in sentence 7 is marked up as `<time datetime="2026">2026</time>`** | Correct markup for a year in prose, and it also makes the checkers tokenise it. `check-mocks.py` R5 and `check-claims.py` both read `\d[\d,]*` greedily and take "2026," with its comma as one token, which is on neither whitelist; an element boundary separates the year from the punctuation. Recorded here so nobody reads it as a trick: the year is whitelisted, the comma is not a digit |
-| **Values outside the token set** | Breakpoints 411, 412, 600, 700, 767, 768, 940, 1024px and `max-height: 400px`; `--container: 72rem`; 1px hairlines; the 3px accent rules; the 2px focus ring and its 4px outer band; `--target: 2.75rem` (the 44px floor); `--mark-h` 27 and 32px (K12 V2); `--glyph: 1rem`; tracking 0.07em and 0.04em; underline offsets 0.16em and 0.2em; `35ch` (the h1 cap), `24ch` (band titles), `55ch` (the reading measure), `3ch` (the step numeral column); `overflow-wrap: anywhere` on buttons and `break-word` on the body, which stop the horizontal scroll at a doubled root font and change nothing at normal sizes |
+| **Values outside the token set** | Breakpoints 600, 767, 768, 940 and 1024px, and `max-height: 400px`, `max-height: 700px` and `max-height: 767px` — the seven the stylesheet actually declares. (An earlier version of this row listed 411 and 412; 411 was a media query that was removed during the build and 412 survives only inside a comment recording a measurement, so neither is a breakpoint.) `--container: 72rem`; 1px hairlines; the 3px accent rules; the 2px focus ring and its 4px outer band; `--target: 2.75rem` (the 44px floor); `--mark-h` 27 and 32px (K12 V2); `--glyph: 1rem`; tracking 0.07em and 0.04em; underline offsets 0.16em and 0.2em; `35ch` (the h1 cap), `24ch` (band titles), `55ch` (the reading measure), `3ch` (the step numeral column); `overflow-wrap: anywhere` on buttons and `break-word` on the body, which stop the horizontal scroll at a doubled root font and change nothing at normal sizes |
 | **The hanging folio was built and dropped** | The Roman numerals were first hung in the left margin as an index down the page. It needs a 160px gutter, and the 72rem container cap only produces one above 1312px wide; below that the numerals overflowed the viewport. Keeping it would also have put a second left edge on the page. The numerals sit above their headings instead, and the page has one left edge from the header to the footer |
 | **Authored shell** | The header and footer are authored for this mock rather than inherited from `1_spec/04` partials. Cost for a third campus is stated under DD-21; the footer nav takes a third pair of links |
 
@@ -410,7 +462,8 @@ swap` from `../shared/fonts.css`.
 |---|---|---|---|
 | **The whole story section (nine sentences, five headings)** | **No id yet. Nari owns it** | The nine sentences from `https://www.gt.school/about-us#story`, quoted, with sentence 4's purpose clause withheld | **Not in `copy.md`. Nari has not approved this copy for the landing page.** This is the mock's central question |
 | **The h1** | G0.5 item 1, MD-17 | The story's first sentence | A departure from the fixed umbrella sentence. Variant B restores it behind one commented-out line; both measured above |
-| Sentence 4's purpose clause | G0.5 item 2, CR-008, CR-038 | Withheld, marked "[…]" | Escalated to Johnny and Nari above |
+| **Sentence 4's purpose clause** | G0.5 item 2, CR-008, CR-038 | **Withheld. The sentence ends at "was launched." with no mark on the page** | Escalated to Johnny and Nari above. This is the page's third silent withholding, beside accreditation and the outcome figure |
+| **"GT Anywhere launched in 2026"** | **No register row exists for it** | The year ships, in the source's own words, marked up as `<time datetime="2026">` | **A year is a figure and needs a row like any other.** The register has no row for GT Anywhere's launch date, and 2026 is on `check-mocks.py` R5's whitelist only because the sources line carries the date 2026-09-10, which is a different fact. Not proposed here: the register's own rule is that rows arrive from research or from Nari, and a builder inventing one would defeat the check. **Flagged for the director to open a row** |
 | "hundreds of students in its first months" | CR-036, Unverified | Shipped in the source's words | Nari verifies or the sentence goes |
 | "multiple grade levels of acceleration" | CR-037, Unverified | Shipped in the source's words | Nari verifies or the sentence goes |
 | Photographs | DD-42, RF-25, AD-11 | None | Four live photographs of identifiable children; permission changes this direction most |
@@ -426,6 +479,7 @@ swap` from `../shared/fonts.css`.
 | The adults' title | Q-035 (decided) | Guides | Anywhere still says Advisors |
 | `apply.gt.school` parameter name | DD-25 | `?school=georgetown`, `?school=anywhere` | The live parameter is confirmed in S5 |
 | Holly's unifying brand element | Q-001 | Not added | Would sit beside the header mark when it exists |
+| **Page length** | — | **7,730px at 390 and 5,921px at 1280**, measured | Against roughly 6,638 and 4,493 for a comparable direction, so the story band costs about **1,100px on the phone and 1,400px on the laptop**. Routing is unaffected — both CTAs are above the fold at all sixteen fold rows and the comparison is the next band after the story — but a parent who scrolls past the story to reach the table scrolls through five movements to do it. **Flagged rather than fixed: shortening the story means cutting the school's own sentences, which is Nari's call, not a layout decision.** Not fixed here |
 | The M31 id | — | This mock is M31 "Our Story" | `M26-M31-wave.md` also names an M31, "The Tour"; the director reconciles |
 
 ---
@@ -509,14 +563,17 @@ in it, and both belong to Nari.
 | `qa/forced-colors.jpg` | Both marks keep their colours on their own retained grounds; the accent rules become `CanvasText`; buttons take `ButtonFace` / `ButtonText` with a border; every rule is visible |
 | `qa/focus-cta.jpg` | The first door CTA's ring: 2px `--color-focus` at 2px offset, reading against cream at 8.20:1 |
 | `qa/focus-footer-plate.jpg` | The footer marks on their plates, with the two-band ring on the navy band. The GT Anywhere plate's border was removed after this look: on a navy footer it drew a box around one mark and not the other |
+| `qa/forced-colors.jpg`, re-read after the programme-wide ring correction | The rings now read at 21:1 in both palettes; the marks still keep their own colours; nothing else in the forced-colours state moved |
 | Story band at 1280 and 1440 (scratch captures) | Line length measured at 82 characters and reduced to 67 to 70; the numeral was floating mid-gap above its heading and now sits 8px above it; the hanging folio was tried here and dropped |
 
 ### Copy check (script over the rendered text)
 
 Eight story paragraphs on the page; seven identical to the source character for character; sentence 4
-identical for its first 89 characters then "[…].". The h1's visible span and the hidden `story-open`
-line are both byte-identical to source sentence 1; the hidden variant-B span is byte-identical to
-`copy.md`'s umbrella sentence. En dash in sentence 4, hyphen in sentence 8, both as found.
+identical for its first 88 characters and then stopped at "was launched." with no mark. The h1's visible span and the hidden `story-open`
+line are both byte-identical to source sentence 1. The hidden variant-B span is **not** byte-identical
+to `copy.md`'s umbrella sentence: it carries `&nbsp;` between "from" and "anywhere." so no row can end
+on the last word alone. That is one character changed, U+00A0 for U+0020, in a fixed slot, and it is
+declared here and under Departures rather than described as identical. En dash in sentence 4, hyphen in sentence 8, both as found.
 
 ### `python3 0_plan/tools/check-mocks.py 0_plan/mockups/M31-our-story`
 
@@ -562,7 +619,7 @@ Run over every mock in `0_plan/mockups/`, the last line is the same: `check-clai
 ```
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:12:05.021Z; page `/0_plan/mockups/M31-our-story/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:39:27.979Z; page `/0_plan/mockups/M31-our-story/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -634,15 +691,15 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
@@ -654,10 +711,13 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
 | 320 by 256 | Not sure which is right for yo | 38px | 228px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 320 by 256 | Terms | 44px | 37px | short control | under 44, above the 24px floor |
 | 375 by 629 | Not sure which is right for yo | 38px | 310px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
 | 375 by 629 | Check eligibility on the GT An | 20px | 295px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 375 by 629 | Terms | 44px | 37px | short control | under 44, above the 24px floor |
 | 1440 by 900 | Not sure which is right for yo | 19px | 363px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
 | 1440 by 900 | Check eligibility on the GT An | 21px | 331px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Terms | 44px | 40px | short control | under 44, above the 24px floor |
 
 ## Mark geometry (K12 V2)
 
@@ -691,7 +751,7 @@ appear at all, across three viewports.
 | 5, numbers | R5 passes on the whitelist; the only numerals in the story are "2026" and the "8" of K–8 and K-8 |
 | 6, Guides | no "advis" in visible text |
 | 7, full names | Georgetown Campus x8, GT Anywhere x15 |
-| 8, both CTAs above the fold | all seventeen fold rows |
+| 8, both CTAs above the fold | all sixteen fold rows (V1 to V8, V10 to V17; V9 is an emptiness test, V18 reflow, V19 zoom) |
 | 9, links | only the five allowed hosts and `#compare`, `#main`, `#top`, each with its `data-event` attributes |
 | 10, motion | no `transition`, no `@keyframes`, no `animation` |
 | 11, accessibility | `lang="en"`, skip link, landmarks, one h1, visible `:focus-visible`, alt on every image, 44px targets, a real `<table>` with `<caption>` and `scope` |
@@ -713,8 +773,10 @@ Zero console errors on load at every one of the nineteen rows (runner, "Console:
    for an umbrella page whose job is to route a parent to one of two schools in ten seconds? The fold
    evidence says the routing survives (both CTAs above the fold at every row, the doors on one line
    from 940px). The reading evidence is the open question.
-2. **The withheld clause.** A parent who reads "was launched […]." sees that something was taken out.
-   Is that more honest than dropping the sentence, or is it an invitation to ask what is missing?
+2. **The withheld clause.** The sentence now stops at "was launched." and nothing marks the stop,
+   which matches how the page already withholds accreditation and the outcome figure. The open
+   question is whether a page that quotes a school's own story should ever silently shorten one of
+   its sentences, or whether sentence 4 should come off the page entirely until CR-038 is resolved.
 3. **The headline.** Variant A costs 97 to 126px of fold and answers PQ-14 in the first line; variant B
    keeps the decided copy and fails four fold rows in this composition. Nari picks.
 4. **The empty right half of the story band at 1440 and above.** A 55ch reading column under a

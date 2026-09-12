@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:12:05.021Z; page `/0_plan/mockups/M31-our-story/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:39:27.979Z; page `/0_plan/mockups/M31-our-story/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -72,15 +72,15 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
@@ -92,10 +92,13 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
 | 320 by 256 | Not sure which is right for yo | 38px | 228px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 320 by 256 | Terms | 44px | 37px | short control | under 44, above the 24px floor |
 | 375 by 629 | Not sure which is right for yo | 38px | 310px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
 | 375 by 629 | Check eligibility on the GT An | 20px | 295px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 375 by 629 | Terms | 44px | 37px | short control | under 44, above the 24px floor |
 | 1440 by 900 | Not sure which is right for yo | 19px | 363px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
 | 1440 by 900 | Check eligibility on the GT An | 21px | 331px | sentence link | inline sentence link, exempt under WCAG 2.5.8 |
+| 1440 by 900 | Terms | 44px | 40px | short control | under 44, above the 24px floor |
 
 ## Mark geometry (K12 V2)
 
