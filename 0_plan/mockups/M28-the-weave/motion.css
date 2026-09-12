@@ -22,7 +22,9 @@
 
 @media (min-width: 768px) and (hover: hover) {
   /* Hover clears every word first, including one left showing by focus. */
-  .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; }
+  /* Reset transform as well as opacity: clearing opacity alone let a word held by the focus
+     rule return by fading without the declared 4px rise (Astra pass 3). */
+  .board:has(.door .door-cta:hover) .suffix b[data-k] { opacity: 0; transform: translateY(4px); }
   .board:has(.door--georgetown .door-cta:hover) .suffix b[data-k="georgetown"],
   .board:has(.door--anywhere   .door-cta:hover) .suffix b[data-k="anywhere"] {
     opacity: 1; transform: translateY(0);

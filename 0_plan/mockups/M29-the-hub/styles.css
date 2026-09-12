@@ -78,6 +78,7 @@ h1 {
   min-height: 44px; padding: var(--space-3) var(--space-5);
   background: var(--color-navy); color: var(--color-on-navy); text-decoration: none;
   font-family: var(--font-mono); font-weight: 600; font-size: var(--text-btn);
+  line-height: var(--leading-body); /* single-line string, RF-58 */
   border-radius: var(--radius-md);
 }
 .door-cta:hover, .door-cta:focus-visible { text-decoration: underline; }

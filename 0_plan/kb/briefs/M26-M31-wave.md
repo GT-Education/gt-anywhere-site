@@ -15,7 +15,7 @@ appear below with links to `gt.school` and `anywhere.gt.school`.
 
 | Asked | Kept | Changed, and the binding reason |
 |---|---|---|
-| Wirey brain morphs into the logo | The wire, and the transformation | The mark is **already an atom of crossing orbits**. The wire is the brand's own geometry, so nothing is morphed: morphing is outside the transform-and-opacity-only contract; a filled 4-path SVG cannot morph without a JS library, which rule 2 forbids. A brain also makes an implicit cognitive-gain claim next to three unverified speed claims (REQ-022) |
+| Wirey brain morphs into the logo | The wire, and the transformation | The mark is **already an atom of crossing orbits**. The wire is the brand's own geometry, so nothing is morphed: morphing is outside the transform-and-opacity-only contract. (Path count is not the reason; an earlier draft of this row claimed four paths required a JS library, which does not follow.) A brain also makes an implicit cognitive-gain claim next to three unverified speed claims (REQ-022) |
 | The logo animates on entry | **Nothing.** MN-18 refused V12 and the timed variant was retired | MN-02 and runbook section 7: nothing animates the LCP element before first paint; the README already logs the hero entrance as a Core Web Vitals defect (REQ-073) |
 | Wordmark spins through three names | The suffix swap, as the **choice mechanism** | MN-01 and MN-08 allow motion that serves orientation or choice and forbid signature moments. Driving the swap from the door the parent is considering converts a brand film into a wayfinding cue |
 | Georgetown lower-left, Anywhere lower-right | Two mirrored equal arms | DD-21 requires N campuses. CONTRACT section 3 "Nesting is hierarchy" forbids drawing the two schools as rings or nested shapes |
@@ -40,7 +40,7 @@ D-039 (scripts) stays escalated and is not needed: every board is CSS-only.
 | Move | Definition | Trigger | Budget | Reduced motion |
 |---|---|---|---|---|
 | V11 lockup suffix swap | The orange suffix of the GT lockup swaps to the school the reader is considering | hover, `:focus-visible`, or `:target` | 200ms, opacity + 4px rise, transform and opacity only, zero layout shift (the box reserves the widest word) | `--duration-none`; the state still changes |
-| V12 mark assembly | The mark rotates -18deg to 0 once on load | page load, once | 300ms `--ease-out`; **departs from MN-02** | no animation; final state painted |
+| ~~V12 mark assembly~~ **REFUSED by MN-18** | Was: the mark rotates -18deg to 0 once on load | — | Refused on motion policy; the timed variant that implemented it was retired | — |
 
 D-039 (scripts) stays escalated: every board here is CSS-only, so none of them depends on it.
 
@@ -114,9 +114,9 @@ browser on a server started for the purpose. What was actually proven, as oppose
 | Suffix swaps on keyboard | Real `Tab` to a door CTA, not programmatic `.focus()` | `:focus-visible` matches, `:has()` fires, suffix swaps |
 | Suffix swaps on hover, and settles back | Hover a door, wait past the 200ms transition, then move the pointer away | Exactly one word on hover; returns to `school` on leave. All five interactive boards |
 | Hover and focus cannot stack | Keyboard focus on one door, pointer on the other | Exactly one word visible. This was a live defect until the cascade was rewritten |
-| M35's stepper actually works | `:target` navigation, checking the DOM relationship rather than line order | Anchors are siblings of `.stage`; suffix swaps; active dot scales 1.4 |
+| M34's stepper actually works | `:target` navigation, checking the DOM relationship rather than line order | Anchors are siblings of `.stage`; suffix swaps; active dot scales 1.4 |
 | Reduced motion | `emulateMedia({reducedMotion:'reduce'})` at 1440 | Every transition 0s **and** the state still changes, on both hover and `:target` |
-| Bracket symmetry | Measured boxes at 1440 | M26/M35 arms 360px, M29 359px (its card borders reduce the box); drops 32px; centres 360/1080; mirrored |
+| Bracket symmetry | Measured boxes at 1440 | M26/M34 arms 360px, M29 359px (its card borders reduce the box); drops 32px; centres 360/1080; mirrored |
 
 **Two false alarms, recorded because the method matters.** A programmatic `.focus()` showed no swap —
 that is `:focus-visible` heuristics, not a defect. Sampling opacity 60ms into a 200ms fade showed two

@@ -35,17 +35,18 @@ The h1 is the umbrella sentence from `copy.md` section 1, verbatim and unanimate
 | Beat | Trigger | Property | Duration | Easing | Reduced motion |
 |---|---|---|---|---|---|
 | Suffix swap to a school | `:target` via a dot control, or `:focus-visible` on a door CTA, at any width | `opacity` 0 to 1 **and** `translateY(4px)` to 0 | `--duration-base` 200ms | `--ease-out` | `--duration-none`; the state still changes |
-| Suffix returning to `school` | the trigger above ending | `opacity` only — the resting word carries no translation, so it fades without moving | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
+| Suffix returning (to `school`, or to an active step) | the trigger above ending | `opacity` only — the resting word carries no translation, so it fades without moving | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
 | Active step dot | `:target` | `transform: scale(1.4)` over 200ms. The navy fill is a colour change and is **instant**, per the vocabulary | `--duration-base` 200ms (scale only) | `--ease-out` | `--duration-none` |
 
 This board has **no hover swap** by design: adding one would duplicate M26 and blur the comparison it exists to make. The dot controls are hidden at or below 760px tall, where keyboard focus remains the route.
 
-Mark sizes: 56px, 88px from 768px, 36px on V10, hidden at or below 760px tall. Terminals: Static terminals exist but are never animated.
+Mark sizes: 56px, 88px from 768px, hidden at or below 760px tall (which includes V10). Terminals: Static terminals exist but are never animated.
 
-**Resolution order.** Hover clears every suffix word before showing its own, so a pointer over one door
-while the other holds keyboard focus cannot leave two words stacked. Verified in a browser. During the
-declared 200ms crossfade the outgoing and incoming words necessarily overlap; that is the transition,
-not a defect.
+**Resolution order.** This board has no hover swap. Keyboard focus clears every suffix word before
+showing its own, so focus takes precedence over a step left active by `:target` — `:where()` drops the
+ID's specificity to make that possible. Consequence worth stating: ending focus returns to whichever
+step is still targeted, **not necessarily to `school`**. During the declared 200ms crossfade the
+outgoing and incoming words overlap; that is the transition, not a defect.
 
 ## Assets
 
@@ -57,7 +58,7 @@ DD-42/RF-25 hold every image behind Nari's written permission.
 
 | Departure | Reason |
 |---|---|
-| The stage lockup is typographic (DD-19) | A design choice, not a technical necessity: stacked SVG variants with crossfaded wrappers would also work inside the same reserved grid. Live text was chosen because it keeps one accessible string per word and needs no new asset. The header keeps the real `gt-school-logo-h.svg`, so rule 16 holds |
+| The stage lockup is typographic (DD-19) | A design choice, not a technical necessity: stacked SVG variants with crossfaded wrappers would also work inside the same reserved grid. Live text was chosen because it needs no new asset and swaps with one rule. It is **not** an accessibility gain: the stage lockup is `aria-hidden`, and the header lockup carries the accessible name. The header keeps the real `gt-school-logo-h.svg`, so rule 16 holds |
 | **"GTgeorgetown" is not an approved school identity** | The deck names the school "Georgetown Campus", and only a GT Anywhere lockup exists as an asset. The suffix cycle is Johnny's explicit brief. **Flagged for Nari and Holly before promotion** |
 | **DD-21 is not satisfied in the implementation** | The bracket arms and the mobile ordering use school-specific selectors, so a third campus needs new rules, not just another list item. The markup is a list; the geometry is not yet general |
 | Values outside the token set | Lockup `line-height: 1.1` and its tracking; the 1.5px hairline; the mark sizes above; the 9px dot and its 1.4 scale. Each is geometry rather than a design token, and none introduces a colour |

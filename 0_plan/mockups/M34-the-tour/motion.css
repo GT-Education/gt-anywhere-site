@@ -16,7 +16,8 @@
 :where(#s-anywhere:target)   ~ .stage .suffix b[data-k="anywhere"] { opacity: 1; transform: translateY(0); }
 
 /* Focus clears every word first, so it always wins over whichever step was left showing. */
-.board:has(.door .door-cta:focus-visible) .suffix b[data-k] { opacity: 0; }
+/* Reset transform as well as opacity, so a word held by :target cannot return by fading alone. */
+.board:has(.door .door-cta:focus-visible) .suffix b[data-k] { opacity: 0; transform: translateY(4px); }
 .board:has(.door--georgetown .door-cta:focus-visible) .suffix b[data-k="georgetown"],
 .board:has(.door--anywhere   .door-cta:focus-visible) .suffix b[data-k="anywhere"] {
   opacity: 1; transform: translateY(0);

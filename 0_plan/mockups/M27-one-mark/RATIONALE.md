@@ -37,9 +37,9 @@ The h1 is the umbrella sentence from `copy.md` section 1, verbatim and unanimate
 | Suffix swap to a school | hover on a door CTA (**768px and wider, `hover: hover` only**) or `:focus-visible` at any width | `opacity` 0 to 1 **and** `translateY(4px)` to 0 | `--duration-base` 200ms | `--ease-out` | `--duration-none`; the state still changes |
 | Suffix returning to `school` | the trigger above ending | `opacity` only — the resting word carries no translation, so it fades without moving | `--duration-base` 200ms | `--ease-out` | `--duration-none` |
 
-Hover is unavailable below 768px and on devices without a hover pointer; keyboard focus covers those cases (MN-12).
+Hover is unavailable below 768px and on devices without a hover pointer; keyboard focus covers those cases (MN-12). **Exception:** in compact landscape this direction hides the whole stage, so the lockup and its swap are not present on that row at all.
 
-Mark sizes: 64px, 104px from 768px, 36px on V10, hidden at or below 760px tall. Terminals: No terminals at all.
+Mark sizes: 64px, 104px from 768px, hidden at or below 760px tall (which includes V10). Terminals: No terminals at all.
 
 **Resolution order.** Hover clears every suffix word before showing its own, so a pointer over one door
 while the other holds keyboard focus cannot leave two words stacked. Verified in a browser. During the
@@ -56,7 +56,7 @@ DD-42/RF-25 hold every image behind Nari's written permission.
 
 | Departure | Reason |
 |---|---|
-| The stage lockup is typographic (DD-19) | A design choice, not a technical necessity: stacked SVG variants with crossfaded wrappers would also work inside the same reserved grid. Live text was chosen because it keeps one accessible string per word and needs no new asset. The header keeps the real `gt-school-logo-h.svg`, so rule 16 holds |
+| The stage lockup is typographic (DD-19) | A design choice, not a technical necessity: stacked SVG variants with crossfaded wrappers would also work inside the same reserved grid. Live text was chosen because it needs no new asset and swaps with one rule. It is **not** an accessibility gain: the stage lockup is `aria-hidden`, and the header lockup carries the accessible name. The header keeps the real `gt-school-logo-h.svg`, so rule 16 holds |
 | **"GTgeorgetown" is not an approved school identity** | The deck names the school "Georgetown Campus", and only a GT Anywhere lockup exists as an asset. The suffix cycle is Johnny's explicit brief. **Flagged for Nari and Holly before promotion** |
 | **DD-21 is not satisfied in the implementation** | The bracket arms and the mobile ordering use school-specific selectors, so a third campus needs new rules, not just another list item. The markup is a list; the geometry is not yet general |
 | Values outside the token set | Lockup `line-height: 1.1` and its tracking; the 1.5px hairline; the mark sizes above. Each is geometry rather than a design token, and none introduces a colour |

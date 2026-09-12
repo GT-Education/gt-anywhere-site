@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T02:58:56.011Z; page `/0_plan/mockups/M34-the-tour/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T03:10:41.833Z; page `/0_plan/mockups/M34-the-tour/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -21,7 +21,7 @@ Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/b
 | V15 | 1366 by 648 | fold | 624 | 56 | 300 | 330 | 469 | 469 | yes | PASS |
 | V16 | 1440 by 900 | fold | 876 | 56 | 457 | 495 | 719 | 719 | yes | PASS |
 | V17 | 1920 by 960 | fold | 936 | 56 | 457 | 495 | 719 | 719 | yes | PASS |
-| V18 | 320 by 256 | reflow |  | 88 | 370 | 420 | 538 | 649 | no | PASS no horizontal scroll |
+| V18 | 320 by 256 | reflow |  | 88 | 370 | 420 | 530 | 641 | no | PASS no horizontal scroll |
 | V19 | 1024 by 576 | zoom |  | 56 | 271 | 301 | 436 | 436 | yes | report: scrollWidth 1024 |
 
 ## Reduced motion (V14, prefers-reduced-motion: reduce)
@@ -63,7 +63,7 @@ What the runner saw continuing below the fold. Ink means text, a painted edge or
 | V15 | yes | content reaches 634 of 648 and more follows below |
 | V16 | yes | text cut by the edge, 893 to 943 |
 | V17 | yes | text cut by the edge, 953 to 972 |
-| V18 | no | not applicable: the last CTA is at 649, past the 256px edge, so there is no gap between it and the fold to judge |
+| V18 | no | not applicable: the last CTA is at 641, past the 256px edge, so there is no gap between it and the fold to judge |
 | V19 | yes | text cut by the edge, 557 to 578 |
 
 ## The GT marks under forced colours
