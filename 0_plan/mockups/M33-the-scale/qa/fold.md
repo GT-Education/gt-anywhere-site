@@ -1,6 +1,6 @@
 # Fold and matrix run
 
-Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:20:19.710Z; page `/0_plan/mockups/M33-the-scale/index.html`.
+Runner: `0_plan/tools/shots.mjs` with Playwright from `/Users/johnny/.npm/_npx/bbb8a2c4738e2b0c/node_modules/playwright`, cached Chrome for Testing chromium-1234 151.0.7922.34; 2026-09-12T00:32:26.279Z; page `/0_plan/mockups/M33-the-scale/index.html`.
 
 | Row | Viewport | Rule | Limit | header | h1 | provenance | CTA Georgetown | CTA Anywhere | Next band cut | Result |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -72,15 +72,15 @@ Both GT marks are two-colour artwork, so each needs a ground that keeps its own 
 
 | Scheme | File | Result |
 |---|---|---|
-| light | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| light | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| light | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
 | light | `gt-school-logo-h.svg` | kept by the image itself |
 | light | `gt-anywhere-logo-h.svg` | kept by the image itself |
-| dark | focus ring on `mark link` | 13.88:1 against its own retained ground |
-| dark | focus ring on `mark link` | 14.58:1 against its own retained ground |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
+| dark | focus ring on `mark link` | 21:1 against the surface it is drawn on, outside the element |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-school-logo-h.svg` | kept by the image itself |
 | dark | `gt-anywhere-logo-h.svg` | kept by the image itself |
@@ -93,7 +93,9 @@ BUILDER-BRIEF rule 11 asks for 44px; WCAG 2.5.8 requires 24px at AA and is met b
 
 | Viewport | Target | Height | Width | Kind | Result |
 |---|---|---|---|---|---|
-| all three rows | every interactive target is at least 44px tall | | | | ok |
+| 320 by 256 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
+| 375 by 629 | Terms | 44px | 35px | short control | under 44, above the 24px floor |
+| 1440 by 900 | Terms | 44px | 38px | short control | under 44, above the 24px floor |
 
 ## Mark geometry (K12 V2)
 
