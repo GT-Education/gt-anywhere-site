@@ -445,3 +445,63 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
    brand orange for one measured reason: orange on this light-gold land is 1.48 to 1 and unreadable
    at 8px, where navy is 8.64 to 1 and holds its shape. */
 .panel__map .marker { color: #002a3a; }       /* the community map's deep navy, so the mark reads on gold */
+
+/* ---------------------------------------------------------------------------
+   v3: the comparison below the fold.
+   Every word is copy.md verbatim: the nine comparison rows of section 3, the four facts of section
+   4 and the four application steps of section 5, with the destinations section 5 names. Nothing
+   here is written for this page, and there is no FAQ, because the deck holds no FAQ copy and
+   inventing questions a school has not approved would put words in its mouth.
+   The three rows that are identical on both sides are marked as shared rather than repeated
+   silently, since a parent scanning for a difference should be able to see there is none.
+   --------------------------------------------------------------------------- */
+.below { padding: 72px 0 96px; }
+.below__h {
+  margin: 0 0 16px;
+  font-family: Literata, Georgia, serif;
+  font-size: 30px; line-height: 1.18; font-weight: 300; letter-spacing: -.02em;
+  color: var(--navy);
+}
+.below__lede { margin: 0 0 14px; font-size: 16px; line-height: 1.55; color: #5b5b5b; max-width: 52ch; }
+
+.cmp__scroll { overflow-x: auto; margin-bottom: 56px; }
+.cmp { inline-size: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; min-inline-size: 640px; }
+.cmp caption { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cmp th, .cmp td { padding: 14px 16px; text-align: left; vertical-align: top; border-block-end: 1px solid rgba(0,42,58,.16); }
+.cmp thead th {
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500;
+  color: var(--navy); border-block-end: 1.5px solid var(--navy);
+}
+.cmp tbody th {
+  inline-size: 22%; font-weight: 500; color: var(--navy);
+  font-family: "Inter Tight", Arial, sans-serif;
+}
+.cmp tbody td { color: rgb(0,17,23); }
+/* the three rows that read the same on both sides, said once and marked, not repeated in silence */
+.cmp__row--same td { color: #5b5b5b; }
+.cmp__row--same th::after {
+  content: "same"; display: block; margin-block-start: 4px;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text, #a5501a);
+}
+
+.below__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.facts, .steps { margin: 0; padding-inline-start: 1.1em; display: grid; gap: 10px; font-size: 16px; line-height: 1.55; color: rgb(0,17,23); }
+.steps { counter-reset: step; }
+.below__actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+.below__btn {
+  display: inline-flex; align-items: center; block-size: 44px; padding: 0 18px;
+  border-radius: 8px; background: var(--navy); color: var(--white); text-decoration: none;
+  font-family: Inconsolata, ui-monospace, Menlo, monospace;
+  font-size: 15px; font-weight: 500; letter-spacing: .02em;
+}
+.below__btn:hover { background: #0A1E3C; }
+.below__btn:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
+@media (max-width: 767px) {
+  .below { padding: 48px 0 64px; }
+  .below__h { font-size: 24px; }
+  .below__pair { grid-template-columns: 1fr; gap: 36px; }
+  .below__btn { inline-size: 100%; justify-content: center; }
+}
