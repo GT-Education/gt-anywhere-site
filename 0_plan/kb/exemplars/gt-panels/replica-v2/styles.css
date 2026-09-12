@@ -299,8 +299,11 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
    filled with Texas picked out inside it, which says available across the country without
    asserting how many students are where.
    --------------------------------------------------------------------------- */
-.panel__map { position: relative; z-index: 2; margin: 0; inline-size: min(58%, 260px); }
-.panel__map svg { inline-size: 100%; block-size: auto; display: block; overflow: visible; }
+/* Sized by height, not width. Texas is nearly square and the country is close to twice as wide as
+   it is tall, so equal widths made the state loom over the country and unbalanced the two panels.
+   Equal heights let the country be the wider shape, which is both better balanced and true. */
+.panel__map { position: relative; z-index: 2; margin: 4px 0 0; max-inline-size: 88%; }
+.panel__map svg { display: block; overflow: visible; block-size: 156px; inline-size: auto; max-inline-size: 100%; }
 /* These sit over a photograph, so the fill has to carry them on its own rather than rely on the
    panel's wash. The first version at 14 per cent white vanished into a busy picture. */
 .panel__map .land {
@@ -322,9 +325,71 @@ body { margin: 0; background: var(--ground); font-family: "Inter Tight", Arial, 
   color: var(--gold-light);
 }
 
-@media (max-width: 991px) { .panel__map { inline-size: min(66%, 200px); } }
+@media (max-width: 991px) { .panel__map svg { block-size: 112px; } }
 @media (max-width: 767px) {
   /* the map replaces the prose at this width: it is the one thing that still reads at 160px */
-  .panel__map { inline-size: 78%; }
+  .panel__map { margin-block-start: 2px; }
+  .panel__map svg { block-size: 84px; }
   .panel__where { font-size: 10px; letter-spacing: .06em; }
 }
+
+/* ---------------------------------------------------------------------------
+   v2 header and entrance.
+   The white bar is gone: anywhere.gt.school carries its mark on the page's own ground rather than
+   on a plate, and the plate was the loudest object on a page whose subject is two photographs.
+   The mark is centred, which is also where the estate's own load animation starts it.
+
+   The entrance follows the estate's: the mark begins in the middle of the screen and rises. Where
+   the estate's then vanishes, this one lands in the header and stays, and the page fades in under
+   it, which is what Johnny asked for. It is CSS only — no script — so it needs no exception to the
+   escalated script decision, and it is one animation, not a sequence.
+
+   Two notes against it, recorded rather than hidden: the studio's own motion rules forbid animating
+   the largest element on the first screen before first paint, and this is a replica of the estate's
+   behaviour rather than a proposal for a landing page. Under reduced motion nothing moves and
+   nothing fades; the mark is in the header and the page is present from the first frame.
+   --------------------------------------------------------------------------- */
+.navbar_wrap { padding-block-start: 24px; }
+.navbar {
+  background: none;          /* the plate is what read as distracting */
+  padding: 0;
+  block-size: auto;
+  justify-content: center;   /* the mark sits on the page's centre line */
+}
+.navbar__logo img { height: 36px; }
+
+@keyframes mark-settle {
+  from { transform: translateY(calc(50vh - 96px)) scale(2.1); }
+  to   { transform: translateY(0) scale(1); }
+}
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.navbar__logo {
+  animation: mark-settle 1100ms cubic-bezier(.66, 0, .24, 1) both;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.page-in { animation: page-in 700ms var(--ease) 700ms both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__logo, .page-in { animation: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Map palette and markers, taken from the community map at apply.gt.school.
+   That map is a live Mapbox map, so its artwork cannot be lifted, but its stylesheet was read and
+   its palette is the brand's: accent orange #e48b53 is its most-used colour, with light gold
+   #ebba9b, navy #002a3a and a deeper navy #0A1E3C behind them. The land here takes the light gold
+   that both that map and the estate's own static map use, and the circles become the GT mark.
+   --------------------------------------------------------------------------- */
+.panel__map .land,
+.panel__map .land--reach {
+  fill: #ebba9b;
+  stroke: rgba(0, 42, 58, .35);
+  stroke-width: 1; vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 2px 10px rgba(0, 25, 35, .5));
+}
+.panel__map .marker { color: #e48b53; }            /* the mark itself, via currentColor */
+.panel__map .marker__disc { fill: #0A1E3C; stroke: rgba(255,255,255,.75); stroke-width: 1; vector-effect: non-scaling-stroke; }       /* the community map's deep navy, so the mark reads on gold */
