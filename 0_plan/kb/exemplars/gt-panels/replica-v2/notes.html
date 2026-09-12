@@ -42,18 +42,24 @@
   <table>
     <thead><tr><th>Movement</th><th>anywhere.gt.school</th><th>Here</th></tr></thead>
     <tbody>
-      <tr><td>Fade and rise</td><td class="n">~500ms</td><td class="n">500ms, kept</td></tr>
+      <tr><td>Page opens</td><td class="n">mark already present</td><td class="n">blank</td></tr>
+      <tr><td>A hairline draws across the centre</td><td class="n">&mdash;</td><td class="n">420ms</td></tr>
+      <tr><td>The mark unfolds out of that line</td><td class="n">fades up 48px, ~500ms</td><td class="n">480ms, opening from the line</td></tr>
       <tr><td>Hold at centre</td><td class="n">~170ms</td><td class="n">700ms, lengthened</td></tr>
       <tr><td>Leaves the screen</td><td class="n">~370ms, accelerating</td><td class="n">replaced</td></tr>
       <tr><td>Travels into the header</td><td class="n">&mdash;</td><td class="n">600ms</td></tr>
-      <tr><td>&ldquo;This is&rdquo; writes in</td><td class="n">&mdash;</td><td class="n">from 1800ms, 55ms a letter</td></tr>
-      <tr><td>Page fades in</td><td class="n">&mdash;</td><td class="n">from 2350ms</td></tr>
+      <tr><td>&ldquo;This is&rdquo; is written in</td><td class="n">&mdash;</td><td class="n">900ms, left to right</td></tr>
+      <tr><td>Page fades in</td><td class="n">&mdash;</td><td class="n">from 3050ms</td></tr>
     </tbody>
   </table>
-  <p>So the entry is the estate's, the hold is longer as asked, and the exit becomes an arrival: the
-  mark lands in the header instead of leaving. Then &ldquo;This is&rdquo; writes itself in ahead of
-  it, a letter at a time rising from below the line, in the brand sans at the weight the lockup's
-  own second word uses. Only then does the page fade in.</p>
+  <p>The page now opens blank. A hairline draws itself across the centre, the mark unfolds out of
+  that line, the line withdraws, and the mark holds before travelling up into the header. The
+  estate's entry timing is kept where it still applies; its exit becomes an arrival.</p>
+  <p>&ldquo;This is&rdquo; is then written in beside it. The effect is a left-to-right reveal of a
+  cursive face rather than a letter-by-letter pop, because that is how a hand actually lays ink
+  down: continuously, along the line. The face is Caveat, served from this folder rather than from a
+  font host, since a network import did not resolve reliably here and a fallback to a system script
+  face would have changed the letterforms.</p>
   <p>It is CSS only, so no script is involved. Two notes against it, recorded rather than hidden:
   the studio's motion rules forbid animating the largest element on the first screen before first
   paint, and this is a replica of the estate's behaviour rather than a proposal for a landing page.
