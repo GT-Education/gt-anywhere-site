@@ -102,6 +102,26 @@ whose hero device would have to justify itself again at every later review.
 What would change this recommendation: if the timed variant measurably beats the interactive one with
 parents, the ordering flips and M26-timed leads with MN-02 formally amended rather than departed from.
 
+## Verification evidence (2026-09-11, browser-driven)
+
+The runner measures geometry. It does not exercise the interaction, so these were driven by hand in a
+browser on a server started for the purpose. What was actually proven, as opposed to asserted:
+
+| Claim | How it was checked | Result |
+|---|---|---|
+| Suffix swaps on keyboard | Real `Tab` to a door CTA, not programmatic `.focus()` | `:focus-visible` matches, `:has()` fires, suffix swaps |
+| Suffix swaps on hover, and settles back | Hover a door, wait past the 200ms transition, then move the pointer away | Exactly one word on hover; returns to `school` on leave. All five interactive boards |
+| Hover and focus cannot stack | Keyboard focus on one door, pointer on the other | Exactly one word visible. This was a live defect until the cascade was rewritten |
+| M35's stepper actually works | `:target` navigation, checking the DOM relationship rather than line order | Anchors are siblings of `.stage`; suffix swaps; active dot scales 1.4 |
+| Reduced motion | `emulateMedia({reducedMotion:'reduce'})` at 1440 | Every transition 0s **and** the state still changes, on both hover and `:target` |
+| Bracket symmetry | Measured boxes at 1440 | M26/M35 arms 360px, M29 359px (its card borders reduce the box); drops 32px; centres 360/1080; mirrored |
+
+**Two false alarms, recorded because the method matters.** A programmatic `.focus()` showed no swap —
+that is `:focus-visible` heuristics, not a defect. Sampling opacity 60ms into a 200ms fade showed two
+words at once and nearly triggered a "fix" to working code; the rules were correct and the sample was
+early. Both were caught by measuring the rules rather than trusting the first reading.
+
+
 ## Acceptance
 
 `node 0_plan/tools/shots.mjs 0_plan/mockups/<folder>` must report "all required rows pass", and each
