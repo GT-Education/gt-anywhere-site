@@ -1,79 +1,165 @@
-# Critic (Fable): M33 "The Scale"
+# Critic's card: M33 "The Scale", second pass
 
-| Field | Value |
-|---|---|
-| Mock | `0_plan/mockups/M33-the-scale/` — `index.html`, `styles.css`, `motion.css`, `RATIONALE.md`, `qa/` |
-| Brief | `0_plan/kb/briefs/M33.md`. **The file on disk is revision 2**, and `RATIONALE.md` line 6 cites revision 2. The assignment called it revision 3. Its git history is two commits (`ee805cc`, `0956a96`) and no third revision exists in the tree. Scored against revision 2 |
-| Contract | `0_plan/kb/briefs/CONTRACT.md` v2.1 |
-| Date | 2026-09-11 |
-| Verdict | **ITERATE.** Seven rows pass, **two rows do not**: Composition 3 and Craft 3 |
+Fable, design director's critic, 2026-09-12. Supersedes the round-1 card (in git history at `65f56e7~`).
+Round 1 scored 4/3/4/4/5/5/4/3/4 and returned ITERATE on Composition and Craft; Astra scored 4/3/4/3/4/3/3/3/3.
 
-## How this was checked
+Everything below was driven in a browser on a server I started (cached Chrome for Testing chromium-1234,
+Playwright from the npx cache, scratchpad only — nothing written into the repo but this file). I re-measured
+rather than read: geometry and the marker at 1440×900, 1920×960, 1280×720, 768×1024 and 390×844; fold offsets
+at five rows; forced colours in both palettes; the rail crops analysed pixel by pixel; and the animation range
+overridden at runtime to test the engineer's claim that the sweep cannot be widened.
 
-Not by reading the rationale. Every figure below was reproduced.
+## Scores
 
-| What | How | Result |
+| Row | Score | Reason |
 |---|---|---|
-| The captures | Opened and looked at: `V2`, `V5`, `V10`, `V11`, `V14`, `V16`, `V18`, `V19`, `V2-full`, `V14-full`, `V2-rootx2`, `forced-colors`, all four focus captures, plus magnified crops of the rail | See rows below |
-| The fold matrix | All 19 rows re-driven in Chrome for Testing 1234 on a server I started (`127.0.0.1:8231`), measuring `getBoundingClientRect().bottom` for header, h1, provenance and both CTAs | **Every figure in `qa/fold.md` reproduces exactly.** Page heights match too: V9 9365, V2 9193, V14 7297. No console errors on any row |
-| The tick counts | Counted as ink runs in the rendered pixels, both axes | Phone rail: **50** major runs at CSS y58–60, **104** ink runs at y62–68. Desktop rail: **50** at x212, **104** at x225 and x230. Not asserted — counted |
-| Forced colours at the stage | Driven with `forcedColors: 'active'` in both palettes, scrolled to the stage, screenshotted and counted | `.scale-fine` `background-image` returns `none`; **50** major runs survive in both palettes; majors, spine and marker map to `rgb(0,0,0)` / `rgb(255,255,255)` |
-| Reduced motion | `reducedMotion: 'reduce'`, five scroll positions | `animation-name: none`, `transform: none`, `document.getAnimations()` empty at every one |
-| Everything that animates | `document.getAnimations()` at every scroll position, in every mode | Exactly **one** entry, ever: `scale-progress-y` on `.scale-progress`, on a `ViewTimeline` |
-| Contrast | All 16 pairs recomputed from `tokens-v2.css` with the WCAG 2.x formula | **All 16 match the rationale to 0.01** |
-| Checkers | Run, not quoted | `check-mocks.py` 37 pass 0 fail; `check-claims.py` OK; `check-links.py` OK (670/670) |
+| Objective | 4 | The first screen routes: h1, provenance, two named doors with a navy CTA each, two differentiator lines and the compare anchor, all above the limit on every matrix row. I reproduced five of them exactly — 1440×900 gives header 57, h1 317, provenance 355, both CTAs 508 against a 876 limit; 375×629 gives 57/292/321/442/546 against 605 (`qa/fold.md` V16, V2). Both CTAs repeat after the comparison, both apply buttons in `index.html:288-289`, all four school links in the footer. Not 5: roughly 2,100px of story — a 916px overture screen plus a 1,206px stage (measured, 1440×900) — sits on the primary scroll path between the doors and the comparison, and the only bypass is the single `#compare` anchor at the first fold (`index.html:99`). There is no second compare entry inside or after the story |
+| Composition | 4 | Was 3; the round-1 fault is fixed and reproduces on my own run, not the engineer's. Movement box against the tallest thing in it: 338/320 = **5.3%** at 1440×900, 368/320 = **13.0%** at 1920×960, 320/320 = **0%** at 1280×720. Something now aligns to the rail: `styles.css:244` draws a 1px rule from each plate's top edge across the 48px column gap onto the spine, and in my own 1440 capture (`scratchpad/shot-stage-a.png`) the rule, the plate's top and the prose's first line sit on one datum — three points **on** the scale, not three cards beside it. Not 5, for three measured reasons. (a) The rail is the band's spine, not the page's: rail at x=176 and plate at x=288, while h1, doors, compare eyebrow, table, proof heading and footer all start at **x=64** (1440; 80/192 vs 48 at 1280; 416/528 vs 304 at 1920). `.story .wrap { max-width: 76rem }` (`styles.css:137`) is declared in Departures and reasoned as measure, so it is a trade, not an oversight — but the direction's thesis is "the scale is the page's spine" and the page's spine is somewhere else. (b) The overture tail hairline sits at x=176 and the spine at x=240, so the device `styles.css:148` calls "dropping toward the scale below" misses the spine by 64px and the longest tick by 35px — plainly visible in `scratchpad/shot-seam-overture-stage.png`. (c) The overture spends a 916px screen on 157px of prose (measured), and `styles.css:140` justifies its height by the motion guard, which is the same "layout stretched for the marker" fault the critic named, in a surface the iteration did not look at |
+| Typography | 4 | Contract roles applied cleanly: Literata h1 with deliberate breaks capped at 35ch, Inter Tight prose at `--leading-prose` capped at `--measure-prose`, Inconsolata labels uppercase. The Literata overhang arithmetic holds — at `--text-xl` the frame heading clears the plate's 24px padding in `shot-stage-a.png`. Rag is controlled at every width I looked at, four lines at 1440/1024 (`qa/V16.jpg`, `qa/V19.jpg`), three at 750 (`qa/V10.jpg`), six at 375 (`qa/V2.jpg`) with no orphan. Not 5: the type applies the contract rather than arguing with it, and the provenance line set small and grey directly under a four-line h1 (`qa/V16.jpg`) reads as a caption rather than as the affiliation statement MD-17 makes it |
+| Imagery | 4 | No photograph anywhere, correctly grounded (DD-42a, RF-25, AD-11 — every file in ASSETS.md shows identifiable children). The three 6:5 plates carry the estate's own marks; the white-lettered Anywhere lockup gets the navy ground the brief requires (`index.html:159-161`), and my forced-colours run confirms all three marks keep their own colours in both palettes (`qa/stage-forced-light.jpg`, `qa/stage-forced-dark.jpg`). Not 5: plate 1 puts a 56px icon in a 384×320 tinted box (`qa/stage-normal-top.jpg`) — a lot of area for one glyph — and the three plates are branding tiles that carry nothing the prose beside them does not |
+| Colour and surface | 5 | Cream ground, gold-lightest plates, and a navy plate that lands on the online school and doubles as the ground the Anywhere mark needs — one decision doing two jobs. Every line that carries the argument is `--color-border-strong`; the accent was measured at 2.38:1 and **refused**, the estate's light gold at 1.61:1 refused too (RATIONALE, "Colour, measured"). My forced-colours run confirms every line resolves to CanvasText in both palettes: spine 1px, majors 1px, tie rule 1px, marker 4px, black on light and white on dark |
+| Motion | 3 | Scored on the page, not on the concession. On my own instrumented scroll the marker's entire sweep runs in **288–300px** at 1440×900 (the engineer's 306 at a finer step) and **108–110px** at 768×1024. Before that window it is `scaleY(0)` — absent — through the first screen, the overture screen and the stage's whole entry; after it, saturated for the remaining ~900px. Across the ~2,100px during which the rail is on screen at 1440, the page's one moving object is blank for about two fifths, moving for about a seventh, and full for the last two fifths. A position marker that is blank for the approach and saturated for the finish is not reporting position to a desktop reader. **The change that raises it: `animation-range: contain 0% exit 100%` in `motion.css:36` — one value, no layout change.** Measured on this page with the range overridden at runtime: sweep 300 → **1,200px** at 1440×900, 110 → **1,130px** at 768×1024, 1,090 → 1,720px at 375×629, and the start scroll is unchanged (1810 at 1440, 2060 at 768), so the "nothing driven before the third screen" guard is untouched. `cover 0% cover 100%` gives 2,100px but starts inside the overture and would breach that guard — do not use it |
+| Mission and exclusivity | 5 | Exclusivity is carried by selectivity throughout: "selective school" in the h1, the 90th percentile in the comparison and the steps line, tuition present only as a factual row with TEFA beside it. No wealth cue, no stock photograph, no aspirational imagery, no luxury flourish. Affiliation is prominence, not disclosure — the provenance line under the h1 and the story's opening sentence (`index.html:75`, `:109`). Every speed multiplier is withheld behind `[…]` with CR-008 and CR-038 named. The engineer also raised **against itself** the adjacency of a filling measure to CR-037's unverified acceleration claim and routed it to the register's owner instead of burying it |
+| Craft | 3 | Two halves that do not agree, and the summary is not "passes". **The evidence half is now excellent**, and I verified it rather than reading it: `qa/stage-captures.mjs` is checked in with seven stage frames, three 3× rail crops and `qa/stage.md`, and every claim in that table reproduces on my own run — 50 majors present in normal, forced-light, forced-dark and on the phone; the fine gradient painted normally (`repeating-linear-gradient(rgb(133,127,123) 0 1px …)`) and `none` under forced colours in both palettes and at 390; the marker 4px in every mode and both orientations. All 19 matrix rows in RATIONALE are verbatim from `qa/fold.md`, and five reproduce exactly on my run. Round 1's Craft charge is answered in full. **The citation half fails.** The page and its rationale state in four places — `index.html:45-46`, `index.html:166`, RATIONALE's withheld-figures table, RATIONALE's "What is unresolved" — that **no claims-register row holds** the 2026 launch year. **CR-028 holds it**: `0_plan/12-claims-register.md:50`, "GT Anywhere launched in 2026… attracted hundreds of students in its first months", asserting "2026 launch; 'hundreds' of students", Unverified, owner Nari. MN-17 already records the correction — Astra found it, Fable conceded it ("Fable confirmed CR-028 exists and covers both the 2026 launch and the 'hundreds of students' wording"), and it was routed to the M31 engineer; M33 quotes the same sentence and never took it. The rationale's "four claims rows the story touches" table omits CR-028 for the same reason. The withholding stays right — CR-028 is Unverified — but the reason given is false, and it is false in the shipped HTML. **The change that raises it: replace those four statements with CR-028 (Unverified, Nari), add CR-028 to the claims table, and keep the `[…]`** |
+| Continuity | 4 | The page uses the estate's own marks and palette, rebuilds the source's own story device from a dated, checked-in extract rather than from memory (104 ticks in two runs of 52, majors on every second position, 6:5 plates, the short-rule vocabulary — all reproducible with `count.py`), and every outbound link carries `data-school`. Not 5, on the engineer's own record: the Georgetown handoff is **unverified** because gt.school has no mirror in this repository, and the story band's nine sentences are quoted from a live page and are **not** in `copy.md`, so the band a reader would judge continuity by is the one Nari has not approved |
 
-## Scorecard
+## The six tests, answered
 
-| Objective | 4 | Both doors clear the limit on every one of the 19 rows in my own run, not just the engineer's: second CTA at 546 of 605 (V2), 490 of 715 (V8), 271 of 318 (V10), 429 of 696 (V14). Equal weight, `copy.md` verbatim (`copy.md:22,23,26,30,36`), compare anchor before the table, full sections 0 to 8, 12 of 14 parent questions answered and 2 deferred by decision. Costed, not free: the first screen carries a measured hole between the door lines and the anchor — 367px at 768x1024 (`qa/V11.jpg`, plainly visible), 289px at 1920, 229px at 1440, 145px at 1280, 16px at 375 — and two full screens of brand story sit between the doors and the comparison, reachable only by the anchor link |
-| Composition | 3 | The phone is good and the short-desktop rows are good; **the primary desktop is not**. Measured at 1440x900: each `.mv` is 676px tall and its tallest content, the plate, is 267px — **409px, 60% of every movement screen, is empty cream**; at 1920x960 it is 469px of 736, 64%. The rail is 64px of a 1216px wrap, 5% of the page width, pinned to the left margin with nothing aligned to its top or bottom (`normal-stageTop.png`, reproduced at `1440x900`). The direction's thesis is "the scale is the page's spine"; at the width where it matters the scale reads as an artefact in the margin beside three small plates adrift. Proof that the content is not the cause: at 768x1024 the same three movements measure 267/267/348 — exactly the plate height, no slack at all (`M33-m768-story.png`), and `qa/V19.jpg` at 1024x576 is tight. **The change that raises this: at `min-width:1024` and `min-height:700`, cut `.mv { min-block-size: calc(100svh - 14rem) }` (styles.css:205) to roughly half, and raise the `minmax(0, 20rem)` frame column and `.frame { max-inline-size: 22rem }` so the plate carries the screen instead of floating in it.** |
-| Typography | 4 | Contract roles applied and rendered as declared: h1 Literata 400 at `--text-3xl` capped 35ch and balanced, movement headings `--text-xl`, prose Inter Tight at `--leading-prose` capped at `--measure-prose`, labels Inconsolata 600 uppercase at 0.08em. The Literata overhang is accounted for with a number (4.69px a side at 28px against `--space-5` 24px padding, `RATIONALE.md` Decisions). The V10 step-down to `--text-xl` is declared, and `qa/V10.jpg` shows it working at 750x342. One fault, visible not theoretical: **`[…]` renders twice in the story prose and reads as broken copy** — "launched […]." sits alone on a line at 375 (`p375-mid.png`). The brief permitted "leave it out **or** leave a gap"; the engineer took the gap both times, and for the launch year the sentence reads clean without it ("GT Anywhere launched, bringing the full model to gifted families nationwide") |
-| Imagery | 4 | No photograph anywhere, correctly: every file in `shared/ASSETS.md` shows identifiable children (DD-42 option a, RF-25, AD-11). The three frames carry the estate's own marks at the source's 6:5, measured at 0% aspect skew on every row of `qa/fold.md`, which I did not need to take on trust because `fold.md` reproduced everywhere else. The Anywhere wordmark is on a navy plate on every instance, and under forced colours it keeps its ground from inside the SVG — confirmed in my `fc-light-stageTop.png`, where the third frame goes white and the wordmark keeps its own navy strip. Two deductions: the rationale's claim that the GT icon is "single-colour artwork, so forced colours recolours it whole" is **wrong** — my forced-colours captures in both palettes show it unchanged in its own orange (2.24:1 on forced white; decorative and `aria-hidden`, so no rule breaks, but the stated reason is not the real one); and the three-marks-for-three-movements scheme is genuinely ambiguous, which the rationale names as an estate problem rather than hiding |
-| Colour and surface | 5 | I recomputed all 16 pairs from `tokens-v2.css` and **every one matches to 0.01**: scale ink 3.63 on `--color-bg` and 3.31 on `--color-surface`, body 17.69, frame text 16.10, frame label 5.69, muted 6.25, on-navy 14.58, muted-on-dark 7.81, outline 13.88, focus 8.20. The refusals carry the measurement that refused them: accent 2.38 and 2.17, the estate's light gold `#ebba9b` 1.61 and 1.46, and `--color-accent-text` 5.14 recorded as passing and still not taken. No raw hex in `styles.css` (R11), no accent carries a line, no gold carries text, no wealth cue anywhere. This is the standard the programme asked for: a colour decision is a number plus the alternative it beat |
-| Motion | 5 | The brief's constraint is that the timeline drives the marker and nothing else, and that is exactly what the page does. `document.getAnimations()` returns **one** entry at every scroll position in every mode — `scale-progress-y` on `.scale-progress`, on a `ViewTimeline`. All three `.mv` measure `opacity 1`, `visibility visible`, `transform none` in every state; nothing fades, rises or reveals. The progress values are exact for `contain 0% → contain 100%` on a 2220px subject in a 900px port: 0 at 1804, **0.420455** at +25%, **0.840909** at +50%, 1 at 3124. Complete at rest, measured not claimed: in `qa/V14-full.jpg` at scroll zero the spine and all 104 ticks are drawn and the marker's own 4px column (x186–191) carries **zero ink rows** over y1400–2100. No JavaScript at all — one `<script>`, the JSON-LD. Reduced motion verified while scrolling, at five positions. Two things Johnny should see rather than deductions: the resting picture is **not one picture** (with scroll-driven animation the marker is `scaleY(0)` and invisible; under reduced motion and in any engine without `animation-timeline` it is full length — both are called "the complete scale" in the rationale, in two places, and never reconciled); and the marker reaches 100% at scrollY 3124 while the third movement's top is still 224px below the viewport top, so the measure is full as the reader arrives at the last movement. That is what `contain` means and it is correctly documented, but on a page whose thesis is measurement it is worth a ruling |
-| Mission and exclusivity | 4 | Exclusivity is selectivity and nothing else: the admissions bar in the table and the proof strip, no price framing, no gold flourish, no lifestyle imagery. Affiliation appears once as the provenance line, which is MD-17 prominence and Nari's, and the rationale says so. The claims discipline is the best on any surface I have measured: both withheld figures are withheld and named, the four CR rows the story touches are tabulated with status and owner, and the engineer volunteers that `check-claims.py` is digit-based and cannot see CR-036 and CR-037 because they are stated in words — I ran the checker and confirmed it returns OK and does not list them. DD-21 holds: the doors are a `<ul>` and the movements are `<section>` siblings, so a third campus is one `<li>` and one `<section>`. Held at 4 rather than the 5 the brief expected, for one reason the rationale does not examine: **the one thing that moves on this page is a bar filling a measuring scale, drawn directly beside prose about students "achieving multiple grade levels of acceleration" (CR-037, Unverified).** The CONTRACT rule is satisfied — a count with no denominator is not a proportion — but the adjacency invites the reading and deserves a sentence in the register rather than silence. **That sentence is the change that raises this row** |
-| Craft | 3 | The build quality is high and I verified it rather than assumed it: all 19 fold rows reproduce to the pixel, no console errors, the tick arithmetic is exact in both orientations (first major 15.58 against an arithmetic 15.59, last 795.19 against 795.20 at 1440), all 16 contrast pairs recompute, three checkers pass. Against that, **the mock does not ship the evidence its own brief demands.** The brief's Acceptance row asks for "separate stage captures, showing the scale complete before any scrolling" and "Forced colours verified at the stage, not only at the top", and the brief says why in as many words: "the runner captures forced colours at the initial viewport and will not see a third-screen failure". `qa/forced-colors.jpg` **is the initial viewport and contains no scale at all**, there is no stage capture in `qa/`, and the rationale admits the stage checks were run in a throwaway script that checked nothing in. Revision 2 of this brief exists because revision 1 shipped a gradient scale that would have vanished under forced colours; the instruction written to stop that recurring is the one instruction the evidence does not satisfy. Four factual slips ride along: the brief-revision mismatch in the header above; `styles.css:156` says the 50 majors are "drawn from the measured source geometry" when the source has 49 plus two hour marks (the RATIONALE table corrects it, so a comment contradicts its own document); the forced-colours claim about the GT icon (Imagery row); and `qa/fold.md`'s V18 line "no content is visible below the last CTA at all" is contradicted by `qa/V18.jpg`, where the headline is cut by the 256px edge. **The change that raises this: check in the stage captures — the rail at the stage's own scroll position, at scroll zero and mid-range, in normal, forced-colours light and forced-colours dark — so a critic judges the direction's defining object by eye instead of rebuilding the harness.** |
-| Continuity | 4 | This is the honest ceiling and the mock sits on it. `shared/CONTINUITY.md` states that gt.school has no mirror in this repository and that Anywhere cannot stand in for it; the rationale's own unresolved table says "**The Georgetown handoff is unverified**" rather than claiming a match. On the Anywhere side the ground token, the three families and the mark files match, and every declared difference — heading 400 against 300, tracking normal against -1.6px, button 600 against 500, navy fill — is a programme decision with a reason on record (`fonts.css` ships 400 and 600 only; DD-46; the estate's own orange label measures 2.50:1). M33's specific continuity argument is the strongest available to any mock: the device is literally gt.school's own, recreated from the checked-in extract at `0_plan/kb/exemplars/gt-story/` with the live page never loaded. What caps it at 4 is structural, not a fault: the 6:5 ratio, the 30%/45% tick widths and the 2.75/5/4.5rem rules were read from stylesheet text and rounded to the token ladder, and nobody in this programme has seen the source rendered, so "the same device" is asserted from CSS and cannot be settled from here |
+### 1. Does the desktop now argue?
 
-## The eight tests, answered
+Slack reproduces exactly: 5.3% at 1440×900, 13.0% at 1920×960, 0% at 1280×720. The fix is real and the number is honest.
 
-**1. Is the page complete at rest?** Yes, and measured rather than argued. In `qa/V14-full.jpg` and `qa/V2-full.jpg`, both taken at scroll position zero, the whole scale is drawn — spine, 104 ticks, 50 majors — and the marker's 4px column carries no ink, which is the marker correctly sitting at progress 0. All three movements are painted: `opacity 1`, `visibility visible`, `transform none`, in normal, forced-colours and reduced-motion contexts alike. Nothing on the page waits for a scroll. The three movements do not fit one viewport, but that is length, not sequencing: the stage is never pinned, and the only sticky object is the rail itself, which is at most `calc(100svh − 6rem)` and so always shorter than the viewport.
+On the harder question: **the rail reads as the story band's spine, not as the page's, and not as a decorative margin.**
+It is no longer "lines pointing at it" — the tie rule terminates *on* the spine and starts at the plate's top edge, which is
+also the prose's first line, so there is a genuine datum and three real points on the scale. What stops it being the page's
+spine is measurable: the band sits on its own left edge and the rail's x agrees with nothing above or below it.
 
-**2. Is the motion progress only?** Yes. `motion.css` holds two keyframe pairs, `scaleX(0→1)` and `scaleY(0→1)`, applied to one element. `document.getAnimations()` returns exactly one animation at every scroll position I sampled, in every mode. Nothing fades, rises or reveals. `styles.css` contains no `@keyframes` and no `animation:` at all (R10 confirms it, and so does grep).
-
-**3. Reduced motion.** Verified from the browser, not from the CSS: at five scroll positions with `reducedMotion: 'reduce'`, `.scale-progress` reports `animation-name: none`, `transform: none`, and `getAnimations()` is empty. **A reader who never scrolls loses nothing** — the only thing the timeline carries is the position signal, and every tick, every major, the spine, and all three movements are painted regardless. One thing to know: the reduced-motion resting marker is drawn **full length**, so that reader sees a permanent 4px bar down the rail where a motion reader at rest sees none. Both are "complete"; they are not the same picture.
-
-Worth flagging for whoever owns the checkers: `styles.css:353`'s reduced-motion block sets `animation-duration: 0s !important` on everything, and that does **not** stop a scroll-driven animation, because duration is `auto` and ignored on a view timeline. The guard that actually works is the `animation: none` in `motion.css` — the file R10 does not scan. R10's "reduced-motion block covers pseudo-elements" row therefore passes while giving no cover to the only animation on the page.
-
-**4. Forced colours.** The engineer's claim is correct and, if anything, understated. Driven in both palettes at the stage's own scroll position: `getComputedStyle('.scale-fine').backgroundImage` returns `none`, and **50 major runs survive**, counted from pixels, with the spine at 1px and the marker at 4px mapped to `CanvasText` — `rgb(0,0,0)` light, `rgb(255,255,255)` dark. **It still reads unmistakably as a scale**, and the marker is far *more* legible there than in the normal palette, because weight survives when hue is stripped, which is exactly the argument the rationale makes for refusing `--color-accent-text`. The phone rail behaves the same: 104 ink runs normally, 50 under forced colours, at every sampled row. The one problem is evidential, scored under Craft: `qa/forced-colors.jpg` is the first screen and shows no scale, so none of this is visible in the checked-in captures.
-
-**5. The counts.** Arithmetic checks out. `count.py` gives the source 104 ticks — 49 `is-bigger`, 2 `is-hour`, 2 transparent, 51 plain — with 48 gaps between majors, 46 of them 2 and two of them 4. The mock renders **104 ticks and 50 majors**, counted from pixels on both axes: 25 per run, run A on positions 2 to 50 and run B on 54 to 102, giving 49 gaps of which 48 are 2 and one is 4, at the seam. `RATIONALE.md:118` states this plainly — "**50 majors**, 25 per run… the same structure, arrived at without hour marks" — and `:119` records the two hour marks as not reproduced, with the reason. **The mock is honest that 50 is its own number.** The one blemish is that `styles.css:156` describes the 50 as "drawn from the measured source geometry", which reads as if the source held it; the rationale is the corrective and the comment should follow it.
-
-**6. Contrast.** Recomputed from `tokens-v2.css`, not trusted. `#857f7b` on `#fcf4ef` is **3.63:1** and on `#f8e8de` is **3.31:1** — both as claimed, and both above the 3:1 the CONTRACT requires of a line that carries the argument. All 14 other pairs and both refusal figures match to 0.01. My one correction to the rationale is not in its favour or against it: `--color-border` is `#cac6c4`, which measures 1.56 on the ground and 1.42 on the surface, exactly as CONTRACT section 3 already records.
-
-**7. The fold.** Re-measured independently, all 19 rows, on my own server. **Every number in `qa/fold.md` reproduces exactly** — header, h1, provenance, both CTAs — as do the page heights, which is the stronger check because it proves the captures were taken at the viewports they claim. No console errors on any row. R37 was not needed and was not used. The one line in `fold.md` I cannot reconcile is the V18 next-band cell, "no content is visible below the last CTA at all", which `qa/V18.jpg` contradicts — the headline is cut by the 256px edge. V18 is a reflow row where the fold rule does not bind, so nothing turns on it, but the sentence is wrong.
-
-**8. The four declined items.**
-
-| Item | Declining was | Why |
-|---|---|---|
-| R10 does not scan `motion.css`, so its `@keyframes` is not mechanically gated | **Right** | Editing a shared checker from inside a build to make one's own file gate-able is the wrong direction of travel. The engineer disclosed it in Departures, in the page head, and at the top of `motion.css`, and said "I have not touched the rule". I confirmed it: `check-mocks.py:81` loads `styles.css` only and `:155` tests that string. The finding should go to whoever owns R10, with the reduced-motion point above attached — it strengthens the case that R10 must scan every stylesheet a mock loads |
-| `check-claims.py` is digit-based and cannot see CR-036 and CR-037 | **Right to decline, right to disclose** | I ran it: OK, and it lists CR-011, CR-021, CR-032 to CR-035 and not the two word-stated rows. Teaching a claims checker to read prose is not a build-time job, and the rationale's table is, as it says, the only record that those two Unverified claims ride on the page |
-| The marker's ink: `--color-border-strong` rather than `--color-accent-text` at 5.14 | **Right** | Brief revision 2 fixes one ink for ticks and marker together; changing it is a brief change, not a builder's choice. My forced-colours captures vindicate the reasoning — weight is what survives when hue is stripped. The alternative is named with its number and is one declaration away, which is the correct way to leave it |
-| The Georgetown continuity handoff is unverified | **Could not settle, correctly** | `CONTINUITY.md` forbids substituting Anywhere and the hard rules forbid loading gt.school. There is no move available from inside a build, and the rationale says "unverified" rather than inventing a match |
-
-The item it should **not** have declined is the fifth, and it is the Craft deduction: the stage captures were within reach. The engineer ran the forced-colours and reduced-motion checks at the stage, said so in the rationale, and threw the images away rather than checking them in.
-
-## Unresolved
-
-| Item | State |
+| Element (1440×900) | Left edge |
 |---|---|
-| Brief revision 2 or 3 | The tree holds revision 2 and two commits. Scored against revision 2. If a revision 3 exists, it is not in this repository |
-| MN-17 / V13 | Open. Neither Astra nor Johnny has ruled, and nothing here ships until it closes. The sharper question this critique raises: **the motion is what forces the weak desktop composition.** The stage is long because the marker needs distance to be legible, and that length is 60 to 64% dead cream per movement screen. Johnny should rule on V13 knowing the layout is downstream of it |
-| The marker beside CR-037 | A filling measure drawn next to "multiple grade levels of acceleration", both Unverified. Register row, Nari's call |
-| The Georgetown handoff | Structurally unanswerable from this repository |
-| The two `[…]` gaps | Sanctioned by the brief, but they render as broken copy. Whether the launch-year gap becomes an omission is a copy decision, and the story band is Nari's anyway |
+| h1, provenance, doors, compare eyebrow, table, proof heading, footer | **64** |
+| Story band wrap | 112 |
+| Overture lead-in hairline | 176 |
+| Rail (column left) | 176 |
+| Rail **spine** | 240 |
+| Plate | 288 |
 
-Objective 4 / Composition 3 / Typography 4 / Imagery 4 / Colour 5 / Motion 5 / Mission 4 / Craft 3 / Continuity 4
+Two consequences. The rail begins and ends with the band and governs nothing else on the page. And the hairline meant to
+lead into it is 64px off the spine and 35px off the longest tick — a lead-in that misses.
+
+One caution about the metric. "Box height against the tallest thing in it" cannot see emptiness in the *shorter* column,
+and the box is now sized to the plate, so the plate's column is full by construction. The prose cells at 1440 are
+544 × 338 carrying 54, 159 and 288px of text — 16%, 47% and 85% filled. Movement 1 still pairs a 320px plate with two
+lines of prose. The vertical fix is genuine; the pairing at movement 1 is not yet composed.
+
+### 2. Is the marker worth having at 306px?
+
+Not at 1440 or 768 as built, and that is a reason to lower Motion — Motion scores the page, and on those rows the page's
+one move does not do what it is named for. It is a *separate* finding, belonging to MN-17 and not to the score, that the
+move's adoption is only half-supported by this evidence.
+
+But the adoption question has a better answer than refusal, and it is measured rather than argued:
+
+| Row | `contain 0% contain 100%` (built) | `contain 0% exit 100%` (tested) | Start scroll |
+|---|---|---|---|
+| 1440 × 900 | 300px | **1,200px** | 1810, unchanged |
+| 768 × 1024 | 110px | **1,130px** | 2060, unchanged |
+| 375 × 629 | 1,090px | 1,720px | 1490, unchanged |
+
+One declaration, no layout change, no guard touched. So the right verdict on V13 is not "earns its place on the phone and
+is marginal at 1440" — it is "the range is wrong." The engineer's honesty here is exemplary and its conclusion is too
+pessimistic about its own move.
+
+This also **refutes the rationale's stated impossibility**: "not fixable without stretching the tablet layout the way the
+desktop one was stretched" (RATIONALE, "What is unresolved"). It is fixable with a property value.
+
+### 3. The stage evidence
+
+`qa/stage.md` records what it claims and the captures show it. Verified independently, not read:
+
+| Claim | My run |
+|---|---|
+| 50 majors in every mode | 50 in normal, forced-light, forced-dark, and at 390×844. Confirmed |
+| Fine gradient painted normally | `repeating-linear-gradient(rgb(133,127,123) 0px, rgb(133,127,123) 1px, rgba(0,0,0,0) …)`. Confirmed |
+| Fine gradient suppressed under forced colours | `background-image: none` in both palettes and on the phone. Confirmed |
+| Marker at 4px throughout | 4px border-right when vertical, 4px border-bottom when horizontal, CanvasText in forced colours, in all modes. Confirmed |
+| Rail crops at 3× | 240 × 1260px = 80 × 420 CSS px. Confirmed |
+
+It settles the question the brief was revised to demand. This is the part of the iteration that is unambiguously done.
+
+One observation the evidence surfaces and nobody has noted, **not scored**: under forced colours, where the fine gradient is
+suppressed by design, the 50 majors are evenly spaced at 51–54px (3×) except for a single gap of **105px** — measured in
+both `rail-forced-light.png` and `rail-forced-dark.png`. That is the run A / run B seam at positions 50→54. I checked
+whether it is the mock's error: it is not. `count.py` on the checked-in extract returns `{2: 46, 4: 2}`, so the source has
+the same gap in the same place and the mock is faithful. Worth knowing only because the one irregularity in the ruler is
+most exposed to the readers the bordered elements exist for. In passing: `SOURCE.md` and `0_plan/kb/briefs/M33.md` both say
+the two gaps of 4 "are where the first run's hour marks displace a major" — `count.py` shows one is an hour mark and the
+other is the run seam. A KB error, not the mock's.
+
+### 4. The rail's departure from the source
+
+**Sound in substance; one clause of inference stated as fact.**
+
+Verified: `.site-header` carries no `position: sticky` (`styles.css:64`), so "this page's header is not sticky" is true.
+And the consequence is real and was created by the iteration itself — the tie rules the critic asked for require the spine
+to reach the top of the viewport, or a plate whose rule lands in the top 96px points at nothing. A change whose cause is a
+fix you were told to make is not a convenience.
+
+Not verified: "The source pins its stage 6rem down **because** a sticky site header sits in that band"
+(`styles.css:193-196`, and the Departures row). The checked-in extract holds the story section and 70 story/timeline rules
+and says nothing about the source's header, so this is inference about the source's reason, which the brief itself tells
+the engineer to label as such ("Describe the source as read, and label the rest inference"). One hedging word fixes it.
+The departure is properly declared in the Departures table, which is the right instinct.
+
+### 5. The fold figures
+
+Checked against `qa/fold.md` on disk, not against the rationale's retelling. All 19 matrix rows in RATIONALE are byte-identical
+to the file; the rationale cites the run correctly. Five rows re-measured on my own browser run:
+
+| Row | fold.md | Mine |
+|---|---|---|
+| V16 1440×900 | 57 / 317 / 355 / 508 / 508 | identical |
+| V17 1920×960 | 57 / 317 / 355 / 508 / 508 | identical |
+| V14 1280×720 | 57 / 272 / 302 / 429 / 429 | identical |
+| V11 768×1024 | 57 / 262 / 300 / 447 / 447 | identical |
+| V2 375×629 | 57 / 292 / 321 / 442 / 546 | identical |
+
+### 6. The two things kept against advice
+
+**The bracketed gaps — defensible, with one condition.** The brief says "leave it out **or** leave a gap and name it", so
+keeping the gap is inside the brief rather than against it; the page withholds the speed clause the same way two movements
+earlier, so it is internally consistent; and a quoted sentence silently shortened is worse than one that marks the cut.
+The condition: the notice lives in an HTML comment, so Nari sees `[…]` and not the reason. The explanation has to reach her
+where she reads the mock. And with CR-028 found, the second gap is no longer a special case at all — it is an ordinary
+Unverified figure, withheld for the ordinary reason.
+
+**The 111px sweep at 768 — the finding is defensible, the stated impossibility is not.** Reporting it against its own move
+was the right call. Calling it unfixable without stretching the layout is wrong, by measurement: `contain 0% exit 100%`
+takes it to 1,130px with the layout untouched (test 2).
+
+## What changed since the last card
+
+| Round-1 finding | State now |
+|---|---|
+| Composition 3: 60% of each movement box empty at 1440, 64% at 1920 | **Fixed and reproduced.** 5.3%, 13.0%, 0% |
+| Composition 3: nothing aligned to the rail | **Fixed.** Each plate ties to the spine with a real 1px rule; plate top, rule and first prose line share one datum |
+| Craft 3: stage and forced-colours checks run, reported, images discarded | **Fixed.** Ten images, `qa/stage.md` and the script that made them are checked in, and every claim reproduces |
+| "Composition downstream of motion" | **Answered for the movement boxes, un-answered for the overture screen**, which spends 916px on 157px of prose to put the scale on the third screen |
+| Motion 5 (round 1) | **Lowered to 3.** The composition fix cut the sweep to 300px at 1440 and left 110px at 768, which the iteration disclosed and did not fix |
+| — | **New: CR-028.** A claims-register citation that the register itself already corrected is still false in the shipped HTML, four times |
+
+## Unresolved, and honestly so
+
+- Whether the story band's nine quoted sentences may appear on a GT landing page at all. Nari owns it; the mock says so.
+- Whether a 4px marker in the same ink as the ticks is loud enough at rest on a wide desktop. The rationale offers
+  `--color-accent-text` at 5.14:1 as the measured alternative and leaves it to Johnny. I have no basis to settle it, and it
+  is a different question from the range, which I have settled.
+- The Georgetown continuity handoff, which cannot be checked from this repository at all.
+- CR-028 and CR-036 both cover "hundreds of students" from the same source page. That is a register question for whoever
+  owns `12-claims-register.md`, not a mock question.
+
+**Two of the nine rows say no.** Motion 3 and Craft 3. Both have a single named change and both changes are small: one
+property value in `motion.css`, and one stale citation replaced in four places. Everything else on the card passes.
+
+Objective/Composition/Typography/Imagery/Colour/Motion/Mission/Craft/Continuity: 4/4/4/4/5/3/5/3/4
 
 ITERATE
