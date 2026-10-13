@@ -1,0 +1,36 @@
+<!-- GA4 events for www.gt.school (analytics/tracking-plan.json). Needs analytics/webflow/ga4-head.html in the site head. -->
+<script>
+  (function () {
+    if (typeof gtag !== 'function') return;
+    var FORMS = { 'b3847a49-61ad-4da9-b7ce-5de811fe686f': 'georgetown_interest' };
+
+    window.addEventListener('message', function (e) {
+      var d = e.data;
+      // HubSpot v2 embedded forms post hsFormCallback messages to the window.
+      if (d && d.type === 'hsFormCallback' && d.eventName === 'onFormSubmitted') {
+        gtag('event', 'generate_lead', { form_name: FORMS[d.id] || 'georgetown_interest', lead_source: 'inline_form', school: 'georgetown', value: 10, currency: 'USD' });
+      }
+      // Calendly campus-tour widget.
+      var origin = '';
+      try { origin = new URL(e.origin).hostname; } catch (x) {}
+      if (/(^|\.)calendly\.com$/.test(origin) && d && d.event === 'calendly.event_scheduled') {
+        gtag('event', 'schedule_tour', { form_name: 'georgetown_campus_tour', lead_source: 'calendly', school: 'georgetown' });
+      }
+    });
+
+    // Homepage router: which school the visitor picks.
+    if (location.pathname === '/') {
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href]');
+        if (!a) return;
+        var u;
+        try { u = new URL(a.href, location.href); } catch (x) { return; }
+        var school = u.searchParams.get('school');
+        var dest = /(^|\.)anywhere\.gt\.school$/.test(u.hostname) ? 'anywhere'
+          : (u.hostname === location.hostname || /(^|\.)gt\.school$/.test(u.hostname)) && /^\/georgetown/.test(u.pathname) ? 'georgetown'
+          : /(^|\.)apply\.gt\.school$/.test(u.hostname) && /^(georgetown|anywhere)$/.test(school) ? 'apply_' + school : '';
+        if (dest) gtag('event', 'router_choice', { destination: dest });
+      }, true);
+    }
+  })();
+</script>

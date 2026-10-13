@@ -1,0 +1,281 @@
+{
+  "$comment": "GT School web analytics tracking plan. Source of truth for event and parameter names on www.gt.school, anywhere.gt.school and apply.gt.school. validate.mjs checks live pages against this file. Change this file first, then the code.",
+  "property": {
+    "ga4": "G-494D3VN0SF",
+    "name": "GT School (all sites)",
+    "one_property_for_all_sites": true
+  },
+  "conventions": {
+    "event_names": "snake_case, max 40 chars. Use the GA4 recommended name when one exists (generate_lead, sign_up, begin_checkout, purchase). One event per user action; put variants in parameters, never in the event name (no enroll_form_tuition).",
+    "param_names": "snake_case, max 40 chars. Only parameters listed under params may be sent.",
+    "param_values": "Enumerated values are lowercase snake_case and are listed in params.*.values.",
+    "form_name": "<school>_<form>: which form was submitted, e.g. georgetown_interest.",
+    "lead_source": "where on the page the form was opened: the placement, not the form.",
+    "school": "every hit carries school; it is set in the gtag config from host + path, and events may override it with the school the lead is for.",
+    "no_pii": "Never send names, email, phone, zip, IEP status, income or any child data to GA4 or ad pixels as parameters. Hashed user data goes only to Meta CAPI / TikTok Events API server-side."
+  },
+  "params": {
+    "school": {
+      "values": [
+        "georgetown",
+        "anywhere",
+        "summer",
+        "umbrella"
+      ],
+      "custom_dimension": true,
+      "desc": "Which school the page or lead belongs to. umbrella = the gt.school router and shared pages."
+    },
+    "form_name": {
+      "values": [
+        "georgetown_interest",
+        "georgetown_campus_tour",
+        "anywhere_interest",
+        "anywhere_waitlist",
+        "anywhere_newsletter"
+      ],
+      "custom_dimension": true,
+      "desc": "Which form."
+    },
+    "lead_source": {
+      "values": [
+        "inline_form",
+        "homepage_popup",
+        "homepage_stay_informed",
+        "waitlist_confirmation",
+        "nav",
+        "hero",
+        "calendly"
+      ],
+      "custom_dimension": true,
+      "desc": "Placement that opened the form."
+    },
+    "destination": {
+      "values": [
+        "georgetown",
+        "anywhere",
+        "apply_georgetown",
+        "apply_anywhere"
+      ],
+      "custom_dimension": true,
+      "desc": "School picked on the gt.school router."
+    },
+    "value": {
+      "type": "number"
+    },
+    "currency": {
+      "values": [
+        "USD"
+      ]
+    }
+  },
+  "school_by_page": {
+    "www.gt.school": {
+      "umbrella": [
+        "/",
+        "/links",
+        "/privacy-policy",
+        "/terms-of-use",
+        "/brand/*"
+      ],
+      "default": "georgetown"
+    },
+    "anywhere.gt.school": {
+      "default": "anywhere"
+    },
+    "apply.gt.school": {
+      "from": "?school= query param or the chosen school in the app; summer routes = summer"
+    }
+  },
+  "events": {
+    "page_view": {
+      "auto": true,
+      "required": [
+        "school"
+      ],
+      "desc": "Exactly one per page load (SPA: one per route change, with send_page_view:false on config)."
+    },
+    "generate_lead": {
+      "key_event": true,
+      "required": [
+        "form_name",
+        "lead_source",
+        "school",
+        "value",
+        "currency"
+      ],
+      "fired_by": {
+        "georgetown_interest": "www.gt.school site footer: HubSpot form b3847a49-61ad-4da9-b7ce-5de811fe686f onFormSubmitted",
+        "anywhere_interest": "anywhere.gt.school site head: #gt-anywhere-form after partner-lead-webhook success",
+        "anywhere_waitlist": "anywhere.gt.school popup (gta-popup-v8.js today sends waitlist_signup: rename to generate_lead{form_name:anywhere_waitlist})",
+        "anywhere_newsletter": "anywhere.gt.school popup, Stay Informed mode (hero CTA)"
+      }
+    },
+    "schedule_tour": {
+      "key_event": true,
+      "required": [
+        "form_name",
+        "lead_source",
+        "school"
+      ],
+      "fired_by": "www.gt.school site footer: Calendly calendly.event_scheduled"
+    },
+    "router_choice": {
+      "required": [
+        "destination"
+      ],
+      "fired_by": "www.gt.school/ only: click on a school card or apply link"
+    },
+    "apply_click": {
+      "required": [
+        "school",
+        "lead_source"
+      ],
+      "desc": "Click on any CTA that leaves for apply.gt.school (Begin Application buttons, popup 'Continue to application'). Replaces waitlist_continue_to_application.",
+      "fired_by": "anywhere.gt.school popup v8+ and (to add) Begin Application buttons"
+    }
+  },
+  "apply_events_target": {
+    "$comment": "apply.gt.school (mopac-software/gt-vouchers-lp-v1) does not follow this plan yet; see the Linear issue. Target names:",
+    "sign_up": "account created (replaces generate_lead{lead_id} on SignupForm)",
+    "begin_application": "first application step (replaces app_started)",
+    "submit_application": "key event; params school, value",
+    "begin_checkout": "deposit / tuition checkout opened",
+    "purchase": "key event; deposit paid or summer camp paid, params school, value, transaction_id",
+    "enroll_step": "params step (replaces enroll_form_<name>)",
+    "complete_enrollment": "key event"
+  },
+  "key_events": [
+    "generate_lead",
+    "schedule_tour",
+    "submit_application",
+    "purchase",
+    "complete_enrollment"
+  ],
+  "forbidden_params": [
+    "email",
+    "phone",
+    "first_name",
+    "last_name",
+    "zip_code",
+    "has_iep",
+    "household_income_tier",
+    "tefa_tier",
+    "lead_id",
+    "app_id",
+    "event_id",
+    "transaction_id"
+  ],
+  "tags": {
+    "$comment": "Every third-party tag host allowed per site. Anything else fails validation.",
+    "www.gt.school": {
+      "ga4": "G-494D3VN0SF",
+      "allowed_hosts": [
+        "www.googletagmanager.com",
+        "*.google-analytics.com",
+        "analytics.google.com",
+        "js.hs-scripts.com",
+        "js.hs-analytics.net",
+        "js.hs-banner.com",
+        "js.hsadspixel.net",
+        "js.hscollectedforms.net",
+        "js.hsforms.net",
+        "forms.hsforms.com",
+        "*.hubspot.com",
+        "track.hubspot.com",
+        "assets.calendly.com",
+        "calendly.com",
+        "*.doubleclick.net",
+        "www.google.com",
+        "connect.facebook.net",
+        "www.facebook.com",
+        "googleads.g.doubleclick.net",
+        "js.usemessages.com",
+        "api.hubapi.com",
+        "perf-na1.hsforms.com",
+        "forms-na1.hsforms.com",
+        "js.hsforms.net"
+      ],
+      "note": "Google Ads AW-11219766583 and Meta 5961380957279503 are injected by HubSpot Ads (HubSpot > Marketing > Ads > tracking), not by site code."
+    },
+    "anywhere.gt.school": {
+      "ga4": "G-494D3VN0SF",
+      "allowed_hosts": [
+        "www.googletagmanager.com",
+        "*.google-analytics.com",
+        "analytics.google.com",
+        "js.hs-scripts.com",
+        "js.hs-analytics.net",
+        "js.hs-banner.com",
+        "js.hsadspixel.net",
+        "js.hscollectedforms.net",
+        "*.hubspot.com",
+        "track.hubspot.com",
+        "connect.facebook.net",
+        "www.facebook.com",
+        "analytics.tiktok.com",
+        "*.tiktokw.us",
+        "*.doubleclick.net",
+        "www.google.com",
+        "external.vidzflow.com",
+        "*.vidzflow.com",
+        "js.usemessages.com",
+        "api.hubapi.com",
+        "perf-na1.hsforms.com",
+        "forms-na1.hsforms.com",
+        "js.hsforms.net",
+        "*.a.run.app",
+        "*.on.aws",
+        "google.com"
+      ],
+      "note": "*.a.run.app and *.on.aws POST /events?cee=no are the Meta Conversions API Gateway for pixel 1216631520322809 (server-side PageView/Lead). The pixel itself comes from Webflow Site settings > Integrations > Facebook."
+    }
+  },
+  "staging_hosts": [
+    "gt-school-2026.webflow.io",
+    "gt-anywhere.webflow.io"
+  ],
+  "ga4_admin": {
+    "$comment": "Property settings. Applied by hand in GA4 Admin; record the date in the Linear issue.",
+    "data_stream": "one web stream. No cross-domain list or linker needed: all sites are subdomains of gt.school and share the _ga cookie",
+    "unwanted_referrals": [
+      "payments-na1.hubspot.com",
+      "meetings.hubspot.com",
+      "checkout.stripe.com",
+      "calendly.com",
+      "withodyssey.com"
+    ],
+    "enhanced_measurement": {
+      "page_views": "on, with browser history events",
+      "scrolls": "on",
+      "outbound_clicks": "on",
+      "site_search": "on",
+      "video": "on",
+      "downloads": "on",
+      "form_interactions": "off (we send generate_lead ourselves; form_start/form_submit double-count)"
+    },
+    "data_retention": "14 months, reset on new activity",
+    "google_signals": "off",
+    "data_redaction": "email + query params (email, phone) on",
+    "internal_traffic": "define office IPs as traffic_type=internal, filter Testing -> Active",
+    "custom_dimensions_event_scope": [
+      "school",
+      "form_name",
+      "lead_source",
+      "destination"
+    ],
+    "archive_if_registered": [
+      "has_iep",
+      "household_income_tier",
+      "tefa_tier",
+      "event_id",
+      "page_type",
+      "source"
+    ],
+    "channel_group": "GT channels = Default + 'AI assistants' above Referral, source matches regex chatgpt|openai|perplexity|gemini|claude|copilot|deepseek|grok|meta\\.ai",
+    "links": [
+      "Search Console (gt.school domain property)",
+      "Google Ads (the account marketing confirms: AW-17795403973 or AW-11219766583), import key events",
+      "BigQuery daily export if a GCP project exists"
+    ]
+  }
+}

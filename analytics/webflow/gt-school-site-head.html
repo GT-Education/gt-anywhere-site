@@ -1,0 +1,46 @@
+<!-- GT analytics base: GA4 G-494D3VN0SF. Identical on www.gt.school and anywhere.gt.school.
+     Names follow GT-Education/gt-anywhere-site analytics/tracking-plan.json; check with analytics/validate.mjs.
+     Production hosts only (*.gt.school). *.webflow.io staging sends nothing unless
+     localStorage.gt_analytics_test = '1' (set by the validator, which blocks the hits). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  (function () {
+    var host = location.hostname, path = location.pathname.replace(/\/+$/, '') || '/';
+    var test = false;
+    try { test = localStorage.getItem('gt_analytics_test') === '1'; } catch (e) {}
+    window.GT_PROD = /(^|\.)gt\.school$/.test(host) || test;
+    window.GT_SCHOOL = /anywhere/.test(host) ? 'anywhere'
+      : /^\/(links|privacy-policy|terms-of-use|brand(\/.*)?)?$/.test(path) ? 'umbrella'
+      : 'georgetown';
+    if (!window.GT_PROD) return;
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    gtag('js', new Date());
+    // No linker: every site is on gt.school, so the _ga cookie (cookie_domain auto = gt.school) is already shared.
+    gtag('config', 'G-494D3VN0SF', { school: window.GT_SCHOOL });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-494D3VN0SF';
+    document.head.appendChild(s);
+  })();
+</script>
+
+<!-- HubSpot tracking (portal 40051392), production only -->
+<script>
+  if (window.GT_PROD) {
+    (function (d, s) { s = d.createElement('script'); s.id = 'hs-script-loader'; s.async = true; s.src = 'https://js.hs-scripts.com/40051392.js'; d.head.appendChild(s); })(document);
+  }
+</script>
+
+<style>
+.gsap_split_line {
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+</style>
+
+<!-- Finsweet Attributes -->
+<script async type="module"
+src="https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/attributes.js"
+fs-scrolldisable
+></script>
