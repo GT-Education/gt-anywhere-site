@@ -331,6 +331,22 @@ https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
 .splide__track {
   overflow: visible;
 }
+/* GTT-13 / gta-009 fix-round: removing a fabricated workshop card left the
+   Science tab group with one card instead of two, while the Humanities and
+   Competition groups it cross-fades with still have two. Those groups are
+   position:absolute overlays sized by the single in-flow group, inside a
+   container with overflow:hidden, so the second card of each was being
+   clipped. Stack all three groups as grid items in the same cell instead of
+   via absolute positioning so the wrap is sized to the tallest group (the
+   opacity-driven cross-fade still works since grid items stack by z-index). */
+.classes_cards-wrap {
+  display: grid;
+}
+.classes_cards-wrap-inner {
+  grid-area: 1 / 1;
+  position: relative !important;
+  inset: auto !important;
+}
 </style></head><body><div class="page-wrapper"><div class="global-styles"><div class="global-styles-default w-embed"><style>
 /* Improve text rendering and legibility across major browsers */
 body {
