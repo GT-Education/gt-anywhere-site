@@ -1,7 +1,7 @@
 {
   "start": "https://anywhere.gt.school/",
   "pages": 8,
-  "assets": 238,
+  "assets": 227,
   "pageList": [
     "index.html",
     "advisors/index.html",
@@ -18,15 +18,13 @@
     "apply.gt.school",
     "cdn.jsdelivr.net",
     "cdn.prod.website-files.com",
+    "educationfreedom.texas.gov",
     "external.vidzflow.com",
     "fonts.googleapis.com",
     "fonts.gstatic.com",
-    "js.hs-scripts.com",
     "meetings.hubspot.com",
     "www.cognia.org",
-    "www.disruptivesocial.co.uk",
-    "www.facebook.com",
-    "www.googletagmanager.com"
+    "www.disruptivesocial.co.uk"
   ],
   "errors": []
 }
