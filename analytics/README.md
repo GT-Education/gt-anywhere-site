@@ -22,3 +22,9 @@ A run sends nothing anywhere: GA4 hits are answered locally with 204, ad and CRM
 - Every hit carries `school` = `georgetown` | `anywhere` | `summer` | `umbrella`.
 - `form_name` = `<school>_<form>`; `lead_source` = where the form was opened.
 - Never send names, email, phone, zip, IEP or income data to GA4 or ad pixels.
+
+## Terminal dashboard
+
+`node analytics/dashboard.mjs` (or `gt-analytics`) shows GA4 in a terminal: live users, sites, conversions, leads by form, router choice, channels, converting sources and landing pages. It refreshes realtime every minute and reports every 5 minutes; `--once` prints a single snapshot.
+
+It authenticates as the service account `ga-reader@gt-analytics-reader.iam.gserviceaccount.com`, which has Viewer on the GA4 property only. The key is read from `$GA_KEY` or `~/.config/gt/ga-reader.json`. To revoke access, remove the account in GA4 Admin > Property access management.
