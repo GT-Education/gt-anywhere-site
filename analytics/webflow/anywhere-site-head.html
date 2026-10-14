@@ -1,0 +1,185 @@
+<style>
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .static-noise {
+    pointer-events: none;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f8e8de;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: #e48b53;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-corner {
+    display: none;
+    height: 0px;
+    width: 0px;
+  }
+</style>
+
+<!-- GT analytics base: GA4 G-494D3VN0SF. Identical on www.gt.school and anywhere.gt.school.
+     Names follow GT-Education/gt-anywhere-site analytics/tracking-plan.json; check with analytics/validate.mjs.
+     Production hosts only (*.gt.school). *.webflow.io staging sends nothing unless
+     localStorage.gt_analytics_test = '1' (set by the validator, which blocks the hits). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  (function () {
+    var host = location.hostname, path = location.pathname.replace(/\/+$/, '') || '/';
+    var test = false;
+    try { test = localStorage.getItem('gt_analytics_test') === '1'; } catch (e) {}
+    window.GT_PROD = /(^|\.)gt\.school$/.test(host) || test;
+    window.GT_SCHOOL = /anywhere/.test(host) ? 'anywhere'
+      : /^\/(links|privacy-policy|terms-of-use|brand(\/.*)?)?$/.test(path) ? 'umbrella'
+      : 'georgetown';
+    if (!window.GT_PROD) return;
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    gtag('js', new Date());
+    // No linker: every site is on gt.school, so the _ga cookie (cookie_domain auto = gt.school) is already shared.
+    gtag('config', 'G-494D3VN0SF', { school: window.GT_SCHOOL });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-494D3VN0SF';
+    document.head.appendChild(s);
+  })();
+</script>
+
+<!-- Meta Pixel: loaded by Webflow's Facebook integration (Site settings > Integrations); a second copy here doubled PageView (GTT-39) -->
+
+<!-- TikTok Pixel, production only -->
+<script>
+  window.TiktokAnalyticsObject = 'ttq';
+  var ttq = (window.ttq = window.ttq || []);
+  ttq.methods = ['page', 'track', 'identify', 'instances', 'debug', 'on', 'off', 'once', 'ready', 'alias', 'group', 'enableCookie', 'disableCookie', 'holdConsent', 'revokeConsent', 'grantConsent'];
+  ttq.setAndDefer = function (t, e) {
+    t[e] = function () {
+      t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+    };
+  };
+  for (var i = 0; i < ttq.methods.length; i++) {
+    ttq.setAndDefer(ttq, ttq.methods[i]);
+  }
+  ttq.load = function (e) {
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=' + e + '&lib=ttq';
+    var t = document.getElementsByTagName('script')[0];
+    t.parentNode.insertBefore(s, t);
+  };
+  if (window.GT_PROD) {
+    ttq.load('D6KPFVJC77U9RF65T9JG');
+    ttq.page();
+  }
+</script>
+
+<!-- HubSpot tracking (portal 40051392), production only -->
+<script>
+  if (window.GT_PROD) {
+    (function (d, s) { s = d.createElement('script'); s.id = 'hs-script-loader'; s.async = true; s.src = 'https://js.hs-scripts.com/40051392.js'; d.head.appendChild(s); })(document);
+  }
+</script>
+
+<script src="https://external.vidzflow.com/vidzflow/v1.0.2/main.js" defer></script>
+
+<!-- Interest form #gt-anywhere-form -> Supabase partner-lead-webhook, then GA4 generate_lead (form_name anywhere_interest) + Meta/TikTok Lead -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('gt-anywhere-form');
+    if (!form) return;
+
+    form.addEventListener(
+      'submit',
+      async function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var eventId =
+          window.crypto && crypto.randomUUID
+            ? crypto.randomUUID()
+            : 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+
+        const getValue = (name) => form.querySelector(`[name="${name}"]`)?.value || '';
+        const getChecked = (name) => form.querySelector(`[name="${name}"]`)?.checked || false;
+
+        const payload = {
+          first_name: getValue('first_name'),
+          last_name: getValue('last_name'),
+          email: getValue('email'),
+          phone: getValue('phone'),
+          zip_code: getValue('zip_code'),
+          sms_consent: getChecked('sms_consent'),
+          source_url: window.location.href,
+          event_id: eventId,
+        };
+
+        const submitBtn = form.querySelector('input[type="submit"], .w-button');
+        const originalBtnText = submitBtn ? submitBtn.value : 'Submit';
+        if (submitBtn) submitBtn.value = 'Sending...';
+
+        try {
+          const res = await fetch('https://gjemyeaikpbulvdwkjxv.supabase.co/functions/v1/partner-lead-webhook', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': 'pk_partner_1d9784e65e797821a10b8b959cde322617492daf05bb16f0',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await res.json();
+
+          if (result.success) {
+            var leadValue = 10;
+
+            // GA4 key event (analytics/tracking-plan.json)
+            if (typeof gtag === 'function') {
+              gtag('event', 'generate_lead', { form_name: 'anywhere_interest', lead_source: 'inline_form', school: 'anywhere', value: leadValue, currency: 'USD' });
+            }
+
+            // Meta Pixel: Lead, with eventID for Conversions API dedup
+            if (typeof fbq === 'function') {
+              fbq(
+                'track',
+                'Lead',
+                { content_name: 'GT Anywhere Lead', value: leadValue, currency: 'USD' },
+                { eventID: eventId },
+              );
+            }
+
+            // TikTok: Lead, with event_id for dedup
+            if (typeof ttq !== 'undefined') {
+              ttq.track('Lead', {
+                contents: [{ content_id: 'lead', content_type: 'product', content_name: 'GT Anywhere Lead' }],
+                value: leadValue,
+                currency: 'USD',
+                event_id: eventId,
+              });
+            }
+
+            await new Promise((r) => setTimeout(r, 500));
+            window.location.assign('https://apply.gt.school/#/dashboard');
+          } else {
+            alert(result.error || 'Submission failed');
+            if (submitBtn) submitBtn.value = originalBtnText;
+          }
+        } catch (err) {
+          console.error('Fetch error:', err);
+          alert('Something went wrong.');
+          if (submitBtn) submitBtn.value = originalBtnText;
+        }
+      },
+      true,
+    );
+  });
+</script>
