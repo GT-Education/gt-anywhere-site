@@ -3,3 +3,22 @@ node_modules/
 out/
 *.log
 .vercel
+
+# Secrets and local credentials: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+id_rsa*
+*credentials*.json
+*service-account*.json
+*secret*.json
+staging-links.json
+.claude/settings.local.json
+CLAUDE.local.md
+.npmrc
+.netrc
